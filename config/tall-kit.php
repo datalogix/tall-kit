@@ -107,7 +107,7 @@ return [
 
                 'dismissible' => [
                     'container' => [
-                        'class' => 'absolute top-0 right-0 px-4 py-3 outline-none focus:outline-none flex items-center'
+                        'class' => 'absolute top-0 right-0 px-4 py-3 outline-none focus:outline-none flex items-center',
                     ],
 
                     'icon' => [
@@ -723,7 +723,7 @@ return [
                 zipcode_pt_BR: {
                     mask: "99999-999"
                 }
-            })'
+            })',
         ],
 
         /**
