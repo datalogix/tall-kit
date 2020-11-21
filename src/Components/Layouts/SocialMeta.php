@@ -10,42 +10,42 @@ class SocialMeta extends BladeComponent
      * The title.
      *
      * @var string
-    */
+     */
     public $title;
 
     /**
      * The description.
      *
      * @var string
-    */
+     */
     public $description;
 
     /**
      * The type.
      *
      * @var string
-    */
+     */
     public $type;
 
     /**
      * The card.
      *
      * @var string
-    */
+     */
     public $card;
 
     /**
      * The image.
      *
      * @var string
-    */
+     */
     public $image;
 
     /**
      * The url.
      *
      * @var string
-    */
+     */
     public $url;
 
     public function __construct(

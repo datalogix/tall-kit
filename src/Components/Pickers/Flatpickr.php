@@ -10,7 +10,7 @@ class Flatpickr extends Input
      * The assets of component.
      *
      * @var array
-    */
+     */
     protected static $assets = [
         'alpine',
         'flatpickr',
@@ -78,7 +78,6 @@ class Flatpickr extends Input
             'enableTime' => true,
             'dateFormat' => $this->format,
         ], $this->options);
-
 
         return json_encode((object) $options);
     }

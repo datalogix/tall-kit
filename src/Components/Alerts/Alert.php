@@ -11,7 +11,7 @@ class Alert extends BladeComponent
      * The assets of component.
      *
      * @var array
-    */
+     */
     protected static $assets = [
         'alpine',
     ];
@@ -161,11 +161,10 @@ class Alert extends BladeComponent
                 ->merge(['class' => 'bg-'.$color.'-200 border-'.$color.'-300'])
                 ->merge($this->themeProvider->styles->get($style, []))
                 ->merge($this->themeProvider->rounded->get($rounded, []))
-                ->merge($this->themeProvider->shadow->get($shadow, []))
-            ,
+                ->merge($this->themeProvider->shadow->get($shadow, [])),
 
             'icon' => $this->themeProvider->icon->merge([
-                'class' => 'bg-'.$color.'-100 border-'.$color.'-500 text-'.$color.'-500'
+                'class' => 'bg-'.$color.'-100 border-'.$color.'-500 text-'.$color.'-500',
             ]),
 
             'dismissible' => $this->themeProvider->dismissible['container'],
@@ -175,11 +174,11 @@ class Alert extends BladeComponent
             'dismissibleText' => $this->themeProvider->dismissible['text'],
 
             'title' => $this->themeProvider->title->merge([
-                'class' => 'text-'.$color.'-800'
+                'class' => 'text-'.$color.'-800',
             ]),
 
             'message' => $this->themeProvider->message->merge([
-                'class' => 'text-'.$color.'-600'
+                'class' => 'text-'.$color.'-600',
             ]),
         ]);
     }

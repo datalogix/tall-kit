@@ -10,14 +10,14 @@ class TALLKit
      * Styles registered.
      *
      * @var array
-    */
+     */
     private static $styles = [];
 
     /**
      * Scripts registered.
      *
      * @var array
-    */
+     */
     private static $scripts = [];
 
     /**
@@ -25,7 +25,7 @@ class TALLKit
      *
      * @param  string  $style
      * @return void
-    */
+     */
     public static function addStyle($style)
     {
         if (! in_array($style, static::$styles)) {
@@ -37,7 +37,7 @@ class TALLKit
      * Returns styles registered.
      *
      * @return array
-    */
+     */
     public static function styles()
     {
         return static::$styles;
@@ -47,7 +47,7 @@ class TALLKit
      * Output styles.
      *
      * @return string
-    */
+     */
     public static function outputStyles()
     {
         return collect(static::$styles)->map(function ($style) {
@@ -60,7 +60,7 @@ class TALLKit
      *
      * @param  string  $scripts
      * @return void
-    */
+     */
     public static function addScript($script)
     {
         if (! in_array($script, static::$scripts)) {
@@ -72,7 +72,7 @@ class TALLKit
      * Returns scripts registered.
      *
      * @return array
-    */
+     */
     public static function scripts()
     {
         return static::$scripts;
@@ -82,7 +82,7 @@ class TALLKit
      * Output scripts.
      *
      * @return string
-    */
+     */
     public static function outputScripts()
     {
         return collect(static::$scripts)->map(function ($script) {

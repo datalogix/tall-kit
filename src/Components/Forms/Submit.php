@@ -24,7 +24,7 @@ class Submit extends BladeComponent
      * @param  string|null  $theme
      * @return void
      */
-   public function __construct(
+    public function __construct(
         $color = 'info',
         $outlined = false,
         $bordered = false,

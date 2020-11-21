@@ -96,7 +96,7 @@ class TALLKitServiceProvider extends ServiceProvider
 
             // register js
             collect($files)->filter(function (string $file) {
-                return !Str::endsWith($file, '.css');
+                return ! Str::endsWith($file, '.css');
             })->each(function (string $script) {
                 TALLKit::addScript($script);
             });
@@ -111,11 +111,11 @@ class TALLKitServiceProvider extends ServiceProvider
     private function bootDirectives()
     {
         Blade::directive('tallkitStyles', function () {
-            return "<?php echo Datalogix\\TALLKit::outputStyles(); ?>";
+            return '<?php echo Datalogix\\TALLKit::outputStyles(); ?>';
         });
 
         Blade::directive('tallkitScripts', function () {
-            return "<?php echo Datalogix\\TALLKit::outputScripts(); ?>";
+            return '<?php echo Datalogix\\TALLKit::outputScripts(); ?>';
         });
 
         Blade::directive('theme', function ($theme) {
@@ -152,11 +152,11 @@ class TALLKitServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/tall-kit.php' => config_path('tall-kit.php')
+                __DIR__.'/../config/tall-kit.php' => config_path('tall-kit.php'),
             ], 'tall-kit-config');
 
             $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/tall-kit')
+                __DIR__.'/../resources/views' => resource_path('views/vendor/tall-kit'),
             ], 'tall-kit-views');
         }
     }

@@ -10,7 +10,7 @@ class Pikaday extends Input
      * The assets of component.
      *
      * @var array
-    */
+     */
     protected static $assets = [
         'alpine',
         'pikaday',

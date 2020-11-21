@@ -8,7 +8,7 @@ trait HandlesAssets
      * The assets of component.
      *
      * @var array
-    */
+     */
     protected static $assets = [];
 
     /**

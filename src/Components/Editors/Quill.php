@@ -10,7 +10,7 @@ class Quill extends Textarea
      * The assets of component.
      *
      * @var array
-    */
+     */
     protected static $assets = [
         'alpine',
         'quill',

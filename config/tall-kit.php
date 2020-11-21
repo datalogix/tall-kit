@@ -7,12 +7,12 @@ return [
 
     'components' => [
         /**
-         * Alerts
+         * Alerts.
          */
         'alert' => \Datalogix\TALLKit\Components\Alerts\Alert::class,
 
         /**
-         * Buttons
+         * Buttons.
          */
         'button' => \Datalogix\TALLKit\Components\Buttons\Button::class,
         'bt' => \Datalogix\TALLKit\Components\Buttons\Button::class,  // alias
@@ -23,7 +23,7 @@ return [
         'logout' => \Datalogix\TALLKit\Components\Buttons\Logout::class,
 
         /**
-         * Editors
+         * Editors.
          */
         'editor' => \Datalogix\TALLKit\Components\Editors\Quill::class, // alias,
         'easy-mde' => \Datalogix\TALLKit\Components\Editors\EasyMDE::class,
@@ -32,7 +32,7 @@ return [
         'trix' => \Datalogix\TALLKit\Components\Editors\Trix::class,
 
         /**
-         * Forms
+         * Forms.
          */
         'checkbox' => \Datalogix\TALLKit\Components\Forms\Checkbox::class,
         'check' => \Datalogix\TALLKit\Components\Forms\Checkbox::class, // alias
@@ -50,21 +50,21 @@ return [
         'textarea' => \Datalogix\TALLKit\Components\Forms\Textarea::class,
 
         /**
-         * Layouts
+         * Layouts.
          */
         'html' => \Datalogix\TALLKit\Components\Layouts\Html::class,
         'meta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class,
         'social-meta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class,
 
         /**
-         * Navigations
+         * Navigations.
          */
         'dropdown' => \Datalogix\TALLKit\Components\Navigations\Dropdown::class,
         'menu' => \Datalogix\TALLKit\Components\Navigations\Menu::class,
         'menu-item' => \Datalogix\TALLKit\Components\Navigations\MenuItem::class,
 
         /**
-         * Pickers
+         * Pickers.
          */
         'datetime-picker' => \Datalogix\TALLKit\Components\Pickers\Flatpickr::class, // alias
         'datetimepicker' => \Datalogix\TALLKit\Components\Pickers\Flatpickr::class, // alias
@@ -79,7 +79,7 @@ return [
         'pikaday' => \Datalogix\TALLKit\Components\Pickers\Pikaday::class,
 
         /**
-         * Tables
+         * Tables.
          */
         'table' => \Datalogix\TALLKit\Components\Tables\Table::class,
         'heading' => \Datalogix\TALLKit\Components\Tables\Heading::class,
@@ -94,7 +94,7 @@ return [
     'themes' => [
         'default' => [
             /**
-             * Alerts
+             * Alerts.
              */
             'alert' => [
                 'container' => [
@@ -260,7 +260,7 @@ return [
             ],
 
             /**
-             * Buttons
+             * Buttons.
              */
             'button' => [
                 'container' => [
@@ -379,7 +379,7 @@ return [
             ],
 
             /**
-             * Editors
+             * Editors.
              */
             'easy-mde' => [
                 'easymde' => [],
@@ -414,7 +414,7 @@ return [
             ],
 
             /**
-             * Forms
+             * Forms.
              */
             'checkbox' => [
                 'container' => [
@@ -557,7 +557,7 @@ return [
             ],
 
             /**
-             * Layouts
+             * Layouts.
              */
             'html' => [
                 'html' => [],
@@ -570,7 +570,7 @@ return [
             'social-meta' => [],
 
             /**
-             * Navigations
+             * Navigations.
              */
             'dropdown' => [
                 'container' => [
@@ -615,7 +615,7 @@ return [
             ],
 
             /**
-             * Pickers
+             * Pickers.
              */
             'flatpickr' => [
                 'flatpickr' => [],
@@ -638,7 +638,7 @@ return [
             ],
 
             /**
-             * Tables
+             * Tables.
              */
             'cell' => [
                 'td' => [
@@ -685,7 +685,7 @@ return [
         ],
 
         /**
-         * Forms
+         * Forms.
          */
         'inputmask' => [
             'https://cdn.jsdelivr.net/npm/inputmask@5.0.5/dist/inputmask.min.js',
@@ -727,7 +727,7 @@ return [
         ],
 
         /**
-         * Pickers
+         * Pickers.
          */
         'flatpickr' => [
             'https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.css',
@@ -746,7 +746,7 @@ return [
         ],
 
         /**
-         * Editors
+         * Editors.
          */
         'easy-mde' => [
             'https://cdn.jsdelivr.net/npm/easymde@2.13.0/dist/easymde.min.css',

@@ -10,7 +10,7 @@ class Pickr extends Input
      * The assets of component.
      *
      * @var array
-    */
+     */
     protected static $assets = [
         'alpine',
         'pickr',
@@ -20,14 +20,14 @@ class Pickr extends Input
      * The Pickr options.
      *
      * @var array
-    */
+     */
     protected $options;
 
     /**
      * The Pickr swatches.
      *
      * @var array
-    */
+     */
     protected $swatches;
 
     /**

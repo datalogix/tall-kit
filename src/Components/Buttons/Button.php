@@ -65,7 +65,7 @@ class Button extends BladeComponent
             $this->attrs = $this->attrs->merge([
                 'class' => $outlined
                     ? 'bg-transparent hover:bg-'.$colorName.'-'.$colorWeight.' text-'.$colorName.'-'.$colorHover.' hover:text-white border border-'.$colorName.'-'.$colorWeight.' hover:border-transparent'
-                    : 'bg-'.$colorName.'-'.$colorWeight.' hover:bg-'.$colorName.'-'.$colorHover.' text-white'
+                    : 'bg-'.$colorName.'-'.$colorWeight.' hover:bg-'.$colorName.'-'.$colorHover.' text-white',
             ]);
 
             if ($bordered) {
