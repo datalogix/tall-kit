@@ -732,7 +732,7 @@ return [
         'flatpickr' => [
             'https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.css',
             'https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.js',
-            'https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/l10n/'.$locale.'.min.js',
+            $locale != 'en' ? 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/l10n/'.$locale.'.min.js' : '',
         ],
 
         'pickr' => [
