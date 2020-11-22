@@ -5,7 +5,7 @@
         type="hidden"
         :id="$id"
         :name="$name"
-        :default="$slot->isEmpty() ? $default : $slot"
+        :default="$slot"
     />
 
     <div
