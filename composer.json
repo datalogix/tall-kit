@@ -26,11 +26,11 @@
         "illuminate/view": "^8.0"
     },
     "require-dev": {
-        "livewire/livewire": "^2.0",
-        "orchestra/testbench-browser-kit": "^6.0",
-        "phpunit/phpunit": "^9.0",
-        "spatie/laravel-translatable": "^4.0",
-        "spatie/phpunit-watcher": "^1.0"
+        "livewire/livewire": "^2.3",
+        "orchestra/testbench-browser-kit": "^6.2",
+        "phpunit/phpunit": "^9.4",
+        "spatie/laravel-translatable": "^4.6",
+        "spatie/phpunit-watcher": "^1.23"
     },
     "autoload": {
         "psr-4": {

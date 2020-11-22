@@ -13,10 +13,9 @@ jobs:
       matrix:
         #php: [7.3, 7.4, 8.0]
         php: [7.3, 7.4]
-        laravel: [8.*]
-        stability: [prefer-lowest, prefer-stable]
+        laravel: [^8.0]
 
-    name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }}
 
     steps:
       - name: Checkout code
@@ -36,7 +35,7 @@ jobs:
           coverage: xdebug
 
       - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
+        run: composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
