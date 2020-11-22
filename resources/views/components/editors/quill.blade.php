@@ -18,9 +18,9 @@
                     quill.setContents(JSON.parse(input.value).ops);
                 }
 
-                (function() {
+                (function () {
                      let inputEvent = new Event('input');
-                     quill.on('text-change', function(delta, oldDelta, source) {
+                     quill.on('text-change', function (delta, oldDelta, source) {
                         input.value = JSON.stringify(quill.getContents());
                         input.dispatchEvent(inputEvent);
                      });

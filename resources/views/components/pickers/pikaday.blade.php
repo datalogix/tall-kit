@@ -1,6 +1,10 @@
 <x-input
-    x-data
-    x-init="new Pikaday({ field: $el {{ $jsonOptions() }} })"
+    x-data="{
+        initPikaday: function (element) {
+            new Pikaday({ field: element {{ $jsonOptions() }} });
+        }
+    }"
+    x-init="initPikaday($el)"
     :name="$name"
     :id="$id"
     :label="$label"

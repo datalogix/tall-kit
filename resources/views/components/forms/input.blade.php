@@ -17,7 +17,12 @@
             @endif
 
             @if($mask)
-                x-init="Inputmask({{ $maskOptions() }}).mask($el)"
+                x-data="{
+                    initMask: function (element) {
+                        Inputmask({{ $maskOptions() }}).mask(element);
+                    }
+                }"
+                x-init="initMask($el)"
             @endif
         />
     </label>

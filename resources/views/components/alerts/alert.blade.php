@@ -2,7 +2,7 @@
     x-data="{
         hide: false,
         timeout: function (i) {
-            setInterval(() => {
+            setInterval(function () {
                 this.hide = true;
             }, i);
         },

@@ -1,6 +1,10 @@
 <x-input
-    x-data
-    x-init="flatpickr($el, {{ $jsonOptions() }})"
+    x-data="{
+        initFlatpickr: function (element) {
+            flatpickr(element, {{ $jsonOptions() }});
+        }
+    }"
+    x-init="initFlatpickr($el)"
     :name="$name"
     :id="$id"
     :label="$label"
