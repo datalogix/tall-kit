@@ -6,7 +6,7 @@
     :label="$label"
     :type="'text'"
     :bind="$bind"
-    :default="$slot"
+    :default="$slot->isEmpty() ? $default : $slot"
     :language="$language"
     :showErrors="$showErrors"
     :theme="$theme"

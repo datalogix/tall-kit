@@ -7,6 +7,27 @@ trait HandlesDefaultAndOldValue
     use HandlesBoundValues;
 
     /**
+     * The bind target.
+     *
+     * @var mixed
+     */
+    public $bind;
+
+    /**
+     * The default value.
+     *
+     * @var mixed
+     */
+    public $default;
+
+    /**
+     * The language field.
+     *
+     * @var mixed
+     */
+    public $language;
+
+    /**
      * Set default and old value.
      *
      * @param  string  $name
@@ -20,6 +41,10 @@ trait HandlesDefaultAndOldValue
         if ($this->isWired()) {
             return;
         }
+
+        $this->bind = $bind;
+        $this->default = $default;
+        $this->language = $language;
 
         if (! $language) {
             $default = $this->getBoundValue($bind, $name) ?: $default;

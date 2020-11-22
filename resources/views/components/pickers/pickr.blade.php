@@ -19,7 +19,7 @@
         type="hidden"
         id="{{ $id }}-input"
         :name="$name"
-        :default="$slot"
+        :default="$slot->isEmpty() ? $default : $slot"
     />
 
     <div {{ $themeProvider->pickr->merge(['id' => $id]) }}></div>

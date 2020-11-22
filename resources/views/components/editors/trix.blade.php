@@ -5,7 +5,7 @@
         type="hidden"
         :id="$id"
         :name="$name"
-        :default="$slot"
+        :default="$slot->isEmpty() ? $default : $slot"
     />
 
     <trix-editor

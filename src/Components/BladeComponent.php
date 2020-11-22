@@ -20,6 +20,13 @@ abstract class BladeComponent extends BaseComponent
     public $themeProvider;
 
     /**
+     * The theme name.
+     *
+     * @var string|null
+     */
+    public $theme;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $theme
@@ -27,6 +34,7 @@ abstract class BladeComponent extends BaseComponent
      */
     public function __construct($theme = null)
     {
+        $this->theme = $theme;
         $this->themeProvider = app(ThemeProvider::class)->make($theme, class_basename($this));
     }
 
