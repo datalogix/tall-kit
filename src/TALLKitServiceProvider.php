@@ -111,11 +111,11 @@ class TALLKitServiceProvider extends ServiceProvider
     private function bootDirectives()
     {
         Blade::directive('tallkitStyles', function () {
-            return '<?php echo Datalogix\\TALLKit::outputStyles(); ?>';
+            return '<?php echo \Datalogix\TALLKit\TALLKit::outputStyles(); ?>';
         });
 
         Blade::directive('tallkitScripts', function () {
-            return '<?php echo Datalogix\\TALLKit::outputScripts(); ?>';
+            return '<?php echo \Datalogix\TALLKit\TALLKit::outputScripts(); ?>';
         });
 
         Blade::directive('theme', function ($theme) {
