@@ -24,19 +24,3 @@ or add this to require section in your composer.json file:
 ```
 
 then run ```composer update```
-
-## Roadmap v1
-
-- icons
-- autocomplete
-- banner
-- slider
-- filepond
-- favicon
-- modal
-- toast
-- card
-- progressbar
-- charts
-- maps (GoogleMaps, LeaftMaps, Mapbox)
-- preview image(s) on input file
