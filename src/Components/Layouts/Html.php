@@ -47,15 +47,15 @@ class Html extends BladeComponent
     public function __construct(
         $title = '',
         $charset = 'utf-8',
-        $stackStyles = true,
-        $stackScripts = true,
+        $stackStyles = 'styles',
+        $stackScripts = 'scripts',
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->title = $title;
+        $this->title = $title ?: config('app.name');
         $this->charset = $charset;
-        $this->stackScripts = $stackStyles === true ? 'styles' : $stackStyles;
-        $this->stackScripts = $stackScripts === true ? 'scripts' : $stackScripts;
+        $this->stackScripts = $stackStyles;
+        $this->stackScripts = $stackScripts;
     }
 }
