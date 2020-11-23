@@ -685,7 +685,7 @@ return [
         ],
 
         'moment' => [
-            'https://cdn.jsdelivr.net/npm/moment@2.29.1/dist/moment.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js',
         ],
 
         /**
