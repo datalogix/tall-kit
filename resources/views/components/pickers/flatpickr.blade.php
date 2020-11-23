@@ -14,5 +14,5 @@
     :language="$language"
     :showErrors="$showErrors"
     :theme="$theme"
-    {{ $attributes->merge($themeProvider->flatpickr->toArray()) }}
+    {{ $attributes->merge($themeProvider->flatpickr->toArray())->merge(['placeholder' => $placeholder]) }}
 />

@@ -17,6 +17,20 @@ class Flatpickr extends Input
     ];
 
     /**
+     * The Flatpickr format.
+     *
+     * @var string
+     */
+    protected $format;
+
+    /**
+     * The input placeholder.
+     *
+     * @var string|bool
+     */
+    public $placeholder;
+
+    /**
      * The Flatpickr options.
      *
      * @var array
@@ -35,6 +49,7 @@ class Flatpickr extends Input
      * @param  bool  $showErrors
      * @param  string|null  $theme
      * @param  string|null  $format
+     * @param  string|bool|null  $placeholder
      * @param  array  $options
      * @return void
      */
@@ -48,6 +63,7 @@ class Flatpickr extends Input
         $showErrors = true,
         $theme = null,
         $format = null,
+        $placeholder = null,
         $options = []
     ) {
         parent::__construct(
@@ -64,6 +80,7 @@ class Flatpickr extends Input
         );
 
         $this->format = $format ?: 'd/m/Y H:i';
+        $this->placeholder = $placeholder ?? $this->format;
         $this->options = $options;
     }
 

@@ -26,7 +26,7 @@ class Pikaday extends Input
     /**
      * The input placeholder.
      *
-     * @var string
+     * @var string|bool
      */
     public $placeholder;
 
@@ -49,7 +49,7 @@ class Pikaday extends Input
      * @param  bool  $showErrors
      * @param  string|null  $theme
      * @param  string|null  $format
-     * @param  string|null  $placeholder
+     * @param  string|bool|null  $placeholder
      * @param  array  $options
      * @return void
      */
@@ -80,7 +80,7 @@ class Pikaday extends Input
         );
 
         $this->format = $format ?: 'DD/MM/YYYY';
-        $this->placeholder = $placeholder ?? $format;
+        $this->placeholder = $placeholder ?? $this->format;
         $this->options = $options;
     }
 
