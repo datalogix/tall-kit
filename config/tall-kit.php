@@ -494,7 +494,7 @@ return [
 
             'label' => [
                 'container' => [
-                    'class' => 'block mb-1 text-gray-700',
+                    'class' => 'block mb-1 text-sm font-medium text-gray-700',
                 ],
             ],
 
@@ -588,11 +588,12 @@ return [
 
             'menu' => [
                 'container' => [
-                    'class' => 'bg-white border rounded shadow overflow-hidden',
+                    'class' => 'bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 rounded shadow overflow-hidden',
+                    'role' => 'menu',
                 ],
 
                 'inline' => [
-                    'class' => 'flex items-center justify-center',
+                    'class' => 'flex items-center justify-center divide-y-0 divide-x',
                 ],
             ],
 
@@ -602,11 +603,13 @@ return [
                 ],
 
                 'link' => [
-                    'class' => 'flex items-center py-2 px-6 text-gray-700 hover:opacity-75 border-b',
+                    'class' => 'flex items-center py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900',
+                    'role' => 'menuitem',
                 ],
 
                 'button' => [
-                    'class' => 'flex items-center py-2 px-6 text-gray-700 hover:opacity-75 border-b outline-none focus:outline-none',
+                    'class' => 'flex items-center py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 outline-none focus:outline-none',
+                    'role' => 'menuitem',
                 ],
 
                 'iconLeft' => 'mr-3',
@@ -642,38 +645,55 @@ return [
              */
             'cell' => [
                 'td' => [
-                    'class' => 'px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-700',
+                    'class' => 'px-6 py-4 whitespace-nowrap text-sm text-gray-500',
                 ],
             ],
 
             'heading' => [
                 'th' => [
-                    'class' => 'px-6 py-3 bg-gray-100 flex items-center',
+                    'class' => 'px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
+                    'scope' => 'col',
+                ],
+
+                'container' => [
+                    'class' => 'flex items-center'
                 ],
 
                 'sortable' => [
-                    'asc' => '<svg class="asc fill-current w-4 h-4 text-gray-700" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg>',
-                    'desc' => '<svg class="desc fill-current w-4 h-4 text-gray-700" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>',
+                    'asc' => '<svg class="asc fill-current w-4 h-4 text-gray-500" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg>',
+                    'desc' => '<svg class="desc fill-current w-4 h-4 text-gray-500" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>',
                 ],
             ],
 
             'row' => [
                 'tr' => [
-                    'class' => 'bg-white',
+                    'class' => '',
                 ],
             ],
 
             'table' => [
                 'container' => [
-                    'class' => 'align-middle min-w-full overflow-x-auto shadow overdlow-hidden sm:rounded-lg border-b border-gray-200',
+                    'class' => 'shadow overflow-hidden border-b border-gray-200 sm:rounded-lg',
                 ],
 
                 'table' => [
                     'class' => 'min-w-full divide-y divide-gray-200',
                 ],
 
+                'thead' => [
+                    'class' => ''
+                ],
+
+                'tbody' => [
+                    'class' => 'bg-white divide-y divide-gray-200'
+                ],
+
+                'tfoot' => [
+                    'class' => ''
+                ],
+
                 'emptyText' => [
-                    'class' => 'px-6 py-4 whitespace-no-wrap text-lg text-gray-700 text-center',
+                    'class' => 'px-6 py-4 whitespace-nowrap text-lg text-gray-500 text-center',
                 ],
             ],
         ],
