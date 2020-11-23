@@ -90,7 +90,7 @@ class TALLKit
                 return '<script src="'.$script.'"></script>';
             }
 
-            return '<script>'.$script.'</script>';
+            return $script ? '<script>'.$script.'</script>' : '';
         })->implode(PHP_EOL);
     }
 }
