@@ -48,7 +48,7 @@ class Flatpickr extends Input
      * @param  string|null  $language
      * @param  bool  $showErrors
      * @param  string|null  $theme
-     * @param  string|null  $format
+     * @param  string  $format
      * @param  string|bool|null  $placeholder
      * @param  array  $options
      * @return void
@@ -62,7 +62,7 @@ class Flatpickr extends Input
         $language = null,
         $showErrors = true,
         $theme = null,
-        $format = null,
+        $format = 'd/m/Y H:i',
         $placeholder = null,
         $options = []
     ) {
@@ -79,8 +79,8 @@ class Flatpickr extends Input
             $theme
         );
 
-        $this->format = $format ?: 'd/m/Y H:i';
-        $this->placeholder = $placeholder ?? $this->format;
+        $this->format = $format;
+        $this->placeholder = $placeholder ?? $format;
         $this->options = $options;
     }
 

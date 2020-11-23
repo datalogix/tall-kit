@@ -13,6 +13,7 @@ class Pikaday extends Input
      */
     protected static $assets = [
         'alpine',
+        'moment',
         'pikaday',
     ];
 
@@ -48,7 +49,7 @@ class Pikaday extends Input
      * @param  string|null  $language
      * @param  bool  $showErrors
      * @param  string|null  $theme
-     * @param  string|null  $format
+     * @param  string  $format
      * @param  string|bool|null  $placeholder
      * @param  array  $options
      * @return void
@@ -62,7 +63,7 @@ class Pikaday extends Input
         $language = null,
         $showErrors = true,
         $theme = null,
-        $format = null,
+        $format = 'DD/MM/YYYY',
         $placeholder = null,
         $options = []
     ) {
@@ -79,8 +80,8 @@ class Pikaday extends Input
             $theme
         );
 
-        $this->format = $format ?: 'DD/MM/YYYY';
-        $this->placeholder = $placeholder ?? $this->format;
+        $this->format = $format;
+        $this->placeholder = $placeholder ?? $format;
         $this->options = $options;
     }
 

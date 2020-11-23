@@ -684,6 +684,10 @@ return [
             'https://cdn.jsdelivr.net/npm/alpinejs@2.7.3/dist/alpine.min.js',
         ],
 
+        'moment' => [
+            'https://cdn.jsdelivr.net/npm/moment@2.29.1/dist/moment.min.js',
+        ],
+
         /**
          * Forms.
          */
