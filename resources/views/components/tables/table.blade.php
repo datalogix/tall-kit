@@ -1,7 +1,7 @@
 <div {{ $themeProvider->container }}>
     <table {{ $attributes->merge($themeProvider->table->toArray()) }}>
-        @if($cols->isNotEmpty() || isset($head))
-            <thead>
+        @if($cols->isNotEmpty() || ($head ?? false))
+            <thead {{ $themeProvider->thead }}>
                 <tr>
                     @forelse($cols as $key => $col)
                         <x-heading :sortable="$col['sortable'] ?? false">
@@ -14,7 +14,7 @@
             </thead>
         @endif
 
-        <tbody>
+        <tbody {{ $themeProvider->tbody }}>
             @forelse($rows as $row)
                 <x-row>
                     @foreach($cols as $key => $col)
@@ -24,9 +24,11 @@
                     @endforeach
                 </x-row>
             @empty
-                @if(isset($body))
+                @if($slot->isNotEmpty())
+                    {{ $slot }}
+                @elseif($body ?? false)
                     {{ $body }}
-                @elseif(isset($empty))
+                @elseif($empty ?? false)
                     {{ $empty }}
                 @elseif($emptyText)
                     <x-row>
@@ -38,8 +40,8 @@
             @endforelse
         </tbody>
 
-        @if($footer->isNotEmpty() || isset($foot))
-            <tfoot>
+        @if($footer->isNotEmpty() || ($foot ?? false))
+            <tfoot {{ $themeProvider->tfoot }}>
                 @forelse($footer as $row)
                     <x-row>
                         @foreach($cols as $key => $col)
