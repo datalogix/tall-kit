@@ -104,7 +104,7 @@ class Alert extends BladeComponent
      * Create a new component instance.
      *
      * @param  string  $type
-     * @param  string  $style
+     * @param  string  $mode
      * @param  string  $rounded
      * @param  string  $shadow
      * @param  bool  $icon
@@ -123,7 +123,7 @@ class Alert extends BladeComponent
      */
     public function __construct(
         $type = 'info',
-        $style = 'default',
+        $mode = 'default',
         $rounded = 'default',
         $shadow = 'default',
         $icon = true,
@@ -158,8 +158,8 @@ class Alert extends BladeComponent
 
         $this->attrs = new ComponentAttributeBag([
             'container' => $this->themeProvider->container
-                ->merge(['class' => 'bg-'.$color.'-200 border-'.$color.'-300'])
-                ->merge($this->themeProvider->styles->get($style, []))
+            ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
+                ->merge($this->themeProvider->modes->get($mode, []))
                 ->merge($this->themeProvider->rounded->get($rounded, []))
                 ->merge($this->themeProvider->shadow->get($shadow, [])),
 
@@ -167,11 +167,11 @@ class Alert extends BladeComponent
                 'class' => 'bg-'.$color.'-100 border-'.$color.'-500 text-'.$color.'-500',
             ]),
 
-            'dismissible' => $this->themeProvider->dismissible['container'],
+            'dismissible' => new ComponentAttributeBag($this->themeProvider->dismissible['container']),
 
-            'dismissibleIcon' => $this->themeProvider->dismissible['icon'],
+            'dismissibleIcon' => new ComponentAttributeBag($this->themeProvider->dismissible['icon']),
 
-            'dismissibleText' => $this->themeProvider->dismissible['text'],
+            'dismissibleText' => new ComponentAttributeBag($this->themeProvider->dismissible['text']),
 
             'title' => $this->themeProvider->title->merge([
                 'class' => 'text-'.$color.'-800',

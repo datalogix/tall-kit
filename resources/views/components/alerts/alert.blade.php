@@ -2,14 +2,15 @@
     x-data="{
         hide: false,
         timeout: function (i) {
+            let that = this;
             setInterval(function () {
-                this.hide = true;
+                that.hide = true;
             }, i);
         },
     }"
     @if($timeout) x-init="timeout({{ $timeout }})" @endif
     x-show="!hide"
-    {{ $attributes->merge($attrs['container'])->merge(['role' => 'alert']) }}
+    {{ $attributes->merge($attrs['container']->toArray()) }}
 >
     @if($icon)
         <span {{ $attrs['icon'] }}>
@@ -29,7 +30,7 @@
         >
             @if($dismissibleIcon)
                 <span {{ $attrs['dismissibleIcon'] }}>
-                    @if($dismissibleIconSvg])
+                    @if($dismissibleIconSvg)
                         {!! $dismissibleIconSvg !!}
                     @elseif($dismissibleIconName)
                         <x-icon :name="$dismissibleIconName" />
