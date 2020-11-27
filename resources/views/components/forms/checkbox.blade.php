@@ -1,6 +1,6 @@
 <div {{ $themeProvider->container }}>
     <label {{ $themeProvider->label }}>
-        <input {{ $attributes->merge($themeProvider->checkbox->toArray()) }}
+        <input {{ $attributes->merge(toArray($themeProvider->checkbox)) }}
             type="checkbox"
             value="{{ $value }}"
 

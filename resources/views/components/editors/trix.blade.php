@@ -10,7 +10,7 @@
 
     <trix-editor
         input="{{ $id }}"
-        {{ $attributes->merge($themeProvider->trix->toArray()) }}
+        {{ $attributes->merge(toArray($themeProvider->trix)) }}
     ></trix-editor>
 
     @if($hasErrorAndShow($name))

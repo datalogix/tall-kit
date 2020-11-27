@@ -3,7 +3,7 @@
 namespace Datalogix\TALLKit\Components\Buttons;
 
 use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Components\ComponentAttributeBag;
+use Illuminate\View\ComponentAttributeBag;
 
 class Button extends BladeComponent
 {
@@ -24,7 +24,7 @@ class Button extends BladeComponent
     /**
      * The button attrs.
      *
-     * @var \Datalogix\TALLKit\Components\ComponentAttributeBag
+     * @var \Illuminate\View\ComponentAttributeBag
      */
     public $attrs;
 
@@ -55,7 +55,7 @@ class Button extends BladeComponent
 
         $this->text = $text;
         $this->type = $type;
-        $this->attrs = new ComponentAttributeBag($this->themeProvider->button->toArray());
+        $this->attrs = new ComponentAttributeBag(toArray($this->themeProvider->button));
 
         if ($color && $colorProperties = $this->themeProvider->colors->get($color)) {
             $colorName = $colorProperties['name'] ?? $colorProperties;

@@ -1,3 +1,3 @@
-<tr {{ $attributes->merge($themeProvider->tr->toArray()) }}>
+<tr {{ $attributes->merge(toArray($themeProvider->tr)) }}>
     {{ $slot->isEmpty() ? __($text) : $slot }}
 </tr>

@@ -1,6 +1,6 @@
 <div {{ $themeProvider->container }}>
     <label {{ $themeProvider->label }}>
-        <input {{ $attributes->merge($themeProvider->radio->toArray()) }}
+        <input {{ $attributes->merge(toArray($themeProvider->radio)) }}
             type="radio"
             value="{{ $value }}"
 

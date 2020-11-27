@@ -1,12 +1,12 @@
 <?php
 
-namespace Datalogix\TALLKit\Traits;
+namespace Datalogix\TALLKit\Concerns;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\ViewErrorBag;
 
-trait HandlesValidationErrors
+trait ValidationErrors
 {
     /**
      * Show errors.

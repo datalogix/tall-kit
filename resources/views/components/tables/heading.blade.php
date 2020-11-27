@@ -1,4 +1,4 @@
-<th {{ $attributes->merge($themeProvider->th->toArray()) }}>
+<th {{ $attributes->merge(toArray($themeProvider->th)) }}>
     <div {{ $themeProvider->container }}>
         {{ $slot->isEmpty() ? __($text) : $slot }}
 

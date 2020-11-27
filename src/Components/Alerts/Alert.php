@@ -3,7 +3,7 @@
 namespace Datalogix\TALLKit\Components\Alerts;
 
 use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Components\ComponentAttributeBag;
+use Illuminate\View\ComponentAttributeBag;
 
 class Alert extends BladeComponent
 {
@@ -96,7 +96,7 @@ class Alert extends BladeComponent
     /**
      * The alert attrs.
      *
-     * @var \Datalogix\TALLKit\Components\ComponentAttributeBag
+     * @var \Illuminate\View\ComponentAttributeBag
      */
     public $attrs;
 
@@ -158,7 +158,7 @@ class Alert extends BladeComponent
 
         $this->attrs = new ComponentAttributeBag([
             'container' => $this->themeProvider->container
-            ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
+                ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
                 ->merge($this->themeProvider->modes->get($mode, []))
                 ->merge($this->themeProvider->rounded->get($rounded, []))
                 ->merge($this->themeProvider->shadow->get($shadow, [])),

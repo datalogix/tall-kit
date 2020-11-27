@@ -5,6 +5,7 @@ namespace Datalogix\TALLKit\Components;
 use Datalogix\TALLKit\ThemeBinder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\View\ComponentAttributeBag;
 
 class ThemeProvider
 {
@@ -55,7 +56,7 @@ class ThemeProvider
      * Get an item from the collection by key.
      *
      * @param  mixed  $key
-     * @return \Datalogix\TALLKit\Components\ComponentAttributeBag|string|mixed
+     * @return \Illuminate\View\ComponentAttributeBag|string|mixed
      */
     public function __get($key)
     {

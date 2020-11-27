@@ -2,7 +2,7 @@
     <label {{ $themeProvider->label }}>
         <x-label :label="$label" :class="$themeProvider->labelText" />
 
-        <textarea {{ $attributes->merge($themeProvider->textarea->toArray()) }}
+        <textarea {{ $attributes->merge(toArray($themeProvider->textarea)) }}
             @if($id)
                 id="{{ $id }}"
             @endif

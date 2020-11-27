@@ -2,15 +2,15 @@
 
 namespace Datalogix\TALLKit\Components;
 
-use Datalogix\TALLKit\Traits\HandlesAssets;
-use Datalogix\TALLKit\Traits\HandlesLivewireFormDataBinder;
+use Datalogix\TALLKit\Concerns\Assets;
+use Datalogix\TALLKit\Concerns\LivewireFormDataBinder;
 use Illuminate\Support\Str;
 use Illuminate\View\Component as BaseComponent;
 
 abstract class BladeComponent extends BaseComponent
 {
-    use HandlesAssets;
-    use HandlesLivewireFormDataBinder;
+    use Assets;
+    use LivewireFormDataBinder;
 
     /**
      * The theme provider.

@@ -1,8 +1,8 @@
 <?php
 
-namespace Datalogix\TALLKit\Traits;
+namespace Datalogix\TALLKit\Concerns;
 
-trait HandlesLabelText
+trait LabelText
 {
     /**
      * The label text.

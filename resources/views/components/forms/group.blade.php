@@ -1,4 +1,4 @@
-<div {{ $attributes->merge($themeProvider->container->toArray()) }}>
+<div {{ $attributes->merge(toArray($themeProvider->container)) }}>
     <x-label :label="$label" :class="$themeProvider->labelText" />
 
     <div {{ $themeProvider->{$inline ? 'inline' : 'block'} }}>

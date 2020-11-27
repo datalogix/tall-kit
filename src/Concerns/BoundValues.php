@@ -1,10 +1,10 @@
 <?php
 
-namespace Datalogix\TALLKit\Traits;
+namespace Datalogix\TALLKit\Concerns;
 
 use Datalogix\TALLKit\FormDataBinder;
 
-trait HandlesBoundValues
+trait BoundValues
 {
     /**
      * Get an instance of FormDataBinder.

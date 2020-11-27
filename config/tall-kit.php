@@ -15,7 +15,7 @@ return [
          * Buttons.
          */
         'button' => \Datalogix\TALLKit\Components\Buttons\Button::class,
-        'bt' => \Datalogix\TALLKit\Components\Buttons\Button::class,  // alias
+        'bt' => \Datalogix\TALLKit\Components\Buttons\Button::class, // alias
         'btn' => \Datalogix\TALLKit\Components\Buttons\Button::class, // alias,
         'form-button' => \Datalogix\TALLKit\Components\Buttons\FormButton::class,
         'form-bt' => \Datalogix\TALLKit\Components\Buttons\FormButton::class,
@@ -48,6 +48,11 @@ return [
         'select' => \Datalogix\TALLKit\Components\Forms\Select::class,
         'submit' => \Datalogix\TALLKit\Components\Forms\Submit::class,
         'textarea' => \Datalogix\TALLKit\Components\Forms\Textarea::class,
+
+        /**
+         * Icons.
+         */
+        'icon' => \Datalogix\TALLKit\Components\Icons\Icon::class,
 
         /**
          * Layouts.
@@ -99,6 +104,7 @@ return [
             'alert' => [
                 'container' => [
                     'class' => 'flex flex-row items-center p-5 rounded relative',
+                    'role' => 'alert',
                 ],
 
                 'icon' => [
@@ -114,7 +120,7 @@ return [
                         'class' => 'flex items-center justify-center h-8 w-8 flex-shrink-0 rounded-full',
                     ],
 
-                    'iconSvg' => '<svg fill="currentColor" viewBox="0 0 20 20" class="h-6 w-6"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
+                    'iconSvg' => '<svg fill="currentColor" viewBox="0 0 20 20" class="h-4 w-4 text-gray-700"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
 
                     'iconName' => 'close',
 
@@ -168,7 +174,7 @@ return [
                     ],
                 ],
 
-                'styles' => [
+                'modes' => [
                     'default' => [
                         'class' => 'border-2',
                     ],
@@ -191,6 +197,10 @@ return [
 
                     'banner' => [
                         'class' => 'border-t-2 border-b-2',
+                    ],
+
+                    'outlined' => [
+                        'class' => 'border-2 bg-transparent',
                     ],
                 ],
 
@@ -407,7 +417,7 @@ return [
                 'labelText' => '',
 
                 'trix' => [
-                    'class' => 'trix-content',
+                    'class' => 'trix-content block w-full border-gray-200 rounded shadow',
                 ],
 
                 'errors' => '',
@@ -426,11 +436,11 @@ return [
                 ],
 
                 'labelText' => [
-                    'class' => 'ml-2',
+                    'class' => 'ml-3 block text-sm font-medium text-gray-700',
                 ],
 
                 'checkbox' => [
-                    'class' => 'form-checkbox',
+                    'class' => 'h-4 w-4 border-gray-200 rounded shadow',
                 ],
 
                 'errors' => '',
@@ -478,7 +488,7 @@ return [
                 'labelText' => '',
 
                 'input' => [
-                    'class' => 'form-input block w-full',
+                    'class' => 'block w-full sm:text-sm border-gray-200 rounded shadow',
                 ],
 
                 'errors' => '',
@@ -506,11 +516,11 @@ return [
                 ],
 
                 'labelText' => [
-                    'class' => 'ml-2',
+                    'class' => 'ml-3 block text-sm font-medium text-gray-700',
                 ],
 
                 'radio' => [
-                    'class' => 'form-radio',
+                    'class' => 'h-4 w-4 border-gray-200 shadow',
                 ],
 
                 'errors' => '',
@@ -528,11 +538,11 @@ return [
                 'labelText' => '',
 
                 'multiselect' => [
-                    'class' => 'form-multiselect block w-full',
+                    'class' => 'block w-full py-2 px-3 border border-gray-200 bg-white rounded shadow sm:text-sm',
                 ],
 
                 'select' => [
-                    'class' => 'form-select block w-full',
+                    'class' => 'block w-full py-2 px-3 border border-gray-200 bg-white rounded shadow sm:text-sm',
                 ],
 
                 'errors' => '',
@@ -550,7 +560,7 @@ return [
                 'labelText' => '',
 
                 'textarea' => [
-                    'class' => 'form-textarea block w-full',
+                    'class' => 'block w-full sm:text-sm border-gray-200 rounded shadow',
                 ],
 
                 'errors' => '',
@@ -603,12 +613,12 @@ return [
                 ],
 
                 'link' => [
-                    'class' => 'flex items-center py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900',
+                    'class' => 'w-full flex items-center py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900',
                     'role' => 'menuitem',
                 ],
 
                 'button' => [
-                    'class' => 'flex items-center py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 outline-none focus:outline-none',
+                    'class' => 'w-full flex items-center py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 outline-none focus:outline-none',
                     'role' => 'menuitem',
                 ],
 
@@ -656,7 +666,7 @@ return [
                 ],
 
                 'container' => [
-                    'class' => 'flex items-center'
+                    'class' => 'flex items-center',
                 ],
 
                 'sortable' => [
@@ -681,15 +691,15 @@ return [
                 ],
 
                 'thead' => [
-                    'class' => ''
+                    'class' => '',
                 ],
 
                 'tbody' => [
-                    'class' => 'bg-white divide-y divide-gray-200'
+                    'class' => 'bg-white divide-y divide-gray-200',
                 ],
 
                 'tfoot' => [
-                    'class' => ''
+                    'class' => '',
                 ],
 
                 'emptyText' => [

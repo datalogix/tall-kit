@@ -28,7 +28,7 @@
             }
         }"
         x-init="initQuill($el)"
-        {{ $attributes->merge($themeProvider->quill->toArray()) }}
+        {{ $attributes->merge(toArray($themeProvider->quill)) }}
     ></div>
 
     @if($hasErrorAndShow($name))

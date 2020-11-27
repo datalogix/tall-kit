@@ -11,7 +11,7 @@
         @stack($stackStyles)
     @endif
 </head>
-<body {{ $attributes->merge($themeProvider->body->toArray()) }}>
+<body {{ $attributes->merge(toArray($themeProvider->body)) }}>
     {{ $slot }}
 
     @if($stackScripts)

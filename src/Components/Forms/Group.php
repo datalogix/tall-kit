@@ -3,13 +3,13 @@
 namespace Datalogix\TALLKit\Components\Forms;
 
 use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Traits\HandlesLabelText;
-use Datalogix\TALLKit\Traits\HandlesValidationErrors;
+use Datalogix\TALLKit\Concerns\LabelText;
+use Datalogix\TALLKit\Concerns\ValidationErrors;
 
 class Group extends BladeComponent
 {
-    use HandlesValidationErrors;
-    use HandlesLabelText;
+    use LabelText;
+    use ValidationErrors;
 
     /**
      * The group name.

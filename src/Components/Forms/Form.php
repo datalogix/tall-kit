@@ -3,11 +3,11 @@
 namespace Datalogix\TALLKit\Components\Forms;
 
 use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Traits\HandlesBoundValues;
+use Datalogix\TALLKit\Concerns\BoundValues;
 
 class Form extends BladeComponent
 {
-    use HandlesBoundValues;
+    use BoundValues;
 
     /**
      * The form method.

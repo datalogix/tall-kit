@@ -3,7 +3,7 @@
         <x-label :label="$label" :class="$themeProvider->labelText" />
 
         <select
-            {{ $attributes->merge($themeProvider->{$multiple ? 'multiselect' : 'select'}->toArray()) }}
+            {{ $attributes->merge(toArray($themeProvider->{$multiple ? 'multiselect' : 'select'})) }}
             @if($isWired())
                 wire:model="{{ $name }}"
             @else

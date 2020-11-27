@@ -14,5 +14,5 @@
     :language="$language"
     :showErrors="$showErrors"
     :theme="$theme"
-    {{ $attributes->merge($themeProvider->pikaday->toArray())->merge(['placeholder' => $placeholder]) }}
+    {{ $attributes->merge(toArray($themeProvider->pikaday))->merge(['placeholder' => $placeholder]) }}
 />

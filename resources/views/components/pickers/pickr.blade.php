@@ -11,7 +11,7 @@
         }
     }"
     x-init="initPickr($el)"
-    {{ $attributes->merge($themeProvider->container->toArray())->merge(['title' => $value]) }}
+    {{ $attributes->merge(toArray($themeProvider->container))->merge(['title' => $value]) }}
 >
     <x-label :label="$label" :class="$themeProvider->labelText" />
 

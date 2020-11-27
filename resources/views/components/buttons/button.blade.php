@@ -1,5 +1,5 @@
 <div {{ $themeProvider->container }}>
-    <button {{ $attributes->merge($attrs->toArray()) }} type="{{ $type }}">
+    <button {{ $attributes->merge(toArray($attrs)) }} type="{{ $type }}">
         {{ $slot->isEmpty() ? __($text) : $slot }}
     </button>
 </div>

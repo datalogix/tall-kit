@@ -3,18 +3,18 @@
 namespace Datalogix\TALLKit\Components\Forms;
 
 use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Traits\HandlesBoundValues;
-use Datalogix\TALLKit\Traits\HandlesLabelText;
-use Datalogix\TALLKit\Traits\HandlesValidationErrors;
+use Datalogix\TALLKit\Concerns\BoundValues;
+use Datalogix\TALLKit\Concerns\LabelText;
+use Datalogix\TALLKit\Concerns\ValidationErrors;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class Select extends BladeComponent
 {
-    use HandlesValidationErrors;
-    use HandlesBoundValues;
-    use HandlesLabelText;
+    use BoundValues;
+    use LabelText;
+    use ValidationErrors;
 
     /**
      * The selected key.

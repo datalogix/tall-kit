@@ -3,7 +3,7 @@
         {{ $trigger }}
     </div>
 
-    <div x-show="open" {{ $attributes->merge($themeProvider->dropdown->toArray()) }}>
+    <div x-show="open" {{ $attributes->merge(toArray($themeProvider->dropdown)) }}>
         {{ $slot }}
     </div>
 </div>

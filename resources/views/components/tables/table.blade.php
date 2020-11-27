@@ -1,5 +1,5 @@
 <div {{ $themeProvider->container }}>
-    <table {{ $attributes->merge($themeProvider->table->toArray()) }}>
+    <table {{ $attributes->merge(toArray($themeProvider->table)) }}>
         @if($cols->isNotEmpty() || ($head ?? false))
             <thead {{ $themeProvider->thead }}>
                 <tr>

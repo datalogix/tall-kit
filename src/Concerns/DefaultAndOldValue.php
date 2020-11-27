@@ -1,10 +1,10 @@
 <?php
 
-namespace Datalogix\TALLKit\Traits;
+namespace Datalogix\TALLKit\Concerns;
 
-trait HandlesDefaultAndOldValue
+trait DefaultAndOldValue
 {
-    use HandlesBoundValues;
+    use BoundValues;
 
     /**
      * The bind target.

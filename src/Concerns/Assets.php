@@ -1,8 +1,8 @@
 <?php
 
-namespace Datalogix\TALLKit\Traits;
+namespace Datalogix\TALLKit\Concerns;
 
-trait HandlesAssets
+trait Assets
 {
     /**
      * The assets of component.

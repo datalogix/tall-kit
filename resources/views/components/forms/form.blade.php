@@ -6,7 +6,7 @@
     @elseif(Str::contains($slot, 'type="file"'))
         enctype="multipart/form-data"
     @endif
-    {{ $attributes->merge($themeProvider->container->toArray()) }}
+    {{ $attributes->merge(toArray($themeProvider->container)) }}
 >
     @unless(in_array($method, ['HEAD', 'GET', 'OPTIONS']))
         @csrf

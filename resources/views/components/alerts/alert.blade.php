@@ -10,7 +10,7 @@
     }"
     @if($timeout) x-init="timeout({{ $timeout }})" @endif
     x-show="!hide"
-    {{ $attributes->merge($attrs['container']->toArray()) }}
+    {{ $attributes->merge(toArray($attrs['container'])) }}
 >
     @if($icon)
         <span {{ $attrs['icon'] }}>

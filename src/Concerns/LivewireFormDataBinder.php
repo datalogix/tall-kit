@@ -1,10 +1,10 @@
 <?php
 
-namespace Datalogix\TALLKit\Traits;
+namespace Datalogix\TALLKit\Concerns;
 
 use Datalogix\TALLKit\FormDataBinder;
 
-trait HandlesLivewireFormDataBinder
+trait LivewireFormDataBinder
 {
     /**
      * Returns a boolean wether the form is wired to a Livewire component.

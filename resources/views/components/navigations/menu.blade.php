@@ -1,7 +1,7 @@
 <ul {{
     $attributes
-        ->merge($themeProvider->container->toArray())
-        ->merge($inline ? $themeProvider->inline->toArray() : [])
+        ->merge(toArray($themeProvider->container))
+        ->merge($inline ? toArray($themeProvider->inline) : [])
 }}>
     @forelse($items as $item)
         <x-menu-item

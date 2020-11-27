@@ -13,5 +13,5 @@
     :language="$language"
     :showErrors="$showErrors"
     :theme="$theme"
-    {{ $attributes->merge($themeProvider->easymde->toArray()) }}
+    {{ $attributes->merge(toArray($themeProvider->easymde)) }}
 />

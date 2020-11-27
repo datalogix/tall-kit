@@ -2,7 +2,7 @@
     <label {{ $themeProvider->label }}>
         <x-label :label="$label" :class="$themeProvider->labelText" />
 
-        <input {{ $attributes->merge($themeProvider->input->toArray())->merge($themeProvider->types->get($type, [])) }}
+        <input {{ $attributes->merge(toArray($themeProvider->input))->merge($themeProvider->types->get($type, [])) }}
             type="{{ $type }}"
 
             @if($id)
