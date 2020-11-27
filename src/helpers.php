@@ -3,7 +3,8 @@
 use Illuminate\View\ComponentAttributeBag;
 
 if (! function_exists('toArray')) {
-    function toArray($value) {
+    function toArray($value)
+    {
         if ($value instanceof ComponentAttributeBag) {
             return $value->getIterator()->getArrayCopy();
         }
