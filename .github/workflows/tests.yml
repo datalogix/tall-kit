@@ -11,6 +11,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
+        # php: [7.3, 7.4, 8.0]
         php: [7.3, 7.4]
         laravel: [^7.0, ^8.0]
 
@@ -28,7 +29,9 @@ jobs:
           coverage: xdebug
 
       - name: Install dependencies
-        run: composer update --prefer-dist --no-interaction --no-progress
+        run: |
+           composer require "illuminate/contracts=${{ matrix.laravel }}" --no-update
+           composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
