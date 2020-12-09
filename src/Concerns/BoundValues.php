@@ -33,7 +33,7 @@ trait BoundValues
      * @param  string  $name
      * @return mixed
      */
-    private function getBoundValue($bind = null, $name)
+    private function getBoundValue($bind = null, $name = null)
     {
         if ($bind === false) {
             return null;
