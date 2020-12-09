@@ -1,8 +1,6 @@
 name: tests
 
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   tests:
@@ -11,11 +9,14 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        # php: [7.3, 7.4, 8.0]
-        php: [7.3, 7.4]
+        php: [7.2, 7.3, 7.4, 8.0]
         laravel: [^7.0, ^8.0]
+        dependency-version: [prefer-lowest, prefer-stable]
+        exclude:
+          - php: 7.2
+            laravel: 8.*
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
     steps:
       - name: Checkout code
@@ -29,9 +30,7 @@ jobs:
           coverage: xdebug
 
       - name: Install dependencies
-        run: |
-           composer require "illuminate/contracts=${{ matrix.laravel }}" --no-update
-           composer update --prefer-dist --no-interaction --no-progress
+        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
