@@ -11,7 +11,8 @@ jobs:
       matrix:
         php: [7.3, 7.4, 8.0]
         laravel: [^7.0, ^8.0]
-        dependency-version: [prefer-lowest, prefer-stable]
+        #dependency-version: [prefer-lowest, prefer-stable]
+        dependency-version: [prefer-stable]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
