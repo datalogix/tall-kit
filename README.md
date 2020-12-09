@@ -11,16 +11,10 @@
 
 ## Installation
 
-Run the following command from you terminal:
+You can install the package via composer:
 
 ```bash
 composer require datalogix/tall-kit
 ```
 
-or add this to require section in your composer.json file:
-
-```bash
-"datalogix/tall-kit": "~0.1"
-```
-
-then run ```composer update```
+The package will automatically register itself.
