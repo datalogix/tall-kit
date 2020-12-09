@@ -770,8 +770,8 @@ return [
         ],
 
         'pickr' => [
-            'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.7.4/dist/themes/classic.min.css',
-            'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.7.4/dist/pickr.min.js',
+            'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.8.0/dist/themes/classic.min.css',
+            'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.8.0/dist/pickr.min.js',
         ],
 
         'pikaday' => [
@@ -793,8 +793,8 @@ return [
         ],
 
         'trix' => [
-            'https://cdn.jsdelivr.net/npm/trix@1.3.0/dist/trix.min.css',
-            'https://cdn.jsdelivr.net/npm/trix@1.3.0/dist/trix.min.js',
+            'https://cdn.jsdelivr.net/npm/trix@1.3.1/dist/trix.min.css',
+            'https://cdn.jsdelivr.net/npm/trix@1.3.1/dist/trix.min.js',
         ],
     ],
 ];
