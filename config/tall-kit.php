@@ -59,6 +59,10 @@ return [
         /**
          * Layouts.
          */
+        'auth' => \Datalogix\TALLKit\Components\Layouts\Authentication::class, //alias
+        'auth-card' => \Datalogix\TALLKit\Components\Layouts\Authentication::class, //alias
+        'authentication' => \Datalogix\TALLKit\Components\Layouts\Authentication::class,
+        'authentication-card' => \Datalogix\TALLKit\Components\Layouts\Authentication::class, //alias
         'html' => \Datalogix\TALLKit\Components\Layouts\Html::class,
         'meta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class,
         'social-meta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class,
@@ -653,6 +657,18 @@ return [
             /**
              * Layouts.
              */
+            'authentication' => [
+                'container' => [
+                    'class' => 'min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100'
+                ],
+
+                'logo' => [],
+
+                'card' => [
+                    'class' => 'w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg'
+                ],
+            ],
+
             'html' => [
                 'html' => [],
 
