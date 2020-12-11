@@ -16,7 +16,7 @@ return [
          */
         'button' => \Datalogix\TALLKit\Components\Buttons\Button::class,
         'bt' => \Datalogix\TALLKit\Components\Buttons\Button::class, // alias
-        'btn' => \Datalogix\TALLKit\Components\Buttons\Button::class, // alias,
+        'btn' => \Datalogix\TALLKit\Components\Buttons\Button::class, // alias
         'form-button' => \Datalogix\TALLKit\Components\Buttons\FormButton::class,
         'form-bt' => \Datalogix\TALLKit\Components\Buttons\FormButton::class,
         'form-btn' => \Datalogix\TALLKit\Components\Buttons\FormButton::class,
@@ -25,7 +25,7 @@ return [
         /**
          * Editors.
          */
-        'editor' => \Datalogix\TALLKit\Components\Editors\Quill::class, // alias,
+        'editor' => \Datalogix\TALLKit\Components\Editors\Quill::class, // alias
         'easy-mde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class,
         'mde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class,
         'quill' => \Datalogix\TALLKit\Components\Editors\Quill::class,
@@ -48,6 +48,8 @@ return [
         'select' => \Datalogix\TALLKit\Components\Forms\Select::class,
         'submit' => \Datalogix\TALLKit\Components\Forms\Submit::class,
         'textarea' => \Datalogix\TALLKit\Components\Forms\Textarea::class,
+        'validation' => \Datalogix\TALLKit\Components\Forms\Validation::class,
+        'validation-errors' => \Datalogix\TALLKit\Components\Forms\Validation::class, // alias
 
         /**
          * Icons.
@@ -103,7 +105,7 @@ return [
              */
             'alert' => [
                 'container' => [
-                    'class' => 'flex flex-row items-center p-5 rounded relative',
+                    'class' => 'flex flex-row p-5 rounded relative mb-4',
                     'role' => 'alert',
                     'style' => 'display: none;',
                     'x-data' => '{
@@ -630,6 +632,22 @@ return [
                 ],
 
                 'errors' => '',
+            ],
+
+            'validation' => [
+                'alert' => '',
+
+                'container' => [],
+
+                'title' => [
+                    'class' => 'font-medium text-red-600',
+                ],
+
+                'ul' => [
+                    'class' => 'mt-3 list-disc list-inside text-sm text-red-600',
+                ],
+
+                'li' => [],
             ],
 
             /**
