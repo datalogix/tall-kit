@@ -57,6 +57,6 @@ class Table extends BladeComponent
         $this->cols = Collection::make($cols);
         $this->rows = Collection::make($rows);
         $this->footer = Collection::make($footer);
-        $this->emptyText = __($emptyText);
+        $this->emptyText = $emptyText;
     }
 }

@@ -33,7 +33,7 @@
                 @elseif($emptyText)
                     <x-row>
                         <td {{ $themeProvider->emptyText }} colspan="{{ count($cols) }}">
-                            {{ $emptyText }}
+                            {{ __($emptyText) }}
                         </td>
                     </x-row>
                 @endif
