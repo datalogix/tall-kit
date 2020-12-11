@@ -1,17 +1,4 @@
-<div
-    x-data="{
-        hide: false,
-        timeout: function (i) {
-            let that = this;
-            setInterval(function () {
-                that.hide = true;
-            }, i);
-        },
-    }"
-    @if($timeout) x-init="timeout({{ $timeout }})" @endif
-    x-show="!hide"
-    {{ $attributes->merge(toArray($attrs['container'])) }}
->
+<div {{ $attributes->merge(toArray($attrs['container']), false) }}>
     @if($icon)
         <span {{ $attrs['icon'] }}>
             @if($iconSvg)
@@ -23,11 +10,7 @@
     @endif
 
     @if($dismissible)
-        <button
-            @click="hide = true"
-            type="button"
-            {{ $attrs['dismissible'] }}
-        >
+        <button {{ $attrs['dismissible'] }}>
             @if($dismissibleIcon)
                 <span {{ $attrs['dismissibleIcon'] }}>
                     @if($dismissibleIconSvg)

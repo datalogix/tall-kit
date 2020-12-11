@@ -31,20 +31,20 @@ class FormButton extends BladeComponent
      * Create a new component instance.
      *
      * @param  string  $method
-     * @param  string  $action
+     * @param  string|null  $action
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $text = '',
         $method = 'POST',
-        $action = '',
+        $action = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->text = $text;
         $this->method = $method;
-        $this->action = $action ?: request()->url();
+        $this->action = $action ?? request()->url();
     }
 }

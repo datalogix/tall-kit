@@ -2,7 +2,9 @@
 
 namespace Datalogix\TALLKit\Components\Editors;
 
-class EasyMDE extends Editor
+use Datalogix\TALLKit\Components\Forms\Textarea;
+
+class EasyMde extends Textarea
 {
     /**
      * The assets of component.
@@ -15,16 +17,47 @@ class EasyMDE extends Editor
     ];
 
     /**
-     * Convert array options to string.
+     * Create a new component instance.
      *
-     * @return string
+     * @param  string  $name
+     * @param  string|null  $id
+     * @param  string|bool|null  $label
+     * @param  mixed  $bind
+     * @param  mixed  $default
+     * @param  string|null  $language
+     * @param  bool  $showErrors
+     * @param  string|null  $theme
+     * @param  array  $options
+     * @return void
      */
-    public function jsonOptions()
-    {
-        $options = array_merge([
-            'forceSync' => true,
-        ], $this->options);
+    public function __construct(
+        $name,
+        $id = null,
+        $label = '',
+        $bind = null,
+        $default = null,
+        $language = null,
+        $showErrors = true,
+        $theme = null,
+        $options = []
+    ) {
+        parent::__construct(
+            $name,
+            $id ?: $name,
+            $label,
+            $bind,
+            $default,
+            $language,
+            $showErrors,
+            $theme
+        );
 
-        return ', ...'.json_encode((object) $options);
+        $jsonOptions = json_encode((object) array_merge([
+            'forceSync' => true,
+        ], $options));
+
+        $this->themeProvider->easymde = $this->themeProvider->easymde->merge([
+            'x-init' => 'initEasyMde($el, '.$jsonOptions.')',
+        ], false);
     }
 }

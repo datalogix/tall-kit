@@ -2,7 +2,7 @@
     <label {{ $themeProvider->label }}>
         <x-label :label="$label" :class="$themeProvider->labelText" />
 
-        <input {{ $attributes->merge(toArray($themeProvider->input))->merge($themeProvider->types->get($type, [])) }}
+        <input
             type="{{ $type }}"
 
             @if($id)
@@ -16,14 +16,7 @@
                 value="{{ $value ?? $slot }}"
             @endif
 
-            @if($mask)
-                x-data="{
-                    initMask: function (element) {
-                        Inputmask({{ $maskOptions() }}).mask(element);
-                    }
-                }"
-                x-init="initMask($el)"
-            @endif
+            {{ $attributes->merge(toArray($themeProvider->input)) }}
         />
     </label>
 

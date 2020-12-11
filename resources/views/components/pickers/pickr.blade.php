@@ -1,18 +1,4 @@
-<div
-    x-data="{
-        initPickr: function (element) {
-            let pickr = Pickr.create({{ $jsonOptions() }});
-            let input = document.getElementById('{{ $id . '-input' }}');
-            pickr.on('save', function (color) {
-                let currentColor = color ? color.toHEXA().toString() : '';
-                input.setAttribute('value', currentColor);
-                element.setAttribute('title', currentColor);
-            });
-        }
-    }"
-    x-init="initPickr($el)"
-    {{ $attributes->merge(toArray($themeProvider->container))->merge(['title' => $value]) }}
->
+<div {{ $attributes->merge(toArray($themeProvider->container)) }}>
     <x-label :label="$label" :class="$themeProvider->labelText" />
 
     <x-input

@@ -26,8 +26,8 @@ return [
          * Editors.
          */
         'editor' => \Datalogix\TALLKit\Components\Editors\Quill::class, // alias,
-        'easy-mde' => \Datalogix\TALLKit\Components\Editors\EasyMDE::class,
-        'mde' => \Datalogix\TALLKit\Components\Editors\EasyMDE::class,
+        'easy-mde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class,
+        'mde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class,
         'quill' => \Datalogix\TALLKit\Components\Editors\Quill::class,
         'trix' => \Datalogix\TALLKit\Components\Editors\Trix::class,
 
@@ -105,6 +105,41 @@ return [
                 'container' => [
                     'class' => 'flex flex-row items-center p-5 rounded relative',
                     'role' => 'alert',
+                    'style' => 'display: none;',
+                    'x-data' => '{
+                        shown: false,
+                        timeout: null,
+
+                        initAlert(event, milliseconds) {
+                            if (event) {
+                                return this.initEvent(event, milliseconds || 3000)
+                            }
+
+                            if (milliseconds) {
+                                return this.initTimeout(milliseconds)
+                            }
+
+                            this.shown = true
+                        },
+
+                        initTimeout(milliseconds) {
+                            clearTimeout(this.timeout)
+                            this.shown = true
+                            this.timeout = setTimeout(() => { this.shown = false }, milliseconds)
+                        },
+
+                        initEvent(event, milliseconds) {
+                            if (typeof Livewire === \'undefined\') {
+                                console.warn(\'Livewire not found! See https://laravel-livewire.com/docs/installation\');
+                                return
+                            }
+
+                            Livewire.on(event, () => {
+                                this.initTimeout(milliseconds)
+                            })
+                        },
+                    }',
+                    'x-show.transition.opacity.out.duration.1500ms' => 'shown',
                 ],
 
                 'icon' => [
@@ -113,7 +148,9 @@ return [
 
                 'dismissible' => [
                     'container' => [
-                        'class' => 'absolute top-0 right-0 px-4 py-3 outline-none focus:outline-none flex items-center',
+                        'class' => 'absolute top-0 right-0 p-2 outline-none focus:outline-none flex items-center hover:opacity-75',
+                        'type' => 'button',
+                        '@click' => 'shown = false',
                     ],
 
                     'icon' => [
@@ -125,7 +162,7 @@ return [
                     'iconName' => 'close',
 
                     'text' => [
-                        'class' => 'mx-2 text-sm text-gray-400',
+                        'class' => 'text-sm text-gray-700',
                     ],
                 ],
 
@@ -392,7 +429,13 @@ return [
              * Editors.
              */
             'easy-mde' => [
-                'easymde' => [],
+                'easymde' => [
+                    'x-data' => '{
+                        initEasyMde(element, options) {
+                            new EasyMDE({ element, ...options })
+                        },
+                    }',
+                ],
             ],
 
             'quill' => [
@@ -404,6 +447,24 @@ return [
 
                 'quill' => [
                     'class' => 'quill-container',
+                    'x-data' => '{
+                        initQuill(element, inputId, options) {
+                            const quill = new Quill(element, options)
+                            const input = document.getElementById(inputId)
+
+                            if (input.value) {
+                                quill.setContents(JSON.parse(input.value).ops)
+                            }
+
+                            (function () {
+                                const inputEvent = new Event("input")
+                                quill.on("text-change", (delta, oldDelta, source) => {
+                                    input.value = JSON.stringify(quill.getContents())
+                                    input.dispatchEvent(inputEvent)
+                                })
+                            })()
+                        },
+                    }',
                 ],
 
                 'errors' => '',
@@ -448,7 +509,7 @@ return [
 
             'errors' => [
                 'container' => [
-                    'class' => 'text-red-500 text-xs italic',
+                    'class' => 'text-red-600 text-sm italic',
                 ],
             ],
 
@@ -489,6 +550,11 @@ return [
 
                 'input' => [
                     'class' => 'block w-full sm:text-sm border-gray-200 rounded shadow',
+                    'x-data' => '{
+                        initMask(element, options) {
+                            Inputmask(options).mask(element)
+                        },
+                    }',
                 ],
 
                 'errors' => '',
@@ -585,14 +651,40 @@ return [
             'dropdown' => [
                 'container' => [
                     'class' => 'relative',
+                    'x-data' => '{ open: false, }',
+                    '@click.away' => 'open = false',
+                    '@close.stop' => 'open = false',
                 ],
 
                 'trigger' => [
-                    'class' => '',
+                    '@click' => 'open = !open',
                 ],
 
                 'dropdown' => [
+                    'x-transition:enter' => 'transition ease-out duration-200',
+                    'x-transition:enter-start' => 'transform opacity-0 scale-95',
+                    'x-transition:enter-end' => 'transform opacity-100 scale-100',
+                    'x-transition:leave' => 'transition ease-in duration-75',
+                    'x-transition:leave-start' => 'transform opacity-100 scale-100',
+                    'x-transition:leave-end' => 'transform opacity-0 scale-95',
                     'class' => 'absolute',
+                    'x-show' => 'open',
+                    '@click' => 'open = false',
+                    'style' => 'display: none;',
+                ],
+
+                'align' => [
+                    'left' => [
+                        'class' => 'origin-top-left left-0',
+                    ],
+
+                    'top' => [
+                        'class' => 'origin-top',
+                    ],
+
+                    'right' => [
+                        'class' => 'origin-top-right right-0',
+                    ],
                 ],
             ],
 
@@ -609,7 +701,7 @@ return [
 
             'menu-item' => [
                 'container' => [
-                    'class' => 'mx-3',
+
                 ],
 
                 'link' => [
@@ -631,12 +723,28 @@ return [
              * Pickers.
              */
             'flatpickr' => [
-                'flatpickr' => [],
+                'flatpickr' => [
+                    'x-data' => '{
+                        initFlatpickr(element, options) {
+                            flatpickr(element, options)
+                        },
+                    }',
+                ],
             ],
 
             'pickr' => [
                 'container' => [
                     'class' => 'mb-4',
+                    'x-data' => '{
+                        initPickr(element, inputId, options) {
+                            const pickr = Pickr.create(options)
+                            const input = document.getElementById(inputId)
+                            pickr.on("save", (color) => {
+                                input.setAttribute("value", color ? color.toHEXA().toString() : "")
+                                element.setAttribute("title", color ? color.toHEXA().toString() : "")
+                            })
+                        },
+                    }',
                 ],
 
                 'labelText' => '',
@@ -647,7 +755,13 @@ return [
             ],
 
             'pikaday' => [
-                'pikaday' => [],
+                'pikaday' => [
+                    'x-data' => '{
+                        initPikaday(element, options) {
+                            new Pikaday({ field: element, ...options })
+                        },
+                    }',
+                ],
             ],
 
             /**

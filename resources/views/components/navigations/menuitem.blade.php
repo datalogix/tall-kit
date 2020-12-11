@@ -1,4 +1,4 @@
-<li :class="$themeProvider->container">
+<li {{ $themeProvider->container }}>
     @if($href)
         <a :href="$href" {{ $attributes->merge(toArray($themeProvider->link)) }}>
             <x-icon :name="$iconLeft" :class="$themeProvider->iconLeft" />

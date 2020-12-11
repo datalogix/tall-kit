@@ -1,10 +1,4 @@
 <x-input
-    x-data="{
-        initPikaday: function (element) {
-            new Pikaday({ field: element {{ $jsonOptions() }} });
-        }
-    }"
-    x-init="initPikaday($el)"
     :name="$name"
     :id="$id"
     :label="$label"
@@ -14,5 +8,5 @@
     :language="$language"
     :showErrors="$showErrors"
     :theme="$theme"
-    {{ $attributes->merge(toArray($themeProvider->pikaday))->merge(['placeholder' => $placeholder]) }}
+    {{ $attributes->merge(toArray($themeProvider->pikaday)) }}
 />

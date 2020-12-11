@@ -1,8 +1,4 @@
-<ul {{
-    $attributes
-        ->merge(toArray($themeProvider->container))
-        ->merge($inline ? toArray($themeProvider->inline) : [])
-}}>
+<ul {{ $attributes->merge(toArray($themeProvider->container)) }}>
     @forelse($items as $item)
         <x-menu-item
             :text="$item['text'] ?? $item"

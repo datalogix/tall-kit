@@ -14,13 +14,6 @@ class Menu extends BladeComponent
     public $items;
 
     /**
-     * The menu inline.
-     *
-     * @var bool
-     */
-    public $inline;
-
-    /**
      * Create a new component instance.
      *
      * @param  array  $items
@@ -36,6 +29,8 @@ class Menu extends BladeComponent
         parent::__construct($theme);
 
         $this->items = $items;
-        $this->inline = $inline;
+
+        $this->themeProvider->container = $this->themeProvider->container
+            ->merge($inline ? toArray($this->themeProvider->inline) : [], false);
     }
 }

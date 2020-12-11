@@ -17,27 +17,6 @@ class Flatpickr extends Input
     ];
 
     /**
-     * The Flatpickr format.
-     *
-     * @var string
-     */
-    protected $format;
-
-    /**
-     * The input placeholder.
-     *
-     * @var string|bool
-     */
-    public $placeholder;
-
-    /**
-     * The Flatpickr options.
-     *
-     * @var array
-     */
-    protected $options;
-
-    /**
      * Create a new component instance.
      *
      * @param  string  $name
@@ -79,23 +58,14 @@ class Flatpickr extends Input
             $theme
         );
 
-        $this->format = $format;
-        $this->placeholder = $placeholder ?? $format;
-        $this->options = $options;
-    }
-
-    /**
-     * Convert array options to string.
-     *
-     * @return string
-     */
-    public function jsonOptions()
-    {
-        $options = array_merge([
+        $jsonOptions = json_encode((object) array_merge([
             'enableTime' => true,
-            'dateFormat' => $this->format,
-        ], $this->options);
+            'dateFormat' => $format,
+        ], $options));
 
-        return json_encode((object) $options);
+        $this->themeProvider->flatpickr = $this->themeProvider->flatpickr->merge([
+            'x-init' => 'initFlatpickr($el, '.$jsonOptions.')',
+            'placeholder' => $placeholder ?? $format,
+        ], false);
     }
 }

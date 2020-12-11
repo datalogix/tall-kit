@@ -103,6 +103,10 @@ class Input extends BladeComponent
         if ($this->type !== 'password') {
             $this->setValue($name, $bind, $default, $language);
         }
+
+        $this->themeProvider->input = $this->themeProvider->input
+            ->merge($this->themeProvider->types->get($type, []), false)
+            ->merge($mask ? ['x-init' => 'initMask($el, '.$this->maskOptions().')'] : [], false);
     }
 
     /**
@@ -110,7 +114,7 @@ class Input extends BladeComponent
      *
      * @return string
      */
-    public function maskOptions()
+    protected function maskOptions()
     {
         if (is_string($this->mask)) {
             return $this->mask;

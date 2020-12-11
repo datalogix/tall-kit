@@ -3,7 +3,6 @@
 namespace Datalogix\TALLKit\Components\Buttons;
 
 use Datalogix\TALLKit\Components\BladeComponent;
-use Illuminate\View\ComponentAttributeBag;
 
 class Button extends BladeComponent
 {
@@ -20,13 +19,6 @@ class Button extends BladeComponent
      * @var string
      */
     public $type;
-
-    /**
-     * The button attrs.
-     *
-     * @var \Illuminate\View\ComponentAttributeBag
-     */
-    public $attrs;
 
     /**
      * Create a new component instance.
@@ -55,36 +47,27 @@ class Button extends BladeComponent
 
         $this->text = $text;
         $this->type = $type;
-        $this->attrs = new ComponentAttributeBag(toArray($this->themeProvider->button));
 
         if ($color && $colorProperties = $this->themeProvider->colors->get($color)) {
             $colorName = $colorProperties['name'] ?? $colorProperties;
             $colorWeight = $colorProperties['weight'] ?? 500;
             $colorHover = $colorProperties['hover'] ?? 700;
 
-            $this->attrs = $this->attrs->merge([
+            $this->themeProvider->button = $this->themeProvider->button->merge([
                 'class' => $outlined
                     ? 'bg-transparent hover:bg-'.$colorName.'-'.$colorWeight.' text-'.$colorName.'-'.$colorHover.' hover:text-white border border-'.$colorName.'-'.$colorWeight.' hover:border-transparent'
                     : 'bg-'.$colorName.'-'.$colorWeight.' hover:bg-'.$colorName.'-'.$colorHover.' text-white',
-            ]);
+            ], false);
 
             if ($bordered) {
-                $this->attrs = $this->attrs->merge([
+                $this->themeProvider->button = $this->themeProvider->button->merge([
                     'class' => 'border border-'.$colorName.'-'.$colorHover,
-                ]);
+                ], false);
             }
         }
 
-        if ($rounded) {
-            $this->attrs = $this->attrs->merge(
-                $this->themeProvider->rounded->get($rounded, [])
-            );
-        }
-
-        if ($shadow) {
-            $this->attrs = $this->attrs->merge(
-                $this->themeProvider->shadow->get($shadow, [])
-            );
-        }
+        $this->themeProvider->button = $this->themeProvider->button
+            ->merge($rounded ? $this->themeProvider->rounded->get($rounded, []) : [], false)
+            ->merge($shadow ? $this->themeProvider->shadow->get($shadow, []) : [], false);
     }
 }

@@ -18,27 +18,6 @@ class Pikaday extends Input
     ];
 
     /**
-     * The Pikaday format.
-     *
-     * @var string
-     */
-    protected $format;
-
-    /**
-     * The input placeholder.
-     *
-     * @var string|bool
-     */
-    public $placeholder;
-
-    /**
-     * The Pikaday options.
-     *
-     * @var array
-     */
-    protected $options;
-
-    /**
      * Create a new component instance.
      *
      * @param  string  $name
@@ -80,22 +59,13 @@ class Pikaday extends Input
             $theme
         );
 
-        $this->format = $format;
-        $this->placeholder = $placeholder ?? $format;
-        $this->options = $options;
-    }
+        $jsonOptions = json_encode((object) array_merge([
+            'format' => $format,
+        ], $options));
 
-    /**
-     * Convert array options to string.
-     *
-     * @return string
-     */
-    public function jsonOptions()
-    {
-        $options = array_merge([
-            'format' => $this->format,
-        ], $this->options);
-
-        return ', ...'.json_encode((object) $options);
+        $this->themeProvider->pikaday = $this->themeProvider->pikaday->merge([
+            'x-init' => 'initPikaday($el, '.$jsonOptions.')',
+            'placeholder' => $placeholder ?? $format,
+        ], false);
     }
 }

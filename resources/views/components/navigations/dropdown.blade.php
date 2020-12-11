@@ -1,9 +1,9 @@
-<div x-data="{ open: false }" @click.away="open = false" {{ $themeProvider->container }}>
-    <div @click="open = !open" {{ $themeProvider->trigger }}>
+<div {{ $themeProvider->container }}>
+    <div {{ $themeProvider->trigger }}>
         {{ $trigger }}
     </div>
 
-    <div x-show="open" {{ $attributes->merge(toArray($themeProvider->dropdown)) }}>
+    <div {{ $attributes->merge(toArray($themeProvider->dropdown)) }}>
         {{ $slot }}
     </div>
 </div>

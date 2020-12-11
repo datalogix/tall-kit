@@ -17,20 +17,6 @@ class Pickr extends Input
     ];
 
     /**
-     * The Pickr options.
-     *
-     * @var array
-     */
-    protected $options;
-
-    /**
-     * The Pickr swatches.
-     *
-     * @var array
-     */
-    protected $swatches;
-
-    /**
      * Create a new component instance.
      *
      * @param  string  $name
@@ -70,22 +56,24 @@ class Pickr extends Input
             $theme
         );
 
-        $this->options = $options;
-        $this->swatches = $swatches;
-    }
-
-    /**
-     * Convert array options to string.
-     *
-     * @return string
-     */
-    public function jsonOptions()
-    {
-        $options = array_merge([
+        $jsonOptions = json_encode((object) array_merge([
             'el' => '#'.$this->id,
             'default' => $this->value,
             'theme' => 'classic',
-            'swatches' => $this->swatches(),
+            'swatches' => array_merge([
+                '000000',
+                'A0AEC0',
+                'F56565',
+                'ED8936',
+                'ECC94B',
+                '48BB78',
+                '38B2AC',
+                '4299E1',
+                '667EEA',
+                '9F7AEA',
+                'ED64A6',
+                'FFFFFF',
+            ], $swatches),
             'components' => [
                 'preview' => true,
                 'interaction' => [
@@ -95,31 +83,11 @@ class Pickr extends Input
                     'save' => true,
                 ],
             ],
-        ], $this->options);
+        ], $options));
 
-        return json_encode((object) $options);
-    }
-
-    /**
-     * Get Pickr swatches.
-     *
-     * @return array
-     */
-    protected function swatches()
-    {
-        return array_merge([
-            '000000',
-            'A0AEC0',
-            'F56565',
-            'ED8936',
-            'ECC94B',
-            '48BB78',
-            '38B2AC',
-            '4299E1',
-            '667EEA',
-            '9F7AEA',
-            'ED64A6',
-            'FFFFFF',
-        ], $this->swatches);
+        $this->themeProvider->container = $this->themeProvider->container->merge([
+            'x-init' => 'initPickr($el, "'.$this->id.'-input", '.$jsonOptions.')',
+            'title' => $this->value,
+        ], false);
     }
 }

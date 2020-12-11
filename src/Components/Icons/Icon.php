@@ -7,6 +7,13 @@ use Datalogix\TALLKit\Components\BladeComponent;
 class Icon extends BladeComponent
 {
     /**
+     * The icone name.
+     *
+     * @var string
+     */
+    public $name;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $name
@@ -14,7 +21,7 @@ class Icon extends BladeComponent
      */
     public function __construct($name = null)
     {
-        $this->withName($name);
+        $this->name = $name;
     }
 
     /**
@@ -22,7 +29,7 @@ class Icon extends BladeComponent
      */
     public function render()
     {
-        if (! $this->componentName) {
+        if (! $this->name) {
             return '';
         }
 
@@ -32,6 +39,6 @@ class Icon extends BladeComponent
 
         unset($attributes['class']);
 
-        return svg($this->componentName, $class, $attributes)->toHtml();
+        return svg($this->name, $class, $attributes)->toHtml();
     }
 }

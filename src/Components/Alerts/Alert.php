@@ -38,13 +38,6 @@ class Alert extends BladeComponent
     public $iconName;
 
     /**
-     * The alert timeout.
-     *
-     * @var int
-     */
-    public $timeout;
-
-    /**
      * The alert dismissible.
      *
      * @var bool
@@ -119,6 +112,7 @@ class Alert extends BladeComponent
      * @param  string|null  $title
      * @param  string  $message
      * @param  string|null  $theme
+     * @param  string|null  $on
      * @return void
      */
     public function __construct(
@@ -137,7 +131,8 @@ class Alert extends BladeComponent
         $dismissibleText = '',
         $title = null,
         $message = '',
-        $theme = null
+        $theme = null,
+        $on = null
     ) {
         parent::__construct($theme);
 
@@ -147,7 +142,6 @@ class Alert extends BladeComponent
         $this->icon = $icon;
         $this->iconSvg = $iconSvg ?? $typeTheme['iconSvg'];
         $this->iconName = $iconName ?? $typeTheme['iconName'];
-        $this->timeout = $timeout;
         $this->dismissible = $dismissible;
         $this->dismissibleIcon = $dismissibleIcon;
         $this->dismissibleIconSvg = $dismissibleIconSvg ?? $this->themeProvider->dismissible['iconSvg'];
@@ -161,7 +155,8 @@ class Alert extends BladeComponent
                 ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
                 ->merge($this->themeProvider->modes->get($mode, []))
                 ->merge($this->themeProvider->rounded->get($rounded, []))
-                ->merge($this->themeProvider->shadow->get($shadow, [])),
+                ->merge($this->themeProvider->shadow->get($shadow, []))
+                ->merge(['x-init' => 'initAlert("'.$on.'", '.$timeout.')']),
 
             'icon' => $this->themeProvider->icon->merge([
                 'class' => 'bg-'.$color.'-100 border-'.$color.'-500 text-'.$color.'-500',
