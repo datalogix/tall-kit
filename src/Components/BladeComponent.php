@@ -44,8 +44,11 @@ abstract class BladeComponent extends BaseComponent
     public function render()
     {
         return (string) Str::of(get_class($this))
+                ->beforeLast('\\')
                 ->replace([__NAMESPACE__, '\\'], ['', '.'])
                 ->lower()
-                ->prepend('tall-kit::components');
+                ->prepend('tall-kit::components')
+                ->append('.')
+                ->append(Str::kebab(class_basename($this)));
     }
 }

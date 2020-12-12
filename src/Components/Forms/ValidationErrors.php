@@ -4,7 +4,7 @@ namespace Datalogix\TALLKit\Components\Forms;
 
 use Datalogix\TALLKit\Components\BladeComponent;
 
-class Validation extends BladeComponent
+class ValidationErrors extends BladeComponent
 {
     /**
      * The validation type.
