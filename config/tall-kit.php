@@ -18,8 +18,8 @@ return [
         'bt' => \Datalogix\TALLKit\Components\Buttons\Button::class, // alias
         'btn' => \Datalogix\TALLKit\Components\Buttons\Button::class, // alias
         'form-button' => \Datalogix\TALLKit\Components\Buttons\FormButton::class,
-        'form-bt' => \Datalogix\TALLKit\Components\Buttons\FormButton::class,
-        'form-btn' => \Datalogix\TALLKit\Components\Buttons\FormButton::class,
+        'form-bt' => \Datalogix\TALLKit\Components\Buttons\FormButton::class, // alias
+        'form-btn' => \Datalogix\TALLKit\Components\Buttons\FormButton::class, // alias
         'logout' => \Datalogix\TALLKit\Components\Buttons\Logout::class,
 
         /**
@@ -27,7 +27,8 @@ return [
          */
         'editor' => \Datalogix\TALLKit\Components\Editors\Quill::class, // alias
         'easy-mde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class,
-        'mde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class,
+        'easymde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class, // alias
+        'mde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class, // alias
         'quill' => \Datalogix\TALLKit\Components\Editors\Quill::class,
         'trix' => \Datalogix\TALLKit\Components\Editors\Trix::class,
 
@@ -48,8 +49,8 @@ return [
         'select' => \Datalogix\TALLKit\Components\Forms\Select::class,
         'submit' => \Datalogix\TALLKit\Components\Forms\Submit::class,
         'textarea' => \Datalogix\TALLKit\Components\Forms\Textarea::class,
-        'validation' => \Datalogix\TALLKit\Components\Forms\Validation::class,
-        'validation-errors' => \Datalogix\TALLKit\Components\Forms\Validation::class, // alias
+        'validation-errors' => \Datalogix\TALLKit\Components\Forms\ValidationErrors::class,
+        'validation' => \Datalogix\TALLKit\Components\Forms\ValidationErrors::class, // alias
 
         /**
          * Icons.
@@ -59,13 +60,17 @@ return [
         /**
          * Layouts.
          */
-        'auth' => \Datalogix\TALLKit\Components\Layouts\Authentication::class, //alias
-        'auth-card' => \Datalogix\TALLKit\Components\Layouts\Authentication::class, //alias
-        'authentication' => \Datalogix\TALLKit\Components\Layouts\Authentication::class,
-        'authentication-card' => \Datalogix\TALLKit\Components\Layouts\Authentication::class, //alias
+        'auth' => \Datalogix\TALLKit\Components\Layouts\AuthenticationCard::class, //alias
+        'auth-card' => \Datalogix\TALLKit\Components\Layouts\AuthenticationCard::class, //alias
+        'authentication' => \Datalogix\TALLKit\Components\Layouts\AuthenticationCard::class,
+        'authentication-card' => \Datalogix\TALLKit\Components\Layouts\AuthenticationCard::class, //alias
+        'card' => \Datalogix\TALLKit\Components\Layouts\Card::class,
+        'form-section' => \Datalogix\TALLKit\Components\Layouts\FormSection::class,
         'html' => \Datalogix\TALLKit\Components\Layouts\Html::class,
-        'meta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class,
+        'section' => \Datalogix\TALLKit\Components\Layouts\Section::class,
+        'meta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class, //alias
         'social-meta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class,
+        'socialmeta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class, //alias
 
         /**
          * Navigations.
@@ -73,6 +78,7 @@ return [
         'dropdown' => \Datalogix\TALLKit\Components\Navigations\Dropdown::class,
         'menu' => \Datalogix\TALLKit\Components\Navigations\Menu::class,
         'menu-item' => \Datalogix\TALLKit\Components\Navigations\MenuItem::class,
+        'menuitem' => \Datalogix\TALLKit\Components\Navigations\MenuItem::class,
 
         /**
          * Pickers.
@@ -81,12 +87,12 @@ return [
         'datetimepicker' => \Datalogix\TALLKit\Components\Pickers\Flatpickr::class, // alias
         'flatpickr' => \Datalogix\TALLKit\Components\Pickers\Flatpickr::class,
 
-        'colorpicker' => \Datalogix\TALLKit\Components\Pickers\Pickr::class, // alias
         'color-picker' => \Datalogix\TALLKit\Components\Pickers\Pickr::class, // alias
+        'colorpicker' => \Datalogix\TALLKit\Components\Pickers\Pickr::class, // alias
         'pickr' => \Datalogix\TALLKit\Components\Pickers\Pickr::class,
 
-        'datepicker' => \Datalogix\TALLKit\Components\Pickers\Pikaday::class, // alias
         'date-picker' => \Datalogix\TALLKit\Components\Pickers\Pikaday::class, // alias
+        'datepicker' => \Datalogix\TALLKit\Components\Pickers\Pikaday::class, // alias
         'pikaday' => \Datalogix\TALLKit\Components\Pickers\Pikaday::class,
 
         /**
@@ -638,10 +644,12 @@ return [
                 'errors' => '',
             ],
 
-            'validation' => [
+            'validation-errors' => [
                 'alert' => '',
 
-                'container' => [],
+                'container' => [
+                    'class' => 'mb-4'
+                ],
 
                 'title' => [
                     'class' => 'font-medium text-red-600',
@@ -657,7 +665,7 @@ return [
             /**
              * Layouts.
              */
-            'authentication' => [
+            'authentication-card' => [
                 'container' => [
                     'class' => 'min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100'
                 ],
@@ -669,12 +677,68 @@ return [
                 ],
             ],
 
+            'card' => [
+                'container' => [
+                    'class' => 'bg-white shadow rounded overflow-hidden mb-4',
+                ],
+
+                'header' => [
+                    'class' => 'px-8 py-4 bg-gray-50',
+                ],
+
+                'content' => [
+                    'class' => 'p-8 text-gray-700',
+                ],
+
+                'footer' => [
+                    'class' => 'px-8 py-4 bg-gray-50',
+                ],
+            ],
+
+            'form-section' => [
+                'container' => [
+                    'class' => 'md:grid md:grid-cols-3 md:gap-6',
+                ],
+
+                'section' => [
+                    'class' => 'md:col-span-1',
+                ],
+
+                'title' => 'px-4 sm:px-0',
+
+                'form' => [
+                    'class' => 'mt-5 md:mt-0 md:col-span-2',
+                ],
+            ],
+
             'html' => [
                 'html' => [],
 
                 'head' => [],
 
                 'body' => [],
+            ],
+
+            'section' => [
+                'container' => [
+                    'class' => 'flex justify-between',
+                ],
+
+                'content' => [
+                    'class' => '',
+                ],
+
+                'title' => [
+                    'class' => 'text-lg font-medium text-gray-900',
+                ],
+
+                'subtitle' => [
+                    'class' => 'text-sm text-gray-500',
+                ],
+
+                'actions' => [
+                    'class' => '',
+                ],
             ],
 
             'social-meta' => [],
@@ -831,7 +895,7 @@ return [
 
             'table' => [
                 'container' => [
-                    'class' => 'shadow overflow-hidden border-b border-gray-200 sm:rounded-lg',
+                    'class' => 'mb-4 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg',
                 ],
 
                 'table' => [
