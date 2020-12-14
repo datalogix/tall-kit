@@ -14,4 +14,27 @@ class Modal extends BladeComponent
     protected static $assets = [
         'alpine',
     ];
+
+    /**
+     * The modal align.
+     *
+     * @var string
+     */
+    public $align;
+
+    /**
+     * Create a new component instance.
+     *
+     * @param  string  $align
+     * @param  string|null  $theme
+     * @return void
+     */
+    public function __construct(
+        $align = 'top',
+        $theme = null
+    ) {
+        parent::__construct($theme);
+
+        $this->align = $align;
+    }
 }

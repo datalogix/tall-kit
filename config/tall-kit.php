@@ -120,7 +120,7 @@ return [
              */
             'alert' => [
                 'container' => [
-                    'class' => 'flex flex-row p-5 rounded relative mb-4',
+                    'class' => 'flex flex-row p-5 rounded relative',
                     'role' => 'alert',
                     'style' => 'display: none;',
                     'x-data' => '{
@@ -650,7 +650,7 @@ return [
             ],
 
             'validation-errors' => [
-                'alert' => '',
+                'alert' => 'mb-4',
 
                 'container' => [
                     'class' => 'mb-4',
@@ -678,13 +678,13 @@ return [
                 'logo' => [],
 
                 'card' => [
-                    'class' => 'w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg',
+                    'class' => 'w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow overflow-hidden rounded',
                 ],
             ],
 
             'card' => [
                 'container' => [
-                    'class' => 'bg-white shadow rounded overflow-hidden mb-4',
+                    'class' => 'bg-white shadow rounded overflow-hidden',
                 ],
 
                 'header' => [
@@ -775,8 +775,22 @@ return [
                     '@keydown.tab.prevent' => '$event.shiftKey || nextFocusable().focus()',
                     '@keydown.shift.tab.prevent' => 'prevFocusable().focus()',
                     'x-show' => 'show',
-                    'class' => 'fixed top-0 inset-x-0 px-4 pt-6 z-50 flex items-top justify-center',
+                    'class' => 'fixed p-6 inset-0 px-4 z-50 flex justify-center ',
                     'style' => 'display: none;',
+                ],
+
+                'aligns' => [
+                    'top' => [
+                        'class' => 'items-start',
+                    ],
+
+                    'center' => [
+                        'class' => 'items-center',
+                    ],
+
+                    'bottom' => [
+                        'class' => 'items-end',
+                    ],
                 ],
 
                 'overlay' => [
@@ -797,13 +811,36 @@ return [
 
                 'modal' => [
                     'x-show' => 'show',
-                    'class' => 'bg-white p-4 rounded overflow-hidden shadow transform transition-all w-full',
-                    'x-transition:enter' => 'ease-out duration-300',
-                    'x-transition:enter-start' => 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-                    'x-transition:enter-end' => 'opacity-100 translate-y-0 sm:scale-100',
-                    'x-transition:leave' => 'ease-in duration-200',
-                    'x-transition:leave-start' => 'opacity-100 translate-y-0 sm:scale-100',
-                    'x-transition:leave-end' => 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+                    'class' => 'flex-initial bg-white rounded overflow-hidden shadow transform transition-all w-full',
+                ],
+
+                'transitions' => [
+                    'top' => [
+                        'x-transition:enter' => 'ease-out duration-300',
+                        'x-transition:enter-start' => 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+                        'x-transition:enter-end' => 'opacity-100 translate-y-0 sm:scale-100',
+                        'x-transition:leave' => 'ease-in duration-200',
+                        'x-transition:leave-start' => 'opacity-100 translate-y-0 sm:scale-100',
+                        'x-transition:leave-end' => 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+                    ],
+
+                    'center' => [
+                        'x-transition:enter' => 'ease-out duration-300',
+                        'x-transition:enter-start' => 'opacity-0 sm:scale-95',
+                        'x-transition:enter-end' => 'opacity-100 sm:scale-100',
+                        'x-transition:leave' => 'ease-in duration-200',
+                        'x-transition:leave-start' => 'opacity-100 sm:scale-100',
+                        'x-transition:leave-end' => 'opacity-0 sm:scale-95',
+                    ],
+
+                    'bottom' => [
+                        'x-transition:enter' => 'ease-out duration-300',
+                        'x-transition:enter-start' => 'opacity-0 -translate-y-4 sm:translate-y-0 sm:scale-95',
+                        'x-transition:enter-end' => 'opacity-100 translate-y-0 sm:scale-100',
+                        'x-transition:leave' => 'ease-in duration-200',
+                        'x-transition:leave-start' => 'opacity-100 translate-y-0 sm:scale-100',
+                        'x-transition:leave-end' => 'opacity-0 -translate-y-4 sm:translate-y-0 sm:scale-95',
+                    ],
                 ],
             ],
 
@@ -959,7 +996,7 @@ return [
 
             'table' => [
                 'container' => [
-                    'class' => 'mb-4 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg',
+                    'class' => 'shadow rounded overflow-hidden border-b border-gray-200',
                 ],
 
                 'table' => [
