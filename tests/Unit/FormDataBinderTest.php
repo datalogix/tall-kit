@@ -1,8 +1,8 @@
 <?php
 
-namespace Datalogix\TALLKit\Tests\Unit;
+namespace TALLKit\Tests\Unit;
 
-use Datalogix\TALLKit\FormDataBinder;
+use TALLKit\FormDataBinder;
 use PHPUnit\Framework\TestCase;
 
 class FormDataBinderTest extends TestCase

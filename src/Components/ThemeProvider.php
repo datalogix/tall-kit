@@ -1,11 +1,10 @@
 <?php
 
-namespace Datalogix\TALLKit\Components;
+namespace TALLKit\Components;
 
-use Datalogix\TALLKit\ThemeBinder;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Illuminate\View\ComponentAttributeBag;
+use TALLKit\Binders\ThemeBinder;
 
 class ThemeProvider
 {
@@ -32,6 +31,7 @@ class ThemeProvider
     public function __construct(array $themes)
     {
         $this->themes = $themes;
+        $this->items = Collection::make();
     }
 
     /**
@@ -39,15 +39,14 @@ class ThemeProvider
      *
      * @param  string|null  $name
      * @param  string  $component
-     * @return \Datalogix\TALLKit\Components\ThemeProvider
+     * @return \TALLKit\Components\ThemeProvider
      */
     public function make($name, $component)
     {
         $name = $name ?: app(ThemeBinder::class)->get();
         $theme = $this->themes[$name] ?? $this->themes['default'];
-        $component = Str::kebab($component);
 
-        $this->items = Collection::make($theme[$component] ?? []);
+        $this->items = $this->items->wrap($theme[$component] ?? []);
 
         return $this;
     }
@@ -56,14 +55,13 @@ class ThemeProvider
      * Get an item from the collection by key.
      *
      * @param  mixed  $key
-     * @return \Illuminate\View\ComponentAttributeBag|string|mixed
+     * @return \Illuminate\View\ComponentAttributeBag
      */
     public function __get($key)
     {
         $value = $this->items->get($key, []);
+        $attributes = is_array($value) ? $value : ['class' => $value];
 
-        return is_array($value)
-            ? new ComponentAttributeBag($value)
-            : $value;
+        return new ComponentAttributeBag($attributes);
     }
 }

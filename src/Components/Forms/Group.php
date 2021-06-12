@@ -1,36 +1,20 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
-use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Concerns\LabelText;
-use Datalogix\TALLKit\Concerns\ValidationErrors;
-
-class Group extends BladeComponent
+class Group extends Field
 {
-    use LabelText;
-    use ValidationErrors;
-
     /**
-     * The group name.
-     *
      * @var string
      */
-    public $name;
-
-    /**
-     * Show group inline.
-     *
-     * @var bool
-     */
-    public $inline = false;
+    public $type = false;
 
     /**
      * Create a new component instance.
      *
      * @param  string  $name
      * @param  string|bool|null  $label
-     * @param  bool  $inline
+     * @param  string  $type
      * @param  bool  $showErrors
      * @param  string|null  $theme
      * @return void
@@ -38,16 +22,12 @@ class Group extends BladeComponent
     public function __construct(
         $name = '',
         $label = '',
-        $inline = false,
+        $type = 'block',
         $showErrors = true,
         $theme = null
     ) {
-        parent::__construct($theme);
+        parent::__construct($name, $label, $showErrors, $theme);
 
-        $this->setLabel($name, $label);
-
-        $this->name = $name;
-        $this->inline = $inline;
-        $this->showErrors = $name && $showErrors;
+        $this->type = $type;
     }
 }

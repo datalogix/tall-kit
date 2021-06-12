@@ -1,21 +1,25 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Pickers;
+namespace TALLKit\Components\Pickers;
 
-use Datalogix\TALLKit\Components\Forms\Input;
+use TALLKit\Components\Forms\Input;
 
 class Pikaday extends Input
 {
     /**
-     * The assets of component.
-     *
+     * @var string
+     */
+    public $format;
+
+    /**
+     * @var string|bool|null
+     */
+    public $placeholder;
+
+    /**
      * @var array
      */
-    protected static $assets = [
-        'alpine',
-        'moment',
-        'pikaday',
-    ];
+    public $options;
 
     /**
      * Create a new component instance.
@@ -59,13 +63,20 @@ class Pikaday extends Input
             $theme
         );
 
-        $jsonOptions = json_encode((object) array_merge([
-            'format' => $format,
-        ], $options));
+        $this->format = $format;
+        $this->placeholder = $placeholder;
+        $this->options = $options;
+    }
 
-        $this->themeProvider->pikaday = $this->themeProvider->pikaday->merge([
-            'x-init' => 'initPikaday($el, '.$jsonOptions.')',
-            'placeholder' => $placeholder ?? $format,
-        ], false);
+    /**
+     * Json options.
+     *
+     * @return string
+     */
+    public function jsonOptions()
+    {
+        return json_encode((object) array_merge([
+            'format' => $this->format,
+        ], $this->options));
     }
 }

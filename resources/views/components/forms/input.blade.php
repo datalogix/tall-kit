@@ -1,26 +1,23 @@
-<div {{ $themeProvider->{$type === 'hidden' ? 'hidden' : 'container'} }}">
-    <label {{ $themeProvider->label }}>
-        <x-label :label="$label" :class="$themeProvider->labelText" />
+<x-field
+    :name="$name"
+    :label="$type === 'hidden' ? false : $label"
+    :showErrors="$showErrors"
+    :theme="$theme"
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, $type === 'hidden' ? 'hidden' : 'container') }}
+>
+    <input
+        {{ $attributes->mergeThemeProvider($themeProvider, 'input')->merge($maskOptions()) }}
+        type="{{ $type }}"
+        name="{{ $name }}"
 
-        <input
-            type="{{ $type }}"
+        @if($id)
+            id="{{ $id }}"
+        @endif
 
-            @if($id)
-                id="{{ $id }}"
-            @endif
-
-            @if($isWired())
-                wire:model="{{ $name }}"
-            @else
-                name="{{ $name }}"
-                value="{{ $value ?? $slot }}"
-            @endif
-
-            {{ $attributes->merge(toArray($themeProvider->input)) }}
-        />
-    </label>
-
-    @if($hasErrorAndShow($name))
-        <x-errors :name="$name" :class="$themeProvider->errors" />
-    @endif
-</div>
+        @if($isWired())
+            wire:model{!! $wireModifier() !!}="{{ $name }}"
+        @else
+            value="{{ $value ?? $slot }}"
+        @endif
+    />
+</x-field>

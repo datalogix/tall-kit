@@ -1,21 +1,17 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Tables;
+namespace TALLKit\Components\Tables;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class Heading extends BladeComponent
 {
     /**
-     * The heading text.
-     *
      * @var string
      */
     public $text;
 
     /**
-     * The heading sortable.
-     *
      * @var string|bool
      */
     public $sortable;

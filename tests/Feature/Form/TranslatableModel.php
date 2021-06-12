@@ -1,6 +1,6 @@
 <?php
 
-namespace Datalogix\TALLKit\Tests\Feature\Form;
+namespace TALLKit\Tests\Feature\Form;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;

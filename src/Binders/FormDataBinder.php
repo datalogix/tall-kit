@@ -1,6 +1,6 @@
 <?php
 
-namespace Datalogix\TALLKit;
+namespace TALLKit\Binders;
 
 use Illuminate\Support\Arr;
 
@@ -11,14 +11,14 @@ class FormDataBinder
      *
      * @var array
      */
-    private $bindings = [];
+    protected $bindings = [];
 
     /**
      * Wired to a Livewire component.
      *
      * @var bool
      */
-    private $wire = false;
+    protected $wire = false;
 
     /**
      * Bind a target to the current instance.
@@ -58,17 +58,18 @@ class FormDataBinder
      */
     public function isWired()
     {
-        return $this->wire;
+        return $this->wire !== false;
     }
 
     /**
-     * Enable Livewire binding.
+     * Enable Livewire binding with an optional modifier.
      *
+     * @param string $modifier
      * @return void
      */
-    public function wire()
+    public function wire($modifier = null)
     {
-        $this->wire = true;
+        $this->wire = $modifier ?: null;
     }
 
     /**
@@ -79,5 +80,15 @@ class FormDataBinder
     public function endWire()
     {
         $this->wire = false;
+    }
+
+    /**
+     * Returns the modifier, if set.
+     *
+     * @return string|null
+     */
+    public function getWireModifier()
+    {
+        return is_string($this->wire) ? $this->wire : null;
     }
 }

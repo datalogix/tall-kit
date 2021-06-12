@@ -1,23 +1,22 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Modals;
+namespace TALLKit\Components\Modals;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class Modal extends BladeComponent
 {
     /**
-     * The assets of component.
-     *
-     * @var array
+     * @var bool
      */
-    protected static $assets = [
-        'alpine',
-    ];
+    public $show;
 
     /**
-     * The modal align.
-     *
+     * @var string
+     */
+    public $overlay;
+
+    /**
      * @var string
      */
     public $align;
@@ -25,16 +24,22 @@ class Modal extends BladeComponent
     /**
      * Create a new component instance.
      *
+     * @param  bool  $show
+     * @param  bool  $overlay
      * @param  string  $align
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $align = 'top',
+        $show = false,
+        $overlay = true,
+        $align = 'center',
         $theme = null
     ) {
         parent::__construct($theme);
 
+        $this->show = $show;
+        $this->overlay = $overlay;
         $this->align = $align;
     }
 }

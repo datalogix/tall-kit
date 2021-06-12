@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "dev": "yarn development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "yarn production",
+    "production": "yarn lint && mix --production",
+    "test": "yarn lint"
+  },
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-config-standard": "^16.0",
+    "eslint-plugin-import": "^2.23",
+    "eslint-plugin-node": "^11.1",
+    "eslint-plugin-promise": "^5.1",
+    "laravel-mix": "^6.0",
+    "postcss": "^8.3"
+  }
+}

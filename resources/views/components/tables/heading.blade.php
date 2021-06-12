@@ -1,9 +1,6 @@
-<th {{ $attributes->merge(toArray($themeProvider->th)) }}>
-    <div {{ $themeProvider->container }}>
+<th {{ $attributes->mergeThemeProvider($themeProvider, 'th') }}>
+    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
         {{ $slot->isEmpty() ? __($text) : $slot }}
-
-        @if($sortable)
-            {!! $themeProvider->sortable[$sortable] ?? '' !!}
-        @endif
+        {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable) !!}
     </div>
 </th>

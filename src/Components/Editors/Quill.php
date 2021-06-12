@@ -1,20 +1,15 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Editors;
+namespace TALLKit\Components\Editors;
 
-use Datalogix\TALLKit\Components\Forms\Textarea;
+use TALLKit\Components\Forms\Textarea;
 
 class Quill extends Textarea
 {
     /**
-     * The assets of component.
-     *
      * @var array
      */
-    protected static $assets = [
-        'alpine',
-        'quill',
-    ];
+    public $options;
 
     /**
      * Create a new component instance.
@@ -43,7 +38,7 @@ class Quill extends Textarea
     ) {
         parent::__construct(
             $name,
-            $id ?: $name,
+            $id,
             $label,
             $bind,
             $default,
@@ -52,12 +47,18 @@ class Quill extends Textarea
             $theme
         );
 
-        $jsonOptions = json_encode((object) array_merge([
-            'theme' => 'snow',
-        ], $options));
+        $this->options = $options;
+    }
 
-        $this->themeProvider->quill = $this->themeProvider->quill->merge([
-            'x-init' => 'initQuill($el, "'.$this->id.'", '.$jsonOptions.')',
-        ], false);
+    /**
+     * Json options.
+     *
+     * @return string
+     */
+    public function jsonOptions()
+    {
+        return json_encode((object) array_merge([
+            'theme' => 'snow',
+        ], $this->options));
     }
 }

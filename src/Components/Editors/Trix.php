@@ -1,20 +1,11 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Editors;
+namespace TALLKit\Components\Editors;
 
-use Datalogix\TALLKit\Components\Forms\Textarea;
+use TALLKit\Components\Forms\Textarea;
 
 class Trix extends Textarea
 {
-    /**
-     * The assets of component.
-     *
-     * @var array
-     */
-    protected static $assets = [
-        'trix',
-    ];
-
     /**
      * Create a new component instance.
      *

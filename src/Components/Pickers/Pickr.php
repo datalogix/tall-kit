@@ -1,20 +1,20 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Pickers;
+namespace TALLKit\Components\Pickers;
 
-use Datalogix\TALLKit\Components\Forms\Input;
+use TALLKit\Components\Forms\Input;
 
 class Pickr extends Input
 {
     /**
-     * The assets of component.
-     *
      * @var array
      */
-    protected static $assets = [
-        'alpine',
-        'pickr',
-    ];
+    public $options;
+
+    /**
+     * @var array
+     */
+    public $swatches;
 
     /**
      * Create a new component instance.
@@ -45,7 +45,7 @@ class Pickr extends Input
     ) {
         parent::__construct(
             $name,
-            $id ?: $name,
+            $id,
             $label,
             'hidden',
             $bind,
@@ -56,38 +56,63 @@ class Pickr extends Input
             $theme
         );
 
-        $jsonOptions = json_encode((object) array_merge([
-            'el' => '#'.$this->id,
+        $this->options = $options;
+        $this->swatches = $swatches;
+    }
+
+    /**
+     * Json options.
+     *
+     * @return string
+     */
+    public function jsonOptions()
+    {
+        return json_encode((object) array_merge([
             'default' => $this->value,
             'theme' => 'classic',
-            'swatches' => array_merge([
-                '000000',
-                'A0AEC0',
-                'F56565',
-                'ED8936',
-                'ECC94B',
-                '48BB78',
-                '38B2AC',
-                '4299E1',
-                '667EEA',
-                '9F7AEA',
-                'ED64A6',
-                'FFFFFF',
-            ], $swatches),
-            'components' => [
-                'preview' => true,
-                'interaction' => [
-                    'hex' => true,
-                    'input' => true,
-                    'clear' => true,
-                    'save' => true,
-                ],
-            ],
-        ], $options));
+            'swatches' => $this->swatchesOptions(),
+            'components' => $this->componentsOptions(),
+        ], $this->options));
+    }
 
-        $this->themeProvider->container = $this->themeProvider->container->merge([
-            'x-init' => 'initPickr($el, "'.$this->id.'-input", '.$jsonOptions.')',
-            'title' => $this->value,
-        ], false);
+    /**
+     * Swatches options.
+     *
+     * @return array
+     */
+    public function swatchesOptions()
+    {
+        return array_merge([
+            '000000',
+            'A0AEC0',
+            'F56565',
+            'ED8936',
+            'ECC94B',
+            '48BB78',
+            '38B2AC',
+            '4299E1',
+            '667EEA',
+            '9F7AEA',
+            'ED64A6',
+            'FFFFFF',
+        ], $this->swatches);
+    }
+
+    /**
+     * Components options.
+     *
+     * @return array
+     */
+    public function componentsOptions()
+    {
+        return [
+            'preview' => true,
+            'interaction' => [
+                'hex' => true,
+                'input' => true,
+                'clear' => true,
+                'save' => true,
+            ],
+        ];
     }
 }

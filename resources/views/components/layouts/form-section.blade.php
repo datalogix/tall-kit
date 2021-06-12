@@ -1,11 +1,15 @@
-<div {{ $attributes->merge(toArray($themeProvider->container)) }}>
-    <div {{ $themeProvider->section }}>
-        <x-section :title="$title" :subtitle="$subtitle" :class="$themeProvider->title">
+<div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
+    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'section') }}>
+        <x-section
+            :title="$title"
+            :subtitle="$subtitle"
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'title') }}
+        >
             {{ $description ?? '' }}
         </x-section>
     </div>
 
-    <div {{ $themeProvider->form }}>
+    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'form') }}>
         <x-card>
             {{ $slot ?? '' }}
 

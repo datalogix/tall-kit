@@ -1,17 +1,17 @@
 <?php
 
-namespace Datalogix\TALLKit\Concerns;
+namespace TALLKit\Concerns;
 
-use Datalogix\TALLKit\FormDataBinder;
+use TALLKit\Binders\FormDataBinder;
 
 trait BoundValues
 {
     /**
      * Get an instance of FormDataBinder.
      *
-     * @return \Datalogix\TALLKit\FormDataBinder
+     * @return \TALLKit\Binders\FormDataBinder
      */
-    private function getFormDataBinder()
+    protected function getFormDataBinder()
     {
         return app(FormDataBinder::class);
     }
@@ -21,7 +21,7 @@ trait BoundValues
      *
      * @return mixed
      */
-    private function getBoundTarget()
+    protected function getBoundTarget()
     {
         return $this->getFormDataBinder()->get();
     }
@@ -33,7 +33,7 @@ trait BoundValues
      * @param  string  $name
      * @return mixed
      */
-    private function getBoundValue($bind = null, $name = null)
+    protected function getBoundValue($bind = null, $name = null)
     {
         if ($bind === false) {
             return null;

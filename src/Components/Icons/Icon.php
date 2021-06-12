@@ -1,14 +1,12 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Icons;
+namespace TALLKit\Components\Icons;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class Icon extends BladeComponent
 {
     /**
-     * The icone name.
-     *
      * @var string
      */
     public $name;
@@ -29,16 +27,16 @@ class Icon extends BladeComponent
      */
     public function render()
     {
-        if (! $this->name) {
+        if (! $this->name || ! function_exists('svg')) {
             return '';
         }
 
-        $attributes = toArray($this->attributes);
+        $attributes = $this->attributes->getAttributes();
 
         $class = $attributes['class'] ?? '';
 
         unset($attributes['class']);
 
-        return svg($this->name, $class, $attributes)->toHtml();
+        return svg($this->name, $class, $attributes);
     }
 }

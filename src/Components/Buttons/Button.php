@@ -1,24 +1,55 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Buttons;
+namespace TALLKit\Components\Buttons;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class Button extends BladeComponent
 {
     /**
-     * The button text.
-     *
      * @var string
      */
     public $text;
 
     /**
-     * The button type.
-     *
      * @var string
      */
     public $type;
+
+    /**
+     * @var string
+     */
+    public $rounded;
+
+    /**
+     * @var string
+     */
+    public $shadow;
+
+    /**
+     * @var bool
+     */
+    public $outlined;
+
+    /**
+     * @var bool
+     */
+    public $bordered;
+
+    /**
+     * @var string
+     */
+    public $colorName;
+
+    /**
+     * @var int
+     */
+    public $colorWeight;
+
+    /**
+     * @var int
+     */
+    public $colorHover;
 
     /**
      * Create a new component instance.
@@ -28,8 +59,8 @@ class Button extends BladeComponent
      * @param  string|bool|null  $color
      * @param  bool  $outlined
      * @param  bool  $bordered
-     * @param  string|bool|null  $rounded
-     * @param  string|bool|null  $shadow
+     * @param  string  $rounded
+     * @param  string  $shadow
      * @param  string|null  $theme
      * @return void
      */
@@ -37,37 +68,25 @@ class Button extends BladeComponent
         $text = '',
         $type = 'button',
         $color = 'default',
-        $outlined = false,
-        $bordered = false,
         $rounded = 'default',
         $shadow = 'default',
+        $outlined = false,
+        $bordered = false,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->text = $text;
         $this->type = $type;
+        $this->rounded = $rounded;
+        $this->shadow = $shadow;
+        $this->outlined = $outlined;
+        $this->bordered = $bordered;
 
         if ($color && $colorProperties = $this->themeProvider->colors->get($color)) {
-            $colorName = $colorProperties['name'] ?? $colorProperties;
-            $colorWeight = $colorProperties['weight'] ?? 500;
-            $colorHover = $colorProperties['hover'] ?? 700;
-
-            $this->themeProvider->button = $this->themeProvider->button->merge([
-                'class' => $outlined
-                    ? 'bg-transparent hover:bg-'.$colorName.'-'.$colorWeight.' text-'.$colorName.'-'.$colorHover.' hover:text-white border border-'.$colorName.'-'.$colorWeight.' hover:border-transparent'
-                    : 'bg-'.$colorName.'-'.$colorWeight.' hover:bg-'.$colorName.'-'.$colorHover.' text-white',
-            ], false);
-
-            if ($bordered) {
-                $this->themeProvider->button = $this->themeProvider->button->merge([
-                    'class' => 'border border-'.$colorName.'-'.$colorHover,
-                ], false);
-            }
+            $this->colorName = $colorProperties['name'] ?? $colorProperties;
+            $this->colorWeight = $colorProperties['weight'] ?? 500;
+            $this->colorHover = $colorProperties['hover'] ?? 700;
         }
-
-        $this->themeProvider->button = $this->themeProvider->button
-            ->merge($rounded ? $this->themeProvider->rounded->get($rounded, []) : [], false)
-            ->merge($shadow ? $this->themeProvider->shadow->get($shadow, []) : [], false);
     }
 }

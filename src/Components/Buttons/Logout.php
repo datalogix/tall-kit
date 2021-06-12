@@ -1,6 +1,6 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Buttons;
+namespace TALLKit\Components\Buttons;
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +24,7 @@ class Logout extends FormButton
         parent::__construct(
             $text,
             $method,
-            $action ?? Route::has('logout') ? route('logout') : route('auth.logout'),
+            $action ?? (Route::has('logout') ? route('logout') : (Route::has('auth.logout') ? route('auth.logout') : '/')),
             $theme
         );
     }

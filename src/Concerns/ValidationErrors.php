@@ -1,6 +1,6 @@
 <?php
 
-namespace Datalogix\TALLKit\Concerns;
+namespace TALLKit\Concerns;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;

@@ -1,21 +1,25 @@
 @if($errors->{$bag}->any())
     @if($type !== 'none')
-        <x-alert :type="$type" :title="$title ?? __('Whoops! Something went wrong.')" :class="$themeProvider->alert">
-            <ul {{ $themeProvider->ul }}>
+        <x-alert
+            :type="$type"
+            :title="$title ?? __('Whoops! Something went wrong.')"
+            {{ $attributes->mergeThemeProvider($themeProvider, 'alert') }}
+        >
+            <ul {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'ul') }}>
                 @foreach($errors->{$bag}->all() as $error)
-                    <li {{ $themeProvider->li }}>{{ $error }}</li>
+                    <li {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'li') }}>{{ $error }}</li>
                 @endforeach
             </ul>
         </x-alert>
     @else
-        <div {{ $attributes->merge(toArray($themeProvider->container)) }}>
-            <div {{ $themeProvider->title }}>
+        <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
+            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'title') }}>
                 {{ $title ?? __('Whoops! Something went wrong.') }}
             </div>
 
-            <ul {{ $themeProvider->ul }}>
+            <ul {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'ul') }}>
                 @foreach($errors->{$bag}->all() as $error)
-                    <li {{ $themeProvider->li }}>{{ $error }}</li>
+                    <li {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'li') }}>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>

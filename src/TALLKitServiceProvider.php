@@ -1,13 +1,19 @@
 <?php
 
-namespace Datalogix\TALLKit;
+namespace TALLKit;
 
-use Datalogix\TALLKit\Components\ThemeProvider;
 use Illuminate\Contracts\Foundation\CachesConfiguration;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
+use Illuminate\View\ComponentAttributeBag;
+use TALLKit\Binders\FormDataBinder;
+use TALLKit\Binders\ThemeBinder;
+use TALLKit\Components\ThemeProvider;
+use TALLKit\Controllers\TALLKitJavaScriptAssets;
+use TALLKit\Macros\MergeThemeProvider;
+use TALLKit\Macros\MergeOnlyThemeProvider;
 
 class TALLKitServiceProvider extends ServiceProvider
 {
@@ -18,18 +24,33 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/tall-kit.php', 'tall-kit');
+        $this->registerConfig();
+        $this->registerSingleton();
+    }
 
-        $this->app->singleton(FormDataBinder::class, function () {
-            return new FormDataBinder;
-        });
+    /**
+     * Register config.
+     *
+     * @return void
+     */
+    protected function registerConfig()
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/tallkit.php', 'tallkit');
+    }
 
-        $this->app->singleton(ThemeBinder::class, function () {
-            return new ThemeBinder;
-        });
-
+    /**
+     * Register singleton.
+     *
+     * @return void
+     */
+    protected function registerSingleton()
+    {
+        $this->app->singleton(TALLKit::class);
+        $this->app->singleton(FormDataBinder::class);
+        $this->app->singleton(ThemeBinder::class);
+        $this->app->alias(TALLKit::class, 'tallkit');
         $this->app->bind(ThemeProvider::class, function () {
-            return new ThemeProvider(config('tall-kit.themes'));
+            return new ThemeProvider(config('tallkit.themes'));
         });
     }
 
@@ -40,10 +61,23 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->bootMacros();
         $this->bootResources();
+        $this->bootRoutes();
         $this->bootBladeComponents();
         $this->bootDirectives();
         $this->bootPublishing();
+    }
+
+    /**
+     * Bootstrap macros.
+     *
+     * @return void
+     */
+    protected function bootMacros()
+    {
+        ComponentAttributeBag::macro('mergeThemeProvider', app(MergeThemeProvider::class)());
+        ComponentAttributeBag::macro('mergeOnlyThemeProvider', app(MergeOnlyThemeProvider::class)());
     }
 
     /**
@@ -51,9 +85,22 @@ class TALLKitServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function bootResources()
+    protected function bootResources()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'tall-kit');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'tallkit');
+    }
+
+    /**
+     * Bootstrap routes.
+     *
+     * @return void
+     */
+    protected function bootRoutes()
+    {
+        Route::get('/tallkit/tallkit.js', [TALLKitJavaScriptAssets::class, 'source']);
+        Route::get('/tallkit/tallkit.js.map', [TALLKitJavaScriptAssets::class, 'maps']);
+        Route::get('/tallkit/component/{name}', [TALLKitJavaScriptAssets::class, 'component'])
+            ->name('tallkit.component');
     }
 
     /**
@@ -61,46 +108,12 @@ class TALLKitServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function bootBladeComponents()
+    protected function bootBladeComponents()
     {
-        $prefix = config('tall-kit.prefix', '');
-        $components = config('tall-kit.components', []);
-        $assets = config('tall-kit.assets', []);
+        $prefix = config('tallkit.prefix', '');
+        $components = config('tallkit.components', []);
 
         $this->loadViewComponentsAs($prefix, $components);
-
-        /** @var \Datalogix\TALLKit\Components\BladeComponent $component */
-        foreach ($components as $component) {
-            $this->registerAssets($component, $assets);
-        }
-    }
-
-    /**
-     * Register assets of components.
-     *
-     * @param  \Datalogix\TALLKit\Components\BladeComponent  $component
-     * @param  array  $assets
-     * @return void
-     */
-    private function registerAssets($component, array $assets)
-    {
-        foreach ($component::assets() as $asset) {
-            $files = (array) ($assets[$asset] ?? []);
-
-            // register css
-            collect($files)->filter(function (string $file) {
-                return Str::endsWith($file, '.css');
-            })->each(function (string $style) {
-                TALLKit::addStyle($style);
-            });
-
-            // register js
-            collect($files)->filter(function (string $file) {
-                return ! Str::endsWith($file, '.css');
-            })->each(function (string $script) {
-                TALLKit::addScript($script);
-            });
-        }
     }
 
     /**
@@ -108,39 +121,15 @@ class TALLKitServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function bootDirectives()
+    protected function bootDirectives()
     {
-        Blade::directive('tallkitStyles', function () {
-            return '<?php echo \Datalogix\TALLKit\TALLKit::outputStyles(); ?>';
-        });
-
-        Blade::directive('tallkitScripts', function () {
-            return '<?php echo \Datalogix\TALLKit\TALLKit::outputScripts(); ?>';
-        });
-
-        Blade::directive('theme', function ($theme) {
-            return '<?php app(\Datalogix\TALLKit\ThemeBinder::class)->bind('.$theme.'); ?>';
-        });
-
-        Blade::directive('endtheme', function () {
-            return '<?php app(\Datalogix\TALLKit\ThemeBinder::class)->pop(); ?>';
-        });
-
-        Blade::directive('bind', function ($bind) {
-            return '<?php app(\Datalogix\TALLKit\FormDataBinder::class)->bind('.$bind.'); ?>';
-        });
-
-        Blade::directive('endbind', function () {
-            return '<?php app(\Datalogix\TALLKit\FormDataBinder::class)->pop(); ?>';
-        });
-
-        Blade::directive('wire', function () {
-            return '<?php app(\Datalogix\TALLKit\FormDataBinder::class)->wire(); ?>';
-        });
-
-        Blade::directive('endwire', function () {
-            return '<?php app(\Datalogix\TALLKit\FormDataBinder::class)->endWire(); ?>';
-        });
+        Blade::directive('tallkit', [TALLKitBladeDirectives::class, 'init']);
+        Blade::directive('theme', [TALLKitBladeDirectives::class, 'theme']);
+        Blade::directive('endtheme', [TALLKitBladeDirectives::class, 'endtheme']);
+        Blade::directive('bind', [TALLKitBladeDirectives::class, 'bind']);
+        Blade::directive('endbind', [TALLKitBladeDirectives::class, 'endbind']);
+        Blade::directive('wire', [TALLKitBladeDirectives::class, 'wire']);
+        Blade::directive('endwire', [TALLKitBladeDirectives::class, 'endwire']);
     }
 
     /**
@@ -148,16 +137,20 @@ class TALLKitServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function bootPublishing()
+    protected function bootPublishing()
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/tall-kit.php' => config_path('tall-kit.php'),
-            ], 'tall-kit-config');
+                __DIR__.'/../public' => public_path('vendor/tallkit'),
+            ], 'tallkit-assets');
 
             $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/tall-kit'),
-            ], 'tall-kit-views');
+                __DIR__.'/../config/tallkit.php' => config_path('tallkit.php'),
+            ], 'tallkit-config');
+
+            $this->publishes([
+                __DIR__.'/../resources/views' => resource_path('views/vendor/tallkit'),
+            ], 'tallkit-views');
         }
     }
 

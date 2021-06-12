@@ -1,36 +1,28 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Tables;
+namespace TALLKit\Components\Tables;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 use Illuminate\Support\Collection;
 
 class Table extends BladeComponent
 {
     /**
-     * The table cols.
-     *
      * @var \Illuminate\Support\Collection
      */
     public $cols;
 
     /**
-     * The table rows.
-     *
      * @var \Illuminate\Support\Collection
      */
     public $rows;
 
     /**
-     * The table footer.
-     *
      * @var \Illuminate\Support\Collection
      */
     public $footer;
 
     /**
-     * The empty text.
-     *
      * @var string|null
      */
     public $emptyText;

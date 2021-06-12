@@ -1,21 +1,17 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Layouts;
+namespace TALLKit\Components\Layouts;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class Section extends BladeComponent
 {
     /**
-     * The title.
-     *
      * @var string
      */
     public $title;
 
     /**
-     * The subtitle.
-     *
      * @var string
      */
     public $subtitle;

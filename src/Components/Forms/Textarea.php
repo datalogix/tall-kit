@@ -1,6 +1,6 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
 class Textarea extends Input
 {

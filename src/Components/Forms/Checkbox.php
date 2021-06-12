@@ -1,37 +1,21 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
-use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Concerns\BoundValues;
-use Datalogix\TALLKit\Concerns\LabelText;
-use Datalogix\TALLKit\Concerns\ValidationErrors;
+use TALLKit\Concerns\BoundValues;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class Checkbox extends BladeComponent
+class Checkbox extends Field
 {
     use BoundValues;
-    use LabelText;
-    use ValidationErrors;
 
     /**
-     * The checkbox name.
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * The checkbox value.
-     *
      * @var mixed
      */
     public $value;
 
     /**
-     * The checkbox is checked.
-     *
      * @var bool
      */
     public $checked = false;
@@ -57,15 +41,11 @@ class Checkbox extends BladeComponent
         $showErrors = true,
         $theme = null
     ) {
-        parent::__construct($theme);
+        parent::__construct($name, $label, $showErrors, $theme);
 
-        $this->setLabel($name, $label);
-
-        $this->name = $name;
         $this->value = $value;
-        $this->showErrors = $showErrors;
 
-        $key = Str::before($name, '[]');
+        $key = Str::before($this->name, '[]');
 
         if ($oldData = old($key)) {
             $this->checked = in_array($value, Arr::wrap($oldData));

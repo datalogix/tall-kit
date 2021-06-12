@@ -1,35 +1,19 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
-use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Concerns\BoundValues;
-use Datalogix\TALLKit\Concerns\LabelText;
-use Datalogix\TALLKit\Concerns\ValidationErrors;
+use TALLKit\Concerns\BoundValues;
 
-class Radio extends BladeComponent
+class Radio extends Field
 {
     use BoundValues;
-    use LabelText;
-    use ValidationErrors;
 
     /**
-     * The radio name.
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * The radio value.
-     *
      * @var mixed
      */
     public $value;
 
     /**
-     * The radio is checked.
-     *
      * @var bool
      */
     public $checked = false;
@@ -55,20 +39,16 @@ class Radio extends BladeComponent
         $showErrors = true,
         $theme = null
     ) {
-        parent::__construct($theme);
+        parent::__construct($name, $label, $showErrors, $theme);
 
-        $this->setLabel($name, $label);
-
-        $this->name = $name;
         $this->value = $value;
-        $this->showErrors = $showErrors;
 
-        if (old($name)) {
-            $this->checked = old($name) == $value;
+        if (old($this->name)) {
+            $this->checked = old($this->name) == $value;
         }
 
         if (! session()->hasOldInput() && $this->isNotWired()) {
-            $boundValue = $this->getBoundValue($bind, $name) ?? $default;
+            $boundValue = $this->getBoundValue($bind, $this->name) ?? $default;
 
             $this->checked = $boundValue == $this->value;
         }

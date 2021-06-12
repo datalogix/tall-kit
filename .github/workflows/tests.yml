@@ -9,10 +9,9 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [7.3, 7.4, 8.0]
-        laravel: [^7.0, ^8.0]
-        #dependency-version: [prefer-lowest, prefer-stable]
-        dependency-version: [prefer-stable]
+        php: [8.0]
+        laravel: [^8.0]
+        dependency-version: [prefer-lowest, prefer-stable]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
@@ -30,8 +29,8 @@ jobs:
       - name: Install dependencies
         run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
-      - name: Execute tests
-        run: vendor/bin/phpunit --verbose
+      #- name: Execute tests
+      #  run: vendor/bin/phpunit --verbose
 
-      - name: Coverage
-        uses: codecov/codecov-action@v1
+      #- name: Coverage
+      #  uses: codecov/codecov-action@v1

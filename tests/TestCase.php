@@ -1,8 +1,8 @@
 <?php
 
-namespace Datalogix\TALLKit\Tests;
+namespace TALLKit\Tests;
 
-use Datalogix\TALLKit\TALLKitServiceProvider;
+use TALLKit\TALLKitServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Livewire\LivewireServiceProvider;
@@ -30,7 +30,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('tall-kit.themes.testing', []);
+        $app['config']->set('tallkit.themes.testing', []);
     }
 
     /**

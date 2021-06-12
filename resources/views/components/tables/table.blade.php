@@ -1,24 +1,27 @@
-<div {{ $themeProvider->container }}>
-    <table {{ $attributes->merge(toArray($themeProvider->table)) }}>
+<div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
+    <table {{ $attributes->mergeThemeProvider($themeProvider, 'table') }}>
         @if($cols->isNotEmpty() || ($head ?? false))
-            <thead {{ $themeProvider->thead }}>
-                <tr>
+            <thead {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'thead') }}>
+                <x-row {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tr') }}>
                     @forelse($cols as $key => $col)
-                        <x-heading :sortable="$col['sortable'] ?? false">
+                        <x-heading
+                            :sortable="$col['sortable'] ?? false"
+                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'th') }}
+                        >
                             {{ $col['name'] ?? $col }}
                         </x-heading>
                     @empty
                         {{ $head }}
                     @endforelse
-                </tr>
+                </x-row>
             </thead>
         @endif
 
-        <tbody {{ $themeProvider->tbody }}>
+        <tbody {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tbody') }}>
             @forelse($rows as $row)
-                <x-row>
+                <x-row {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tr') }}>
                     @foreach($cols as $key => $col)
-                        <x-cell>
+                        <x-cell {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'td') }}>
                             {{ ${$key} ?? data_get($row, $key) }}
                         </x-cell>
                     @endforeach
@@ -31,21 +34,26 @@
                 @elseif($empty ?? false)
                     {{ $empty }}
                 @elseif($emptyText)
-                    <x-row>
-                        <td {{ $themeProvider->emptyText }} colspan="{{ count($cols) }}">
-                            {{ __($emptyText) }}
-                        </td>
+                    <x-row {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tr') }}>
+                        <x-cell
+                            colspan="{{ count($cols) }}"
+                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'td') }}
+                        >
+                            <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'emptyText') }}>
+                                {{ __($emptyText) }}
+                            </span>
+                        </x-cell>
                     </x-row>
                 @endif
             @endforelse
         </tbody>
 
         @if($footer->isNotEmpty() || ($foot ?? false))
-            <tfoot {{ $themeProvider->tfoot }}>
+            <tfoot {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tfoot') }}>
                 @forelse($footer as $row)
-                    <x-row>
+                    <x-row {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tr') }}>
                         @foreach($cols as $key => $col)
-                            <x-cell>
+                            <x-cell {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'td') }}>
                                 {{ ${$key} ?? data_get($row, $key) }}
                             </x-cell>
                         @endforeach

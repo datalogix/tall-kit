@@ -1,31 +1,25 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
-use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Concerns\BoundValues;
+use TALLKit\Components\BladeComponent;
+use TALLKit\Concerns\BoundValues;
 
 class Form extends BladeComponent
 {
     use BoundValues;
 
     /**
-     * The form method.
-     *
      * @var string
      */
     public $method;
 
     /**
-     * The form action.
-     *
      * @var string|null
      */
     public $action;
 
     /**
-     * The form enctype.
-     *
      * @var string|null
      */
     public $enctype;

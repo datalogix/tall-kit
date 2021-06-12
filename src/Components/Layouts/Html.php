@@ -1,35 +1,37 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Layouts;
+namespace TALLKit\Components\Layouts;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class Html extends BladeComponent
 {
     /**
-     * The title.
-     *
      * @var string
      */
     public $title;
 
     /**
-     * The charset.
-     *
      * @var string
      */
     public $charset;
 
     /**
-     * The stack styles.
-     *
+     * @var bool
+     */
+    public $livewire;
+
+    /**
+     * @var bool
+     */
+    public $tallkit;
+
+    /**
      * @var string|bool
      */
     public $stackStyles;
 
     /**
-     * The stack scripts.
-     *
      * @var string|bool
      */
     public $stackScripts;
@@ -39,6 +41,8 @@ class Html extends BladeComponent
      *
      * @param  string  $title
      * @param  string  $charset
+     * @param  bool  $livewire
+     * @param  bool  $tallkit
      * @param  string|bool  $stackStyles
      * @param  string|bool  $stackScripts
      * @param  string|null  $theme
@@ -47,6 +51,8 @@ class Html extends BladeComponent
     public function __construct(
         $title = '',
         $charset = 'utf-8',
+        $livewire = true,
+        $tallkit = true,
         $stackStyles = 'styles',
         $stackScripts = 'scripts',
         $theme = null
@@ -55,7 +61,9 @@ class Html extends BladeComponent
 
         $this->title = $title ?: config('app.name');
         $this->charset = $charset;
-        $this->stackScripts = $stackStyles;
+        $this->livewire = $livewire && class_exists('\Livewire\Livewire');
+        $this->tallkit = $tallkit;
+        $this->stackStyles = $stackStyles;
         $this->stackScripts = $stackScripts;
     }
 }

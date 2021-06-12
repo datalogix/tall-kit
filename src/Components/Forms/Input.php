@@ -1,63 +1,33 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
-use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Concerns\DefaultAndOldValue;
-use Datalogix\TALLKit\Concerns\LabelText;
-use Datalogix\TALLKit\Concerns\ValidationErrors;
+use TALLKit\Concerns\DefaultAndOldValue;
 use Illuminate\Support\Str;
 
-class Input extends BladeComponent
+class Input extends Field
 {
     use DefaultAndOldValue;
-    use LabelText;
-    use ValidationErrors;
 
     /**
-     * The assets of component.
-     *
-     * @var array
-     */
-    protected static $assets = [
-        'alpine',
-        'inputmask',
-    ];
-
-    /**
-     * The input name.
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * The input id.
-     *
      * @var string|bool|null
      */
     public $id;
 
     /**
-     * The input type.
-     *
      * @var string|null
      */
     public $type;
 
     /**
-     * The input value.
-     *
      * @var mixed
      */
     public $value;
 
     /**
-     * The input mask.
-     *
      * @var mixed
      */
-    public $mask;
+    protected $mask;
 
     /**
      * Create a new component instance.
@@ -86,41 +56,38 @@ class Input extends BladeComponent
         $showErrors = true,
         $theme = null
     ) {
-        parent::__construct($theme);
+        parent::__construct($name, $label, $showErrors, $theme);
 
-        $this->setLabel($name, $label);
-
-        $this->name = $name;
-        $this->id = $id ?? $name;
-        $this->type = $type ?: $this->getTypeByName($name);
-        $this->showErrors = $showErrors;
-        $this->mask = $mask ?? $this->getMaskByName($name, $language);
+        $this->id = $id ?? $this->name;
+        $this->type = $type ?: $this->getTypeByName($this->name);
 
         if ($language) {
-            $this->name = "{$name}[{$language}]";
+            $this->name = "{$this->name}[{$language}]";
         }
 
         if ($this->type !== 'password') {
-            $this->setValue($name, $bind, $default, $language);
+            $this->setValue($this->name, $bind, $default, $language);
         }
 
-        $this->themeProvider->input = $this->themeProvider->input
-            ->merge($this->themeProvider->types->get($type, []), false)
-            ->merge($mask ? ['x-init' => 'initMask($el, '.$this->maskOptions().')'] : [], false);
+        $this->mask = $mask;
     }
 
     /**
-     * Input mask options.
+     * Mask options.
      *
-     * @return string
+     * @return array
      */
-    protected function maskOptions()
+    public function maskOptions()
     {
-        if (is_string($this->mask)) {
-            return $this->mask;
+        if (!$this->mask || $this->type === 'hidden') {
+            return [];
         }
 
-        return json_encode((object) $this->mask);
+        return [
+            'data-tallkit-assets' => 'alpine,imask',
+            'x-data' => 'window.tallkit.component(\'mask\')',
+            'x-init' => 'init('.json_encode(is_string($this->mask) ? ['mask' => $this->mask] : (object) $this->mask).')',
+        ];
     }
 
     /**
@@ -149,48 +116,5 @@ class Input extends BladeComponent
         }
 
         return 'text';
-    }
-
-    /**
-     * Get input mask by name.
-     *
-     * @param  string  $name
-     * @param  string|null  $language
-     * @return mixed
-     */
-    protected function getMaskByName($name, $language = null)
-    {
-        $masksWithoutLocale = [
-            'decimal' => ['decimal'],
-            'email' => ['email'],
-            'ip' => ['ip', 'remote_address', 'remote_address_ip', 'remote_ip'],
-            'url' => ['url', 'website', 'youtube', 'vimeo', 'facebook', 'twitter', 'instagram', 'linkedin'],
-        ];
-
-        $masksWithLocale = [
-            'date' => ['date', 'birthdate', 'birth_date', '_at'],
-            'datetime' => ['datetime', 'date_time'],
-            'phone' => ['phone', 'cell', 'cellphone', 'cell_phone'],
-            'price' => ['price', 'money'],
-            'time' => ['time'],
-            'weight' => ['weight'],
-            'zipcode' => ['zipcode', 'zip_code', 'postal', 'postalcode', 'postal_code'],
-        ];
-
-        foreach ($masksWithoutLocale as $mask => $names) {
-            if (Str::contains($name, $names)) {
-                return ['alias' => $mask];
-            }
-        }
-
-        $language = $language ?? app()->getLocale();
-
-        foreach ($masksWithLocale as $mask => $names) {
-            if (Str::contains($name, $names)) {
-                return ['alias' => $mask.'_'.$language];
-            }
-        }
-
-        return false;
     }
 }

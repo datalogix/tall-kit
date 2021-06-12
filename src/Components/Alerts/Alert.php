@@ -1,97 +1,95 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Alerts;
+namespace TALLKit\Components\Alerts;
 
-use Datalogix\TALLKit\Components\BladeComponent;
-use Illuminate\View\ComponentAttributeBag;
+use TALLKit\Components\BladeComponent;
 
 class Alert extends BladeComponent
 {
     /**
-     * The assets of component.
-     *
-     * @var array
+     * @var string
      */
-    protected static $assets = [
-        'alpine',
-    ];
+    public $type;
 
     /**
-     * The alert icon.
-     *
+     * @var string
+     */
+    public $mode;
+
+    /**
+     * @var string
+     */
+    public $rounded;
+
+    /**
+     * @var string
+     */
+    public $shadow;
+
+    /**
+     * @var string|null
+     */
+    public $on;
+
+    /**
+     * @var int
+     */
+    public $timeout;
+
+    /**
+     * @var string
+     */
+    public $color;
+
+    /**
      * @var bool
      */
     public $icon;
 
     /**
-     * The alert icon svg.
-     *
      * @var string|bool
      */
     public $iconSvg;
 
     /**
-     * The alert icon name.
-     *
      * @var string|bool
      */
     public $iconName;
 
     /**
-     * The alert dismissible.
-     *
      * @var bool
      */
     public $dismissible;
 
     /**
-     * The alert dismissible icon.
-     *
      * @var bool
      */
     public $dismissibleIcon;
 
     /**
-     * The alert dismissible icon svg.
-     *
      * @var string|bool
      */
     public $dismissibleIconSvg;
 
     /**
-     * The alert dismissible icon name.
-     *
      * @var string|bool
      */
     public $dismissibleIconName;
 
     /**
-     * The alert dismissible text.
-     *
      * @var string
      */
     public $dismissibleText;
 
     /**
-     * The alert title.
-     *
      * @var string
      */
     public $title;
 
     /**
-     * The alert message.
-     *
      * @var string
      */
     public $message;
-
-    /**
-     * The alert attrs.
-     *
-     * @var \Illuminate\View\ComponentAttributeBag
-     */
-    public $attrs;
 
     /**
      * Create a new component instance.
@@ -137,44 +135,23 @@ class Alert extends BladeComponent
         parent::__construct($theme);
 
         $typeTheme = $this->themeProvider->types->get($type, $this->themeProvider->types->get('default'));
-        $color = $typeTheme['color'];
 
+        $this->type = $type;
+        $this->mode = $mode;
+        $this->rounded = $rounded;
+        $this->shadow = $shadow;
+        $this->on = $on;
+        $this->timeout = $timeout;
+        $this->color = $typeTheme['color'];
         $this->icon = $icon;
         $this->iconSvg = $iconSvg ?? $typeTheme['iconSvg'];
         $this->iconName = $iconName ?? $typeTheme['iconName'];
         $this->dismissible = $dismissible;
         $this->dismissibleIcon = $dismissibleIcon;
-        $this->dismissibleIconSvg = $dismissibleIconSvg ?? $this->themeProvider->dismissible['iconSvg'];
-        $this->dismissibleIconName = $dismissibleIconName ?? $this->themeProvider->dismissible['iconName'];
+        $this->dismissibleIconSvg = $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('iconSvg');
+        $this->dismissibleIconName = $dismissibleIconName ?? $this->themeProvider->dismissible->get('iconName');
         $this->dismissibleText = $dismissibleText;
         $this->title = $title ?? $typeTheme['title'];
         $this->message = $message;
-
-        $this->attrs = new ComponentAttributeBag([
-            'container' => $this->themeProvider->container
-                ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
-                ->merge($this->themeProvider->modes->get($mode, []))
-                ->merge($this->themeProvider->rounded->get($rounded, []))
-                ->merge($this->themeProvider->shadow->get($shadow, []))
-                ->merge(['x-init' => 'initAlert("'.$on.'", '.$timeout.')']),
-
-            'icon' => $this->themeProvider->icon->merge([
-                'class' => 'bg-'.$color.'-100 border-'.$color.'-500 text-'.$color.'-500',
-            ]),
-
-            'dismissible' => new ComponentAttributeBag($this->themeProvider->dismissible['container']),
-
-            'dismissibleIcon' => new ComponentAttributeBag($this->themeProvider->dismissible['icon']),
-
-            'dismissibleText' => new ComponentAttributeBag($this->themeProvider->dismissible['text']),
-
-            'title' => $this->themeProvider->title->merge([
-                'class' => 'text-'.$color.'-800',
-            ]),
-
-            'message' => $this->themeProvider->message->merge([
-                'class' => 'text-'.$color.'-600',
-            ]),
-        ]);
     }
 }

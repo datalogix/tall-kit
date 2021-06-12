@@ -5,112 +5,228 @@ $locale = strtolower(substr(app()->getLocale(), 0, 2));
 return [
     'prefix' => '',
 
-    'components' => [
+    'options' => [
+
+        /*
+        |--------------------------------------------------------------------------
+        | TALLKit Assets URL
+        |--------------------------------------------------------------------------
+        |
+        | This value sets the path to TALLKit JavaScript assets, for cases where
+        | your app's domain root is not the correct path. By default, TALLKit
+        | will load its JavaScript assets from the app's "relative root".
+        |
+        | Examples: "/assets", "myurl.com/app".
+        |
+        */
+
+        'asset_url' => null,
+
+        /*
+        |--------------------------------------------------------------------------
+        | loadType
+        |--------------------------------------------------------------------------
+        |
+        | Supported:
+        |
+        | data-tallkit-assets: Load only used assets, using the 'data-tallkit-assets' attribute.
+        | true: Load all assets on 'options.assets'.
+        | false: Disable load assets, you need to inject manually.
+        |
+        */
+
+        'loadType' => 'data-tallkit-assets',
+
+        /*
+        |--------------------------------------------------------------------------
+        | injectTailwindcss
+        |--------------------------------------------------------------------------
+        |
+        | Enable when you want to inject tailwindcss directly from the CDN,
+        | the url is in `assets.tailwindcss`.
+        | This option is disabled for several reasons.
+        | See https://tailwindcss.com/docs/installation#using-tailwind-via-cdn
+        |
+        */
+        'injectTailwindcss' => false,
+    ],
+
+    'assets' => [
         /**
-         * Alerts.
+         * Tailwindcss.
          */
-        'alert' => \Datalogix\TALLKit\Components\Alerts\Alert::class,
+        'tailwindcss' => [
+            'https://cdn.jsdelivr.net/npm/tailwindcss@2/dist/tailwind.min.css'
+        ],
 
         /**
-         * Buttons.
+         * Alpine.
          */
-        'button' => \Datalogix\TALLKit\Components\Buttons\Button::class,
-        'bt' => \Datalogix\TALLKit\Components\Buttons\Button::class, // alias
-        'btn' => \Datalogix\TALLKit\Components\Buttons\Button::class, // alias
-        'form-button' => \Datalogix\TALLKit\Components\Buttons\FormButton::class,
-        'form-bt' => \Datalogix\TALLKit\Components\Buttons\FormButton::class, // alias
-        'form-btn' => \Datalogix\TALLKit\Components\Buttons\FormButton::class, // alias
-        'logout' => \Datalogix\TALLKit\Components\Buttons\Logout::class,
+        'alpine' => [
+            'https://cdn.jsdelivr.net/npm/alpinejs@2/dist/alpine.min.js',
+        ],
 
         /**
-         * Editors.
+         * Moment.
          */
-        'editor' => \Datalogix\TALLKit\Components\Editors\Quill::class, // alias
-        'easy-mde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class,
-        'easymde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class, // alias
-        'mde' => \Datalogix\TALLKit\Components\Editors\EasyMde::class, // alias
-        'quill' => \Datalogix\TALLKit\Components\Editors\Quill::class,
-        'trix' => \Datalogix\TALLKit\Components\Editors\Trix::class,
+        'moment' => [
+            'https://cdn.jsdelivr.net/npm/moment@2/moment.min.js',
+        ],
 
         /**
          * Forms.
          */
-        'checkbox' => \Datalogix\TALLKit\Components\Forms\Checkbox::class,
-        'check' => \Datalogix\TALLKit\Components\Forms\Checkbox::class, // alias
-        'errors' => \Datalogix\TALLKit\Components\Forms\Errors::class,
-        'error' => \Datalogix\TALLKit\Components\Forms\Errors::class, // alias
-        'form' => \Datalogix\TALLKit\Components\Forms\Form::class,
-        'group' => \Datalogix\TALLKit\Components\Forms\Group::class,
-        'input' => \Datalogix\TALLKit\Components\Forms\Input::class,
-        'field' => \Datalogix\TALLKit\Components\Forms\Input::class, // alias
-        'label' => \Datalogix\TALLKit\Components\Forms\Label::class,
-        'lbl' => \Datalogix\TALLKit\Components\Forms\Label::class, // alias
-        'radio' => \Datalogix\TALLKit\Components\Forms\Radio::class,
-        'select' => \Datalogix\TALLKit\Components\Forms\Select::class,
-        'submit' => \Datalogix\TALLKit\Components\Forms\Submit::class,
-        'textarea' => \Datalogix\TALLKit\Components\Forms\Textarea::class,
-        'validation-errors' => \Datalogix\TALLKit\Components\Forms\ValidationErrors::class,
-        'validation' => \Datalogix\TALLKit\Components\Forms\ValidationErrors::class, // alias
-
-        /**
-         * Icons.
-         */
-        'icon' => \Datalogix\TALLKit\Components\Icons\Icon::class,
-
-        /**
-         * Layouts.
-         */
-        'auth' => \Datalogix\TALLKit\Components\Layouts\AuthenticationCard::class, //alias
-        'auth-card' => \Datalogix\TALLKit\Components\Layouts\AuthenticationCard::class, //alias
-        'authentication' => \Datalogix\TALLKit\Components\Layouts\AuthenticationCard::class,
-        'authentication-card' => \Datalogix\TALLKit\Components\Layouts\AuthenticationCard::class, //alias
-        'card' => \Datalogix\TALLKit\Components\Layouts\Card::class,
-        'form-section' => \Datalogix\TALLKit\Components\Layouts\FormSection::class,
-        'html' => \Datalogix\TALLKit\Components\Layouts\Html::class,
-        'section' => \Datalogix\TALLKit\Components\Layouts\Section::class,
-        'meta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class, //alias
-        'social-meta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class,
-        'socialmeta' => \Datalogix\TALLKit\Components\Layouts\SocialMeta::class, //alias
-
-        /**
-         * Modals.
-         */
-        'modal' => \Datalogix\TALLKit\Components\Modals\Modal::class,
-
-        /**x
-         * Navigations.
-         */
-        'dropdown' => \Datalogix\TALLKit\Components\Navigations\Dropdown::class,
-        'menu' => \Datalogix\TALLKit\Components\Navigations\Menu::class,
-        'menu-item' => \Datalogix\TALLKit\Components\Navigations\MenuItem::class,
-        'menuitem' => \Datalogix\TALLKit\Components\Navigations\MenuItem::class,
+        'imask' => [
+            'https://cdn.jsdelivr.net/npm/imask@6/dist/imask.min.js',
+        ],
 
         /**
          * Pickers.
          */
-        'datetime-picker' => \Datalogix\TALLKit\Components\Pickers\Flatpickr::class, // alias
-        'datetimepicker' => \Datalogix\TALLKit\Components\Pickers\Flatpickr::class, // alias
-        'flatpickr' => \Datalogix\TALLKit\Components\Pickers\Flatpickr::class,
+        'flatpickr' => [
+            'https://cdn.jsdelivr.net/npm/flatpickr@4/dist/flatpickr.min.css',
+            'https://cdn.jsdelivr.net/npm/flatpickr@4/dist/flatpickr.min.js',
+            $locale != 'en' ? 'https://cdn.jsdelivr.net/npm/flatpickr@4/dist/l10n/'.$locale.'.min.js' : '',
+        ],
 
-        'color-picker' => \Datalogix\TALLKit\Components\Pickers\Pickr::class, // alias
-        'colorpicker' => \Datalogix\TALLKit\Components\Pickers\Pickr::class, // alias
-        'pickr' => \Datalogix\TALLKit\Components\Pickers\Pickr::class,
+        'pickr' => [
+            'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1/dist/themes/classic.min.css',
+            'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1/dist/pickr.min.js',
+        ],
 
-        'date-picker' => \Datalogix\TALLKit\Components\Pickers\Pikaday::class, // alias
-        'datepicker' => \Datalogix\TALLKit\Components\Pickers\Pikaday::class, // alias
-        'pikaday' => \Datalogix\TALLKit\Components\Pickers\Pikaday::class,
+        'pikaday' => [
+            'https://cdn.jsdelivr.net/npm/pikaday@1/css/pikaday.min.css',
+            'https://cdn.jsdelivr.net/npm/pikaday@1/pikaday.min.js',
+        ],
+
+        /**
+         * Editors.
+         */
+        'easymde' => [
+            'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.css',
+            'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.js',
+        ],
+
+        'quill' => [
+            'https://cdn.jsdelivr.net/npm/quill@1/dist/quill.snow.min.css',
+            'https://cdn.jsdelivr.net/npm/quill@1/dist/quill.min.js',
+        ],
+
+        'trix' => [
+            'https://cdn.jsdelivr.net/npm/trix@1/dist/trix.min.css',
+            'https://cdn.jsdelivr.net/npm/trix@1/dist/trix.min.js',
+        ],
+    ],
+
+    'components' => [
+        /**
+         * Alerts.
+         */
+        'alert' => \TALLKit\Components\Alerts\Alert::class,
+
+        /**
+         * Buttons.
+         */
+        'button' => \TALLKit\Components\Buttons\Button::class,
+        'bt' => \TALLKit\Components\Buttons\Button::class, // alias
+        'btn' => \TALLKit\Components\Buttons\Button::class, // alias
+        'form-button' => \TALLKit\Components\Buttons\FormButton::class,
+        'form-bt' => \TALLKit\Components\Buttons\FormButton::class, // alias
+        'form-btn' => \TALLKit\Components\Buttons\FormButton::class, // alias
+        'logout' => \TALLKit\Components\Buttons\Logout::class,
+
+        /**
+         * Editors.
+         */
+        'editor' => \TALLKit\Components\Editors\Quill::class, // alias
+        'easymde' => \TALLKit\Components\Editors\EasyMDE::class,
+        'easy-mde' => \TALLKit\Components\Editors\EasyMDE::class, // alias
+        'mde' => \TALLKit\Components\Editors\EasyMDE::class, // alias
+        'quill' => \TALLKit\Components\Editors\Quill::class,
+        'trix' => \TALLKit\Components\Editors\Trix::class,
+
+        /**
+         * Forms.
+         */
+        'checkbox' => \TALLKit\Components\Forms\Checkbox::class,
+        'check' => \TALLKit\Components\Forms\Checkbox::class, // alias
+        'errors' => \TALLKit\Components\Forms\Errors::class,
+        'error' => \TALLKit\Components\Forms\Errors::class, // alias
+        'field' => \TALLKit\Components\Forms\Field::class, // alias
+        'form-field' => \TALLKit\Components\Forms\Field::class,
+        'form' => \TALLKit\Components\Forms\Form::class,
+        'group' => \TALLKit\Components\Forms\Group::class,
+        'field-group' => \TALLKit\Components\Forms\Group::class, // alias
+        'form-group' => \TALLKit\Components\Forms\Group::class, // alias
+        'input' => \TALLKit\Components\Forms\Input::class,
+        'label' => \TALLKit\Components\Forms\Label::class,
+        'lbl' => \TALLKit\Components\Forms\Label::class, // alias
+        'radio' => \TALLKit\Components\Forms\Radio::class,
+        'select' => \TALLKit\Components\Forms\Select::class,
+        'submit' => \TALLKit\Components\Forms\Submit::class,
+        'textarea' => \TALLKit\Components\Forms\Textarea::class,
+        'validation-errors' => \TALLKit\Components\Forms\ValidationErrors::class,
+        'validation' => \TALLKit\Components\Forms\ValidationErrors::class, // alias
+
+        /**
+         * Icons.
+         */
+        'icon' => \TALLKit\Components\Icons\Icon::class,
+
+        /**
+         * Layouts.
+         */
+        'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
+        'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
+        'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class,
+        'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
+        'card' => \TALLKit\Components\Layouts\Card::class,
+        'form-section' => \TALLKit\Components\Layouts\FormSection::class,
+        'html' => \TALLKit\Components\Layouts\Html::class,
+        'section' => \TALLKit\Components\Layouts\Section::class,
+        'meta' => \TALLKit\Components\Layouts\SocialMeta::class, //alias
+        'social-meta' => \TALLKit\Components\Layouts\SocialMeta::class,
+        'socialmeta' => \TALLKit\Components\Layouts\SocialMeta::class, //alias
+
+        /**
+         * Modals.
+         */
+        'modal' => \TALLKit\Components\Modals\Modal::class,
+
+        /**
+         * Navigations.
+         */
+        'dropdown' => \TALLKit\Components\Navigations\Dropdown::class,
+        'menu' => \TALLKit\Components\Navigations\Menu::class,
+        'menu-item' => \TALLKit\Components\Navigations\MenuItem::class,
+        'menuitem' => \TALLKit\Components\Navigations\MenuItem::class,
+
+        /**
+         * Pickers.
+         */
+        'datetime-picker' => \TALLKit\Components\Pickers\Flatpickr::class, // alias
+        'datetimepicker' => \TALLKit\Components\Pickers\Flatpickr::class, // alias
+        'flatpickr' => \TALLKit\Components\Pickers\Flatpickr::class,
+
+        'color-picker' => \TALLKit\Components\Pickers\Pickr::class, // alias
+        'colorpicker' => \TALLKit\Components\Pickers\Pickr::class, // alias
+        'pickr' => \TALLKit\Components\Pickers\Pickr::class,
+
+        'date-picker' => \TALLKit\Components\Pickers\Pikaday::class, // alias
+        'datepicker' => \TALLKit\Components\Pickers\Pikaday::class, // alias
+        'pikaday' => \TALLKit\Components\Pickers\Pikaday::class,
 
         /**
          * Tables.
          */
-        'table' => \Datalogix\TALLKit\Components\Tables\Table::class,
-        'heading' => \Datalogix\TALLKit\Components\Tables\Heading::class,
-        'head' => \Datalogix\TALLKit\Components\Tables\Heading::class, // alias
-        'th' => \Datalogix\TALLKit\Components\Tables\Heading::class, // alias
-        'row' => \Datalogix\TALLKit\Components\Tables\Row::class,
-        'tr' => \Datalogix\TALLKit\Components\Tables\Row::class, // alias
-        'cell' => \Datalogix\TALLKit\Components\Tables\Cell::class,
-        'td' => \Datalogix\TALLKit\Components\Tables\Cell::class, // alias
+        'table' => \TALLKit\Components\Tables\Table::class,
+        'heading' => \TALLKit\Components\Tables\Heading::class,
+        'head' => \TALLKit\Components\Tables\Heading::class, // alias
+        'th' => \TALLKit\Components\Tables\Heading::class, // alias
+        'row' => \TALLKit\Components\Tables\Row::class,
+        'tr' => \TALLKit\Components\Tables\Row::class, // alias
+        'cell' => \TALLKit\Components\Tables\Cell::class,
+        'td' => \TALLKit\Components\Tables\Cell::class, // alias
     ],
 
     'themes' => [
@@ -120,43 +236,12 @@ return [
              */
             'alert' => [
                 'container' => [
+                    'data-tallkit-assets' => 'alpine',
                     'class' => 'flex flex-row p-5 rounded relative',
                     'role' => 'alert',
                     'style' => 'display: none;',
-                    'x-data' => '{
-                        shown: false,
-                        timeout: null,
-
-                        initAlert(event, milliseconds) {
-                            if (event) {
-                                return this.initEvent(event, milliseconds || 3000)
-                            }
-
-                            if (milliseconds) {
-                                return this.initTimeout(milliseconds)
-                            }
-
-                            this.shown = true
-                        },
-
-                        initTimeout(milliseconds) {
-                            clearTimeout(this.timeout)
-                            this.shown = true
-                            this.timeout = setTimeout(() => { this.shown = false }, milliseconds)
-                        },
-
-                        initEvent(event, milliseconds) {
-                            if (typeof Livewire === \'undefined\') {
-                                console.warn(\'Livewire not found! See https://laravel-livewire.com/docs/installation\');
-                                return
-                            }
-
-                            Livewire.on(event, () => {
-                                this.initTimeout(milliseconds)
-                            })
-                        },
-                    }',
-                    'x-show.transition.opacity.out.duration.1500ms' => 'shown',
+                    'x-data' => 'window.tallkit.component(\'alert\')',
+                    'x-show.transition.opacity.out.duration.1500ms' => 'openned',
                 ],
 
                 'icon' => [
@@ -167,7 +252,7 @@ return [
                     'container' => [
                         'class' => 'absolute top-0 right-0 p-2 outline-none focus:outline-none flex items-center hover:opacity-75',
                         'type' => 'button',
-                        '@click' => 'shown = false',
+                        '@click' => 'close',
                     ],
 
                     'icon' => [
@@ -328,11 +413,7 @@ return [
              */
             'button' => [
                 'container' => [
-                    'class' => 'flex items-center justify-between',
-                ],
-
-                'button' => [
-                    'class' => 'font-bold py-2 px-4 focus:outline-none focus:shadow-outline',
+                    'class' => 'flex-inline items-center justify-between font-bold py-2 px-4 focus:outline-none focus:shadow-outline',
                 ],
 
                 'colors' => [
@@ -387,6 +468,10 @@ return [
                     'full' => [
                         'class' => 'rounded-full',
                     ],
+
+                    'none' => [
+                        'class' => 'rounded-none',
+                    ],
                 ],
 
                 'shadow' => [
@@ -433,7 +518,7 @@ return [
             ],
 
             'form-button' => [
-                'container' => '',
+                'container' => [],
 
                 'button' => [],
             ],
@@ -445,60 +530,44 @@ return [
             /**
              * Editors.
              */
-            'easy-mde' => [
+            'easymde' => [
                 'easymde' => [
-                    'x-data' => '{
-                        initEasyMde(element, options) {
-                            new EasyMDE({ element, ...options })
-                        },
-                    }',
+                    'data-tallkit-assets' => 'alpine,easymde',
+                    'x-data' => 'window.tallkit.component(\'easymde\')',
                 ],
             ],
 
             'quill' => [
                 'container' => [
-                    'class' => 'mb-4',
+                    'data-tallkit-assets' => 'alpine,quill',
+                    'wire:ignore' => 'true',
+                    'x-data' => 'window.tallkit.component(\'quill\')',
                 ],
 
-                'labelText' => '',
+                'input' => [
+                    'x-ref' => 'input',
+                ],
 
                 'quill' => [
                     'class' => 'quill-container',
-                    'x-data' => '{
-                        initQuill(element, inputId, options) {
-                            const quill = new Quill(element, options)
-                            const input = document.getElementById(inputId)
-
-                            if (input.value) {
-                                quill.setContents(JSON.parse(input.value).ops)
-                            }
-
-                            (function () {
-                                const inputEvent = new Event("input")
-                                quill.on("text-change", (delta, oldDelta, source) => {
-                                    input.value = JSON.stringify(quill.getContents())
-                                    input.dispatchEvent(inputEvent)
-                                })
-                            })()
-                        },
-                    }',
+                    'x-ref' => 'editor',
                 ],
-
-                'errors' => '',
             ],
 
             'trix' => [
                 'container' => [
-                    'class' => 'mb-4',
+                    'data-tallkit-assets' => 'alpine,trix',
+                    'wire:ignore' => 'true',
+                    'x-data' => 'window.tallkit.component(\'trix\')',
+                    'x-init' => 'init',
+                    'x-on:trix-change' => 'change',
                 ],
 
-                'labelText' => '',
+                'input' => [],
 
                 'trix' => [
                     'class' => 'trix-content block w-full border-gray-200 rounded shadow',
                 ],
-
-                'errors' => '',
             ],
 
             /**
@@ -514,14 +583,12 @@ return [
                 ],
 
                 'labelText' => [
-                    'class' => 'ml-3 block text-sm font-medium text-gray-700',
+                    'class' => 'ml-3',
                 ],
 
                 'checkbox' => [
                     'class' => 'h-4 w-4 border-gray-200 rounded shadow',
                 ],
-
-                'errors' => '',
             ],
 
             'errors' => [
@@ -530,24 +597,42 @@ return [
                 ],
             ],
 
+            'field' => [
+                'container' => [
+                    'class' => 'mb-4',
+                ],
+
+                'label' => [
+                    'class' => 'block',
+                ],
+
+                'labelText' => [
+                    'class' => 'mb-1',
+                ],
+
+                'errors' => [],
+            ],
+
             'form' => [
                 'container' => [],
             ],
 
             'group' => [
-                'container' => [
-                    'class' => 'mb-4',
+                'labelText' => [
+                    'class' => 'mb-1',
                 ],
 
-                'labelText' => '',
+                'types' => [
+                    'grid' => [
+                        'class' => 'grid gap-6',
+                    ],
 
-                'inline' => [
-                    'class' => 'flex flex-wrap space-x-6',
+                    'inline' => [
+                        'class' => 'flex flex-wrap space-x-6',
+                    ],
+
+                    'block' => [],
                 ],
-
-                'block' => [],
-
-                'errors' => '',
             ],
 
             'input' => [
@@ -555,71 +640,32 @@ return [
                     'class' => 'hidden',
                 ],
 
-                'container' => [
-                    'class' => 'mb-4',
-                ],
-
-                'label' => [
-                    'class' => 'block',
-                ],
-
-                'labelText' => '',
-
                 'input' => [
                     'class' => 'block w-full sm:text-sm border-gray-200 rounded shadow',
-                    'x-data' => '{
-                        initMask(element, options) {
-                            Inputmask(options).mask(element)
-                        },
-                    }',
-                ],
-
-                'errors' => '',
-
-                'types' => [
-                    /*
-                    'password' => [
-                        'class' => 'custom-class-per-type',
-                    ],
-                    */
                 ],
             ],
 
             'label' => [
                 'container' => [
-                    'class' => 'block mb-1 text-sm font-medium text-gray-700',
+                    'class' => 'block text-sm font-medium text-gray-700',
                 ],
             ],
 
             'radio' => [
-                'container' => [],
-
                 'label' => [
                     'class' => 'inline-flex items-center',
                 ],
 
                 'labelText' => [
-                    'class' => 'ml-3 block text-sm font-medium text-gray-700',
+                    'class' => 'ml-3',
                 ],
 
                 'radio' => [
                     'class' => 'h-4 w-4 border-gray-200 shadow',
                 ],
-
-                'errors' => '',
             ],
 
             'select' => [
-                'container' => [
-                    'class' => 'mb-4',
-                ],
-
-                'label' => [
-                    'class' => 'block',
-                ],
-
-                'labelText' => '',
-
                 'multiselect' => [
                     'class' => 'block w-full py-2 px-3 border border-gray-200 bg-white rounded shadow sm:text-sm',
                 ],
@@ -627,30 +673,18 @@ return [
                 'select' => [
                     'class' => 'block w-full py-2 px-3 border border-gray-200 bg-white rounded shadow sm:text-sm',
                 ],
-
-                'errors' => '',
             ],
 
             'textarea' => [
-                'container' => [
-                    'class' => 'mb-4',
-                ],
-
-                'label' => [
-                    'class' => 'block',
-                ],
-
-                'labelText' => '',
-
                 'textarea' => [
                     'class' => 'block w-full sm:text-sm border-gray-200 rounded shadow',
                 ],
-
-                'errors' => '',
             ],
 
             'validation-errors' => [
-                'alert' => 'mb-4',
+                'alert' => [
+                    'class' => 'mb-4',
+                ],
 
                 'container' => [
                     'class' => 'mb-4',
@@ -709,7 +743,9 @@ return [
                     'class' => 'md:col-span-1',
                 ],
 
-                'title' => 'px-4 sm:px-0',
+                'title' => [
+                    'class' => 'px-4 sm:px-0',
+                ],
 
                 'form' => [
                     'class' => 'mt-5 md:mt-0 md:col-span-2',
@@ -729,9 +765,7 @@ return [
                     'class' => 'flex justify-between',
                 ],
 
-                'content' => [
-                    'class' => '',
-                ],
+                'content' => [],
 
                 'title' => [
                     'class' => 'text-lg font-medium text-gray-900',
@@ -741,9 +775,7 @@ return [
                     'class' => 'text-sm text-gray-500',
                 ],
 
-                'actions' => [
-                    'class' => '',
-                ],
+                'actions' => [],
             ],
 
             'social-meta' => [],
@@ -753,29 +785,22 @@ return [
              */
             'modal' => [
                 'container' => [
-                    'x-data' => '{
-                        show: false,
-                        focusables() {
-                            // All focusable element types...
-                            let selector = \'a, button, input, textarea, select, details, [tabindex]:not([tabindex=-1])\'
+                    'data-tallkit-assets' => 'alpine',
+                    'x-data' => 'window.tallkit.component(\'modal\')',
+                ],
 
-                            return [...$el.querySelectorAll(selector)]
-                                // All non-disabled elements...
-                                .filter(el => ! el.hasAttribute(\'disabled\'))
-                        },
-                        firstFocusable() { return this.focusables()[0] },
-                        lastFocusable() { return this.focusables().slice(-1)[0] },
-                        nextFocusable() { return this.focusables()[this.nextFocusableIndex()] || this.firstFocusable() },
-                        prevFocusable() { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() },
-                        nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
-                        prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },
-                    }',
-                    '@close.stop' => 'show = false',
-                    '@keydown.escape.window' => 'show = false',
+                'trigger' => [
+                    'class' => 'inline',
+                    '@click' => 'toggle',
+                ],
+
+                'box' => [
+                    '@close.stop' => 'close',
+                    '@keydown.escape.window' => 'close',
                     '@keydown.tab.prevent' => '$event.shiftKey || nextFocusable().focus()',
                     '@keydown.shift.tab.prevent' => 'prevFocusable().focus()',
-                    'x-show' => 'show',
-                    'class' => 'fixed p-6 inset-0 px-4 z-50 flex justify-center ',
+                    'x-show' => 'openned',
+                    'class' => 'fixed p-6 inset-0 px-4 z-50 flex justify-center',
                     'style' => 'display: none;',
                 ],
 
@@ -794,9 +819,9 @@ return [
                 ],
 
                 'overlay' => [
-                    'x-show' => 'show',
+                    'x-show' => 'openned',
                     'class' => 'fixed inset-0 transform transition-all',
-                    '@click' => 'show = false',
+                    '@click' => 'close',
                     'x-transition:enter' => 'ease-out duration-300',
                     'x-transition:enter-start' => 'opacity-0',
                     'x-transition:enter-end' => 'opacity-100',
@@ -810,7 +835,7 @@ return [
                 ],
 
                 'modal' => [
-                    'x-show' => 'show',
+                    'x-show' => 'openned',
                     'class' => 'flex-initial bg-white rounded overflow-hidden shadow transform transition-all w-full',
                 ],
 
@@ -849,14 +874,32 @@ return [
              */
             'dropdown' => [
                 'container' => [
-                    'class' => 'relative',
-                    'x-data' => '{ open: false, }',
-                    '@click.away' => 'open = false',
-                    '@close.stop' => 'open = false',
+                    'data-tallkit-assets' => 'alpine',
+                    'class' => 'relative inline',
+                    'x-data' => 'window.tallkit.component(\'dropdown\')',
+                    '@click.away' => 'close',
+                    '@close.stop' => 'close',
                 ],
 
                 'trigger' => [
-                    '@click' => 'open = !open',
+                    'class' => 'inline cursor-pointer',
+                    '@click' => 'open',
+                ],
+
+                'overlay' => [
+                    'x-show' => 'openned',
+                    'class' => 'fixed inset-0 transform transition-all',
+                    '@click' => 'close',
+                    'x-transition:enter' => 'ease-out duration-300',
+                    'x-transition:enter-start' => 'opacity-0',
+                    'x-transition:enter-end' => 'opacity-100',
+                    'x-transition:leave' => 'ease-in duration-200',
+                    'x-transition:leave-start' => 'opacity-100',
+                    'x-transition:leave-end' => 'opacity-0',
+                ],
+
+                'backdrop' => [
+                    'class' => 'absolute inset-0 bg-gray-500 opacity-75',
                 ],
 
                 'dropdown' => [
@@ -866,23 +909,27 @@ return [
                     'x-transition:leave' => 'transition ease-in duration-75',
                     'x-transition:leave-start' => 'transform opacity-100 scale-100',
                     'x-transition:leave-end' => 'transform opacity-0 scale-95',
-                    'class' => 'absolute',
-                    'x-show' => 'open',
-                    '@click' => 'open = false',
+                    'class' => 'absolute z-10',
+                    'x-show' => 'openned',
+                    '@click' => 'close',
                     'style' => 'display: none;',
                 ],
 
-                'align' => [
-                    'left' => [
-                        'class' => 'origin-top-left left-0',
+                'aligns' => [
+                    'top-left' => [
+                        'class' => 'origin-top-left top-6 left-0',
                     ],
 
-                    'top' => [
-                        'class' => 'origin-top',
+                    'top-right' => [
+                        'class' => 'origin-top-right top-6 right-0',
                     ],
 
-                    'right' => [
-                        'class' => 'origin-top-right right-0',
+                    'bottom-left' => [
+                        'class' => 'origin-bottom-left bottom-6 left-0',
+                    ],
+
+                    'bottom-right' => [
+                        'class' => 'origin-bottom-right bottom-6 right-0',
                     ],
                 ],
             ],
@@ -899,9 +946,7 @@ return [
             ],
 
             'menu-item' => [
-                'container' => [
-
-                ],
+                'container' => [],
 
                 'link' => [
                     'class' => 'w-full flex items-center py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900',
@@ -913,9 +958,13 @@ return [
                     'role' => 'menuitem',
                 ],
 
-                'iconLeft' => 'mr-3',
+                'iconLeft' => [
+                    'class' => 'mr-3',
+                ],
 
-                'iconRight' => 'ml-3',
+                'iconRight' => [
+                    'class' => 'ml-3',
+                ],
             ],
 
             /**
@@ -923,43 +972,33 @@ return [
              */
             'flatpickr' => [
                 'flatpickr' => [
-                    'x-data' => '{
-                        initFlatpickr(element, options) {
-                            flatpickr(element, options)
-                        },
-                    }',
+                    'data-tallkit-assets' => 'alpine,flatpickr',
+                    'x-data' => 'window.tallkit.component(\'flatpickr\')',
+                    'autocomplete' => 'off',
                 ],
             ],
 
             'pickr' => [
                 'container' => [
-                    'class' => 'mb-4',
-                    'x-data' => '{
-                        initPickr(element, inputId, options) {
-                            const pickr = Pickr.create(options)
-                            const input = document.getElementById(inputId)
-                            pickr.on("save", (color) => {
-                                input.setAttribute("value", color ? color.toHEXA().toString() : "")
-                                element.setAttribute("title", color ? color.toHEXA().toString() : "")
-                            })
-                        },
-                    }',
+                    'data-tallkit-assets' => 'alpine,pickr',
+                    'wire:ignore' => 'true',
+                    'x-data' => 'window.tallkit.component(\'pickr\')',
                 ],
 
-                'labelText' => '',
+                'input' => [
+                    'x-ref' => 'input',
+                ],
 
-                'pickr' => [],
-
-                'errors' => '',
+                'pickr' => [
+                    'x-ref' => 'picker',
+                ],
             ],
 
             'pikaday' => [
                 'pikaday' => [
-                    'x-data' => '{
-                        initPikaday(element, options) {
-                            new Pikaday({ field: element, ...options })
-                        },
-                    }',
+                    'data-tallkit-assets' => 'alpine,moment,pikaday',
+                    'x-data' => 'window.tallkit.component(\'pikaday\')',
+                    'autocomplete' => 'off',
                 ],
             ],
 
@@ -989,9 +1028,7 @@ return [
             ],
 
             'row' => [
-                'tr' => [
-                    'class' => '',
-                ],
+                'tr' => [],
             ],
 
             'table' => [
@@ -1003,111 +1040,18 @@ return [
                     'class' => 'min-w-full divide-y divide-gray-200',
                 ],
 
-                'thead' => [
-                    'class' => '',
-                ],
+                'thead' => [],
 
                 'tbody' => [
                     'class' => 'bg-white divide-y divide-gray-200',
                 ],
 
-                'tfoot' => [
-                    'class' => '',
-                ],
+                'tfoot' => [],
 
                 'emptyText' => [
                     'class' => 'px-6 py-4 whitespace-nowrap text-lg text-gray-500 text-center',
                 ],
             ],
-        ],
-    ],
-
-    'assets' => [
-        'alpine' => [
-            'https://cdn.jsdelivr.net/npm/alpinejs@2.7.3/dist/alpine.min.js',
-        ],
-
-        'moment' => [
-            'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js',
-        ],
-
-        /**
-         * Forms.
-         */
-        'inputmask' => [
-            'https://cdn.jsdelivr.net/npm/inputmask@5.0.5/dist/inputmask.min.js',
-            'Inputmask.extendAliases({
-                date_pt_BR: {
-                    alias: "datetime",
-                    inputformat: "dd/mm/yyyy"
-                },
-                datetime_pt_BR: {
-                    alias: "datetime",
-                    inputformat: "dd/mm/yyyy HH:MM"
-                },
-                phone_pt_BR: {
-                    mask: "(99) 99999999[9]"
-                },
-                price_pt_BR: {
-                    alias: "numeric",
-                    autoGroup: true,
-                    groupSeparator: ".",
-                    digits: 2,
-                    digitsOptional: false,
-                    radixPoint: ",",
-                    prefix: "R$ ",
-                    placeholder: "0",
-                    unmaskAsNumber: true,
-                    removeMaskOnSubmit: true
-                },
-                time_pt_BR: {
-                    alias: "datetime",
-                    inputformat: "HH:MM"
-                },
-                weight_pt_BR: {
-                    mask: "9{1,3}[.9{1,2}]"
-                },
-                zipcode_pt_BR: {
-                    mask: "99999-999"
-                }
-            })',
-        ],
-
-        /**
-         * Pickers.
-         */
-        'flatpickr' => [
-            'https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.css',
-            'https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.js',
-            $locale != 'en' ? 'https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/l10n/'.$locale.'.min.js' : '',
-        ],
-
-        'pickr' => [
-            'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.8.0/dist/themes/classic.min.css',
-            'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.8.0/dist/pickr.min.js',
-        ],
-
-        'pikaday' => [
-            'https://cdn.jsdelivr.net/npm/pikaday@1.8.2/css/pikaday.min.css',
-            'https://cdn.jsdelivr.net/npm/pikaday@1.8.2/pikaday.min.js',
-        ],
-
-        /**
-         * Editors.
-         */
-        'easy-mde' => [
-            'https://cdn.jsdelivr.net/npm/easymde@2.13.0/dist/easymde.min.css',
-            'https://cdn.jsdelivr.net/npm/easymde@2.13.0/dist/easymde.min.js',
-        ],
-
-        'quill' => [
-            'https://cdn.quilljs.com/1.3.7/quill.snow.css',
-            'https://cdn.quilljs.com/1.3.7/quill.min.js',
-        ],
-
-        'trix' => [
-            'https://cdn.jsdelivr.net/npm/trix@1.3.1/dist/trix.min.css',
-            'https://cdn.jsdelivr.net/npm/trix@1.3.1/dist/trix.min.js',
         ],
     ],
 ];

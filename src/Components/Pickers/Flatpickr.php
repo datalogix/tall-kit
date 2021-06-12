@@ -1,20 +1,25 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Pickers;
+namespace TALLKit\Components\Pickers;
 
-use Datalogix\TALLKit\Components\Forms\Input;
+use TALLKit\Components\Forms\Input;
 
 class Flatpickr extends Input
 {
     /**
-     * The assets of component.
-     *
+     * @var string
+     */
+    public $format;
+
+    /**
+     * @var string|bool|null
+     */
+    public $placeholder;
+
+    /**
      * @var array
      */
-    protected static $assets = [
-        'alpine',
-        'flatpickr',
-    ];
+    public $options;
 
     /**
      * Create a new component instance.
@@ -58,14 +63,21 @@ class Flatpickr extends Input
             $theme
         );
 
-        $jsonOptions = json_encode((object) array_merge([
-            'enableTime' => true,
-            'dateFormat' => $format,
-        ], $options));
+        $this->format = $format;
+        $this->placeholder = $placeholder;
+        $this->options = $options;
+    }
 
-        $this->themeProvider->flatpickr = $this->themeProvider->flatpickr->merge([
-            'x-init' => 'initFlatpickr($el, '.$jsonOptions.')',
-            'placeholder' => $placeholder ?? $format,
-        ], false);
+    /**
+     * Json options.
+     *
+     * @return string
+     */
+    public function jsonOptions()
+    {
+        return json_encode((object) array_merge([
+            'enableTime' => true,
+            'dateFormat' => $this->format,
+        ], $this->options));
     }
 }

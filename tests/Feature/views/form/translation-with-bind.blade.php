@@ -1,7 +1,7 @@
 @php
-    $targetA = new \Datalogix\TALLKit\Tests\Feature\Form\TranslatableModel;
+    $targetA = new \TALLKit\Tests\Feature\Form\TranslatableModel;
     $targetA->setTranslations('input', ['nl' => 'hallo', 'en' => 'hello']);
-    $targetB = new \Datalogix\TALLKit\Tests\Feature\Form\TranslatableModel;
+    $targetB = new \TALLKit\Tests\Feature\Form\TranslatableModel;
     $targetB->setTranslations('output', ['nl' => 'vaarwel', 'en' => 'goodbye']);
 @endphp
 

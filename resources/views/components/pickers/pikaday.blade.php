@@ -8,5 +8,7 @@
     :language="$language"
     :showErrors="$showErrors"
     :theme="$theme"
-    {{ $attributes->merge(toArray($themeProvider->pikaday)) }}
+    :placeholder="$placeholder ?? $format"
+    x-init="init({{ $jsonOptions() }})"
+    {{ $attributes->mergeThemeProvider($themeProvider, 'pikaday') }}
 />

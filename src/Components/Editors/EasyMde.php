@@ -1,20 +1,20 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Editors;
+namespace TALLKit\Components\Editors;
 
-use Datalogix\TALLKit\Components\Forms\Textarea;
+use TALLKit\Components\Forms\Textarea;
 
-class EasyMde extends Textarea
+class EasyMDE extends Textarea
 {
     /**
-     * The assets of component.
-     *
      * @var array
      */
-    protected static $assets = [
-        'alpine',
-        'easy-mde',
-    ];
+    public $options;
+
+    /**
+     * @var string
+     */
+    protected $componentKey = 'easymde';
 
     /**
      * Create a new component instance.
@@ -43,7 +43,7 @@ class EasyMde extends Textarea
     ) {
         parent::__construct(
             $name,
-            $id ?: $name,
+            $id,
             $label,
             $bind,
             $default,
@@ -52,12 +52,18 @@ class EasyMde extends Textarea
             $theme
         );
 
-        $jsonOptions = json_encode((object) array_merge([
-            'forceSync' => true,
-        ], $options));
+        $this->options = $options;
+    }
 
-        $this->themeProvider->easymde = $this->themeProvider->easymde->merge([
-            'x-init' => 'initEasyMde($el, '.$jsonOptions.')',
-        ], false);
+    /**
+     * Json options.
+     *
+     * @return string
+     */
+    public function jsonOptions()
+    {
+        return json_encode((object) array_merge([
+            'forceSync' => true,
+        ], $this->options));
     }
 }

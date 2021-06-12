@@ -1,6 +1,6 @@
 <?php
 
-namespace Datalogix\TALLKit;
+namespace TALLKit\Binders;
 
 use Illuminate\Support\Arr;
 
@@ -11,7 +11,7 @@ class ThemeBinder
      *
      * @var array
      */
-    private $bindings = [];
+    protected $bindings = [];
 
     /**
      * Bind a theme to the current instance.

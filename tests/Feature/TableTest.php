@@ -1,8 +1,8 @@
 <?php
 
-namespace Datalogix\TALLKit\Tests\Feature;
+namespace TALLKit\Tests\Feature;
 
-use Datalogix\TALLKit\Tests\TestCase;
+use TALLKit\Tests\TestCase;
 
 class TableTest extends TestCase
 {

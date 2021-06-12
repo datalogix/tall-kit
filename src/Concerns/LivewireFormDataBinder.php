@@ -1,8 +1,8 @@
 <?php
 
-namespace Datalogix\TALLKit\Concerns;
+namespace TALLKit\Concerns;
 
-use Datalogix\TALLKit\FormDataBinder;
+use TALLKit\Binders\FormDataBinder;
 
 trait LivewireFormDataBinder
 {
@@ -24,5 +24,17 @@ trait LivewireFormDataBinder
     public function isNotWired()
     {
         return ! $this->isWired();
+    }
+
+    /**
+     * Returns the optional wire modifier.
+     *
+     * @return string
+     */
+    public function wireModifier()
+    {
+        $modifier = app(FormDataBinder::class)->getWireModifier();
+
+        return $modifier ? ".{$modifier}" : null;
     }
 }

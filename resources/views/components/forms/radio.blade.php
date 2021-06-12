@@ -1,13 +1,19 @@
-<div {{ $themeProvider->container }}>
-    <label {{ $themeProvider->label }}>
-        <input {{ $attributes->merge(toArray($themeProvider->radio)) }}
+<x-field
+    :name="$name"
+    :label="false"
+    :showErrors="$showErrors"
+    :theme="$theme"
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+>
+    <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
+        <input
+            {{ $attributes->mergeThemeProvider($themeProvider, 'radio') }}
             type="radio"
             value="{{ $value }}"
+            name="{{ $name }}"
 
             @if($isWired())
-                wire:model="{{ $name }}"
-            @else
-                name="{{ $name }}"
+                wire:model{!! $wireModifier() !!}="{{ $name }}"
             @endif
 
             @if($checked)
@@ -15,10 +21,8 @@
             @endif
         />
 
-        <span {{ $themeProvider->labelText }}>{{ $slot->isEmpty() ? $label : $slot }}</span>
+        <x-label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}>
+            {{ $slot->isEmpty() ? $label : $slot }}
+        </x-label>
     </label>
-
-    @if($hasErrorAndShow($name))
-        <x-errors :name="$name" :class="$themeProvider->errors" />
-    @endif
-</div>
+</x-field>

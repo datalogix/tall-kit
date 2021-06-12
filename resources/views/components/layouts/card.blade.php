@@ -1,18 +1,20 @@
-<section {{ $attributes->merge(toArray($themeProvider->container)) }}>
+<section {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
     @if(isset($header))
-        <header {{ $themeProvider->header }}>
+        <header {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header') }}>
             {{ $header }}
         </header>
     @endif
 
     {{ $top ?? '' }}
 
-    <div {{ $themeProvider->content }}>
+    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
         {{ $slot }}
     </div>
 
+    {{ $bottom ?? '' }}
+
     @if(isset($footer))
-        <footer {{ $themeProvider->footer }}>
+        <footer {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer') }}>
             {{ $footer }}
         </footer>
     @endif

@@ -1,21 +1,19 @@
 <?php
 
-namespace Datalogix\TALLKit\Components;
+namespace TALLKit\Components;
 
-use Datalogix\TALLKit\Concerns\Assets;
-use Datalogix\TALLKit\Concerns\LivewireFormDataBinder;
 use Illuminate\Support\Str;
 use Illuminate\View\Component as BaseComponent;
+use TALLKit\Concerns\LivewireFormDataBinder;
 
 abstract class BladeComponent extends BaseComponent
 {
-    use Assets;
     use LivewireFormDataBinder;
 
     /**
      * The theme provider.
      *
-     * @var \Datalogix\TALLKit\Components\ThemeProvider
+     * @var \TALLKit\Components\ThemeProvider
      */
     public $themeProvider;
 
@@ -27,6 +25,13 @@ abstract class BladeComponent extends BaseComponent
     public $theme;
 
     /**
+     * The component key.
+     *
+     * @var string
+     */
+    protected $componentKey;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $theme
@@ -35,7 +40,18 @@ abstract class BladeComponent extends BaseComponent
     public function __construct($theme = null)
     {
         $this->theme = $theme;
-        $this->themeProvider = app(ThemeProvider::class)->make($theme, class_basename($this));
+        $this->themeProvider = app(ThemeProvider::class)
+            ->make($this->theme, $this->getComponentKey());
+    }
+
+    /**
+     * Get component key.
+     *
+     * @return string
+     */
+    protected function getComponentKey()
+    {
+        return $this->componentKey ?? Str::kebab(class_basename($this));
     }
 
     /**
@@ -47,8 +63,8 @@ abstract class BladeComponent extends BaseComponent
                 ->beforeLast('\\')
                 ->replace([__NAMESPACE__, '\\'], ['', '.'])
                 ->lower()
-                ->prepend('tall-kit::components')
+                ->prepend('tallkit::components')
                 ->append('.')
-                ->append(Str::kebab(class_basename($this)));
+                ->append($this->getComponentKey());
     }
 }

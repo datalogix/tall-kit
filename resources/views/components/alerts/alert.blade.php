@@ -1,6 +1,19 @@
-<div {{ $attributes->merge(toArray($attrs['container']), false) }}>
+<div x-init="init('{{$on}}', {{$timeout}})"
+    {{
+        $attributes
+            ->mergeThemeProvider($themeProvider, 'container')
+            ->mergeThemeProvider($themeProvider, 'modes', $mode)
+            ->mergeThemeProvider($themeProvider, 'rounded', $rounded)
+            ->mergeThemeProvider($themeProvider, 'shadow', $shadow)
+            ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
+    }}
+>
     @if($icon)
-        <span {{ $attrs['icon'] }}>
+        <span {{
+            $attributes
+                ->mergeOnlyThemeProvider($themeProvider, 'icon')
+                ->merge(['class' => 'bg-'.$color.'-100 border-'.$color.'-500 text-'.$color.'-500'])
+        }}>
             @if($iconSvg)
                 {!! $iconSvg !!}
             @elseif($iconName)
@@ -10,9 +23,9 @@
     @endif
 
     @if($dismissible)
-        <button {{ $attrs['dismissible'] }}>
+        <button {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'container') }}>
             @if($dismissibleIcon)
-                <span {{ $attrs['dismissibleIcon'] }}>
+                <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'icon') }}>
                     @if($dismissibleIconSvg)
                         {!! $dismissibleIconSvg !!}
                     @elseif($dismissibleIconName)
@@ -22,19 +35,29 @@
             @endif
 
             @if($dismissibleText)
-                <span {{ $attrs['dismissibleText'] }}>{{ __($dismissibleText) }}</span>
+                <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'text') }}>
+                    {{ __($dismissibleText) }}
+                </span>
             @endif
         </button>
     @endif
 
     <div>
         @if($title)
-            <div {{ $attrs['title'] }}>
+            <div {{
+                $attributes
+                    ->mergeOnlyThemeProvider($themeProvider, 'title')
+                    ->merge(['class' => 'text-'.$color.'-800'])
+            }}>
                 {{ __($title) }}
             </div>
         @endif
 
-        <div {{ $attrs['message'] }}>
+        <div {{
+                $attributes
+                    ->mergeOnlyThemeProvider($themeProvider, 'message')
+                    ->merge(['class' => 'text-'.$color.'-600'])
+        }}>
             {{ $slot->isEmpty() ? __($message) : $slot }}
         </div>
     </div>

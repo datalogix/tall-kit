@@ -1,8 +1,8 @@
 <?php
 
-namespace Datalogix\TALLKit\Tests\Unit;
+namespace TALLKit\Tests\Unit;
 
-use Datalogix\TALLKit\ThemeBinder;
+use TALLKit\ThemeBinder;
 use PHPUnit\Framework\TestCase;
 
 class ThemeBinderTest extends TestCase

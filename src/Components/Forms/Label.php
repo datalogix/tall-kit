@@ -1,14 +1,12 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class Label extends BladeComponent
 {
     /**
-     * The label text.
-     *
      * @var string|bool|null
      */
     public $label;

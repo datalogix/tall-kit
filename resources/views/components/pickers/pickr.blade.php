@@ -1,16 +1,19 @@
-<div {{ $attributes->merge(toArray($themeProvider->container)) }}>
-    <x-label :label="$label" :class="$themeProvider->labelText" />
-
+<x-field
+    :name="$name"
+    :label="$label"
+    :showErrors="$showErrors"
+    :theme="$theme"
+    :title="$value"
+    x-init="init({{ $jsonOptions() }})"
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+>
     <x-input
         type="hidden"
-        id="{{ $id }}-input"
+        :id="$id"
         :name="$name"
         :default="$slot->isEmpty() ? $default : $slot"
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
     />
 
-    <div {{ $themeProvider->pickr->merge(['id' => $id]) }}></div>
-
-    @if($hasErrorAndShow($name))
-        <x-errors :name="$name" :class="$themeProvider->errors" />
-    @endif
-</div>
+    <div {{ $attributes->mergeThemeProvider($themeProvider, 'pickr') }}></div>
+</x-field>

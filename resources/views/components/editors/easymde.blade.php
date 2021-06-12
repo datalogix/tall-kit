@@ -7,5 +7,7 @@
     :language="$language"
     :showErrors="$showErrors"
     :theme="$theme"
-    {{ $attributes->merge(toArray($themeProvider->easymde)) }}
+    :theme:container="['wire:ignore' => '']"
+    x-init="init({{ $jsonOptions() }})"
+    {{ $attributes->mergeThemeProvider($themeProvider, 'easymde') }}
 />

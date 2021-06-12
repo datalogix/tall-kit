@@ -1,13 +1,23 @@
-<div {{ $themeProvider->container }}>
-    <label {{ $themeProvider->label }}>
-        <input {{ $attributes->merge(toArray($themeProvider->checkbox)) }}
+<x-field
+    :name="$name"
+    :label="false"
+    :showErrors="$showErrors"
+    :theme="$theme"
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+>
+    <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
+        @if ($value === 1 && $isNotWired())
+            <input type="hidden" value="0" name="{{ $name }}" />
+        @endif
+
+        <input
+            {{ $attributes->mergeThemeProvider($themeProvider, 'checkbox') }}
             type="checkbox"
             value="{{ $value }}"
+            name="{{ $name }}"
 
             @if($isWired())
-                wire:model="{{ $name }}"
-            @else
-                name="{{ $name }}"
+                wire:model{!! $wireModifier() !!}="{{ $name }}"
             @endif
 
             @if($checked)
@@ -15,10 +25,8 @@
             @endif
         />
 
-        <span {{ $themeProvider->labelText }}>{{ $slot->isEmpty() ? $label : $slot }}</span>
+        <x-label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}>
+            {{ $slot->isEmpty() ? $label : $slot }}
+        </x-label>
     </label>
-
-    @if($hasErrorAndShow($name))
-        <x-errors :name="$name" :class="$themeProvider->errors" />
-    @endif
-</div>
+</x-field>

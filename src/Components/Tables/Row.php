@@ -1,14 +1,12 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Tables;
+namespace TALLKit\Components\Tables;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class Row extends BladeComponent
 {
     /**
-     * The row text.
-     *
      * @var string
      */
     public $text;

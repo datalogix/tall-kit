@@ -1,66 +1,42 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
-use Datalogix\TALLKit\Components\BladeComponent;
-use Datalogix\TALLKit\Concerns\BoundValues;
-use Datalogix\TALLKit\Concerns\LabelText;
-use Datalogix\TALLKit\Concerns\ValidationErrors;
+use TALLKit\Concerns\BoundValues;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-class Select extends BladeComponent
+class Select extends Field
 {
     use BoundValues;
-    use LabelText;
-    use ValidationErrors;
 
     /**
-     * The selected key.
-     *
      * @var mixed
      */
     public $selectedKey;
 
     /**
-     * The select name.
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * The select options.
-     *
      * @var mixed
      */
     public $options = [];
 
     /**
-     * Item text on options.
-     *
      * @var string|array|int|null
      */
     public $itemText = null;
 
     /**
-     * Item value on options.
-     *
      * @var string|array|int|null
      */
     public $itemValue = null;
 
     /**
-     * The select is multiple.
-     *
      * @var bool
      */
     public $multiple = false;
 
     /**
-     * Display empty option.
-     *
      * @var bool
      */
     public $emptyOption = true;
@@ -94,24 +70,20 @@ class Select extends BladeComponent
         $emptyOption = true,
         $theme = null
     ) {
-        parent::__construct($theme);
+        parent::__construct($name, $label, $showErrors, $theme);
 
-        $this->setLabel($name, $label);
-
-        $this->name = $name;
         $this->itemText = $itemText ?: 'name';
         $this->itemValue = $itemValue ?: 'id';
         $this->options = $this->prepareOptions($options);
 
         if ($this->isNotWired()) {
-            $key = Str::before($name, '[]');
+            $key = Str::before($this->name, '[]');
             $default = $this->getBoundValue($bind, $key) ?: $default;
 
             $this->selectedKey = old($key, $default);
         }
 
         $this->multiple = $multiple;
-        $this->showErrors = $showErrors;
         $this->emptyOption = $emptyOption;
     }
 

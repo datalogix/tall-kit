@@ -1,6 +1,6 @@
 <?php
 
-namespace Datalogix\TALLKit\Concerns;
+namespace TALLKit\Concerns;
 
 trait DefaultAndOldValue
 {
@@ -36,7 +36,7 @@ trait DefaultAndOldValue
      * @param  mixed  $language
      * @return void
      */
-    private function setValue($name, $bind = null, $default = null, $language = null)
+    protected function setValue($name, $bind = null, $default = null, $language = null)
     {
         if ($this->isWired()) {
             return;

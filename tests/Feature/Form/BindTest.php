@@ -1,8 +1,8 @@
 <?php
 
-namespace Datalogix\TALLKit\Tests\Feature\Form;
+namespace TALLKit\Tests\Feature\Form;
 
-use Datalogix\TALLKit\Tests\TestCase;
+use TALLKit\Tests\TestCase;
 use Illuminate\Http\Request;
 
 class BindTest extends TestCase

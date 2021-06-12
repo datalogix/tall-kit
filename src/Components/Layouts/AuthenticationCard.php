@@ -1,8 +1,8 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Layouts;
+namespace TALLKit\Components\Layouts;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class AuthenticationCard extends BladeComponent
 {

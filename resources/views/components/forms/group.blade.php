@@ -1,11 +1,16 @@
-<div {{ $attributes->merge(toArray($themeProvider->container)) }}>
-    <x-label :label="$label" :class="$themeProvider->labelText" />
+<x-field
+    :name="$name"
+    :label="false"
+    :showErrors="$showErrors"
+    :theme="$theme"
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+>
+    <x-label
+        :label="$label"
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+    />
 
-    <div {{ $themeProvider->{$inline ? 'inline' : 'block'} }}>
+    <div {{ $attributes->mergeThemeProvider($themeProvider, 'types', $type) }}>
         {{ $slot }}
     </div>
-
-    @if($hasErrorAndShow($name))
-        <x-errors :name="$name" :class="$themeProvider->errors" />
-    @endif
-</div>
+</x-field>

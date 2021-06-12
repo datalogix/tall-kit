@@ -1,7 +1,7 @@
 watch:
-    directories:
-        - config
-        - resources
-        - src
-        - tests
-    fileMask: '*.php'
+  directories:
+    - config
+    - resources
+    - src
+    - tests
+  fileMask: '*.php'

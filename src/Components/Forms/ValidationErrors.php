@@ -1,28 +1,22 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class ValidationErrors extends BladeComponent
 {
     /**
-     * The validation type.
-     *
      * @var string
      */
     public $type;
 
     /**
-     * The validation title.
-     *
      * @var string|null
      */
     public $title;
 
     /**
-     * The validation error bag.
-     *
      * @var string
      */
     public $bag;

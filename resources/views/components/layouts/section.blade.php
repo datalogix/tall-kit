@@ -1,23 +1,27 @@
-<div {{ $attributes->merge(toArray($themeProvider->container)) }}>
-    <div {{ $themeProvider->content }}>
-        @if($title)
-            <div {{ $themeProvider->title }}>
-                {{ $title }}
-            </div>
-        @endif
+<section {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
+    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
+        @if($title || $subtitle)
+            <header>
+                @if($title)
+                    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'title') }}>
+                        {{ $title }}
+                    </div>
+                @endif
 
-        @if($subtitle)
-            <div {{ $themeProvider->subtitle }}>
-                {{ $subtitle }}
-            </div>
+                @if($subtitle)
+                    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'subtitle') }}>
+                        {{ $subtitle }}
+                    </div>
+                @endif
+            </header>
         @endif
 
         {{ $slot }}
     </div>
 
     @if(isset($actions))
-        <div {{ $themeProvider->actions }}>
+        <footer {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}>
             {{ $actions }}
-        </div>
+        </footer>
     @endif
-</div>
+</section>

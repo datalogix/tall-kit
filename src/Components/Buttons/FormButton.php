@@ -1,28 +1,22 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Buttons;
+namespace TALLKit\Components\Buttons;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class FormButton extends BladeComponent
 {
     /**
-     * The button text.
-     *
      * @var string
      */
     public $text;
 
     /**
-     * The form method.
-     *
      * @var string
      */
     public $method;
 
     /**
-     * The form action.
-     *
      * @var string
      */
     public $action;

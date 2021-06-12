@@ -1,17 +1,20 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Navigations;
+namespace TALLKit\Components\Navigations;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class Menu extends BladeComponent
 {
     /**
-     * The menu items.
-     *
      * @var array
      */
     public $items;
+
+    /**
+     * @var bool
+     */
+    public $inline;
 
     /**
      * Create a new component instance.
@@ -29,8 +32,6 @@ class Menu extends BladeComponent
         parent::__construct($theme);
 
         $this->items = $items;
-
-        $this->themeProvider->container = $this->themeProvider->container
-            ->merge($inline ? toArray($this->themeProvider->inline) : [], false);
+        $this->inline = $inline;
     }
 }

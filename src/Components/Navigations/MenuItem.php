@@ -1,35 +1,27 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Navigations;
+namespace TALLKit\Components\Navigations;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 
 class MenuItem extends BladeComponent
 {
     /**
-     * The menu item text.
-     *
      * @var string
      */
     public $text;
 
     /**
-     * The menu item href.
-     *
      * @var string|bool
      */
     public $href;
 
     /**
-     * The menu item icon left.
-     *
      * @var string|bool
      */
     public $iconLeft;
 
     /**
-     * The menu item icon right.
-     *
      * @var string|bool
      */
     public $iconRight;

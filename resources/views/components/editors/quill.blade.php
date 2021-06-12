@@ -1,16 +1,18 @@
-<div {{ $themeProvider->container }}>
-    <x-label :label="$label" :class="$themeProvider->labelText" />
-
+<x-field
+    :name="$name"
+    :label="$label"
+    :showErrors="$showErrors"
+    :theme="$theme"
+    x-init="init({{ $jsonOptions() }})"
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+>
     <x-input
         type="hidden"
         :id="$id"
         :name="$name"
         :default="$slot->isEmpty() ? $default : $slot"
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
     />
 
-    <div {{ $attributes->merge(toArray($themeProvider->quill)) }}></div>
-
-    @if($hasErrorAndShow($name))
-        <x-errors :name="$name" :class="$themeProvider->errors" />
-    @endif
-</div>
+    <div {{ $attributes->mergeThemeProvider($themeProvider, 'quill') }}></div>
+</x-field>

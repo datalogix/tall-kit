@@ -1,22 +1,18 @@
 <?php
 
-namespace Datalogix\TALLKit\Components\Forms;
+namespace TALLKit\Components\Forms;
 
-use Datalogix\TALLKit\Components\BladeComponent;
+use TALLKit\Components\BladeComponent;
 use Illuminate\Support\Str;
 
 class Errors extends BladeComponent
 {
     /**
-     * The error name.
-     *
      * @var string
      */
     public $name;
 
     /**
-     * The error bag.
-     *
      * @var string
      */
     public $bag;
