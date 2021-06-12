@@ -26,7 +26,7 @@
     @endif
 
     @if($tallkit)
-        @tallkit
+        @tallkit(is_array($tallkit) ? $tallkit : [])
     @endif
 
     @if($stackScripts)

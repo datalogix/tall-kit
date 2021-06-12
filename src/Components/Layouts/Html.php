@@ -22,7 +22,7 @@ class Html extends BladeComponent
     public $livewire;
 
     /**
-     * @var bool
+     * @var bool|array
      */
     public $tallkit;
 
@@ -42,7 +42,7 @@ class Html extends BladeComponent
      * @param  string  $title
      * @param  string  $charset
      * @param  bool  $livewire
-     * @param  bool  $tallkit
+     * @param  bool|array  $tallkit
      * @param  string|bool  $stackStyles
      * @param  string|bool  $stackScripts
      * @param  string|null  $theme
