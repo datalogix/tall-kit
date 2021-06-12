@@ -2,7 +2,6 @@
 
 namespace TALLKit\Tests\Feature\Form;
 
-
 use Illuminate\Http\Request;
 use TALLKit\Tests\TestCase;
 
