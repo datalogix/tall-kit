@@ -139,9 +139,9 @@ return [
          * Editors.
          */
         'editor' => \TALLKit\Components\Editors\Quill::class, // alias
-        'easymde' => \TALLKit\Components\Editors\EasyMDE::class,
-        'easy-mde' => \TALLKit\Components\Editors\EasyMDE::class, // alias
-        'mde' => \TALLKit\Components\Editors\EasyMDE::class, // alias
+        'easymde' => \TALLKit\Components\Editors\Easymde::class,
+        'easy-mde' => \TALLKit\Components\Editors\Easymde::class, // alias
+        'mde' => \TALLKit\Components\Editors\Easymde::class, // alias
         'quill' => \TALLKit\Components\Editors\Quill::class,
         'trix' => \TALLKit\Components\Editors\Trix::class,
 

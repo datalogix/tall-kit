@@ -4,17 +4,12 @@ namespace TALLKit\Components\Editors;
 
 use TALLKit\Components\Forms\Textarea;
 
-class EasyMDE extends Textarea
+class Easymde extends Textarea
 {
     /**
      * @var array
      */
     public $options;
-
-    /**
-     * @var string
-     */
-    protected $componentKey = 'easymde';
 
     /**
      * Create a new component instance.
