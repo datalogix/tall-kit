@@ -56,7 +56,7 @@ return [
          * Tailwindcss.
          */
         'tailwindcss' => [
-            'https://cdn.jsdelivr.net/npm/tailwindcss@2/dist/tailwind.min.css'
+            'https://cdn.jsdelivr.net/npm/tailwindcss@2/dist/tailwind.min.css',
         ],
 
         /**

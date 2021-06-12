@@ -59,7 +59,7 @@ class TALLKit
             $fullAssetPath = ($this->isRunningServerless() ? config('app.asset_url') : $appUrl).'/vendor/tallkit'.$versionedFileName;
 
             if ($manifest !== $publishedManifest) {
-                $assetWarning = <<<HTML
+                $assetWarning = <<<'HTML'
 <script>
     console.warn("TALLKit: The published TALLKit assets are out of date.")
 </script>

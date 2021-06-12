@@ -2,11 +2,11 @@
 
 namespace TALLKit\Tests;
 
-use TALLKit\TALLKitServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\BrowserKit\TestCase as BaseTestCase;
+use TALLKit\TALLKitServiceProvider;
 
 abstract class TestCase extends BaseTestCase
 {

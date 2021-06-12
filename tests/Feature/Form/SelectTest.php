@@ -2,8 +2,8 @@
 
 namespace TALLKit\Tests\Feature\Form;
 
-use TALLKit\Tests\TestCase;
 use Illuminate\Http\Request;
+use TALLKit\Tests\TestCase;
 
 class SelectTest extends TestCase
 {

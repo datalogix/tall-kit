@@ -2,10 +2,10 @@
 
 namespace TALLKit\Components\Forms;
 
-use TALLKit\Concerns\BoundValues;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use TALLKit\Concerns\BoundValues;
 
 class Select extends Field
 {

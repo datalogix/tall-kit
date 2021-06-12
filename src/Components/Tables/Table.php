@@ -2,8 +2,8 @@
 
 namespace TALLKit\Components\Tables;
 
-use TALLKit\Components\BladeComponent;
 use Illuminate\Support\Collection;
+use TALLKit\Components\BladeComponent;
 
 class Table extends BladeComponent
 {

@@ -2,8 +2,8 @@
 
 namespace TALLKit\Tests\Unit;
 
-use TALLKit\ThemeBinder;
 use PHPUnit\Framework\TestCase;
+use TALLKit\ThemeBinder;
 
 class ThemeBinderTest extends TestCase
 {

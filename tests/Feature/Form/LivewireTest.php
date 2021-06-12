@@ -2,9 +2,9 @@
 
 namespace TALLKit\Tests\Feature\Form;
 
-use TALLKit\Tests\TestCase;
 use Livewire\Component;
 use Livewire\Livewire;
+use TALLKit\Tests\TestCase;
 
 class FormComponent extends Component
 {

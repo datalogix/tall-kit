@@ -23,7 +23,7 @@ trait Components
      */
     public function registerComponent($name, $content = null, $overwrite = true)
     {
-        if ($overwrite || !$this->hasComponent($name)) {
+        if ($overwrite || ! $this->hasComponent($name)) {
             $this->components[$name] = $content;
         }
     }

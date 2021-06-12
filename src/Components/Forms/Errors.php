@@ -2,8 +2,8 @@
 
 namespace TALLKit\Components\Forms;
 
-use TALLKit\Components\BladeComponent;
 use Illuminate\Support\Str;
+use TALLKit\Components\BladeComponent;
 
 class Errors extends BladeComponent
 {

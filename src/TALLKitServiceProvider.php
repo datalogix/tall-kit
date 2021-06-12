@@ -12,8 +12,8 @@ use TALLKit\Binders\FormDataBinder;
 use TALLKit\Binders\ThemeBinder;
 use TALLKit\Components\ThemeProvider;
 use TALLKit\Controllers\TALLKitJavaScriptAssets;
-use TALLKit\Macros\MergeThemeProvider;
 use TALLKit\Macros\MergeOnlyThemeProvider;
+use TALLKit\Macros\MergeThemeProvider;
 
 class TALLKitServiceProvider extends ServiceProvider
 {

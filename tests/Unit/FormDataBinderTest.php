@@ -2,8 +2,8 @@
 
 namespace TALLKit\Tests\Unit;
 
-use TALLKit\FormDataBinder;
 use PHPUnit\Framework\TestCase;
+use TALLKit\FormDataBinder;
 
 class FormDataBinderTest extends TestCase
 {

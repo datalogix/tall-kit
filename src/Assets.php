@@ -21,7 +21,7 @@ trait Assets
      */
     public function registerAsset($name, $content = null, $overwrite = true)
     {
-        if ($overwrite || !$this->hasAsset($name)) {
+        if ($overwrite || ! $this->hasAsset($name)) {
             $this->assets[$name] = $content;
         }
     }

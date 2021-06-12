@@ -27,7 +27,7 @@ class MergeThemeProvider
                 if (is_array($themeAttrs) && array_key_exists($subkey, $themeAttrs)) {
                     if (is_array($themeAttrs[$subkey])) {
                         $subkeyAttrs = $subkeyAttrs->merge($themeAttrs[$subkey]);
-                    } else if(is_string($themeAttrs[$subkey])) {
+                    } elseif(is_string($themeAttrs[$subkey])) {
                         $subkeyAttrs = $subkeyAttrs->merge(['class' => $themeAttrs[$subkey]]);
                     }
                 }

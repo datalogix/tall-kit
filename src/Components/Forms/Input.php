@@ -2,8 +2,8 @@
 
 namespace TALLKit\Components\Forms;
 
-use TALLKit\Concerns\DefaultAndOldValue;
 use Illuminate\Support\Str;
+use TALLKit\Concerns\DefaultAndOldValue;
 
 class Input extends Field
 {
@@ -79,7 +79,7 @@ class Input extends Field
      */
     public function maskOptions()
     {
-        if (!$this->mask || $this->type === 'hidden') {
+        if (! $this->mask || $this->type === 'hidden') {
             return [];
         }
 
