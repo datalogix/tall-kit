@@ -1,10 +1,17 @@
 <x-field
     :name="$name"
-    :label="$label"
+    :label="false"
     :showErrors="$showErrors"
     :theme="$theme"
     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
 >
+    <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
+        <x-label
+            :label="$label"
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+        />
+    </label>
+
     <x-input
         type="hidden"
         :id="$id"
