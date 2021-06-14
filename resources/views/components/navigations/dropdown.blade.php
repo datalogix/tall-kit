@@ -1,6 +1,6 @@
 <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}>
-        {{ $trigger }}
+        {!! $trigger ?? $title !!}
     </div>
 
     @if($overlay)
