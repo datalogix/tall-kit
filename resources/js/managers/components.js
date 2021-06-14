@@ -26,12 +26,9 @@ class Components {
   }
 
   get (name) {
-    if (!this.has(name)) {
-      return {}
+    return {
+      ...(this.has(name) ? this.items[name] : {})
     }
-
-    const content = this.items[name]
-    return typeof content === 'function' ? content(utils) : content
   }
 }
 
