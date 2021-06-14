@@ -641,7 +641,7 @@ return [
                 ],
 
                 'input' => [
-                    'class' => 'block w-full sm:text-sm border-gray-200 rounded shadow',
+                    'class' => 'block w-full py-2 px-3 border border-gray-200 bg-white rounded shadow sm:text-sm',
                 ],
             ],
 
@@ -677,7 +677,7 @@ return [
 
             'textarea' => [
                 'textarea' => [
-                    'class' => 'block w-full sm:text-sm border-gray-200 rounded shadow',
+                    'class' => 'block w-full py-2 px-3 border border-gray-200 bg-white rounded shadow sm:text-sm',
                 ],
             ],
 
@@ -790,7 +790,7 @@ return [
                 ],
 
                 'trigger' => [
-                    'class' => 'inline',
+                    'class' => 'inline cursor-pointer',
                     '@click' => 'toggle',
                 ],
 
@@ -877,13 +877,11 @@ return [
                     'data-tallkit-assets' => 'alpine',
                     'class' => 'relative inline',
                     'x-data' => 'window.tallkit.component(\'dropdown\')',
-                    '@click.away' => 'close',
-                    '@close.stop' => 'close',
                 ],
 
                 'trigger' => [
                     'class' => 'inline cursor-pointer',
-                    '@click' => 'open',
+                    '@click' => 'toggle',
                 ],
 
                 'overlay' => [
@@ -912,6 +910,7 @@ return [
                     'class' => 'absolute z-10',
                     'x-show' => 'openned',
                     '@click' => 'close',
+                    '@click.away' => 'close',
                     'style' => 'display: none;',
                 ],
 
