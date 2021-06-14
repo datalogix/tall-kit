@@ -2,11 +2,18 @@
 
 namespace TALLKit;
 
+use Illuminate\Support\Str;
+
 class TALLKitBladeDirectives
 {
-    public static function init($expression)
+    public static function styles($expression)
     {
-        return '<?php echo \TALLKit\Facades\TALLKit::init('.$expression.'); ?>';
+        return '<?php echo \TALLKit\Facades\TALLKit::styles('.$expression.'); ?>';
+    }
+
+    public static function scripts($expression)
+    {
+        return '<?php echo \TALLKit\Facades\TALLKit::scripts('.$expression.'); ?>';
     }
 
     public static function theme($expression)

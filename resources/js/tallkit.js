@@ -13,11 +13,7 @@ class TALLKit {
   }
 
   preventReloads () {
-    if (!this.options.injectTailwindcss) {
-      this.assets.loaded.push('tailwindcss')
-    }
-
-    if (window.Alpine) {
+    if (window.Alpine || this.options.inject.alpine) {
       this.assets.loaded.push('alpine')
     }
   }
@@ -27,7 +23,9 @@ class TALLKit {
       return Promise.resolve()
     }
 
-    await this.assets.init(this.options.loadType)
+    if (typeof this.options.load_type === 'string') {
+      await this.assets.init(this.options.load_type)
+    }
 
     dispatch('tallkit:load')
 

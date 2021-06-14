@@ -123,7 +123,8 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     protected function bootDirectives()
     {
-        Blade::directive('tallkit', [TALLKitBladeDirectives::class, 'init']);
+        Blade::directive('tallkitStyles', [TALLKitBladeDirectives::class, 'styles']);
+        Blade::directive('tallkitScripts', [TALLKitBladeDirectives::class, 'scripts']);
         Blade::directive('theme', [TALLKitBladeDirectives::class, 'theme']);
         Blade::directive('endtheme', [TALLKitBladeDirectives::class, 'endtheme']);
         Blade::directive('bind', [TALLKitBladeDirectives::class, 'bind']);

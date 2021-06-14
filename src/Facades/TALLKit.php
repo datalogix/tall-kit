@@ -5,7 +5,8 @@ namespace TALLKit\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static string init($options = [], $assets = [])
+ * @method static string styles($config = [])
+ * @method static string scripts($config = [])
  * @method static void registerAsset($name, $content = null, $overwrite = true)
  * @method static bool hasAsset($name)
  * @method static void unregisterAsset($name)

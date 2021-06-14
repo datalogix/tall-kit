@@ -2,23 +2,50 @@
 
 namespace TALLKit;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+
 class TALLKit
 {
     use Assets, Components;
 
     /**
-     * Init.
+     * Styles.
      *
-     * @param  array  $options
-     * @param  array  $assets
+     * @param  array  $config
      * @return string
      */
-    public function init($options = [], $assets = [])
+    public function styles($config = [])
     {
         $debug = config('app.debug');
-        $scripts = $this->scripts(
-            array_merge(config('tallkit.options', []), $options),
-            array_merge(config('tallkit.assets', []), $assets)
+
+        $styles = $this->cssAssets(
+            array_replace_recursive(config('tallkit.options', []), $config['options'] ?? []),
+            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), $config['assets'] ?? [])
+        );
+
+        // HTML Label.
+        $html = $debug ? ['<!-- TALLKit Styles -->'] : [];
+
+        // CSS assets.
+        $html[] = $debug ? $styles : $this->minify($styles);
+
+        return implode("\n", $html);
+    }
+
+    /**
+     * Scripts.
+     *
+     * @param  array  $config
+     * @return string
+     */
+    public function scripts($config = [])
+    {
+        $debug = config('app.debug');
+
+        $scripts = $this->javascriptAssets(
+            array_replace_recursive(config('tallkit.options', []), $config['options'] ?? []),
+            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), $config['assets'] ?? [])
         );
 
         // HTML Label.
@@ -31,13 +58,61 @@ class TALLKit
     }
 
     /**
-     * Scripts.
+     * Css assets.
      *
      * @param  array  $options
      * @param  array  $assets
      * @return string
      */
-    protected function scripts($options, $assets)
+    protected function cssAssets($options, $assets)
+    {
+        $styles = Collection::make();
+        $scripts = Collection::make();
+
+        if ($options['inject']['tailwindcss'] && $assets['tailwindcss']) {
+            $styles->add($assets['tailwindcss']);
+        }
+
+        if ($options['inject']['alpine'] && $assets['alpine']) {
+            $scripts->add($assets['alpine']);
+        }
+
+        if ($options['load_type'] === true) {
+            Collection::make($assets)->filter(function($key) {
+                return $key !== 'tailwindcss' && $key !== 'alpine';
+            })->each(function($asset) use ($styles, $scripts) {
+                $styles->add(Collection::make($asset)->filter(function($value) {
+                    return Str::endsWith($value, '.css');
+                }));
+
+                $scripts->add(Collection::make($asset)->filter(function($value) {
+                    return Str::endsWith($value, '.js');
+                }));
+            });
+        }
+
+        $htmlStyles = $styles->flatten()->map(function($url) {
+            return '<link href="'.$url.'" rel="stylesheet" />';
+        })->join("\n");
+
+        $htmlScrips = $scripts->flatten()->map(function($url) use ($assets) {
+            return '<script src="'.$url.'"'.((in_array($url, $assets['alpine'])) ? ' defer' : '').'></script>';
+        })->join("\n");
+
+        return <<<HTML
+{$htmlStyles}
+{$htmlScrips}
+HTML;
+    }
+
+    /**
+     * Javascript assets.
+     *
+     * @param  array  $options
+     * @param  array  $assets
+     * @return string
+     */
+    protected function javascriptAssets($options, $assets)
     {
         $jsonEncodedOptions = $options ? json_encode($options) : '';
         $jsonEncodedAssets = $assets ? json_encode($assets) : '';
@@ -50,6 +125,7 @@ class TALLKit
         // Default to dynamic `tallkit.js` (served by a Laravel route).
         $fullAssetPath = "{$appUrl}/tallkit{$versionedFileName}";
         $assetWarning = null;
+        $nonce = isset($options['nonce']) ? "nonce=\"{$options['nonce']}\"" : '';
 
         // Use static assets if they have been published.
         if (file_exists(public_path('vendor/tallkit/mix-manifest.json'))) {
@@ -60,7 +136,7 @@ class TALLKit
 
             if ($manifest !== $publishedManifest) {
                 $assetWarning = <<<'HTML'
-<script>
+<script {$nonce}>
     console.warn("TALLKit: The published TALLKit assets are out of date.")
 </script>
 HTML;
@@ -75,7 +151,7 @@ HTML;
         return <<<HTML
 {$assetWarning}
 <script src="{$fullAssetPath}" data-turbo-eval="false" data-turbolinks-eval="false"></script>
-<script data-turbo-eval="false" data-turbolinks-eval="false">
+<script data-turbo-eval="false" data-turbolinks-eval="false" {$nonce}>
     if (!window.tallkit) {
         window.tallkit = new TALLKit({$jsonEncodedOptions}, {$jsonEncodedAssets});
         {$tallkitAssets}

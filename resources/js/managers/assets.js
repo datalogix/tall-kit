@@ -36,26 +36,12 @@ class Assets {
     return Array.isArray(content) ? content : [content]
   }
 
-  async init (loadType = true) {
-    let assets = []
-
-    if (loadType === true) {
-      assets = Object.keys(this.items)
-    } else if (typeof loadType === 'string') {
-      assets = await new Promise((resolve) => {
-        document.addEventListener('DOMContentLoaded', () => {
-          resolve(detectAssets(document, loadType))
-        })
+  async init (loadType) {
+    const assets = await new Promise((resolve) => {
+      document.addEventListener('DOMContentLoaded', () => {
+        resolve(detectAssets(document, loadType))
       })
-    }
-
-    if (!assets.includes('tailwindcss')) {
-      assets.unshift('tailwindcss')
-    }
-
-    if (!assets.includes('alpine')) {
-      assets.unshift('alpine')
-    }
+    })
 
     for (const asset of assets) {
       await this.load(asset)

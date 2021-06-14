@@ -1,5 +1,6 @@
 <?php
 
+$lang = str_replace('_', '-', app()->getLocale());
 $locale = strtolower(substr(app()->getLocale(), 0, 2));
 
 return [
@@ -24,7 +25,7 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | loadType
+        | Load type
         |--------------------------------------------------------------------------
         |
         | Supported:
@@ -35,20 +36,39 @@ return [
         |
         */
 
-        'loadType' => 'data-tallkit-assets',
+        'load_type' => 'data-tallkit-assets',
 
         /*
         |--------------------------------------------------------------------------
-        | injectTailwindcss
+        | inject
         |--------------------------------------------------------------------------
         |
-        | Enable when you want to inject tailwindcss directly from the CDN,
-        | the url is in `assets.tailwindcss`.
-        | This option is disabled for several reasons.
-        | See https://tailwindcss.com/docs/installation#using-tailwind-via-cdn
+        | Some assets are essential for the package to work,
+        | with this option you can inject them automatically or not.
         |
         */
-        'injectTailwindcss' => false,
+        'inject' => [
+
+            /*
+            |
+            | Enable when you want to inject tailwindcss directly from the CDN,
+            | the url is in `assets.tailwindcss`.
+            | This option is disabled for several reasons.
+            | See https://tailwindcss.com/docs/installation#using-tailwind-via-cdn
+            |
+            */
+
+            'tailwindcss' => false,
+
+            /*
+            |
+            | Inject alpinejs directly from the CDN, the url is in `assets.alpine`.
+            | See https://github.com/alpinejs/alpine/tree/2.x#install
+            |
+            */
+
+            'alpine' => true
+        ],
     ],
 
     'assets' => [
@@ -563,6 +583,14 @@ return [
                     'x-on:trix-change' => 'change',
                 ],
 
+                'label' => [
+                    'class' => 'block',
+                ],
+
+                'labelText' => [
+                    'class' => 'mb-1',
+                ],
+
                 'input' => [],
 
                 'trix' => [
@@ -753,7 +781,9 @@ return [
             ],
 
             'html' => [
-                'html' => [],
+                'html' => [
+                    'lang' => $lang,
+                ],
 
                 'head' => [],
 
@@ -880,13 +910,13 @@ return [
                 ],
 
                 'trigger' => [
-                    'class' => 'inline cursor-pointer',
+                    'class' => 'inline cursor-pointer z-10',
                     '@click' => 'toggle',
                 ],
 
                 'overlay' => [
                     'x-show' => 'openned',
-                    'class' => 'fixed inset-0 transform transition-all',
+                    'class' => 'fixed inset-0 transform transition-all z-20',
                     '@click' => 'close',
                     'x-transition:enter' => 'ease-out duration-300',
                     'x-transition:enter-start' => 'opacity-0',
@@ -894,6 +924,7 @@ return [
                     'x-transition:leave' => 'ease-in duration-200',
                     'x-transition:leave-start' => 'opacity-100',
                     'x-transition:leave-end' => 'opacity-0',
+                    'style' => 'display: none;',
                 ],
 
                 'backdrop' => [
@@ -907,7 +938,7 @@ return [
                     'x-transition:leave' => 'transition ease-in duration-75',
                     'x-transition:leave-start' => 'transform opacity-100 scale-100',
                     'x-transition:leave-end' => 'transform opacity-0 scale-95',
-                    'class' => 'absolute z-10',
+                    'class' => 'absolute z-30',
                     'x-show' => 'openned',
                     '@click' => 'close',
                     '@click.away' => 'close',
