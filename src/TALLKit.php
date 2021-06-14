@@ -78,24 +78,24 @@ class TALLKit
         }
 
         if ($options['load_type'] === true) {
-            Collection::make($assets)->filter(function($key) {
+            Collection::make($assets)->filter(function ($key) {
                 return $key !== 'tailwindcss' && $key !== 'alpine';
-            })->each(function($asset) use ($styles, $scripts) {
-                $styles->add(Collection::make($asset)->filter(function($value) {
+            })->each(function ($asset) use ($styles, $scripts) {
+                $styles->add(Collection::make($asset)->filter(function ($value) {
                     return Str::endsWith($value, '.css');
                 }));
 
-                $scripts->add(Collection::make($asset)->filter(function($value) {
+                $scripts->add(Collection::make($asset)->filter(function ($value) {
                     return Str::endsWith($value, '.js');
                 }));
             });
         }
 
-        $htmlStyles = $styles->flatten()->map(function($url) {
+        $htmlStyles = $styles->flatten()->map(function ($url) {
             return '<link href="'.$url.'" rel="stylesheet" />';
         })->join("\n");
 
-        $htmlScrips = $scripts->flatten()->map(function($url) use ($assets) {
+        $htmlScrips = $scripts->flatten()->map(function ($url) use ($assets) {
             return '<script src="'.$url.'"'.((in_array($url, $assets['alpine'])) ? ' defer' : '').'></script>';
         })->join("\n");
 

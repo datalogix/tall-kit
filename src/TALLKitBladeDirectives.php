@@ -2,8 +2,6 @@
 
 namespace TALLKit;
 
-use Illuminate\Support\Str;
-
 class TALLKitBladeDirectives
 {
     public static function styles($expression)

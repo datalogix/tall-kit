@@ -67,7 +67,7 @@ return [
             |
             */
 
-            'alpine' => true
+            'alpine' => true,
         ],
     ],
 
