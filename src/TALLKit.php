@@ -139,14 +139,14 @@ HTML;
             if ($manifest !== $publishedManifest) {
                 $assetWarning = <<<'HTML'
 <script{$nonce}>
-    console.warn("TALLKit: The published TALLKit assets are out of date.")
+    console.warn("TALLKit: The published TALLKit assets are out of date.");
 </script>
 HTML;
             }
         }
 
         $tallkitAssets = $this->renderAssets();
-        $tallkitComponents = $this->renderComponents();
+        $tallkitComponents = $this->renderComponents($nonce);
 
         // Adding semicolons for this JavaScript is important,
         // because it will be minified in production.
@@ -160,7 +160,7 @@ HTML;
     }
 </script>
 {$tallkitComponents}
-<script data-turbo-eval="false" data-turbolinks-eval="false">
+<script data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}>
     window.tallkit.init();
 
     window.deferLoadingAlpine = function (callback) {

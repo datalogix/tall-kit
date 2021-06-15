@@ -76,9 +76,10 @@ trait Components
     /**
      * Render components.
      *
+     * @param  string  $nonce
      * @return string
      */
-    public function renderComponents()
+    public function renderComponents($nonce = '')
     {
         $result = [];
 
@@ -86,12 +87,12 @@ trait Components
             if (Str::endsWith($actions, '.js') || Str::contains($actions, '.js?')) {
                 $componentSrc = route('tallkit.component', $name);
                 $result[] = <<<HTML
-<script src="{$componentSrc}" data-turbo-eval="false" data-turbolinks-eval="false"></script>
+<script src="{$componentSrc}" data-turbo-eval="false" data-turbolinks-eval="false"${$nonce}></script>
 HTML;
             } else {
                 $actionsEncoded = $actions ?? '{}';
                 $result[] = <<<HTML
-<script data-turbo-eval="false" data-turbolinks-eval="false">
+<script data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}>
     window.tallkit.components.register('$name', $actionsEncoded);
 </script>
 HTML;
