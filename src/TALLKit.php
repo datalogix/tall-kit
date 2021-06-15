@@ -95,8 +95,10 @@ class TALLKit
             return '<link href="'.$url.'" rel="stylesheet" />';
         })->join("\n");
 
-        $htmlScrips = $scripts->flatten()->map(function ($url) use ($assets) {
-            return '<script src="'.$url.'"'.((in_array($url, $assets['alpine'])) ? ' defer' : '').'></script>';
+        $nonce = isset($options['nonce']) ? " nonce=\"{$options['nonce']}\"" : '';
+
+        $htmlScrips = $scripts->flatten()->map(function ($url) use ($assets, $nonce) {
+            return '<script src="'.$url.'"'.((in_array($url, $assets['alpine'])) ? ' defer' : '').$nonce.'></script>';
         })->join("\n");
 
         return <<<HTML
@@ -125,7 +127,7 @@ HTML;
         // Default to dynamic `tallkit.js` (served by a Laravel route).
         $fullAssetPath = "{$appUrl}/tallkit{$versionedFileName}";
         $assetWarning = null;
-        $nonce = isset($options['nonce']) ? "nonce=\"{$options['nonce']}\"" : '';
+        $nonce = isset($options['nonce']) ? " nonce=\"{$options['nonce']}\"" : '';
 
         // Use static assets if they have been published.
         if (file_exists(public_path('vendor/tallkit/mix-manifest.json'))) {
@@ -136,7 +138,7 @@ HTML;
 
             if ($manifest !== $publishedManifest) {
                 $assetWarning = <<<'HTML'
-<script {$nonce}>
+<script{$nonce}>
     console.warn("TALLKit: The published TALLKit assets are out of date.")
 </script>
 HTML;
@@ -150,8 +152,8 @@ HTML;
         // because it will be minified in production.
         return <<<HTML
 {$assetWarning}
-<script src="{$fullAssetPath}" data-turbo-eval="false" data-turbolinks-eval="false"></script>
-<script data-turbo-eval="false" data-turbolinks-eval="false" {$nonce}>
+<script src="{$fullAssetPath}" data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}></script>
+<script data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}>
     if (!window.tallkit) {
         window.tallkit = new TALLKit({$jsonEncodedOptions}, {$jsonEncodedAssets});
         {$tallkitAssets}
