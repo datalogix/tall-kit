@@ -64,7 +64,7 @@ class Sidebar extends Drawer
     }
 
     /**
-     * Get breakpoint size
+     * Get breakpoint size.
      *
      * @return int
      */

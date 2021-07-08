@@ -850,8 +850,6 @@ return [
                     'grid-12' => [
                         'class' => 'grid gap-6 grid-cols-12',
                     ],
-
-
                 ],
             ],
 

@@ -21,7 +21,7 @@ class MergeThemeProvider
                 })->get($themeKey, []);
 
             $exceptAttrs = Collection::make($this->whereStartsWith('theme:'.$themeKey.'.except.'))
-                ->filter(function($value) {
+                ->filter(function ($value) {
                     return $value !== false;
                 })->map(function ($value, $key) use ($themeKey) {
                     return Str::replace('theme:'.$themeKey.'.except.', '', $key);
