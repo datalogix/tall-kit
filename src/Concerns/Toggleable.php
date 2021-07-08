@@ -50,14 +50,12 @@ trait Toggleable
      */
     public function events()
     {
-        if (!$this->name) return [];
-
         // 2x -> https://github.com/alpinejs/alpine/blob/2.x/README.pt.md#x-on
         // 3x -> https://alpinejs.dev/directives/on#window
-        return[
+        return $this->name ? [
             '@'.$this->name.'-open.window' => 'open',
             '@'.$this->name.'-close.window' => 'close',
             '@'.$this->name.'-toggle.window' => 'toggle',
-        ];
+        ] : [];
     }
 }

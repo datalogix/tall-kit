@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 class Logout extends FormButton
 {
-     /**
+    /**
      * Create a new component instance.
      *
      * @param  string  $text

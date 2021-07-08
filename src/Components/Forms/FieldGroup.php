@@ -41,7 +41,7 @@ class FieldGroup extends BladeComponent
         $prependText = null,
         $prependIcon = null,
         $appendText = null,
-        $appendIcon = null,
+        $appendIcon = null
     ) {
         parent::__construct($theme);
 

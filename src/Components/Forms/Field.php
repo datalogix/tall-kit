@@ -46,7 +46,7 @@ class Field extends FieldGroup
         $prependText = null,
         $prependIcon = null,
         $appendText = null,
-        $appendIcon = null,
+        $appendIcon = null
     ) {
         parent::__construct(
             $theme,

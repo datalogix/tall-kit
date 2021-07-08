@@ -66,7 +66,7 @@ class Html extends BladeComponent
         $this->title = $title ?: config('app.name');
         $this->charset = $charset;
         $this->livewire = $livewire && class_exists('\Livewire\Livewire');
-        $this->tallkit =  $tallkit ? array_replace_recursive(
+        $this->tallkit = $tallkit ? array_replace_recursive(
             is_array($tallkit) ? $tallkit : [],
             is_bool($tailwindcss) ? ['options' => ['inject' => ['tailwindcss' => $tailwindcss]]] : [],
             is_bool($alpine) ? ['options' => ['inject' => ['alpine' => $alpine]]] : [],

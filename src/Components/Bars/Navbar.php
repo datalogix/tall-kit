@@ -7,7 +7,7 @@ use TALLKit\Components\Menus\Menu;
 class Navbar extends Menu
 {
     /**
-     * Get item
+     * Get item.
      *
      * @return array
      */

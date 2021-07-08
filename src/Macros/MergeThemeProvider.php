@@ -15,15 +15,17 @@ class MergeThemeProvider
                 return $this;
             }
 
-            $themeAttrs = Collection::make($this->whereStartsWith('theme:'))->mapWithKeys(function ($value, $key) {
-                return [Str::replace('theme:', '', $key) => is_array($value) ? $value : ['class' => $value]];
-            })->get($themeKey, []);
+            $themeAttrs = Collection::make($this->whereStartsWith('theme:'))
+                ->mapWithKeys(function ($value, $key) {
+                    return [Str::replace('theme:', '', $key) => is_array($value) ? $value : ['class' => $value]];
+                })->get($themeKey, []);
 
-            $exceptAttrs = Collection::make($this->whereStartsWith('theme:'.$themeKey.'.except.'))->filter(function($value) {
-                return $value !== false;
-            })->map(function ($value, $key) use ($themeKey) {
-                return Str::replace('theme:'.$themeKey.'.except.', '', $key);
-            })->all();
+            $exceptAttrs = Collection::make($this->whereStartsWith('theme:'.$themeKey.'.except.'))
+                ->filter(function($value) {
+                    return $value !== false;
+                })->map(function ($value, $key) use ($themeKey) {
+                    return Str::replace('theme:'.$themeKey.'.except.', '', $key);
+                })->all();
 
             $subkeyAttrs = new ComponentAttributeBag();
 

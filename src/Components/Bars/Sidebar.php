@@ -50,7 +50,7 @@ class Sidebar extends Drawer
     }
 
     /**
-     * Get container
+     * Get container.
      *
      * @return array
      */
@@ -70,7 +70,9 @@ class Sidebar extends Drawer
      */
     public function breakpointSize()
     {
-        if (!$this->breakpoint) return 0;
+        if (! $this->breakpoint) {
+            return 0;
+        }
 
         // https://tailwindcss.com/docs/breakpoints
         return [
@@ -83,16 +85,14 @@ class Sidebar extends Drawer
     }
 
     /**
-     * Get breakpoint classes
+     * Get breakpoint classes.
      *
      * @return array
      */
     public function breakpointClasses()
     {
-        if (! $this->breakpoint) return [];
-
-        return [
-            ':class' => '{ \''.$this->breakpoint.':static\': openned }',
-        ];
+        return $this->breakpoint
+            ? [':class' => '{ \''.$this->breakpoint.':static\': openned }']
+            : [];
     }
 }

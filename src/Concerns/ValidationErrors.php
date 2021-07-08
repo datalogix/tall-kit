@@ -53,7 +53,9 @@ trait ValidationErrors
      */
     public function hasError($name, $bag = 'default')
     {
-        if (!$name) return false;
+        if (! $name) {
+            return false;
+        }
 
         $name = str_replace(['[', ']'], ['.', ''], Str::before($name, '[]'));
 

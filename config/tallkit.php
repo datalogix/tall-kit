@@ -478,7 +478,7 @@ return [
                 'menu' => [],
 
                 'item' => [
-                    'class' => 'text-gray-100 w-full flex items-center py-4 px-6 transition hover:bg-black hover:bg-opacity-10 outline-none focus:outline-none focus:shadow-outline'
+                    'class' => 'text-gray-100 w-full flex items-center py-4 px-6 transition hover:bg-black hover:bg-opacity-10 outline-none focus:outline-none focus:shadow-outline',
                 ],
 
                 'active' => [
@@ -642,7 +642,7 @@ return [
                 'iconName' => 'menu',
 
                 'iconSvg' => [
-                    ' <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+                    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
                 ],
             ],
 
@@ -897,7 +897,7 @@ return [
                 ],
 
                 'select' => [
-                    'class' => 'block w-full py-2 px-3 outline-none focus:outline-none'
+                    'class' => 'block w-full py-2 px-3 outline-none focus:outline-none',
                 ],
             ],
 
@@ -938,7 +938,7 @@ return [
                 'sidebar' => [],
 
                 'logo' => [
-                    'class' => 'text-white'
+                    'class' => 'text-white',
                 ],
 
                 'box' => [
@@ -1065,7 +1065,7 @@ return [
                     'x-transition:leave-start' => 'opacity-100',
                     'x-transition:leave-end' => 'opacity-0',
                     'x-show' => 'openned',
-                    '@click' => 'close(false)'
+                    '@click' => 'close(false)',
                 ],
 
                 'backdrop' => [
@@ -1273,7 +1273,7 @@ return [
             /**
              * Navigations.
              */
-             'drawer' => [
+            'drawer' => [
                 'container' => [],
 
                 'drawer' => [
@@ -1354,7 +1354,7 @@ return [
                         'class' => 'bottom-0',
                     ],
 
-                   'top-left' => [
+                    'top-left' => [
                         'class' => 'origin-top-left top-0 left-0',
                     ],
 

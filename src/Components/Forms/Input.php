@@ -119,7 +119,7 @@ class Input extends Field
      */
     protected function getTypeByName($name = null)
     {
-        if (!$name) {
+        if (! $name) {
             return 'text';
         }
 

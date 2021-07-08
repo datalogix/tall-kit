@@ -42,7 +42,7 @@ trait DefaultAndOldValue
         $this->default = $default;
         $this->language = $language;
 
-        if ($this->isWired() || !$name) {
+        if ($this->isWired() || ! $name) {
             return;
         }
 
