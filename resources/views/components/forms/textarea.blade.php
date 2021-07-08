@@ -1,20 +1,40 @@
 <x-field
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :name="$name"
     :label="$label"
     :showErrors="$showErrors"
     :theme="$theme"
-    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+    :groupable="$groupable"
+    :prependText="$prependText"
+    :prependIcon="$prependIcon"
+    :appendText="$appendText"
+    :appendIcon="$appendIcon"
 >
     <textarea
         {{ $attributes->mergeThemeProvider($themeProvider, 'textarea') }}
-        name="{{ $name }}"
 
-        @if($id)
+        @if ($name)
+            name="{{ $name }}"
+        @endif
+
+        @if ($id)
             id="{{ $id }}"
         @endif
 
-        @if($isWired())
+        @if ($isWired() && $name)
             wire:model{!! $wireModifier() !!}="{{ $name }}"
         @endif
     >@unless($isWired()){{ $value ?? $slot }}@endunless</textarea>
+
+    @isset ($prepend)
+        <x-slot name="prepend">
+            {{ $prepend }}
+        </x-slot>
+    @endisset
+
+    @isset ($append)
+        <x-slot name="append">
+            {{ $append }}
+        </x-slot>
+    @endisset
 </x-field>

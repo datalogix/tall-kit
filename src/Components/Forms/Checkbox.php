@@ -33,15 +33,20 @@ class Checkbox extends Field
      * @return void
      */
     public function __construct(
-        $name,
-        $label = '',
+        $name = null,
+        $label = null,
         $value = 1,
         $bind = null,
         $default = false,
         $showErrors = true,
         $theme = null
     ) {
-        parent::__construct($name, $label, $showErrors, $theme);
+        parent::__construct(
+            $name,
+            $label,
+            $showErrors,
+            $theme
+        );
 
         $this->value = $value;
 

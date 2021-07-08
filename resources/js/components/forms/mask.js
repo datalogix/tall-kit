@@ -1,7 +1,9 @@
 export default ({ loadComponentAssets }) => ({
-  async init (options) {
+  async setup (options) {
+    if (!this.$refs.input) return
+
     await loadComponentAssets('imask')
 
-    window.IMask(this.$el, options)
+    window.IMask(this.$refs.input, options)
   }
 })

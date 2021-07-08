@@ -1,13 +1,31 @@
-<x-textarea
+<x-field {{
+    $attributes
+        ->mergeOnlyThemeProvider($themeProvider, 'container')
+        ->merge(['x-init' => 'setup('.$jsonOptions().')'])
+    }}
     :name="$name"
-    :id="$id"
-    :label="$label"
-    :bind="$bind"
-    :default="$slot->isEmpty() ? $default : $slot"
-    :language="$language"
+    :label="false"
     :showErrors="$showErrors"
     :theme="$theme"
-    :theme:container="['wire:ignore' => '']"
-    x-init="init({{ $jsonOptions() }})"
-    {{ $attributes->mergeThemeProvider($themeProvider, 'easymde') }}
-/>
+>
+    <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
+        <x-label
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+            :label="$label"
+            :theme="$theme"
+        >{{ $labelContent ?? '' }}</x-label>
+    </label>
+
+    <x-textarea
+        {{ $attributes->mergeThemeProvider($themeProvider, 'easymde') }}
+        :name="$name"
+        :id="$id"
+        :label="false"
+        :bind="$bind"
+        :default="$slot->isEmpty() ? $default : $slot"
+        :language="$language"
+        :showErrors="$showErrors"
+        :theme="$theme"
+        :groupable="false"
+    />
+</x-field>

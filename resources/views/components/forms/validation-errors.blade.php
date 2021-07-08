@@ -1,24 +1,41 @@
-@if($errors->{$bag}->any())
-    @if($type !== 'none')
+@if ($errors->{$bag}->any())
+    @if ($type !== 'none')
         <x-alert
-            :type="$type"
-            :title="$title ?? __('Whoops! Something went wrong.')"
             {{ $attributes->mergeThemeProvider($themeProvider, 'alert') }}
+            :type="$type"
+            :mode="$mode"
+            :rounded="$rounded"
+            :shadow="$shadow"
+            :icon="$icon"
+            :icon-svg="$iconSvg"
+            :icon-name="$iconName"
+            :timeout="$timeout"
+            :dismissible="$dismissible"
+            :dismissible-icon="$dismissibleIcon"
+            :dismissible-icon-svg="$dismissibleIconSvg"
+            :dismissible-icon-name="$dismissibleIconName"
+            :dismissible-text="$dismissibleText"
+            :title="$title"
+            :message="$message"
+            :on="$on"
+            :theme="$theme"
         >
             <ul {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'ul') }}>
-                @foreach($errors->{$bag}->all() as $error)
+                @foreach ($errors->{$bag}->all() as $error)
                     <li {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'li') }}>{{ $error }}</li>
                 @endforeach
             </ul>
         </x-alert>
     @else
         <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
-            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'title') }}>
-                {{ $title ?? __('Whoops! Something went wrong.') }}
-            </div>
+            @if ($title)
+                <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'title') }}>
+                    {!! __($title) !!}
+                </div>
+            @endif
 
             <ul {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'ul') }}>
-                @foreach($errors->{$bag}->all() as $error)
+                @foreach ($errors->{$bag}->all() as $error)
                     <li {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'li') }}>{{ $error }}</li>
                 @endforeach
             </ul>

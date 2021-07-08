@@ -37,11 +37,7 @@ class Assets {
   }
 
   async init (loadType) {
-    const assets = await new Promise((resolve) => {
-      document.addEventListener('DOMContentLoaded', () => {
-        resolve(detectAssets(document, loadType))
-      })
-    })
+    const assets = detectAssets(document, loadType)
 
     for (const asset of assets) {
       await this.load(asset)
@@ -54,6 +50,8 @@ class Assets {
     if (this.loaded.includes(asset) || !this.has(asset)) {
       return Promise.resolve()
     }
+
+    this.loaded.push(asset)
 
     const assets = this.get(asset)
     const promisses = []
@@ -83,8 +81,6 @@ class Assets {
     await Promise.all(promisses)
 
     dispatch(`tallkit:asset.${asset}`)
-
-    this.loaded.push(asset)
   }
 }
 

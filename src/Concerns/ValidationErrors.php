@@ -18,13 +18,13 @@ trait ValidationErrors
     /**
      * Returns a boolean wether the given attribute has an error and the should be shown.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  string  $bag
      * @return bool
      */
     public function hasErrorAndShow($name, $bag = 'default')
     {
-        return $this->showErrors
+        return $this->showErrors && $name
             ? $this->hasError($name, $bag)
             : false;
     }
@@ -47,12 +47,14 @@ trait ValidationErrors
     /**
      * Returns a boolean wether the given attribute has an error.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  string  $bag
      * @return bool
      */
     public function hasError($name, $bag = 'default')
     {
+        if (!$name) return false;
+
         $name = str_replace(['[', ']'], ['.', ''], Str::before($name, '[]'));
 
         $errorBag = $this->getErrorBag($bag);

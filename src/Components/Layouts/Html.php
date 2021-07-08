@@ -7,7 +7,7 @@ use TALLKit\Components\BladeComponent;
 class Html extends BladeComponent
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $title;
 
@@ -39,20 +39,24 @@ class Html extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  string  $title
+     * @param  string|null  $title
      * @param  string  $charset
      * @param  bool  $livewire
      * @param  bool|array  $tallkit
+     * @param  bool|null  $tailwindcss
+     * @param  bool|null  $alpine
      * @param  string|bool  $stackStyles
      * @param  string|bool  $stackScripts
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $title = '',
+        $title = null,
         $charset = 'utf-8',
         $livewire = true,
         $tallkit = true,
+        $tailwindcss = null,
+        $alpine = null,
         $stackStyles = 'styles',
         $stackScripts = 'scripts',
         $theme = null
@@ -62,7 +66,12 @@ class Html extends BladeComponent
         $this->title = $title ?: config('app.name');
         $this->charset = $charset;
         $this->livewire = $livewire && class_exists('\Livewire\Livewire');
-        $this->tallkit = $tallkit;
+        $this->tallkit =  $tallkit ? array_replace_recursive(
+            is_array($tallkit) ? $tallkit : [],
+            is_bool($tailwindcss) ? ['options' => ['inject' => ['tailwindcss' => $tailwindcss]]] : [],
+            is_bool($alpine) ? ['options' => ['inject' => ['alpine' => $alpine]]] : [],
+        ) : false;
+
         $this->stackStyles = $stackStyles;
         $this->stackScripts = $stackScripts;
     }

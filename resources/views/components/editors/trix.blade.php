@@ -1,27 +1,29 @@
 <x-field
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :name="$name"
     :label="false"
     :showErrors="$showErrors"
     :theme="$theme"
-    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
 >
     <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
         <x-label
-            :label="$label"
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
-        />
+            :label="$label"
+            :theme="$theme"
+        >{{ $labelContent ?? '' }}</x-label>
     </label>
 
     <x-input
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
         type="hidden"
         :id="$id"
         :name="$name"
         :default="$slot->isEmpty() ? $default : $slot"
-        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
+        :theme="$theme"
     />
 
     <trix-editor
-        input="{{ $id }}"
         {{ $attributes->mergeThemeProvider($themeProvider, 'trix') }}
+        input="{{ $id }}"
     ></trix-editor>
 </x-field>

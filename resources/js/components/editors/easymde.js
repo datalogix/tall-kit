@@ -1,14 +1,16 @@
 export default ({ loadComponentAssets, updateInputValue }) => ({
-  async init (options) {
+  async setup (options) {
     await loadComponentAssets('easymde')
 
+    const { editor } = this.$refs
+
     const easymde = new window.EasyMDE({
-      element: this.$el,
+      element: editor,
       ...options
     })
 
     easymde.codemirror.on('change', () => {
-      updateInputValue(this.$el, easymde.value())
+      updateInputValue(editor, easymde.value())
     })
   }
 })

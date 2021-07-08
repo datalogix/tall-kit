@@ -1,7 +1,11 @@
 <x-form-button
+    {{ $attributes->mergeThemeProvider($themeProvider, 'button') }}
     :method="$method"
     :action="$action"
-    {{ $attributes->mergeThemeProvider($themeProvider, 'button') }}
+    :route="$route"
+    :bind="$bind"
+    :enctype="$enctype"
+    :theme="$theme"
 >
-    {{ $slot->isEmpty() ? __($text) : $slot }}
+    {!! $slot->isEmpty() ? __($text) : $slot !!}
 </x-form-button>

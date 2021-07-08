@@ -18,7 +18,7 @@ class Label extends BladeComponent
      * @param  string|null  $theme
      * @return void
      */
-    public function __construct($label = '', $theme = null)
+    public function __construct($label = null, $theme = null)
     {
         parent::__construct($theme);
 

@@ -1,5 +1,5 @@
-@if($label || $slot->isNotEmpty())
+@if ($label || $slot->isNotEmpty())
     <span {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
-        {{ $slot->isEmpty() ? $label : $slot }}
+        {!! $slot->isEmpty() ? __($label) : $slot !!}
     </span>
 @endif

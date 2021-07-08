@@ -1,5 +1,5 @@
 export default ({ loadComponentAssets, updateInputValue }) => ({
-  async init (options) {
+  async setup (options) {
     await loadComponentAssets('quill')
 
     const { input, editor } = this.$refs

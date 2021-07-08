@@ -30,21 +30,21 @@ trait DefaultAndOldValue
     /**
      * Set default and old value.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  mixed  $bind
      * @param  mixed  $default
      * @param  mixed  $language
      * @return void
      */
-    protected function setValue($name, $bind = null, $default = null, $language = null)
+    protected function setValue($name = null, $bind = null, $default = null, $language = null)
     {
-        if ($this->isWired()) {
-            return;
-        }
-
         $this->bind = $bind;
         $this->default = $default;
         $this->language = $language;
+
+        if ($this->isWired() || !$name) {
+            return;
+        }
 
         if (! $language) {
             $default = $this->getBoundValue($bind, $name) ?: $default;

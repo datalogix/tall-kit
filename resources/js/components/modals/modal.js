@@ -1,10 +1,6 @@
 export default ({ toggleable }) => ({
   ...toggleable(),
 
-  init (openned = false) {
-    this.openned = openned
-  },
-
   focusables () {
     // All focusable element types...
     const selector = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex=-1])'

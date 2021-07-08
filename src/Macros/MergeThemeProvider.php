@@ -19,7 +19,13 @@ class MergeThemeProvider
                 return [Str::replace('theme:', '', $key) => is_array($value) ? $value : ['class' => $value]];
             })->get($themeKey, []);
 
-            $subkeyAttrs = $subkey ? new ComponentAttributeBag() : $themeProvider->$themeKey->merge($themeAttrs);
+            $exceptAttrs = Collection::make($this->whereStartsWith('theme:'.$themeKey.'.except.'))->filter(function($value) {
+                return $value !== false;
+            })->map(function ($value, $key) use ($themeKey) {
+                return Str::replace('theme:'.$themeKey.'.except.', '', $key);
+            })->all();
+
+            $subkeyAttrs = new ComponentAttributeBag();
 
             if ($subkey) {
                 $subkeyAttrs = $subkeyAttrs->merge($themeProvider->$themeKey->get($subkey, []));
@@ -31,6 +37,11 @@ class MergeThemeProvider
                         $subkeyAttrs = $subkeyAttrs->merge(['class' => $themeAttrs[$subkey]]);
                     }
                 }
+            } else {
+                $subkeyAttrs = $subkeyAttrs->merge($themeAttrs, false)->merge(
+                    $themeProvider->$themeKey->except($exceptAttrs)->getAttributes(),
+                    false
+                );
             }
 
             return $this->whereDoesntStartWith('theme:')->merge(

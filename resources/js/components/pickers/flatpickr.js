@@ -1,7 +1,9 @@
 export default ({ loadComponentAssets }) => ({
-  async init (options) {
+  async setup (options) {
+    if (!this.$refs.input) return
+
     await loadComponentAssets('flatpickr')
 
-    window.flatpickr(this.$el, options)
+    window.flatpickr(this.$refs.input, options)
   }
 })

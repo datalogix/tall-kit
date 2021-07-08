@@ -7,19 +7,19 @@ use TALLKit\Components\BladeComponent;
 class Cell extends BladeComponent
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $text;
 
     /**
      * Create a new component instance.
      *
-     * @param  string  $text
+     * @param  string|null  $text
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $text = '',
+        $text = null,
         $theme = null
     ) {
         parent::__construct($theme);

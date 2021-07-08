@@ -24,13 +24,17 @@ class Pikaday extends Input
     /**
      * Create a new component instance.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  string|bool|null  $id
      * @param  string|bool|null  $label
      * @param  mixed  $bind
      * @param  mixed  $default
      * @param  string|null  $language
      * @param  bool  $showErrors
+     * @param  string|null  $prependText
+     * @param  string|null  $prependIcon
+     * @param  string|null  $appendText
+     * @param  string|null  $appendIcon
      * @param  string|null  $theme
      * @param  string  $format
      * @param  string|bool|null  $placeholder
@@ -38,13 +42,17 @@ class Pikaday extends Input
      * @return void
      */
     public function __construct(
-        $name,
+        $name = null,
         $id = null,
-        $label = '',
+        $label = null,
         $bind = null,
         $default = null,
         $language = null,
         $showErrors = true,
+        $prependText = null,
+        $prependIcon = null,
+        $appendText = null,
+        $appendIcon = null,
         $theme = null,
         $format = 'DD/MM/YYYY',
         $placeholder = null,
@@ -60,6 +68,10 @@ class Pikaday extends Input
             false,
             $language,
             $showErrors,
+            $prependText,
+            $prependIcon,
+            $appendText,
+            $appendIcon,
             $theme
         );
 
@@ -75,8 +87,10 @@ class Pikaday extends Input
      */
     public function jsonOptions()
     {
-        return json_encode((object) array_merge([
-            'format' => $this->format,
-        ], $this->options));
+        return json_encode((object) array_replace_recursive(
+            ['format' => $this->format],
+            $this->themeProvider->options->getAttributes(),
+            $this->options
+        ));
     }
 }

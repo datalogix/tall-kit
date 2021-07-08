@@ -7,7 +7,7 @@ use TALLKit\Components\BladeComponent;
 class Heading extends BladeComponent
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $text;
 
@@ -19,13 +19,13 @@ class Heading extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  string  $text
+     * @param  string|null  $text
      * @param  string|bool  $sortable
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $text = '',
+        $text = null,
         $sortable = false,
         $theme = null
     ) {

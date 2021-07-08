@@ -1,13 +1,13 @@
-<div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
+<x-toggleable
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+    :name="$name"
+    :show="$show"
+    :overlay="$overlay"
+    :theme="$theme"
+>
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}>
-        {!! $trigger ?? $title !!}
+        {!! $trigger ?? __('Clique to open (Provide your trigger)') !!}
     </div>
-
-    @if($overlay)
-        <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'overlay') }}>
-            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'backdrop') }}></div>
-        </div>
-    @endif
 
     <div {{
         $attributes
@@ -16,4 +16,4 @@
     }}>
         {{ $slot }}
     </div>
-</div>
+</x-toggleable>

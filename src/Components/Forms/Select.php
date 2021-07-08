@@ -44,7 +44,7 @@ class Select extends Field
     /**
      * Create a new component instance.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  string|bool|null  $label
      * @param  string|array|int|null  $itemText
      * @param  string|array|int|null  $itemValue
@@ -52,25 +52,45 @@ class Select extends Field
      * @param  mixed  $bind
      * @param  mixed  $default
      * @param  bool  $multiple
-     * @param  bool  $showErrors
      * @param  bool  $emptyOption
+     * @param  bool  $showErrors
      * @param  string|null  $theme
+     * @param  bool  $groupable
+     * @param  string|null  $prependText
+     * @param  string|null  $prependIcon
+     * @param  string|null  $appendText
+     * @param  string|null  $appendIcon
      * @return void
      */
     public function __construct(
-        $name,
-        $label = '',
+        $name = null,
+        $label = null,
         $itemText = null,
         $itemValue = null,
         $options = [],
         $bind = null,
         $default = null,
         $multiple = false,
-        $showErrors = true,
         $emptyOption = true,
-        $theme = null
+        $showErrors = true,
+        $theme = null,
+        $groupable = true,
+        $prependText = null,
+        $prependIcon = null,
+        $appendText = null,
+        $appendIcon = null
     ) {
-        parent::__construct($name, $label, $showErrors, $theme);
+        parent::__construct(
+            $name,
+            $label,
+            $showErrors,
+            $theme,
+            $groupable,
+            $prependText,
+            $prependIcon,
+            $appendText,
+            $appendIcon
+        );
 
         $this->itemText = $itemText ?: 'name';
         $this->itemValue = $itemValue ?: 'id';

@@ -14,7 +14,7 @@ class Easymde extends Textarea
     /**
      * Create a new component instance.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  string|null  $id
      * @param  string|bool|null  $label
      * @param  mixed  $bind
@@ -26,9 +26,9 @@ class Easymde extends Textarea
      * @return void
      */
     public function __construct(
-        $name,
+        $name = null,
         $id = null,
-        $label = '',
+        $label = null,
         $bind = null,
         $default = null,
         $language = null,
@@ -57,8 +57,9 @@ class Easymde extends Textarea
      */
     public function jsonOptions()
     {
-        return json_encode((object) array_merge([
-            'forceSync' => true,
-        ], $this->options));
+        return json_encode((object) array_replace_recursive(
+            $this->themeProvider->options->getAttributes(),
+            $this->options
+        ));
     }
 }

@@ -7,26 +7,26 @@ use TALLKit\Components\BladeComponent;
 class Section extends BladeComponent
 {
     /**
-     * @var string
+     * @var string|bool|null
      */
     public $title;
 
     /**
-     * @var string
+     * @var string|bool|null
      */
     public $subtitle;
 
     /**
      * Create a new component instance.
      *
-     * @param  string  $title
-     * @param  string  $subtitle
+     * @param  string|bool|null  $title
+     * @param  string|bool|null  $subtitle
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $title = '',
-        $subtitle = '',
+        $title = null,
+        $subtitle = null,
         $theme = null
     ) {
         parent::__construct($theme);

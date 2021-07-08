@@ -9,37 +9,27 @@ class Alert extends BladeComponent
     /**
      * @var string
      */
+    public $color;
+
+    /**
+     * @var string|bool|null
+     */
     public $type;
 
     /**
-     * @var string
+     * @var string|bool|null
      */
     public $mode;
 
     /**
-     * @var string
+     * @var string|bool|null
      */
     public $rounded;
 
     /**
-     * @var string
+     * @var string|bool|null
      */
     public $shadow;
-
-    /**
-     * @var string|null
-     */
-    public $on;
-
-    /**
-     * @var int
-     */
-    public $timeout;
-
-    /**
-     * @var string
-     */
-    public $color;
 
     /**
      * @var bool
@@ -47,14 +37,19 @@ class Alert extends BladeComponent
     public $icon;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $iconSvg;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $iconName;
+
+    /**
+     * @var int
+     */
+    public $timeout;
 
     /**
      * @var bool
@@ -67,37 +62,42 @@ class Alert extends BladeComponent
     public $dismissibleIcon;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $dismissibleIconSvg;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $dismissibleIconName;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $dismissibleText;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $message;
 
     /**
+     * @var string|null
+     */
+    public $on;
+
+    /**
      * Create a new component instance.
      *
-     * @param  string  $type
-     * @param  string  $mode
-     * @param  string  $rounded
-     * @param  string  $shadow
+     * @param  string|bool|null  $type
+     * @param  string|bool|null  $mode
+     * @param  string|bool|null  $rounded
+     * @param  string|bool|null  $shadow
      * @param  bool  $icon
      * @param  string|bool|null  $iconSvg
      * @param  string|bool|null  $iconName
@@ -106,11 +106,11 @@ class Alert extends BladeComponent
      * @param  bool  $dismissibleIcon
      * @param  string|bool|null  $dismissibleIconSvg
      * @param  string|bool|null  $dismissibleIconName
-     * @param  string  $dismissibleText
+     * @param  string|null  $dismissibleText
      * @param  string|null  $title
-     * @param  string  $message
-     * @param  string|null  $theme
+     * @param  string|null  $message
      * @param  string|null  $on
+     * @param  string|null  $theme
      * @return void
      */
     public function __construct(
@@ -126,26 +126,25 @@ class Alert extends BladeComponent
         $dismissibleIcon = true,
         $dismissibleIconSvg = null,
         $dismissibleIconName = null,
-        $dismissibleText = '',
+        $dismissibleText = null,
         $title = null,
-        $message = '',
-        $theme = null,
-        $on = null
+        $message = null,
+        $on = null,
+        $theme = null
     ) {
         parent::__construct($theme);
 
         $typeTheme = $this->themeProvider->types->get($type, $this->themeProvider->types->get('default'));
 
+        $this->color = $typeTheme['color'];
         $this->type = $type;
         $this->mode = $mode;
         $this->rounded = $rounded;
         $this->shadow = $shadow;
-        $this->on = $on;
-        $this->timeout = $timeout;
-        $this->color = $typeTheme['color'];
         $this->icon = $icon;
         $this->iconSvg = $iconSvg ?? $typeTheme['iconSvg'];
         $this->iconName = $iconName ?? $typeTheme['iconName'];
+        $this->timeout = $timeout;
         $this->dismissible = $dismissible;
         $this->dismissibleIcon = $dismissibleIcon;
         $this->dismissibleIconSvg = $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('iconSvg');
@@ -153,5 +152,6 @@ class Alert extends BladeComponent
         $this->dismissibleText = $dismissibleText;
         $this->title = $title ?? $typeTheme['title'];
         $this->message = $message;
+        $this->on = $on;
     }
 }

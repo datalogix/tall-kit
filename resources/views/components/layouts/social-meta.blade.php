@@ -1,16 +1,28 @@
-<meta name="twitter:card" content="{{ $card }}" />
+@if ($card)
+    <meta name="twitter:card" content="{{ $card }}" />
+@endif
 
-<meta property="og:type" content="{{ $type }}">
-<meta property="og:title" content="{{ $title }}" />
+@if ($type)
+    <meta property="og:type" content="{{ $type }}">
+@endif
 
-@if($description)
+@if ($title)
+    <meta property="og:title" content="{{ $title }}" />
+@endif
+
+@if ($description)
     <meta name="description" content="{{ $description }}">
     <meta property="og:description" content="{{ $description }}">
 @endif
 
-@if($image)
+@if ($image)
     <meta property="og:image" content="{{ $image }}" />
 @endif
 
-<meta property="og:url" content="{{ $url }}" />
-<meta property="og:locale" content="{{ app()->getLocale() }}" />
+@if ($url)
+    <meta property="og:url" content="{{ $url }}" />
+@endif
+
+@if ($locale)
+    <meta property="og:locale" content="{{ $locale }}" />
+@endif

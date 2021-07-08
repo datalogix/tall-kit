@@ -1,18 +1,18 @@
 <form
+    {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
     method="{{ $spoofMethod ? 'POST' : $method }}"
     action="{{ $action }}"
-    @if($enctype)
+    @if ($enctype)
         enctype="{{ $enctype }}"
-    @elseif(Str::contains($slot, 'type="file"'))
+    @elseif (Str::contains($slot, 'type="file"'))
         enctype="multipart/form-data"
     @endif
-    {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
 >
     @unless(in_array($method, ['HEAD', 'GET', 'OPTIONS']))
         @csrf
     @endunless
 
-    @if($spoofMethod)
+    @if ($spoofMethod)
         @method($method)
     @endif
 

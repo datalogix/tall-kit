@@ -7,7 +7,7 @@ class Textarea extends Input
     /**
      * Create a new component instance.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  string|bool|null  $id
      * @param  string|bool|null  $label
      * @param  mixed  $bind
@@ -15,17 +15,27 @@ class Textarea extends Input
      * @param  string|null  $language
      * @param  bool  $showErrors
      * @param  string|null  $theme
+     * @param  bool  $groupable
+     * @param  string|null  $prependText
+     * @param  string|null  $prependIcon
+     * @param  string|null  $appendText
+     * @param  string|null  $appendIcon
      * @return void
      */
     public function __construct(
-        $name,
+        $name = null,
         $id = null,
-        $label = '',
+        $label = null,
         $bind = null,
         $default = null,
         $language = null,
         $showErrors = true,
-        $theme = null
+        $theme = null,
+        $groupable = true,
+        $prependText = null,
+        $prependIcon = null,
+        $appendText = null,
+        $appendIcon = null
     ) {
         parent::__construct(
             $name,
@@ -37,7 +47,12 @@ class Textarea extends Input
             false,
             $language,
             $showErrors,
-            $theme
+            $theme,
+            $groupable,
+            $prependText,
+            $prependIcon,
+            $appendText,
+            $appendIcon
         );
     }
 }

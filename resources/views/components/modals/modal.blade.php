@@ -1,16 +1,20 @@
-<div
-    x-init="init({{ $show }})"
-    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+<div {{
+    $attributes
+        ->mergeOnlyThemeProvider($themeProvider, 'container')
+        ->merge(['x-init' => 'setup('.$show.')'])
+        ->merge($events())
+    }}
 >
     <div {{
         $attributes->mergeOnlyThemeProvider($themeProvider, 'box')->merge(
             $attributes->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)->getAttributes()
         )
     }}>
-        @if($overlay)
-            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'overlay') }}>
-                <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'backdrop') }}></div>
-            </div>
+        @if ($overlay)
+            <x-overlay
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'overlay') }}
+                :theme="$theme"
+            />
         @endif
 
         <div {{
@@ -22,9 +26,9 @@
         </div>
     </div>
 
-    @if(isset($trigger))
+    @isset ($trigger)
         <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}>
             {!! $trigger !!}
         </div>
-    @endif
+    @endisset
 </div>

@@ -1,3 +1,3 @@
 <td {{ $attributes->mergeThemeProvider($themeProvider, 'td') }}>
-    {{ $slot->isEmpty() ? __($text) : $slot }}
+    {!! $slot->isEmpty() ? __($text) : $slot !!}
 </td>

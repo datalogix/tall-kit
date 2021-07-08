@@ -32,7 +32,7 @@ class Input extends Field
     /**
      * Create a new component instance.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  string|bool|null  $id
      * @param  string|bool|null  $label
      * @param  string|null  $type
@@ -42,21 +42,41 @@ class Input extends Field
      * @param  string|null  $language
      * @param  bool  $showErrors
      * @param  string|null  $theme
+     * @param  bool  $groupable
+     * @param  string|null  $prependText
+     * @param  string|null  $prependIcon
+     * @param  string|null  $appendText
+     * @param  string|null  $appendIcon
      * @return void
      */
     public function __construct(
-        $name,
+        $name = null,
         $id = null,
-        $label = '',
+        $label = null,
         $type = null,
         $bind = null,
         $default = null,
         $mask = null,
         $language = null,
         $showErrors = true,
-        $theme = null
+        $theme = null,
+        $groupable = true,
+        $prependText = null,
+        $prependIcon = null,
+        $appendText = null,
+        $appendIcon = null
     ) {
-        parent::__construct($name, $label, $showErrors, $theme);
+        parent::__construct(
+            $name,
+            $label,
+            $showErrors,
+            $theme,
+            $groupable,
+            $prependText,
+            $prependIcon,
+            $appendText,
+            $appendIcon,
+        );
 
         $this->id = $id ?? $this->name;
         $this->type = $type ?: $this->getTypeByName($this->name);
@@ -83,21 +103,26 @@ class Input extends Field
             return [];
         }
 
-        return [
-            'data-tallkit-assets' => 'alpine,imask',
-            'x-data' => 'window.tallkit.component(\'mask\')',
-            'x-init' => 'init('.json_encode(is_string($this->mask) ? ['mask' => $this->mask] : (object) $this->mask).')',
-        ];
+        $encoded = json_encode(is_string($this->mask) ? ['mask' => $this->mask] : (object) $this->mask);
+
+        return $this->attributes
+            ->mergeOnlyThemeProvider($this->themeProvider, 'mask')
+            ->merge(['x-init' => 'setup('.$encoded.')'], false)
+            ->getAttributes();
     }
 
     /**
      * Get input type by name.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @return string
      */
-    protected function getTypeByName($name)
+    protected function getTypeByName($name = null)
     {
+        if (!$name) {
+            return 'text';
+        }
+
         $types = [
             'color' => ['color'],
             'date' => ['date', 'birthdate', 'birth_date', '_at'],

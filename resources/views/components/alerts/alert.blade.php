@@ -1,55 +1,51 @@
-<div x-init="init('{{$on}}', {{$timeout}})"
-    {{
-        $attributes
-            ->mergeThemeProvider($themeProvider, 'container')
-            ->mergeThemeProvider($themeProvider, 'modes', $mode)
-            ->mergeThemeProvider($themeProvider, 'rounded', $rounded)
-            ->mergeThemeProvider($themeProvider, 'shadow', $shadow)
-            ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
+<div {{
+    $attributes
+        ->mergeThemeProvider($themeProvider, 'container')
+        ->mergeThemeProvider($themeProvider, 'modes', $mode)
+        ->mergeThemeProvider($themeProvider, 'rounded', $rounded)
+        ->mergeThemeProvider($themeProvider, 'shadow', $shadow)
+        ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
+        ->merge(['x-init' => 'setup(\''.$on.'\', '.$timeout.')'])
     }}
 >
-    @if($icon)
+    @if ($icon)
         <span {{
             $attributes
                 ->mergeOnlyThemeProvider($themeProvider, 'icon')
                 ->merge(['class' => 'bg-'.$color.'-100 border-'.$color.'-500 text-'.$color.'-500'])
         }}>
-            @if($iconSvg)
+            <x-icon :name="$iconName">
                 {!! $iconSvg !!}
-            @elseif($iconName)
-                <x-icon :name="$iconName" />
-            @endif
+            </x-icon>
         </span>
     @endif
 
-    @if($dismissible)
+    @if ($dismissible)
         <button {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'container') }}>
-            @if($dismissibleIcon)
+            @if ($dismissibleIcon)
                 <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'icon') }}>
-                    @if($dismissibleIconSvg)
+                    <x-icon :name="$dismissibleIconName">
                         {!! $dismissibleIconSvg !!}
-                    @elseif($dismissibleIconName)
-                        <x-icon :name="$dismissibleIconName" />
-                    @endif
+                    </x-icon>
                 </span>
             @endif
 
-            @if($dismissibleText)
+            @if ($dismissibleText)
                 <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'text') }}>
-                    {{ __($dismissibleText) }}
+                    {!! __($dismissibleText) !!}
                 </span>
             @endif
         </button>
     @endif
 
     <div>
-        @if($title)
+        @if ($title)
             <div {{
                 $attributes
                     ->mergeOnlyThemeProvider($themeProvider, 'title')
                     ->merge(['class' => 'text-'.$color.'-800'])
             }}>
-                {{ __($title) }}
+                {!! __($title) !!}
             </div>
         @endif
 
@@ -58,7 +54,7 @@
                     ->mergeOnlyThemeProvider($themeProvider, 'message')
                     ->merge(['class' => 'text-'.$color.'-600'])
         }}>
-            {{ $slot->isEmpty() ? __($message) : $slot }}
+            {!! $slot->isEmpty() ? __($message) : $slot !!}
         </div>
     </div>
 </div>

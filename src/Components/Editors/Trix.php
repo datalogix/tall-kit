@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Editors;
 
+use Illuminate\Support\Str;
 use TALLKit\Components\Forms\Textarea;
 
 class Trix extends Textarea
@@ -9,7 +10,7 @@ class Trix extends Textarea
     /**
      * Create a new component instance.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  string|null  $id
      * @param  string|bool|null  $label
      * @param  mixed  $bind
@@ -20,9 +21,9 @@ class Trix extends Textarea
      * @return void
      */
     public function __construct(
-        $name,
+        $name = null,
         $id = null,
-        $label = '',
+        $label = null,
         $bind = null,
         $default = null,
         $language = null,
@@ -31,13 +32,14 @@ class Trix extends Textarea
     ) {
         parent::__construct(
             $name,
-            $id ?: $name,
+            $id ?: $name ?: Str::random(),
             $label,
             $bind,
             $default,
             $language,
             $showErrors,
-            $theme
+            $theme,
+            false
         );
     }
 }

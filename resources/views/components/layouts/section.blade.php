@@ -1,16 +1,16 @@
 <section {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
-        @if($title || $subtitle)
-            <header>
-                @if($title)
+        @if ($title || $subtitle)
+            <header {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header') }}>
+                @if ($title)
                     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'title') }}>
-                        {{ $title }}
+                        {!! __($title) !!}
                     </div>
                 @endif
 
-                @if($subtitle)
+                @if ($subtitle)
                     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'subtitle') }}>
-                        {{ $subtitle }}
+                        {!! __($subtitle) !!}
                     </div>
                 @endif
             </header>
@@ -19,9 +19,9 @@
         {{ $slot }}
     </div>
 
-    @if(isset($actions))
+    @isset ($actions)
         <footer {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}>
             {{ $actions }}
         </footer>
-    @endif
+    @endisset
 </section>

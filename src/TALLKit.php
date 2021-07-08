@@ -102,6 +102,7 @@ class TALLKit
         })->join("\n");
 
         return <<<HTML
+        <style>[x-cloak] { display: none !important; }</style>
 {$htmlStyles}
 {$htmlScrips}
 HTML;
@@ -161,13 +162,20 @@ HTML;
 </script>
 {$tallkitComponents}
 <script data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}>
-    window.tallkit.init();
-
     window.deferLoadingAlpine = function (callback) {
         window.addEventListener('tallkit:load', function () {
             callback();
         });
     };
+
+    // Support for Alpine V3.
+    window.addEventListener('alpine:initializing', () => {
+        window.tallkit.init();
+    })
+
+    document.addEventListener('DOMContentLoaded', function () {
+        window.tallkit.init();
+    });
 </script>
 HTML;
     }

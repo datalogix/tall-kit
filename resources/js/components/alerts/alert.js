@@ -3,7 +3,7 @@ export default ({ toggleable }) => ({
 
   timeout: null,
 
-  init (event, milliseconds) {
+  setup (event, milliseconds) {
     if (event) {
       return this.initEvent(event, milliseconds || 3000)
     }

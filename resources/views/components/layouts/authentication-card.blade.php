@@ -1,9 +1,15 @@
 <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
-    @if(isset($logo))
-        <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'logo') }}>
-            {{ $logo }}
-        </div>
-    @endif
+    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header') }}>
+        <x-logo
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'logo') }}
+            :image="$logoImage"
+            :name="$logoName"
+            :url="$logoUrl"
+            :theme="$theme"
+        >
+            {{ $logo ?? '' }}
+        </x-logo>
+    </div>
 
     <div {{ $attributes->mergeThemeProvider($themeProvider, 'card') }}>
         {{ $slot }}

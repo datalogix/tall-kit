@@ -46,17 +46,71 @@ export function updateInputValue (element, value) {
 export function toggleable () {
   return {
     openned: false,
+    lastOpenned: null,
 
-    open () {
+    setup (openned = false) {
+      this.openned = openned
+    },
+
+    open (storage = true) {
       this.openned = true
+      if (storage) this.lastOpenned = this.openned
     },
 
-    close () {
+    close (storage = true) {
       this.openned = false
+      if (storage) this.lastOpenned = this.openned
     },
 
-    toggle () {
-      this.openned = !this.openned
+    toggle (storage = true) {
+      if (this.openned) {
+        this.close(storage)
+        return
+      }
+
+      this.open(storage)
+    },
+
+    isOpened () {
+      return this.openned === true
+    },
+
+    isClosed () {
+      return this.openned === false
     }
   }
+}
+
+export function loadable () {
+  return {
+    loaded: false,
+
+    start () {
+      this.loaded = false
+    },
+
+    complete () {
+      this.loaded = true
+    },
+
+    isLoading () {
+      return this.loaded === false
+    },
+
+    isCompleted () {
+      return this.loaded === true
+    }
+  }
+}
+
+export function loadImg (src, callback) {
+  if (!src) return
+
+  const img = new window.Image()
+
+  if (callback) {
+    img.onload = () => callback()
+  }
+
+  img.src = src
 }

@@ -7,7 +7,7 @@ use TALLKit\Components\BladeComponent;
 class Button extends BladeComponent
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $text;
 
@@ -15,6 +15,21 @@ class Button extends BladeComponent
      * @var string
      */
     public $type;
+
+    /**
+     * @var string|null
+     */
+    public $icon;
+
+    /**
+     * @var string|null
+     */
+    public $iconLeft;
+
+    /**
+     * @var string|null
+     */
+    public $iconRight;
 
     /**
      * @var string
@@ -37,6 +52,11 @@ class Button extends BladeComponent
     public $bordered;
 
     /**
+     * @var string|bool|null
+     */
+    public $color;
+
+    /**
      * @var string
      */
     public $colorName;
@@ -54,8 +74,11 @@ class Button extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  string  $text
+     * @param  string|null  $text
      * @param  string  $type
+     * @param  string|null  $icon
+     * @param  string|null  $iconLeft
+     * @param  string|null  $iconRight
      * @param  string|bool|null  $color
      * @param  bool  $outlined
      * @param  bool  $bordered
@@ -65,8 +88,11 @@ class Button extends BladeComponent
      * @return void
      */
     public function __construct(
-        $text = '',
+        $text = null,
         $type = 'button',
+        $icon = null,
+        $iconLeft = null,
+        $iconRight = null,
         $color = 'default',
         $rounded = 'default',
         $shadow = 'default',
@@ -78,12 +104,16 @@ class Button extends BladeComponent
 
         $this->text = $text;
         $this->type = $type;
+        $this->icon = $icon;
+        $this->iconLeft = $iconLeft ?? $this->icon;
+        $this->iconRight = $iconRight;
+        $this->color = $color;
         $this->rounded = $rounded;
         $this->shadow = $shadow;
         $this->outlined = $outlined;
         $this->bordered = $bordered;
 
-        if ($color && $colorProperties = $this->themeProvider->colors->get($color)) {
+        if ($this->color && $colorProperties = $this->themeProvider->colors->get($this->color)) {
             $this->colorName = $colorProperties['name'] ?? $colorProperties;
             $this->colorWeight = $colorProperties['weight'] ?? 500;
             $this->colorHover = $colorProperties['hover'] ?? 700;

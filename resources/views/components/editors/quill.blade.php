@@ -1,17 +1,28 @@
-<x-field
+<x-field {{
+    $attributes
+        ->mergeOnlyThemeProvider($themeProvider, 'container')
+        ->merge(['x-init' => 'setup('.$jsonOptions().')'])
+    }}
     :name="$name"
-    :label="$label"
+    :label="false"
     :showErrors="$showErrors"
     :theme="$theme"
-    x-init="init({{ $jsonOptions() }})"
-    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
 >
+    <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
+        <x-label
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+            :label="$label"
+            :theme="$theme"
+        >{{ $labelContent ?? '' }}</x-label>
+    </label>
+
     <x-input
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
         type="hidden"
         :id="$id"
         :name="$name"
         :default="$slot->isEmpty() ? $default : $slot"
-        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
+        :theme="$theme"
     />
 
     <div {{ $attributes->mergeThemeProvider($themeProvider, 'quill') }}></div>

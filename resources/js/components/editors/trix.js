@@ -1,5 +1,5 @@
 export default ({ dispatchInputEvent, loadComponentAssets }) => ({
-  async init () {
+  async setup () {
     await loadComponentAssets('trix')
   },
 

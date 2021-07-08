@@ -2,43 +2,45 @@
 
 namespace TALLKit\Components\Buttons;
 
-use TALLKit\Components\BladeComponent;
+use TALLKit\Components\Forms\Form;
 
-class FormButton extends BladeComponent
+class FormButton extends Form
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $text;
 
     /**
-     * @var string
-     */
-    public $method;
-
-    /**
-     * @var string
-     */
-    public $action;
-
-    /**
      * Create a new component instance.
      *
+     * @param  string|null  $text
      * @param  string  $method
      * @param  string|null  $action
+     * @param  array|string|null  $route
+     * @param  mixed  $bind
+     * @param  string|null  $enctype
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $text = '',
+        $text = null,
         $method = 'POST',
         $action = null,
+        $route = null,
+        $bind = null,
+        $enctype = null,
         $theme = null
     ) {
-        parent::__construct($theme);
+        parent::__construct(
+            $method,
+            $action ?? request()->url(),
+            $route,
+            $bind,
+            $enctype,
+            $theme
+        );
 
         $this->text = $text;
-        $this->method = $method;
-        $this->action = $action ?? request()->url();
     }
 }
