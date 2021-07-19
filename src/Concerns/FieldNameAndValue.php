@@ -41,7 +41,7 @@ trait FieldNameAndValue
      */
     public function getFieldKey()
     {
-        if (!$this->fieldKey) {
+        if (! $this->fieldKey) {
             $this->fieldKey = Str::before($this->name, '[]');
         }
 
@@ -55,7 +55,7 @@ trait FieldNameAndValue
      */
     public function getFieldName()
     {
-        if (!$this->fieldName) {
+        if (! $this->fieldName) {
             $this->fieldName = Str::replace(['[', ']'], ['.', ''], $this->getFieldKey());
         }
 
@@ -69,7 +69,7 @@ trait FieldNameAndValue
      */
     public function hasName()
     {
-        return !empty($this->name);
+        return ! empty($this->name);
     }
 
     /**

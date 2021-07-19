@@ -183,20 +183,20 @@ class Input extends Field
     protected function formatValue($value)
     {
         if ($value instanceof Carbon) {
-            switch($this->type) {
-                case "date":
+            switch ($this->type) {
+                case 'date':
                     return $value->format('Y-m-d');
                     break;
-                case "datetime-local":
+                case 'datetime-local':
                     return $value->format('Y-m-d\TH:i');
                     break;
-                case "week":
+                case 'week':
                     return $value->format('Y-\WW');
                     break;
-                case "time":
+                case 'time':
                     return $value->format('H:i');
                     break;
-                case "month":
+                case 'month':
                     return $value->format('Y-m');
                     break;
             }
