@@ -2,16 +2,13 @@
 
 namespace TALLKit\Components\Forms;
 
+use TALLKit\Concerns\FieldNameAndValue;
 use TALLKit\Concerns\ValidationErrors;
 
 class Field extends FieldGroup
 {
+    use FieldNameAndValue;
     use ValidationErrors;
-
-    /**
-     * @var string|null
-     */
-    public $name;
 
     /**
      * @var string|bool|null
@@ -56,7 +53,8 @@ class Field extends FieldGroup
             $appendIcon
         );
 
-        $this->name = $name;
+        $this->setName($name);
+
         $this->label = $label ?? $name;
         $this->showErrors = $showErrors && $name;
         $this->groupable = $groupable;

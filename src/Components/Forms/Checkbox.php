@@ -3,13 +3,9 @@
 namespace TALLKit\Components\Forms;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use TALLKit\Concerns\BoundValues;
 
 class Checkbox extends Field
 {
-    use BoundValues;
-
     /**
      * @var mixed
      */
@@ -50,14 +46,12 @@ class Checkbox extends Field
 
         $this->value = $value;
 
-        $key = Str::before($this->name, '[]');
-
-        if ($oldData = old($key)) {
+        if ($oldData = $this->oldFieldValue()) {
             $this->checked = in_array($value, Arr::wrap($oldData));
         }
 
         if (! session()->hasOldInput() && $this->isNotWired()) {
-            $boundValue = $this->getBoundValue($bind, $key);
+            $boundValue = $this->getFieldBoundValue($bind);
 
             $this->checked = is_null($boundValue)
                 ? $default

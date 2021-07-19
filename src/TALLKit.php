@@ -168,10 +168,9 @@ HTML;
         });
     };
 
-    // Support for Alpine V3.
-    window.addEventListener('alpine:initializing', () => {
+    window.addEventListener('alpine:initializing', function () {
         window.tallkit.init();
-    })
+    });
 
     document.addEventListener('DOMContentLoaded', function () {
         window.tallkit.init();

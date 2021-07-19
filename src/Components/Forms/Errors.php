@@ -2,7 +2,6 @@
 
 namespace TALLKit\Components\Forms;
 
-use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 
 class Errors extends BladeComponent
@@ -32,7 +31,7 @@ class Errors extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->name = str_replace(['[', ']'], ['.', ''], Str::before($name, '[]'));
+        $this->name = $name;
         $this->bag = $bag;
     }
 }

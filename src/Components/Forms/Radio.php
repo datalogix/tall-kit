@@ -2,12 +2,8 @@
 
 namespace TALLKit\Components\Forms;
 
-use TALLKit\Concerns\BoundValues;
-
 class Radio extends Field
 {
-    use BoundValues;
-
     /**
      * @var mixed
      */
@@ -48,14 +44,16 @@ class Radio extends Field
 
         $this->value = $value;
 
-        if (old($this->name)) {
-            $this->checked = old($this->name) == $value;
+        if ($oldData = $this->oldFieldValue()) {
+            $this->checked = $oldData == $this->value;
         }
 
         if (! session()->hasOldInput() && $this->isNotWired()) {
-            $boundValue = $this->getBoundValue($bind, $this->name) ?? $default;
+            $boundValue = $this->getFieldBoundValue($bind);
 
-            $this->checked = $boundValue == $this->value;
+            $this->checked = is_null($boundValue)
+                ? $default
+                : $boundValue == $this->value;
         }
     }
 }

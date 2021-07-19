@@ -327,9 +327,7 @@ return [
                     'class' => 'font-semibold text-lg',
                 ],
 
-                'message' => [
-                    'class' => 'text-sm',
-                ],
+                'message' => [],
 
                 'types' => [
                     'default' => [
@@ -755,7 +753,7 @@ return [
 
             'field-group' => [
                 'container' => [
-                    'class' => 'flex divide-x items-center border border-gray-200 bg-white rounded shadow focus-within:ring',
+                    'class' => 'flex divide-x items-center border border-gray-200 bg-white rounded shadow overflow-hidden focus-within:ring',
                 ],
 
                 'field' => [
@@ -871,7 +869,7 @@ return [
 
             'label' => [
                 'container' => [
-                    'class' => 'block text-sm font-medium text-gray-700',
+                    'class' => 'block text-gray-700',
                 ],
             ],
 
@@ -902,6 +900,7 @@ return [
             'textarea' => [
                 'textarea' => [
                     'class' => 'block w-full py-2 px-3 outline-none focus:outline-none',
+                    'rows' => '5',
                 ],
             ],
 
@@ -999,7 +998,7 @@ return [
                 ],
 
                 'text' => [
-                    'class' => 'text-gray-700 text-sm',
+                    'class' => 'text-gray-700',
                 ],
 
                 'footer' => [
@@ -1085,7 +1084,7 @@ return [
                 ],
 
                 'subtitle' => [
-                    'class' => 'text-sm text-gray-500',
+                    'class' => 'text-gray-500',
                 ],
 
                 'actions' => [],
@@ -1163,7 +1162,7 @@ return [
                 'container' => [],
 
                 'item' => [
-                    'class' => 'w-full flex items-center py-2 px-4 text-sm text-gray-700 transition hover:bg-gray-100 hover:text-gray-900 outline-none focus:outline-none focus:shadow-outline',
+                    'class' => 'w-full flex items-center py-2 px-4 text-gray-700 transition hover:bg-gray-100 hover:text-gray-900 outline-none focus:outline-none focus:shadow-outline',
                     'role' => 'menuitem',
                 ],
 
@@ -1482,7 +1481,7 @@ return [
              */
             'cell' => [
                 'td' => [
-                    'class' => 'px-6 py-4 whitespace-nowrap text-sm text-gray-500',
+                    'class' => 'px-6 py-4 whitespace-nowrap text-gray-500',
                 ],
             ],
 

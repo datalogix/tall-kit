@@ -55,10 +55,10 @@
         </label>
     @endif
 
-    @if ($hasErrorAndShow($name))
+    @if ($hasErrorAndShow())
         <x-errors
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'errors') }}
-            :name="$name"
+            :name="$getFieldName()"
             :theme="$theme"
         />
     @endif

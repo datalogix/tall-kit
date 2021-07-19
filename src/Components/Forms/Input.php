@@ -2,13 +2,11 @@
 
 namespace TALLKit\Components\Forms;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
-use TALLKit\Concerns\DefaultAndOldValue;
 
 class Input extends Field
 {
-    use DefaultAndOldValue;
-
     /**
      * @var string|bool|null
      */
@@ -86,7 +84,7 @@ class Input extends Field
         }
 
         if ($this->type !== 'password') {
-            $this->setValue($this->name, $bind, $default, $language);
+            $this->setValue($bind, $default, $language);
         }
 
         $this->mask = $mask;
@@ -141,5 +139,69 @@ class Input extends Field
         }
 
         return 'text';
+    }
+
+    /**
+     * Set default and old value.
+     *
+     * @param  mixed  $bind
+     * @param  mixed  $default
+     * @param  mixed  $language
+     * @return void
+     */
+    protected function setValue($bind = null, $default = null, $language = null)
+    {
+        if ($this->isWired() || ! $this->hasName()) {
+            return;
+        }
+
+        if (! $language) {
+            $this->value = $this->formatValue(
+                $this->getFieldValue($bind, $default)
+            );
+
+            return;
+        }
+
+        if ($bind !== false) {
+            $bind = $bind ?: $this->getBoundTarget();
+        }
+
+        if ($bind) {
+            $default = $bind->getTranslation($this->getFieldKey(), $language, false) ?: $default;
+        }
+
+        $this->value = old("{$this->getFieldName()}.{$language}", $default);
+    }
+
+    /**
+     * Format value.
+     *
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function formatValue($value)
+    {
+        if ($value instanceof Carbon) {
+            switch($this->type) {
+                case "date":
+                    return $value->format('Y-m-d');
+                    break;
+                case "datetime-local":
+                    return $value->format('Y-m-d\TH:i');
+                    break;
+                case "week":
+                    return $value->format('Y-\WW');
+                    break;
+                case "time":
+                    return $value->format('H:i');
+                    break;
+                case "month":
+                    return $value->format('Y-m');
+                    break;
+            }
+        }
+
+        return $value;
     }
 }

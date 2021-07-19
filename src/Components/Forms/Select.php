@@ -2,15 +2,12 @@
 
 namespace TALLKit\Components\Forms;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use TALLKit\Concerns\BoundValues;
 
 class Select extends Field
 {
-    use BoundValues;
-
     /**
      * @var mixed
      */
@@ -97,10 +94,7 @@ class Select extends Field
         $this->options = $this->prepareOptions($options);
 
         if ($this->isNotWired()) {
-            $key = Str::before($this->name, '[]');
-            $default = $this->getBoundValue($bind, $key) ?: $default;
-
-            $this->selectedKey = old($key, $default);
+            $this->selectedKey = $this->getFieldValue($bind, $default);
         }
 
         $this->multiple = $multiple;
@@ -123,6 +117,10 @@ class Select extends Field
 
         if ($value instanceof Collection) {
             $value = $value->pluck($this->itemValue)->toArray();
+        }
+
+        if ($value instanceof Arrayable) {
+            $value = $value->toArray();
         }
 
         return in_array($key, Arr::wrap($value));
