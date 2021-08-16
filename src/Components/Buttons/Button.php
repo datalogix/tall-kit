@@ -80,10 +80,10 @@ class Button extends BladeComponent
      * @param  string|null  $iconLeft
      * @param  string|null  $iconRight
      * @param  string|bool|null  $color
-     * @param  bool  $outlined
-     * @param  bool  $bordered
      * @param  string  $rounded
      * @param  string  $shadow
+     * @param  bool  $outlined
+     * @param  bool  $bordered
      * @param  string|null  $theme
      * @return void
      */
