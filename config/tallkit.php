@@ -259,6 +259,8 @@ return [
          * Overlays.
          */
         'backdrop' => \TALLKit\Components\Overlays\Overlay::class, //alias
+        'consent' =>  \TALLKit\Components\Overlays\CookieConsent::class, //alias
+        'cookie-consent' => \TALLKit\Components\Overlays\CookieConsent::class,
         'modal' => \TALLKit\Components\Overlays\Modal::class,
         'overlay' => \TALLKit\Components\Overlays\Overlay::class,
         'tooltip' => \TALLKit\Components\Overlays\Tooltip::class,
@@ -1333,7 +1335,9 @@ return [
                     'class' => 'text-gray-500',
                 ],
 
-                'actions' => [],
+                'actions' => [
+                    'class' => 'flex-shrink-0',
+                ],
             ],
 
             'social-meta' => [],
@@ -1593,6 +1597,33 @@ return [
             /**
              * Overlays.
              */
+            'cookie-consent' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'cookie-consent\')',
+                ],
+
+                'modal' => [
+                    'class' => 'border p-4',
+                    'theme:box.except.@keydown.escape.window' => 'true',
+                    'theme:box.except.@keydown.tab.prevent' => 'true',
+                    'theme:box.except.@keydown.shift.tab.prevent' => 'true',
+                ],
+
+                'section' => [],
+
+                'content' => [
+                    'class' => 'mb-2',
+                ],
+
+                'link' => [
+                    'class' => 'underline',
+                ],
+
+                'button' => [],
+            ],
+
             'modal' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',

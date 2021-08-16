@@ -7,6 +7,7 @@ import trix from './editors/trix'
 import inputImage from './forms/input-image'
 import mask from './forms/mask'
 import toggleable from './navigations/toggleable'
+import cookieConsent from './overlays/cookie-consent'
 import modal from './overlays/modal'
 import tooltip from './overlays/tooltip'
 import flatpickr from './pickers/flatpickr'
@@ -47,6 +48,7 @@ export default {
   /**
    * Overlays.
    */
+  'cookie-consent': cookieConsent,
   modal,
   tooltip,
 

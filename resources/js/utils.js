@@ -177,7 +177,7 @@ export function screen (breakpoint) {
   return getBreakpointSize(breakpoint) <= getWindowSize()
 }
 
-export function storage (storageName = null) {
+export function storagable (storageName = null) {
   return {
     storageName,
 
@@ -198,15 +198,19 @@ export function storage (storageName = null) {
     },
 
     getLocalStorage () {
-      if (this.hasLocalStorage() && this.hasStorageName()) {
-        return window.localStorage.getItem(this.getStorageName())
+      if (!this.hasLocalStorage() || !this.hasStorageName()) {
+        return null
       }
+
+      return window.localStorage.getItem(this.getStorageName())
     },
 
     setLocalStorage (value) {
-      if (this.hasLocalStorage() && this.hasStorageName()) {
-        window.localStorage.setItem(this.getStorageName(), value)
+      if (!this.hasLocalStorage() || !this.hasStorageName()) {
+        return
       }
+
+      window.localStorage.setItem(this.getStorageName(), value)
     }
   }
 }
@@ -236,4 +240,57 @@ export function onLivewireEvent (eventName, callback) {
   }
 
   window.Livewire.on(eventName, callback)
+}
+
+export function cookieable (cookieName = null) {
+  return {
+    cookieName,
+
+    hasCookieName () {
+      return !!this.cookieName
+    },
+
+    getCookieName () {
+      return this.cookieName
+    },
+
+    setCookieName (name) {
+      this.cookieName = name
+    },
+
+    hasCookie () {
+      return !!document.cookie
+    },
+
+    getCookie () {
+      if (!this.hasCookie() || !this.hasCookieName()) {
+        return null
+      }
+
+      const name = this.getCookieName() + '='
+      const ca = document.cookie.split(';')
+
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i]
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1)
+        }
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length)
+        }
+      }
+
+      return null
+    },
+
+    setCookie (value, days = 1) {
+      if (!this.hasCookie() || !this.hasCookieName()) {
+        return
+      }
+
+      const expires = new Date()
+      expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000))
+      document.cookie = `${this.getCookieName()}=${value};expires=${expires.toUTCString()};path=/`
+    }
+  }
 }
