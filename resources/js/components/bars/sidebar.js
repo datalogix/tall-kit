@@ -1,6 +1,6 @@
-export default ({ toggleable, screen, storage }) => ({
+export default ({ toggleable, screen, storagable }) => ({
   ...toggleable(),
-  ...storage(),
+  ...storagable(),
 
   name: null,
   breakpoint: null,
