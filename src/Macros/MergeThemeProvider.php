@@ -10,7 +10,8 @@ class MergeThemeProvider
 {
     public function __invoke()
     {
-        function convertStringToArrayClass($value) {
+        function convertStringToArrayClass($value)
+        {
             if (is_array($value)) {
                 $newValue = [];
 
@@ -30,7 +31,8 @@ class MergeThemeProvider
             return [];
         }
 
-        function mergeRecursiveClass(array $arr1, array $arr2) {
+        function mergeRecursiveClass(array $arr1, array $arr2)
+        {
             $result = $arr2;
 
             foreach ($arr1 as $k => $v) {
