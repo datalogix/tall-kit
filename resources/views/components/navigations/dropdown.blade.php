@@ -12,7 +12,7 @@
     <div {{
         $attributes
             ->mergeThemeProvider($themeProvider, 'dropdown')
-            ->mergeThemeProvider($themeProvider, 'aligns', $align)
+            ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
     }}>
         {{ $slot }}
     </div>

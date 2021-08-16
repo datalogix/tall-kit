@@ -2,26 +2,77 @@
 
 namespace TALLKit\Components\Bars;
 
-use TALLKit\Components\Menus\Menu;
+use Illuminate\Support\Collection;
+use TALLKit\Components\Navigations\Nav;
 
-class Navbar extends Menu
+class Navbar extends Nav
 {
     /**
-     * Get item.
-     *
-     * @return array
+     * @var string|bool
      */
-    public function item()
-    {
-        return $this->attributes
-            ->mergeOnlyThemeProvider($this->themeProvider, 'item')
-            ->merge([
-                'theme:item.except.class' => true,
-                'theme:active.except.class' => true,
-                'theme:active' => $this->attributes
-                    ->mergeOnlyThemeProvider($this->themeProvider, 'active')
-                    ->get('class'),
-            ])
-            ->getAttributes();
+    public $breakpoint;
+
+    /**
+     * @var bool
+     */
+    public $animated;
+
+    /**
+     * @var string
+     */
+    public $align;
+
+    /**
+     * @var string|bool|null
+     */
+    public $logoImage;
+
+    /**
+     * @var string|bool|null
+     */
+    public $logoName;
+
+    /**
+     * @var string|bool|null
+     */
+    public $logoUrl;
+
+    /**
+     * @var \Illuminate\Support\Collection
+     */
+    public $breakpointStyles;
+
+    /**
+     * Create a new component instance.
+     *
+     * @param  array  $items
+     * @param  string  $breakpoint
+     * @param  bool  $animated
+     * @param  string  $align
+     * @param  string|bool|null  $logoImage
+     * @param  string|bool|null  $logoName
+     * @param  string|bool|null  $logoUrl
+     * @param  string|null  $theme
+     * @return void
+     */
+    public function __construct(
+        $items = [],
+        $breakpoint = 'none',
+        $animated = true,
+        $align = 'between',
+        $logoImage = null,
+        $logoName = null,
+        $logoUrl = null,
+        $theme = null
+    ) {
+        parent::__construct($items, true, $theme);
+
+        $this->breakpoint = $breakpoint;
+        $this->animated = $animated;
+        $this->align = $align;
+        $this->logoImage = $logoImage;
+        $this->logoName = $logoName;
+        $this->logoUrl = $logoUrl;
+        $this->breakpointStyles = Collection::make($this->themeProvider->breakpoints->get($this->breakpoint));
     }
 }

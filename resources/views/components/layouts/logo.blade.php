@@ -1,4 +1,6 @@
-@if ($name || $image)
+@if ($slot->isNotEmpty())
+    {{ $slot }}
+@elseif ($name || $image)
     <{{ $url ? 'a' : 'span' }}
         {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
         @if ($url) href="{{ $url }}" @endif

@@ -1,7 +1,7 @@
 <?php
 
 $lang = str_replace('_', '-', app()->getLocale());
-$locale = strtolower(substr(app()->getLocale(), 0, 2));
+$locale = strtolower(substr($lang, 0, 2));
 
 return [
     'prefix' => '',
@@ -64,6 +64,7 @@ return [
             |
             | Inject alpinejs directly from the CDN, the url is in `assets.alpine`.
             | See https://github.com/alpinejs/alpine/tree/2.x#install
+            | See https://alpinejs.dev/essentials/installation#from-a-script-tag
             |
             */
 
@@ -99,6 +100,15 @@ return [
          */
         'imask' => [
             'https://cdn.jsdelivr.net/npm/imask@6/dist/imask.min.js',
+        ],
+
+        /**
+         * Overlays.
+         */
+        'tooltip' => [
+            'https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js',
+            'https://cdn.jsdelivr.net/npm/tippy.js@6/dist/tippy.umd.min.js',
+            'https://cdn.jsdelivr.net/npm/tippy.js@6/dist/tippy.css',
         ],
 
         /**
@@ -187,7 +197,9 @@ return [
         'form' => \TALLKit\Components\Forms\Form::class,
         'group' => \TALLKit\Components\Forms\Group::class,
         'form-group' => \TALLKit\Components\Forms\Group::class, // alias
+        'image-preview' => \TALLKit\Components\Forms\InputImage::class, // alias
         'input' => \TALLKit\Components\Forms\Input::class,
+        'input-image' => \TALLKit\Components\Forms\InputImage::class,
         'label' => \TALLKit\Components\Forms\Label::class,
         'lbl' => \TALLKit\Components\Forms\Label::class, // alias
         'radio' => \TALLKit\Components\Forms\Radio::class,
@@ -215,11 +227,10 @@ return [
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
         'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
         'card' => \TALLKit\Components\Layouts\Card::class,
+        'container' => \TALLKit\Components\Layouts\Container::class,
         'form-section' => \TALLKit\Components\Layouts\FormSection::class,
         'html' => \TALLKit\Components\Layouts\Html::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
-        'overlay' => \TALLKit\Components\Layouts\Overlay::class,
-        'backdrop' => \TALLKit\Components\Layouts\Overlay::class, //alias
         'section' => \TALLKit\Components\Layouts\Section::class,
         'social-meta' => \TALLKit\Components\Layouts\SocialMeta::class,
         'socialmeta' => \TALLKit\Components\Layouts\SocialMeta::class, //alias
@@ -231,14 +242,8 @@ return [
         'dropdown-menu' => \TALLKit\Components\Menus\MenuDropdown::class, // alias
         'menu-dropdown' => \TALLKit\Components\Menus\MenuDropdown::class,
         'menu' => \TALLKit\Components\Menus\Menu::class,
-        'menu-item' => \TALLKit\Components\Menus\MenuItem::class,
         'menu-user' => \TALLKit\Components\Menus\UserMenu::class, // alias
         'user-menu' => \TALLKit\Components\Menus\UserMenu::class,
-
-        /**
-         * Modals.
-         */
-        'modal' => \TALLKit\Components\Modals\Modal::class,
 
         /**
          * Navigations.
@@ -246,7 +251,17 @@ return [
         'drawer' => \TALLKit\Components\Navigations\Drawer::class,
         'dropdown' => \TALLKit\Components\Navigations\Dropdown::class,
         'navigation-drawer' => \TALLKit\Components\Navigations\Drawer::class, // alias
+        'nav' => \TALLKit\Components\Navigations\Nav::class,
+        'nav-item' => \TALLKit\Components\Navigations\NavItem::class,
         'toggleable' => \TALLKit\Components\Navigations\Toggleable::class,
+
+        /**
+         * Overlays.
+         */
+        'backdrop' => \TALLKit\Components\Overlays\Overlay::class, //alias
+        'modal' => \TALLKit\Components\Overlays\Modal::class,
+        'overlay' => \TALLKit\Components\Overlays\Overlay::class,
+        'tooltip' => \TALLKit\Components\Overlays\Tooltip::class,
 
         /**
          * Pickers.
@@ -287,10 +302,10 @@ return [
             'alert' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
-                    'class' => 'flex flex-row p-5 rounded relative transition',
-                    'role' => 'alert',
+                    'class' => 'flex flex-row p-4 rounded relative transition',
+                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'alert\')',
-                    'x-show' => 'openned',
+                    'x-show' => 'isOpened()',
                     'x-transition:enter' => 'ease-out duration-300',
                     'x-transition:enter-start' => 'opacity-0',
                     'x-transition:enter-end' => 'opacity-100',
@@ -319,7 +334,7 @@ return [
                     'iconSvg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
 
                     'text' => [
-                        'class' => 'text-sm text-gray-700',
+                        'class' => 'text-sm',
                     ],
                 ],
 
@@ -340,28 +355,28 @@ return [
                     'error' => [
                         'color' => 'red',
                         'iconName' => 'close',
-                        'iconSvg' => '<svg class="fill-current h-6 w-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Error',
                     ],
 
                     'info' => [
                         'color' => 'blue',
                         'iconName' => 'information',
-                        'iconSvg' => '<svg class="fill-current h-6 w-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Info',
                     ],
 
                     'success' => [
                         'color' => 'green',
                         'iconName' => 'check',
-                        'iconSvg' => '<svg class="fill-current h-6 w-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Success',
                     ],
 
                     'warning' => [
                         'color' => 'yellow',
                         'iconName' => 'alert',
-                        'iconSvg' => '<svg class="fill-current h-6 w-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Warning',
                     ],
                 ],
@@ -466,17 +481,181 @@ return [
              */
             'navbar' => [
                 'container' => [
-                    'class' => 'bg-gray-700 overflow-y-auto',
+                    'data-tallkit-assets' => 'alpine',
+                    'class' => 'flex flex-wrap items-center relative',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'navbar\')',
+                    '@click.away' => 'close',
+                    '@click.outside' => 'close',
+                    '@keydown.escape.window' => 'close',
                 ],
 
-                'inline' => [
-                    'class' => 'bg-gray-700 flex items-center overflow-x-auto',
+                'aligns' => [
+                    'start' => [
+                        'class' => 'justify-start',
+                    ],
+
+                    'end' => [
+                        'class' => 'justify-end',
+                    ],
+
+                    'center' => [
+                        'class' => 'justify-center',
+                    ],
+
+                    'between' => [
+                        'class' => 'justify-between',
+                    ],
+
+                    'around' => [
+                        'class' => 'justify-around',
+                    ],
+
+                    'evenly' => [
+                        'class' => 'justify-evenly',
+                    ],
                 ],
 
-                'menu' => [],
+                'breakpoints' => [
+                    'sm' => [
+                        'container' => [
+                            'class' => 'sm:flex-nowrap',
+                        ],
+
+                        'logo' => [],
+
+                        'toggler' => [
+                            'class' => 'sm:hidden',
+                        ],
+
+                        'nav' => [
+                            'class' => 'sm:flex sm:w-auto sm:flex-grow-0 sm:flex-row sm:items-center sm:max-h-full sm:relative',
+                        ],
+
+                        'animated' => [
+                            'class' => 'sm:transition-none',
+                        ],
+                    ],
+
+                    'md' => [
+                        'container' => [
+                            'class' => 'md:flex-nowrap',
+                        ],
+
+                        'logo' => [],
+
+                        'toggler' => [
+                            'class' => 'md:hidden',
+                        ],
+
+                        'nav' => [
+                            'class' => 'md:flex md:w-auto md:flex-grow-0 md:flex-row md:items-center md:max-h-full md:relative',
+                        ],
+
+                        'animated' => [
+                            'class' => 'md:transition-none',
+                        ],
+                    ],
+
+                    'lg' => [
+                        'container' => [
+                            'class' => 'lg:flex-nowrap',
+                        ],
+
+                        'logo' => [],
+
+                        'toggler' => [
+                            'class' => 'lg:hidden',
+                        ],
+
+                        'nav' => [
+                            'class' => 'lg:flex lg:w-auto lg:flex-grow-0 lg:flex-row lg:items-center lg:max-h-full lg:relative',
+                        ],
+
+                        'animated' => [
+                            'class' => 'lg:transition-none',
+                        ],
+                    ],
+
+                    'xl' => [
+                        'container' => [
+                            'class' => 'xl:flex-nowrap',
+                        ],
+
+                        'logo' => [],
+
+                        'toggler' => [
+                            'class' => 'xl:hidden',
+                        ],
+
+                        'nav' => [
+                            'class' => 'xl:flex xl:w-auto xl:flex-grow-0 xl:flex-row xl:items-center xl:max-h-full xl:relative',
+                        ],
+
+                        'animated' => [
+                            'class' => 'xl:transition-none',
+                        ],
+                    ],
+
+                    '2xl' => [
+                        'container' => [
+                            'class' => '2xl:flex-nowrap',
+                        ],
+
+                        'logo' => [],
+
+                        'toggler' => [
+                            'class' => '2xl:hidden',
+                        ],
+
+                        'nav' => [
+                            'class' => '2xl:flex 2xl:w-auto 2xl:flex-grow-0 2xl:flex-row 2xl:items-center 2xl:max-h-full 2xl:relative',
+                        ],
+
+                        'animated' => [
+                            'class' => '2xl:transition-none',
+                        ],
+                    ],
+                ],
+
+                'logo' => [],
+
+                'toggler' => [
+                    '@click' => 'toggle',
+                ],
+
+                'nav' => [
+                    'class' => 'w-full flex-grow flex-col items-start max-h-0',
+                    ':class' => '{ \'hidden\': isClosed() }',
+                    'x-ref' => 'nav',
+                    'x-bind:style' => 'isOpened() ? \'max-height: \' + $refs.nav.scrollHeight + \'px\' : \'\'',
+
+                    'theme:item' => [
+                        'theme:container' => [
+                            'class' => 'w-full',
+                        ],
+                    ],
+                ],
+
+                'animated' => [
+                    'class' => 'transition-all',
+                ],
+            ],
+
+            'sidebar' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'sidebar\')',
+                    '@resize.window' => 'check',
+                ],
+
+                'nav' => [
+                    'class' => 'h-full relative bg-gray-700 overflow-y-auto',
+                ],
 
                 'item' => [
-                    'class' => 'text-gray-100 w-full flex items-center py-4 px-6 transition hover:bg-black hover:bg-opacity-10 outline-none focus:outline-none focus:shadow-outline',
+                    'class' => 'text-gray-100 w-full flex items-center py-4 px-6 transition hover:bg-black hover:bg-opacity-10 outline-none focus:outline-none',
                 ],
 
                 'active' => [
@@ -484,26 +663,13 @@ return [
                 ],
             ],
 
-            'sidebar' => [
-                'container' => [
-                    'data-tallkit-assets' => 'alpine',
-                    'x-data' => 'window.tallkit.component(\'sidebar\')',
-                    'x-spread' => 'events',
-                    'x-bind' => 'events',
-                ],
-
-                'navbar' => [
-                    'class' => 'h-full relative',
-                ],
-            ],
-
             'toolbar' => [
                 'container' => [
-                    'class' => 'flex justify-between items-center py-4 px-6 bg-white border-b-4 border-indigo-700 text-gray-700',
+                    'class' => 'flex justify-between items-center py-4 px-6 bg-white border-b-4 border-indigo-700',
                 ],
 
                 'title' => [
-                    'class' => 'flex-1 text-2xl text-red-5001 font-medium',
+                    'class' => 'flex-1 text-2xl font-medium',
                 ],
             ],
 
@@ -512,7 +678,7 @@ return [
              */
             'button' => [
                 'container' => [
-                    'class' => 'flex-inline items-center justify-between space-x-2 font-bold py-2 px-4 outline-none focus:outline-none focus:shadow-outline',
+                    'class' => 'flex-inline justify-between items-center space-x-2 font-bold py-2 px-4 outline-none focus:outline-none',
                 ],
 
                 'iconLeft' => [],
@@ -640,7 +806,7 @@ return [
                 'iconName' => 'menu',
 
                 'iconSvg' => [
-                    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                    '<svg class="fill-current" viewBox="0 0 24 24"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
                 ],
             ],
 
@@ -757,7 +923,7 @@ return [
                 ],
 
                 'field' => [
-                    'class' => 'flex-1 w-full',
+                    'class' => 'flex-1 w-full relative',
                 ],
 
                 'prepend' => [
@@ -851,6 +1017,98 @@ return [
                 ],
             ],
 
+            'input-image' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'input-image\')',
+                    'x-init' => 'setup',
+                ],
+
+                'label' => [],
+
+                'labelText' => [
+                    'class' => 'mb-1',
+                ],
+
+                'field' => [
+                    'class' => 'inline-block relative overflow-hidden border border-gray-200 rounded shadow focus-within:ring',
+                ],
+
+                'input' => [
+                    'class' => 'hidden',
+                    'type' => 'file',
+                    'accept' => 'image/*',
+                    '@change' => 'change',
+                    'x-ref' => 'input',
+                ],
+
+                'empty' => [
+                    'class' => 'w-full h-full',
+                    'x-show' => 'isEmpty()',
+                    '@click.prevent' => 'edit',
+                ],
+
+                'emptyIconSvg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>',
+
+                'loading' => [
+                    'class' => 'w-full h-full flex items-center justify-center p-2',
+                    'x-show' => 'isLoading()',
+                ],
+
+                'loadingIcon' => 'animate-spin w-6 h-6 shadown',
+
+                'loadingIconName' => 'loading',
+
+                'loadingIconSvg' => '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
+
+                'error' => [
+                    'class' => 'w-full h-full',
+                    'x-show' => 'isFailed()',
+                    '@click.prevent' => 'edit'
+                ],
+
+                'errorIconSvg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
+
+                'complete' => [
+                    'class' => 'w-full h-full flex items-center justify-center',
+                    'x-show' => 'isCompleted()',
+                ],
+
+                'img' => [
+                    'x-ref' => 'output',
+                ],
+
+                'actions' => [
+                    'class' => 'w-full h-full flex items-center justify-center absolute text-white bg-black bg-opacity-25',
+                ],
+
+                'edit' => [
+                    'class' => 'transform hover:scale-125',
+                    '@click.prevent' => 'edit',
+                ],
+
+                'editIcon' => [
+                    'class' => 'text-white w-6 h-6',
+                ],
+
+                'editIconName' => 'pencil',
+
+                'editIconSvg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>',
+
+                'delete' => [
+                    'class' => 'transform hover:scale-125',
+                ],
+
+                'deleteIcon' => [
+                    'class' => 'text-white w-6 h-6',
+                ],
+
+                'deleteIconName' => 'trash',
+
+                'deleteIconSvg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>',
+            ],
+
             'input' => [
                 'hidden' => [
                     'class' => 'hidden',
@@ -869,7 +1127,7 @@ return [
 
             'label' => [
                 'container' => [
-                    'class' => 'block text-gray-700',
+                    'class' => 'block',
                 ],
             ],
 
@@ -954,7 +1212,7 @@ return [
                 ],
 
                 'content' => [
-                    'class' => 'container mx-auto px-6 py-8',
+                    'class' => 'px-6 py-8',
                 ],
             ],
 
@@ -997,9 +1255,7 @@ return [
                     'class' => 'block mb-1 text-lg font-medium text-gray-900',
                 ],
 
-                'text' => [
-                    'class' => 'text-gray-700',
-                ],
+                'text' => [],
 
                 'footer' => [
                     'class' => 'px-8 py-4 bg-gray-50 overflow-hidden',
@@ -1007,6 +1263,12 @@ return [
 
                 'image-footer' => [
                     'class' => 'w-full h-32 rounded-b',
+                ],
+            ],
+
+            'container' => [
+                'container' => [
+                    'class' => 'container mx-auto',
                 ],
             ],
 
@@ -1035,12 +1297,14 @@ return [
 
                 'head' => [],
 
-                'body' => [],
+                'body' => [
+                    'class' => 'text-gray-700',
+                ],
             ],
 
             'logo' => [
                 'container' => [
-                    'class' => 'flex items-center justify-center p-4 m-4',
+                    'class' => 'flex items-center justify-center p-4',
                 ],
 
                 'image' => [
@@ -1049,24 +1313,6 @@ return [
 
                 'name' => [
                     'class' => 'text-2xl font-semibold',
-                ],
-            ],
-
-            'overlay' => [
-                'container' => [
-                    'class' => 'fixed inset-0 transform transition cursor-pointer',
-                    'x-transition:enter' => 'ease-out duration-300',
-                    'x-transition:enter-start' => 'opacity-0',
-                    'x-transition:enter-end' => 'opacity-100',
-                    'x-transition:leave' => 'ease-in duration-200',
-                    'x-transition:leave-start' => 'opacity-100',
-                    'x-transition:leave-end' => 'opacity-0',
-                    'x-show' => 'openned',
-                    '@click' => 'close(false)',
-                ],
-
-                'backdrop' => [
-                    'class' => 'absolute inset-0 bg-gray-500 opacity-75',
                 ],
             ],
 
@@ -1136,7 +1382,7 @@ return [
 
                 'trigger' => [
                     'type' => 'button',
-                    'class' => 'bg-white text-gray-700 shadow rounded-full w-8 h-8 transition hover:bg-gray-100 flex items-center justify-center outline-none focus:outline-none',
+                    'class' => 'bg-white shadow rounded-full w-8 h-8 transition hover:bg-gray-100 flex items-center justify-center outline-none focus:outline-none',
                 ],
 
                 'icon' => [],
@@ -1148,34 +1394,25 @@ return [
 
             'menu' => [
                 'container' => [
-                    'class' => 'bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 rounded shadow overflow-hidden whitespace-nowrap',
-                    'role' => 'menu',
+                    'class' => 'bg-white ring-1 ring-black ring-opacity-5 divide-gray-100 rounded shadow',
+
+                    'theme:item' => [
+                        'class' => 'hover:bg-gray-100 hover:text-gray-900',
+
+                        'theme:active' => [
+                            'class' => 'bg-gray-100 text-gray-900',
+                        ],
+                    ],
                 ],
 
-                'inline' => [
-                    'class' => 'flex items-center justify-center bg-white ring-1 ring-black ring-opacity-5 divide-x divide-gray-100 rounded shadow overflow-hidden whitespace-nowrap',
-                    'role' => 'menu',
-                ],
-            ],
+                'aligns' => [
+                    'outline' => [
+                        'class' => 'divide-y',
+                    ],
 
-            'menu-item' => [
-                'container' => [],
-
-                'item' => [
-                    'class' => 'w-full flex items-center py-2 px-4 text-gray-700 transition hover:bg-gray-100 hover:text-gray-900 outline-none focus:outline-none focus:shadow-outline',
-                    'role' => 'menuitem',
-                ],
-
-                'active' => [
-                    'class' => 'bg-gray-100 text-gray-900',
-                ],
-
-                'iconLeft' => [
-                    'class' => 'mr-3',
-                ],
-
-                'iconRight' => [
-                    'class' => 'ml-3',
+                    'inline' => [
+                        'class' => 'divide-x',
+                    ],
                 ],
             ],
 
@@ -1191,80 +1428,16 @@ return [
                 ],
 
                 'userAvatarContainer' => [
-                    'theme:image' => 'w-full h-full',
-                    'theme:icon' => 'w-4 h-4',
+                    'theme:image' => [
+                        'class' => 'w-full h-full',
+                    ],
+
+                    'theme:icon' => [
+                        'class' => 'w-4 h-4',
+                    ],
                 ],
 
                 'userName' => [],
-            ],
-
-            /**
-             * Modals.
-             */
-            'modal' => [
-                'container' => [
-                    'data-tallkit-assets' => 'alpine',
-                    'x-cloak' => '',
-                    'x-data' => 'window.tallkit.component(\'modal\')',
-                ],
-
-                'trigger' => [
-                    'class' => 'inline cursor-pointer',
-                    '@click' => 'toggle',
-                ],
-
-                'box' => [
-                    'class' => 'fixed p-6 inset-0 px-4 z-50 flex justify-center',
-                    'x-show' => 'openned',
-                    '@close.stop' => 'close',
-                    '@keydown.escape.window' => 'close',
-                    '@keydown.tab.prevent' => '$event.shiftKey || nextFocusable().focus()',
-                    '@keydown.shift.tab.prevent' => 'prevFocusable().focus()',
-                ],
-
-                'aligns' => [
-                    'top' => [
-                        'class' => 'items-start',
-                    ],
-
-                    'center' => [
-                        'class' => 'items-center',
-                    ],
-
-                    'bottom' => [
-                        'class' => 'items-end',
-                    ],
-                ],
-
-                'modal' => [
-                    'class' => 'flex-initial bg-white rounded overflow-hidden shadow transform transition w-full',
-                    'x-show' => 'openned',
-                    'x-transition:enter' => 'ease-out duration-300',
-                    'x-transition:leave' => 'ease-in duration-200',
-                ],
-
-                'transitions' => [
-                    'top' => [
-                        'x-transition:enter-start' => 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-                        'x-transition:enter-end' => 'opacity-100 translate-y-0 sm:scale-100',
-                        'x-transition:leave-start' => 'opacity-100 translate-y-0 sm:scale-100',
-                        'x-transition:leave-end' => 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-                    ],
-
-                    'center' => [
-                        'x-transition:enter-start' => 'opacity-0 sm:scale-95',
-                        'x-transition:enter-end' => 'opacity-100 sm:scale-100',
-                        'x-transition:leave-start' => 'opacity-100 sm:scale-100',
-                        'x-transition:leave-end' => 'opacity-0 sm:scale-95',
-                    ],
-
-                    'bottom' => [
-                        'x-transition:enter-start' => 'opacity-0 -translate-y-4 sm:translate-y-0 sm:scale-95',
-                        'x-transition:enter-end' => 'opacity-100 translate-y-0 sm:scale-100',
-                        'x-transition:leave-start' => 'opacity-100 translate-y-0 sm:scale-100',
-                        'x-transition:leave-end' => 'opacity-0 -translate-y-4 sm:translate-y-0 sm:scale-95',
-                    ],
-                ],
             ],
 
             /**
@@ -1275,7 +1448,7 @@ return [
 
                 'drawer' => [
                     'class' => 'fixed transform transition',
-                    'x-show' => 'openned',
+                    'x-show' => 'isOpened()',
                     'x-transition:enter' => 'ease-out duration-300',
                     'x-transition:leave' => 'ease-in duration-200',
                 ],
@@ -1317,21 +1490,22 @@ return [
 
             'dropdown' => [
                 'trigger' => [
-                    'class' => 'inline cursor-pointer',
+                    'class' => 'inline-block cursor-pointer',
                     '@click' => 'toggle',
                 ],
 
                 'dropdown' => [
                     'class' => 'absolute',
-                    'x-show' => 'openned',
+                    'x-show' => 'isOpened()',
                     'x-transition:enter' => 'transition ease-out duration-300',
                     'x-transition:enter-start' => 'transform opacity-0 scale-95',
                     'x-transition:enter-end' => 'transform opacity-100 scale-100',
                     'x-transition:leave' => 'transition ease-in duration-200',
                     'x-transition:leave-start' => 'transform opacity-100 scale-100',
                     'x-transition:leave-end' => 'transform opacity-0 scale-95',
-                    '@click' => 'close',
                     '@click.away' => 'close',
+                    '@click.outside' => 'close',
+                    '@keydown.escape.window' => 'close'
                 ],
 
                 'aligns' => [
@@ -1369,14 +1543,188 @@ return [
                 ],
             ],
 
+            'nav-item' => [
+                'container' => [],
+
+                'item' => [
+                    'class' => 'w-full flex items-center py-2 px-4 transition outline-none focus:outline-none hover:opacity-75',
+                ],
+
+                'active' => [
+                    'class' => 'font-semibold',
+                ],
+
+                'iconLeft' => [
+                    'class' => 'mr-3',
+                ],
+
+                'iconRight' => [
+                    'class' => 'ml-3',
+                ],
+            ],
+
+            'nav' => [
+                'container' => [
+                    'class' => 'flex overflow-hidden whitespace-nowrap',
+                ],
+
+                'aligns' => [
+                    'outline' => [
+                        'class' => 'flex-col',
+                    ],
+
+                    'inline' => [
+                        'class' => 'flex-row',
+                    ],
+                ],
+            ],
+
             'toggleable' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
                     'class' => 'relative',
-                    ':class' => '{\'z-30\': openned}',
+                    ':class' => '{\'z-30\': isOpened()}',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'toggleable\')',
+                    '@keydown.escape.window' => 'close(false)'
                 ],
+            ],
+
+            /**
+             * Overlays.
+             */
+            'modal' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'modal\')',
+                ],
+
+                'trigger' => [
+                    'class' => 'inline-block cursor-pointer',
+                    '@click' => 'toggle',
+                ],
+
+                'box' => [
+                    'class' => 'fixed inset-0 z-50 p-4 flex',
+                    'x-show' => 'isOpened()',
+                    '@close.stop' => 'close',
+                    '@keydown.escape.window' => 'close',
+                    '@keydown.tab.prevent' => '$event.shiftKey || nextFocusable().focus()',
+                    '@keydown.shift.tab.prevent' => 'prevFocusable().focus()',
+                ],
+
+                'aligns' => [
+                    'left' => [
+                        'class' => 'items-center justify-start',
+                    ],
+
+                    'right' => [
+                        'class' => 'items-center justify-end',
+                    ],
+
+                    'top' => [
+                        'class' => 'items-start justify-center',
+                    ],
+
+                    'top-left' => [
+                        'class' => 'items-start justify-start',
+                    ],
+
+                    'top-right' => [
+                        'class' => 'items-start justify-end',
+                    ],
+
+                    'center' => [
+                        'class' => 'items-center justify-center',
+                    ],
+
+                    'bottom' => [
+                        'class' => 'items-end justify-center',
+                    ],
+
+                    'bottom-left' => [
+                        'class' => 'items-end justify-start',
+                    ],
+
+                    'bottom-right' => [
+                        'class' => 'items-end justify-end',
+                    ],
+                ],
+
+                'modal' => [
+                    'class' => 'flex-initial bg-white overflow-hidden rounded shadow transform transition w-full',
+                    'x-show' => 'isOpened()',
+                    'x-transition:enter' => 'ease-out duration-300',
+                    'x-transition:leave' => 'ease-in duration-200',
+                ],
+
+                'transitions' => [
+                    'opacity' => [
+                        'x-transition:enter-start' => 'opacity-0',
+                        'x-transition:enter-end' => 'opacity-100',
+                        'x-transition:leave-start' => 'opacity-100',
+                        'x-transition:leave-end' => 'opacity-0',
+                    ],
+
+                    'left' => [
+                        'x-transition:enter-start' => '-translate-x-full',
+                        'x-transition:enter-end' => 'translate-x-0',
+                        'x-transition:leave-start' => 'translate-x-0',
+                        'x-transition:leave-end' => '-translate-x-full',
+                    ],
+
+                    'right' => [
+                        'x-transition:enter-start' => 'translate-x-full',
+                        'x-transition:enter-end' => 'translate-x-0',
+                        'x-transition:leave-start' => 'translate-x-0',
+                        'x-transition:leave-end' => 'translate-x-full',
+                    ],
+
+                    'top' => [
+                        'x-transition:enter-start' => '-translate-y-full',
+                        'x-transition:enter-end' => 'translate-y-0',
+                        'x-transition:leave-start' => 'translate-y-0',
+                        'x-transition:leave-end' => '-translate-y-full',
+                    ],
+
+                    'bottom' => [
+                        'x-transition:enter-start' => 'translate-y-full',
+                        'x-transition:enter-end' => 'translate-y-0',
+                        'x-transition:leave-start' => 'translate-y-0',
+                        'x-transition:leave-end' => 'translate-y-full',
+                    ],
+                ],
+            ],
+
+            'overlay' => [
+                'container' => [
+                    'class' => 'fixed inset-0 transform transition cursor-pointer',
+                    'x-cloak' => '',
+                    'x-transition:enter' => 'ease-out duration-300',
+                    'x-transition:enter-start' => 'opacity-0',
+                    'x-transition:enter-end' => 'opacity-100',
+                    'x-transition:leave' => 'ease-in duration-200',
+                    'x-transition:leave-start' => 'opacity-100',
+                    'x-transition:leave-end' => 'opacity-0',
+                    'x-show' => 'isOpened()',
+                    '@click' => 'close(false)',
+                ],
+
+                'backdrop' => [
+                    'class' => 'absolute inset-0 bg-gray-500 opacity-70',
+                ],
+            ],
+
+            'tooltip' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,tooltip',
+                    'class' => 'inline-block',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'tooltip\')',
+                ],
+
+                'options' => [],
             ],
 
             /**
@@ -1463,12 +1811,12 @@ return [
                 ],
 
                 'image' => [
-                    'x-show' => 'loaded',
+                    'x-show' => 'isCompleted()',
                     'x-ref' => 'image',
                 ],
 
                 'icon' => [
-                    'x-show' => '!loaded',
+                    'x-show' => 'isLoading()',
                 ],
 
                 'iconName' => 'user',

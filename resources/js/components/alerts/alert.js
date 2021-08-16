@@ -1,38 +1,19 @@
-export default ({ toggleable }) => ({
+export default ({ toggleable, timeout, onLivewireEvent }) => ({
   ...toggleable(),
-
-  timeout: null,
 
   setup (event, milliseconds) {
     if (event) {
-      return this.initEvent(event, milliseconds || 3000)
+      return onLivewireEvent(event, () => {
+        this.open()
+
+        timeout(this.close, milliseconds || 3000)
+      })
     }
+
+    this.open()
 
     if (milliseconds) {
-      return this.initTimeout(milliseconds)
+      timeout(this.close, milliseconds)
     }
-
-    this.open()
-  },
-
-  initEvent (event, milliseconds) {
-    if (!window.Livewire) {
-      console.warn('Livewire not found! See https://laravel-livewire.com/docs/installation')
-      return
-    }
-
-    window.Livewire.on(event, () => {
-      this.initTimeout(milliseconds)
-    })
-  },
-
-  initTimeout (milliseconds) {
-    clearTimeout(this.timeout)
-
-    this.open()
-
-    this.timeout = setTimeout(() => {
-      this.close()
-    }, milliseconds)
   }
 })

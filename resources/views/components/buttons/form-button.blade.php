@@ -2,8 +2,6 @@
     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :method="$method"
     :action="$action"
-    :route="$route"
-    :bind="$bind"
     :enctype="$enctype"
     :theme="$theme"
 >

@@ -2,11 +2,9 @@ export default ({ toggleable }) => ({
   ...toggleable(),
 
   focusables () {
-    // All focusable element types...
     const selector = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex=-1])'
 
     return [...this.$el.querySelectorAll(selector)]
-      // All non-disabled elements...
       .filter(el => !el.hasAttribute('disabled'))
   },
 

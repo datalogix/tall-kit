@@ -25,6 +25,11 @@ class Input extends Field
     /**
      * @var mixed
      */
+    public $default;
+
+    /**
+     * @var mixed
+     */
     protected $mask;
 
     /**
@@ -78,6 +83,7 @@ class Input extends Field
 
         $this->id = $id ?? $this->name;
         $this->type = $type ?: $this->getTypeByName($this->name);
+        $this->default = $default;
 
         if ($language) {
             $this->name = "{$this->name}[{$language}]";
@@ -151,7 +157,13 @@ class Input extends Field
      */
     protected function setValue($bind = null, $default = null, $language = null)
     {
-        if ($this->isWired() || ! $this->hasName()) {
+        if ($this->isWired()) {
+            return;
+        }
+
+        if (! $this->hasName()) {
+            $this->value = $default;
+
             return;
         }
 

@@ -2,20 +2,10 @@
 
 namespace TALLKit\Components\Menus;
 
-use TALLKit\Components\BladeComponent;
+use TALLKit\Components\Navigations\Nav;
 
-class Menu extends BladeComponent
+class Menu extends Nav
 {
-    /**
-     * @var array
-     */
-    public $items;
-
-    /**
-     * @var bool
-     */
-    public $inline;
-
     /**
      * Create a new component instance.
      *
@@ -29,9 +19,6 @@ class Menu extends BladeComponent
         $inline = false,
         $theme = null
     ) {
-        parent::__construct($theme);
-
-        $this->items = $items;
-        $this->inline = $inline;
+        parent::__construct($items, $inline, $theme);
     }
 }

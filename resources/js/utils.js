@@ -15,11 +15,15 @@ export function detectAssets (el, attributeKey) {
 }
 
 export function loadComponentAssets (asset) {
-  if (window.tallkit && window.tallkit.assets) {
-    return window.tallkit.assets.load(asset)
-  }
+  return new Promise((resolve, reject) => {
+    if (!window.tallkit || !window.tallkit.assets) {
+      reject(new Error('TALLKit is not defined.'))
+    }
 
-  return Promise.resolve()
+    window.tallkit.assets.load(asset)
+
+    window.addEventListener(`tallkit:asset.${asset}`, resolve)
+  })
 }
 
 export function dispatch (eventName) {
@@ -49,7 +53,7 @@ export function toggleable () {
     lastOpenned: null,
 
     setup (openned = false) {
-      this.openned = openned
+      this.openned = Boolean(openned)
     },
 
     open (storage = true) {
@@ -83,14 +87,38 @@ export function toggleable () {
 
 export function loadable () {
   return {
-    loaded: false,
+    empty: null,
+    loaded: null,
+    error: null,
+
+    reset () {
+      this.empty = null
+      this.loaded = null
+      this.error = null
+    },
+
+    clear () {
+      this.reset()
+      this.empty = true
+    },
 
     start () {
+      this.reset()
       this.loaded = false
     },
 
     complete () {
+      this.reset()
       this.loaded = true
+    },
+
+    fail (error) {
+      this.reset()
+      this.error = error
+    },
+
+    isEmpty () {
+      return this.empty === true
     },
 
     isLoading () {
@@ -99,18 +127,113 @@ export function loadable () {
 
     isCompleted () {
       return this.loaded === true
+    },
+
+    isFailed () {
+      return this.error !== null
     }
   }
 }
 
-export function loadImg (src, callback) {
-  if (!src) return
+export function loadImg (src, ref = null) {
+  return new Promise((resolve, reject) => {
+    const img = new window.Image()
+    img.onload = (event) => {
+      if (ref) ref.src = img.src
+      resolve(event, img)
+    }
+    img.onerror = (error) => {
+      reject(error, img)
+    }
+    img.src = src
+  })
+}
 
-  const img = new window.Image()
+export function getWindowSize () {
+  return window.innerWidth
+}
 
-  if (callback) {
-    img.onload = () => callback()
+export const getBreakpointSize = (breakpoint) => {
+  const breakpoints = {
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    '2xl': 1536
   }
 
-  img.src = src
+  if (Number.isInteger(breakpoint)) {
+    return breakpoint
+  }
+
+  if (breakpoints[breakpoint] === undefined) {
+    throw Error('Undefined breakpoint: ' + breakpoint)
+  }
+
+  return breakpoints[breakpoint]
+}
+
+export function screen (breakpoint) {
+  return getBreakpointSize(breakpoint) <= getWindowSize()
+}
+
+export function storage (storageName = null) {
+  return {
+    storageName,
+
+    hasStorageName () {
+      return !!this.storageName
+    },
+
+    getStorageName () {
+      return this.storageName
+    },
+
+    setStorageName (name) {
+      this.storageName = name
+    },
+
+    hasLocalStorage () {
+      return !!window.localStorage
+    },
+
+    getLocalStorage () {
+      if (this.hasLocalStorage() && this.hasStorageName()) {
+        return window.localStorage.getItem(this.getStorageName())
+      }
+    },
+
+    setLocalStorage (value) {
+      if (this.hasLocalStorage() && this.hasStorageName()) {
+        window.localStorage.setItem(this.getStorageName(), value)
+      }
+    }
+  }
+}
+
+export function timeout (callback, milliseconds = 500) {
+  let timeoutId = null
+  clearTimeout(timeoutId)
+
+  timeoutId = setTimeout(() => {
+    callback()
+  }, milliseconds)
+}
+
+export function interval (callback, milliseconds = 500) {
+  let intervalId = null
+  clearInterval(intervalId)
+
+  intervalId = setInterval(() => {
+    callback()
+  }, milliseconds)
+}
+
+export function onLivewireEvent (eventName, callback) {
+  if (!window.Livewire) {
+    console.warn('Livewire not found! See https://laravel-livewire.com/docs/installation')
+    return
+  }
+
+  window.Livewire.on(eventName, callback)
 }

@@ -71,9 +71,11 @@ class TALLKit
 
         if ($options['inject']['tailwindcss'] && $assets['tailwindcss']) {
             $styles->add($assets['tailwindcss']);
+            $scripts->add($assets['tailwindcss']);
         }
 
         if ($options['inject']['alpine'] && $assets['alpine']) {
+            $styles->add($assets['alpine']);
             $scripts->add($assets['alpine']);
         }
 
@@ -81,23 +83,22 @@ class TALLKit
             Collection::make($assets)->filter(function ($key) {
                 return $key !== 'tailwindcss' && $key !== 'alpine';
             })->each(function ($asset) use ($styles, $scripts) {
-                $styles->add(Collection::make($asset)->filter(function ($value) {
-                    return Str::endsWith($value, '.css');
-                }));
-
-                $scripts->add(Collection::make($asset)->filter(function ($value) {
-                    return Str::endsWith($value, '.js');
-                }));
+                $styles->add($asset);
+                $scripts->add($asset);
             });
         }
 
-        $htmlStyles = $styles->flatten()->map(function ($url) {
+        $htmlStyles = $styles->flatten()->filter(function ($value) {
+            return Str::endsWith($value, '.css');
+        })->map(function ($url) {
             return '<link href="'.$url.'" rel="stylesheet" />';
         })->join("\n");
 
         $nonce = isset($options['nonce']) ? " nonce=\"{$options['nonce']}\"" : '';
 
-        $htmlScrips = $scripts->flatten()->map(function ($url) use ($assets, $nonce) {
+        $htmlScrips = $scripts->flatten()->filter(function ($value) {
+            return Str::endsWith($value, '.js');
+        })->map(function ($url) use ($assets, $nonce) {
             return '<script src="'.$url.'"'.((in_array($url, $assets['alpine'])) ? ' defer' : '').$nonce.'></script>';
         })->join("\n");
 

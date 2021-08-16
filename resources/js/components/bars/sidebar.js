@@ -1,52 +1,35 @@
-export default ({ toggleable }) => ({
+export default ({ toggleable, screen, storage }) => ({
   ...toggleable(),
+  ...storage(),
 
   name: null,
   breakpoint: null,
 
   setup (name, breakpoint) {
     this.name = name
-    this.breakpoint = parseInt(breakpoint)
+    this.breakpoint = breakpoint
+    this.setStorageName(this.name)
 
     this.check()
-    this.watchValueToLocalStorage()
-  },
 
-  events: {
-    '@resize.window' () {
-      this.check()
-    }
+    this.$watch('lastOpenned', (value) => {
+      this.setLocalStorage(value)
+    })
   },
 
   check () {
-    if (!this.breakpoint) return
+    try {
+      if (!screen(this.breakpoint)) {
+        return this.close(false)
+      }
 
-    if (window.innerWidth < this.breakpoint) {
-      return this.close(false)
+      const value = this.getLocalStorage()
+
+      return value === 'true' || value === null || value === undefined
+        ? this.open(false)
+        : this.close(false)
+    } catch {
+      //
     }
-
-    return this.handleOnLocalStorage()
-  },
-
-  handleOnLocalStorage () {
-    if (!window.localStorage || !this.name) {
-      return this.open(false)
-    }
-
-    const storage = window.localStorage.getItem(this.name)
-
-    if (storage === null || storage === 'true') {
-      return this.open(false)
-    }
-
-    return this.close(false)
-  },
-
-  watchValueToLocalStorage () {
-    if (!window.localStorage || !this.name) return
-
-    this.$watch('lastOpenned', (value) => {
-      window.localStorage.setItem(this.name, value)
-    })
   }
 })

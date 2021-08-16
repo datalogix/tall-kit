@@ -1,9 +1,9 @@
 <div {{
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
-        ->mergeThemeProvider($themeProvider, 'modes', $mode)
-        ->mergeThemeProvider($themeProvider, 'rounded', $rounded)
-        ->mergeThemeProvider($themeProvider, 'shadow', $shadow)
+        ->mergeOnlyThemeProvider($themeProvider, 'modes', $mode)
+        ->mergeOnlyThemeProvider($themeProvider, 'rounded', $rounded)
+        ->mergeOnlyThemeProvider($themeProvider, 'shadow', $shadow)
         ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
         ->merge(['x-init' => 'setup(\''.$on.'\', '.$timeout.')'])
     }}

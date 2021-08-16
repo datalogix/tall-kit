@@ -26,7 +26,7 @@ class TALLKit {
     this.ready = true
 
     if (typeof this.options.load_type === 'string') {
-      await this.assets.init(this.options.load_type)
+      this.assets.init(this.options.load_type)
     }
 
     dispatch('tallkit:load')

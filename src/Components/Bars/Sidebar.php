@@ -30,7 +30,7 @@ class Sidebar extends Drawer
      */
     public function __construct(
         $items = [],
-        $breakpoint = 'lg',
+        $breakpoint = 'none',
         $name = 'sidebar',
         $show = false,
         $overlay = true,
@@ -58,30 +58,9 @@ class Sidebar extends Drawer
     {
         return $this->attributes
             ->mergeOnlyThemeProvider($this->themeProvider, 'container')
-            ->merge(['x-init' => 'setup(\''.$this->name.'\', '.$this->breakpointSize().')'], false)
+            ->merge(['x-init' => 'setup(\''.$this->name.'\', \''.$this->breakpoint.'\')'], false)
             ->merge($this->breakpoint ? ['theme:overlay' => $this->breakpoint.':hidden'] : [], false)
             ->getAttributes();
-    }
-
-    /**
-     * Get breakpoint size.
-     *
-     * @return int
-     */
-    public function breakpointSize()
-    {
-        if (! $this->breakpoint) {
-            return 0;
-        }
-
-        // https://tailwindcss.com/docs/breakpoints
-        return [
-            'sm' => 640,
-            'md' => 768,
-            'lg' =>  1024,
-            'xl' =>  1280,
-            '2xl' => 1536,
-        ][$this->breakpoint];
     }
 
     /**
@@ -92,7 +71,26 @@ class Sidebar extends Drawer
     public function breakpointClasses()
     {
         return $this->breakpoint
-            ? [':class' => '{ \''.$this->breakpoint.':static\': openned }']
+            ? [':class' => '{ \''.$this->breakpoint.':static\': isOpened() }']
             : [];
+    }
+
+    /**
+     * Get item.
+     *
+     * @return array
+     */
+    public function item()
+    {
+        return $this->attributes
+            ->mergeOnlyThemeProvider($this->themeProvider, 'item')
+            ->merge([
+                'theme:item.except.class' => true,
+                'theme:active.except.class' => true,
+                'theme:active' => $this->attributes
+                    ->mergeOnlyThemeProvider($this->themeProvider, 'active')
+                    ->get('class'),
+            ])
+            ->getAttributes();
     }
 }

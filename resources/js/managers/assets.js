@@ -36,14 +36,12 @@ class Assets {
     return Array.isArray(content) ? content : [content]
   }
 
-  async init (loadType) {
+  init (loadType) {
     const assets = detectAssets(document, loadType)
 
     for (const asset of assets) {
-      await this.load(asset)
+      this.load(asset)
     }
-
-    dispatch('tallkit:asset.loaded')
   }
 
   async load (asset) {

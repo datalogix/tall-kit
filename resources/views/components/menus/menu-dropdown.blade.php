@@ -1,7 +1,7 @@
 <div {{
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
-        ->mergeThemeProvider($themeProvider, 'aligns', $align)
+        ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
     }}
 >
     <x-dropdown

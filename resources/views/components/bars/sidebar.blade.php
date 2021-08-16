@@ -10,23 +10,18 @@
     :theme="$theme"
     :theme:container="$container()"
 >
-    <x-navbar
-        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'navbar') }}
-        :items="$items"
-        :theme="$theme"
-    >
-        @isset ($header)
-            <x-slot name="header">
-                {{ $header }}
-            </x-slot>
-        @endisset
+    <nav {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'nav') }}>
+        {{ $header ?? '' }}
 
-        @isset ($footer)
-            <x-slot name="footer">
-                {{ $footer }}
-            </x-slot>
-        @endisset
+        <x-nav
+            :items="$items"
+            :inline="false"
+            :theme="$theme"
+            :theme:item="$item()"
+        >
+            {{ $slot }}
+        </x-nav>
 
-        {{ $slot }}
-    </x-navbar>
+        {{ $footer ?? '' }}
+    </nav>
 </x-drawer>

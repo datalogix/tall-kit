@@ -1,8 +1,8 @@
 <button {{
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
-        ->mergeThemeProvider($themeProvider, 'rounded', $rounded)
-        ->mergeThemeProvider($themeProvider, 'shadow', $shadow)
+        ->mergeOnlyThemeProvider($themeProvider, 'rounded', $rounded)
+        ->mergeOnlyThemeProvider($themeProvider, 'shadow', $shadow)
         ->merge($colorName ? [
             'class' => $outlined
                 ? 'bg-transparent hover:bg-'.$colorName.'-'.$colorWeight.' text-'.$colorName.'-'.$colorHover.' hover:text-white border border-'.$colorName.'-'.$colorWeight.' hover:border-transparent'
@@ -21,7 +21,9 @@
         {!! $iconLeft !!}
     </x-icon>
 
-    <span>{!! $slot->isEmpty() ? __($text) : $slot !!}</span>
+    @if ($slot->isNotEmpty() || $text)
+        <span>{!! $slot->isEmpty() ? __($text) : $slot !!}</span>
+    @endif
 
     <x-icon
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'iconRight') }}

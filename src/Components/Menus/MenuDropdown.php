@@ -32,7 +32,7 @@ class MenuDropdown extends Menu
         $name = null,
         $show = false,
         $overlay = true,
-        $align = 'right',
+        $align = null,
         $iconName = null,
         $theme = null
     ) {

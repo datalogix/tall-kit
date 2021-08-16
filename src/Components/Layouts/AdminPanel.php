@@ -170,7 +170,7 @@ class AdminPanel extends BladeComponent
         $logoName = null,
         $logoUrl = null,
         $sidebarItems = [],
-        $sidebarBreakpoint = 'lg',
+        $sidebarBreakpoint = 'none',
         $sidebarName = 'sidebar',
         $sidebarShow = false,
         $sidebarOverlay = true,

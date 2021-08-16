@@ -8,7 +8,7 @@
     <div {{
         $attributes
             ->mergeThemeProvider($themeProvider, 'drawer')
-            ->mergeThemeProvider($themeProvider, 'aligns', $align)
+            ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
 
     }}>
         {{ $slot }}

@@ -10,7 +10,9 @@
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
             :label="$label"
             :theme="$theme"
-        >{{ $labelContent ?? '' }}</x-label>
+        >
+            {{ $labelContent ?? '' }}
+        </x-label>
     </label>
 
     <x-input

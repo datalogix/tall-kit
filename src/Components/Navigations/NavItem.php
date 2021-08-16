@@ -1,11 +1,11 @@
 <?php
 
-namespace TALLKit\Components\Menus;
+namespace TALLKit\Components\Navigations;
 
 use Illuminate\Support\Facades\Request;
 use TALLKit\Components\BladeComponent;
 
-class MenuItem extends BladeComponent
+class NavItem extends BladeComponent
 {
     /**
      * @var string|null

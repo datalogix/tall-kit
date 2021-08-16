@@ -10,6 +10,48 @@ class MergeThemeProvider
 {
     public function __invoke()
     {
+        function convertStringToArrayClass($value) {
+            if (is_array($value)) {
+                $newValue = [];
+
+                foreach ($value as $k => $v) {
+                    $newValue[$k] = Str::startsWith($k, 'theme:')
+                        ? convertStringToArrayClass($v)
+                        : $v;
+                }
+
+                return $newValue;
+            }
+
+            if (is_string($value)) {
+                return ['class' => $value];
+            }
+
+            return [];
+        }
+
+        function mergeRecursiveClass(array $arr1, array $arr2) {
+            $result = $arr2;
+
+            foreach ($arr1 as $k => $v) {
+                if (! array_key_exists($k, $arr2)) {
+                    $result[$k] = $v;
+
+                    continue;
+                }
+
+                if (is_array($v)) {
+                    $result[$k] = mergeRecursiveClass($v, is_array($arr2[$k]) ? $arr2[$k] : []);
+
+                    continue;
+                }
+
+                $result[$k] = (new ComponentAttributeBag([$k => $v]))->merge([$k => $arr2[$k]], false)->get($k);
+            }
+
+            return $result;
+        }
+
         return function ($themeProvider, $themeKey = null, $subkey = null) {
             if (is_null($themeKey)) {
                 return $this;
@@ -17,7 +59,7 @@ class MergeThemeProvider
 
             $themeAttrs = Collection::make($this->whereStartsWith('theme:'))
                 ->mapWithKeys(function ($value, $key) {
-                    return [Str::replace('theme:', '', $key) => is_array($value) ? $value : ['class' => $value]];
+                    return [Str::replace('theme:', '', $key) => convertStringToArrayClass($value)];
                 })->get($themeKey, []);
 
             $exceptAttrs = Collection::make($this->whereStartsWith('theme:'.$themeKey.'.except.'))
@@ -33,17 +75,13 @@ class MergeThemeProvider
                 $subkeyAttrs = $subkeyAttrs->merge($themeProvider->$themeKey->get($subkey, []));
 
                 if (is_array($themeAttrs) && array_key_exists($subkey, $themeAttrs)) {
-                    if (is_array($themeAttrs[$subkey])) {
-                        $subkeyAttrs = $subkeyAttrs->merge($themeAttrs[$subkey]);
-                    } elseif (is_string($themeAttrs[$subkey])) {
-                        $subkeyAttrs = $subkeyAttrs->merge(['class' => $themeAttrs[$subkey]]);
-                    }
+                    $subkeyAttrs = $subkeyAttrs->merge(convertStringToArrayClass($themeAttrs[$subkey]));
                 }
             } else {
-                $subkeyAttrs = $subkeyAttrs->merge($themeAttrs, false)->merge(
-                    $themeProvider->$themeKey->except($exceptAttrs)->getAttributes(),
-                    false
-                );
+                $subkeyAttrs = $subkeyAttrs->merge(mergeRecursiveClass(
+                    convertStringToArrayClass($themeProvider->$themeKey->except($exceptAttrs)->getAttributes()),
+                    $themeAttrs
+                ), false);
             }
 
             return $this->whereDoesntStartWith('theme:')->merge(

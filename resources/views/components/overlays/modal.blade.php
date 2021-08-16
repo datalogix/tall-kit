@@ -6,9 +6,9 @@
     }}
 >
     <div {{
-        $attributes->mergeOnlyThemeProvider($themeProvider, 'box')->merge(
-            $attributes->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)->getAttributes()
-        )
+        $attributes
+            ->mergeOnlyThemeProvider($themeProvider, 'box')
+            ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
     }}>
         @if ($overlay)
             <x-overlay
@@ -20,7 +20,7 @@
         <div {{
             $attributes
                 ->mergeThemeProvider($themeProvider, 'modal')
-                ->mergeThemeProvider($themeProvider, 'transitions', $align)
+                ->mergeOnlyThemeProvider($themeProvider, 'transitions', $transition)
         }}>
             {{ $slot }}
         </div>

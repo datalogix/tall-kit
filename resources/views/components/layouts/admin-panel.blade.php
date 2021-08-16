@@ -92,9 +92,9 @@
         </x-toolbar>
 
         <main {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'main') }}>
-            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
+            <x-container {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
                 {{ $slot }}
-            </div>
+            </x-container>
         </main>
     </div>
 </div>

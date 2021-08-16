@@ -40,6 +40,6 @@ class AuthenticationCard extends BladeComponent
 
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
-        $this->hrlogoUrlef = $logoUrl;
+        $this->logoUrl = $logoUrl;
     }
 }
