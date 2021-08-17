@@ -2,13 +2,11 @@ export default ({ toggleable, screen, storagable }) => ({
   ...toggleable(),
   ...storagable(),
 
-  name: null,
   breakpoint: null,
 
   setup (name, breakpoint) {
-    this.name = name
+    this.setStorageName(name)
     this.breakpoint = breakpoint
-    this.setStorageName(this.name)
 
     this.check()
 
