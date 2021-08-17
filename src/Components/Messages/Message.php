@@ -1,10 +1,10 @@
 <?php
 
-namespace TALLKit\Components\Alerts;
+namespace TALLKit\Components\Messages;
 
 use TALLKit\Components\BladeComponent;
 
-class Alert extends BladeComponent
+class Message extends BladeComponent
 {
     /**
      * @var string

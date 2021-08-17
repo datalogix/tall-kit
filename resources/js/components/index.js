@@ -1,4 +1,3 @@
-import alert from './alerts/alert'
 import navbar from './bars/navbar'
 import sidebar from './bars/sidebar'
 import easymde from './editors/easymde'
@@ -6,6 +5,7 @@ import quill from './editors/quill'
 import trix from './editors/trix'
 import inputImage from './forms/input-image'
 import mask from './forms/mask'
+import message from './messages/message'
 import toggleable from './navigations/toggleable'
 import cookieConsent from './overlays/cookie-consent'
 import modal from './overlays/modal'
@@ -16,11 +16,6 @@ import pikaday from './pickers/pikaday'
 import avatar from './supports/avatar'
 
 export default {
-  /**
-   * Alerts.
-   */
-  alert,
-
   /**
    * Bars.
    */
@@ -39,6 +34,11 @@ export default {
    */
   'input-image': inputImage,
   mask,
+
+  /**
+   * Messages.
+   */
+  message,
 
   /**
    * Navigations.

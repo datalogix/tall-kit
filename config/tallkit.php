@@ -151,11 +151,6 @@ return [
 
     'components' => [
         /**
-         * Alerts.
-         */
-        'alert' => \TALLKit\Components\Alerts\Alert::class,
-
-        /**
          * Bars.
          */
         'navbar' => \TALLKit\Components\Bars\Navbar::class,
@@ -226,12 +221,9 @@ return [
         'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
         'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
-        'card' => \TALLKit\Components\Layouts\Card::class,
         'container' => \TALLKit\Components\Layouts\Container::class,
-        'form-section' => \TALLKit\Components\Layouts\FormSection::class,
         'html' => \TALLKit\Components\Layouts\Html::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
-        'section' => \TALLKit\Components\Layouts\Section::class,
         'social-meta' => \TALLKit\Components\Layouts\SocialMeta::class,
         'socialmeta' => \TALLKit\Components\Layouts\SocialMeta::class, //alias
         'meta' => \TALLKit\Components\Layouts\SocialMeta::class, //alias
@@ -244,6 +236,12 @@ return [
         'menu' => \TALLKit\Components\Menus\Menu::class,
         'menu-user' => \TALLKit\Components\Menus\UserMenu::class, // alias
         'user-menu' => \TALLKit\Components\Menus\UserMenu::class,
+
+        /**
+         * Messages.
+         */
+        'alert' => \TALLKit\Components\Messages\Message::class, // alias
+        'message' => \TALLKit\Components\Messages\Message::class,
 
         /**
          * Navigations.
@@ -264,6 +262,13 @@ return [
         'modal' => \TALLKit\Components\Overlays\Modal::class,
         'overlay' => \TALLKit\Components\Overlays\Overlay::class,
         'tooltip' => \TALLKit\Components\Overlays\Tooltip::class,
+
+        /**
+         * Panels.
+         */
+        'card' => \TALLKit\Components\Panels\Card::class,
+        'form-section' => \TALLKit\Components\Panels\FormSection::class,
+        'section' => \TALLKit\Components\Panels\Section::class,
 
         /**
          * Pickers.
@@ -298,186 +303,6 @@ return [
 
     'themes' => [
         'default' => [
-            /**
-             * Alerts.
-             */
-            'alert' => [
-                'container' => [
-                    'data-tallkit-assets' => 'alpine',
-                    'class' => 'flex flex-row p-4 rounded relative transition',
-                    'x-cloak' => '',
-                    'x-data' => 'window.tallkit.component(\'alert\')',
-                    'x-show' => 'isOpened()',
-                    'x-transition:enter' => 'ease-out duration-300',
-                    'x-transition:enter-start' => 'opacity-0',
-                    'x-transition:enter-end' => 'opacity-100',
-                    'x-transition:leave' => 'ease-in duration-200',
-                    'x-transition:leave-start' => 'opacity-100',
-                    'x-transition:leave-end' => 'opacity-0',
-                ],
-
-                'icon' => [
-                    'class' => 'flex items-center border-2 justify-center h-10 w-10 flex-shrink-0 rounded-full mr-4',
-                ],
-
-                'dismissible' => [
-                    'container' => [
-                        'class' => 'absolute top-0 right-0 p-2 outline-none focus:outline-none flex items-center transition hover:opacity-75',
-                        'type' => 'button',
-                        '@click' => 'close',
-                    ],
-
-                    'icon' => [
-                        'class' => 'flex items-center justify-center h-8 w-8 flex-shrink-0 rounded-full',
-                    ],
-
-                    'iconName' => 'close',
-
-                    'iconSvg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
-
-                    'text' => [
-                        'class' => 'text-sm',
-                    ],
-                ],
-
-                'title' => [
-                    'class' => 'font-semibold text-lg',
-                ],
-
-                'message' => [],
-
-                'types' => [
-                    'default' => [
-                        'color' => 'gray',
-                        'iconSvg' => false,
-                        'iconName' => false,
-                        'title' => false,
-                    ],
-
-                    'error' => [
-                        'color' => 'red',
-                        'iconName' => 'close',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
-                        'title' => 'Error',
-                    ],
-
-                    'info' => [
-                        'color' => 'blue',
-                        'iconName' => 'information',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
-                        'title' => 'Info',
-                    ],
-
-                    'success' => [
-                        'color' => 'green',
-                        'iconName' => 'check',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
-                        'title' => 'Success',
-                    ],
-
-                    'warning' => [
-                        'color' => 'yellow',
-                        'iconName' => 'alert',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
-                        'title' => 'Warning',
-                    ],
-                ],
-
-                'modes' => [
-                    'default' => [
-                        'class' => 'border-2',
-                    ],
-
-                    'top' => [
-                        'class' => 'border-t-2',
-                    ],
-
-                    'bottom' => [
-                        'class' => 'border-b-2',
-                    ],
-
-                    'left' => [
-                        'class' => 'border-l-2',
-                    ],
-
-                    'right' => [
-                        'class' => 'border-r-2',
-                    ],
-
-                    'banner' => [
-                        'class' => 'border-t-2 border-b-2',
-                    ],
-
-                    'outlined' => [
-                        'class' => 'border-2 bg-transparent',
-                    ],
-                ],
-
-                'rounded' => [
-                    'default' => [
-                        'class' => 'rounded',
-                    ],
-
-                    'sm' => [
-                        'class' => 'rounded-sm',
-                    ],
-
-                    'md' => [
-                        'class' => 'rounded-md',
-                    ],
-
-                    'lg' => [
-                        'class' => 'rounded-lg',
-                    ],
-
-                    'full' => [
-                        'class' => 'rounded-full',
-                    ],
-                ],
-
-                'shadow' => [
-                    'default' => [
-                        'class' => 'shadow',
-                    ],
-
-                    'xs' => [
-                        'class' => 'shadow-xs',
-                    ],
-
-                    'sm' => [
-                        'class' => 'shadow-sm',
-                    ],
-
-                    'md' => [
-                        'class' => 'shadow-md',
-                    ],
-
-                    'lg' => [
-                        'class' => 'shadow-lg',
-                    ],
-
-                    'xl' => [
-                        'class' => 'shadow-xl',
-                    ],
-
-                    '2xl' => [
-                        'class' => 'shadow-2xl',
-                    ],
-
-                    'inner' => [
-                        'class' => 'shadow-inner',
-                    ],
-
-                    'outline' => [
-                        'class' => 'shadow-outline',
-                    ],
-
-                    'none' => [
-                        'class' => 'shadow-none',
-                    ],
-                ],
-            ],
-
             /**
              * Bars.
              */
@@ -1165,7 +990,7 @@ return [
             ],
 
             'validation-errors' => [
-                'alert' => [
+                'message' => [
                     'class' => 'mb-4',
                 ],
 
@@ -1232,64 +1057,10 @@ return [
                 ],
             ],
 
-            'card' => [
-                'container' => [
-                    'class' => 'bg-white shadow rounded relative',
-                ],
-
-                'link' => [
-                    'class' => 'block transition hover:shadow-lg',
-                ],
-
-                'image-header' => [
-                    'class' => 'w-full h-32 rounded-t',
-                ],
-
-                'header' => [
-                    'class' => 'px-8 py-4 bg-gray-50 overflow-hidden',
-                ],
-
-                'content' => [
-                    'class' => 'block p-8',
-                ],
-
-                'title' => [
-                    'class' => 'block mb-1 text-lg font-medium text-gray-900',
-                ],
-
-                'text' => [],
-
-                'footer' => [
-                    'class' => 'px-8 py-4 bg-gray-50 overflow-hidden',
-                ],
-
-                'image-footer' => [
-                    'class' => 'w-full h-32 rounded-b',
-                ],
-            ],
-
             'container' => [
                 'container' => [
                     'class' => 'container mx-auto',
                 ],
-            ],
-
-            'form-section' => [
-                'container' => [
-                    'class' => 'lg:grid lg:grid-cols-3 lg:gap-6',
-                ],
-
-                'section' => [
-                    'class' => 'lg:col-span-1',
-                ],
-
-                'title' => [],
-
-                'form' => [
-                    'class' => 'mt-5 lg:mt-0 lg:col-span-2',
-                ],
-
-                'card' => [],
             ],
 
             'html' => [
@@ -1315,28 +1086,6 @@ return [
 
                 'name' => [
                     'class' => 'text-2xl font-semibold',
-                ],
-            ],
-
-            'section' => [
-                'container' => [
-                    'class' => 'flex justify-between items-center',
-                ],
-
-                'content' => [],
-
-                'header' => [],
-
-                'title' => [
-                    'class' => 'text-lg font-medium text-gray-900',
-                ],
-
-                'subtitle' => [
-                    'class' => 'text-gray-500',
-                ],
-
-                'actions' => [
-                    'class' => 'flex-shrink-0',
                 ],
             ],
 
@@ -1442,6 +1191,186 @@ return [
                 ],
 
                 'userName' => [],
+            ],
+
+            /**
+             * Messages.
+             */
+            'message' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'class' => 'flex flex-row p-4 rounded relative transition',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'message\')',
+                    'x-show' => 'isOpened()',
+                    'x-transition:enter' => 'ease-out duration-300',
+                    'x-transition:enter-start' => 'opacity-0',
+                    'x-transition:enter-end' => 'opacity-100',
+                    'x-transition:leave' => 'ease-in duration-200',
+                    'x-transition:leave-start' => 'opacity-100',
+                    'x-transition:leave-end' => 'opacity-0',
+                ],
+
+                'icon' => [
+                    'class' => 'flex items-center border-2 justify-center h-10 w-10 flex-shrink-0 rounded-full mr-4',
+                ],
+
+                'dismissible' => [
+                    'container' => [
+                        'class' => 'absolute top-0 right-0 p-2 outline-none focus:outline-none flex items-center transition hover:opacity-75',
+                        'type' => 'button',
+                        '@click' => 'close',
+                    ],
+
+                    'icon' => [
+                        'class' => 'flex items-center justify-center h-8 w-8 flex-shrink-0 rounded-full',
+                    ],
+
+                    'iconName' => 'close',
+
+                    'iconSvg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
+
+                    'text' => [
+                        'class' => 'text-sm',
+                    ],
+                ],
+
+                'title' => [
+                    'class' => 'font-semibold text-lg',
+                ],
+
+                'message' => [],
+
+                'types' => [
+                    'default' => [
+                        'color' => 'gray',
+                        'iconSvg' => false,
+                        'iconName' => false,
+                        'title' => false,
+                    ],
+
+                    'error' => [
+                        'color' => 'red',
+                        'iconName' => 'close',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
+                        'title' => 'Error',
+                    ],
+
+                    'info' => [
+                        'color' => 'blue',
+                        'iconName' => 'information',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
+                        'title' => 'Info',
+                    ],
+
+                    'success' => [
+                        'color' => 'green',
+                        'iconName' => 'check',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'title' => 'Success',
+                    ],
+
+                    'warning' => [
+                        'color' => 'yellow',
+                        'iconName' => 'alert',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
+                        'title' => 'Warning',
+                    ],
+                ],
+
+                'modes' => [
+                    'default' => [
+                        'class' => 'border-2',
+                    ],
+
+                    'top' => [
+                        'class' => 'border-t-2',
+                    ],
+
+                    'bottom' => [
+                        'class' => 'border-b-2',
+                    ],
+
+                    'left' => [
+                        'class' => 'border-l-2',
+                    ],
+
+                    'right' => [
+                        'class' => 'border-r-2',
+                    ],
+
+                    'banner' => [
+                        'class' => 'border-t-2 border-b-2',
+                    ],
+
+                    'outlined' => [
+                        'class' => 'border-2 bg-transparent',
+                    ],
+                ],
+
+                'rounded' => [
+                    'default' => [
+                        'class' => 'rounded',
+                    ],
+
+                    'sm' => [
+                        'class' => 'rounded-sm',
+                    ],
+
+                    'md' => [
+                        'class' => 'rounded-md',
+                    ],
+
+                    'lg' => [
+                        'class' => 'rounded-lg',
+                    ],
+
+                    'full' => [
+                        'class' => 'rounded-full',
+                    ],
+                ],
+
+                'shadow' => [
+                    'default' => [
+                        'class' => 'shadow',
+                    ],
+
+                    'xs' => [
+                        'class' => 'shadow-xs',
+                    ],
+
+                    'sm' => [
+                        'class' => 'shadow-sm',
+                    ],
+
+                    'md' => [
+                        'class' => 'shadow-md',
+                    ],
+
+                    'lg' => [
+                        'class' => 'shadow-lg',
+                    ],
+
+                    'xl' => [
+                        'class' => 'shadow-xl',
+                    ],
+
+                    '2xl' => [
+                        'class' => 'shadow-2xl',
+                    ],
+
+                    'inner' => [
+                        'class' => 'shadow-inner',
+                    ],
+
+                    'outline' => [
+                        'class' => 'shadow-outline',
+                    ],
+
+                    'none' => [
+                        'class' => 'shadow-none',
+                    ],
+                ],
             ],
 
             /**
@@ -1756,6 +1685,85 @@ return [
                 ],
 
                 'options' => [],
+            ],
+
+            /**
+             * Panels.
+             */
+            'card' => [
+                'container' => [
+                    'class' => 'bg-white shadow rounded relative',
+                ],
+
+                'link' => [
+                    'class' => 'block transition hover:shadow-lg',
+                ],
+
+                'image-header' => [
+                    'class' => 'w-full h-32 rounded-t',
+                ],
+
+                'header' => [
+                    'class' => 'px-8 py-4 bg-gray-50 overflow-hidden',
+                ],
+
+                'content' => [
+                    'class' => 'block p-8',
+                ],
+
+                'title' => [
+                    'class' => 'block mb-1 text-lg font-medium text-gray-900',
+                ],
+
+                'text' => [],
+
+                'footer' => [
+                    'class' => 'px-8 py-4 bg-gray-50 overflow-hidden',
+                ],
+
+                'image-footer' => [
+                    'class' => 'w-full h-32 rounded-b',
+                ],
+            ],
+
+            'form-section' => [
+                'container' => [
+                    'class' => 'lg:grid lg:grid-cols-3 lg:gap-6',
+                ],
+
+                'section' => [
+                    'class' => 'lg:col-span-1',
+                ],
+
+                'title' => [],
+
+                'form' => [
+                    'class' => 'mt-5 lg:mt-0 lg:col-span-2',
+                ],
+
+                'card' => [],
+            ],
+
+            'section' => [
+                'container' => [
+                    'class' => 'flex justify-between items-center',
+                ],
+
+                'content' => [],
+
+                'header' => [],
+
+                'title' => [
+                    'class' => 'text-lg font-medium text-gray-900',
+                ],
+
+                'subtitle' => [
+                    'class' => 'text-gray-500',
+                ],
+
+                'actions' => [
+                    'class' => 'flex-shrink-0',
+                ],
             ],
 
             /**

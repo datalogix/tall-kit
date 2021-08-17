@@ -1,7 +1,7 @@
 @if ($errors->{$bag}->any())
     @if ($type !== 'none')
-        <x-alert
-            {{ $attributes->mergeThemeProvider($themeProvider, 'alert') }}
+        <x-message
+            {{ $attributes->mergeThemeProvider($themeProvider, 'message') }}
             :type="$type"
             :mode="$mode"
             :rounded="$rounded"
@@ -25,7 +25,7 @@
                     <li {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'li') }}>{{ $error }}</li>
                 @endforeach
             </ul>
-        </x-alert>
+        </x-message>
     @else
         <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
             @if ($title)
