@@ -1,26 +1,23 @@
 export default ({ dispatch, cookieable, timeout }) => ({
   ...cookieable(),
 
-  name: null,
-  expires: null,
-
-  setup (name, expires) {
-    this.name = name
-    this.expires = expires
-
-    this.setCookieName(this.name)
+  setup (name, expires = null) {
+    this.setCookieName(name)
+    this.setCookieExpires(expires)
     this.open()
   },
 
   open () {
-    if (!this.getCookie()) {
-      timeout(() => dispatch(`${this.name}-modal-open`))
+    if (this.getCookie()) {
+      return
     }
+
+    timeout(() => dispatch(`${this.getCookieName()}-modal-open`))
   },
 
   close () {
-    this.setCookie(true, this.expires)
+    this.setCookie(true)
 
-    dispatch(`${this.name}-modal-close`)
+    dispatch(`${this.getCookieName()}-modal-close`)
   }
 })

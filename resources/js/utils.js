@@ -242,9 +242,10 @@ export function onLivewireEvent (eventName, callback) {
   window.Livewire.on(eventName, callback)
 }
 
-export function cookieable (cookieName = null) {
+export function cookieable (cookieName = null, cookieExpires = null) {
   return {
     cookieName,
+    cookieExpires,
 
     hasCookieName () {
       return !!this.cookieName
@@ -256,6 +257,14 @@ export function cookieable (cookieName = null) {
 
     setCookieName (name) {
       this.cookieName = name
+    },
+
+    getCookieExpires () {
+      return parseInt(this.cookieExpires) || 1
+    },
+
+    setCookieExpires (expires) {
+      this.cookieExpires = expires
     },
 
     hasCookie () {
@@ -283,13 +292,13 @@ export function cookieable (cookieName = null) {
       return null
     },
 
-    setCookie (value, days = 1) {
+    setCookie (value, days = null) {
       if (!this.hasCookie() || !this.hasCookieName()) {
         return
       }
 
       const expires = new Date()
-      expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000))
+      expires.setTime(expires.getTime() + ((days || this.getCookieExpires()) * 24 * 60 * 60 * 1000))
       document.cookie = `${this.getCookieName()}=${value};expires=${expires.toUTCString()};path=/`
     }
   }
