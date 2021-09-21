@@ -29,7 +29,7 @@ abstract class ComponentTestCase extends TestCase
         return [TALLKitServiceProvider::class];
     }
 
-    public function assertComponentRenders($expected, $template, $data = [])
+    public function assertComponentRenders($expected, $template, array $data = [])
     {
         $blade = (string) $this->blade($template, $data);
 
