@@ -1,17 +1,23 @@
 <x-field
     {{ $attributes->mergeOnlyThemeProvider($themeProvider, $type === 'hidden' ? 'hidden' : 'container') }}
     :name="$name"
-    :label="$type === 'hidden' ? false : $label"
+    :label="$label"
     :showErrors="$showErrors"
-    :theme="$theme"
     :groupable="$groupable"
     :prependText="$prependText"
     :prependIcon="$prependIcon"
     :appendText="$appendText"
     :appendIcon="$appendIcon"
+    :theme="$theme"
 >
-    <input
-        {{ $attributes->mergeThemeProvider($themeProvider, 'input')->merge($maskOptions()) }}
+    <input {{
+        $attributes
+            ->mergeThemeProvider($themeProvider, 'input')
+            ->merge($maskOptions())
+            ->merge($cleaveOptions())
+            ->merge($tagifyOptions())
+        }}
+
         type="{{ $type }}"
 
         @if ($name)

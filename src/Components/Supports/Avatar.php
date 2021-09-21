@@ -2,20 +2,8 @@
 
 namespace TALLKit\Components\Supports;
 
-use TALLKit\Components\BladeComponent;
-
-class Avatar extends BladeComponent
+class Avatar extends ImageLoader
 {
-    /**
-     * @var string|null
-     */
-    public $avatar;
-
-    /**
-     * @var string|bool|null
-     */
-    public $icon;
-
     /**
      * Create a new component instance.
      *
@@ -24,6 +12,9 @@ class Avatar extends BladeComponent
      * @param  string|null  $provider
      * @param  string|null  $fallback
      * @param  string|bool|null  $icon
+     * @param  string|bool|null  $loadingIcon
+     * @param  string|bool|null  $errorIcon
+     * @param  int|bool|null  $ttl
      * @param  string|null  $theme
      * @return void
      */
@@ -33,12 +24,19 @@ class Avatar extends BladeComponent
         $provider = null,
         $fallback = null,
         $icon = null,
+        $loadingIcon = null,
+        $errorIcon = null,
+        $ttl = 3600,
         $theme = null
     ) {
-        parent::__construct($theme);
-
-        $this->avatar = $this->url($search, $src, $provider, $fallback);
-        $this->icon = $icon;
+        parent::__construct(
+            $this->url($search, $src, $provider, $fallback),
+            $icon,
+            $loadingIcon,
+            $errorIcon,
+            $ttl,
+            $theme
+        );
     }
 
     /**
@@ -65,7 +63,7 @@ class Avatar extends BladeComponent
         ]));
 
         return $provider
-            ? sprintf('https://unavatar.now.sh/%s/%s?%s', $provider, $search, $query)
-            : sprintf('https://unavatar.now.sh/%s?%s', $search, $query);
+            ? sprintf('https://unavatar.io/%s/%s?%s', $provider, $search, $query)
+            : sprintf('https://unavatar.io/%s?%s', $search, $query);
     }
 }

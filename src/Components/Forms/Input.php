@@ -33,6 +33,16 @@ class Input extends Field
     protected $mask;
 
     /**
+     * @var array|null
+     */
+    protected $cleave;
+
+    /**
+     * @var array|bool|null
+     */
+    protected $tagify;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $name
@@ -42,6 +52,8 @@ class Input extends Field
      * @param  mixed  $bind
      * @param  mixed  $default
      * @param  mixed  $mask
+     * @param  array|null  $cleave
+     * @param  array|bool|null  $tagify
      * @param  string|null  $language
      * @param  bool  $showErrors
      * @param  string|null  $theme
@@ -60,6 +72,8 @@ class Input extends Field
         $bind = null,
         $default = null,
         $mask = null,
+        $cleave = null,
+        $tagify = null,
         $language = null,
         $showErrors = true,
         $theme = null,
@@ -94,6 +108,10 @@ class Input extends Field
         }
 
         $this->mask = $mask;
+        $this->cleave = $cleave;
+        $this->tagify = $tagify;
+
+        $this->label = $this->type === 'hidden' || $this->tagify ? false : $this->label;
     }
 
     /**
@@ -107,10 +125,48 @@ class Input extends Field
             return [];
         }
 
-        $encoded = json_encode(is_string($this->mask) ? ['mask' => $this->mask] : (object) $this->mask);
+        $encoded = json_encode((object) (is_array($this->mask) ? $this->mask : ['mask' => $this->mask]));
 
         return $this->attributes
             ->mergeOnlyThemeProvider($this->themeProvider, 'mask')
+            ->merge(['x-init' => 'setup('.$encoded.')'], false)
+            ->getAttributes();
+    }
+
+    /**
+     * Cleave options.
+     *
+     * @return array
+     */
+    public function cleaveOptions()
+    {
+        if (! is_array($this->cleave) || $this->type === 'hidden') {
+            return [];
+        }
+
+        $encoded = json_encode((object) $this->cleave);
+
+        return $this->attributes
+            ->mergeOnlyThemeProvider($this->themeProvider, 'cleave')
+            ->merge(['x-init' => 'setup('.$encoded.')'], false)
+            ->getAttributes();
+    }
+
+    /**
+     * Tagify options.
+     *
+     * @return array
+     */
+    public function tagifyOptions()
+    {
+        if (! $this->tagify || $this->type === 'hidden') {
+            return [];
+        }
+
+        $encoded = json_encode((object) (is_array($this->tagify) ? $this->tagify : []));
+
+        return $this->attributes
+            ->mergeOnlyThemeProvider($this->themeProvider, 'tagify')
             ->merge(['x-init' => 'setup('.$encoded.')'], false)
             ->getAttributes();
     }

@@ -89,17 +89,49 @@ return [
         ],
 
         /**
+         * Editors.
+         */
+        'easymde' => [
+            'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.css',
+            'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.js',
+        ],
+
+        'quill' => [
+            'https://cdn.jsdelivr.net/npm/quill@1/dist/quill.snow.min.css',
+            'https://cdn.jsdelivr.net/npm/quill@1/dist/quill.min.js',
+        ],
+
+        'trix' => [
+            'https://cdn.jsdelivr.net/npm/trix@1/dist/trix.min.css',
+            'https://cdn.jsdelivr.net/npm/trix@1/dist/trix.min.js',
+        ],
+
+        /**
+         * Forms.
+         */
+        'cleave' => [
+            'https://cdn.jsdelivr.net/npm/cleave.js@1/dist/cleave.min.js',
+        ],
+
+        'imask' => [
+            'https://cdn.jsdelivr.net/npm/imask@6/dist/imask.min.js',
+        ],
+
+        'tagify' => [
+            'https://cdn.jsdelivr.net/npm/@yaireo/tagify@4/dist/tagify.css',
+            'https://cdn.jsdelivr.net/npm/@yaireo/tagify@4/dist/tagify.polyfills.min.js',
+            'https://cdn.jsdelivr.net/npm/@yaireo/tagify@4/dist/tagify.min.js',
+        ],
+
+        /**
          * Moment.
          */
         'moment' => [
             'https://cdn.jsdelivr.net/npm/moment@2/moment.min.js',
         ],
 
-        /**
-         * Forms.
-         */
-        'imask' => [
-            'https://cdn.jsdelivr.net/npm/imask@6/dist/imask.min.js',
+        'moment-timezone' => [
+            'https://cdn.jsdelivr.net/npm/moment-timezone@0/builds/moment-timezone-with-data.min.js',
         ],
 
         /**
@@ -131,21 +163,21 @@ return [
         ],
 
         /**
-         * Editors.
+         * Sliders.
          */
-        'easymde' => [
-            'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.css',
-            'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.js',
+        'flickity' => [
+            'https://cdn.jsdelivr.net/npm/flickity@2/dist/flickity.min.css',
+            'https://cdn.jsdelivr.net/npm/flickity@2/dist/flickity.pkgd.min.js',
         ],
 
-        'quill' => [
-            'https://cdn.jsdelivr.net/npm/quill@1/dist/quill.snow.min.css',
-            'https://cdn.jsdelivr.net/npm/quill@1/dist/quill.min.js',
+        'splide' => [
+            'https://cdn.jsdelivr.net/npm/@splidejs/splide@2/dist/css/splide.min.css',
+            'https://cdn.jsdelivr.net/npm/@splidejs/splide@2/dist/js/splide.min.js',
         ],
 
-        'trix' => [
-            'https://cdn.jsdelivr.net/npm/trix@1/dist/trix.min.css',
-            'https://cdn.jsdelivr.net/npm/trix@1/dist/trix.min.js',
+        'swiper' => [
+            'https://cdn.jsdelivr.net/npm/swiper@7/swiper-bundle.min.css',
+            'https://cdn.jsdelivr.net/npm/swiper@7/swiper-bundle.min.js',
         ],
     ],
 
@@ -168,6 +200,13 @@ return [
         'form-btn' => \TALLKit\Components\Buttons\FormButton::class, // alias
         'logout' => \TALLKit\Components\Buttons\Logout::class,
         'toggler' => \TALLKit\Components\Buttons\Toggler::class,
+
+        /**
+         * Datetimes.
+         */
+        'carbon' => \TALLKit\Components\Datetimes\Carbon::class,
+        'countdown' => \TALLKit\Components\Datetimes\Countdown::class,
+        'count-down' => \TALLKit\Components\Datetimes\Countdown::class, // alias,
 
         /**
          * Editors.
@@ -215,18 +254,26 @@ return [
          * Layouts.
          */
         'admin-panel' => \TALLKit\Components\Layouts\AdminPanel::class,
-        'admin' => \TALLKit\Components\Layouts\AdminPanel::class, //alias
-        'admin-card' => \TALLKit\Components\Layouts\AdminPanel::class, //alias
+        'admin' => \TALLKit\Components\Layouts\AdminPanel::class, // alias
+        'admin-card' => \TALLKit\Components\Layouts\AdminPanel::class, // alias
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
-        'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
-        'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
-        'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class, //alias
+        'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class, // alias
+        'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class, // alias
+        'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class, // alias
         'container' => \TALLKit\Components\Layouts\Container::class,
+        'content' => \TALLKit\Components\Layouts\Container::class, //alias
+        'google-fonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
+        'googlefonts' => \TALLKit\Components\Layouts\GoogleFonts::class, // alias
         'html' => \TALLKit\Components\Layouts\Html::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
-        'social-meta' => \TALLKit\Components\Layouts\SocialMeta::class,
-        'socialmeta' => \TALLKit\Components\Layouts\SocialMeta::class, //alias
-        'meta' => \TALLKit\Components\Layouts\SocialMeta::class, //alias
+        'meta' => \TALLKit\Components\Layouts\Meta::class,
+
+        /**
+         * Markdowns.
+         */
+        'markdown' => \TALLKit\Components\Markdowns\Markdown::class,
+        'md' => \TALLKit\Components\Markdowns\Markdown::class, // alias
+        'toc' => \TALLKit\Components\Markdowns\Toc::class,
 
         /**
          * Menus.
@@ -251,13 +298,14 @@ return [
         'navigation-drawer' => \TALLKit\Components\Navigations\Drawer::class, // alias
         'nav' => \TALLKit\Components\Navigations\Nav::class,
         'nav-item' => \TALLKit\Components\Navigations\NavItem::class,
+        'navitem' => \TALLKit\Components\Navigations\NavItem::class, // alias
         'toggleable' => \TALLKit\Components\Navigations\Toggleable::class,
 
         /**
          * Overlays.
          */
-        'backdrop' => \TALLKit\Components\Overlays\Overlay::class, //alias
-        'consent' =>  \TALLKit\Components\Overlays\CookieConsent::class, //alias
+        'backdrop' => \TALLKit\Components\Overlays\Overlay::class, // alias
+        'consent' =>  \TALLKit\Components\Overlays\CookieConsent::class, // alias
         'cookie-consent' => \TALLKit\Components\Overlays\CookieConsent::class,
         'modal' => \TALLKit\Components\Overlays\Modal::class,
         'overlay' => \TALLKit\Components\Overlays\Overlay::class,
@@ -266,9 +314,15 @@ return [
         /**
          * Panels.
          */
+        'accordion' => \TALLKit\Components\Panels\Accordion::class,
+        'accordion-item' => \TALLKit\Components\Panels\AccordionItem::class,
+        'accordionitem' => \TALLKit\Components\Panels\AccordionItem::class, // alias
         'card' => \TALLKit\Components\Panels\Card::class,
         'form-section' => \TALLKit\Components\Panels\FormSection::class,
         'section' => \TALLKit\Components\Panels\Section::class,
+        'tab' => \TALLKit\Components\Panels\Tab::class,
+        'tab-item' => \TALLKit\Components\Panels\TabItem::class,
+        'tabitem' => \TALLKit\Components\Panels\TabItem::class, // alias
 
         /**
          * Pickers.
@@ -284,9 +338,32 @@ return [
         'pikaday' => \TALLKit\Components\Pickers\Pikaday::class,
 
         /**
+         * Sliders.
+         */
+        'flickity' => \TALLKit\Components\Sliders\Flickity::class,
+        'flickity-item' => \TALLKit\Components\Sliders\FlickityItem::class,
+        'flickityitem' => \TALLKit\Components\Sliders\FlickityItem::class, // alias
+        'slider' => \TALLKit\Components\Sliders\Slider::class,
+        'slider-item' => \TALLKit\Components\Sliders\SliderItem::class,
+        'slideritem' => \TALLKit\Components\Sliders\SliderItem::class, // alias
+        'splide' => \TALLKit\Components\Sliders\Splide::class,
+        'splide-item' => \TALLKit\Components\Sliders\SplideItem::class,
+        'splideitem' => \TALLKit\Components\Sliders\SplideItem::class, // alias
+        'swiper' => \TALLKit\Components\Sliders\Swiper::class,
+        'swiper-item' => \TALLKit\Components\Sliders\SwiperItem::class,
+        'swiperitem' => \TALLKit\Components\Sliders\SwiperItem::class, // alias
+
+        /**
          * Supports.
          */
         'avatar' => \TALLKit\Components\Supports\Avatar::class,
+        'cron' => \TALLKit\Components\Supports\Cron::class, // alias
+        'image-loader' => \TALLKit\Components\Supports\ImageLoader::class,
+        'img-loader' => \TALLKit\Components\Supports\ImageLoader::class, // alias
+        'load-img' => \TALLKit\Components\Supports\ImageLoader::class, // alias
+        'load-image' => \TALLKit\Components\Supports\ImageLoader::class, // alias
+        'unsplash' => \TALLKit\Components\Supports\Unsplash::class, // alias
+
 
         /**
          * Tables.
@@ -309,12 +386,12 @@ return [
             'navbar' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
-                    'class' => 'flex flex-wrap items-center relative',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'navbar\')',
                     '@click.away' => 'close',
                     '@click.outside' => 'close',
                     '@keydown.escape.window' => 'close',
+                    'class' => 'flex flex-wrap items-center relative',
                 ],
 
                 'aligns' => [
@@ -452,10 +529,10 @@ return [
                 ],
 
                 'nav' => [
-                    'class' => 'w-full flex-grow flex-col items-start max-h-0',
-                    ':class' => '{ \'hidden\': isClosed() }',
                     'x-ref' => 'nav',
-                    'x-bind:style' => 'isOpened() ? \'max-height: \' + $refs.nav.scrollHeight + \'px\' : \'\'',
+                    ':class' => '{ \'hidden\': isClosed() }',
+                    ':style' => 'style()',
+                    'class' => 'w-full flex-grow flex-col items-start max-h-0',
 
                     'theme:item' => [
                         'theme:container' => [
@@ -505,7 +582,7 @@ return [
              */
             'button' => [
                 'container' => [
-                    'class' => 'flex-inline justify-between items-center space-x-2 font-bold py-2 px-4 outline-none focus:outline-none',
+                    'class' => 'flex justify-between items-center space-x-2 py-2 px-4 outline-none focus:outline-none',
                 ],
 
                 'iconLeft' => [],
@@ -638,6 +715,39 @@ return [
             ],
 
             /**
+             * Datetimes.
+             */
+            'carbon' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,moment,moment-timezone',
+                    'x-data' => 'window.tallkit.component(\'carbon\')',
+                ],
+            ],
+
+            'countdown' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-data' => 'window.tallkit.component(\'countdown\')',
+                ],
+
+                'days' => [
+                    'x-ref' => 'days',
+                ],
+
+                'hours' => [
+                    'x-ref' => 'hours',
+                ],
+
+                'minutes' => [
+                    'x-ref' => 'minutes',
+                ],
+
+                'seconds' => [
+                    'x-ref' => 'seconds',
+                ],
+            ],
+
+            /**
              * Editors.
              */
             'easymde' => [
@@ -684,8 +794,8 @@ return [
                 ],
 
                 'quill' => [
-                    'class' => 'quill-container',
                     'x-ref' => 'editor',
+                    'class' => 'quill-container',
                 ],
 
                 'options' => [
@@ -859,28 +969,27 @@ return [
                 ],
 
                 'field' => [
-                    'class' => 'inline-block relative overflow-hidden border border-gray-200 rounded shadow focus-within:ring',
+                    'class' => 'bg-white inline-block relative overflow-hidden border border-gray-200 rounded shadow focus-within:ring',
                 ],
 
                 'input' => [
+                    'x-ref' => 'input',
+                    '@change' => 'change',
                     'class' => 'hidden',
                     'type' => 'file',
-                    'accept' => 'image/*',
-                    '@change' => 'change',
-                    'x-ref' => 'input',
                 ],
 
                 'empty' => [
-                    'class' => 'w-full h-full',
                     'x-show' => 'isEmpty()',
                     '@click.prevent' => 'edit',
+                    'class' => 'w-full h-full',
                 ],
 
                 'emptyIconSvg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>',
 
                 'loading' => [
-                    'class' => 'w-full h-full flex items-center justify-center p-2',
                     'x-show' => 'isLoading()',
+                    'class' => 'w-full h-full flex items-center justify-center p-2',
                 ],
 
                 'loadingIcon' => 'animate-spin w-6 h-6 shadown',
@@ -890,33 +999,34 @@ return [
                 'loadingIconSvg' => '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
 
                 'error' => [
-                    'class' => 'w-full h-full',
                     'x-show' => 'isFailed()',
                     '@click.prevent' => 'edit',
+                    'class' => 'w-full h-full',
                 ],
 
                 'errorIconSvg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
 
                 'complete' => [
-                    'class' => 'w-full h-full flex items-center justify-center',
                     'x-show' => 'isCompleted()',
+                    'class' => 'w-full h-full flex flex-col items-center justify-center',
                 ],
 
                 'img' => [
                     'x-ref' => 'output',
+                    'class' => 'm-4',
                 ],
 
                 'actions' => [
-                    'class' => 'w-full h-full flex items-center justify-center absolute text-white bg-black bg-opacity-25',
+                    'class' => 'w-full h-full flex items-center justify-center border-t p-2',
                 ],
 
                 'edit' => [
-                    'class' => 'transform hover:scale-125',
                     '@click.prevent' => 'edit',
+                    'class' => 'transition transform hover:scale-125',
                 ],
 
                 'editIcon' => [
-                    'class' => 'text-white w-6 h-6',
+                    'class' => 'w-6 h-6',
                 ],
 
                 'editIconName' => 'pencil',
@@ -924,11 +1034,11 @@ return [
                 'editIconSvg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>',
 
                 'delete' => [
-                    'class' => 'transform hover:scale-125',
+                    'class' => 'transition transform hover:scale-125',
                 ],
 
                 'deleteIcon' => [
-                    'class' => 'text-white w-6 h-6',
+                    'class' => 'w-6 h-6',
                 ],
 
                 'deleteIconName' => 'trash',
@@ -948,6 +1058,18 @@ return [
                 'mask' => [
                     'data-tallkit-assets' => 'alpine,imask',
                     'x-data' => 'window.tallkit.component(\'mask\')',
+                    'x-ref' => 'input',
+                ],
+
+                'cleave' => [
+                    'data-tallkit-assets' => 'alpine,cleave',
+                    'x-data' => 'window.tallkit.component(\'cleave\')',
+                    'x-ref' => 'input',
+                ],
+
+                'tagify' => [
+                    'data-tallkit-assets' => 'alpine,tagify',
+                    'x-data' => 'window.tallkit.component(\'tagify\')',
                     'x-ref' => 'input',
                 ],
             ],
@@ -1089,7 +1211,24 @@ return [
                 ],
             ],
 
-            'social-meta' => [],
+            'meta' => [],
+
+            /**
+             * Markdowns.
+             */
+            'markdown' => [
+                'container' => [],
+            ],
+
+            'toc' => [
+                'container' => [],
+
+                'item' => [],
+
+                'sub' => [],
+
+                'link' => [],
+            ],
 
             /**
              * Menus.
@@ -1134,15 +1273,13 @@ return [
                 'dropdown' => [],
 
                 'trigger' => [
-                    'type' => 'button',
-                    'class' => 'bg-white shadow rounded-full w-8 h-8 transition hover:bg-gray-100 flex items-center justify-center outline-none focus:outline-none',
+                    'class' => 'bg-white w-8 h-8 transition hover:opacity-75',
+                    'style' => 'padding: 0;',
                 ],
-
-                'icon' => [],
 
                 'iconName' => 'ellipsis-v',
 
-                'iconSvg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 192 512"><path d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"/></svg>',
+                'iconSvg' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 192 512"><path fill="currentColor" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>',
             ],
 
             'menu' => [
@@ -1199,7 +1336,6 @@ return [
             'message' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
-                    'class' => 'flex flex-row p-4 rounded relative transition',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'message\')',
                     'x-show' => 'isOpened()',
@@ -1209,6 +1345,7 @@ return [
                     'x-transition:leave' => 'ease-in duration-200',
                     'x-transition:leave-start' => 'opacity-100',
                     'x-transition:leave-end' => 'opacity-0',
+                    'class' => 'flex flex-row p-4 rounded relative transition',
                 ],
 
                 'icon' => [
@@ -1216,23 +1353,14 @@ return [
                 ],
 
                 'dismissible' => [
-                    'container' => [
-                        'class' => 'absolute top-0 right-0 p-2 outline-none focus:outline-none flex items-center transition hover:opacity-75',
-                        'type' => 'button',
+                    'button' => [
                         '@click' => 'close',
-                    ],
-
-                    'icon' => [
-                        'class' => 'flex items-center justify-center h-8 w-8 flex-shrink-0 rounded-full',
+                        'class' => 'absolute top-0 right-0 transition hover:opacity-75 text-sm',
                     ],
 
                     'iconName' => 'close',
 
                     'iconSvg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
-
-                    'text' => [
-                        'class' => 'text-sm',
-                    ],
                 ],
 
                 'title' => [
@@ -1380,55 +1508,54 @@ return [
                 'container' => [],
 
                 'drawer' => [
-                    'class' => 'fixed transform transition',
                     'x-show' => 'isOpened()',
                     'x-transition:enter' => 'ease-out duration-300',
                     'x-transition:leave' => 'ease-in duration-200',
+                    'class' => 'fixed transform transition',
                 ],
 
                 'aligns' => [
                     'left' => [
-                        'class' => 'h-full top-0 bottom-0 left-0 overflow-y-auto',
                         'x-transition:enter-start' => '-translate-x-full',
                         'x-transition:enter-end' => 'translate-x-0',
                         'x-transition:leave-start' => 'translate-x-0',
                         'x-transition:leave-end' => '-translate-x-full',
+                        'class' => 'h-full top-0 bottom-0 left-0 overflow-y-auto',
                     ],
 
                     'right' => [
-                        'class' => 'h-full top-0 bottom-0 right-0 overflow-y-auto',
                         'x-transition:enter-start' => 'translate-x-full',
                         'x-transition:enter-end' => 'translate-x-0',
                         'x-transition:leave-start' => 'translate-x-0',
                         'x-transition:leave-end' => 'translate-x-full',
+                        'class' => 'h-full top-0 bottom-0 right-0 overflow-y-auto',
                     ],
 
                     'top' => [
-                        'class' => 'w-full top-0 left-0 right-0 overflow-x-auto',
                         'x-transition:enter-start' => '-translate-y-full',
                         'x-transition:enter-end' => 'translate-y-0',
                         'x-transition:leave-start' => 'translate-y-0',
                         'x-transition:leave-end' => '-translate-y-full',
+                        'class' => 'w-full top-0 left-0 right-0 overflow-x-auto',
                     ],
 
                     'bottom' => [
-                        'class' => 'w-full bottom-0 left-0 right-0 overflow-x-auto',
                         'x-transition:enter-start' => 'translate-y-full',
                         'x-transition:enter-end' => 'translate-y-0',
                         'x-transition:leave-start' => 'translate-y-0',
                         'x-transition:leave-end' => 'translate-y-full',
+                        'class' => 'w-full bottom-0 left-0 right-0 overflow-x-auto',
                     ],
                 ],
             ],
 
             'dropdown' => [
                 'trigger' => [
-                    'class' => 'inline-block cursor-pointer',
                     '@click' => 'toggle',
+                    'class' => 'inline-block cursor-pointer',
                 ],
 
                 'dropdown' => [
-                    'class' => 'absolute',
                     'x-show' => 'isOpened()',
                     'x-transition:enter' => 'transition ease-out duration-300',
                     'x-transition:enter-start' => 'transform opacity-0 scale-95',
@@ -1439,6 +1566,7 @@ return [
                     '@click.away' => 'close',
                     '@click.outside' => 'close',
                     '@keydown.escape.window' => 'close',
+                    'class' => 'absolute',
                 ],
 
                 'aligns' => [
@@ -1515,11 +1643,11 @@ return [
             'toggleable' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
-                    'class' => 'relative',
-                    ':class' => '{\'z-30\': isOpened()}',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'toggleable\')',
                     '@keydown.escape.window' => 'close(false)',
+                    ':class' => '{\'z-30\': isOpened()}',
+                    'class' => 'relative',
                 ],
             ],
 
@@ -1534,10 +1662,10 @@ return [
                 ],
 
                 'modal' => [
-                    'class' => 'border p-4',
                     'theme:box.except.@keydown.escape.window' => 'true',
                     'theme:box.except.@keydown.tab.prevent' => 'true',
                     'theme:box.except.@keydown.shift.tab.prevent' => 'true',
+                    'class' => 'border p-4',
                 ],
 
                 'section' => [],
@@ -1561,17 +1689,17 @@ return [
                 ],
 
                 'trigger' => [
-                    'class' => 'inline-block cursor-pointer',
                     '@click' => 'toggle',
+                    'class' => 'inline-block cursor-pointer',
                 ],
 
                 'box' => [
-                    'class' => 'fixed inset-0 z-50 p-4 flex',
                     'x-show' => 'isOpened()',
                     '@close.stop' => 'close',
                     '@keydown.escape.window' => 'close',
                     '@keydown.tab.prevent' => '$event.shiftKey || nextFocusable().focus()',
                     '@keydown.shift.tab.prevent' => 'prevFocusable().focus()',
+                    'class' => 'fixed inset-0 z-50 p-4 flex',
                 ],
 
                 'aligns' => [
@@ -1613,10 +1741,10 @@ return [
                 ],
 
                 'modal' => [
-                    'class' => 'flex-initial bg-white overflow-hidden rounded shadow transform transition w-full',
                     'x-show' => 'isOpened()',
                     'x-transition:enter' => 'ease-out duration-300',
                     'x-transition:leave' => 'ease-in duration-200',
+                    'class' => 'flex-initial bg-white overflow-hidden rounded shadow transform transition w-full',
                 ],
 
                 'transitions' => [
@@ -1659,16 +1787,16 @@ return [
 
             'overlay' => [
                 'container' => [
-                    'class' => 'fixed inset-0 transform transition cursor-pointer',
                     'x-cloak' => '',
+                    'x-show' => 'isOpened()',
                     'x-transition:enter' => 'ease-out duration-300',
                     'x-transition:enter-start' => 'opacity-0',
                     'x-transition:enter-end' => 'opacity-100',
                     'x-transition:leave' => 'ease-in duration-200',
                     'x-transition:leave-start' => 'opacity-100',
                     'x-transition:leave-end' => 'opacity-0',
-                    'x-show' => 'isOpened()',
                     '@click' => 'close(false)',
+                    'class' => 'fixed inset-0 transform transition cursor-pointer',
                 ],
 
                 'backdrop' => [
@@ -1679,9 +1807,9 @@ return [
             'tooltip' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,tooltip',
-                    'class' => 'inline-block',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'tooltip\')',
+                    'class' => 'inline-block',
                 ],
 
                 'options' => [],
@@ -1690,6 +1818,41 @@ return [
             /**
              * Panels.
              */
+            'accordion' => [
+                'container' => [
+                    'class' => 'border',
+                ],
+            ],
+
+            'accordion-item' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'accordion-item\')',
+                    'class' => 'border-b',
+                ],
+
+                'trigger' => [
+                    '@click' => 'toggle',
+                    'class' => 'w-full text-left py-2 px-4 cursor-pointer',
+                ],
+
+                'disabled' => [
+                    'class' => 'cursor-not-allowed',
+                    'disabled' => true,
+                ],
+
+                'item' => [
+                    'x-ref' => 'container',
+                    ':style' => 'style()',
+                    'class' => 'overflow-hidden transition-all max-h-0 duration-500',
+                ],
+
+                'content' => [
+                    'class' => 'py-2 px-4',
+                ],
+            ],
+
             'card' => [
                 'container' => [
                     'class' => 'bg-white shadow rounded relative',
@@ -1766,6 +1929,79 @@ return [
                 ],
             ],
 
+            'tab' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'tab\')',
+                ],
+
+                'heading' => [
+                    'class' => 'flex',
+                    'role' => 'tablist',
+                ],
+
+                'item' => [
+                    'x-html' => 'tab.header',
+                    '@click' => 'setSelected(tab)',
+                    'role' => 'tab',
+                ],
+
+                'selected' => [],
+
+                'disabled' => [
+                    'class' => 'cursor-not-allowed',
+                ],
+
+                'tabs' => [
+                    'x-ref' => 'tabs',
+                ],
+
+                'tab-item' => [
+                    'x-show' => 'isSelected(tab)',
+                    'x-html' => 'tab.content',
+                ],
+
+                'modes-item' => [
+                    'default' => [],
+
+                    'border' => [],
+                ],
+
+                'modes-selected' => [
+                    'default' => [
+                        'class' => 'border-b-2 bg-white border-gray-500',
+                    ],
+
+                    'border' => [
+                        'class' => 'border border-b-0 bg-white rounded-t',
+                    ],
+                ],
+
+                'modes-disabled' => [
+                    'default' => [],
+
+                    'border' => [],
+                ],
+
+                'modes-tabs' => [
+                    'default' => [
+                        'class' => '-mt-px border-t',
+                    ],
+
+                    'border' => [
+                        'class' => '-mt-px border rounded-b',
+                    ],
+                ],
+            ],
+
+            'tab-item' => [
+                'container' => [
+                    'class' => 'p-4',
+                    'role' => 'tabpanel',
+                ],
+            ],
+
             /**
              * Pickers.
              */
@@ -1839,13 +2075,215 @@ return [
             ],
 
             /**
+             * Sliders.
+             */
+            'flickity' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,flickity',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'flickity\')',
+                ],
+
+                'options' => [
+                    // see https://flickity.metafizzy.co/options.html
+                ],
+            ],
+
+            'flickity-item' => [
+                'container' => [],
+            ],
+
+            'slider' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'slider\')',
+                    '@mouseenter' => 'onMouseEnter',
+                    '@mouseleave' => 'onMouseLeave',
+                    'class' => 'relative',
+                ],
+
+                'options' => [
+                    'selected' => 0,
+                    'loop' => false,
+                    'autoplay' => false,
+                    'interval' => 10,
+                    'controls' => true,
+                    'paginator' => true,
+                    'progressbar' => false,
+                    'stopOnOver' => false,
+                ],
+
+                'slider' => [
+                    'x-ref' => 'slider',
+                    'class' => 'slider-snap overflow-auto relative flex-no-wrap flex transition-all',
+                ],
+
+                'prev' => [
+                    '@click' => 'prev',
+                    ':class' => 'prevClass()',
+                    'class' => 'absolute top-0 left-0 h-full opacity-50 hover:opacity-100 z-20',
+                ],
+
+                'prevIcon' => [
+                    'class' => 'w-6 h-6',
+                ],
+
+                'prevIconName' => 'chevron-left',
+
+                'prevIconSvg' => [
+                    '<svg viewBox="0 0 320 512"><path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path></svg>',
+                ],
+
+                'next' => [
+                    '@click' => 'next',
+                    ':class' => 'nextClass()',
+                    'class' => 'absolute top-0 right-0 h-full opacity-50 hover:opacity-100 z-20',
+                ],
+
+                'nextIcon' => [
+                    'class' => 'w-6 h-6',
+                ],
+
+                'nextIconName' => 'chevron-right',
+
+                'nextIconSvg' => [
+                    '<svg viewBox="0 0 320 512"><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg>',
+                ],
+
+                'paginator' => [
+                    'x-show' => 'hasPaginator()',
+                    'class' => 'p-4 flex items-center justify-center space-x-2 absolute bottom-0 w-full z-10',
+                ],
+
+                'page' => [
+                    '@click' => 'go(index)',
+                    ':class' => '{ \'bg-opacity-100\': is(index) }',
+                    'class' => 'bg-opacity-25',
+                    'style' => 'padding: 8px;',
+                ],
+
+                'progressbar' => [
+                    'x-show' => 'hasProgressbar()',
+                    ':style' => 'progressbarStyle()',
+                    'class' => 'bg-gray-100 h-2 max-w-full',
+                ],
+            ],
+
+            'slider-item' => [
+                'container' => [
+                    'class' => 'w-full flex-shrink-0',
+                    'style' => 'scroll-snap-align:center;',
+                ],
+            ],
+
+            'splide' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,splide',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'splide\')',
+                    'class' => 'splide',
+                ],
+
+                'options' => [
+                    // see https://splidejs.com/options/
+                ],
+
+                'slider' => [
+                    'class' => 'splide__slider',
+                ],
+
+                'track' => [
+                    'class' => 'splide__track',
+                ],
+
+                'list' => [
+                    'class' => 'splide__list',
+                ],
+            ],
+
+            'splide-item' => [
+                'container' => [
+                    'class' => 'splide__slide',
+                ],
+            ],
+
+            'swiper' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,swiper',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'swiper\')',
+                    'class' => 'swiper',
+                ],
+
+                'options' => [
+                    // see https://swiperjs.com
+
+                    'pagination' => [
+                        'el' => '.swiper-pagination'
+                    ],
+
+                    'navigation' => [
+                        'nextEl' => '.swiper-button-next',
+                        'prevEl' => '.swiper-button-prev',
+                    ],
+
+                    'scrollbar' => [
+                        'el' => '.swiper-scrollbar'
+                    ],
+                ],
+
+                'wrapper' => [
+                    'class' => 'swiper-wrapper',
+                ],
+
+                'pagination' => [
+                    'class' => 'swiper-pagination',
+                ],
+
+                'button-prev' => [
+                    'class' => 'swiper-button-prev',
+                ],
+
+                'button-next' => [
+                    'class' => 'swiper-button-next',
+                ],
+
+                'scrollbar' => [
+                    'class' => 'swiper-scrollbar',
+                ],
+            ],
+
+            'swiper-item' => [
+                'container' => [
+                    'class' => 'swiper-slide',
+                ],
+            ],
+
+            /**
              * Supports.
              */
             'avatar' => [
                 'container' => [
+                    'theme:iconName' => [
+                        'user',
+                    ],
+
+                    'theme:iconSvg' => [
+                        '<svg class="fill-current" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>',
+                    ],
+                ],
+            ],
+
+            'cron' => [
+                'container' => [],
+            ],
+
+            'image-loader' => [
+                'container' => [
                     'data-tallkit-assets' => 'alpine',
                     'x-cloak' => '',
-                    'x-data' => 'window.tallkit.component(\'avatar\')',
+                    'x-data' => 'window.tallkit.component(\'image-loader\')',
                     'x-init' => 'setup',
                 ],
 
@@ -1855,12 +2293,45 @@ return [
                 ],
 
                 'icon' => [
-                    'x-show' => 'isLoading()',
+                    'x-show' => 'isLoading() || isFailed()',
                 ],
 
-                'iconName' => 'user',
+                'iconName' => [
+                    'image',
+                ],
 
-                'iconSvg' => '<svg class="fill-current" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>',
+                'iconSvg' => [
+                    '<svg class="fill-current" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 336H54a6 6 0 0 1-6-6V118a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v276a6 6 0 0 1-6 6zM128 152c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zM96 352h320v-80l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L192 304l-39.515-39.515c-4.686-4.686-12.284-4.686-16.971 0L96 304v48z"></path></svg>',
+                ],
+
+                'loadingIcon' => [
+                    'x-show' => 'isLoading()',
+                    'class' => 'animate-spin',
+                ],
+
+                'loadingIconName' => [
+                    'loading',
+                ],
+
+                'loadingIconSvg' => [
+                    '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
+                ],
+
+                'errorIcon' => [
+                    'x-show' => 'isFailed()',
+                ],
+
+                'errorIconName' => [
+                    'times',
+                ],
+
+                'errorIconSvg' => [
+                    '<svg class="fill-current" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
+                ],
+            ],
+
+            'unsplash' => [
+                'container' => [],
             ],
 
             /**

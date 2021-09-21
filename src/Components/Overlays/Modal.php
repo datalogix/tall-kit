@@ -17,7 +17,7 @@ class Modal extends Toggleable
      * Create a new component instance.
      *
      * @param  string|bool|null  $name
-     * @param  bool  $show
+     * @param  bool|int  $show
      * @param  bool  $overlay
      * @param  string  $align
      * @param  string  $transition

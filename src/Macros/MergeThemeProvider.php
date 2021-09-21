@@ -10,50 +10,6 @@ class MergeThemeProvider
 {
     public function __invoke()
     {
-        function convertStringToArrayClass($value)
-        {
-            if (is_array($value)) {
-                $newValue = [];
-
-                foreach ($value as $k => $v) {
-                    $newValue[$k] = Str::startsWith($k, 'theme:')
-                        ? convertStringToArrayClass($v)
-                        : $v;
-                }
-
-                return $newValue;
-            }
-
-            if (is_string($value)) {
-                return ['class' => $value];
-            }
-
-            return [];
-        }
-
-        function mergeRecursiveClass(array $arr1, array $arr2)
-        {
-            $result = $arr2;
-
-            foreach ($arr1 as $k => $v) {
-                if (! array_key_exists($k, $arr2)) {
-                    $result[$k] = $v;
-
-                    continue;
-                }
-
-                if (is_array($v)) {
-                    $result[$k] = mergeRecursiveClass($v, is_array($arr2[$k]) ? $arr2[$k] : []);
-
-                    continue;
-                }
-
-                $result[$k] = (new ComponentAttributeBag([$k => $v]))->merge([$k => $arr2[$k]], false)->get($k);
-            }
-
-            return $result;
-        }
-
         return function ($themeProvider, $themeKey = null, $subkey = null) {
             if (is_null($themeKey)) {
                 return $this;
@@ -61,7 +17,7 @@ class MergeThemeProvider
 
             $themeAttrs = Collection::make($this->whereStartsWith('theme:'))
                 ->mapWithKeys(function ($value, $key) {
-                    return [Str::replace('theme:', '', $key) => convertStringToArrayClass($value)];
+                    return [Str::replace('theme:', '', $key) => MergeThemeProvider::convertStringToArrayClass($value)];
                 })->get($themeKey, []);
 
             $exceptAttrs = Collection::make($this->whereStartsWith('theme:'.$themeKey.'.except.'))
@@ -77,11 +33,11 @@ class MergeThemeProvider
                 $subkeyAttrs = $subkeyAttrs->merge($themeProvider->$themeKey->get($subkey, []));
 
                 if (is_array($themeAttrs) && array_key_exists($subkey, $themeAttrs)) {
-                    $subkeyAttrs = $subkeyAttrs->merge(convertStringToArrayClass($themeAttrs[$subkey]));
+                    $subkeyAttrs = $subkeyAttrs->merge(MergeThemeProvider::convertStringToArrayClass($themeAttrs[$subkey]));
                 }
             } else {
-                $subkeyAttrs = $subkeyAttrs->merge(mergeRecursiveClass(
-                    convertStringToArrayClass($themeProvider->$themeKey->except($exceptAttrs)->getAttributes()),
+                $subkeyAttrs = $subkeyAttrs->merge(MergeThemeProvider::mergeRecursiveClass(
+                    MergeThemeProvider::convertStringToArrayClass($themeProvider->$themeKey->except($exceptAttrs)->getAttributes()),
                     $themeAttrs
                 ), false);
             }
@@ -91,5 +47,49 @@ class MergeThemeProvider
                 false
             );
         };
+    }
+
+    public static function convertStringToArrayClass($value)
+    {
+        if (is_array($value)) {
+            $newValue = [];
+
+            foreach ($value as $k => $v) {
+                $newValue[$k] = Str::startsWith($k, 'theme:')
+                    ? static::convertStringToArrayClass($v)
+                    : $v;
+            }
+
+            return $newValue;
+        }
+
+        if (is_string($value)) {
+            return ['class' => $value];
+        }
+
+        return [];
+    }
+
+    public static function mergeRecursiveClass(array $arr1, array $arr2)
+    {
+        $result = $arr2;
+
+        foreach ($arr1 as $k => $v) {
+            if (! array_key_exists($k, $arr2)) {
+                $result[$k] = $v;
+
+                continue;
+            }
+
+            if (is_array($v)) {
+                $result[$k] = static::mergeRecursiveClass($v, is_array($arr2[$k]) ? $arr2[$k] : []);
+
+                continue;
+            }
+
+            $result[$k] = (new ComponentAttributeBag([$k => $v]))->merge([$k => $arr2[$k]], false)->get($k);
+        }
+
+        return $result;
     }
 }

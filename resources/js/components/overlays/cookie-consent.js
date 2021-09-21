@@ -12,12 +12,12 @@ export default ({ dispatch, cookieable, timeout }) => ({
       return
     }
 
-    timeout(() => dispatch(`${this.getCookieName()}-modal-open`))
+    timeout(() => dispatch(`${this.getCookieName()}-modal-open`, this))
   },
 
   close () {
     this.setCookie(true)
 
-    dispatch(`${this.getCookieName()}-modal-close`)
+    dispatch(`${this.getCookieName()}-modal-close`, this)
   }
 })

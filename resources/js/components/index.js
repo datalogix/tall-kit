@@ -1,19 +1,29 @@
 import navbar from './bars/navbar'
 import sidebar from './bars/sidebar'
+import carbon from './datetimes/carbon'
+import countdown from './datetimes/countdown'
 import easymde from './editors/easymde'
 import quill from './editors/quill'
 import trix from './editors/trix'
+import cleave from './forms/cleave'
 import inputImage from './forms/input-image'
 import mask from './forms/mask'
+import tagify from './forms/tagify'
 import message from './messages/message'
 import toggleable from './navigations/toggleable'
 import cookieConsent from './overlays/cookie-consent'
 import modal from './overlays/modal'
 import tooltip from './overlays/tooltip'
+import accordionItem from './panels/accordion-item'
+import tab from './panels/tab'
 import flatpickr from './pickers/flatpickr'
 import pickr from './pickers/pickr'
 import pikaday from './pickers/pikaday'
-import avatar from './supports/avatar'
+import flickity from './sliders/flickity'
+import slider from './sliders/slider'
+import splide from './sliders/splide'
+import swiper from './sliders/swiper'
+import imageLoader from './supports/image-loader'
 
 export default {
   /**
@@ -21,6 +31,12 @@ export default {
    */
   navbar,
   sidebar,
+
+  /**
+   * Datetimes.
+   */
+  carbon,
+  countdown,
 
   /**
    * Editors.
@@ -32,8 +48,10 @@ export default {
   /**
    * Forms.
    */
+  cleave,
   'input-image': inputImage,
   mask,
+  tagify,
 
   /**
    * Messages.
@@ -53,6 +71,12 @@ export default {
   tooltip,
 
   /**
+   * Panels.
+   */
+  'accordion-item': accordionItem,
+  tab,
+
+  /**
    * Pickers.
    */
   flatpickr,
@@ -60,7 +84,15 @@ export default {
   pikaday,
 
   /**
+   * Sliders.
+   */
+  flickity,
+  slider,
+  splide,
+  swiper,
+
+  /**
    * Supports.
    */
-  avatar
+  'image-loader': imageLoader
 }

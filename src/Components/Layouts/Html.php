@@ -17,6 +17,21 @@ class Html extends BladeComponent
     public $charset;
 
     /**
+     * @var string
+     */
+    public $viewport;
+
+    /**
+     * @var bool
+     */
+    public $csrfToken;
+
+    /**
+     * @var string|null
+     */
+    public $googleFonts;
+
+    /**
      * @var bool
      */
     public $livewire;
@@ -41,6 +56,9 @@ class Html extends BladeComponent
      *
      * @param  string|null  $title
      * @param  string  $charset
+     * @param  string  $viewport
+     * @param  bool  $csrfToken
+     * @param  string|null  $googleFonts
      * @param  bool  $livewire
      * @param  bool|array  $tallkit
      * @param  bool|null  $tailwindcss
@@ -53,6 +71,9 @@ class Html extends BladeComponent
     public function __construct(
         $title = null,
         $charset = 'utf-8',
+        $viewport = 'width=device-width, initial-scale=1',
+        $csrfToken = true,
+        $googleFonts = null,
         $livewire = true,
         $tallkit = true,
         $tailwindcss = null,
@@ -63,8 +84,11 @@ class Html extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->title = $title ?: config('app.name');
+        $this->title = $title ?? config('app.name');
         $this->charset = $charset;
+        $this->viewport = $viewport;
+        $this->csrfToken = $csrfToken;
+        $this->googleFonts = $googleFonts;
         $this->livewire = $livewire && class_exists('\Livewire\Livewire');
         $this->tallkit = $tallkit ? array_replace_recursive(
             is_array($tallkit) ? $tallkit : [],

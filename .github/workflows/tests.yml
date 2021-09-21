@@ -35,8 +35,8 @@ jobs:
       - name: Install dependencies
         run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
-      #- name: Execute tests
-      #  run: vendor/bin/phpunit --verbose
+      - name: Execute tests
+        run: vendor/bin/phpunit --verbose
 
-      #- name: Coverage
-      #  uses: codecov/codecov-action@v2
+      - name: Coverage
+        uses: codecov/codecov-action@v2

@@ -2,8 +2,9 @@
 <html {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'html') }}>
 <head {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'head') }}>
     <meta charset="{{ $charset }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @if ($viewport) <meta name="viewport" content="{{ $viewport }}"> @endif
+    @if ($csrfToken) <meta name="csrf-token" content="{{ csrf_token() }}"> @endif
+    @if ($googleFonts) <x-google-fonts family="{{ $googleFonts }}" /> @endif
     <title>{{ __($title) }}</title>
     {{ $head ?? '' }}
     @if ($livewire) @livewireStyles @endif

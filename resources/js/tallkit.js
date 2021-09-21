@@ -29,7 +29,7 @@ class TALLKit {
       this.assets.init(this.options.load_type)
     }
 
-    dispatch('tallkit:load')
+    dispatch('tallkit:load', this)
   }
 
   asset (name) {

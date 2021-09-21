@@ -78,7 +78,7 @@ class Assets {
 
     await Promise.all(promisses)
 
-    dispatch(`tallkit:asset.${asset}`)
+    dispatch(`tallkit:asset.${asset}`, this)
   }
 }
 

@@ -1,16 +1,18 @@
 export default ({ loadComponentAssets, updateInputValue }) => ({
+  pickr: null,
+
   async setup (options) {
     await loadComponentAssets('pickr')
 
-    const pickr = window.Pickr.create({
+    this.pickr = window.Pickr.create({
       el: this.$refs.picker,
       ...options
     })
 
-    pickr.on('save', (color) => {
+    this.pickr.on('save', (color) => {
       updateInputValue(this.$refs.input, color ? color.toHEXA().toString() : null)
 
-      pickr.hide()
+      this.pickr.hide()
     })
   }
 })

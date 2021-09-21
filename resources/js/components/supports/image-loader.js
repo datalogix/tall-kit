@@ -2,11 +2,11 @@ export default ({ loadable, loadImg }) => ({
   ...loadable(),
 
   setup () {
-    if (!this.$refs.image) {
-      return
-    }
-
     this.start()
+
+    if (!this.$refs.image) {
+      return this.fail('Image not found')
+    }
 
     loadImg(this.$refs.image.src)
       .then(() => this.complete())

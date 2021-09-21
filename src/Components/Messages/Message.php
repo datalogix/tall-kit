@@ -9,6 +9,11 @@ class Message extends BladeComponent
     /**
      * @var string
      */
+    public $session;
+
+    /**
+     * @var string
+     */
     public $color;
 
     /**
@@ -94,6 +99,7 @@ class Message extends BladeComponent
     /**
      * Create a new component instance.
      *
+     * @param  string|bool|null  $session
      * @param  string|bool|null  $type
      * @param  string|bool|null  $mode
      * @param  string|bool|null  $rounded
@@ -114,6 +120,7 @@ class Message extends BladeComponent
      * @return void
      */
     public function __construct(
+        $session = null,
         $type = 'info',
         $mode = 'default',
         $rounded = 'default',
@@ -134,24 +141,26 @@ class Message extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $typeTheme = $this->themeProvider->types->get($type, $this->themeProvider->types->get('default'));
+        $this->session = $session;
+        $this->type = data_get($session ? session($session) : [], 'type', $type);
 
-        $this->color = $typeTheme['color'];
-        $this->type = $type;
-        $this->mode = $mode;
-        $this->rounded = $rounded;
-        $this->shadow = $shadow;
-        $this->icon = $icon;
-        $this->iconSvg = $iconSvg ?? $typeTheme['iconSvg'];
-        $this->iconName = $iconName ?? $typeTheme['iconName'];
-        $this->timeout = $timeout;
-        $this->dismissible = $dismissible;
-        $this->dismissibleIcon = $dismissibleIcon;
-        $this->dismissibleIconSvg = $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('iconSvg');
-        $this->dismissibleIconName = $dismissibleIconName ?? $this->themeProvider->dismissible->get('iconName');
-        $this->dismissibleText = $dismissibleText;
-        $this->title = $title ?? $typeTheme['title'];
-        $this->message = $message;
-        $this->on = $on;
+        $typeTheme = $this->themeProvider->types->get($this->type, $this->themeProvider->types->get('default'));
+
+        $this->color = data_get($session ? session($session) : [], 'color', $typeTheme['color']);
+        $this->mode = data_get($session ? session($session) : [], 'mode', $mode);
+        $this->rounded = data_get($session ? session($session) : [], 'rounded', $rounded);
+        $this->shadow = data_get($session ? session($session) : [], 'shadow', $shadow);
+        $this->icon = data_get($session ? session($session) : [], 'icon', $icon);
+        $this->iconSvg = data_get($session ? session($session) : [], 'iconSvg', $iconSvg ?? $typeTheme['iconSvg']);
+        $this->iconName = data_get($session ? session($session) : [], 'iconName', $iconName ?? $typeTheme['iconName']);
+        $this->timeout = data_get($session ? session($session) : [], 'timeout', $timeout);
+        $this->dismissible = data_get($session ? session($session) : [], 'dismissible', $dismissible);
+        $this->dismissibleIcon = data_get($session ? session($session) : [], 'dismissibleIcon', $dismissibleIcon);
+        $this->dismissibleIconSvg = data_get($session ? session($session) : [], 'dismissibleIconSvg', $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('iconSvg'));
+        $this->dismissibleIconName = data_get($session ? session($session) : [], 'dismissibleIconName', $dismissibleIconName ?? $this->themeProvider->dismissible->get('iconName'));
+        $this->dismissibleText = data_get($session ? session($session) : [], 'dismissibleText', $dismissibleText);
+        $this->title = data_get($session ? session($session) : [], 'title', $title ?? $typeTheme['title']);
+        $this->message = data_get($session ? session($session) : [], 'message', $message);
+        $this->on = data_get($session ? session($session) : [], 'on', $on);
     }
 }

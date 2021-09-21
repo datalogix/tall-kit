@@ -9,12 +9,14 @@
 
 > A set of components to utilise in your Laravel Blade views using TALL stack.
 
-## Installation
+## Official Documentation
 
-You can install the package via composer:
+Documentation for TALL Kit can be found on its [website](https://tall-kit.github.io/).
 
-```bash
-composer require datalogix/tall-kit
-```
+## Changelog
 
-The package will automatically register itself.
+Check out the [CHANGELOG](CHANGELOG.md) in this repository for all the recent changes.
+
+## License
+
+TALL Kit is open-sourced software licensed under [the MIT license](./LICENSE).

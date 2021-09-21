@@ -6,8 +6,8 @@
     :name="$name"
     :label="$label"
     :showErrors="$showErrors"
-    :theme="$theme"
     :title="$value"
+    :theme="$theme"
 >
     <x-input
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}

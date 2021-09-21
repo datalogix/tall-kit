@@ -16,14 +16,17 @@
             @isset ($trigger)
                 {{ $trigger }}
             @else
-                <button {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}>
-                    <x-icon
-                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon') }}
-                        :name="$iconName ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'iconName')->first()"
-                    >
+                <x-button
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}
+                    color="none"
+                    rounded="full"
+                    :iconLeft="$iconName ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'iconName')->first()"
+                    :theme="$theme"
+                >
+                    <x-slot name="iconLeft">
                         {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'iconSvg')->first() !!}
-                    </x-icon>
-                </button>
+                    </x-slot>
+                </x-button>
             @endisset
         </x-slot>
 

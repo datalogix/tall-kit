@@ -12,12 +12,14 @@
             :overlay="$overlay"
             :align="$align"
             :transition="$transition"
+            :theme="$theme"
         >
             @if ($slot->isEmpty())
                 <x-section
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'section') }}
                     :title="__($title ?? 'This site uses cookies')"
                     :subtitle="$subtitle"
+                    :theme="$theme"
                 >
                     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
                         @isset ($content)
@@ -33,7 +35,7 @@
                     @isset ($button)
                         {{ $button }}
                     @else
-                        <x-btn  {{
+                        <x-button {{
                             $attributes
                                 ->mergeOnlyThemeProvider($themeProvider, 'button')
                                 ->merge(['@click' => '$dispatch(\''.$name.'-close\')'])

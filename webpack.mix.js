@@ -1,11 +1,9 @@
 const path = require('path')
 const mix = require('laravel-mix')
-
-require('laravel-mix-eslint')
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 mix.setPublicPath('dist')
   .js('resources/js/tallkit.js', 'dist')
-  .eslint({ fix: true })
   .sourceMaps()
   .version()
   .webpackConfig({
@@ -14,5 +12,11 @@ mix.setPublicPath('dist')
       alias: {
         '@': path.resolve(__dirname, 'resources/js/')
       }
-    }
+    },
+    plugins: [
+      new ESLintPlugin({
+        extensions: ['js'],
+        fix: true
+      })
+    ]
   })

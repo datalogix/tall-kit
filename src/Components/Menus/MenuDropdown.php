@@ -19,7 +19,7 @@ class MenuDropdown extends Menu
      * @param  array  $items
      * @param  bool  $inline
      * @param  string|bool|null  $name
-     * @param  bool  $show
+     * @param  bool|int  $show
      * @param  bool  $overlay
      * @param  string|null  $align
      * @param  string|bool|null  $iconName

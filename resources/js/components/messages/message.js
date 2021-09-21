@@ -6,14 +6,14 @@ export default ({ toggleable, timeout, onLivewireEvent }) => ({
       return onLivewireEvent(event, () => {
         this.open()
 
-        timeout(this.close, milliseconds || 3000)
+        timeout(() => this.close(), milliseconds || 3000)
       })
     }
 
     this.open()
 
     if (milliseconds) {
-      timeout(this.close, milliseconds)
+      timeout(() => this.close(), milliseconds)
     }
   }
 })

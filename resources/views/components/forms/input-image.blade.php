@@ -1,5 +1,5 @@
 <x-field
-    {{ $attributes ->mergeOnlyThemeProvider($themeProvider, 'container') }}
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :name="$name"
     :label="false"
     :showErrors="$showErrors"
@@ -22,6 +22,10 @@
                     name="{{ $name }}"
                 @endif
 
+                @if ($accept)
+                    accept="{{ $accept }}"
+                @endif
+
                 @if ($id)
                     id="{{ $id }}"
                 @endif
@@ -34,12 +38,13 @@
             @isset ($empty)
                 {{ $empty }}
             @else
-                <x-btn
+                <x-button
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'empty') }}
                     color="blue"
                     :text="$emptyText"
                     :icon="$emptyIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'emptyIconSvg')->first()"
-                />
+                    :theme="$theme"
+                >{{ $slot }}</x-button>
             @endisset
 
             <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading') }}>
@@ -58,11 +63,12 @@
             @isset ($error)
                 {{ $error }}
             @else
-                <x-btn
+                <x-button
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'error') }}
                     color="error"
                     :text="$errorText"
                     :icon="$errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'errorIconSvg')->first()"
+                    :theme="$theme"
                 />
             @endisset
 
@@ -81,10 +87,11 @@
                         @isset ($edit)
                             {{ $edit }}
                         @else
-                            <x-btn
+                            <x-button
                                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'edit') }}
                                 color="transparent"
                                 shadow="none"
+                                :theme="$theme"
                             >
                                 <x-icon
                                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'editIcon') }}
@@ -92,19 +99,20 @@
                                 >
                                     {!! $editIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'editIconSvg')->first() !!}
                                 </x-icon>
-                            </x-btn>
+                            </x-button>
                         @endisset
 
                         @isset ($delete)
                             {{ $delete }}
                         @else
-                            <x-btn {{
+                            <x-button {{
                                 $attributes
                                     ->mergeOnlyThemeProvider($themeProvider, 'delete')
                                     ->merge(['@click' => 'destroy(\''.__('Do you really want to remove this image?').'\')'])
                                 }}
                                 color="transparent"
                                 shadow="none"
+                                :theme="$theme"
                             >
                                 <x-icon
                                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'deleteIcon') }}
@@ -112,7 +120,7 @@
                                 >
                                     {!! $deleteIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'deleteIconSvg')->first() !!}
                                 </x-icon>
-                            </x-btn>
+                            </x-button>
                         @endisset
                     @endisset
                 </div>

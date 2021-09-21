@@ -11,7 +11,7 @@ class Components {
 
   register (name, content = {}, overwrite = true) {
     if (overwrite || !this.has(name)) {
-      this.items[name] = typeof content === 'function' ? content(utils) : content
+      this.items[name] = content
     }
   }
 
@@ -26,9 +26,13 @@ class Components {
   }
 
   get (name) {
-    return {
-      ...(this.has(name) ? this.items[name] : {})
+    if (!this.has(name)) {
+      return {}
     }
+
+    const content = this.items[name]
+
+    return typeof content === 'function' ? content(utils) : content
   }
 }
 

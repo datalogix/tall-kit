@@ -12,7 +12,7 @@ trait Toggleable
     public $name;
 
     /**
-     * @var bool
+     * @var bool|int
      */
     public $show;
 
@@ -30,7 +30,7 @@ trait Toggleable
      * Set toogleable.
      *
      * @param  string|bool|null  $name
-     * @param  bool  $show
+     * @param  bool|int  $show
      * @param  bool  $overlay
      * @param  string  $align
      * @return void

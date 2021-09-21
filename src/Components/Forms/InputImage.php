@@ -7,6 +7,11 @@ class InputImage extends Input
     /**
      * @var string|null
      */
+    public $accept;
+
+    /**
+     * @var string|null
+     */
     public $empty;
 
     /**
@@ -73,6 +78,7 @@ class InputImage extends Input
      * @param  mixed  $bind
      * @param  mixed  $default
      * @param  string|null  $language
+     * @param  string|null  $accept
      * @param  string|null  $empty
      * @param  string|null  $emptyText
      * @param  string|null  $emptyIcon
@@ -100,6 +106,7 @@ class InputImage extends Input
         $bind = null,
         $default = null,
         $language = null,
+        $accept = 'image/*',
         $empty = null,
         $emptyText = null,
         $emptyIcon = null,
@@ -137,6 +144,7 @@ class InputImage extends Input
             $appendIcon
         );
 
+        $this->accept = $accept;
         $this->empty = $empty;
         $this->emptyText = $emptyText;
         $this->emptyIcon = $emptyIcon;

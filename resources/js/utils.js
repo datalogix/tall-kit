@@ -26,19 +26,23 @@ export function loadComponentAssets (asset) {
   })
 }
 
-export function dispatch (eventName) {
-  const event = document.createEvent('Events')
+export function dispatch (name, detail = {}) {
+  // use $el for Alpine 2 https://github.com/alpinejs/alpine/blob/2.x/README.pt.md#el
+  // use $root for Alpine 3 https://github.com/alpinejs/alpine/pull/2011
+  const element = (detail.$root || detail.$el || document)
 
-  event.initEvent(eventName, true, true)
+  const event = new window.CustomEvent(name, {
+    detail,
+    bubbles: true,
+    composed: true,
+    cancelable: true
+  })
 
-  return dispatchInputEvent(document, event)
+  element.dispatchEvent(event)
 }
 
-export function dispatchInputEvent (element, event = null) {
-  if (!event) event = new window.Event('input')
-  if (element) element.dispatchEvent(event)
-
-  return event
+export function dispatchInputEvent (element) {
+  element.dispatchEvent(new window.Event('input'))
 }
 
 export function updateInputValue (element, value) {
@@ -53,17 +57,25 @@ export function toggleable () {
     lastOpenned: null,
 
     setup (openned = false) {
+      if (Number.isInteger(openned)) {
+        return timeout(() => this.open(), openned)
+      }
+
       this.openned = Boolean(openned)
     },
 
     open (storage = true) {
       this.openned = true
       if (storage) this.lastOpenned = this.openned
+
+      dispatch('open', this)
     },
 
     close (storage = true) {
       this.openned = false
       if (storage) this.lastOpenned = this.openned
+
+      dispatch('close', this)
     },
 
     toggle (storage = true) {
@@ -95,26 +107,36 @@ export function loadable () {
       this.empty = null
       this.loaded = null
       this.error = null
+
+      dispatch('reset', this)
     },
 
     clear () {
       this.reset()
       this.empty = true
+
+      dispatch('clear', this)
     },
 
     start () {
       this.reset()
       this.loaded = false
+
+      dispatch('start', this)
     },
 
     complete () {
       this.reset()
       this.loaded = true
+
+      dispatch('complete', this)
     },
 
     fail (error) {
       this.reset()
       this.error = error
+
+      dispatch('fail', this)
     },
 
     isEmpty () {
@@ -219,18 +241,16 @@ export function timeout (callback, milliseconds = 500) {
   let timeoutId = null
   clearTimeout(timeoutId)
 
-  timeoutId = setTimeout(() => {
-    callback()
-  }, milliseconds)
+  timeoutId = setTimeout(callback, parseInt(milliseconds, 0))
+  return timeoutId
 }
 
 export function interval (callback, milliseconds = 500) {
   let intervalId = null
   clearInterval(intervalId)
 
-  intervalId = setInterval(() => {
-    callback()
-  }, milliseconds)
+  intervalId = setInterval(callback, parseInt(milliseconds, 0))
+  return intervalId
 }
 
 export function onLivewireEvent (eventName, callback) {

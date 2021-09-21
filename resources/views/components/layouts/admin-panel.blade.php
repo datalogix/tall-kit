@@ -45,6 +45,7 @@
                     <x-toggler
                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'toggler') }}
                         @click="$dispatch('{{ $sidebarName }}-toggle')"
+                        :theme="$theme"
                     >
                         {{ $toggler ?? '' }}
                     </x-toggler>
@@ -92,7 +93,10 @@
         </x-toolbar>
 
         <main {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'main') }}>
-            <x-container {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
+            <x-container
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}
+                :theme="$theme"
+            >
                 {{ $slot }}
             </x-container>
         </main>

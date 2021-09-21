@@ -1,4 +1,4 @@
-export default ({ loadable, loadImg, timeout }) => ({
+export default ({ loadable, loadImg, timeout, dispatch }) => ({
   ...loadable(),
 
   setup () {
