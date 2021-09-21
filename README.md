@@ -11,7 +11,7 @@
 
 ## Official Documentation
 
-Documentation for TALL Kit can be found on its [website](https://tall-kit.github.io/).
+Documentation for TALL Kit can be found on its [website](https://tall-kit.netlify.app/).
 
 ## Changelog
 
