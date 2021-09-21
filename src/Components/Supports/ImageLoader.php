@@ -63,7 +63,7 @@ class ImageLoader extends BladeComponent
     }
 
     /**
-     * Cache
+     * Cache.
      *
      * @param  string|null  $url
      * @param  int|bool|null  $ttl
@@ -71,7 +71,7 @@ class ImageLoader extends BladeComponent
      */
     protected function cache($url, $ttl)
     {
-        if (!$url || !$ttl) {
+        if (! $url || ! $ttl) {
             return $url;
         }
 

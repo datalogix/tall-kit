@@ -64,7 +64,7 @@ class FormDataBinder
     /**
      * Enable Livewire binding with an optional modifier.
      *
-     * @param string $modifier
+     * @param  string $modifier
      * @return void
      */
     public function wire($modifier = null)

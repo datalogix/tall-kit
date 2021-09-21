@@ -13,7 +13,7 @@ class Unsplash extends ImageLoader
      *
      * @param  string|null  $photo
      * @param  string|null  $query
-     * @param  bool|null $featured
+     * @param  bool|null  $featured
      * @param  string|null  $username
      * @param  int|null  $width
      * @param  int|null  $height
@@ -52,7 +52,7 @@ class Unsplash extends ImageLoader
      *
      * @param  string|null  $photo
      * @param  string|null  $query
-     * @param  bool|null $featured
+     * @param  bool|null  $featured
      * @param  string|null  $username
      * @param  int|null  $width
      * @param  int|null  $height

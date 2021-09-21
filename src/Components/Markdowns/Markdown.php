@@ -12,12 +12,12 @@ class Markdown extends BladeComponent
 {
     /**
      * @var array
-    */
+     */
     protected $options;
 
     /**
      * @var int|bool|null
-    */
+     */
     protected $ttl;
 
     /**

@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Markdowns;
 
-use \Illuminate\Support\Str;
+use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 
 class Toc extends BladeComponent

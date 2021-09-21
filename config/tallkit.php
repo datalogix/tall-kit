@@ -2220,7 +2220,7 @@ return [
                     // see https://swiperjs.com
 
                     'pagination' => [
-                        'el' => '.swiper-pagination'
+                        'el' => '.swiper-pagination',
                     ],
 
                     'navigation' => [
@@ -2229,7 +2229,7 @@ return [
                     ],
 
                     'scrollbar' => [
-                        'el' => '.swiper-scrollbar'
+                        'el' => '.swiper-scrollbar',
                     ],
                 ],
 

@@ -35,7 +35,7 @@ class Tooltip extends BladeComponent
     /**
      * Json options.
      *
-     * @param string $content
+     * @param  string $content
      * @return string
      */
     public function jsonOptions($content)
