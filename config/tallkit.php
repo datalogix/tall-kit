@@ -364,7 +364,6 @@ return [
         'load-image' => \TALLKit\Components\Supports\ImageLoader::class, // alias
         'unsplash' => \TALLKit\Components\Supports\Unsplash::class, // alias
 
-
         /**
          * Tables.
          */
