@@ -50,8 +50,12 @@ class Icon extends BladeComponent
     protected function renderIcon()
     {
         return function (array $data) {
-            if (empty(trim($data['slot']))) {
+            if (empty(trim($data['slot'])) && empty($data['attributes'])) {
                 return '';
+            }
+
+            if (empty(trim($data['slot']))) {
+                return '<i '.$data['attributes'].'></i>';
             }
 
             if (Str::startsWith($data['slot'], '<svg')) {
