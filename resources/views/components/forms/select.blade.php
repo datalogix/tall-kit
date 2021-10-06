@@ -3,12 +3,12 @@
     :name="$name"
     :label="$label"
     :showErrors="$showErrors"
+    :theme="$theme"
     :groupable="$groupable"
     :prependText="$prependText"
     :prependIcon="$prependIcon"
     :appendText="$appendText"
     :appendIcon="$appendIcon"
-    :theme="$theme"
 >
     <select
         {{ $attributes->mergeThemeProvider($themeProvider, $multiple ? 'multiselect' : 'select') }}
