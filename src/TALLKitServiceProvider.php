@@ -112,8 +112,13 @@ class TALLKitServiceProvider extends ServiceProvider
     {
         $prefix = config('tallkit.prefix', '');
         $components = config('tallkit.components', []);
+        $aliases = config('tallkit.aliases', []);
 
         $this->loadViewComponentsAs($prefix, $components);
+
+        if (config('tallkit.options.aliases')) {
+            $this->loadViewComponentsAs($prefix, $aliases);
+        }
     }
 
     /**
