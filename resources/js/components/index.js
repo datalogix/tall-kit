@@ -24,6 +24,7 @@ import slider from './sliders/slider'
 import splide from './sliders/splide'
 import swiper from './sliders/swiper'
 import imageLoader from './supports/image-loader'
+import filepond from './uploaders/filepond'
 
 export default {
   /**
@@ -94,5 +95,10 @@ export default {
   /**
    * Supports.
    */
-  'image-loader': imageLoader
+  'image-loader': imageLoader,
+
+  /**
+   * Uploaders.
+   */
+  filepond
 }

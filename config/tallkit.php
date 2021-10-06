@@ -70,6 +70,17 @@ return [
 
             'alpine' => true,
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Register components aliases
+        |--------------------------------------------------------------------------
+        |
+        | This option registers some components with multiple names, using `aliases`.
+        |
+        */
+
+        'aliases' => true,
     ],
 
     'assets' => [
@@ -179,6 +190,102 @@ return [
             'https://cdn.jsdelivr.net/npm/swiper@7/swiper-bundle.min.css',
             'https://cdn.jsdelivr.net/npm/swiper@7/swiper-bundle.min.js',
         ],
+
+        /**
+         * Uploaders.
+         */
+        'filepond' => [
+            'https://cdn.jsdelivr.net/npm/filepond@4/dist/filepond.min.css',
+            'https://cdn.jsdelivr.net/npm/filepond@4/dist/filepond.min.js',
+        ],
+
+        'FilePondPluginFileEncode' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-file-encode@2/dist/filepond-plugin-file-encode.min.js',
+        ],
+
+        'FilePondPluginFileMetadata' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-file-metadata@1/dist/filepond-plugin-file-metadata.min.js',
+        ],
+
+        'FilePondPluginFilePoster' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-file-poster@2/dist/filepond-plugin-file-poster.min.css',
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-file-poster@2/dist/filepond-plugin-file-poster.min.js',
+        ],
+
+        'FilePondPluginFileRename' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-file-rename@1/dist/filepond-plugin-file-rename.min.js',
+        ],
+
+        'FilePondPluginFileValidateSize' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-file-validate-size@2/dist/filepond-plugin-file-validate-size.min.js',
+        ],
+
+        'FilePondPluginFileValidateType' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-file-validate-type@1/dist/filepond-plugin-file-validate-type.min.js'
+        ],
+
+        'FilePondPluginImageCrop' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-crop@2/dist/filepond-plugin-image-crop.min.js',
+        ],
+
+        'FilePondPluginImageEdit' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-edit@1/dist/filepond-plugin-image-edit.min.css',
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-edit@1/dist/filepond-plugin-image-edit.min.js',
+        ],
+
+        'FilePondPluginImageExifOrientation' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-exif-orientation@1/dist/filepond-plugin-image-exif-orientation.min.js',
+        ],
+
+        'FilePondPluginImageFilter' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-filter@1/dist/filepond-plugin-image-filter.min.js',
+        ],
+
+        'FilePondPluginImagePreview' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview@4/dist/filepond-plugin-image-preview.css',
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview@4/dist/filepond-plugin-image-preview.min.js',
+        ],
+
+        'FilePondPluginImageResize' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-resize@1/dist/filepond-plugin-image-resize.min.js',
+        ],
+
+        'FilePondPluginImageTransform' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-transform@3/dist/filepond-plugin-image-transform.min.js',
+        ],
+
+        'FilePondPluginImageValidateSize' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-validate-size@1/dist/filepond-plugin-image-validate-size.min.js',
+        ],
+
+        'FilePondPluginMediaPreview' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-media-preview@1/dist/filepond-plugin-media-preview.min.css',
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-media-preview@1/dist/filepond-plugin-media-preview.min.js',
+        ],
+
+        'FilePondPluginGetFile' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-get-file@1/dist/filepond-plugin-get-file.min.css',
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-get-file@1/dist/filepond-plugin-get-file.min.js',
+        ],
+
+        'FilePondPluginPdfPreview' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-pdf-preview@1/dist/filepond-plugin-pdf-preview.min.css',
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-pdf-preview@1/dist/filepond-plugin-pdf-preview.min.js',
+        ],
+
+        'FilePondPluginImageOverlay' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-overlay@1/dist/filepond-plugin-image-overlay.min.css',
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-image-overlay@1/dist/filepond-plugin-image-overlay.min.js',
+        ],
+
+        'FilePondPluginPdfConvert' => [
+            'https://cdn.jsdelivr.net/npm/pdfjs-dist@2/build/pdf.min.js',
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-pdf-convert@1/dist/filepond-plugin-pdf-convert.min.js',
+        ],
+
+        'FilePondPluginCopyPath' => [
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-copy-path@1/dist/filepond-plugin-copy-path.min.js',
+        ],
     ],
 
     'components' => [
@@ -193,11 +300,7 @@ return [
          * Buttons.
          */
         'button' => \TALLKit\Components\Buttons\Button::class,
-        'bt' => \TALLKit\Components\Buttons\Button::class, // alias
-        'btn' => \TALLKit\Components\Buttons\Button::class, // alias
         'form-button' => \TALLKit\Components\Buttons\FormButton::class,
-        'form-bt' => \TALLKit\Components\Buttons\FormButton::class, // alias
-        'form-btn' => \TALLKit\Components\Buttons\FormButton::class, // alias
         'logout' => \TALLKit\Components\Buttons\Logout::class,
         'toggler' => \TALLKit\Components\Buttons\Toggler::class,
 
@@ -206,15 +309,11 @@ return [
          */
         'carbon' => \TALLKit\Components\Datetimes\Carbon::class,
         'countdown' => \TALLKit\Components\Datetimes\Countdown::class,
-        'count-down' => \TALLKit\Components\Datetimes\Countdown::class, // alias,
 
         /**
          * Editors.
          */
-        'editor' => \TALLKit\Components\Editors\Quill::class, // alias
         'easymde' => \TALLKit\Components\Editors\Easymde::class,
-        'easy-mde' => \TALLKit\Components\Editors\Easymde::class, // alias
-        'mde' => \TALLKit\Components\Editors\Easymde::class, // alias
         'quill' => \TALLKit\Components\Editors\Quill::class,
         'trix' => \TALLKit\Components\Editors\Trix::class,
 
@@ -222,28 +321,19 @@ return [
          * Forms.
          */
         'checkbox' => \TALLKit\Components\Forms\Checkbox::class,
-        'check' => \TALLKit\Components\Forms\Checkbox::class, // alias
         'errors' => \TALLKit\Components\Forms\Errors::class,
-        'error' => \TALLKit\Components\Forms\Errors::class, // alias
+        'field' => \TALLKit\Components\Forms\Field::class,
         'field-group' => \TALLKit\Components\Forms\FieldGroup::class,
-        'field' => \TALLKit\Components\Forms\Field::class, // alias
-        'form-field' => \TALLKit\Components\Forms\Field::class,
         'form' => \TALLKit\Components\Forms\Form::class,
         'group' => \TALLKit\Components\Forms\Group::class,
-        'form-group' => \TALLKit\Components\Forms\Group::class, // alias
-        'image-preview' => \TALLKit\Components\Forms\InputImage::class, // alias
         'input' => \TALLKit\Components\Forms\Input::class,
         'input-image' => \TALLKit\Components\Forms\InputImage::class,
         'label' => \TALLKit\Components\Forms\Label::class,
-        'lbl' => \TALLKit\Components\Forms\Label::class, // alias
         'radio' => \TALLKit\Components\Forms\Radio::class,
         'select' => \TALLKit\Components\Forms\Select::class,
         'submit' => \TALLKit\Components\Forms\Submit::class,
         'textarea' => \TALLKit\Components\Forms\Textarea::class,
-        'validation-bag' => \TALLKit\Components\Forms\ValidationErrors::class, // alias
         'validation-errors' => \TALLKit\Components\Forms\ValidationErrors::class,
-        'validation-error' => \TALLKit\Components\Forms\ValidationErrors::class, // alias
-        'validation' => \TALLKit\Components\Forms\ValidationErrors::class, // alias
 
         /**
          * Icons.
@@ -254,16 +344,9 @@ return [
          * Layouts.
          */
         'admin-panel' => \TALLKit\Components\Layouts\AdminPanel::class,
-        'admin' => \TALLKit\Components\Layouts\AdminPanel::class, // alias
-        'admin-card' => \TALLKit\Components\Layouts\AdminPanel::class, // alias
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
-        'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class, // alias
-        'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class, // alias
-        'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class, // alias
         'container' => \TALLKit\Components\Layouts\Container::class,
-        'content' => \TALLKit\Components\Layouts\Container::class, //alias
         'google-fonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
-        'googlefonts' => \TALLKit\Components\Layouts\GoogleFonts::class, // alias
         'html' => \TALLKit\Components\Layouts\Html::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
         'meta' => \TALLKit\Components\Layouts\Meta::class,
@@ -272,22 +355,18 @@ return [
          * Markdowns.
          */
         'markdown' => \TALLKit\Components\Markdowns\Markdown::class,
-        'md' => \TALLKit\Components\Markdowns\Markdown::class, // alias
         'toc' => \TALLKit\Components\Markdowns\Toc::class,
 
         /**
          * Menus.
          */
-        'dropdown-menu' => \TALLKit\Components\Menus\MenuDropdown::class, // alias
         'menu-dropdown' => \TALLKit\Components\Menus\MenuDropdown::class,
         'menu' => \TALLKit\Components\Menus\Menu::class,
-        'menu-user' => \TALLKit\Components\Menus\UserMenu::class, // alias
         'user-menu' => \TALLKit\Components\Menus\UserMenu::class,
 
         /**
          * Messages.
          */
-        'alert' => \TALLKit\Components\Messages\Message::class, // alias
         'message' => \TALLKit\Components\Messages\Message::class,
 
         /**
@@ -295,17 +374,13 @@ return [
          */
         'drawer' => \TALLKit\Components\Navigations\Drawer::class,
         'dropdown' => \TALLKit\Components\Navigations\Dropdown::class,
-        'navigation-drawer' => \TALLKit\Components\Navigations\Drawer::class, // alias
         'nav' => \TALLKit\Components\Navigations\Nav::class,
         'nav-item' => \TALLKit\Components\Navigations\NavItem::class,
-        'navitem' => \TALLKit\Components\Navigations\NavItem::class, // alias
         'toggleable' => \TALLKit\Components\Navigations\Toggleable::class,
 
         /**
          * Overlays.
          */
-        'backdrop' => \TALLKit\Components\Overlays\Overlay::class, // alias
-        'consent' =>  \TALLKit\Components\Overlays\CookieConsent::class, // alias
         'cookie-consent' => \TALLKit\Components\Overlays\CookieConsent::class,
         'modal' => \TALLKit\Components\Overlays\Modal::class,
         'overlay' => \TALLKit\Components\Overlays\Overlay::class,
@@ -316,25 +391,17 @@ return [
          */
         'accordion' => \TALLKit\Components\Panels\Accordion::class,
         'accordion-item' => \TALLKit\Components\Panels\AccordionItem::class,
-        'accordionitem' => \TALLKit\Components\Panels\AccordionItem::class, // alias
         'card' => \TALLKit\Components\Panels\Card::class,
         'form-section' => \TALLKit\Components\Panels\FormSection::class,
         'section' => \TALLKit\Components\Panels\Section::class,
         'tab' => \TALLKit\Components\Panels\Tab::class,
         'tab-item' => \TALLKit\Components\Panels\TabItem::class,
-        'tabitem' => \TALLKit\Components\Panels\TabItem::class, // alias
 
         /**
          * Pickers.
          */
-        'datetime-picker' => \TALLKit\Components\Pickers\Flatpickr::class, // alias
-        'datetimepicker' => \TALLKit\Components\Pickers\Flatpickr::class, // alias
         'flatpickr' => \TALLKit\Components\Pickers\Flatpickr::class,
-        'color-picker' => \TALLKit\Components\Pickers\Pickr::class, // alias
-        'colorpicker' => \TALLKit\Components\Pickers\Pickr::class, // alias
         'pickr' => \TALLKit\Components\Pickers\Pickr::class,
-        'date-picker' => \TALLKit\Components\Pickers\Pikaday::class, // alias
-        'datepicker' => \TALLKit\Components\Pickers\Pikaday::class, // alias
         'pikaday' => \TALLKit\Components\Pickers\Pikaday::class,
 
         /**
@@ -342,39 +409,152 @@ return [
          */
         'flickity' => \TALLKit\Components\Sliders\Flickity::class,
         'flickity-item' => \TALLKit\Components\Sliders\FlickityItem::class,
-        'flickityitem' => \TALLKit\Components\Sliders\FlickityItem::class, // alias
         'slider' => \TALLKit\Components\Sliders\Slider::class,
         'slider-item' => \TALLKit\Components\Sliders\SliderItem::class,
-        'slideritem' => \TALLKit\Components\Sliders\SliderItem::class, // alias
         'splide' => \TALLKit\Components\Sliders\Splide::class,
         'splide-item' => \TALLKit\Components\Sliders\SplideItem::class,
-        'splideitem' => \TALLKit\Components\Sliders\SplideItem::class, // alias
         'swiper' => \TALLKit\Components\Sliders\Swiper::class,
         'swiper-item' => \TALLKit\Components\Sliders\SwiperItem::class,
-        'swiperitem' => \TALLKit\Components\Sliders\SwiperItem::class, // alias
 
         /**
          * Supports.
          */
         'avatar' => \TALLKit\Components\Supports\Avatar::class,
-        'cron' => \TALLKit\Components\Supports\Cron::class, // alias
+        'cron' => \TALLKit\Components\Supports\Cron::class,
         'image-loader' => \TALLKit\Components\Supports\ImageLoader::class,
-        'img-loader' => \TALLKit\Components\Supports\ImageLoader::class, // alias
-        'load-img' => \TALLKit\Components\Supports\ImageLoader::class, // alias
-        'load-image' => \TALLKit\Components\Supports\ImageLoader::class, // alias
-        'unsplash' => \TALLKit\Components\Supports\Unsplash::class, // alias
+        'unsplash' => \TALLKit\Components\Supports\Unsplash::class,
 
         /**
          * Tables.
          */
         'table' => \TALLKit\Components\Tables\Table::class,
         'heading' => \TALLKit\Components\Tables\Heading::class,
-        'head' => \TALLKit\Components\Tables\Heading::class, // alias
-        'th' => \TALLKit\Components\Tables\Heading::class, // alias
         'row' => \TALLKit\Components\Tables\Row::class,
-        'tr' => \TALLKit\Components\Tables\Row::class, // alias
         'cell' => \TALLKit\Components\Tables\Cell::class,
-        'td' => \TALLKit\Components\Tables\Cell::class, // alias
+
+        /**
+         * Uploaders.
+         */
+        'dropzone' => \TALLKit\Components\Uploaders\Dropzone::class,
+        'filepond' => \TALLKit\Components\Uploaders\Filepond::class,
+    ],
+
+    'aliases' => [
+        /**
+         * Buttons.
+         */
+        'bt' => \TALLKit\Components\Buttons\Button::class,
+        'btn' => \TALLKit\Components\Buttons\Button::class,
+        'form-bt' => \TALLKit\Components\Buttons\FormButton::class,
+        'form-btn' => \TALLKit\Components\Buttons\FormButton::class,
+
+        /**
+         * Datetimes.
+         */
+        'count-down' => \TALLKit\Components\Datetimes\Countdown::class,
+
+        /**
+         * Editors.
+         */
+        'editor' => \TALLKit\Components\Editors\Quill::class,
+        'easy-mde' => \TALLKit\Components\Editors\Easymde::class,
+        'mde' => \TALLKit\Components\Editors\Easymde::class,
+
+        /**
+         * Forms.
+         */
+        'check' => \TALLKit\Components\Forms\Checkbox::class,
+        'error' => \TALLKit\Components\Forms\Errors::class,
+        'form-field' => \TALLKit\Components\Forms\Field::class,
+        'form-group' => \TALLKit\Components\Forms\Group::class,
+        'image-preview' => \TALLKit\Components\Forms\InputImage::class,
+        'lbl' => \TALLKit\Components\Forms\Label::class,
+        'validation-bag' => \TALLKit\Components\Forms\ValidationErrors::class,
+        'validation-error' => \TALLKit\Components\Forms\ValidationErrors::class,
+        'validation' => \TALLKit\Components\Forms\ValidationErrors::class,
+
+        /**
+         * Icons.
+         */
+        'i' => \TALLKit\Components\Icons\Icon::class,
+
+        /**
+         * Layouts.
+         */
+        'admin' => \TALLKit\Components\Layouts\AdminPanel::class,
+        'admin-card' => \TALLKit\Components\Layouts\AdminPanel::class,
+        'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class,
+        'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
+        'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class,
+        'content' => \TALLKit\Components\Layouts\Container::class,
+        'googlefonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
+
+        /**
+         * Markdowns.
+         */
+        'md' => \TALLKit\Components\Markdowns\Markdown::class,
+
+        /**
+         * Menus.
+         */
+        'dropdown-menu' => \TALLKit\Components\Menus\MenuDropdown::class,
+        'menu-user' => \TALLKit\Components\Menus\UserMenu::class,
+
+        /**
+         * Messages.
+         */
+        'alert' => \TALLKit\Components\Messages\Message::class,
+
+        /**
+         * Navigations.
+         */
+        'navigation-drawer' => \TALLKit\Components\Navigations\Drawer::class,
+        'navitem' => \TALLKit\Components\Navigations\NavItem::class,
+
+        /**
+         * Overlays.
+         */
+        'backdrop' => \TALLKit\Components\Overlays\Overlay::class,
+        'consent' =>  \TALLKit\Components\Overlays\CookieConsent::class,
+
+        /**
+         * Panels.
+         */
+        'accordionitem' => \TALLKit\Components\Panels\AccordionItem::class,
+        'tabitem' => \TALLKit\Components\Panels\TabItem::class,
+
+        /**
+         * Pickers.
+         */
+        'datetime-picker' => \TALLKit\Components\Pickers\Flatpickr::class,
+        'datetimepicker' => \TALLKit\Components\Pickers\Flatpickr::class,
+        'color-picker' => \TALLKit\Components\Pickers\Pickr::class,
+        'colorpicker' => \TALLKit\Components\Pickers\Pickr::class,
+        'date-picker' => \TALLKit\Components\Pickers\Pikaday::class,
+        'datepicker' => \TALLKit\Components\Pickers\Pikaday::class,
+
+        /**
+         * Sliders.
+         */
+        'flickityitem' => \TALLKit\Components\Sliders\FlickityItem::class,
+        'slideritem' => \TALLKit\Components\Sliders\SliderItem::class,
+        'splideitem' => \TALLKit\Components\Sliders\SplideItem::class,
+        'swiperitem' => \TALLKit\Components\Sliders\SwiperItem::class,
+
+        /**
+         * Supports.
+         */
+        'img-loader' => \TALLKit\Components\Supports\ImageLoader::class,
+        'load-img' => \TALLKit\Components\Supports\ImageLoader::class,
+        'load-image' => \TALLKit\Components\Supports\ImageLoader::class,
+
+        /**
+         * Tables.
+         */
+        'head' => \TALLKit\Components\Tables\Heading::class,
+        'th' => \TALLKit\Components\Tables\Heading::class,
+        'tr' => \TALLKit\Components\Tables\Row::class,
+        'td' => \TALLKit\Components\Tables\Cell::class,
     ],
 
     'themes' => [
@@ -769,6 +949,7 @@ return [
                 ],
 
                 'options' => [
+                    // See https://github.com/Ionaru/easy-markdown-editor#configuration
                     'forceSync' => true,
                 ],
             ],
@@ -798,6 +979,7 @@ return [
                 ],
 
                 'options' => [
+                    // See https://quilljs.com/docs/configuration/#options
                     'theme' => 'snow',
                 ],
             ],
@@ -822,6 +1004,7 @@ return [
                 'input' => [],
 
                 'trix' => [
+                    // See https://trix-editor.org/
                     'class' => 'trix-content block w-full border-gray-200 rounded shadow bg-white',
                 ],
             ],
@@ -1811,7 +1994,9 @@ return [
                     'class' => 'inline-block',
                 ],
 
-                'options' => [],
+                'options' => [
+                    // See https://atomiks.github.io/tippyjs/v6/all-props/
+                ],
             ],
 
             /**
@@ -2013,6 +2198,7 @@ return [
                 ],
 
                 'options' => [
+                    // See https://flatpickr.js.org/options/
                     'enableTime' => true,
                 ],
             ],
@@ -2033,6 +2219,7 @@ return [
                 ],
 
                 'options' => [
+                    // See https://github.com/Simonwep/pickr#options
                     'theme' => 'classic',
 
                     'swatches' => [
@@ -2070,7 +2257,9 @@ return [
                     'autocomplete' => 'off',
                 ],
 
-                'options' => [],
+                'options' => [
+                    // See https://github.com/Pikaday/Pikaday#configuration
+                ],
             ],
 
             /**
@@ -2084,7 +2273,7 @@ return [
                 ],
 
                 'options' => [
-                    // see https://flickity.metafizzy.co/options.html
+                    // See https://flickity.metafizzy.co/options.html
                 ],
             ],
 
@@ -2185,7 +2374,7 @@ return [
                 ],
 
                 'options' => [
-                    // see https://splidejs.com/options/
+                    // See https://splidejs.com/options/
                 ],
 
                 'slider' => [
@@ -2216,7 +2405,7 @@ return [
                 ],
 
                 'options' => [
-                    // see https://swiperjs.com
+                    // See https://swiperjs.com
 
                     'pagination' => [
                         'el' => '.swiper-pagination',
@@ -2388,6 +2577,30 @@ return [
 
                 'emptyText' => [
                     'class' => 'px-6 py-4 whitespace-nowrap text-lg text-gray-500 text-center',
+                ],
+            ],
+
+            /**
+             * Uploaders.
+             */
+            'filepond' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'filepond\')',
+                    'x-show' => 'filepond',
+                ],
+
+                'options' => [
+                    // See https://pqina.nl/filepond/docs/api/instance/properties/
+                ],
+
+                'plugins' => [
+                    // See https://pqina.nl/filepond/docs/api/plugins/
+                ],
+
+                'filepond' => [
+                    'x-ref' => 'filepond',
                 ],
             ],
         ],

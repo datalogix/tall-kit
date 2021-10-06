@@ -104,10 +104,12 @@ class TALLKit
 
         return <<<HTML
 <style>
-    [x-cloak] { display: none !important; }
-    .slider-snap{-ms-overflow-style:none;scroll-behavior:smooth;-ms-scroll-snap-type:x mandatory;scroll-snap-type:x mandatory}
-    .slider-snap::-webkit-scrollbar{display:none}
+    [x-cloak] {display:none!important;}
+    .slider-snap{-ms-overflow-style:none;scroll-behavior:smooth;-ms-scroll-snap-type:x mandatory;scroll-snap-type:x mandatory;}
+    .slider-snap::-webkit-scrollbar{display:none;}
     .slider-snap>*{scroll-snap-align:center;width: 100%;flex-shrink: 0;}
+    .filepond--root{margin-bottom:0!important;}
+    .filepond--panel-root{border-radius:0!important;}
 </style>
 {$htmlStyles}
 {$htmlScrips}
