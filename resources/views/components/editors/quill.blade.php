@@ -20,9 +20,9 @@
 
     <x-input
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
-        type="hidden"
-        :id="$id"
         :name="$name"
+        :id="$id"
+        :type="'hidden'"
         :default="$slot->isEmpty() ? $default : $slot"
         :theme="$theme"
     />

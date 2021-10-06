@@ -78,6 +78,8 @@ class InputImage extends Input
      * @param  mixed  $bind
      * @param  mixed  $default
      * @param  string|null  $language
+     * @param  bool  $showErrors
+     * @param  string|null  $theme
      * @param  string|null  $accept
      * @param  string|null  $empty
      * @param  string|null  $emptyText
@@ -91,12 +93,6 @@ class InputImage extends Input
      * @param  string|null  $editIcon
      * @param  string|null  $delete
      * @param  string|null  $deleteIcon
-     * @param  bool  $showErrors
-     * @param  string|null  $theme
-     * @param  string|null  $prependText
-     * @param  string|null  $prependIcon
-     * @param  string|null  $appendText
-     * @param  string|null  $appendIcon
      * @return void
      */
     public function __construct(
@@ -106,6 +102,8 @@ class InputImage extends Input
         $bind = null,
         $default = null,
         $language = null,
+        $showErrors = true,
+        $theme = null,
         $accept = 'image/*',
         $empty = null,
         $emptyText = null,
@@ -118,13 +116,7 @@ class InputImage extends Input
         $edit = null,
         $editIcon = null,
         $delete = null,
-        $deleteIcon = null,
-        $showErrors = true,
-        $theme = null,
-        $prependText = null,
-        $prependIcon = null,
-        $appendText = null,
-        $appendIcon = null
+        $deleteIcon = null
     ) {
         parent::__construct(
             $name,
@@ -134,14 +126,12 @@ class InputImage extends Input
             $bind,
             $default,
             null,
+            null,
+            null,
             $language,
             $showErrors,
             $theme,
-            false,
-            $prependText,
-            $prependIcon,
-            $appendText,
-            $appendIcon
+            false
         );
 
         $this->accept = $accept;

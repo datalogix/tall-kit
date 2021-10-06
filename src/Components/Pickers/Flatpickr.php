@@ -31,11 +31,12 @@ class Flatpickr extends Input
      * @param  mixed  $default
      * @param  string|null  $language
      * @param  bool  $showErrors
+     * @param  string|null  $theme
+     * @param  bool  $groupable
      * @param  string|null  $prependText
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
      * @param  string|null  $appendIcon
-     * @param  string|null  $theme
      * @param  string  $format
      * @param  string|bool|null  $placeholder
      * @param  array  $options
@@ -49,11 +50,12 @@ class Flatpickr extends Input
         $default = null,
         $language = null,
         $showErrors = true,
+        $theme = null,
+        $groupable = true,
         $prependText = null,
         $prependIcon = null,
         $appendText = null,
         $appendIcon = null,
-        $theme = null,
         $format = 'd/m/Y H:i',
         $placeholder = null,
         $options = []
@@ -65,14 +67,17 @@ class Flatpickr extends Input
             'text',
             $bind,
             $default,
-            false,
+            null,
+            null,
+            null,
             $language,
             $showErrors,
+            $theme,
+            $groupable,
             $prependText,
             $prependIcon,
             $appendText,
-            $appendIcon,
-            $theme
+            $appendIcon
         );
 
         $this->format = $format;

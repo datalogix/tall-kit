@@ -21,8 +21,8 @@ class Pickr extends Input
      * @param  mixed  $default
      * @param  string|null  $language
      * @param  bool  $showErrors
-     * @param  array  $options
      * @param  string|null  $theme
+     * @param  array  $options
      * @return void
      */
     public function __construct(
@@ -33,8 +33,8 @@ class Pickr extends Input
         $default = null,
         $language = null,
         $showErrors = true,
+        $theme = null,
         $options = [],
-        $theme = null
     ) {
         parent::__construct(
             $name,
@@ -43,7 +43,9 @@ class Pickr extends Input
             'hidden',
             $bind,
             $default,
-            false,
+            null,
+            null,
+            null,
             $language,
             $showErrors,
             $theme

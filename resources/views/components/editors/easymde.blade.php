@@ -25,7 +25,7 @@
         :label="false"
         :default="$slot->isEmpty() ? $default : $slot"
         :showErrors="$showErrors"
-        :groupable="false"
         :theme="$theme"
+        :groupable="false"
     />
 </x-field>

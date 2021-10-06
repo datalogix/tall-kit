@@ -44,7 +44,8 @@ class Easymde extends Textarea
             $default,
             $language,
             $showErrors,
-            $theme
+            $theme,
+            false
         );
 
         $this->options = $options;

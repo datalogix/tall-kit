@@ -9,12 +9,13 @@
     :type="'text'"
     :default="$slot->isEmpty() ? $default : $slot"
     :showErrors="$showErrors"
-    :placeholder="$placeholder ?? $format"
+    :theme="$theme"
+    :groupable="$groupable"
     :prependText="$prependText"
     :prependIcon="$prependIcon"
     :appendText="$appendText"
     :appendIcon="$appendIcon"
-    :theme="$theme"
+    :placeholder="$placeholder ?? $format"
 >
     @isset ($prepend)
         <x-slot name="prepend">
