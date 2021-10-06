@@ -83,6 +83,6 @@ class NavItem extends BladeComponent
      */
     public function isActive()
     {
-        return $this->active ?? $this->href ? Request::is($this->href) : false;
+        return $this->active ?? $this->href ? Request::fullUrlIs($this->href.'*') : false;
     }
 }
