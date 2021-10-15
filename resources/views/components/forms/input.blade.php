@@ -9,6 +9,7 @@
     :prependIcon="$prependIcon"
     :appendText="$appendText"
     :appendIcon="$appendIcon"
+    :preview="$preview"
 >
     <input {{
         $attributes

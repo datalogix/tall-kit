@@ -1,5 +1,9 @@
 <th {{ $attributes->mergeThemeProvider($themeProvider, 'th') }}>
-    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
+    <div {{
+        $attributes
+            ->mergeOnlyThemeProvider($themeProvider, 'container')
+            ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
+     }}>
         {!! $slot->isEmpty() ? __($text) : $slot !!}
 
         @if ($sortable)

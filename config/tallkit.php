@@ -481,7 +481,6 @@ return [
         /**
          * Layouts.
          */
-        'admin' => \TALLKit\Components\Layouts\AdminPanel::class,
         'admin-card' => \TALLKit\Components\Layouts\AdminPanel::class,
         'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
@@ -752,7 +751,7 @@ return [
                 ],
 
                 'title' => [
-                    'class' => 'flex-1 text-2xl font-medium',
+                    'class' => 'hidden sm:block flex-1 text-2xl font-medium',
                 ],
             ],
 
@@ -761,7 +760,7 @@ return [
              */
             'button' => [
                 'container' => [
-                    'class' => 'flex justify-between items-center space-x-2 py-2 px-4 outline-none focus:outline-none',
+                    'class' => 'inline-block justify-between items-center space-x-2 py-2 px-4 outline-none focus:outline-none',
                 ],
 
                 'iconLeft' => [],
@@ -867,12 +866,78 @@ return [
                         'class' => 'shadow-none',
                     ],
                 ],
+
+                'presets' => [
+                    'show' => [
+                        'text' => 'Show',
+                        'color' => 'default',
+                    ],
+
+                    'create' => [
+                        'text' => 'Create',
+                        'color' => 'success',
+                    ],
+
+                    'edit' => [
+                        'text' => 'Edit',
+                        'color' => 'info',
+                    ],
+
+                    'delete' => [
+                        'text' => 'Delete',
+                        'color' => 'error',
+                    ],
+
+                    'save' => [
+                        'text' => 'Save',
+                        'color' => 'success',
+                    ],
+
+                    'send' => [
+                        'text' => 'Send',
+                        'color' => 'info',
+                    ],
+
+                    'back' => [
+                        'text' => 'Back',
+                        'color' => 'default',
+                    ],
+
+                    'cancel' => [
+                        'text' => 'Cancel',
+                        'color' => 'none',
+                    ],
+
+                    'enter' => [
+                        'text' => 'Enter',
+                        'color' => 'default',
+                    ],
+
+                    'update' => [
+                        'text' => 'Update',
+                        'color' => 'info',
+                    ],
+
+                    'download' => [
+                        'text' => 'Download',
+                        'color' => 'info',
+                    ],
+                ],
             ],
 
             'form-button' => [
-                'container' => [],
+                'container' => [
+                    'class' => 'inline-block',
+                ],
 
                 'button' => [],
+
+                'presets' => [
+                    'delete' => [
+                        'method' => 'delete',
+                        'confirm' => 'Do you really want to delete?',
+                    ],
+                ]
             ],
 
             'logout' => [
@@ -880,7 +945,9 @@ return [
             ],
 
             'toggler' => [
-                'button' => [],
+                'button' => [
+                    'class' => 'pl-0 flex',
+                ],
 
                 'icon' => [
                     'class' => 'w-6 h-6',
@@ -1026,13 +1093,13 @@ return [
                 ],
 
                 'checkbox' => [
-                    'class' => 'h-4 w-4 border-gray-200 rounded shadow',
+                    'class' => 'h-4 w-4 border-gray-200 rounded shadow flex-shrink-0',
                 ],
             ],
 
             'errors' => [
                 'container' => [
-                    'class' => 'text-red-600 text-sm italic',
+                    'class' => 'mt-1 text-red-600 text-sm italic',
                 ],
             ],
 
@@ -1068,6 +1135,30 @@ return [
                 ],
 
                 'errors' => [],
+
+                'preview' => [
+                    'class' => 'my-4',
+                ],
+
+                'types' => [
+                    'img' => [
+                        'style' => 'max-width: 320px; max-height: 240px;'
+                    ],
+
+                    'audio' => [
+                        'controls' => true,
+                    ],
+
+                    'video' => [
+                        'controls' => true,
+                        'width' => 320,
+                        'height' => 240,
+                    ],
+
+                    'download' => [
+                        'target' => '_blank',
+                    ],
+                ],
             ],
 
             'form' => [
@@ -1324,7 +1415,7 @@ return [
                 'sidebar' => [],
 
                 'logo' => [
-                    'class' => 'text-white',
+                    'class' => 'text-white w-60 p-10',
                 ],
 
                 'box' => [
@@ -1343,7 +1434,7 @@ return [
                 ],
 
                 'content' => [
-                    'class' => 'px-6 py-8',
+                    'class' => 'p-6 lg:p-10',
                 ],
             ],
 
@@ -1354,10 +1445,12 @@ return [
 
                 'header' => [],
 
-                'logo' => [],
+                'logo' => [
+                    'class' => 'p-10',
+                ],
 
                 'card' => [
-                    'class' => 'w-full sm:max-w-md px-6 py-4 bg-white shadow overflow-hidden rounded',
+                    'class' => 'w-full sm:max-w-md p-6 sm:p-14 bg-white overflow-hidden shadow rounded',
                 ],
             ],
 
@@ -1381,7 +1474,7 @@ return [
 
             'logo' => [
                 'container' => [
-                    'class' => 'flex items-center justify-center p-4',
+                    'class' => 'flex items-center justify-center',
                 ],
 
                 'image' => [
@@ -1509,7 +1602,9 @@ return [
                     ],
                 ],
 
-                'userName' => [],
+                'userName' => [
+                    'class' => 'hidden sm:block',
+                ],
             ],
 
             /**
@@ -2529,6 +2624,22 @@ return [
                 'td' => [
                     'class' => 'px-6 py-4 whitespace-nowrap text-gray-500',
                 ],
+
+                'container' => [],
+
+                'aligns' => [
+                    'left' => [
+                        'class' => 'text-left',
+                    ],
+
+                    'center' => [
+                        'class' => 'text-center',
+                    ],
+
+                    'right' => [
+                        'class' => 'text-right',
+                    ],
+                ],
             ],
 
             'heading' => [
@@ -2539,6 +2650,20 @@ return [
 
                 'container' => [
                     'class' => 'flex items-center',
+                ],
+
+                'aligns' => [
+                    'left' => [
+                        'class' => 'justify-start',
+                    ],
+
+                    'center' => [
+                        'class' => 'justify-center',
+                    ],
+
+                    'right' => [
+                        'class' => 'justify-end',
+                    ],
                 ],
 
                 'sortable' => [
@@ -2560,7 +2685,7 @@ return [
 
             'table' => [
                 'container' => [
-                    'class' => 'shadow rounded overflow-hidden border-b border-gray-200',
+                    'class' => 'shadow rounded overflow-y-auto border-b border-gray-200 my-4',
                 ],
 
                 'table' => [

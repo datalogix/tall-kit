@@ -77,7 +77,7 @@ class Pikaday extends Input
             $prependText,
             $prependIcon,
             $appendText,
-            $appendIcon,
+            $appendIcon
         );
 
         $this->format = $format;

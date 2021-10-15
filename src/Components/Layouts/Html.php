@@ -42,12 +42,22 @@ class Html extends BladeComponent
     public $tallkit;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
+     */
+    public $mixStyles;
+
+    /**
+     * @var string|bool|null
+     */
+    public $mixScripts;
+
+    /**
+     * @var string|bool|null
      */
     public $stackStyles;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $stackScripts;
 
@@ -63,8 +73,10 @@ class Html extends BladeComponent
      * @param  bool|array  $tallkit
      * @param  bool|null  $tailwindcss
      * @param  bool|null  $alpine
-     * @param  string|bool  $stackStyles
-     * @param  string|bool  $stackScripts
+     * @param  string|bool|null  $mixStyles
+     * @param  string|bool|null  $mixScripts
+     * @param  string|bool|null  $stackStyles
+     * @param  string|bool|null  $stackScripts
      * @param  string|null  $theme
      * @return void
      */
@@ -78,6 +90,8 @@ class Html extends BladeComponent
         $tallkit = true,
         $tailwindcss = null,
         $alpine = null,
+        $mixStyles = 'css/app.css',
+        $mixScripts = 'js/app.js',
         $stackStyles = 'styles',
         $stackScripts = 'scripts',
         $theme = null
@@ -96,6 +110,8 @@ class Html extends BladeComponent
             is_bool($alpine) ? ['options' => ['inject' => ['alpine' => $alpine]]] : [],
         ) : false;
 
+        $this->mixStyles = $mixStyles && file_exists(public_path($mixStyles)) ? $mixStyles : null;
+        $this->mixScripts = $mixScripts && file_exists(public_path($mixScripts)) ? $mixScripts : null;
         $this->stackStyles = $stackStyles;
         $this->stackScripts = $stackScripts;
     }

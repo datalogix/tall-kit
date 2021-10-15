@@ -63,7 +63,8 @@ class Filepond extends Input
             $prependText,
             $prependIcon,
             $appendText,
-            $appendIcon
+            $appendIcon,
+            false
         );
 
         $this->options = $options;

@@ -66,4 +66,26 @@
             :theme="$theme"
         />
     @endif
+
+    @if ($preview)
+        <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'preview') }}>
+            @if (Str::endsWith($preview, ['.jpg', 'jpeg', 'gif', 'png']))
+                <img {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'types', 'img') }} src="{{ $preview }}" />
+            @elseif (Str::endsWith($preview, '.mp3'))
+                <audio {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'types', 'audio') }}>
+                    <source src="{{ $preview }}" type="audio/mpeg">
+                </audio>
+            @elseif (Str::endsWith($preview, '.mp4'))
+                <video {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'types', 'video') }}>
+                    <source src="{{ $preview }}" type="video/mp4">
+                </video>
+            @else
+                <x-button
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'types', 'download') }}
+                    href="{{ $preview }}"
+                    preset="download"
+                />
+            @endif
+        </div>
+    @endif
 </div>

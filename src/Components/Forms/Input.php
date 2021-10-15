@@ -3,6 +3,7 @@
 namespace TALLKit\Components\Forms;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Input extends Field
@@ -62,6 +63,7 @@ class Input extends Field
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
      * @param  string|null  $appendIcon
+     * @param  string|bool|null  $preview
      * @return void
      */
     public function __construct(
@@ -81,7 +83,8 @@ class Input extends Field
         $prependText = null,
         $prependIcon = null,
         $appendText = null,
-        $appendIcon = null
+        $appendIcon = null,
+        $preview = null
     ) {
         parent::__construct(
             $name,
@@ -93,6 +96,7 @@ class Input extends Field
             $prependIcon,
             $appendText,
             $appendIcon,
+            $preview
         );
 
         $this->id = $id ?? $this->name;
@@ -112,6 +116,7 @@ class Input extends Field
         $this->tagify = $tagify;
 
         $this->label = $this->type === 'hidden' || $this->tagify ? false : $this->label;
+        $this->preview = $preview ?? ($this->type === 'file' ? $this->value : false);
     }
 
     /**
@@ -250,6 +255,7 @@ class Input extends Field
      */
     protected function formatValue($value)
     {
+        // dates
         if ($value instanceof Carbon) {
             switch ($this->type) {
                 case 'date':
@@ -268,6 +274,11 @@ class Input extends Field
                     return $value->format('Y-m');
                     break;
             }
+        }
+
+        // files
+        if (pathinfo($value, PATHINFO_EXTENSION) && Storage::exists($value)) {
+            return Storage::url($value);
         }
 
         return $value;

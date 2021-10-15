@@ -54,7 +54,7 @@ class Icon extends BladeComponent
                 return '';
             }
 
-            if (empty(trim($data['slot']))) {
+            if (empty(trim($data['slot'])) && (string) $data['attributes']) {
                 return '<i '.$data['attributes'].'></i>';
             }
 

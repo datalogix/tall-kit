@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Tables;
 
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use TALLKit\Components\BladeComponent;
 
@@ -28,6 +29,11 @@ class Table extends BladeComponent
     public $emptyText;
 
     /**
+     * @var \Illuminate\Contracts\Pagination\Paginator|null
+     */
+    public $paginator;
+
+    /**
      * Create a new component instance.
      *
      * @param  mixed  $cols
@@ -45,6 +51,11 @@ class Table extends BladeComponent
         $theme = null
     ) {
         parent::__construct($theme);
+
+        if ($rows instanceOf Paginator) {
+            $this->paginator = $rows;
+            $rows = $rows->items();
+        }
 
         $this->cols = Collection::make($cols);
         $this->rows = Collection::make($rows);

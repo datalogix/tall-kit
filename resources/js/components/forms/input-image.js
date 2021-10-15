@@ -1,4 +1,4 @@
-export default ({ loadable, loadImg, timeout, dispatch }) => ({
+export default ({ loadable, loadImg, timeout }) => ({
   ...loadable(),
 
   setup () {
@@ -20,7 +20,10 @@ export default ({ loadable, loadImg, timeout, dispatch }) => ({
   destroy (message) {
     if (!message || window.confirm(message)) {
       this.start()
-      timeout(() => this.clear(), 100)
+      timeout(() => {
+        this.$refs.input.value = ''
+        this.clear()
+      }, 100)
     }
   },
 
@@ -35,6 +38,7 @@ export default ({ loadable, loadImg, timeout, dispatch }) => ({
 
     loadImg(src, this.$refs.output)
       .then(() => {
+        URL.revokeObjectURL(src)
         timeout(() => this.complete(), 100)
       })
       .catch((e) => {

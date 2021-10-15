@@ -29,7 +29,7 @@
             </strong>
         @endif
 
-        @if ($slot->isEmpty())
+        @if ($slot->isEmpty() && $text)
             <p {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'text') }}>
                 {!! __($text) !!}
             </p>

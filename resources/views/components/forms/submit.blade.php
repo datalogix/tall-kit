@@ -2,13 +2,14 @@
     {{ $attributes }}
     type="submit"
     :text="$text"
-    :color="$color"
     :icon="$icon"
     :iconLeft="$iconLeft"
     :iconRight="$iconRight"
-    :outlined="$outlined"
-    :bordered="$bordered"
+    :color="$color"
     :rounded="$rounded"
     :shadow="$shadow"
+    :outlined="$outlined"
+    :bordered="$bordered"
+    :preset="$preset"
     :theme="$theme"
 >{{ $slot }}</x-button>

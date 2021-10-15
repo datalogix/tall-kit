@@ -1,4 +1,4 @@
-<button {{
+<{{ $href ? 'a' : 'button' }} {{
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
         ->mergeOnlyThemeProvider($themeProvider, 'rounded', $rounded)
@@ -12,7 +12,8 @@
             'class' => 'border border-'.$colorName.'-'.$colorHover,
         ] : [])
     }}
-    type="{{ $type }}"
+    @if ($href) href="{{ $href }}" @endif
+    @if (!$href) type="{{ $type }}" @endif
 >
     <x-icon
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'iconLeft') }}
@@ -31,4 +32,4 @@
     >
         {!! $iconRight !!}
     </x-icon>
-</button>
+</{{ $href ? 'a' : 'button' }}>

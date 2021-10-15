@@ -2,6 +2,7 @@
     {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
     method="{{ $spoofMethod ? 'POST' : $method }}"
     action="{{ $action }}"
+    @if ($confirm) onclick="return confirm('{{ __($confirm) }}')" @endif
     @if ($enctype)
         enctype="{{ $enctype }}"
     @elseif (Str::contains($slot, 'type="file"'))
@@ -18,3 +19,4 @@
 
     {{ $slot }}
 </form>
+

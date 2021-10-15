@@ -7,12 +7,18 @@
                     :theme="$theme"
                 >
                     @forelse ($cols as $key => $col)
-                        <x-heading
-                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'th') }}
+                        <x-heading {{
+                                $attributes
+                                    ->mergeOnlyThemeProvider($themeProvider, 'th')
+                                    ->merge(isset($col['class']) ? ['class' => $col['class']] : [])
+                                    ->merge(isset($col['style']) ? ['style' => $col['style']] : [])
+                                    ->merge(isset($col['attrs']) ? $col['attrs'] : [])
+                            }}
+                            :align="$col['align'] ?? false"
                             :sortable="$col['sortable'] ?? false"
                             :theme="$theme"
                         >
-                            {{ $col['name'] ?? $col }}
+                            {{ __($col['name'] ?? $col) }}
                         </x-heading>
                     @empty
                         {{ $head }}
@@ -28,11 +34,21 @@
                     :theme="$theme"
                 >
                     @foreach ($cols as $key => $col)
-                        <x-cell
-                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'td') }}
+                        <x-cell {{
+                                $attributes
+                                    ->mergeOnlyThemeProvider($themeProvider, 'td')
+                                    ->merge(isset($col['class']) ? ['class' => $col['class']] : ($loop->last ? ['class' => 'w-40'] : []))
+                                    ->merge(isset($col['style']) ? ['style' => $col['style']] : [])
+                                    ->merge(isset($col['attrs']) ? $col['attrs'] : [])
+                            }}
+                            :align="$col['align'] ?? false"
                             :theme="$theme"
                         >
-                            {{ ${$key} ?? data_get($row, $key) }}
+                            @isset(${is_int($key) ? $col : $key})
+                                {{ ${is_int($key) ? $col : $key}($row, $key, $col) }}
+                            @else
+                                {{ data_get($row, (is_int($key) ? $col : $key).'_formatted', data_get($row, is_int($key) ? $col : $key)) }}
+                            @endisset
                         </x-cell>
                     @endforeach
                 </x-row>
@@ -43,7 +59,7 @@
                     {{ $body }}
                 @elseif ($empty ?? false)
                     {{ $empty }}
-                @elseif ($emptyText)
+                @else
                     <x-row
                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tr') }}
                         :theme="$theme"
@@ -54,7 +70,7 @@
                             :theme="$theme"
                         >
                             <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'emptyText') }}>
-                                {!! __($emptyText) !!}
+                                {!! __($emptyText ?? 'No records') !!}
                             </span>
                         </x-cell>
                     </x-row>
@@ -70,11 +86,21 @@
                         :theme="$theme"
                     >
                         @foreach ($cols as $key => $col)
-                            <x-cell
-                                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'td') }}
+                            <x-cell {{
+                                    $attributes
+                                        ->mergeOnlyThemeProvider($themeProvider, 'td')
+                                        ->merge(isset($col['class']) ? ['class' => $col['class']] : [])
+                                        ->merge(isset($col['style']) ? ['style' => $col['style']] : [])
+                                        ->merge(isset($col['attrs']) ? $col['attrs'] : [])
+                                }}
+                                :align="$col['align'] ?? false"
                                 :theme="$theme"
                             >
-                                {{ ${$key} ?? data_get($row, $key) }}
+                                @isset(${(is_int($key) ? $col : $key).'-footer'})
+                                    {{ ${(is_int($key) ? $col : $key).'-footer'}($row, $key, $col) }}
+                                @else
+                                    {{ data_get($row, (is_int($key) ? $col : $key).'_formatted', data_get($row, is_int($key) ? $col : $key)) }}
+                                @endisset
                             </x-cell>
                         @endforeach
                     </x-row>
@@ -85,3 +111,7 @@
         @endif
     </table>
 </div>
+
+@if ($paginator)
+    {{ $paginator->links() }}
+@endif

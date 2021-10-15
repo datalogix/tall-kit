@@ -25,6 +25,11 @@ class Form extends BladeComponent
     public $enctype;
 
     /**
+     * @var string|bool|null
+     */
+    public $confirm;
+
+    /**
      * Form method spoofing to support PUT, PATCH and DELETE actions.
      * https://laravel.com/docs/master/routing#form-method-spoofing.
      *
@@ -40,6 +45,7 @@ class Form extends BladeComponent
      * @param  array|string|null  $route
      * @param  mixed  $bind
      * @param  string|null  $enctype
+     * @param  string|bool|null  $confirm
      * @param  string|null  $theme
      * @return void
      */
@@ -49,6 +55,7 @@ class Form extends BladeComponent
         $route = null,
         $bind = null,
         $enctype = null,
+        $confirm = null,
         $theme = null
     ) {
         parent::__construct($theme);
@@ -56,6 +63,7 @@ class Form extends BladeComponent
         $this->method = strtoupper($method);
         $this->action = $action;
         $this->enctype = $enctype;
+        $this->confirm = $confirm;
         $this->spoofMethod = in_array($this->method, ['PUT', 'PATCH', 'DELETE']);
 
         if (is_null($this->action) && ! is_null($route)) {
