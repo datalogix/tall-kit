@@ -34,7 +34,7 @@ class Pickr extends Input
         $language = null,
         $showErrors = true,
         $theme = null,
-        $options = [],
+        $options = []
     ) {
         parent::__construct(
             $name,
