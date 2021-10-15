@@ -68,7 +68,9 @@ class TALLKitBladeDirectives
         [$name, $functionArguments, $functionUses] = $directiveArguments;
 
         // Connect the arguments to form a correct function declaration
-        if ($functionArguments) $functionArguments = "function {$functionArguments}";
+        if ($functionArguments) {
+            $functionArguments = "function {$functionArguments}";
+        }
 
         $functionUses = array_filter(explode(',', trim($functionUses, '()')), 'strlen');
 
@@ -82,6 +84,6 @@ class TALLKitBladeDirectives
 
     public static function endscopedslot()
     {
-        return "<?php }); ?>";
+        return '<?php }); ?>';
     }
 }

@@ -52,7 +52,7 @@ class Table extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        if ($rows instanceOf Paginator) {
+        if ($rows instanceof Paginator) {
             $this->paginator = $rows;
             $rows = $rows->items();
         }

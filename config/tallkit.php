@@ -221,7 +221,7 @@ return [
         ],
 
         'FilePondPluginFileValidateType' => [
-            'https://cdn.jsdelivr.net/npm/filepond-plugin-file-validate-type@1/dist/filepond-plugin-file-validate-type.min.js'
+            'https://cdn.jsdelivr.net/npm/filepond-plugin-file-validate-type@1/dist/filepond-plugin-file-validate-type.min.js',
         ],
 
         'FilePondPluginImageCrop' => [
@@ -937,7 +937,7 @@ return [
                         'method' => 'delete',
                         'confirm' => 'Do you really want to delete?',
                     ],
-                ]
+                ],
             ],
 
             'logout' => [
@@ -1142,7 +1142,7 @@ return [
 
                 'types' => [
                     'img' => [
-                        'style' => 'max-width: 320px; max-height: 240px;'
+                        'style' => 'max-width: 320px; max-height: 240px;',
                     ],
 
                     'audio' => [
