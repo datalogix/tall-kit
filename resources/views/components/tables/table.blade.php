@@ -47,7 +47,10 @@
                             @isset(${is_int($key) ? $col : $key})
                                 {{ ${is_int($key) ? $col : $key}($row, $key, $col) }}
                             @else
-                                {{ data_get($row, (is_int($key) ? $col : $key).'_formatted', data_get($row, is_int($key) ? $col : $key)) }}
+                                <x-display
+                                    :target="$row"
+                                    :key="is_int($key) ? $col : $key"
+                                />
                             @endisset
                         </x-cell>
                     @endforeach
@@ -99,7 +102,10 @@
                                 @isset(${(is_int($key) ? $col : $key).'-footer'})
                                     {{ ${(is_int($key) ? $col : $key).'-footer'}($row, $key, $col) }}
                                 @else
-                                    {{ data_get($row, (is_int($key) ? $col : $key).'_formatted', data_get($row, is_int($key) ? $col : $key)) }}
+                                    <x-display
+                                        :target="$row"
+                                        :key="is_int($key) ? $col : $key"
+                                    />
                                 @endisset
                             </x-cell>
                         @endforeach

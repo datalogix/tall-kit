@@ -63,7 +63,7 @@ class Input extends Field
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
      * @param  string|null  $appendIcon
-     * @param  string|bool|null  $preview
+     * @param  string|bool|null  $display
      * @return void
      */
     public function __construct(
@@ -84,7 +84,7 @@ class Input extends Field
         $prependIcon = null,
         $appendText = null,
         $appendIcon = null,
-        $preview = null
+        $display = null
     ) {
         parent::__construct(
             $name,
@@ -96,7 +96,7 @@ class Input extends Field
             $prependIcon,
             $appendText,
             $appendIcon,
-            $preview
+            $display
         );
 
         $this->id = $id ?? $this->name;
@@ -116,7 +116,7 @@ class Input extends Field
         $this->tagify = $tagify;
 
         $this->label = $this->type === 'hidden' || $this->tagify ? false : $this->label;
-        $this->preview = $preview ?? ($this->type === 'file' ? $this->value : false);
+        $this->display = $display ?? ($this->type === 'file' ? $this->value : false);
     }
 
     /**
@@ -277,7 +277,11 @@ class Input extends Field
         }
 
         // files
-        if (pathinfo($value, PATHINFO_EXTENSION) && Storage::exists($value)) {
+        if (
+            ! filter_var($value, FILTER_VALIDATE_URL)
+            && pathinfo($value, PATHINFO_EXTENSION)
+            && Storage::exists($value)
+        ) {
             return Storage::url($value);
         }
 

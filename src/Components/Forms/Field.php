@@ -23,7 +23,7 @@ class Field extends FieldGroup
     /**
      * @var string|bool|null
      */
-    public $preview;
+    public $display;
 
     /**
      * Create a new component instance.
@@ -37,7 +37,7 @@ class Field extends FieldGroup
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
      * @param  string|null  $appendIcon
-     * @param  string|bool|null  $preview
+     * @param  string|bool|null  $display
      * @return void
      */
     public function __construct(
@@ -50,7 +50,7 @@ class Field extends FieldGroup
         $prependIcon = null,
         $appendText = null,
         $appendIcon = null,
-        $preview = null
+        $display = null
     ) {
         parent::__construct(
             $theme,
@@ -65,6 +65,6 @@ class Field extends FieldGroup
         $this->label = $label ?? $name;
         $this->showErrors = $showErrors && $name;
         $this->groupable = $groupable;
-        $this->preview = $preview;
+        $this->display = $display;
     }
 }
