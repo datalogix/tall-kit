@@ -1,7 +1,7 @@
 <form
     {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
     method="{{ $spoofMethod ? 'POST' : $method }}"
-    action="{{ $action }}"
+    @if ($action) action="{{ $action }}" @endif
     @if ($confirm) onclick="return confirm('{{ __($confirm) }}')" @endif
     @if ($enctype)
         enctype="{{ $enctype }}"
