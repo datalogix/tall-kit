@@ -25,6 +25,13 @@ abstract class BladeComponent extends BaseComponent
     public $theme;
 
     /**
+     * The theme key.
+     *
+     * @var string
+     */
+    protected $themeKey;
+
+    /**
      * The component key.
      *
      * @var string
@@ -41,7 +48,17 @@ abstract class BladeComponent extends BaseComponent
     {
         $this->theme = $theme;
         $this->themeProvider = app(ThemeProvider::class)
-            ->make($this->theme, $this->getComponentKey());
+            ->make($this->theme, $this->getThemeKey());
+    }
+
+    /**
+     * Get theme key.
+     *
+     * @return string
+     */
+    protected function getThemeKey()
+    {
+        return $this->themeKey ?? $this->getComponentKey();
     }
 
     /**
