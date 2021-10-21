@@ -299,6 +299,7 @@ return [
         /**
          * Buttons.
          */
+        'back' => \TALLKit\Components\Buttons\Back::class,
         'button' => \TALLKit\Components\Buttons\Button::class,
         'form-button' => \TALLKit\Components\Buttons\FormButton::class,
         'logout' => \TALLKit\Components\Buttons\Logout::class,
@@ -346,6 +347,7 @@ return [
         'admin-panel' => \TALLKit\Components\Layouts\AdminPanel::class,
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'container' => \TALLKit\Components\Layouts\Container::class,
+        'display' => \TALLKit\Components\Layouts\Display::class,
         'google-fonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
         'html' => \TALLKit\Components\Layouts\Html::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
@@ -487,6 +489,7 @@ return [
         'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'content' => \TALLKit\Components\Layouts\Container::class,
         'googlefonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
+        'preview' => \TALLKit\Components\Layouts\Display::class,
 
         /**
          * Markdowns.
@@ -922,6 +925,11 @@ return [
                         'text' => 'Download',
                         'color' => 'info',
                     ],
+
+                    'view' => [
+                        'text' => 'View',
+                        'color' => 'info',
+                    ],
                 ],
             ],
 
@@ -1042,7 +1050,7 @@ return [
 
                 'quill' => [
                     'x-ref' => 'editor',
-                    'class' => 'quill-container',
+                    'class' => 'quill-container bg-white',
                 ],
 
                 'options' => [
@@ -1136,28 +1144,9 @@ return [
 
                 'errors' => [],
 
-                'preview' => [
+                'display' => [
                     'class' => 'my-4',
-                ],
-
-                'types' => [
-                    'img' => [
-                        'style' => 'max-width: 320px; max-height: 240px;',
-                    ],
-
-                    'audio' => [
-                        'controls' => true,
-                    ],
-
-                    'video' => [
-                        'controls' => true,
-                        'width' => 320,
-                        'height' => 240,
-                    ],
-
-                    'download' => [
-                        'target' => '_blank',
-                    ],
+                    'style' => 'max-width: 320px; max-height: 240px;',
                 ],
             ],
 
@@ -1460,6 +1449,31 @@ return [
                 ],
             ],
 
+            'display' => [
+                'container' => [],
+
+                'types' => [
+                    'img' => [
+                        'class' => 'mx-auto',
+                        'style' => 'max-width: 120px; max-height: 120px;',
+                    ],
+
+                    'audio' => [
+                        'controls' => true,
+                    ],
+
+                    'video' => [
+                        'controls' => true,
+                        'width' => 320,
+                        'height' => 240,
+                    ],
+
+                    'download' => [
+                        'target' => '_blank',
+                    ],
+                ],
+            ],
+
             'html' => [
                 'html' => [
                     'lang' => $lang,
@@ -1589,16 +1603,18 @@ return [
                 ],
 
                 'userAvatar' => [
-                    'class' => 'w-8 h-8 rounded-full overflow-hidden border shadow bg-indigo-700 text-white flex items-center justify-center font-bold',
+                    'class' => 'w-8 h-8 rounded-full overflow-hidden bg-indigo-700 text-white shadow flex items-center justify-center font-bold',
                 ],
 
                 'userAvatarContainer' => [
-                    'theme:image' => [
-                        'class' => 'w-full h-full',
-                    ],
+                    'theme:container' => [
+                        'theme:image' => [
+                            'class' => 'w-full h-full',
+                        ],
 
-                    'theme:icon' => [
-                        'class' => 'w-4 h-4',
+                        'theme:icon' => [
+                            'class' => 'w-4 h-4',
+                        ],
                     ],
                 ],
 
