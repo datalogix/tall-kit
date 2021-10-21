@@ -58,9 +58,9 @@ class Avatar extends ImageLoader
             return false;
         }
 
-        $query = http_build_query(array_filter([
-            'fallback' => $fallback,
-        ]));
+        $query = http_build_query([
+            'fallback' => $fallback ?: 'false',
+        ]);
 
         return $provider
             ? sprintf('https://unavatar.io/%s/%s?%s', $provider, $search, $query)
