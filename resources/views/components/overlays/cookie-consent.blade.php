@@ -1,7 +1,7 @@
 @empty ($_COOKIE[$name])
     <div {{
         $attributes
-            ->mergeThemeProvider($themeProvider, 'container')
+            ->mergeOnlyThemeProvider($themeProvider, 'container')
             ->merge(['x-init' => 'setup(\''.$name.'\', '.$expires.')'])
             ->merge($events())
         }}
