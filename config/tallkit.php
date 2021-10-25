@@ -306,6 +306,15 @@ return [
         'toggler' => \TALLKit\Components\Buttons\Toggler::class,
 
         /**
+         * Crud.
+         */
+        'crud-header' => \TALLKit\Components\Crud\CrudHeader::class,
+        'crud-actions' => \TALLKit\Components\Crud\CrudActions::class,
+        'crud-index' => \TALLKit\Components\Crud\CrudIndex::class,
+        'crud-form' => \TALLKit\Components\Crud\CrudForm::class,
+        'crud-show' => \TALLKit\Components\Crud\CrudShow::class,
+
+        /**
          * Datetimes.
          */
         'carbon' => \TALLKit\Components\Datetimes\Carbon::class,
@@ -451,6 +460,16 @@ return [
         'form-btn' => \TALLKit\Components\Buttons\FormButton::class,
 
         /**
+         * Crud.
+         */
+        'crud-list' => \TALLKit\Components\Crud\CrudIndex::class,
+        'crud-new' => \TALLKit\Components\Crud\CrudForm::class,
+        'crud-create' => \TALLKit\Components\Crud\CrudForm::class,
+        'crud-edit' => \TALLKit\Components\Crud\CrudForm::class,
+        'crud-update' => \TALLKit\Components\Crud\CrudForm::class,
+        'crud-view' => \TALLKit\Components\Crud\CrudShow::class,
+
+        /**
          * Datetimes.
          */
         'count-down' => \TALLKit\Components\Datetimes\Countdown::class,
@@ -483,6 +502,7 @@ return [
         /**
          * Layouts.
          */
+        'admin' => \TALLKit\Components\Layouts\AdminPanel::class,
         'admin-card' => \TALLKit\Components\Layouts\AdminPanel::class,
         'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
@@ -746,6 +766,50 @@ return [
                 'active' => [
                     'class' => 'bg-black bg-opacity-25 hover:bg-opacity-25',
                 ],
+
+                'breakpoints' => [
+                    'sm' => [
+                        ':class' => '{ \'sm:static\': isOpened() }',
+                    ],
+
+                    'md' => [
+                        ':class' => '{ \'md:static\': isOpened() }',
+                    ],
+
+                    'lg' => [
+                        ':class' => '{ \'lg:static\': isOpened() }',
+                    ],
+
+                    'xl' => [
+                        ':class' => '{ \'xl:static\': isOpened() }',
+                    ],
+
+                    '2xl' => [
+                        ':class' => '{ \'2xl:static\': isOpened() }',
+                    ],
+                ],
+
+                'overlay' => [
+                    'sm' => [
+                        'class' => 'sm:hidden',
+                    ],
+
+                    'md' => [
+                        'class' => 'md:hidden',
+                    ],
+
+                    'lg' => [
+                        'class' => 'lg:hidden',
+                    ],
+
+                    'xl' => [
+                        'class' => 'xl:hidden',
+                    ],
+
+                    '2xl' => [
+                        'class' => '2xl:hidden',
+                    ],
+                ],
             ],
 
             'toolbar' => [
@@ -762,6 +826,53 @@ return [
              * Buttons.
              */
             'button' => [
+                '_purge' => [
+                    'hover:bg-gray-500',
+                    'hover:bg-gray-700',
+                    'border-gray-500',
+                    'border-gray-700',
+                    'bg-gray-500',
+                    'bg-gray-700',
+                    'text-gray-700',
+                    'text-gray-500',
+
+                    'hover:bg-blue-500',
+                    'hover:bg-blue-700',
+                    'border-blue-500',
+                    'border-blue-700',
+                    'bg-blue-500',
+                    'bg-blue-700',
+                    'text-blue-700',
+                    'text-blue-500',
+
+                    'hover:bg-red-500',
+                    'hover:bg-red-700',
+                    'border-red-500',
+                    'border-red-700',
+                    'bg-red-500',
+                    'bg-red-700',
+                    'text-red-700',
+                    'text-red-500',
+
+                    'hover:bg-green-500',
+                    'hover:bg-green-700',
+                    'border-green-500',
+                    'border-green-700',
+                    'bg-green-500',
+                    'bg-green-700',
+                    'text-green-700',
+                    'text-green-500',
+
+                    'hover:bg-yellow-500',
+                    'hover:bg-yellow-700',
+                    'border-yellow-500',
+                    'border-yellow-700',
+                    'bg-green-500',
+                    'bg-yellow-700',
+                    'text-yellow-700',
+                    'text-yellow-500',
+                ],
+
                 'container' => [
                     'class' => 'inline-block justify-between items-center space-x-2 py-2 px-4 outline-none focus:outline-none',
                 ],
@@ -966,6 +1077,79 @@ return [
                 'iconSvg' => [
                     '<svg class="fill-current" viewBox="0 0 24 24"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
                 ],
+            ],
+
+            /**
+             * Crud.
+             */
+            'crud-actions' => [
+                'show' => [],
+
+                'edit' => [],
+
+                'destroy' => [],
+            ],
+
+            'crud-header' => [
+                'container' => [
+                    'class' => 'flex space-x-4 items-center justify-between pb-4',
+                ],
+
+                'title' => [
+                    'class' => 'text-xl font-medium',
+                ],
+
+                'actions' => [
+                    'class' => 'hidden lg:flex space-x-4 items-center',
+                ],
+            ],
+
+            'crud-index' => [
+                'container' => [],
+
+                'header' => [],
+
+                'create' => [],
+
+                'table' => [],
+
+                'actions' => [],
+            ],
+
+            'crud-form' => [
+                'container' => [],
+
+                'header' => [],
+
+                'header-save' => [],
+
+                'header-back' => [],
+
+                'footer' => [
+                    'class' => 'flex space-x-4 items-center justify-between pt-4',
+                ],
+
+                'footer-save' => [],
+
+                'footer-back' => [],
+            ],
+
+            'crud-show' => [
+                'container' => [],
+
+                'header' => [],
+
+                'header-actions' => [],
+
+                'header-back' => [],
+
+                'footer' => [
+                    'class' => 'flex space-x-4 items-center pt-4',
+                ],
+
+                'footer-actions' => [],
+
+                'footer-back' => [],
             ],
 
             /**
@@ -1397,6 +1581,8 @@ return [
              * Layouts.
              */
             'admin-panel' => [
+                'html' => [],
+
                 'container' => [
                     'class' => 'flex h-screen bg-gray-100',
                 ],
@@ -1425,9 +1611,15 @@ return [
                 'content' => [
                     'class' => 'p-6 lg:p-10',
                 ],
+
+                'message' => [
+                    'class' => 'mb-6',
+                ],
             ],
 
             'authentication-card' => [
+                'html' => [],
+
                 'container' => [
                     'class' => 'min-h-screen flex flex-col items-center pt-6 bg-gray-100',
                 ],
@@ -1440,6 +1632,10 @@ return [
 
                 'card' => [
                     'class' => 'w-full sm:max-w-md p-6 sm:p-14 bg-white overflow-hidden shadow rounded',
+                ],
+
+                'message' => [
+                    'class' => 'mb-6',
                 ],
             ],
 
@@ -1627,6 +1823,48 @@ return [
              * Messages.
              */
             'message' => [
+                '_purge' => [
+                    'bg-gray-200',
+                    'border-gray-300',
+                    'bg-gray-100',
+                    'border-gray-500',
+                    'text-gray-500',
+                    'text-gray-600',
+                    'text-gray-800',
+
+                    'bg-red-200',
+                    'border-red-300',
+                    'bg-red-100',
+                    'border-red-500',
+                    'text-red-500',
+                    'text-red-600',
+                    'text-red-800',
+
+                    'bg-blue-200',
+                    'border-blue-300',
+                    'bg-blue-100',
+                    'border-blue-500',
+                    'text-blue-500',
+                    'text-blue-600',
+                    'text-blue-800',
+
+                    'bg-yellow-200',
+                    'border-yellow-300',
+                    'bg-yellow-100',
+                    'border-yellow-500',
+                    'text-yellow-500',
+                    'text-yellow-600',
+                    'text-yellow-800',
+
+                    'bg-green-200',
+                    'border-green-300',
+                    'bg-green-100',
+                    'border-green-500',
+                    'text-green-500',
+                    'text-green-600',
+                    'text-green-800',
+                ],
+
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
                     'x-cloak' => '',
@@ -1696,6 +1934,36 @@ return [
                         'iconName' => 'alert',
                         'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Warning',
+                    ],
+
+                    'created' => [
+                        'color' => 'green',
+                        'iconName' => 'check',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'title' => 'Created',
+                        'message' => 'Record created successfully!',
+                        'dismissible' => true,
+                        'timeout' => 3000,
+                    ],
+
+                    'updated' => [
+                        'color' => 'blue',
+                        'iconName' => 'check',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'title' => 'Updated',
+                        'message' => 'Record updated successfully!',
+                        'dismissible' => true,
+                        'timeout' => 3000,
+                    ],
+
+                    'deleted' => [
+                        'color' => 'red',
+                        'iconName' => 'check',
+                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'title' => 'Deleted',
+                        'message' => 'Record deleted successfully!',
+                        'dismissible' => true,
+                        'timeout' => 3000,
                     ],
                 ],
 
