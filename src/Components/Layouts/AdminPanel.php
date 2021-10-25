@@ -3,23 +3,21 @@
 namespace TALLKit\Components\Layouts;
 
 use TALLKit\Components\BladeComponent;
+use TALLKit\Concerns\User;
 
 class AdminPanel extends BladeComponent
 {
+    use User;
+
+    /**
+     * @var bool|array
+     */
+    public $html;
+
     /**
      * @var string|bool|null
      */
     public $title;
-
-    /**
-     * @var string|null
-     */
-    public $guard;
-
-    /**
-     * @var mixed
-     */
-    public $user;
 
     /**
      * @var string|bool|null
@@ -37,7 +35,7 @@ class AdminPanel extends BladeComponent
     public $logoUrl;
 
     /**
-     * @var array
+     * @var mixed
      */
     public $sidebarItems;
 
@@ -67,7 +65,7 @@ class AdminPanel extends BladeComponent
     public $sidebarAlign;
 
     /**
-     * @var array
+     * @var mixed
      */
     public $userMenuItems;
 
@@ -92,7 +90,7 @@ class AdminPanel extends BladeComponent
     public $userMenuOverlay;
 
     /**
-     * @var string
+     * @var string|bool|null
      */
     public $userMenuAlign;
 
@@ -102,27 +100,27 @@ class AdminPanel extends BladeComponent
     public $userMenuIconName;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $userMenuUserName;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $userMenuUserAvatar;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $userMenuAvatarSearch;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $userMenuAvatarProvider;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $userMenuAvatarFallback;
 
@@ -132,50 +130,59 @@ class AdminPanel extends BladeComponent
     public $userMenuAvatarIcon;
 
     /**
+     * @var string|bool|null
+     */
+    public $messageSession;
+
+    /**
      * Create a new component instance.
      *
+     * @param  bool|array  $html
      * @param  string|bool|null  $title
      * @param  string|null  $guard
-     * @param  mixed  $user
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed|null  $user
      * @param  string|bool|null  $logoImage
      * @param  string|bool|null  $logoName
      * @param  string|bool|null  $logoUrl
-     * @param  array  $sidebarItems
+     * @param  mixed  $sidebarItems
      * @param  string|bool  $sidebarBreakpoint
      * @param  string|bool|null  $sidebarName
      * @param  bool  $sidebarShow
      * @param  bool  $sidebarOverlay
      * @param  string|null  $sidebarAlign
-     * @param  array  $userMenuItems
+     * @param  mixed  $userMenuItems
      * @param  bool  $userMenuInline
      * @param  string|bool|null  $userMenuName
      * @param  bool  $userMenuShow
      * @param  bool  $userMenuOverlay
-     * @param  string|null  $userMenuAlign
+     * @param  string|bool|null  $userMenuAlign
      * @param  string|bool|null  $userMenuIconName
-     * @param  string|null  $userMenuUserName
-     * @param  string|null  $userMenuUserAvatar
-     * @param  string|null  $userMenuAvatarSearch
-     * @param  string|null  $userMenuAvatarProvider
-     * @param  string|null  $userMenuAvatarFallback
-     * @param  string|null  $userMenuAvatarIcon
+     * @param  string|bool|null  $userMenuUserName
+     * @param  string|bool|null  $userMenuUserAvatar
+     * @param  string|bool|null  $userMenuAvatarSearch
+     * @param  string|bool|null  $userMenuAvatarProvider
+     * @param  string|bool|null  $userMenuAvatarFallback
+     * @param  string|bool|null  $userMenuAvatarIcon
+     * @param  string|bool|null  $userMenuAvatarIcon
+     * @param  string|bool|null  $messageSession
      * @param  string|bool|null  $theme
      * @return void
      */
     public function __construct(
+        $html = true,
         $title = null,
         $guard = null,
         $user = null,
         $logoImage = null,
         $logoName = null,
         $logoUrl = null,
-        $sidebarItems = [],
-        $sidebarBreakpoint = 'none',
+        $sidebarItems = null,
+        $sidebarBreakpoint = 'lg',
         $sidebarName = 'sidebar',
         $sidebarShow = false,
         $sidebarOverlay = true,
         $sidebarAlign = null,
-        $userMenuItems = [],
+        $userMenuItems = null,
         $userMenuInline = false,
         $userMenuName = 'user-menu',
         $userMenuShow = false,
@@ -188,18 +195,24 @@ class AdminPanel extends BladeComponent
         $userMenuAvatarProvider = null,
         $userMenuAvatarFallback = null,
         $userMenuAvatarIcon = null,
+        $messageSession = 'status',
         $theme = null
     ) {
         parent::__construct($theme);
 
+        $this->setUser($user, $guard);
+
+        $this->html = $html ? array_replace_recursive(
+            $this->themeProvider->html->getAttributes(),
+            is_array($html) ? $html : []
+        ) : false;
+
         $this->title = $title ?? config('app.name');
-        $this->guard = $guard;
-        $this->user = $user ?? (auth($this->guard)->check() ? auth($this->guard)->user() : null);
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
-        $this->logoUrl = $logoUrl;
-        $this->sidebarItems = $sidebarItems;
-        $this->sidebarBreakpoint = $sidebarBreakpoint;
+        $this->logoUrl = $logoUrl ?? route_detect(['admin.index', 'admin.dashboard']);
+        $this->sidebarItems = $this->getUserValue('sidebar') ?? $sidebarItems;
+        $this->sidebarBreakpoint = $this->getUserValue('sidebarBreakpoint') ?? $sidebarBreakpoint;
         $this->sidebarName = $sidebarName;
         $this->sidebarShow = $sidebarShow;
         $this->sidebarOverlay = $sidebarOverlay;
@@ -217,5 +230,6 @@ class AdminPanel extends BladeComponent
         $this->userMenuAvatarProvider = $userMenuAvatarProvider;
         $this->userMenuAvatarFallback = $userMenuAvatarFallback;
         $this->userMenuAvatarIcon = $userMenuAvatarIcon;
+        $this->messageSession = $messageSession;
     }
 }

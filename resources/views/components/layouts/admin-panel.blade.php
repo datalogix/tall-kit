@@ -1,3 +1,4 @@
+@if (is_array($html))<x-html :options="$html">@endif
 <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
     <x-sidebar
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'sidebar') }}
@@ -97,8 +98,14 @@
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}
                 :theme="$theme"
             >
+                <x-message
+                    :session="$messageSession"
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'message') }}
+                />
+
                 {{ $slot }}
             </x-container>
         </main>
     </div>
 </div>
+@if (is_array($html))</x-html>@endif

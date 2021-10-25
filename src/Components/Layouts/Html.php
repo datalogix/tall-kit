@@ -77,6 +77,7 @@ class Html extends BladeComponent
      * @param  string|bool|null  $mixScripts
      * @param  string|bool|null  $stackStyles
      * @param  string|bool|null  $stackScripts
+     * @param  arrray  $options
      * @param  string|null  $theme
      * @return void
      */
@@ -94,25 +95,30 @@ class Html extends BladeComponent
         $mixScripts = 'js/app.js',
         $stackStyles = 'styles',
         $stackScripts = 'scripts',
+        $options = [],
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->title = $title ?? config('app.name');
-        $this->charset = $charset;
-        $this->viewport = $viewport;
-        $this->csrfToken = $csrfToken;
-        $this->googleFonts = $googleFonts;
-        $this->livewire = $livewire && class_exists('\Livewire\Livewire');
+        $this->title = data_get($options, 'title', $title ?? config('app.name'));
+        $this->charset = data_get($options, 'charset', $charset);
+        $this->viewport = data_get($options, 'viewport', $viewport);
+        $this->csrfToken = data_get($options, 'csrfToken', $csrfToken);
+        $this->googleFonts = data_get($options, 'googleFonts', $googleFonts);
+        $this->livewire = data_get($options, 'livewire', $livewire) && class_exists('\Livewire\Livewire');
         $this->tallkit = $tallkit ? array_replace_recursive(
             is_array($tallkit) ? $tallkit : [],
             is_bool($tailwindcss) ? ['options' => ['inject' => ['tailwindcss' => $tailwindcss]]] : [],
             is_bool($alpine) ? ['options' => ['inject' => ['alpine' => $alpine]]] : [],
+            data_get($options, 'tallkit', []),
         ) : false;
+
+        $mixStyles = data_get($options, 'mixStyles', $mixStyles);
+        $mixScripts = data_get($options, 'mixScripts', $mixScripts);
 
         $this->mixStyles = $mixStyles && file_exists(public_path($mixStyles)) ? $mixStyles : null;
         $this->mixScripts = $mixScripts && file_exists(public_path($mixScripts)) ? $mixScripts : null;
-        $this->stackStyles = $stackStyles;
-        $this->stackScripts = $stackScripts;
+        $this->stackStyles = data_get($options, 'stackStyles', $stackStyles);
+        $this->stackScripts = data_get($options, 'stackScripts', $stackScripts);
     }
 }
