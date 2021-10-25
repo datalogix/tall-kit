@@ -119,5 +119,5 @@
 </div>
 
 @if ($paginator)
-    {{ $paginator->links() }}
+    {{ $paginator->withQueryString()->links() }}
 @endif
