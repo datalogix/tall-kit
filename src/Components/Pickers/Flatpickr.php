@@ -3,9 +3,12 @@
 namespace TALLKit\Components\Pickers;
 
 use TALLKit\Components\Forms\Input;
+use TALLKit\Concerns\JsonOptions;
 
 class Flatpickr extends Input
 {
+    use JsonOptions;
+
     /**
      * @var string
      */
@@ -15,11 +18,6 @@ class Flatpickr extends Input
      * @var string|bool|null
      */
     public $placeholder;
-
-    /**
-     * @var array
-     */
-    public $options;
 
     /**
      * Create a new component instance.
@@ -39,7 +37,7 @@ class Flatpickr extends Input
      * @param  string|null  $appendIcon
      * @param  string  $format
      * @param  string|bool|null  $placeholder
-     * @param  array  $options
+     * @param  mixed  $options
      * @return void
      */
     public function __construct(
@@ -58,7 +56,7 @@ class Flatpickr extends Input
         $appendIcon = null,
         $format = 'd/m/Y H:i',
         $placeholder = null,
-        $options = []
+        $options = null
     ) {
         parent::__construct(
             $name,
@@ -82,20 +80,16 @@ class Flatpickr extends Input
 
         $this->format = $format;
         $this->placeholder = $placeholder;
-        $this->options = $options;
+        $this->setOptions($options);
     }
 
     /**
-     * Json options.
+     * Get options values.
      *
-     * @return string
+     * @return array
      */
-    public function jsonOptions()
+    protected function getOptionsValues()
     {
-        return json_encode((object) array_replace_recursive(
-            ['dateFormat' => $this->format],
-            $this->themeProvider->options->getAttributes(),
-            $this->options
-        ));
+        return ['dateFormat' => $this->format];
     }
 }

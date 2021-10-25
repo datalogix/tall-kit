@@ -3,13 +3,11 @@
 namespace TALLKit\Components\Editors;
 
 use TALLKit\Components\Forms\Textarea;
+use TALLKit\Concerns\JsonOptions;
 
 abstract class Editor extends Textarea
 {
-    /**
-     * @var array
-     */
-    public $options;
+    use JsonOptions;
 
     /**
      * Create a new component instance.
@@ -22,7 +20,7 @@ abstract class Editor extends Textarea
      * @param  string|null  $language
      * @param  bool  $showErrors
      * @param  string|null  $theme
-     * @param  array  $options
+     * @param  mixed  $options
      * @return void
      */
     public function __construct(
@@ -34,7 +32,7 @@ abstract class Editor extends Textarea
         $language = null,
         $showErrors = true,
         $theme = null,
-        $options = []
+        $options = null
     ) {
         parent::__construct(
             $name,
@@ -48,19 +46,6 @@ abstract class Editor extends Textarea
             false
         );
 
-        $this->options = $options;
-    }
-
-    /**
-     * Json options.
-     *
-     * @return string
-     */
-    public function jsonOptions()
-    {
-        return json_encode((object) array_replace_recursive(
-            $this->themeProvider->options->getAttributes(),
-            $this->options
-        ));
+        $this->setOptions($options);
     }
 }

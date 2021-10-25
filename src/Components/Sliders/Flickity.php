@@ -3,37 +3,25 @@
 namespace TALLKit\Components\Sliders;
 
 use TALLKit\Components\BladeComponent;
+use TALLKit\Concerns\JsonOptions;
 
 class Flickity extends BladeComponent
 {
-    /**
-     * @var array
-     */
-    public $options;
+    use JsonOptions;
 
     /**
      * Create a new component instance.
      *
-     * @param  array  $options
+     * @param  mixed  $options
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $options = [],
+        $options = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->options = array_replace_recursive($this->themeProvider->options->getAttributes(), $options);
-    }
-
-    /**
-     * Json options.
-     *
-     * @return string
-     */
-    public function jsonOptions()
-    {
-        return json_encode((object) $this->options);
+        $this->setOptions($options);
     }
 }

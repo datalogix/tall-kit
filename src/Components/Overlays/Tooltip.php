@@ -3,47 +3,44 @@
 namespace TALLKit\Components\Overlays;
 
 use TALLKit\Components\BladeComponent;
+use TALLKit\Concerns\JsonOptions;
 
 class Tooltip extends BladeComponent
 {
+    use JsonOptions;
+
     /**
      * @var string|null
      */
     public $value;
 
     /**
-     * @var array
-     */
-    public $options;
-
-    /**
      * Create a new component instance.
      *
      * @param  string|null  $value
-     * @param  array  $options
+     * @param  mixed  $options
      * @param  string|null  $theme
      * @return void
      */
-    public function __construct($value = null, $options = [], $theme = null)
-    {
+    public function __construct(
+        $value = null,
+        $options = null,
+        $theme = null
+    ) {
         parent::__construct($theme);
 
         $this->value = $value;
-        $this->options = $options;
+        $this->setOptions($options);
     }
 
     /**
-     * Json options.
+     * Get options values.
      *
-     * @param  string  $content
-     * @return string
+     * @param  mixed  $content
+     * @return array
      */
-    public function jsonOptions($content)
+    protected function getOptionsValues($content)
     {
-        return json_encode((object) array_replace_recursive(
-            $this->themeProvider->options->getAttributes(),
-            compact('content'),
-            $this->options,
-        ));
+        return compact('content');
     }
 }

@@ -3,13 +3,11 @@
 namespace TALLKit\Components\Uploaders;
 
 use TALLKit\Components\Forms\Input;
+use TALLKit\Concerns\JsonOptions;
 
 class Filepond extends Input
 {
-    /**
-     * @var array
-     */
-    public $options;
+    use JsonOptions;
 
     /**
      * Create a new component instance.
@@ -27,7 +25,7 @@ class Filepond extends Input
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
      * @param  string|null  $appendIcon
-     * @param  array  $options
+     * @param  mixed  $options
      * @return void
      */
     public function __construct(
@@ -44,7 +42,7 @@ class Filepond extends Input
         $prependIcon = null,
         $appendText = null,
         $appendIcon = null,
-        $options = []
+        $options = null
     ) {
         parent::__construct(
             $name,
@@ -67,19 +65,6 @@ class Filepond extends Input
             false
         );
 
-        $this->options = $options;
-    }
-
-    /**
-     * Json options.
-     *
-     * @return string
-     */
-    public function jsonOptions()
-    {
-        return json_encode((object) array_replace_recursive(
-            $this->themeProvider->options->getAttributes(),
-            $this->options
-        ));
+        $this->setOptions($options);
     }
 }

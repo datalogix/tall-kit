@@ -3,13 +3,11 @@
 namespace TALLKit\Components\Pickers;
 
 use TALLKit\Components\Forms\Input;
+use TALLKit\Concerns\JsonOptions;
 
 class Pickr extends Input
 {
-    /**
-     * @var array
-     */
-    public $options;
+    use JsonOptions;
 
     /**
      * Create a new component instance.
@@ -22,7 +20,7 @@ class Pickr extends Input
      * @param  string|null  $language
      * @param  bool  $showErrors
      * @param  string|null  $theme
-     * @param  array  $options
+     * @param  mixed  $options
      * @return void
      */
     public function __construct(
@@ -34,7 +32,7 @@ class Pickr extends Input
         $language = null,
         $showErrors = true,
         $theme = null,
-        $options = []
+        $options = null
     ) {
         parent::__construct(
             $name,
@@ -51,20 +49,16 @@ class Pickr extends Input
             $theme
         );
 
-        $this->options = $options;
+        $this->setOptions($options);
     }
 
     /**
-     * Json options.
+     * Get options values.
      *
-     * @return string
+     * @return array
      */
-    public function jsonOptions()
+    protected function getOptionsValues()
     {
-        return json_encode((object) array_replace_recursive(
-            ['default' => $this->value],
-            $this->themeProvider->options->getAttributes(),
-            $this->options
-        ));
+        return ['default' => $this->value];
     }
 }

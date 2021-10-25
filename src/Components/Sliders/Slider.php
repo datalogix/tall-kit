@@ -3,13 +3,11 @@
 namespace TALLKit\Components\Sliders;
 
 use TALLKit\Components\BladeComponent;
+use TALLKit\Concerns\JsonOptions;
 
 class Slider extends BladeComponent
 {
-    /**
-     * @var array
-     */
-    public $options;
+    use JsonOptions;
 
     /**
      * @var string|bool|null
@@ -24,32 +22,22 @@ class Slider extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  array  $options
+     * @param  mixed  $options
      * @param  string|bool|null  $prevIcon
      * @param  string|bool|null  $nextIcon
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $options = [],
+        $options = null,
         $prevIcon = null,
         $nextIcon = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->options = array_replace_recursive($this->themeProvider->options->getAttributes(), $options);
+        $this->setOptions($options);
         $this->prevIcon = $prevIcon;
         $this->nextIcon = $nextIcon;
-    }
-
-    /**
-     * Json options.
-     *
-     * @return string
-     */
-    public function jsonOptions()
-    {
-        return json_encode((object) $this->options);
     }
 }
