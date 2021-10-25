@@ -38,12 +38,25 @@
   "autoload": {
     "psr-4": {
       "TALLKit\\": "src/"
-    }
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
       "TALLKit\\Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "dev": [
+      "@composer update",
+      "@composer test",
+      "yarn",
+      "yarn watch"
+    ],
+    "test": "vendor/bin/phpunit",
+    "watch": "vendor/bin/phpunit-watcher watch"
   },
   "extra": {
     "laravel": {
@@ -60,15 +73,5 @@
     "sort-packages": true
   },
   "minimum-stability": "dev",
-  "prefer-stable": true,
-  "scripts": {
-    "dev": [
-      "@composer update",
-      "@composer test",
-      "yarn",
-      "yarn watch"
-    ],
-    "test": "vendor/bin/phpunit",
-    "watch": "vendor/bin/phpunit-watcher watch"
-  }
+  "prefer-stable": true
 }
