@@ -23,7 +23,7 @@ trait JsonOptions
     }
 
     /**
-     * Get options
+     * Get options.
      *
      * @return array
      */
