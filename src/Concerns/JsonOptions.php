@@ -47,10 +47,10 @@ trait JsonOptions
      *
      * @return string
      */
-    public function jsonOptions()
+    public function jsonOptions(...$args)
     {
         return json_encode((object) array_replace_recursive(
-            $this->getOptionsValues(func_get_args()),
+            $this->getOptionsValues(...func_get_args()),
             $this->themeProvider->options->getAttributes(),
             $this->getOptions()
         ));
