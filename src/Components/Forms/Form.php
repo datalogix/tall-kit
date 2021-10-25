@@ -61,13 +61,9 @@ class Form extends BladeComponent
         parent::__construct($theme);
 
         $this->method = strtoupper($method);
-        $this->action = $action;
+        $this->action = $action ?? route_detect($route, $bind ?: $this->getBoundTarget(), null);
         $this->enctype = $enctype;
         $this->confirm = $confirm;
         $this->spoofMethod = in_array($this->method, ['PUT', 'PATCH', 'DELETE']);
-
-        if (is_null($this->action) && ! is_null($route)) {
-            $this->action = route($route, $bind ?: $this->getBoundTarget());
-        }
     }
 }

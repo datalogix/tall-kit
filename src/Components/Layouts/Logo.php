@@ -50,16 +50,12 @@ class Logo extends BladeComponent
      */
     protected function imageAsset()
     {
-        if (file_exists(public_path('logo.png'))) {
-            return asset('logo.png');
-        }
+        $paths = ['logo.png', 'imgs/logo.png', 'images/logo.png'];
 
-        if (file_exists(public_path('imgs/logo.png'))) {
-            return asset('imgs/logo.png');
-        }
-
-        if (file_exists(public_path('images/logo.png'))) {
-            return asset('images/logo.png');
+        foreach ($paths as $path) {
+            if (file_exists(public_path($path))) {
+                return asset($path);
+            }
         }
     }
 }

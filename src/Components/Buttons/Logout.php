@@ -2,8 +2,6 @@
 
 namespace TALLKit\Components\Buttons;
 
-use Illuminate\Support\Facades\Route;
-
 class Logout extends FormButton
 {
     /**
@@ -49,7 +47,7 @@ class Logout extends FormButton
     ) {
         parent::__construct(
             $method,
-            $action ?? (Route::has('logout') ? route('logout') : (Route::has('auth.logout') ? route('auth.logout') : '/')),
+            $action ?? route_detect(['logout', 'auth.logout']),
             $route,
             $bind,
             $enctype,

@@ -2,12 +2,13 @@
 
 namespace TALLKit\Components\Bars;
 
+use Illuminate\Support\Collection;
 use TALLKit\Components\Navigations\Drawer;
 
 class Sidebar extends Drawer
 {
     /**
-     * @var array
+     * @var \Illuminate\Support\Collection
      */
     public $items;
 
@@ -19,7 +20,7 @@ class Sidebar extends Drawer
     /**
      * Create a new component instance.
      *
-     * @param  array  $items
+     * @param  mixed  $items
      * @param  string|bool|null  $breakpoint
      * @param  string|bool|null  $name
      * @param  bool  $show
@@ -29,7 +30,7 @@ class Sidebar extends Drawer
      * @return void
      */
     public function __construct(
-        $items = [],
+        $items = null,
         $breakpoint = 'none',
         $name = 'sidebar',
         $show = false,
@@ -45,7 +46,7 @@ class Sidebar extends Drawer
             $theme
         );
 
-        $this->items = $items;
+        $this->items = Collection::make($items);
         $this->breakpoint = $breakpoint;
     }
 
@@ -59,20 +60,8 @@ class Sidebar extends Drawer
         return $this->attributes
             ->mergeOnlyThemeProvider($this->themeProvider, 'container')
             ->merge(['x-init' => 'setup(\''.$this->name.'\', \''.$this->breakpoint.'\')'], false)
-            ->merge($this->breakpoint ? ['theme:overlay' => $this->breakpoint.':hidden'] : [], false)
+            ->merge(['theme:overlay' => $this->themeProvider->overlay->get($this->breakpoint, [])], false)
             ->getAttributes();
-    }
-
-    /**
-     * Get breakpoint classes.
-     *
-     * @return array
-     */
-    public function breakpointClasses()
-    {
-        return $this->breakpoint
-            ? [':class' => '{ \''.$this->breakpoint.':static\': isOpened() }']
-            : [];
     }
 
     /**

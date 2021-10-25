@@ -2,8 +2,6 @@
 
 namespace TALLKit\Components\Overlays;
 
-use Illuminate\Support\Facades\Route;
-
 class CookieConsent extends Modal
 {
     /**
@@ -129,7 +127,7 @@ class CookieConsent extends Modal
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->description = $description;
-        $this->url = $url ?? (Route::has('cookie-privacy') ? route('cookie-privacy') : (Route::has('privacy-policy') ? route('privacy-policy') : '/'));
+        $this->url = $url ?? route_detect(['cookie-privacy', 'privacy-policy']);
         $this->more = $more;
         $this->buttonText = $buttonText;
         $this->buttonIcon = $buttonIcon;

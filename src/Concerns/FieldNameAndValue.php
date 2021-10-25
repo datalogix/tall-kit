@@ -16,6 +16,11 @@ trait FieldNameAndValue
     /**
      * @var string
      */
+    protected $realName;
+
+    /**
+     * @var string
+     */
     protected $fieldKey;
 
     /**
@@ -32,6 +37,7 @@ trait FieldNameAndValue
     public function setName($name = null)
     {
         $this->name = $name;
+        $this->realName = $name;
     }
 
     /**
@@ -42,7 +48,7 @@ trait FieldNameAndValue
     public function getFieldKey()
     {
         if (! $this->fieldKey) {
-            $this->fieldKey = Str::before($this->name, '[]');
+            $this->fieldKey = Str::before($this->realName, '[]');
         }
 
         return $this->fieldKey;
@@ -105,6 +111,6 @@ trait FieldNameAndValue
      */
     public function getFieldBoundValue($bind = null)
     {
-        return $this->getBoundValue($bind, $this->getFieldKey());
+        return $this->getBoundValue($bind, $this->getFieldName());
     }
 }

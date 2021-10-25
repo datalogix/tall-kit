@@ -241,7 +241,11 @@ class Input extends Field
         }
 
         if ($bind) {
-            $default = $bind->getTranslation($this->getFieldKey(), $language, false) ?: $default;
+            $default = $this->formatValue(
+                $bind->getTranslation($this->getFieldKey(),
+                $language,
+                false
+            )) ?: $default;
         }
 
         $this->value = old("{$this->getFieldName()}.{$language}", $default);
@@ -278,7 +282,8 @@ class Input extends Field
 
         // files
         if (
-            ! filter_var($value, FILTER_VALIDATE_URL)
+            is_string($value)
+            && ! filter_var($value, FILTER_VALIDATE_URL)
             && pathinfo($value, PATHINFO_EXTENSION)
             && Storage::exists($value)
         ) {

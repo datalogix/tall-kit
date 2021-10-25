@@ -2,30 +2,34 @@
 
 namespace TALLKit\Components\Menus;
 
+use TALLKit\Concerns\User;
+
 class UserMenu extends MenuDropdown
 {
+    use User;
+
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $userName;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $userAvatar;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $avatarSearch;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $avatarProvider;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $avatarFallback;
 
@@ -37,26 +41,26 @@ class UserMenu extends MenuDropdown
     /**
      * Create a new component instance.
      *
-     * @param  array  $items
+     * @param  mixed  $items
      * @param  bool  $inline
      * @param  string|bool|null  $name
      * @param  bool  $show
      * @param  bool  $overlay
      * @param  string  $align
      * @param  string|bool|null  $iconName
-     * @param  mixed  $user
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed|null  $user
      * @param  string|null  $guard
-     * @param  string|null  $userName
-     * @param  string|null  $userAvatar
-     * @param  string|null  $avatarSearch
-     * @param  string|null  $avatarProvider
-     * @param  string|null  $avatarFallback
+     * @param  string|bool|null  $userName
+     * @param  string|bool|null  $userAvatar
+     * @param  string|bool|null  $avatarSearch
+     * @param  string|bool|null  $avatarProvider
+     * @param  string|bool|null  $avatarFallback
      * @param  string|bool|null  $avatarIcon
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $items = [],
+        $items = null,
         $inline = false,
         $name = null,
         $show = false,
@@ -73,8 +77,10 @@ class UserMenu extends MenuDropdown
         $avatarIcon = null,
         $theme = null
     ) {
+        $this->setUser($user, $guard);
+
         parent::__construct(
-            $items,
+            $items ?? $this->getUserValue('userMenu'),
             $inline,
             $name,
             $show,
@@ -84,11 +90,9 @@ class UserMenu extends MenuDropdown
             $theme
         );
 
-        $user = $user ?? (auth($guard)->check() ? auth($guard)->user() : null);
-
-        $this->userName = $userName ?? optional((object) $user)->name;
-        $this->userAvatar = $userAvatar ?? optional((object) $user)->avatar;
-        $this->avatarSearch = $avatarSearch ?? optional((object) $user)->email;
+        $this->userName = $userName ?? $this->getUserValue('name');
+        $this->userAvatar = $userAvatar ?? $this->getUserValue('avatar_url') ?? $this->getUserValue('avatar');
+        $this->avatarSearch = $avatarSearch ?? $this->getUserValue('email');
         $this->avatarProvider = $avatarProvider;
         $this->avatarFallback = $avatarFallback;
         $this->avatarIcon = $avatarIcon;

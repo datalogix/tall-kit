@@ -41,7 +41,7 @@ class Textarea extends Input
             $name,
             $id,
             $label,
-            'hidden',
+            'textarea',
             $bind,
             $default,
             null,
