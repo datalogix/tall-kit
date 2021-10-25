@@ -15,7 +15,7 @@
                     {{ $attributes->mergeThemeProvider($themeProvider, 'header-actions') }}
                     :custom-actions="$customActions"
                     :prefix="$prefix"
-                    :parameters="[...$parameters, $resource]"
+                    :parameters="array_merge($parameters, [$resource])"
                 />
 
                 <x-back
@@ -37,7 +37,7 @@
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-actions') }}
                 :custom-actions="$customActions"
                 :prefix="$prefix"
-                :parameters="[...$parameters, $resource]"
+                :parameters="array_merge($parameters, [$resource])"
             />
 
             <x-back

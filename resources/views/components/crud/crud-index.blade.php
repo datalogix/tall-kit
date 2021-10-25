@@ -36,7 +36,7 @@
                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
                         :custom-actions="$customActions"
                         :prefix="$prefix"
-                        :parameters="[...$parameters, $row]"
+                        :parameters="array_merge($parameters, [$row])"
                     />
                 @endscopedslot
             @endif

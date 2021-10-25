@@ -58,7 +58,7 @@ class CrudForm extends Crud
         $this->method = $method ?? ($this->resource ? 'patch' : 'post');
         $this->action = $action ?? route_detect(
             $this->prefix.'.'.($this->resource ? 'update' : 'store'),
-            [...$this->parameters, $this->resource],
+            array_merge($this->parameters, [$this->resource]),
             null
         );
     }
