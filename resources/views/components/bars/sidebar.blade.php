@@ -1,7 +1,7 @@
 <x-drawer {{
     $attributes
         ->mergeThemeProvider($themeProvider, 'drawer')
-        ->merge($breakpointClasses(), false)
+        ->merge($themeProvider->breakpoints->get($breakpoint, []), false)
     }}
     :name="$name"
     :show="$show"
