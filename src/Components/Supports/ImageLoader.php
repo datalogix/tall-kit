@@ -10,12 +10,12 @@ use TALLKit\Components\BladeComponent;
 class ImageLoader extends BladeComponent
 {
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $url;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $src;
 
@@ -37,7 +37,7 @@ class ImageLoader extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  string|null  $url
+     * @param  string|bool|null  $url
      * @param  string|bool|null  $icon
      * @param  string|bool|null  $loadingIcon
      * @param  string|bool|null  $errorIcon
@@ -65,9 +65,9 @@ class ImageLoader extends BladeComponent
     /**
      * Cache.
      *
-     * @param  string|null  $url
+     * @param  string|bool|null  $url
      * @param  int|bool|null  $ttl
-     * @return string|bool
+     * @return string|bool|null
      */
     protected function cache($url, $ttl)
     {

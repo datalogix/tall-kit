@@ -12,16 +12,16 @@ class TALLKit
     /**
      * Styles.
      *
-     * @param  array  $config
+     * @param  mixed  $config
      * @return string
      */
-    public function styles($config = [])
+    public function styles($config = null)
     {
         $debug = config('app.debug');
 
         $styles = $this->cssAssets(
-            array_replace_recursive(config('tallkit.options', []), $config['options'] ?? []),
-            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), $config['assets'] ?? [])
+            array_replace_recursive(config('tallkit.options', []), data_get($config, 'options', [])),
+            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), data_get($config, 'assets', []))
         );
 
         // HTML Label.
@@ -36,16 +36,16 @@ class TALLKit
     /**
      * Scripts.
      *
-     * @param  array  $config
+     * @param  mixed  $config
      * @return string
      */
-    public function scripts($config = [])
+    public function scripts($config = null)
     {
         $debug = config('app.debug');
 
         $scripts = $this->javascriptAssets(
-            array_replace_recursive(config('tallkit.options', []), $config['options'] ?? []),
-            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), $config['assets'] ?? [])
+            array_replace_recursive(config('tallkit.options', []), data_get($config, 'options', [])),
+            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), data_get($config, 'assets', []))
         );
 
         // HTML Label.

@@ -9,13 +9,13 @@ class Menu extends Nav
     /**
      * Create a new component instance.
      *
-     * @param  array  $items
+     * @param  mixed  $items
      * @param  bool  $inline
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $items = [],
+        $items = null,
         $inline = false,
         $theme = null
     ) {

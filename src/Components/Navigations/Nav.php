@@ -2,12 +2,13 @@
 
 namespace TALLKit\Components\Navigations;
 
+use Illuminate\Support\Collection;
 use TALLKit\Components\BladeComponent;
 
 class Nav extends BladeComponent
 {
     /**
-     * @var array
+     * @var \Illuminate\Support\Collection
      */
     public $items;
 
@@ -19,19 +20,19 @@ class Nav extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  array  $items
+     * @param  mixed  $items
      * @param  bool  $inline
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $items = [],
+        $items = null,
         $inline = true,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->items = $items;
+        $this->items = Collection::make($items);
         $this->inline = $inline;
     }
 }

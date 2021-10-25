@@ -45,7 +45,7 @@ class Navbar extends Nav
     /**
      * Create a new component instance.
      *
-     * @param  array  $items
+     * @param  mixed  $items
      * @param  string  $breakpoint
      * @param  bool  $animated
      * @param  string  $align
@@ -56,7 +56,7 @@ class Navbar extends Nav
      * @return void
      */
     public function __construct(
-        $items = [],
+        $items = null,
         $breakpoint = 'none',
         $animated = true,
         $align = 'between',

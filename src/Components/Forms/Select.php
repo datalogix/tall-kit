@@ -14,9 +14,9 @@ class Select extends Field
     public $selectedKey;
 
     /**
-     * @var mixed
+     * @var \Illuminate\Support\Collection
      */
-    public $options = [];
+    public $options;
 
     /**
      * @var string|array|int|null
@@ -64,7 +64,7 @@ class Select extends Field
         $label = null,
         $itemText = null,
         $itemValue = null,
-        $options = [],
+        $options = null,
         $bind = null,
         $default = null,
         $multiple = false,
@@ -130,7 +130,7 @@ class Select extends Field
      * Prepare options.
      *
      * @param  mixed  $options
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
     protected function prepareOptions($options)
     {
@@ -140,7 +140,6 @@ class Select extends Field
                 $value = data_get($value, $this->itemText, $value);
 
                 return [$key => $value];
-            })
-            ->toArray();
+            });
     }
 }
