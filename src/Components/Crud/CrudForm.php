@@ -54,7 +54,7 @@ class CrudForm extends Crud
             $theme
         );
 
-        $this->title = $title ?? __(Str::title($this->resource ? 'edit' : 'create')).' '. __($this->title);
+        $this->title = $title ?? __(Str::title($this->resource ? 'edit' : 'create')).' '.__($this->title);
         $this->method = $method ?? ($this->resource ? 'patch' : 'post');
         $this->action = $action ?? route_detect(
             $this->prefix.'.'.($this->resource ? 'update' : 'store'),
