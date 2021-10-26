@@ -10,6 +10,7 @@
     @if ($livewire) @livewireStyles @endif
     @if (is_array($tallkit)) @tallkitStyles($tallkit) @endif
     @if ($mixStyles) <link href="{{ mix($mixStyles) }}" rel="stylesheet"> @endif
+    @foreach ($styles as $style) <link href="{{ $style }}" rel="stylesheet"> @endforeach
     @if ($stackStyles) @stack($stackStyles) @endif
 </head>
 <body {{ $attributes->mergeThemeProvider($themeProvider, 'body') }}>
@@ -17,6 +18,7 @@
     @if ($livewire) @livewireScripts @endif
     @if (is_array($tallkit)) @tallkitScripts($tallkit) @endif
     @if ($mixScripts) <script src="{{ mix($mixScripts) }}"></script> @endif
+    @foreach ($scripts as $script) <script src="{{ $script }}"></script>> @endforeach
     @if ($stackScripts) @stack($stackScripts) @endif
 </body>
 </html>

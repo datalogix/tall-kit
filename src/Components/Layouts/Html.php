@@ -52,6 +52,16 @@ class Html extends BladeComponent
     public $mixScripts;
 
     /**
+     * @var array
+     */
+    public $styles;
+
+    /**
+     * @var array
+     */
+    public $scripts;
+
+    /**
      * @var string|bool|null
      */
     public $stackStyles;
@@ -75,6 +85,8 @@ class Html extends BladeComponent
      * @param  bool|null  $alpine
      * @param  string|bool|null  $mixStyles
      * @param  string|bool|null  $mixScripts
+     * @param  array  $styles
+     * @param  array  $scripts
      * @param  string|bool|null  $stackStyles
      * @param  string|bool|null  $stackScripts
      * @param  arrray  $options
@@ -93,12 +105,19 @@ class Html extends BladeComponent
         $alpine = null,
         $mixStyles = 'css/app.css',
         $mixScripts = 'js/app.js',
+        $styles = [],
+        $scripts = [],
         $stackStyles = 'styles',
         $stackScripts = 'scripts',
         $options = [],
         $theme = null
     ) {
         parent::__construct($theme);
+
+        $options = array_merge_recursive(
+            $this->themeProvider->options->getAttributes(),
+            $options
+        );
 
         $this->title = data_get($options, 'title', $title ?? config('app.name'));
         $this->charset = data_get($options, 'charset', $charset);
@@ -118,6 +137,8 @@ class Html extends BladeComponent
 
         $this->mixStyles = $mixStyles && file_exists(public_path($mixStyles)) ? $mixStyles : null;
         $this->mixScripts = $mixScripts && file_exists(public_path($mixScripts)) ? $mixScripts : null;
+        $this->styles = array_merge(data_get($options, 'styles', []), $styles);
+        $this->scripts = array_merge(data_get($options, 'scripts', []), $scripts);
         $this->stackStyles = data_get($options, 'stackStyles', $stackStyles);
         $this->stackScripts = data_get($options, 'stackScripts', $stackScripts);
     }
