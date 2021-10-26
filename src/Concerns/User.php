@@ -2,6 +2,8 @@
 
 namespace TALLKit\Concerns;
 
+use Illuminate\Support\Arr;
+
 trait User
 {
     /**
@@ -30,17 +32,23 @@ trait User
     /**
      * Get user value.
      *
-     * @param  string  $key
+     * @param  string|string[]  $keys
      * @return mixed
      */
-    protected function getUserValue($key)
+    protected function getUserValue(...$keys)
     {
         if (! $this->user) {
             return null;
         }
 
-        return method_exists($this->user, $key)
-            ? $this->user->{$key}()
-            : data_get($this->user, $key);
+        foreach (Arr::wrap($keys) as $key) {
+            $result = method_exists($this->user, $key)
+                ? $this->user->{$key}()
+                : data_get($this->user, $key);
+
+            if (! is_null($result)) {
+                return $result;
+            }
+        }
     }
 }
