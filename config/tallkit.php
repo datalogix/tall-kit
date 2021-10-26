@@ -1105,7 +1105,9 @@ return [
             ],
 
             'crud-index' => [
-                'container' => [],
+                'container' => [
+                    'class' => 'mb-4',
+                ],
 
                 'header' => [],
 
@@ -1117,7 +1119,9 @@ return [
             ],
 
             'crud-form' => [
-                'container' => [],
+                'container' => [
+                    'class' => 'mb-4',
+                ],
 
                 'header' => [],
 
@@ -1135,7 +1139,9 @@ return [
             ],
 
             'crud-show' => [
-                'container' => [],
+                'container' => [
+                    'class' => 'mb-4',
+                ],
 
                 'header' => [],
 
