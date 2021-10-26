@@ -204,6 +204,7 @@ class AdminPanel extends BladeComponent
 
         $this->html = $html ? array_replace_recursive(
             $this->themeProvider->html->getAttributes(),
+            $this->getUserValue('html', 'adminHtml') ?? [],
             is_array($html) ? $html : []
         ) : false;
 
@@ -211,13 +212,13 @@ class AdminPanel extends BladeComponent
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
         $this->logoUrl = $logoUrl ?? route_detect(['admin.index', 'admin.dashboard']);
-        $this->sidebarItems = $this->getUserValue('sidebar') ?? $sidebarItems;
-        $this->sidebarBreakpoint = $this->getUserValue('sidebarBreakpoint') ?? $sidebarBreakpoint;
+        $this->sidebarItems = $sidebarItems ?? $this->getUserValue('sidebar', 'adminSidebar');
+        $this->sidebarBreakpoint = $this->getUserValue('sidebarBreakpoint', 'adminSidebarBreakpoint') ?? $sidebarBreakpoint;
         $this->sidebarName = $sidebarName;
         $this->sidebarShow = $sidebarShow;
         $this->sidebarOverlay = $sidebarOverlay;
         $this->sidebarAlign = $sidebarAlign;
-        $this->userMenuItems = $userMenuItems;
+        $this->userMenuItems = $userMenuItems ?? $this->getUserValue('adminUserMenu');
         $this->userMenuInline = $userMenuInline;
         $this->userMenuName = $userMenuName;
         $this->userMenuShow = $userMenuShow;
