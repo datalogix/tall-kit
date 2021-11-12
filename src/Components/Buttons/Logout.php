@@ -4,7 +4,7 @@ namespace TALLKit\Components\Buttons;
 
 class Logout extends FormButton
 {
-     /**
+    /**
      * Create a new component instance.
      *
      * @param  bool|null  $init

@@ -194,7 +194,6 @@ return [
         /**
          * Uploaders.
          */
-
         'dropzone' => [
             'https://cdn.jsdelivr.net/npm/dropzone@6.0.0-beta.1/dist/dropzone.css',
             'https://cdn.jsdelivr.net/npm/dropzone@6.0.0-beta.1/dist/dropzone-min.js',
@@ -946,7 +945,6 @@ return [
                         'weight' => 500,
                         'hover' => 700,
                     ],
-
 
                     'indigo' => [
                         'name' => 'indigo',

@@ -108,7 +108,7 @@ class CrudIndex extends Crud
         if ($this->mapRelationsColumn) {
             $mappedRelations = [];
 
-            $cols = $cols->map(function($item) use (&$mappedRelations) {
+            $cols = $cols->map(function ($item) use (&$mappedRelations) {
                 if (in_array($item, $mappedRelations)) {
                     return false;
                 }
