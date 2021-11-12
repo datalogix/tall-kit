@@ -19,19 +19,19 @@ class Tab extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  mixed  $selected
-     * @param  string|bool|null  $mode
+     * @param  int|bool|null  $selected
+     * @param  string|null  $mode
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $selected = 0,
-        $mode = 'default',
+        $selected = null,
+        $mode = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->selected = is_null($selected) || $selected === false ? null : ($selected === true ? 0 : intval($selected));
-        $this->mode = $mode ?: 'none';
+        $this->selected = $selected === false ? null : (is_null($selected) || $selected === true ? 0 : intval($selected));
+        $this->mode = $mode ?? 'default';
     }
 }

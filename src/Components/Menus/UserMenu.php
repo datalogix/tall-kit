@@ -42,11 +42,12 @@ class UserMenu extends MenuDropdown
      * Create a new component instance.
      *
      * @param  mixed  $items
-     * @param  bool  $inline
+     * @param  bool|null  $inline
      * @param  string|bool|null  $name
-     * @param  bool  $show
-     * @param  bool  $overlay
-     * @param  string  $align
+     * @param  bool|null  $show
+     * @param  bool|null  $overlay
+     * @param  bool|null  $closeable
+     * @param  string|null  $align
      * @param  string|bool|null  $iconName
      * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed|null  $user
      * @param  string|null  $guard
@@ -61,11 +62,12 @@ class UserMenu extends MenuDropdown
      */
     public function __construct(
         $items = null,
-        $inline = false,
+        $inline = null,
         $name = null,
-        $show = false,
-        $overlay = true,
-        $align = 'right',
+        $show = null,
+        $overlay = null,
+        $closeable = null,
+        $align = null,
         $iconName = null,
         $user = null,
         $guard = null,
@@ -81,11 +83,12 @@ class UserMenu extends MenuDropdown
 
         parent::__construct(
             $items ?? $this->getUserValue('userMenu'),
-            $inline,
+            $inline ?? false,
             $name,
             $show,
             $overlay,
-            $align,
+            $closeable,
+            $align ?? 'right',
             $iconName,
             $theme
         );

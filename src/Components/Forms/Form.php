@@ -10,6 +10,11 @@ class Form extends BladeComponent
     use BoundValues;
 
     /**
+     * @var bool
+     */
+    public $init;
+
+    /**
      * @var string
      */
     public $method;
@@ -20,7 +25,7 @@ class Form extends BladeComponent
     public $action;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $enctype;
 
@@ -40,17 +45,19 @@ class Form extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  string  $method
+     * @param  bool|null  $init
+     * @param  string|null  $method
      * @param  string|null  $action
-     * @param  array|string|null  $route
+     * @param  string|string[]|null  $route
      * @param  mixed  $bind
-     * @param  string|null  $enctype
+     * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $method = 'POST',
+        $init = null,
+        $method = null,
         $action = null,
         $route = null,
         $bind = null,
@@ -60,7 +67,8 @@ class Form extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->method = strtoupper($method);
+        $this->init = $init ?? true;
+        $this->method = strtoupper($method ?? 'post');
         $this->action = $action ?? route_detect($route, $bind ?: $this->getBoundTarget(), null);
         $this->enctype = $enctype;
         $this->confirm = $confirm;

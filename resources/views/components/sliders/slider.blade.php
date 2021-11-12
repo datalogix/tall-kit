@@ -8,7 +8,7 @@
         {{ $slot }}
     </div>
 
-    @if ($options['controls'] ?? false)
+    @if ($options['controls'] ?? null)
         @isset($controls)
             {{ $controls }}
         @else
@@ -42,7 +42,7 @@
         @endisset
     @endif
 
-    @if ($options['paginator'] ?? false)
+    @if ($options['paginator'] ?? null)
         @isset($paginator)
             {{ $paginator }}
         @else
@@ -58,7 +58,7 @@
         @endisset
     @endif
 
-    @if (($options['autoplay'] ?? false) && ($options['progressbar'] ?? false))
+    @if (($options['autoplay'] ?? null) && ($options['progressbar'] ?? null))
         @isset($progressbar)
             {{ $progressbar }}
         @else

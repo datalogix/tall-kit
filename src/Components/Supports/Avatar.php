@@ -26,7 +26,7 @@ class Avatar extends ImageLoader
         $icon = null,
         $loadingIcon = null,
         $errorIcon = null,
-        $ttl = 3600,
+        $ttl = null,
         $theme = null
     ) {
         parent::__construct(
@@ -34,7 +34,7 @@ class Avatar extends ImageLoader
             $icon,
             $loadingIcon,
             $errorIcon,
-            $ttl,
+            $ttl ?? 3600,
             $theme
         );
     }

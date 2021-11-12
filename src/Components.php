@@ -17,7 +17,7 @@ trait Components
      * Register component.
      *
      * @param  string  $name
-     * @param  string  $content
+     * @param  string|null  $content
      * @param  bool  $overwrite
      * @return void
      */

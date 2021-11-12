@@ -26,7 +26,7 @@
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'button') }}
                 color="none"
                 shadow="none"
-                :iconLeft="$dismissibleIcon ? $dismissibleIconName : null"
+                :icon-left="$dismissibleIcon ? $dismissibleIconName : null"
                 :text="$dismissibleText"
                 :theme="$theme"
             >

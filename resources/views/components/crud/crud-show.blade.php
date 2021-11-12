@@ -5,6 +5,7 @@
         <x-crud-header
             {{ $attributes->mergeThemeProvider($themeProvider, 'header') }}
             :title="$title"
+            :theme="$theme"
         >
             @isset($actionsHeader)
                 {{ $actionsHeader }}
@@ -16,10 +17,12 @@
                     :custom-actions="$customActions"
                     :prefix="$prefix"
                     :parameters="array_merge($parameters, [$resource])"
+                    :theme="$theme"
                 />
 
                 <x-back
                     {{ $attributes->mergeThemeProvider($themeProvider, 'header-back') }}
+                    :theme="$theme"
                 />
             @endisset
         </x-crud-header>
@@ -38,10 +41,12 @@
                 :custom-actions="$customActions"
                 :prefix="$prefix"
                 :parameters="array_merge($parameters, [$resource])"
+                :theme="$theme"
             />
 
             <x-back
                 {{ $attributes->mergeThemeProvider($themeProvider, 'footer-back') }}
+                :theme="$theme"
             />
         @endisset
     </div>

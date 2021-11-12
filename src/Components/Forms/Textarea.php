@@ -12,10 +12,10 @@ class Textarea extends Input
      * @param  string|bool|null  $label
      * @param  mixed  $bind
      * @param  mixed  $default
-     * @param  string|null  $language
-     * @param  bool  $showErrors
+     * @param  string|string|null  $language
+     * @param  bool|null  $showErrors
      * @param  string|null  $theme
-     * @param  bool  $groupable
+     * @param  bool|null  $groupable
      * @param  string|null  $prependText
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
@@ -29,9 +29,9 @@ class Textarea extends Input
         $bind = null,
         $default = null,
         $language = null,
-        $showErrors = true,
+        $showErrors = null,
         $theme = null,
-        $groupable = true,
+        $groupable = null,
         $prependText = null,
         $prependIcon = null,
         $appendText = null,
@@ -50,7 +50,7 @@ class Textarea extends Input
             $language,
             $showErrors,
             $theme,
-            $groupable,
+            $groupable ?? true,
             $prependText,
             $prependIcon,
             $appendText,

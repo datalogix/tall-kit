@@ -20,18 +20,18 @@ class TabItem extends BladeComponent
      * Create a new component instance.
      *
      * @param  string|null  $name
-     * @param  bool  $disabled
+     * @param  bool|null  $disabled
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $name = null,
-        $disabled = false,
+        $disabled = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->name = $name;
-        $this->disabled = $disabled;
+        $this->disabled = $disabled ?? false;
     }
 }

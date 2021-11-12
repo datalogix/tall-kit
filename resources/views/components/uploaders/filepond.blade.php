@@ -5,18 +5,20 @@
     }}
     :name="$name"
     :label="false"
-    :showErrors="$showErrors"
+    :show-errors="$showErrors"
     :theme="$theme"
 >
-    <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
-        <x-label
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
-            :label="$label"
-            :theme="$theme"
-        >
-            {{ $labelContent ?? '' }}
-        </x-label>
-    </label>
+    @if ($label || isset($labelContent))
+        <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
+            <x-label
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+                :label="$label"
+                :theme="$theme"
+            >
+                {{ $labelContent ?? '' }}
+            </x-label>
+        </label>
+    @endif
 
     <x-input {{
         $attributes->mergeThemeProvider($themeProvider, 'filepond') }}
@@ -25,13 +27,13 @@
         :label="false"
         :type="'file'"
         :default="$slot->isEmpty() ? $default : $slot"
-        :showErrors="$showErrors"
+        :show-errors="$showErrors"
         :theme="$theme"
         :groupable="$groupable"
-        :prependText="$prependText"
-        :prependIcon="$prependIcon"
-        :appendText="$appendText"
-        :appendIcon="$appendIcon"
+        :prepend-text="$prependText"
+        :prepend-icon="$prependIcon"
+        :append-text="$appendText"
+        :append-icon="$appendIcon"
     >
         @isset ($prepend)
             <x-slot name="prepend">

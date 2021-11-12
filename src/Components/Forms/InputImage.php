@@ -5,7 +5,7 @@ namespace TALLKit\Components\Forms;
 class InputImage extends Input
 {
     /**
-     * @var string|null
+     * @var string|bool
      */
     public $accept;
 
@@ -77,10 +77,10 @@ class InputImage extends Input
      * @param  string|bool|null  $label
      * @param  mixed  $bind
      * @param  mixed  $default
-     * @param  string|null  $language
-     * @param  bool  $showErrors
+     * @param  string|bool|null  $language
+     * @param  bool|null  $showErrors
      * @param  string|null  $theme
-     * @param  string|null  $accept
+     * @param  string|bool|null  $accept
      * @param  string|null  $empty
      * @param  string|null  $emptyText
      * @param  string|null  $emptyIcon
@@ -102,9 +102,9 @@ class InputImage extends Input
         $bind = null,
         $default = null,
         $language = null,
-        $showErrors = true,
+        $showErrors = null,
         $theme = null,
-        $accept = 'image/*',
+        $accept = null,
         $empty = null,
         $emptyText = null,
         $emptyIcon = null,
@@ -134,7 +134,7 @@ class InputImage extends Input
             false
         );
 
-        $this->accept = $accept;
+        $this->accept = $accept ?? 'image/*';
         $this->empty = $empty;
         $this->emptyText = $emptyText;
         $this->emptyIcon = $emptyIcon;

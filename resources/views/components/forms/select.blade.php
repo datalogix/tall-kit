@@ -2,13 +2,13 @@
     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :name="$name"
     :label="$label"
-    :showErrors="$showErrors"
+    :show-errors="$showErrors"
     :theme="$theme"
     :groupable="$groupable"
-    :prependText="$prependText"
-    :prependIcon="$prependIcon"
-    :appendText="$appendText"
-    :appendIcon="$appendIcon"
+    :prepend-text="$prependText"
+    :prepend-icon="$prependIcon"
+    :append-text="$appendText"
+    :append-icon="$appendIcon"
 >
     <select
         {{ $attributes->mergeThemeProvider($themeProvider, $multiple ? 'multiselect' : 'select') }}

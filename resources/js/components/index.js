@@ -6,6 +6,7 @@ import easymde from './editors/easymde'
 import quill from './editors/quill'
 import trix from './editors/trix'
 import cleave from './forms/cleave'
+import form from './forms/form'
 import inputImage from './forms/input-image'
 import mask from './forms/mask'
 import tagify from './forms/tagify'
@@ -24,6 +25,7 @@ import slider from './sliders/slider'
 import splide from './sliders/splide'
 import swiper from './sliders/swiper'
 import imageLoader from './supports/image-loader'
+import dropzone from './uploaders/dropzone'
 import filepond from './uploaders/filepond'
 
 export default {
@@ -50,6 +52,7 @@ export default {
    * Forms.
    */
   cleave,
+  form,
   'input-image': inputImage,
   mask,
   tagify,
@@ -100,5 +103,6 @@ export default {
   /**
    * Uploaders.
    */
+  dropzone,
   filepond
 }

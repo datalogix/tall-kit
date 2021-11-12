@@ -9,6 +9,7 @@
         :name="$name"
         :show="$show"
         :overlay="$overlay"
+        :closeable="$closeable"
         :align="$align"
         :theme="$theme"
     >
@@ -20,7 +21,7 @@
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}
                     color="none"
                     rounded="full"
-                    :iconLeft="$iconName ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'iconName')->first()"
+                    :icon-left="$iconName ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'iconName')->first()"
                     :theme="$theme"
                 >
                     <x-slot name="iconLeft">

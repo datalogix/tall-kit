@@ -5,18 +5,20 @@
     }}
     :name="$name"
     :label="false"
-    :showErrors="$showErrors"
+    :show-errors="$showErrors"
     :theme="$theme"
 >
-    <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
-        <x-label
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
-            :label="$label"
-            :theme="$theme"
-        >
-            {{ $labelContent ?? '' }}
-        </x-label>
-    </label>
+    @if ($label || isset($labelContent))
+        <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
+            <x-label
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+                :label="$label"
+                :theme="$theme"
+            >
+                {{ $labelContent ?? '' }}
+            </x-label>
+        </label>
+    @endif
 
     <x-textarea
         {{ $attributes->mergeThemeProvider($themeProvider, 'easymde') }}
@@ -24,7 +26,7 @@
         :id="$id"
         :label="false"
         :default="$slot->isEmpty() ? $default : $slot"
-        :showErrors="$showErrors"
+        :show-errors="$showErrors"
         :theme="$theme"
         :groupable="false"
     />

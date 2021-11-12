@@ -5,6 +5,7 @@
         <x-crud-header
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header') }}
             :title="$title"
+            :theme="$theme"
         >
             @isset($actionsHeader)
                 {{ $actionsHeader }}
@@ -13,8 +14,9 @@
             @elseif($route = route_detect([$prefix.'.create', $prefix.'.new', $prefix.'.form'], $parameters, null))
                 <x-button
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create') }}
-                    :href="$route"
                     preset="create"
+                    :href="$route"
+                    :theme="$theme"
                 />
             @endisset
         </x-crud-header>
@@ -29,14 +31,16 @@
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'table') }}
             :cols="$cols"
             :rows="$resource"
+            :theme="$theme"
         >
             @if ($displayActionsColumn)
-                @scopedslot('actions', ($row), ($customActions, $prefix, $parameters, $attributes, $themeProvider))
+                @scopedslot('actions', ($row), ($customActions, $prefix, $parameters, $attributes, $themeProvider, $theme))
                     <x-crud-actions
                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
                         :custom-actions="$customActions"
                         :prefix="$prefix"
                         :parameters="array_merge($parameters, [$row])"
+                        :theme="$theme"
                     />
                 @endscopedslot
             @endif

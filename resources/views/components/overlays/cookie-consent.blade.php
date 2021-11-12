@@ -10,6 +10,7 @@
             {{ $attributes->mergeThemeProvider($themeProvider, 'modal') }}
             :name="$name.'-modal'"
             :overlay="$overlay"
+            :closeable="$closeable"
             :align="$align"
             :transition="$transition"
             :theme="$theme"
@@ -42,8 +43,8 @@
                             }}
                             :text="__($buttonText ?? 'I agree')"
                             :icon="$buttonIcon"
-                            :iconLeft="$buttonIconLeft"
-                            :iconRight="$buttonIconRight"
+                            :icon-left="$buttonIconLeft"
+                            :icon-right="$buttonIconRight"
                             :color="$buttonColor"
                             :rounded="$buttonRounded"
                             :shadow="$buttonShadow"

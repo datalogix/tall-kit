@@ -1,6 +1,6 @@
 <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
     <table {{ $attributes->mergeThemeProvider($themeProvider, 'table') }}>
-        @if ($cols->isNotEmpty() || ($head ?? false))
+        @if ($cols->isNotEmpty() || ($head ?? null))
             <thead {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'thead') }}>
                 <x-row
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tr') }}
@@ -14,8 +14,8 @@
                                     ->merge(isset($col['style']) ? ['style' => $col['style']] : [])
                                     ->merge(isset($col['attrs']) ? $col['attrs'] : [])
                             }}
-                            :align="$col['align'] ?? false"
-                            :sortable="$col['sortable'] ?? false"
+                            :align="$col['align'] ?? null"
+                            :sortable="$col['sortable'] ?? null"
                             :theme="$theme"
                         >
                             {{ __($col['name'] ?? $col) }}
@@ -41,7 +41,7 @@
                                     ->merge(isset($col['style']) ? ['style' => $col['style']] : [])
                                     ->merge(isset($col['attrs']) ? $col['attrs'] : [])
                             }}
-                            :align="$col['align'] ?? false"
+                            :align="$col['align'] ?? null"
                             :theme="$theme"
                         >
                             @isset(${is_int($key) ? $col : $key})
@@ -50,6 +50,7 @@
                                 <x-display
                                     :target="$row"
                                     :key="is_int($key) ? $col : $key"
+                                    :theme="$theme"
                                 />
                             @endisset
                         </x-cell>
@@ -58,9 +59,9 @@
             @empty
                 @if ($slot->isNotEmpty())
                     {{ $slot }}
-                @elseif ($body ?? false)
+                @elseif ($body ?? null)
                     {{ $body }}
-                @elseif ($empty ?? false)
+                @elseif ($empty ?? null)
                     {{ $empty }}
                 @else
                     <x-row
@@ -81,7 +82,7 @@
             @endforelse
         </tbody>
 
-        @if ($footer->isNotEmpty() || ($foot ?? false))
+        @if ($footer->isNotEmpty() || ($foot ?? null))
             <tfoot {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tfoot') }}>
                 @forelse ($footer as $row)
                     <x-row
@@ -96,7 +97,7 @@
                                         ->merge(isset($col['style']) ? ['style' => $col['style']] : [])
                                         ->merge(isset($col['attrs']) ? $col['attrs'] : [])
                                 }}
-                                :align="$col['align'] ?? false"
+                                :align="$col['align']"
                                 :theme="$theme"
                             >
                                 @isset(${(is_int($key) ? $col : $key).'-footer'})
@@ -105,6 +106,7 @@
                                     <x-display
                                         :target="$row"
                                         :key="is_int($key) ? $col : $key"
+                                        :theme="$theme"
                                     />
                                 @endisset
                             </x-cell>

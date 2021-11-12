@@ -50,13 +50,13 @@ class ImageLoader extends BladeComponent
         $icon = null,
         $loadingIcon = null,
         $errorIcon = null,
-        $ttl = 3600,
+        $ttl = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->url = $url;
-        $this->src = $this->cache($url, $ttl);
+        $this->src = $this->cache($url, $ttl ?? 3600);
         $this->icon = $icon;
         $this->loadingIcon = $loadingIcon;
         $this->errorIcon = $errorIcon;

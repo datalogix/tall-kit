@@ -12,17 +12,17 @@ class FormButton extends Form
     public $text;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $icon;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $iconLeft;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $iconRight;
 
@@ -32,12 +32,12 @@ class FormButton extends Form
     public $color;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $rounded;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $shadow;
 
@@ -52,6 +52,11 @@ class FormButton extends Form
     public $bordered;
 
     /**
+     * @var bool|null
+     */
+    public $loading;
+
+    /**
      * @var string|null
      */
     public $preset;
@@ -59,26 +64,29 @@ class FormButton extends Form
     /**
      * Create a new component instance.
      *
+     * @param  bool|null  $init
      * @param  string|null  $method
      * @param  string|null  $action
      * @param  array|string|null  $route
      * @param  mixed  $bind
-     * @param  string|null  $enctype
+     * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  string|null  $text
-     * @param  string|null  $icon
-     * @param  string|null  $iconLeft
-     * @param  string|null  $iconRight
+     * @param  string|bool|null  $icon
+     * @param  string|bool|null  $iconLeft
+     * @param  string|bool|null  $iconRight
      * @param  string|bool|null  $color
-     * @param  string|null  $rounded
-     * @param  string|null  $shadow
+     * @param  string|bool|null  $rounded
+     * @param  string|bool|null  $shadow
      * @param  bool|null  $outlined
      * @param  bool|null  $bordered
+     * @param  string|bool|null  $loading
      * @param  string|null  $preset
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
+        $init = null,
         $method = null,
         $action = null,
         $route = null,
@@ -94,10 +102,12 @@ class FormButton extends Form
         $shadow = null,
         $outlined = null,
         $bordered = null,
+        $loading = null,
         $preset = null,
         $theme = null
     ) {
         parent::__construct(
+            $init,
             $method ?? 'POST',
             $action ?? request()->url(),
             $route,
@@ -116,6 +126,7 @@ class FormButton extends Form
         $this->shadow = $shadow;
         $this->outlined = $outlined;
         $this->bordered = $bordered;
+        $this->loading = $loading;
         $this->preset = $preset;
 
         if ($this->preset && $presetProperties = $this->themeProvider->presets->get($this->preset)) {

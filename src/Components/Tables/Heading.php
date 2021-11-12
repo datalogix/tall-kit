@@ -26,7 +26,7 @@ class Heading extends BladeComponent
      *
      * @param  string|null  $text
      * @param  string|bool|null  $align
-     * @param  string|bool  $sortable
+     * @param  string|bool|null  $sortable
      * @param  string|null  $theme
      * @return void
      */
@@ -40,6 +40,6 @@ class Heading extends BladeComponent
 
         $this->text = $text;
         $this->align = $align ?: 'left';
-        $this->sortable = $sortable ? strtolower($sortable === true ? 'asc' : $sortable) : false;
+        $this->sortable = ($sortable ?? false) ? strtolower($sortable === true ? 'asc' : $sortable) : false;
     }
 }

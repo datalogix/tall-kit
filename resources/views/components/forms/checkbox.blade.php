@@ -2,7 +2,7 @@
     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :name="$name"
     :label="false"
-    :showErrors="$showErrors"
+    :show-errors="$showErrors"
     :theme="$theme"
 >
     <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>

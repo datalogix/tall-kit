@@ -1,7 +1,8 @@
 <x-form
-    {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
+    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :method="$method"
     :action="$action"
+    :theme="$theme"
 >
     @isset($header)
         {{ $header }}
@@ -9,6 +10,7 @@
         <x-crud-header
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header') }}
             :title="$title"
+            :theme="$theme"
         >
             @isset($actionsHeader)
                 {{ $actionsHeader }}
@@ -18,16 +20,20 @@
                 <x-submit
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save') }}
                     preset="save"
+                    :theme="$theme"
                 />
 
                 <x-back
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-back') }}
+                    :theme="$theme"
                 />
             @endisset
         </x-crud-header>
     @endisset
 
-    {{ $slot }}
+    <div {{ $attributes->mergeThemeProvider($themeProvider, 'content') }}>
+        {{ $slot }}
+    </div>
 
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer') }}>
         @isset($actionsFooter)
@@ -38,10 +44,12 @@
             <x-submit
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save') }}
                 preset="save"
+                :theme="$theme"
             />
 
             <x-back
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-back') }}
+                :theme="$theme"
             />
         @endisset
     </div>

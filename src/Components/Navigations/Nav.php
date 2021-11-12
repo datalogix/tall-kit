@@ -21,18 +21,18 @@ class Nav extends BladeComponent
      * Create a new component instance.
      *
      * @param  mixed  $items
-     * @param  bool  $inline
+     * @param  bool|null  $inline
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $items = null,
-        $inline = true,
+        $inline = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->items = Collection::make($items);
-        $this->inline = $inline;
+        $this->inline = $inline ?? true;
     }
 }

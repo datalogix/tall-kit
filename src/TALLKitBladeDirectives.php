@@ -6,46 +6,97 @@ use Illuminate\Support\Str;
 
 class TALLKitBladeDirectives
 {
+    /**
+     * Styles.
+     *
+     * @param  mixed  $expression
+     * @return string
+     */
     public static function styles($expression)
     {
         return '<?php echo \TALLKit\Facades\TALLKit::styles('.$expression.'); ?>';
     }
 
+    /**
+     * Scripts.
+     *
+     * @param  mixed  $expression
+     * @return string
+     */
     public static function scripts($expression)
     {
         return '<?php echo \TALLKit\Facades\TALLKit::scripts('.$expression.'); ?>';
     }
 
+    /**
+     * Theme.
+     *
+     * @param  mixed  $expression
+     * @return string
+     */
     public static function theme($expression)
     {
         return '<?php app(\TALLKit\Binders\ThemeBinder::class)->bind('.$expression.'); ?>';
     }
 
+    /**
+     * End theme.
+     *
+     * @return string
+     */
     public static function endtheme()
     {
         return '<?php app(\TALLKit\Binders\ThemeBinder::class)->pop(); ?>';
     }
 
+    /**
+     * Bind.
+     *
+     * @param  mixed  $expression
+     * @return string
+     */
     public static function bind($expression)
     {
         return '<?php app(\TALLKit\Binders\FormDataBinder::class)->bind('.$expression.'); ?>';
     }
 
+    /**
+     * End bind.
+     *
+     * @return string
+     */
     public static function endbind()
     {
         return '<?php app(\TALLKit\Binders\FormDataBinder::class)->pop(); ?>';
     }
 
+    /**
+     * Wire.
+     *
+     * @param  mixed  $expression
+     * @return string
+     */
     public static function wire($expression)
     {
         return '<?php app(\TALLKit\Binders\FormDataBinder::class)->wire('.$expression.'); ?>';
     }
 
+    /**
+     * End wire.
+     *
+     * @return string
+     */
     public static function endwire()
     {
         return '<?php app(\TALLKit\Binders\FormDataBinder::class)->endWire(); ?>';
     }
 
+    /**
+     * Scoped slot.
+     *
+     * @param  mixed  $expression
+     * @return string
+     */
     public static function scopedslot($expression)
     {
         // Split the expression by `top-level` commas (not in parentheses)
@@ -82,6 +133,11 @@ class TALLKitBladeDirectives
         return "<?php \$__env->slot({$name}, {$functionArguments} use ({$functionUses}) { ?>";
     }
 
+    /**
+     * End scoped slot.
+     *
+     * @return string
+     */
     public static function endscopedslot()
     {
         return '<?php }); ?>';

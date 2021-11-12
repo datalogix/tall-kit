@@ -3,6 +3,7 @@
     :name="$name"
     :show="$show"
     :overlay="$overlay"
+    :closeable="$closeable"
     :theme="$theme"
 >
     <div {{

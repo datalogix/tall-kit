@@ -26,8 +26,8 @@ class Toc extends BladeComponent
      * Create a new component instance.
      *
      * @param  string|null  $url
-     * @param  int  $min
-     * @param  int  $max
+     * @param  int|null  $min
+     * @param  int|null  $max
      * @param  string|null  $theme
      * @return void
      */
@@ -40,8 +40,8 @@ class Toc extends BladeComponent
         parent::__construct($theme);
 
         $this->url = $url;
-        $this->min = $min;
-        $this->max = $max;
+        $this->min = $min ?? 2;
+        $this->max = $max ?? 3;
     }
 
     /**

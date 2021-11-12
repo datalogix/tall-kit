@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Layouts;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use TALLKit\Components\BladeComponent;
 
@@ -29,11 +30,21 @@ class Display extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $value = $value ?? data_get($target, $key.'_formatted', data_get($target, $key));
+        $value = $value ?? data_get($target, $key.'_formatted', data_get($target, $key.'_url', data_get($target, $key)));
 
+        // Model - Relation
+        if ($value instanceof Model) {
+            $value = data_get($value, 'name', data_get($value, 'title'));
+        }
+
+        // Storage
         if (
             is_string($value)
+            && ! filter_var($value, FILTER_VALIDATE_IP)
+            && ! filter_var($value, FILTER_VALIDATE_MAC)
             && ! filter_var($value, FILTER_VALIDATE_URL)
+            && ! filter_var($value, FILTER_VALIDATE_EMAIL)
+            && ! filter_var($value, FILTER_VALIDATE_DOMAIN)
             && pathinfo($value, PATHINFO_EXTENSION)
             && Storage::exists($value)
         ) {

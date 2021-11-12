@@ -18,18 +18,18 @@ class Splide extends BladeComponent
      * Create a new component instance.
      *
      * @param  mixed  $options
-     * @param  bool  $relative
+     * @param  bool|null  $relative
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $options = null,
-        $relative = false,
+        $relative = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->setOptions($options);
-        $this->relative = $relative;
+        $this->relative = $relative ?? false;
     }
 }

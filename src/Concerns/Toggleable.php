@@ -22,6 +22,11 @@ trait Toggleable
     public $overlay;
 
     /**
+     * @var bool
+     */
+    public $closeable;
+
+    /**
      * @var string
      */
     public $align;
@@ -30,16 +35,18 @@ trait Toggleable
      * Set toogleable.
      *
      * @param  string|bool|null  $name
-     * @param  bool|int  $show
-     * @param  bool  $overlay
-     * @param  string  $align
+     * @param  bool|int|null  $show
+     * @param  bool|null  $overlay
+     * @param  bool|null  $closeable
+     * @param  string|null  $align
      * @return void
      */
-    public function setToggleable($name = null, $show = false, $overlay = true, $align = null)
+    public function setToggleable($name = null, $show = null, $overlay = null, $closeable = null, $align = null)
     {
         $this->name = $name;
-        $this->show = $show;
-        $this->overlay = $overlay;
+        $this->show = $show ?? false;
+        $this->overlay = $overlay ?? true;
+        $this->closeable = $closeable ?? true;
         $this->align = $align ?? static::$ALIGN_DEFAULT;
     }
 

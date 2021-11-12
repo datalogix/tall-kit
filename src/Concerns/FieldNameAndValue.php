@@ -9,22 +9,22 @@ trait FieldNameAndValue
     use BoundValues;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $realName;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $fieldKey;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $fieldName;
 

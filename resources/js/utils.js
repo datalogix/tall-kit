@@ -323,3 +323,15 @@ export function cookieable (cookieName = null, cookieExpires = null) {
     }
   }
 }
+
+export function getCsrfToken (withKey = false) {
+  const token = document.querySelector('meta[name="csrf-token"]').content
+
+  if (withKey) {
+    return {
+      'X-CSRF-TOKEN': token
+    }
+  }
+
+  return token
+}

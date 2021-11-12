@@ -3,18 +3,18 @@
         ->mergeThemeProvider($themeProvider, 'flatpickr')
         ->merge(['x-init' => 'setup('.$jsonOptions().')'])
     }}
+    type="text"
     :name="$name"
     :id="$id"
     :label="$label"
-    :type="'text'"
     :default="$slot->isEmpty() ? $default : $slot"
-    :showErrors="$showErrors"
+    :show-errors="$showErrors"
     :theme="$theme"
     :groupable="$groupable"
-    :prependText="$prependText"
-    :prependIcon="$prependIcon"
-    :appendText="$appendText"
-    :appendIcon="$appendIcon"
+    :prepend-text="$prependText"
+    :prepend-icon="$prependIcon"
+    :append-text="$appendText"
+    :append-icon="$appendIcon"
     :placeholder="$placeholder ?? $format"
 >
     @isset ($prepend)

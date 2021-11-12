@@ -22,6 +22,14 @@ class Slider extends BladeComponent
     /**
      * Create a new component instance.
      *
+     * @param  int|null  $selected
+     * @param  bool|null  $loop
+     * @param  bool|null  $autoplay
+     * @param  int|null  $interval
+     * @param  bool|null  $controls
+     * @param  bool|null  $paginator
+     * @param  bool|null  $progressbar
+     * @param  bool|null  $stopOnOver
      * @param  mixed  $options
      * @param  string|bool|null  $prevIcon
      * @param  string|bool|null  $nextIcon
@@ -29,6 +37,14 @@ class Slider extends BladeComponent
      * @return void
      */
     public function __construct(
+        $selected = null,
+        $loop = null,
+        $autoplay = null,
+        $interval = null,
+        $controls = null,
+        $paginator = null,
+        $progressbar = null,
+        $stopOnOver = null,
         $options = null,
         $prevIcon = null,
         $nextIcon = null,
@@ -36,7 +52,17 @@ class Slider extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->setOptions($options);
+        $this->setOptions(array_replace_recursive([
+            'selected' => $selected ?? 0,
+            'loop' => $loop ?? false,
+            'autoplay' => $autoplay ?? false,
+            'interval' => $interval ?? 10,
+            'controls' => $controls ?? true,
+            'paginator' => $paginator ?? true,
+            'progressbar' => $progressbar ?? false,
+            'stopOnOver' => $stopOnOver ?? false,
+        ], $options ?? []));
+
         $this->prevIcon = $prevIcon;
         $this->nextIcon = $nextIcon;
     }

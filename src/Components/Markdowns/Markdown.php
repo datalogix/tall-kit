@@ -16,30 +16,30 @@ class Markdown extends BladeComponent
     protected $options;
 
     /**
-     * @var int|bool|null
+     * @var int|bool
      */
     protected $ttl;
 
     /**
      * Create a new component instance.
      *
-     * @param  array  $options
+     * @param  array|null  $options
      * @param  int|bool|null  $ttl
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $options = [
-            'html_input' => 'allow',
-            'allow_unsafe_links' => true,
-        ],
-        $ttl = 3600,
+        $options = null,
+        $ttl = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->options = $options;
-        $this->ttl = $ttl;
+        $this->options = $options ?? [
+            'html_input' => 'allow',
+            'allow_unsafe_links' => true,
+        ];
+        $this->ttl = $ttl ?? 3600;
     }
 
     /**

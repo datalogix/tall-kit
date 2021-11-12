@@ -23,31 +23,34 @@ class Sidebar extends Drawer
      * @param  mixed  $items
      * @param  string|bool|null  $breakpoint
      * @param  string|bool|null  $name
-     * @param  bool  $show
-     * @param  bool  $overlay
-     * @param  string  $align
+     * @param  bool|null  $show
+     * @param  bool|null  $overlay
+     * @param  bool|null  $closeable
+     * @param  string|null  $align
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $items = null,
-        $breakpoint = 'none',
-        $name = 'sidebar',
-        $show = false,
-        $overlay = true,
+        $breakpoint = null,
+        $name = null,
+        $show = null,
+        $overlay = null,
+        $closeable = null,
         $align = null,
         $theme = null
     ) {
         parent::__construct(
-            $name,
+            $name ?? 'sidebar',
             $show,
             $overlay,
+            $closeable,
             $align,
             $theme
         );
 
         $this->items = Collection::make($items);
-        $this->breakpoint = $breakpoint;
+        $this->breakpoint = $breakpoint ?? 'none';
     }
 
     /**

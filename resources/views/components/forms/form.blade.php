@@ -1,8 +1,12 @@
-<form
-    {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
+<form {{
+    $init
+        ? $attributes
+            ->mergeThemeProvider($themeProvider, 'container')
+            ->merge(['x-init' => 'setup(\''.__($confirm).'\')'])
+        : $attributes
+    }}
     method="{{ $spoofMethod ? 'POST' : $method }}"
     @if ($action) action="{{ $action }}" @endif
-    @if ($confirm) onclick="return confirm('{{ __($confirm) }}')" @endif
     @if ($enctype)
         enctype="{{ $enctype }}"
     @elseif (Str::contains($slot, 'type="file"'))

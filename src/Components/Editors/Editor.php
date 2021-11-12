@@ -17,8 +17,8 @@ abstract class Editor extends Textarea
      * @param  string|bool|null  $label
      * @param  mixed  $bind
      * @param  mixed  $default
-     * @param  string|null  $language
-     * @param  bool  $showErrors
+     * @param  string|bool|null  $language
+     * @param  bool|null  $showErrors
      * @param  string|null  $theme
      * @param  mixed  $options
      * @return void
@@ -30,7 +30,7 @@ abstract class Editor extends Textarea
         $bind = null,
         $default = null,
         $language = null,
-        $showErrors = true,
+        $showErrors = null,
         $theme = null,
         $options = null
     ) {

@@ -9,7 +9,7 @@ use TALLKit\Components\BladeComponent;
 class Icon extends BladeComponent
 {
     /**
-     * @var string
+     * @var string|null
      */
     public $name;
 

@@ -1,5 +1,6 @@
 <x-form
     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+    :init="$init"
     :method="$method"
     :action="$action"
     :enctype="$enctype"
@@ -9,14 +10,15 @@
     <x-submit
         {{ $attributes->mergeThemeProvider($themeProvider, 'button') }}
         :text="$text"
-        :color="$color"
         :icon="$icon"
-        :iconLeft="$iconLeft"
-        :iconRight="$iconRight"
-        :outlined="$outlined"
-        :bordered="$bordered"
+        :icon-left="$iconLeft"
+        :icon-right="$iconRight"
+        :color="$color"
         :rounded="$rounded"
         :shadow="$shadow"
+        :outlined="$outlined"
+        :bordered="$bordered"
+        :loading="$loading"
         :preset="$preset"
         :theme="$theme"
     >

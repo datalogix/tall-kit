@@ -14,27 +14,27 @@ class Checkbox extends Field
     /**
      * @var bool
      */
-    public $checked = false;
+    public $checked;
 
     /**
      * Create a new component instance.
      *
-     * @param  string  $name
+     * @param  string|null  $name
      * @param  string|bool|null  $label
      * @param  mixed  $value
      * @param  mixed  $bind
-     * @param  bool  $default
-     * @param  bool  $showErrors
+     * @param  bool|null  $default
+     * @param  bool|null  $showErrors
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $name = null,
         $label = null,
-        $value = 1,
+        $value = null,
         $bind = null,
-        $default = false,
-        $showErrors = true,
+        $default = null,
+        $showErrors = null,
         $theme = null
     ) {
         parent::__construct(
@@ -44,7 +44,8 @@ class Checkbox extends Field
             $theme
         );
 
-        $this->value = $value;
+        $this->value = $value ?? 1;
+        $this->checked = false;
 
         if ($oldData = $this->oldFieldValue()) {
             $this->checked = in_array($value, Arr::wrap($oldData));
@@ -54,7 +55,7 @@ class Checkbox extends Field
             $boundValue = $this->getFieldBoundValue($bind);
 
             $this->checked = is_null($boundValue)
-                ? $default
+                ? ($default ?? false)
                 : in_array($value, Arr::wrap($boundValue));
         }
     }

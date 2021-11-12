@@ -2,69 +2,38 @@
 
 namespace TALLKit\Components\Uploaders;
 
-use TALLKit\Components\Forms\Input;
-use TALLKit\Concerns\JsonOptions;
-
-class Filepond extends Input
+class Filepond extends Uploader
 {
-    use JsonOptions;
-
     /**
-     * Create a new component instance.
+     * Get options values.
      *
-     * @param  string|null  $name
-     * @param  string|bool|null  $id
-     * @param  string|bool|null  $label
-     * @param  mixed  $bind
-     * @param  mixed  $default
-     * @param  string|null  $language
-     * @param  bool  $showErrors
-     * @param  string|null  $theme
-     * @param  bool  $groupable
-     * @param  string|null  $prependText
-     * @param  string|null  $prependIcon
-     * @param  string|null  $appendText
-     * @param  string|null  $appendIcon
-     * @param  mixed  $options
-     * @return void
+     * @return array
      */
-    public function __construct(
-        $name = null,
-        $id = null,
-        $label = null,
-        $bind = null,
-        $default = null,
-        $language = null,
-        $showErrors = true,
-        $theme = null,
-        $groupable = true,
-        $prependText = null,
-        $prependIcon = null,
-        $appendText = null,
-        $appendIcon = null,
-        $options = null
-    ) {
-        parent::__construct(
-            $name,
-            $id,
-            $label,
-            'file',
-            $bind,
-            $default,
-            null,
-            null,
-            null,
-            $language,
-            $showErrors,
-            $theme,
-            $groupable,
-            $prependText,
-            $prependIcon,
-            $appendText,
-            $appendIcon,
-            false
-        );
-
-        $this->setOptions($options);
+    protected function getOptionsValues()
+    {
+        return [
+            'labelIdle' => __('Drag & Drop your files or <span class="filepond--label-action"> Browse </span>'),
+            'labelInvalidField' => __('Field contains invalid files'),
+            'labelFileWaitingForSize' => __('Waiting for size'),
+            'labelFileSizeNotAvailable' => __('Size not available'),
+            'labelFileLoading' => __('Loading'),
+            'labelFileLoadError' => __('Error during load'),
+            'labelFileProcessing' => __('Uploading'),
+            'labelFileProcessingComplete' => __('Upload complete'),
+            'labelFileProcessingAborted' => __('Upload cancelled'),
+            'labelFileProcessingError' => __('Error during upload'),
+            'labelFileProcessingRevertError' => __('Error during revert'),
+            'labelFileRemoveError' => __('Error during remove'),
+            'labelTapToCancel' => __('tap to cancel'),
+            'labelTapToRetry' => __('tap to retry'),
+            'labelTapToUndo' => __('tap to undo'),
+            'labelButtonRemoveItem' => __('Remove'),
+            'labelButtonAbortItemLoad' => __('Abort'),
+            'labelButtonRetryItemLoad' => __('Retry'),
+            'labelButtonAbortItemProcessing' => __('Cancel'),
+            'labelButtonUndoItemProcessing' => __('Undo'),
+            'labelButtonRetryItemProcessing' => __('Retry'),
+            'labelButtonProcessItem' => __('Upload'),
+        ];
     }
 }

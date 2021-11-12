@@ -20,7 +20,7 @@ abstract class Crud extends BladeComponent
     public $key;
 
     /**
-     * @var string|bool|null
+     * @var string|bool
      */
     public $title;
 
@@ -40,20 +40,20 @@ abstract class Crud extends BladeComponent
     public $customActions;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $routeName;
 
     /**
      * Create a new component instance.
      *
-     * @param  string|null  $prefix
-     * @param  string|null  $key
+     * @param  string|bool|null  $prefix
+     * @param  string|bool|null  $key
      * @param  string|bool|null  $title
      * @param  mixed  $parameters
      * @param  mixed  $resource
      * @param  mixed  $customActions
-     * @param  string|null  $routeName
+     * @param  string|bool|null  $routeName
      * @param  string|null  $theme
      * @return void
      */
@@ -101,8 +101,8 @@ abstract class Crud extends BladeComponent
         $this->titlePlural = $this->title;
 
         if (is_null($this->title)) {
-            $this->title = Str::title(Str::singular($this->key));
-            $this->titlePlural = Str::title(Str::plural($this->key));
+            $this->title = (string) Str::of($this->key)->replace('-', ' ')->singular()->title();
+            $this->titlePlural = (string) Str::of($this->key)->replace('-', ' ')->plural()->title();
         }
     }
 }

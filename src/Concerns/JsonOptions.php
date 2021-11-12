@@ -9,7 +9,7 @@ trait JsonOptions
     /**
      * @var array
      */
-    protected $options = [];
+    public $options = [];
 
     /**
      * Set options.
@@ -19,7 +19,10 @@ trait JsonOptions
      */
     protected function setOptions($options)
     {
-        $this->options = Collection::make($options)->toArray();
+        $this->options = array_replace_recursive(
+            $this->themeProvider->options->getAttributes(),
+            Collection::make($options)->toArray()
+        );
     }
 
     /**
@@ -51,7 +54,6 @@ trait JsonOptions
     {
         return json_encode((object) array_replace_recursive(
             $this->getOptionsValues(...func_get_args()),
-            $this->themeProvider->options->getAttributes(),
             $this->getOptions()
         ));
     }

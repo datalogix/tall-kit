@@ -5,15 +5,15 @@
     }}
     :name="$name"
     :label="$label"
-    :showErrors="$showErrors"
+    :show-errors="$showErrors"
     :theme="$theme"
     :title="$value"
 >
     <x-input
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
+        type="hidden"
         :name="$name"
         :id="$id"
-        :type="'hidden'"
         :default="$slot->isEmpty() ? $default : $slot"
         :theme="$theme"
     />

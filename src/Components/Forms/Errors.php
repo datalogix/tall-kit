@@ -20,18 +20,18 @@ class Errors extends BladeComponent
      * Create a new component instance.
      *
      * @param  string  $name
-     * @param  string  $bag
+     * @param  string|null  $bag
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $name,
-        $bag = 'default',
+        $bag = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->name = $name;
-        $this->bag = $bag;
+        $this->bag = $bag ?? 'default';
     }
 }

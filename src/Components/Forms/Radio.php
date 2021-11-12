@@ -12,7 +12,7 @@ class Radio extends Field
     /**
      * @var bool
      */
-    public $checked = false;
+    public $checked;
 
     /**
      * Create a new component instance.
@@ -22,17 +22,17 @@ class Radio extends Field
      * @param  mixed  $value
      * @param  mixed  $bind
      * @param  mixed  $default
-     * @param  bool  $showErrors
+     * @param  bool|null  $showErrors
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $name = null,
         $label = null,
-        $value = 1,
+        $value = null,
         $bind = null,
-        $default = false,
-        $showErrors = true,
+        $default = null,
+        $showErrors = null,
         $theme = null
     ) {
         parent::__construct(
@@ -42,7 +42,8 @@ class Radio extends Field
             $theme
         );
 
-        $this->value = $value;
+        $this->value = $value ?? 1;
+        $this->checked = false;
 
         if ($oldData = $this->oldFieldValue()) {
             $this->checked = $oldData == $this->value;
@@ -52,7 +53,7 @@ class Radio extends Field
             $boundValue = $this->getFieldBoundValue($bind);
 
             $this->checked = is_null($boundValue)
-                ? $default
+                ? ($default ?? false)
                 : $boundValue == $this->value;
         }
     }

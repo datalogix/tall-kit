@@ -14,8 +14,9 @@
 
     <div {{ $attributes->mergeThemeProvider($themeProvider, 'card') }}>
         <x-message
-            :session="$messageSession"
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'message') }}
+            :session="$messageSession"
+            :theme="$theme"
         />
 
         {{ $slot }}

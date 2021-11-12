@@ -34,8 +34,8 @@ class Carbon extends BladeComponent
      *
      * @param  string|DateTimeInterface|null  $date
      * @param  DateTimeZone|string|null  $tz
-     * @param  string  $format
-     * @param  bool  $human
+     * @param  string|null  $format
+     * @param  bool|null  $human
      * @param  string|null  $local
      * @param  string|null  $theme
      * @return void
@@ -43,16 +43,16 @@ class Carbon extends BladeComponent
     public function __construct(
         $date = null,
         $tz = null,
-        $format = 'Y-m-d H:i:s',
-        $human = false,
+        $format = null,
+        $human = null,
         $local = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->date = CarbonAlias::parse($date, $tz);
-        $this->format = $format;
-        $this->human = $human;
+        $this->format = $format ?? 'Y-m-d H:i:s';
+        $this->human = $human ?? false;
         $this->local = $local;
     }
 }

@@ -25,20 +25,28 @@ class Unsplash extends ImageLoader
      * @return void
      */
     public function __construct(
-        $photo = 'random',
-        $query = '',
-        $featured = false,
-        $username = '',
+        $photo = null,
+        $query = null,
+        $featured = null,
+        $username = null,
         $width = null,
         $height = null,
         $icon = null,
         $loadingIcon = null,
         $errorIcon = null,
-        $ttl = 3600,
+        $ttl = null,
         $theme = null
     ) {
         parent::__construct(
-            $this->url($photo, $query, $featured, $username, $width, $height, $ttl),
+            $this->url(
+                $photo ?? 'random',
+                $query ?? '',
+                $featured ?? false,
+                $username ?? '',
+                $width,
+                $height,
+                $ttl ?? 3600
+            ),
             $icon,
             $loadingIcon,
             $errorIcon,

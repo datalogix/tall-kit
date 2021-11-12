@@ -32,24 +32,24 @@ class Cron extends BladeComponent
      *
      * @param  string|null  $schedule
      * @param  string|null  $locale
-     * @param  bool  $use24hour
-     * @param  bool  $human
+     * @param  bool|null  $use24hour
+     * @param  bool|null  $human
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $schedule = null,
         $locale = null,
-        $use24hour = false,
-        $human = false,
+        $use24hour = null,
+        $human = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->schedule = $schedule;
         $this->locale = $locale ?? app()->getLocale();
-        $this->use24hour = $use24hour;
-        $this->human = $human;
+        $this->use24hour = $use24hour ?? false;
+        $this->human = $human ?? false;
     }
 
     /**

@@ -15,7 +15,7 @@ trait Assets
      * Register asset.
      *
      * @param  string  $name
-     * @param  string|string[]  $content
+     * @param  string|string[]|null  $content
      * @param  bool  $overwrite
      * @return void
      */

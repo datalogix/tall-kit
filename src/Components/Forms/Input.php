@@ -14,7 +14,7 @@ class Input extends Field
     public $id;
 
     /**
-     * @var string|null
+     * @var string
      */
     public $type;
 
@@ -55,15 +55,15 @@ class Input extends Field
      * @param  mixed  $mask
      * @param  array|null  $cleave
      * @param  array|bool|null  $tagify
-     * @param  string|null  $language
-     * @param  bool  $showErrors
+     * @param  string|bool|null  $language
+     * @param  bool|null  $showErrors
      * @param  string|null  $theme
-     * @param  bool  $groupable
+     * @param  bool|null  $groupable
      * @param  string|null  $prependText
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
      * @param  string|null  $appendIcon
-     * @param  string|bool|null  $display
+     * @param  mixed  $display
      * @return void
      */
     public function __construct(
@@ -77,9 +77,9 @@ class Input extends Field
         $cleave = null,
         $tagify = null,
         $language = null,
-        $showErrors = true,
+        $showErrors = null,
         $theme = null,
-        $groupable = true,
+        $groupable = null,
         $prependText = null,
         $prependIcon = null,
         $appendText = null,
@@ -91,7 +91,7 @@ class Input extends Field
             $label,
             $showErrors,
             $theme,
-            $groupable,
+            $groupable ?? true,
             $prependText,
             $prependIcon,
             $appendText,

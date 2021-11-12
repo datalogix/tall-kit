@@ -1,8 +1,10 @@
-export default ({ loadComponentAssets }) => ({
+import defu from 'defu'
+
+export default ({ loadComponentAssets, getCsrfToken }) => ({
   filepond: null,
 
   async setup (options = {}) {
-    const plugins = options.plugins || []
+    const plugins = Object.values(options.plugins || [])
 
     for (const plugin of plugins) {
       await loadComponentAssets(plugin)
@@ -14,7 +16,17 @@ export default ({ loadComponentAssets }) => ({
       window.FilePond.registerPlugin(window[plugin])
     }
 
+    const defaults = {
+      server: {
+        withCredentials: true,
+        headers: getCsrfToken(true)
+      }
+    }
+
     // eslint-disable-next-line new-cap
-    this.filepond = new window.FilePond.create(this.$refs.filepond, options)
+    this.filepond = new window.FilePond.create(
+      this.$refs.filepond,
+      defu(options, defaults)
+    )
   }
 })

@@ -13,6 +13,7 @@
         @if ($overlay)
             <x-overlay
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'overlay') }}
+                :closeable="$closeable"
                 :theme="$theme"
             />
         @endif

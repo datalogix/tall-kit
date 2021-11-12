@@ -7,7 +7,7 @@ use TALLKit\Components\BladeComponent;
 class Logo extends BladeComponent
 {
     /**
-     * @var string|bool|null
+     * @var string|bool
      */
     public $name;
 

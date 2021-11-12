@@ -1,23 +1,13 @@
 <?php
 
-namespace TALLKit\Components\Pickers;
+namespace TALLKit\Components\Uploaders;
 
 use TALLKit\Components\Forms\Input;
 use TALLKit\Concerns\JsonOptions;
 
-class Pikaday extends Input
+abstract class Uploader extends Input
 {
     use JsonOptions;
-
-    /**
-     * @var string
-     */
-    public $format;
-
-    /**
-     * @var string|bool|null
-     */
-    public $placeholder;
 
     /**
      * Create a new component instance.
@@ -35,8 +25,6 @@ class Pikaday extends Input
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
      * @param  string|null  $appendIcon
-     * @param  string|null  $format
-     * @param  string|bool|null  $placeholder
      * @param  mixed  $options
      * @return void
      */
@@ -54,15 +42,13 @@ class Pikaday extends Input
         $prependIcon = null,
         $appendText = null,
         $appendIcon = null,
-        $format = null,
-        $placeholder = null,
         $options = null
     ) {
         parent::__construct(
             $name,
             $id,
             $label,
-            'text',
+            'file',
             $bind,
             $default,
             null,
@@ -75,21 +61,10 @@ class Pikaday extends Input
             $prependText,
             $prependIcon,
             $appendText,
-            $appendIcon
+            $appendIcon,
+            false
         );
 
-        $this->format = $format ?? 'DD/MM/YYYY';
-        $this->placeholder = $placeholder;
         $this->setOptions($options);
-    }
-
-    /**
-     * Get options values.
-     *
-     * @return array
-     */
-    protected function getOptionsValues()
-    {
-        return ['format' => $this->format];
     }
 }

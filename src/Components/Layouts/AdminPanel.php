@@ -10,12 +10,12 @@ class AdminPanel extends BladeComponent
     use User;
 
     /**
-     * @var bool|array
+     * @var array|bool
      */
     public $html;
 
     /**
-     * @var string|bool|null
+     * @var string|bool
      */
     public $title;
 
@@ -45,7 +45,7 @@ class AdminPanel extends BladeComponent
     public $sidebarBreakpoint;
 
     /**
-     * @var string|bool|null
+     * @var string|bool
      */
     public $sidebarName;
 
@@ -60,7 +60,12 @@ class AdminPanel extends BladeComponent
     public $sidebarOverlay;
 
     /**
-     * @var string
+     * @var bool
+     */
+    public $sidebarCloseable;
+
+    /**
+     * @var string|null
      */
     public $sidebarAlign;
 
@@ -75,7 +80,7 @@ class AdminPanel extends BladeComponent
     public $userMenuInline;
 
     /**
-     * @var string|bool|null
+     * @var string|bool
      */
     public $userMenuName;
 
@@ -90,7 +95,12 @@ class AdminPanel extends BladeComponent
     public $userMenuOverlay;
 
     /**
-     * @var string|bool|null
+     * @var bool
+     */
+    public $userMenuCloseable;
+
+    /**
+     * @var string|bool
      */
     public $userMenuAlign;
 
@@ -130,14 +140,14 @@ class AdminPanel extends BladeComponent
     public $userMenuAvatarIcon;
 
     /**
-     * @var string|bool|null
+     * @var string|bool
      */
     public $messageSession;
 
     /**
      * Create a new component instance.
      *
-     * @param  bool|array  $html
+     * @param  array|bool|null  $html
      * @param  string|bool|null  $title
      * @param  string|null  $guard
      * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed|null  $user
@@ -145,16 +155,18 @@ class AdminPanel extends BladeComponent
      * @param  string|bool|null  $logoName
      * @param  string|bool|null  $logoUrl
      * @param  mixed  $sidebarItems
-     * @param  string|bool  $sidebarBreakpoint
+     * @param  string|bool|null  $sidebarBreakpoint
      * @param  string|bool|null  $sidebarName
-     * @param  bool  $sidebarShow
-     * @param  bool  $sidebarOverlay
+     * @param  bool|null  $sidebarShow
+     * @param  bool|null  $sidebarOverlay
+     * @param  bool|null  $sidebarCloseable
      * @param  string|null  $sidebarAlign
      * @param  mixed  $userMenuItems
-     * @param  bool  $userMenuInline
+     * @param  bool|null  $userMenuInline
      * @param  string|bool|null  $userMenuName
-     * @param  bool  $userMenuShow
-     * @param  bool  $userMenuOverlay
+     * @param  bool|null  $userMenuShow
+     * @param  bool|null  $userMenuOverlay
+     * @param  bool|null  $userMenuCloseable
      * @param  string|bool|null  $userMenuAlign
      * @param  string|bool|null  $userMenuIconName
      * @param  string|bool|null  $userMenuUserName
@@ -163,13 +175,12 @@ class AdminPanel extends BladeComponent
      * @param  string|bool|null  $userMenuAvatarProvider
      * @param  string|bool|null  $userMenuAvatarFallback
      * @param  string|bool|null  $userMenuAvatarIcon
-     * @param  string|bool|null  $userMenuAvatarIcon
      * @param  string|bool|null  $messageSession
      * @param  string|bool|null  $theme
      * @return void
      */
     public function __construct(
-        $html = true,
+        $html = null,
         $title = null,
         $guard = null,
         $user = null,
@@ -177,17 +188,19 @@ class AdminPanel extends BladeComponent
         $logoName = null,
         $logoUrl = null,
         $sidebarItems = null,
-        $sidebarBreakpoint = 'lg',
-        $sidebarName = 'sidebar',
-        $sidebarShow = false,
-        $sidebarOverlay = true,
+        $sidebarBreakpoint = null,
+        $sidebarName = null,
+        $sidebarShow = null,
+        $sidebarOverlay = null,
+        $sidebarCloseable = null,
         $sidebarAlign = null,
         $userMenuItems = null,
-        $userMenuInline = false,
-        $userMenuName = 'user-menu',
-        $userMenuShow = false,
-        $userMenuOverlay = true,
-        $userMenuAlign = 'right',
+        $userMenuInline = null,
+        $userMenuName = null,
+        $userMenuShow = null,
+        $userMenuOverlay = null,
+        $userMenuCloseable = null,
+        $userMenuAlign = null,
         $userMenuIconName = null,
         $userMenuUserName = null,
         $userMenuUserAvatar = null,
@@ -195,14 +208,14 @@ class AdminPanel extends BladeComponent
         $userMenuAvatarProvider = null,
         $userMenuAvatarFallback = null,
         $userMenuAvatarIcon = null,
-        $messageSession = 'status',
+        $messageSession = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->setUser($user, $guard);
 
-        $this->html = $html ? array_replace_recursive(
+        $this->html = ($html ?? true) ? array_replace_recursive(
             $this->themeProvider->html->getAttributes(),
             $this->getUserValue('html', 'adminHtml') ?? [],
             is_array($html) ? $html : []
@@ -213,17 +226,19 @@ class AdminPanel extends BladeComponent
         $this->logoName = $logoName;
         $this->logoUrl = $logoUrl ?? route_detect(['admin.index', 'admin.dashboard']);
         $this->sidebarItems = $sidebarItems ?? $this->getUserValue('sidebar', 'adminSidebar');
-        $this->sidebarBreakpoint = $this->getUserValue('sidebarBreakpoint', 'adminSidebarBreakpoint') ?? $sidebarBreakpoint;
-        $this->sidebarName = $sidebarName;
-        $this->sidebarShow = $sidebarShow;
-        $this->sidebarOverlay = $sidebarOverlay;
+        $this->sidebarBreakpoint = $this->getUserValue('sidebarBreakpoint', 'adminSidebarBreakpoint') ?? $sidebarBreakpoint ?? 'lg';
+        $this->sidebarName = $sidebarName ?? 'sidebar';
+        $this->sidebarShow = $sidebarShow ?? false;
+        $this->sidebarOverlay = $sidebarOverlay ?? true;
+        $this->sidebarCloseable = $sidebarCloseable ?? true;
         $this->sidebarAlign = $sidebarAlign;
         $this->userMenuItems = $userMenuItems ?? $this->getUserValue('adminUserMenu');
-        $this->userMenuInline = $userMenuInline;
-        $this->userMenuName = $userMenuName;
-        $this->userMenuShow = $userMenuShow;
-        $this->userMenuOverlay = $userMenuOverlay;
-        $this->userMenuAlign = $userMenuAlign;
+        $this->userMenuInline = $userMenuInline ?? false;
+        $this->userMenuName = $userMenuName ?? 'user-menu';
+        $this->userMenuShow = $userMenuShow ?? false;
+        $this->userMenuOverlay = $userMenuOverlay ?? true;
+        $this->userMenuCloseable = $userMenuCloseable ?? true;
+        $this->userMenuAlign = $userMenuAlign ?? 'right';
         $this->userMenuIconName = $userMenuIconName;
         $this->userMenuUserName = $userMenuUserName;
         $this->userMenuUserAvatar = $userMenuUserAvatar;
@@ -231,6 +246,6 @@ class AdminPanel extends BladeComponent
         $this->userMenuAvatarProvider = $userMenuAvatarProvider;
         $this->userMenuAvatarFallback = $userMenuAvatarFallback;
         $this->userMenuAvatarIcon = $userMenuAvatarIcon;
-        $this->messageSession = $messageSession;
+        $this->messageSession = $messageSession ?? 'status';
     }
 }

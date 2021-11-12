@@ -21,7 +21,7 @@ class Field extends FieldGroup
     public $groupable;
 
     /**
-     * @var string|bool|null
+     * @var mixed
      */
     public $display;
 
@@ -30,22 +30,22 @@ class Field extends FieldGroup
      *
      * @param  string|null  $name
      * @param  string|bool|null  $label
-     * @param  bool  $showErrors
+     * @param  bool|null  $showErrors
      * @param  string|null  $theme
-     * @param  bool  $groupable
+     * @param  bool|null  $groupable
      * @param  string|null  $prependText
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
      * @param  string|null  $appendIcon
-     * @param  string|bool|null  $display
+     * @param  mixed  $display
      * @return void
      */
     public function __construct(
         $name = null,
         $label = null,
-        $showErrors = true,
+        $showErrors = null,
         $theme = null,
-        $groupable = false,
+        $groupable = null,
         $prependText = null,
         $prependIcon = null,
         $appendText = null,
@@ -63,8 +63,8 @@ class Field extends FieldGroup
         $this->setName($name);
 
         $this->label = $label ?? $name;
-        $this->showErrors = $showErrors && $name;
-        $this->groupable = $groupable;
+        $this->showErrors = ($showErrors ?? true) && $name;
+        $this->groupable = $groupable ?? false;
         $this->display = $display;
     }
 }

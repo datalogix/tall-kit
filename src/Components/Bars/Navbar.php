@@ -46,9 +46,9 @@ class Navbar extends Nav
      * Create a new component instance.
      *
      * @param  mixed  $items
-     * @param  string  $breakpoint
-     * @param  bool  $animated
-     * @param  string  $align
+     * @param  string|null  $breakpoint
+     * @param  bool|null  $animated
+     * @param  string|null  $align
      * @param  string|bool|null  $logoImage
      * @param  string|bool|null  $logoName
      * @param  string|bool|null  $logoUrl
@@ -57,9 +57,9 @@ class Navbar extends Nav
      */
     public function __construct(
         $items = null,
-        $breakpoint = 'none',
-        $animated = true,
-        $align = 'between',
+        $breakpoint = null,
+        $animated = null,
+        $align = null,
         $logoImage = null,
         $logoName = null,
         $logoUrl = null,
@@ -67,9 +67,9 @@ class Navbar extends Nav
     ) {
         parent::__construct($items, true, $theme);
 
-        $this->breakpoint = $breakpoint;
-        $this->animated = $animated;
-        $this->align = $align;
+        $this->breakpoint = $breakpoint ?? 'none';
+        $this->animated = $animated ?? true;
+        $this->align = $align ?? 'between';
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
         $this->logoUrl = $logoUrl;

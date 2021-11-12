@@ -2,7 +2,7 @@
     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :name="$name"
     :label="false"
-    :showErrors="$showErrors"
+    :show-errors="$showErrors"
     :theme="$theme"
 >
     <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
@@ -108,7 +108,7 @@
                             <x-button {{
                                 $attributes
                                     ->mergeOnlyThemeProvider($themeProvider, 'delete')
-                                    ->merge(['@click' => 'destroy(\''.__('Do you really want to remove this image?').'\')'])
+                                    ->merge(['@click' => 'remove(\''.__('Do you really want to remove this image?').'\')'])
                                 }}
                                 color="transparent"
                                 shadow="none"

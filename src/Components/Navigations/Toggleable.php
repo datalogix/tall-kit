@@ -13,21 +13,23 @@ class Toggleable extends BladeComponent
      * Create a new component instance.
      *
      * @param  string|bool|null  $name
-     * @param  bool|int  $show
-     * @param  bool  $overlay
-     * @param  string  $align
+     * @param  bool|int|null  $show
+     * @param  bool|null  $overlay
+     * @param  bool|null  $closeable
+     * @param  string|null  $align
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $name = null,
-        $show = false,
-        $overlay = true,
+        $show = null,
+        $overlay = null,
+        $closeable = null,
         $align = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->setToggleable($name, $show, $overlay, $align);
+        $this->setToggleable($name, $show, $overlay, $closeable, $align);
     }
 }

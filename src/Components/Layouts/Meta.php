@@ -78,8 +78,8 @@ class Meta extends BladeComponent
         $keywords = null,
         $author = null,
         $robots = null,
-        $type = 'website',
-        $card = 'summary_large_image',
+        $type = null,
+        $card = null,
         $image = null,
         $url = null,
         $locale = null,
@@ -92,8 +92,8 @@ class Meta extends BladeComponent
         $this->keywords = $keywords;
         $this->author = $author;
         $this->robots = $robots;
-        $this->type = $type;
-        $this->card = $card;
+        $this->type = $type ?? 'website';
+        $this->card = $card ?? 'summary_large_image';
         $this->image = $image;
         $this->url = $url ?? url()->current();
         $this->locale = $locale ?? app()->getLocale();

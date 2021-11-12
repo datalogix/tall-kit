@@ -14,6 +14,8 @@
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'types', 'download') }}
             href="{{ $value }}"
             preset="download"
+            target="_blank"
+            :theme="$theme"
         />
     @else
         {{ $slot->isEmpty() ? $value : $slot }}

@@ -4,6 +4,7 @@
     :name="$name"
     :show="$show"
     :overlay="$overlay"
+    :closeable="$closeable"
     :align="$align"
     :items="$items"
     :theme="$theme"

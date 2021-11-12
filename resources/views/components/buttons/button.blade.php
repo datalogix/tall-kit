@@ -3,6 +3,7 @@
         ->mergeThemeProvider($themeProvider, 'container')
         ->mergeOnlyThemeProvider($themeProvider, 'rounded', $rounded)
         ->mergeOnlyThemeProvider($themeProvider, 'shadow', $shadow)
+        ->mergeOnlyThemeProvider($themeProvider, $loading && $type === 'submit' ? 'loading' : null, $loading ? 'container' : null)
         ->merge($colorName ? [
             'class' => $outlined
                 ? 'bg-transparent hover:bg-'.$colorName.'-'.$colorWeight.' text-'.$colorName.'-'.$colorHover.' hover:text-white border border-'.$colorName.'-'.$colorWeight.' hover:border-transparent'
@@ -15,21 +16,32 @@
     @if ($href) href="{{ $href }}" @endif
     @if (!$href) type="{{ $type }}" @endif
 >
-    <x-icon
-        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'iconLeft') }}
-        :name="$iconLeft"
-    >
-        {!! $iconLeft !!}
-    </x-icon>
+    @if ($loading && $type === 'submit')<span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'content') }}>@endif
+        <x-icon
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'iconLeft') }}
+            :name="$iconLeft"
+        >
+            {!! $iconLeft ?? $icon !!}
+        </x-icon>
 
-    @if ($slot->isNotEmpty() || $text)
-        <span>{!! $slot->isEmpty() ? __($text) : $slot !!}</span>
+        @if ($slot->isNotEmpty() || $text)
+            <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'text') }}>
+                {!! $slot->isEmpty() ? __($text) : $slot !!}
+            </span>
+        @endif
+
+        <x-icon
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'iconRight') }}
+            :name="$iconRight"
+        >
+            {!! $iconRight !!}
+        </x-icon>
+    @if ($loading && $type === 'submit')</span>@endif
+
+    @if ($loading && $type === 'submit')
+        <x-loading
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'loading') }}
+            :text="is_string($loading) ? $loading : null"
+        />
     @endif
-
-    <x-icon
-        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'iconRight') }}
-        :name="$iconRight"
-    >
-        {!! $iconRight !!}
-    </x-icon>
 </{{ $href ? 'a' : 'button' }}>

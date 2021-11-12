@@ -2,18 +2,20 @@
     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :name="$name"
     :label="false"
-    :showErrors="$showErrors"
+    :show-errors="$showErrors"
     :theme="$theme"
 >
-    <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
-        <x-label
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
-            :label="$label"
-            :theme="$theme"
-        >
-            {{ $labelContent ?? '' }}
-        </x-label>
-    </label>
+    @if ($label || isset($labelContent))
+        <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
+            <x-label
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+                :label="$label"
+                :theme="$theme"
+            >
+                {{ $labelContent ?? '' }}
+            </x-label>
+        </label>
+    @endif
 
     <x-input
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}

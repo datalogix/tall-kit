@@ -18,27 +18,32 @@ class NavItem extends BladeComponent
     public $active;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $href;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $target;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $click;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
+     */
+    public $icon;
+
+    /**
+     * @var string|bool|null
      */
     public $iconLeft;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $iconRight;
 
@@ -47,22 +52,24 @@ class NavItem extends BladeComponent
      *
      * @param  string|null  $text
      * @param  bool|null  $active
-     * @param  string|bool  $href
-     * @param  string|bool  $target
-     * @param  string|bool  $click
-     * @param  string|bool  $iconLeft
-     * @param  string|bool  $iconRight
+     * @param  string|bool|null  $href
+     * @param  string|bool|null  $target
+     * @param  string|bool|null  $click
+     * @param  string|bool|null  $icon
+     * @param  string|bool|null  $iconLeft
+     * @param  string|bool|null  $iconRight
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $text = null,
         $active = null,
-        $href = false,
-        $target = false,
-        $click = false,
-        $iconLeft = false,
-        $iconRight = false,
+        $href = null,
+        $target = null,
+        $click = null,
+        $icon = null,
+        $iconLeft = null,
+        $iconRight = null,
         $theme = null
     ) {
         parent::__construct($theme);
@@ -72,7 +79,8 @@ class NavItem extends BladeComponent
         $this->href = $href;
         $this->target = $target;
         $this->click = $click;
-        $this->iconLeft = $iconLeft;
+        $this->icon = $icon;
+        $this->iconLeft = $iconLeft ?? $this->icon;
         $this->iconRight = $iconRight;
     }
 

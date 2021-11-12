@@ -17,10 +17,11 @@ class MenuDropdown extends Menu
      * Create a new component instance.
      *
      * @param  mixed  $items
-     * @param  bool  $inline
+     * @param  bool|null  $inline
      * @param  string|bool|null  $name
-     * @param  bool|int  $show
-     * @param  bool  $overlay
+     * @param  bool|int|null  $show
+     * @param  bool|null  $overlay
+     * @param  bool|null  $closeable
      * @param  string|null  $align
      * @param  string|bool|null  $iconName
      * @param  string|null  $theme
@@ -28,21 +29,22 @@ class MenuDropdown extends Menu
      */
     public function __construct(
         $items = null,
-        $inline = false,
+        $inline = null,
         $name = null,
-        $show = false,
-        $overlay = true,
+        $show = null,
+        $overlay = null,
+        $closeable = null,
         $align = null,
         $iconName = null,
         $theme = null
     ) {
         parent::__construct(
             $items,
-            $inline,
+            $inline ?? false,
             $theme
         );
 
-        $this->setToggleable($name, $show, $overlay, $align);
+        $this->setToggleable($name, $show, $overlay, $closeable, $align);
         $this->iconName = $iconName;
     }
 }

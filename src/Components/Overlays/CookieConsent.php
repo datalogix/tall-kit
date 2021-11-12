@@ -35,32 +35,32 @@ class CookieConsent extends Modal
     public $buttonText;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $buttonIcon;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $buttonIconLeft;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $buttonIconRight;
 
     /**
-     * @var string|bool|null
+     * @var string|bool
      */
     public $buttonColor;
 
     /**
-     * @var string
+     * @var string|bool
      */
     public $buttonRounded;
 
     /**
-     * @var string
+     * @var string|bool
      */
     public $buttonShadow;
 
@@ -77,34 +77,36 @@ class CookieConsent extends Modal
     /**
      * Create a new component instance.
      *
-     * @param  string  $name
-     * @param  bool  $overlay
-     * @param  string  $align
-     * @param  string  $transition
-     * @param  int  $expires
+     * @param  string|null  $name
+     * @param  bool|null  $overlay
+     * @param  bool|null  $closeable
+     * @param  string|null  $align
+     * @param  string|null  $transition
+     * @param  int|null  $expires
      * @param  string|null  $title
      * @param  string|null  $subtitle
      * @param  string|null  $description
      * @param  string|null  $url
      * @param  string|null  $more
      * @param  string|null  $buttonText
-     * @param  string|null  $buttonIcon
-     * @param  string|null  $buttonIconLeft
-     * @param  string|null  $buttonIconRight
+     * @param  string|bool|null  $buttonIcon
+     * @param  string|bool|null  $buttonIconLeft
+     * @param  string|bool|null  $buttonIconRight
      * @param  string|bool|null  $buttonColor
-     * @param  string  $buttonRounded
-     * @param  string  $buttonShadow
-     * @param  bool  $buttonOutlined
-     * @param  bool  $buttonBordered
+     * @param  string|bool|null  $buttonRounded
+     * @param  string|bool|null  $buttonShadow
+     * @param  bool|null  $buttonOutlined
+     * @param  bool|null  $buttonBordered
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $name = 'cookie-consent',
-        $overlay = false,
-        $align = 'bottom-right',
-        $transition = 'bottom',
-        $expires = 365,
+        $name = null,
+        $overlay = null,
+        $closeable = null,
+        $align = null,
+        $transition = null,
+        $expires = null,
         $title = null,
         $subtitle = null,
         $description = null,
@@ -114,16 +116,24 @@ class CookieConsent extends Modal
         $buttonIcon = null,
         $buttonIconLeft = null,
         $buttonIconRight = null,
-        $buttonColor = 'default',
-        $buttonRounded = 'default',
-        $buttonShadow = 'default',
-        $buttonOutlined = false,
-        $buttonBordered = false,
+        $buttonColor = null,
+        $buttonRounded = null,
+        $buttonShadow = null,
+        $buttonOutlined = null,
+        $buttonBordered = null,
         $theme = null
     ) {
-        parent::__construct($name, false, $overlay, $align, $transition, $theme);
+        parent::__construct(
+            $name ?? 'cookie-consent',
+            false,
+            $overlay ?? false,
+            $closeable ?? false,
+            $align ?? 'bottom-right',
+            $transition ?? 'bottom',
+            $theme
+        );
 
-        $this->expires = $expires;
+        $this->expires = $expires ?? 365;
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->description = $description;
@@ -133,10 +143,10 @@ class CookieConsent extends Modal
         $this->buttonIcon = $buttonIcon;
         $this->buttonIconLeft = $buttonIconLeft;
         $this->buttonIconRight = $buttonIconRight;
-        $this->buttonColor = $buttonColor;
-        $this->buttonRounded = $buttonRounded;
-        $this->buttonShadow = $buttonShadow;
-        $this->buttonOutlined = $buttonOutlined;
-        $this->buttonBordered = $buttonBordered;
+        $this->buttonColor = $buttonColor ?? 'default';
+        $this->buttonRounded = $buttonRounded ?? 'default';
+        $this->buttonShadow = $buttonShadow ?? 'default';
+        $this->buttonOutlined = $buttonOutlined ?? false;
+        $this->buttonBordered = $buttonBordered ?? false;
     }
 }

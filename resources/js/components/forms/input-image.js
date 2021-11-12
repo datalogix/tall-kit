@@ -2,7 +2,9 @@ export default ({ loadable, loadImg, timeout }) => ({
   ...loadable(),
 
   setup () {
-    this.load(this.$refs.output.src)
+    if (this.$refs.output) {
+      this.load(this.$refs.output.src)
+    }
   },
 
   change (event) {
@@ -14,14 +16,20 @@ export default ({ loadable, loadImg, timeout }) => ({
   },
 
   edit () {
-    this.$refs.input.click()
+    if (this.$refs.input) {
+      this.$refs.input.click()
+    }
   },
 
-  destroy (message) {
+  remove (message) {
     if (!message || window.confirm(message)) {
       this.start()
+
       timeout(() => {
-        this.$refs.input.value = ''
+        if (this.$refs.input) {
+          this.$refs.input.value = ''
+        }
+
         this.clear()
       }, 100)
     }

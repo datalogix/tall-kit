@@ -7,7 +7,7 @@ use TALLKit\Components\BladeComponent;
 class AuthenticationCard extends BladeComponent
 {
     /**
-     * @var bool|array
+     * @var array|bool
      */
     public $html;
 
@@ -27,14 +27,14 @@ class AuthenticationCard extends BladeComponent
     public $logoUrl;
 
     /**
-     * @var string|bool|null
+     * @var string|bool
      */
     public $messageSession;
 
     /**
      * Create a new component instance.
      *
-     * @param  bool|array  $html
+     * @param  array|bool|null  $html
      * @param  string|bool|null  $logoImage
      * @param  string|bool|null  $logoName
      * @param  string|bool|null  $logoUrl
@@ -43,16 +43,16 @@ class AuthenticationCard extends BladeComponent
      * @return void
      */
     public function __construct(
-        $html = true,
+        $html = null,
         $logoImage = null,
         $logoName = null,
         $logoUrl = null,
-        $messageSession = 'status',
+        $messageSession = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->html = $html ? array_replace_recursive(
+        $this->html = ($html ?? true) ? array_replace_recursive(
             $this->themeProvider->html->getAttributes(),
             is_array($html) ? $html : []
         ) : false;
@@ -60,6 +60,6 @@ class AuthenticationCard extends BladeComponent
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
         $this->logoUrl = $logoUrl;
-        $this->messageSession = $messageSession;
+        $this->messageSession = $messageSession ?? 'status';
     }
 }

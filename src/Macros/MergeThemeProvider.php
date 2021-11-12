@@ -30,10 +30,10 @@ class MergeThemeProvider
             $subkeyAttrs = new ComponentAttributeBag();
 
             if ($subkey) {
-                $subkeyAttrs = $subkeyAttrs->merge($themeProvider->$themeKey->get($subkey, []));
+                $subkeyAttrs = $subkeyAttrs->merge($themeProvider->$themeKey->get($subkey, []), false);
 
                 if (is_array($themeAttrs) && array_key_exists($subkey, $themeAttrs)) {
-                    $subkeyAttrs = $subkeyAttrs->merge(MergeThemeProvider::convertStringToArrayClass($themeAttrs[$subkey]));
+                    $subkeyAttrs = $subkeyAttrs->merge(MergeThemeProvider::convertStringToArrayClass($themeAttrs[$subkey]), false);
                 }
             } else {
                 $subkeyAttrs = $subkeyAttrs->merge(MergeThemeProvider::mergeRecursiveClass(

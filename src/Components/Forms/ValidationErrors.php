@@ -2,9 +2,9 @@
 
 namespace TALLKit\Components\Forms;
 
-use TALLKit\Components\BladeComponent;
+use TALLKit\Components\Messages\Message;
 
-class ValidationErrors extends BladeComponent
+class ValidationErrors extends Message
 {
     /**
      * @var string
@@ -12,99 +12,19 @@ class ValidationErrors extends BladeComponent
     public $bag;
 
     /**
-     * @var string|bool|null
-     */
-    public $type;
-
-    /**
-     * @var string|bool|null
-     */
-    public $mode;
-
-    /**
-     * @var string|bool|null
-     */
-    public $rounded;
-
-    /**
-     * @var string|bool|null
-     */
-    public $shadow;
-
-    /**
-     * @var bool
-     */
-    public $icon;
-
-    /**
-     * @var string|bool|null
-     */
-    public $iconSvg;
-
-    /**
-     * @var string|bool|null
-     */
-    public $iconName;
-
-    /**
-     * @var int
-     */
-    public $timeout;
-
-    /**
-     * @var bool
-     */
-    public $dismissible;
-
-    /**
-     * @var bool
-     */
-    public $dismissibleIcon;
-
-    /**
-     * @var string|bool|null
-     */
-    public $dismissibleIconSvg;
-
-    /**
-     * @var string|bool|null
-     */
-    public $dismissibleIconName;
-
-    /**
-     * @var string|null
-     */
-    public $dismissibleText;
-
-    /**
-     * @var string|null
-     */
-    public $title;
-
-    /**
-     * @var string|null
-     */
-    public $message;
-
-    /**
-     * @var string|null
-     */
-    public $on;
-
-    /**
      * Create a new component instance.
      *
-     * @param  string|bool|null  $bag
+     * @param  string|null  $bag
      * @param  string|bool|null  $type
      * @param  string|bool|null  $mode
      * @param  string|bool|null  $rounded
      * @param  string|bool|null  $shadow
-     * @param  bool  $icon
+     * @param  bool|null  $icon
      * @param  string|bool|null  $iconSvg
      * @param  string|bool|null  $iconName
-     * @param  int  $timeout
-     * @param  bool  $dismissible
-     * @param  bool  $dismissibleIcon
+     * @param  int|null  $timeout
+     * @param  bool|null  $dismissible
+     * @param  bool|null  $dismissibleIcon
      * @param  string|bool|null  $dismissibleIconSvg
      * @param  string|bool|null  $dismissibleIconName
      * @param  string|null  $dismissibleText
@@ -116,42 +36,45 @@ class ValidationErrors extends BladeComponent
      */
     public function __construct(
         $bag = null,
-        $type = 'danger',
-        $mode = 'default',
-        $rounded = 'default',
-        $shadow = 'default',
-        $icon = true,
+        $type = null,
+        $mode = null,
+        $rounded = null,
+        $shadow = null,
+        $icon = null,
         $iconSvg = null,
         $iconName = null,
-        $timeout = 0,
-        $dismissible = false,
-        $dismissibleIcon = true,
+        $timeout = null,
+        $dismissible = null,
+        $dismissibleIcon = null,
         $dismissibleIconSvg = null,
         $dismissibleIconName = null,
         $dismissibleText = null,
-        $title = 'Whoops! Something went wrong.',
+        $title = null,
         $message = null,
         $on = null,
         $theme = null
     ) {
-        parent::__construct($theme);
+        parent::__construct(
+            false,
+            $type ?? 'danger',
+            $mode,
+            $rounded,
+            $shadow,
+            $icon,
+            $iconSvg,
+            $iconName,
+            $timeout,
+            $dismissible,
+            $dismissibleIcon,
+            $dismissibleIconSvg,
+            $dismissibleIconName,
+            $dismissibleText,
+            $title ?? 'Whoops! Something went wrong.',
+            $message,
+            $on,
+            $theme,
+        );
 
-        $this->bag = $bag ?: 'default';
-        $this->type = $type;
-        $this->mode = $mode;
-        $this->rounded = $rounded;
-        $this->shadow = $shadow;
-        $this->icon = $icon;
-        $this->iconSvg = $iconSvg;
-        $this->iconName = $iconName;
-        $this->timeout = $timeout;
-        $this->dismissible = $dismissible;
-        $this->dismissibleIcon = $dismissibleIcon;
-        $this->dismissibleIconSvg = $dismissibleIconSvg;
-        $this->dismissibleIconName = $dismissibleIconName;
-        $this->dismissibleText = $dismissibleText;
-        $this->title = $title;
-        $this->message = $message;
-        $this->on = $on;
+        $this->bag = $bag ?? 'default';
     }
 }

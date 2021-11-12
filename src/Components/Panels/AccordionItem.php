@@ -25,21 +25,21 @@ class AccordionItem extends BladeComponent
      * Create a new component instance.
      *
      * @param  string|null  $name
-     * @param  bool|int  $open
-     * @param  bool  $disabled
+     * @param  bool|int|null  $open
+     * @param  bool|null  $disabled
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $name = null,
-        $open = false,
-        $disabled = false,
+        $open = null,
+        $disabled = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->name = $name;
-        $this->open = $open;
-        $this->disabled = $disabled;
+        $this->open = $open ?? false;
+        $this->disabled = $disabled ?? false;
     }
 }

@@ -22,39 +22,44 @@ class Button extends BladeComponent
     public $type;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $icon;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $iconLeft;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $iconRight;
 
     /**
-     * @var string
+     * @var string|bool
      */
     public $rounded;
 
     /**
-     * @var string
+     * @var string|bool
      */
     public $shadow;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $outlined;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $bordered;
+
+    /**
+     * @var string|bool|null
+     */
+    public $loading;
 
     /**
      * @var string|null
@@ -67,17 +72,17 @@ class Button extends BladeComponent
     public $color;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $colorName;
 
     /**
-     * @var int
+     * @var int|null
      */
     public $colorWeight;
 
     /**
-     * @var int
+     * @var int|null
      */
     public $colorHover;
 
@@ -87,14 +92,15 @@ class Button extends BladeComponent
      * @param  string|null  $text
      * @param  string|null  $href
      * @param  string|null  $type
-     * @param  string|null  $icon
-     * @param  string|null  $iconLeft
-     * @param  string|null  $iconRight
+     * @param  string|bool|null  $icon
+     * @param  string|bool|null  $iconLeft
+     * @param  string|bool|null  $iconRight
      * @param  string|bool|null  $color
-     * @param  string|null  $rounded
-     * @param  string|null  $shadow
+     * @param  string|bool|null  $rounded
+     * @param  string|bool|null  $shadow
      * @param  bool|null  $outlined
      * @param  bool|null  $bordered
+     * @param  string|bool|null  $loading
      * @param  string|null  $preset
      * @param  string|null  $theme
      * @return void
@@ -111,6 +117,7 @@ class Button extends BladeComponent
         $shadow = null,
         $outlined = null,
         $bordered = null,
+        $loading = null,
         $preset = null,
         $theme = null
     ) {
@@ -125,20 +132,21 @@ class Button extends BladeComponent
         $this->color = $color ?? 'default';
         $this->rounded = $rounded ?? 'default';
         $this->shadow = $shadow ?? 'default';
-        $this->outlined = $outlined ?? false;
-        $this->bordered = $bordered ?? false;
+        $this->outlined = $outlined;
+        $this->bordered = $bordered;
+        $this->loading = $loading;
         $this->preset = $preset;
 
         if ($this->preset && $presetProperties = $this->themeProvider->presets->get($this->preset)) {
             $this->text = $text ?? $presetProperties['text'];
-            $this->icon = $icon ?? $presetProperties['icon'] ?? null;
-            $this->iconLeft = $iconLeft ?? $presetProperties['iconLeft'] ?? $this->icon;
+            $this->iconLeft = $iconLeft ?? $presetProperties['iconLeft'] ?? $presetProperties['icon'] ?? null;
             $this->iconRight = $iconRight ?? $presetProperties['iconRight'] ?? null;
             $this->color = $color ?? $presetProperties['color'] ?? 'default';
             $this->rounded = $rounded ?? $presetProperties['rounded'] ?? 'default';
             $this->shadow = $shadow ?? $presetProperties['shadow'] ?? 'default';
-            $this->outlined = $outlined ?? $presetProperties['outlined'] ?? false;
-            $this->bordered = $bordered ?? $presetProperties['bordered'] ?? false;
+            $this->outlined = $outlined ?? $presetProperties['outlined'] ?? null;
+            $this->bordered = $bordered ?? $presetProperties['bordered'] ?? null;
+            $this->loading = $loading ?? $presetProperties['loading'] ?? null;
         }
 
         if ($this->color && $colorProperties = $this->themeProvider->colors->get($this->color)) {

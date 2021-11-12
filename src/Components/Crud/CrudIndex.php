@@ -4,6 +4,8 @@ namespace TALLKit\Components\Crud;
 
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Enumerable;
+use Illuminate\Support\Str;
 
 class CrudIndex extends Crud
 {
@@ -18,6 +20,11 @@ class CrudIndex extends Crud
     public $displayActionsColumn;
 
     /**
+     * @var bool
+     */
+    public $mapRelationsColumn;
+
+    /**
      * @var mixed
      */
     public $cols;
@@ -25,15 +32,16 @@ class CrudIndex extends Crud
     /**
      * Create a new component instance.
      *
-     * @param  string|null  $prefix
-     * @param  string|null  $key
+     * @param  string|bool|null  $prefix
+     * @param  string|bool|null  $key
      * @param  string|bool|null  $title
      * @param  mixed  $parameters
      * @param  mixed  $resource
      * @param  mixed  $customActions
-     * @param  string|null  $routeName
-     * @param  bool  $displayIdColumn
-     * @param  bool  $displayActionsColumn
+     * @param  string|bool|null  $routeName
+     * @param  bool|null  $displayIdColumn
+     * @param  bool|null  $displayActionsColumn
+     * @param  bool|null  $mapRelationsColumn
      * @param  mixed  $rows
      * @param  mixed  $cols
      * @param  string|null  $theme
@@ -47,8 +55,9 @@ class CrudIndex extends Crud
         $resource = null,
         $customActions = null,
         $routeName = null,
-        $displayIdColumn = false,
-        $displayActionsColumn = true,
+        $displayIdColumn = null,
+        $displayActionsColumn = null,
+        $mapRelationsColumn = null,
         $rows = null,
         $cols = null,
         $theme = null
@@ -65,8 +74,9 @@ class CrudIndex extends Crud
         );
 
         $this->title = $this->titlePlural;
-        $this->displayIdColumn = $displayIdColumn;
-        $this->displayActionsColumn = $displayActionsColumn;
+        $this->displayIdColumn = $displayIdColumn ?? false;
+        $this->displayActionsColumn = $displayActionsColumn ?? true;
+        $this->mapRelationsColumn = $mapRelationsColumn ?? true;
         $this->cols = $this->getCols($cols);
     }
 
@@ -78,27 +88,42 @@ class CrudIndex extends Crud
      */
     protected function getCols($cols)
     {
-        $cols = Collection::make($cols ?? $this->getColsFromResource())->toArray();
+        $cols = Collection::make($cols ?? $this->getColsFromResource());
+
+        if (($this->resource instanceof Paginator || $this->resource instanceof Enumerable)
+            && $this->resource->isEmpty()
+            && $cols->isEmpty()
+        ) {
+            return $cols->toArray();
+        }
 
         if (! $this->displayIdColumn) {
-            $idIndex = array_search('id', $cols);
-            if ($idIndex !== false) {
-                unset($cols[$idIndex]);
-            }
-
-            $idIndex = array_search('ID', $cols);
-            if ($idIndex !== false) {
-                unset($cols[$idIndex]);
-            }
-
-            unset($cols['id']);
+            $cols->forget($cols->search('id'), $cols->search('ID'));
         }
 
         if ($this->displayActionsColumn) {
-            $cols[] = 'actions';
+            $cols->push('actions');
         }
 
-        return $cols;
+        if ($this->mapRelationsColumn) {
+            $mappedRelations = [];
+
+            $cols = $cols->map(function($item) use (&$mappedRelations) {
+                if (in_array($item, $mappedRelations)) {
+                    return false;
+                }
+
+                if (Str::endsWith($item, '_id')) {
+                    $item = Str::replaceLast('_id', '', $item);
+
+                    array_push($mappedRelations, $item);
+                }
+
+                return $item;
+            })->filter();
+        }
+
+        return $cols->toArray();
     }
 
     /**

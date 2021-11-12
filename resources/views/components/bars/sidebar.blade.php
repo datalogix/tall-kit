@@ -6,6 +6,7 @@
     :name="$name"
     :show="$show"
     :overlay="$overlay"
+    :closeable="$closeable"
     :align="$align"
     :theme="$theme"
     :theme:container="$container()"

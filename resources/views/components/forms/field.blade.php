@@ -4,11 +4,11 @@
     @elseif ($groupable === true && $label === false)
         <x-field-group
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'fieldGroup') }}
-            :prependText="$prependText"
-            :prependIcon="$prependIcon"
-            :appendText="$appendText"
-            :appendIcon="$appendIcon"
             :theme="$theme"
+            :prepend-text="$prependText"
+            :prepend-icon="$prependIcon"
+            :append-text="$appendText"
+            :append-icon="$appendIcon"
         >
             {{ $slot }}
 
@@ -36,11 +36,11 @@
 
             <x-field-group
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'fieldGroup') }}
-                :prependText="$prependText"
-                :prependIcon="$prependIcon"
-                :appendText="$appendText"
-                :appendIcon="$appendIcon"
                 :theme="$theme"
+                :prepend-text="$prependText"
+                :prepend-icon="$prependIcon"
+                :append-text="$appendText"
+                :append-icon="$appendIcon"
             >
                 {{ $slot }}
 
@@ -71,6 +71,7 @@
         <x-display
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
             :value="$display"
+            :theme="$theme"
         />
     @endif
 </div>

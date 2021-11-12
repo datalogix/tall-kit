@@ -194,6 +194,12 @@ return [
         /**
          * Uploaders.
          */
+
+        'dropzone' => [
+            'https://cdn.jsdelivr.net/npm/dropzone@6.0.0-beta.1/dist/dropzone.css',
+            'https://cdn.jsdelivr.net/npm/dropzone@6.0.0-beta.1/dist/dropzone-min.js',
+        ],
+
         'filepond' => [
             'https://cdn.jsdelivr.net/npm/filepond@4/dist/filepond.min.css',
             'https://cdn.jsdelivr.net/npm/filepond@4/dist/filepond.min.js',
@@ -359,6 +365,7 @@ return [
         'display' => \TALLKit\Components\Layouts\Display::class,
         'google-fonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
         'html' => \TALLKit\Components\Layouts\Html::class,
+        'loading' => \TALLKit\Components\Layouts\Loading::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
         'meta' => \TALLKit\Components\Layouts\Meta::class,
 
@@ -826,60 +833,88 @@ return [
              * Buttons.
              */
             'button' => [
-                '_purge' => [
-                    'hover:bg-gray-500',
-                    'hover:bg-gray-700',
-                    'border-gray-500',
-                    'border-gray-700',
-                    'bg-gray-500',
-                    'bg-gray-700',
-                    'text-gray-700',
-                    'text-gray-500',
-
-                    'hover:bg-blue-500',
-                    'hover:bg-blue-700',
-                    'border-blue-500',
-                    'border-blue-700',
-                    'bg-blue-500',
-                    'bg-blue-700',
-                    'text-blue-700',
-                    'text-blue-500',
-
-                    'hover:bg-red-500',
-                    'hover:bg-red-700',
-                    'border-red-500',
-                    'border-red-700',
-                    'bg-red-500',
-                    'bg-red-700',
-                    'text-red-700',
-                    'text-red-500',
-
-                    'hover:bg-green-500',
-                    'hover:bg-green-700',
-                    'border-green-500',
-                    'border-green-700',
-                    'bg-green-500',
-                    'bg-green-700',
-                    'text-green-700',
-                    'text-green-500',
-
-                    'hover:bg-yellow-500',
-                    'hover:bg-yellow-700',
-                    'border-yellow-500',
-                    'border-yellow-700',
-                    'bg-green-500',
-                    'bg-yellow-700',
-                    'text-yellow-700',
-                    'text-yellow-500',
-                ],
+                '_purge' => '
+                    hover:bg-gray-500
+                    hover:bg-gray-700
+                    border-gray-500
+                    border-gray-700
+                    bg-gray-500
+                    bg-gray-700
+                    text-gray-700
+                    text-gray-500
+                    hover:bg-blue-500
+                    hover:bg-blue-700
+                    border-blue-500
+                    border-blue-700
+                    bg-blue-500
+                    bg-blue-700
+                    text-blue-700
+                    text-blue-500
+                    hover:bg-red-500
+                    hover:bg-red-700
+                    border-red-500
+                    border-red-700
+                    bg-red-500
+                    bg-red-700
+                    text-red-700
+                    text-red-500
+                    hover:bg-green-500
+                    hover:bg-green-700
+                    border-green-500
+                    border-green-700
+                    bg-green-500
+                    bg-green-700
+                    text-green-700
+                    text-green-500
+                    hover:bg-yellow-500
+                    hover:bg-yellow-700
+                    border-yellow-500
+                    border-yellow-700
+                    bg-green-500
+                    bg-yellow-700
+                    text-yellow-700
+                    text-yellow-500
+                    hover:bg-indigo-500
+                    hover:bg-indigo-700
+                    border-indigo-500
+                    border-indigo-700
+                    bg-indigo-500
+                    bg-indigo-700
+                    text-indigo-700
+                    text-indigo-500
+                ',
 
                 'container' => [
-                    'class' => 'inline-block justify-between items-center space-x-2 py-2 px-4 outline-none focus:outline-none',
+                    'class' => 'inline-flex justify-between items-center space-x-2 py-2 px-3 outline-none focus:outline-none',
+                ],
+
+                'loading' => [
+                    'container' => [
+                        ':disabled' => 'typeof isLoading === \'function\' && isLoading()',
+                        ':class' => '{
+                            \'cursor-wait\': typeof isLoading === \'function\' && isLoading(),
+                            \'space-x-2\': typeof isLoading === \'function\' && !isLoading()
+                        }',
+                    ],
+
+                    'content' => [
+                        ':class' => '{
+                            \'invisible\': typeof isLoading === \'function\' && isLoading(),
+                            \'w-0\': typeof isLoading === \'function\' && isLoading()
+                        }',
+                    ],
+
+                    'loading' => [
+                        'style' => 'display:none;',
+                        'x-show' => 'typeof isLoading === \'function\' && isLoading()',
+                    ],
                 ],
 
                 'iconLeft' => [],
 
                 'iconRight' => [],
+
+                'text' => [],
 
                 'colors' => [
                     'default' => [
@@ -908,6 +943,13 @@ return [
 
                     'warning' => [
                         'name' => 'yellow',
+                        'weight' => 500,
+                        'hover' => 700,
+                    ],
+
+
+                    'indigo' => [
+                        'name' => 'indigo',
                         'weight' => 500,
                         'hover' => 700,
                     ],
@@ -985,61 +1027,73 @@ return [
                     'show' => [
                         'text' => 'Show',
                         'color' => 'default',
+                        'loading' => 'Showing',
                     ],
 
                     'create' => [
                         'text' => 'Create',
                         'color' => 'success',
+                        'loading' => 'Creating',
                     ],
 
                     'edit' => [
                         'text' => 'Edit',
                         'color' => 'info',
+                        'loading' => 'Editing',
                     ],
 
                     'delete' => [
                         'text' => 'Delete',
                         'color' => 'error',
+                        'loading' => 'Deleting',
                     ],
 
                     'save' => [
                         'text' => 'Save',
                         'color' => 'success',
+                        'loading' => 'Saving',
                     ],
 
                     'send' => [
                         'text' => 'Send',
                         'color' => 'info',
+                        'loading' => 'Sending',
                     ],
 
                     'back' => [
                         'text' => 'Back',
                         'color' => 'default',
+                        'loading' => 'Returning',
                     ],
 
                     'cancel' => [
                         'text' => 'Cancel',
                         'color' => 'none',
+                        'loading' => 'Canceling',
                     ],
 
                     'enter' => [
                         'text' => 'Enter',
-                        'color' => 'default',
+                        'color' => 'indigo',
+                        'loading' => 'Entering',
                     ],
 
                     'update' => [
                         'text' => 'Update',
                         'color' => 'info',
+                        'loading' => 'Updating',
                     ],
 
                     'download' => [
                         'text' => 'Download',
                         'color' => 'info',
+                        'loading' => 'Loading',
                     ],
 
                     'view' => [
                         'text' => 'View',
                         'color' => 'info',
+                        'loading' => 'Viewing',
                     ],
                 ],
             ],
@@ -1065,7 +1119,7 @@ return [
 
             'toggler' => [
                 'button' => [
-                    'class' => 'pl-0 flex',
+                    'class' => 'flex',
                 ],
 
                 'icon' => [
@@ -1119,15 +1173,17 @@ return [
             ],
 
             'crud-form' => [
-                'container' => [
-                    'class' => 'mb-4',
-                ],
+                'container' => [],
 
                 'header' => [],
 
                 'header-save' => [],
 
                 'header-back' => [],
+
+                'content' => [
+                    'class' => 'mb-4',
+                ],
 
                 'footer' => [
                     'class' => 'flex space-x-4 items-center justify-between pt-4',
@@ -1335,13 +1391,18 @@ return [
                 'errors' => [],
 
                 'display' => [
-                    'class' => 'my-4',
+                    'class' => 'my-4 text-center border border-gray-200 rounded shadow bg-white p-2',
                     'style' => 'max-width: 320px; max-height: 240px;',
                 ],
             ],
 
             'form' => [
-                'container' => [],
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'form\')',
+                    '@submit' => 'prepareSubmit',
+                ],
             ],
 
             'group' => [
@@ -1686,6 +1747,24 @@ return [
                 'body' => [
                     'class' => 'text-gray-700',
                 ],
+            ],
+
+            'loading' => [
+                'container' => [
+                    'class' => 'inline-flex items-center space-x-2',
+                ],
+
+                'icon' => [
+                    'class' => 'animate-spin w-6 h-6',
+                ],
+
+                'iconName' => 'spinner',
+
+                'iconSvg' => [
+                    '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
+                ],
+
+                'text' => [],
             ],
 
             'logo' => [
@@ -2175,20 +2254,16 @@ return [
                 'container' => [],
 
                 'item' => [
-                    'class' => 'w-full flex items-center py-2 px-4 transition outline-none focus:outline-none hover:opacity-75',
+                    'class' => 'w-full flex items-center py-2 px-3 transition outline-none focus:outline-none hover:opacity-75',
                 ],
 
                 'active' => [
                     'class' => 'font-semibold',
                 ],
 
-                'iconLeft' => [
-                    'class' => 'mr-3',
-                ],
+                'iconLeft' => [],
 
-                'iconRight' => [
-                    'class' => 'ml-3',
-                ],
+                'iconRight' => [],
             ],
 
             'nav' => [
@@ -2362,8 +2437,12 @@ return [
                     'x-transition:leave' => 'ease-in duration-200',
                     'x-transition:leave-start' => 'opacity-100',
                     'x-transition:leave-end' => 'opacity-0',
+                    'class' => 'fixed inset-0 transform transition',
+                ],
+
+                'closeable' => [
                     '@click' => 'close(false)',
-                    'class' => 'fixed inset-0 transform transition cursor-pointer',
+                    'class' => 'cursor-pointer',
                 ],
 
                 'backdrop' => [
@@ -2403,7 +2482,7 @@ return [
 
                 'trigger' => [
                     '@click' => 'toggle',
-                    'class' => 'w-full text-left py-2 px-4 cursor-pointer',
+                    'class' => 'w-full text-left py-2 px-3 cursor-pointer',
                 ],
 
                 'disabled' => [
@@ -2418,7 +2497,7 @@ return [
                 ],
 
                 'content' => [
-                    'class' => 'py-2 px-4',
+                    'class' => 'py-2 px-3',
                 ],
             ],
 
@@ -2934,7 +3013,7 @@ return [
 
             'heading' => [
                 'th' => [
-                    'class' => 'px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
+                    'class' => 'py-4 px-6 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
                     'scope' => 'col',
                 ],
 
@@ -2998,20 +3077,36 @@ return [
             /**
              * Uploaders.
              */
+            'dropzone' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,dropzone',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'dropzone\')',
+                ],
+
+                'dropzone' => [
+                    'x-ref' => 'dropzone',
+                    'class' => 'dropzone',
+                ],
+
+                'options' => [
+                    // See https://docs.dropzone.dev/configuration/basics/configuration-options
+                ],
+            ],
+
             'filepond' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'filepond\')',
-                    'x-show' => 'filepond',
                 ],
 
                 'options' => [
                     // See https://pqina.nl/filepond/docs/api/instance/properties/
-                ],
 
-                'plugins' => [
-                    // See https://pqina.nl/filepond/docs/api/plugins/
+                    'plugins' => [
+                        // See https://pqina.nl/filepond/docs/api/plugins/
+                    ],
                 ],
 
                 'filepond' => [

@@ -19,24 +19,24 @@ class Select extends Field
     public $options;
 
     /**
-     * @var string|array|int|null
+     * @var string|array|int
      */
     public $itemText = null;
 
     /**
-     * @var string|array|int|null
+     * @var string|array|int
      */
     public $itemValue = null;
 
     /**
      * @var bool
      */
-    public $multiple = false;
+    public $multiple;
 
     /**
      * @var bool
      */
-    public $emptyOption = true;
+    public $emptyOption;
 
     /**
      * Create a new component instance.
@@ -48,11 +48,11 @@ class Select extends Field
      * @param  mixed  $options
      * @param  mixed  $bind
      * @param  mixed  $default
-     * @param  bool  $multiple
-     * @param  bool  $emptyOption
-     * @param  bool  $showErrors
+     * @param  bool|null  $multiple
+     * @param  bool|null  $emptyOption
+     * @param  bool|null  $showErrors
      * @param  string|null  $theme
-     * @param  bool  $groupable
+     * @param  bool|null  $groupable
      * @param  string|null  $prependText
      * @param  string|null  $prependIcon
      * @param  string|null  $appendText
@@ -67,11 +67,11 @@ class Select extends Field
         $options = null,
         $bind = null,
         $default = null,
-        $multiple = false,
-        $emptyOption = true,
-        $showErrors = true,
+        $multiple = null,
+        $emptyOption = null,
+        $showErrors = null,
         $theme = null,
-        $groupable = true,
+        $groupable = null,
         $prependText = null,
         $prependIcon = null,
         $appendText = null,
@@ -82,7 +82,7 @@ class Select extends Field
             $label,
             $showErrors,
             $theme,
-            $groupable,
+            $groupable ?? true,
             $prependText,
             $prependIcon,
             $appendText,
@@ -97,8 +97,8 @@ class Select extends Field
             $this->selectedKey = $this->getFieldValue($bind, $default);
         }
 
-        $this->multiple = $multiple;
-        $this->emptyOption = $emptyOption;
+        $this->multiple = $multiple ?? false;
+        $this->emptyOption = $emptyOption ?? true;
     }
 
     /**

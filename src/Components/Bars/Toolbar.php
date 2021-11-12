@@ -7,7 +7,7 @@ use TALLKit\Components\BladeComponent;
 class Toolbar extends BladeComponent
 {
     /**
-     * @var string|bool|null
+     * @var string|bool
      */
     public $title;
 
