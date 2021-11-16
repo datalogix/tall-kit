@@ -48,6 +48,7 @@
                                 {{ ${is_int($key) ? $col : $key}($row, $key, $col) }}
                             @else
                                 <x-display
+                                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
                                     :target="$row"
                                     :key="is_int($key) ? $col : $key"
                                     :theme="$theme"
@@ -104,6 +105,7 @@
                                     {{ ${(is_int($key) ? $col : $key).'-footer'}($row, $key, $col) }}
                                 @else
                                     <x-display
+                                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
                                         :target="$row"
                                         :key="is_int($key) ? $col : $key"
                                         :theme="$theme"
