@@ -1299,6 +1299,20 @@ return [
 
                 'options' => [
                     // See https://quilljs.com/docs/configuration/#options
+                    'modules' => [
+                        'toolbar' => [
+                            [['size' => ['small', false, 'large', 'huge']]],
+                            ['bold', 'italic', 'underline', 'strike'],
+                            ['blockquote', 'code-block'],
+                            [['list' => 'ordered'], ['list' => 'bullet'], ['align' => []]],
+                            ['link', 'image', 'video'],
+                            [['script' => 'sub'], ['script' => 'super']],
+                            [['indent' => '-1'], ['indent' => '+1']],
+                            [['direction' => 'rtl']],
+                            [['color' => []], ['background' => []]],
+                            ['clean'],
+                        ],
+                    ],
                     'theme' => 'snow',
                 ],
             ],
@@ -1389,8 +1403,8 @@ return [
                 'errors' => [],
 
                 'display' => [
-                    'class' => 'my-4 text-center border border-gray-200 rounded shadow bg-white p-2',
-                    'style' => 'max-width: 320px; max-height: 240px;',
+                    'class' => 'flex items-center justify-center my-4 text-center border border-gray-200 rounded shadow bg-white p-2',
+                    'style' => 'max-width: 360px; max-height: 280px;',
                 ],
             ],
 
@@ -1715,8 +1729,7 @@ return [
 
                 'types' => [
                     'img' => [
-                        'class' => 'mx-auto',
-                        'style' => 'max-width: 120px; max-height: 120px;',
+                        'class' => 'mx-auto w-full h-full object-contain',
                     ],
 
                     'audio' => [
@@ -1725,8 +1738,7 @@ return [
 
                     'video' => [
                         'controls' => true,
-                        'width' => 320,
-                        'height' => 240,
+                        'class' => 'mx-auto w-full h-full object-contain',
                     ],
 
                     'download' => [
@@ -3061,14 +3073,24 @@ return [
 
                 'thead' => [],
 
+                'th' => [],
+
                 'tbody' => [
                     'class' => 'bg-white divide-y divide-gray-200',
                 ],
+
+                'tr' => [],
+
+                'td' => [],
 
                 'tfoot' => [],
 
                 'emptyText' => [
                     'class' => 'px-6 py-4 whitespace-nowrap text-lg text-gray-500 text-center',
+                ],
+
+                'display' => [
+                    'style' => 'max-width: 120px; max-height: 120px;',
                 ],
             ],
 
