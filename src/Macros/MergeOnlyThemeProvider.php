@@ -11,12 +11,8 @@ class MergeOnlyThemeProvider
                 return $this;
             }
 
-            $attrs = $this->whereStartsWith("theme:$themeKey")
+            return $this->whereStartsWith("theme:$themeKey")
                 ->mergeThemeProvider($themeProvider, $themeKey, $subkey, false);
-
-            return $subkey
-                ? $this->merge($attrs->getAttributes(), false)
-                : $attrs;
         };
     }
 }
