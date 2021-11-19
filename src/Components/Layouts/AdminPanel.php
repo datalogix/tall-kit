@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Layouts;
 
+use Illuminate\Support\Arr;
 use TALLKit\Components\BladeComponent;
 use TALLKit\Concerns\User;
 
@@ -218,7 +219,7 @@ class AdminPanel extends BladeComponent
         $this->html = ($html ?? true) ? array_replace_recursive(
             $this->themeProvider->html->getAttributes(),
             $this->getUserValue('html', 'adminHtml') ?? [],
-            is_array($html) ? $html : []
+            Arr::wrap($html)
         ) : false;
 
         $this->title = $title ?? config('app.name');

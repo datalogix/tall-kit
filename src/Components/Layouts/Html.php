@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Layouts;
 
+use Illuminate\Support\Arr;
 use TALLKit\Components\BladeComponent;
 
 class Html extends BladeComponent
@@ -74,7 +75,7 @@ class Html extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  arrray|null  $options
+     * @param  array|null  $options
      * @param  string|null  $title
      * @param  string|null  $charset
      * @param  string|null  $viewport
@@ -83,8 +84,8 @@ class Html extends BladeComponent
      * @param  bool|null  $livewire
      * @param  string|bool|null  $mixStyles
      * @param  string|bool|null  $mixScripts
-     * @param  array|null  $styles
-     * @param  array|null  $scripts
+     * @param  array|string|null  $styles
+     * @param  array|string|null  $scripts
      * @param  string|bool|null  $stackStyles
      * @param  string|bool|null  $stackScripts
      * @param  bool|null  $tailwindcss
@@ -131,15 +132,15 @@ class Html extends BladeComponent
 
         $this->mixStyles = $mixStyles && file_exists(public_path($mixStyles)) ? $mixStyles : null;
         $this->mixScripts = $mixScripts && file_exists(public_path($mixScripts)) ? $mixScripts : null;
-        $this->styles = array_merge(data_get($options, 'styles', []), $styles ?? []);
-        $this->scripts = array_merge(data_get($options, 'scripts', []), $scripts ?? []);
+        $this->styles = array_merge(data_get($options, 'styles', []), Arr::wrap($styles));
+        $this->scripts = array_merge(data_get($options, 'scripts', []), Arr::wrap($scripts));
         $this->stackStyles = data_get($options, 'stackStyles', $stackStyles ?? 'styles');
         $this->stackScripts = data_get($options, 'stackScripts', $stackScripts ?? 'scripts');
 
         $tailwindcss = $tailwindcss ?? is_null($this->mixStyles);
 
         $this->tallkit = ($tallkit ?? true) ? array_replace_recursive(
-            is_array($tallkit) ? $tallkit : [],
+            Arr::wrap($tallkit),
             is_bool($tailwindcss) ? ['options' => ['inject' => ['tailwindcss' => $tailwindcss]]] : [],
             is_bool($alpine) ? ['options' => ['inject' => ['alpine' => $alpine]]] : [],
             data_get($options, 'tallkit', []),

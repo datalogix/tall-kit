@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Layouts;
 
+use Illuminate\Support\Arr;
 use TALLKit\Components\BladeComponent;
 
 class AuthenticationCard extends BladeComponent
@@ -54,7 +55,7 @@ class AuthenticationCard extends BladeComponent
 
         $this->html = ($html ?? true) ? array_replace_recursive(
             $this->themeProvider->html->getAttributes(),
-            is_array($html) ? $html : []
+            Arr::wrap($html)
         ) : false;
 
         $this->logoImage = $logoImage;
