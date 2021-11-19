@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Tables;
 
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -9,7 +10,7 @@ use Illuminate\Support\Collection;
 class Datatable extends Table
 {
     /**
-     * @var bool
+     * @var \Illuminate\Contracts\Pagination\Paginator|bool|null
      */
     public $paginator;
 
@@ -21,7 +22,7 @@ class Datatable extends Table
      * @param  mixed  $resource
      * @param  mixed  $footer
      * @param  string|null  $emptyText
-     * @param  bool|null  $paginator
+     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
      * @param  callable|null  $parseCols
      * @param  callable|null  $parseRows
      * @param  string|null  $theme
@@ -38,10 +39,15 @@ class Datatable extends Table
         $parseRows = null,
         $theme = null
     ) {
-        $this->paginator = $paginator ?? true;
-
-        $rows = self::getRows($rows ?? $resource, $this->paginator, $parseRows);
+        $rows = self::getRows($rows ?? $resource, $paginator, $parseRows);
         $cols = self::getCols($cols, $rows, $parseCols);
+
+        $this->paginator = $paginator;
+
+        if ($rows instanceof Paginator) {
+            $this->paginator = $rows;
+            $rows = $rows->items();
+        }
 
         parent::__construct(
             $cols,
@@ -56,7 +62,7 @@ class Datatable extends Table
      * Get rows.
      *
      * @param  mixed  $rows
-     * @param  bool  $paginator
+     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
      * @param  callable|null  $parse
      * @return mixed
      */
@@ -71,7 +77,7 @@ class Datatable extends Table
         }
 
         if ($rows instanceof Builder) {
-            $rows = $paginator
+            $rows = ($paginator ?? true)
                 ? $rows->paginate()
                 : $rows->get();
         }
@@ -91,7 +97,7 @@ class Datatable extends Table
      */
     public static function getCols($cols, $rows = null, $parse = null)
     {
-        $firstRow = Collection::make(Collection::make($rows)->first());
+        $firstRow = Collection::make(Collection::make($rows instanceof Paginator ? $rows->items() : $rows)->first());
         $cols = Collection::make($cols ?? $firstRow->keys());
 
         if ($firstRow->isEmpty() && $cols->isEmpty()) {

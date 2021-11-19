@@ -38,7 +38,7 @@ class CrudIndex extends Crud
     public $emptyText;
 
     /**
-     * @var bool
+     * @var \Illuminate\Contracts\Pagination\Paginator|bool|null
      */
     public $paginator;
 
@@ -59,7 +59,7 @@ class CrudIndex extends Crud
      * @param  mixed  $cols
      * @param  mixed  $footer
      * @param  string|null  $emptyText
-     * @param  bool|null  $paginator
+     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
      * @param  string|null  $theme
      * @return void
      */
@@ -86,7 +86,7 @@ class CrudIndex extends Crud
             $key,
             $title,
             $parameters,
-            Datatable::getRows($resource ?? $rows, $paginator ?? true),
+            Datatable::getRows($resource ?? $rows, $paginator),
             $customActions,
             $routeName,
             $theme
@@ -99,7 +99,7 @@ class CrudIndex extends Crud
         $this->cols = $this->getCols($cols);
         $this->footer = $footer;
         $this->emptyText = $emptyText;
-        $this->paginator = $paginator ?? true;
+        $this->paginator = $paginator;
     }
 
     /**
