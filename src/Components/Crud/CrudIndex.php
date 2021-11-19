@@ -2,9 +2,7 @@
 
 namespace TALLKit\Components\Crud;
 
-use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Enumerable;
 use Illuminate\Support\Str;
 
 class CrudIndex extends Crud
@@ -30,6 +28,21 @@ class CrudIndex extends Crud
     public $cols;
 
     /**
+     * @var mixed
+     */
+    public $footer;
+
+    /**
+     * @var string|null
+     */
+    public $emptyText;
+
+    /**
+     * @var \Illuminate\Contracts\Pagination\Paginator|bool|null
+     */
+    public $paginator;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|bool|null  $prefix
@@ -44,6 +57,9 @@ class CrudIndex extends Crud
      * @param  bool|null  $mapRelationsColumn
      * @param  mixed  $rows
      * @param  mixed  $cols
+     * @param  mixed  $footer
+     * @param  string|null  $emptyText
+     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
      * @param  string|null  $theme
      * @return void
      */
@@ -60,6 +76,9 @@ class CrudIndex extends Crud
         $mapRelationsColumn = null,
         $rows = null,
         $cols = null,
+        $footer = null,
+        $emptyText = null,
+        $paginator = null,
         $theme = null
     ) {
         parent::__construct(
@@ -77,28 +96,34 @@ class CrudIndex extends Crud
         $this->displayIdColumn = $displayIdColumn ?? false;
         $this->displayActionsColumn = $displayActionsColumn ?? true;
         $this->mapRelationsColumn = $mapRelationsColumn ?? true;
-        $this->cols = $this->getCols($cols);
+        $this->cols = $cols;
+        $this->footer = $footer;
+        $this->emptyText = $emptyText;
+        $this->paginator = $paginator;
     }
 
     /**
-     * Get cols.
+     * Parse cols.
      *
      * @param  mixed  $cols
-     * @return array
+     * @return mixed
      */
-    protected function getCols($cols)
+    public function parseCols($cols)
     {
-        $cols = Collection::make($cols ?? $this->getColsFromResource());
-
-        if (($this->resource instanceof Paginator || $this->resource instanceof Enumerable)
-            && $this->resource->isEmpty()
-            && $cols->isEmpty()
-        ) {
-            return $cols->toArray();
-        }
+        $cols = Collection::make($cols);
 
         if (! $this->displayIdColumn) {
-            $cols->forget($cols->search('id'), $cols->search('ID'));
+            if ($cols->search('id') !== false) {
+                $cols->forget($cols->search('id'));
+            }
+
+            if ($cols->search('Id') !== false) {
+                $cols->forget($cols->search('Id'));
+            }
+
+            if ($cols->search('ID') !== false) {
+                $cols->forget($cols->search('ID'));
+            }
         }
 
         if ($this->displayActionsColumn) {
@@ -123,21 +148,17 @@ class CrudIndex extends Crud
             })->filter();
         }
 
-        return $cols->toArray();
+        return $cols;
     }
 
     /**
-     * Get cols from resource.
+     * Parse rows.
      *
-     * @return array
+     * @param  mixed  $rows
+     * @return mixed
      */
-    protected function getColsFromResource()
+    public function parseRows($rows)
     {
-        $resource = Collection::make($this->resource instanceof Paginator
-            ? $this->resource->items()
-            : $this->resource
-        )->first();
-
-        return Collection::make($resource)->keys()->toArray();
+        return $rows;
     }
 }

@@ -24,26 +24,57 @@
 
     {{ $slot }}
 
-    @isset($table)
-        {{ $table }}
+    @isset($datatable)
+        {{ $datatable }}
     @else
-        <x-table
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'table') }}
+        <x-datatable
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'datatable') }}
             :cols="$cols"
-            :rows="$resource"
+            :resource="$resource"
+            :footer="$footer"
+            :empty-text="$emptyText"
+            :paginator="$paginator"
+            :parse-cols="$parseCols"
+            :parse-rows="$parseRows"
             :theme="$theme"
         >
             @if ($displayActionsColumn)
                 @scopedslot('actions', ($row), ($customActions, $prefix, $parameters, $attributes, $themeProvider, $theme))
-                    <x-crud-actions
-                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
-                        :custom-actions="$customActions"
-                        :prefix="$prefix"
-                        :parameters="array_merge($parameters, [$row])"
-                        :theme="$theme"
-                    />
+                    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'row-actions') }}>
+                        <x-crud-actions
+                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
+                            :custom-actions="$customActions"
+                            :prefix="$prefix"
+                            :parameters="array_merge($parameters, [$row])"
+                            :theme="$theme"
+                        />
+                    </div>
                 @endscopedslot
             @endif
-        </x-table>
+
+            @isset ($head)
+                <x-slot name="head">
+                    {{ $head }}
+                </x-slot>
+            @endisset
+
+            @isset ($body)
+                <x-slot name="body">
+                    {{ $body }}
+                </x-slot>
+            @endisset
+
+            @isset ($empty)
+                <x-slot name="empty">
+                    {{ $empty }}
+                </x-slot>
+            @endisset
+
+            @isset ($foot)
+                <x-slot name="foot">
+                    {{ $foot }}
+                </x-slot>
+            @endisset
+        </x-datatable>
     @endisset
 </div>
