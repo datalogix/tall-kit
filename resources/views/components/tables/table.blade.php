@@ -44,8 +44,8 @@
                             :align="$col['align'] ?? null"
                             :theme="$theme"
                         >
-                            @isset(${is_int($key) ? $col : $key})
-                                {{ ${is_int($key) ? $col : $key}($row, $key, $col) }}
+                            @isset(${'col_'.(is_int($key) ? $col : $key)})
+                                {{ ${'col_'.(is_int($key) ? $col : $key)}($row, $key, $col) }}
                             @else
                                 <x-display
                                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
@@ -101,8 +101,8 @@
                                 :align="$col['align']"
                                 :theme="$theme"
                             >
-                                @isset(${(is_int($key) ? $col : $key).'-footer'})
-                                    {{ ${(is_int($key) ? $col : $key).'-footer'}($row, $key, $col) }}
+                                @isset(${'col_'.(is_int($key) ? $col : $key).'_footer'})
+                                    {{ ${'col_'.(is_int($key) ? $col : $key).'_footer'}($row, $key, $col) }}
                                 @else
                                     <x-display
                                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}

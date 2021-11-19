@@ -11,7 +11,7 @@
 
         @foreach ($cols as $key => $col)
             @php
-            $colName = is_int($key) ? $col : $key;
+            $colName = 'col_'.(is_int($key) ? $col : $key);
             $action = isset(${$colName}) ? ${$colName} : null;
             @endphp
 
@@ -47,7 +47,7 @@
         @endisset
     </x-table>
 
-    @if ($paginator && $rows instanceof Paginator)
-        {{ $rows->withQueryString()->links() }}
+    @if ($paginator instanceof \Illuminate\Contracts\Pagination\Paginator)
+        {{ $paginator->withQueryString()->links() }}
     @endif
 </div>

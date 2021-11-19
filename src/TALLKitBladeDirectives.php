@@ -101,7 +101,7 @@ class TALLKitBladeDirectives
     {
         // Split the expression by `top-level` commas (not in parentheses)
         $directiveArguments = preg_split("/,(?![^\(\(]*[\)\)])/", $expression);
-        $directiveArguments = array_map('trim', $directiveArguments);
+        $directiveArguments = array_pad(array_map('trim', $directiveArguments), 2, '()');
 
         // Prepare arguments to uses
         if (! Str::startsWith($directiveArguments[1], '(')) {

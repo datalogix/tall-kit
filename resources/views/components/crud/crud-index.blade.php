@@ -38,12 +38,12 @@
         >
             @foreach ($cols as $key => $col)
                 @php
-                $colName = is_int($key) ? $col : $key;
+                $colName = 'col_'.(is_int($key) ? $col : $key);
                 $action = isset(${$colName}) ? ${$colName} : null;
                 @endphp
 
-                @if ($displayActionsColumn && $colName === 'actions')
-                    @scopedslot('actions', ($row), ($customActions, $prefix, $parameters, $attributes, $themeProvider, $theme))
+                @if ($displayActionsColumn && $colName === 'col_actions')
+                    @scopedslot('col_actions', ($row), ($customActions, $prefix, $parameters, $attributes, $themeProvider, $theme))
                         <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'row-actions') }}>
                             <x-crud-actions
                                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
