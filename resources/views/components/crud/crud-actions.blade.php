@@ -61,3 +61,5 @@
         :theme="$theme"
     />
 @endif
+
+<x-button preset="edit" />

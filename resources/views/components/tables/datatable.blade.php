@@ -9,6 +9,19 @@
     >
         {{ $slot }}
 
+        @foreach ($cols as $key => $col)
+            @php
+            $colName = is_int($key) ? $col : $key;
+            $action = isset(${$colName}) ? ${$colName} : null;
+            @endphp
+
+            @isset ($action)
+                @scopedslot($colName, ($row), ($action))
+                    {{ $action($row) }}
+                @endscopedslot
+            @endisset
+        @endforeach
+
         @isset ($head)
             <x-slot name="head">
                 {{ $head }}
@@ -34,7 +47,7 @@
         @endisset
     </x-table>
 
-    @if ($paginator)
-        {{ $paginator->withQueryString()->links() }}
+    @if ($paginator && $rows instanceof Paginator)
+        {{ $rows->withQueryString()->links() }}
     @endif
 </div>

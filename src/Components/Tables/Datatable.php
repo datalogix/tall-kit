@@ -2,7 +2,6 @@
 
 namespace TALLKit\Components\Tables;
 
-use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -10,7 +9,7 @@ use Illuminate\Support\Collection;
 class Datatable extends Table
 {
     /**
-     * @var \Illuminate\Contracts\Pagination\Paginator|bool|null
+     * @var bool
      */
     public $paginator;
 
@@ -22,7 +21,7 @@ class Datatable extends Table
      * @param  mixed  $resource
      * @param  mixed  $footer
      * @param  string|null  $emptyText
-     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
+     * @param  bool|null  $paginator
      * @param  callable|null  $parseCols
      * @param  callable|null  $parseRows
      * @param  string|null  $theme
@@ -39,8 +38,10 @@ class Datatable extends Table
         $parseRows = null,
         $theme = null
     ) {
-        $rows = $this->getRows($rows ?? $resource, $paginator ?? true, $parseRows);
-        $cols = $this->getCols($cols, $rows, $parseCols);
+        $this->paginator = $paginator ?? true;
+
+        $rows = self::getRows($rows ?? $resource, $this->paginator, $parseRows);
+        $cols = self::getCols($cols, $rows, $parseCols);
 
         parent::__construct(
             $cols,
@@ -55,11 +56,11 @@ class Datatable extends Table
      * Get rows.
      *
      * @param  mixed  $rows
-     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
+     * @param  bool  $paginator
      * @param  callable|null  $parse
      * @return mixed
      */
-    protected function getRows($rows, $paginator = true, $parse = null)
+    public static function getRows($rows, $paginator = true, $parse = null)
     {
         if (is_string($rows)) {
             $rows = app($rows);
@@ -75,15 +76,6 @@ class Datatable extends Table
                 : $rows->get();
         }
 
-        if ($rows instanceof Paginator && $paginator === true) {
-            $paginator = $rows;
-            $rows = $rows->items();
-        }
-
-        $this->paginator = $paginator instanceof Paginator
-            ? $paginator
-            : false;
-
         return is_callable($parse)
             ? $parse($rows)
             : $rows;
@@ -97,11 +89,12 @@ class Datatable extends Table
      * @param  callable|null  $parse
      * @return mixed
      */
-    protected function getCols($cols, $rows, $parse = null)
+    public static function getCols($cols, $rows = null, $parse = null)
     {
-        $cols = Collection::make($cols ?? Collection::make(Collection::make($rows)->first())->keys());
+        $firstRow = Collection::make(Collection::make($rows)->first());
+        $cols = Collection::make($cols ?? $firstRow->keys());
 
-        if (empty($rows) && empty($cols)) {
+        if ($firstRow->isEmpty() && $cols->isEmpty()) {
             return [];
         }
 

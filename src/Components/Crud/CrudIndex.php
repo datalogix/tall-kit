@@ -2,8 +2,8 @@
 
 namespace TALLKit\Components\Crud;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use TALLKit\Components\Tables\Datatable;
 
 class CrudIndex extends Crud
 {
@@ -38,7 +38,7 @@ class CrudIndex extends Crud
     public $emptyText;
 
     /**
-     * @var \Illuminate\Contracts\Pagination\Paginator|bool|null
+     * @var bool
      */
     public $paginator;
 
@@ -59,7 +59,7 @@ class CrudIndex extends Crud
      * @param  mixed  $cols
      * @param  mixed  $footer
      * @param  string|null  $emptyText
-     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
+     * @param  bool|null  $paginator
      * @param  string|null  $theme
      * @return void
      */
@@ -86,7 +86,7 @@ class CrudIndex extends Crud
             $key,
             $title,
             $parameters,
-            $resource ?? $rows,
+            Datatable::getRows($resource ?? $rows, $paginator ?? true),
             $customActions,
             $routeName,
             $theme
@@ -96,21 +96,25 @@ class CrudIndex extends Crud
         $this->displayIdColumn = $displayIdColumn ?? false;
         $this->displayActionsColumn = $displayActionsColumn ?? true;
         $this->mapRelationsColumn = $mapRelationsColumn ?? true;
-        $this->cols = $cols;
+        $this->cols = $this->getCols($cols);
         $this->footer = $footer;
         $this->emptyText = $emptyText;
-        $this->paginator = $paginator;
+        $this->paginator = $paginator ?? true;
     }
 
     /**
-     * Parse cols.
+     * Get cols.
      *
      * @param  mixed  $cols
      * @return mixed
      */
-    public function parseCols($cols)
+    protected function getCols($cols)
     {
-        $cols = Collection::make($cols);
+        $cols = Datatable::getCols($cols, $this->resource);
+
+        if (empty($cols)) {
+            return $cols;
+        }
 
         if (! $this->displayIdColumn) {
             if ($cols->search('id') !== false) {
@@ -149,16 +153,5 @@ class CrudIndex extends Crud
         }
 
         return $cols;
-    }
-
-    /**
-     * Parse rows.
-     *
-     * @param  mixed  $rows
-     * @return mixed
-     */
-    public function parseRows($rows)
-    {
-        return $rows;
     }
 }

@@ -34,23 +34,36 @@
             :footer="$footer"
             :empty-text="$emptyText"
             :paginator="$paginator"
-            :parse-cols="$parseCols"
-            :parse-rows="$parseRows"
             :theme="$theme"
         >
-            @if ($displayActionsColumn)
-                @scopedslot('actions', ($row), ($customActions, $prefix, $parameters, $attributes, $themeProvider, $theme))
-                    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'row-actions') }}>
-                        <x-crud-actions
-                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
-                            :custom-actions="$customActions"
-                            :prefix="$prefix"
-                            :parameters="array_merge($parameters, [$row])"
-                            :theme="$theme"
-                        />
-                    </div>
-                @endscopedslot
-            @endif
+            @foreach ($cols as $key => $col)
+                @php
+                $colName = is_int($key) ? $col : $key;
+                $action = isset(${$colName}) ? ${$colName} : null;
+                @endphp
+
+                @if ($displayActionsColumn && $colName === 'actions')
+                    @scopedslot('actions', ($row), ($customActions, $prefix, $parameters, $attributes, $themeProvider, $theme))
+                        <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'row-actions') }}>
+                            <x-crud-actions
+                                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
+                                :custom-actions="$customActions"
+                                :prefix="$prefix"
+                                :parameters="array_merge($parameters, [$row])"
+                                :theme="$theme"
+                            />
+                        </div>
+                    @endscopedslot
+
+                    @continue
+                @endif
+
+                @isset ($action)
+                    @scopedslot($colName, ($row), ($action))
+                        {{ $action($row) }}
+                    @endscopedslot
+                @endisset
+            @endforeach
 
             @isset ($head)
                 <x-slot name="head">
