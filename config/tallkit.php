@@ -444,10 +444,11 @@ return [
         /**
          * Tables.
          */
-        'table' => \TALLKit\Components\Tables\Table::class,
+        'cell' => \TALLKit\Components\Tables\Cell::class,
+        'datatable' => \TALLKit\Components\Tables\Datatable::class,
         'heading' => \TALLKit\Components\Tables\Heading::class,
         'row' => \TALLKit\Components\Tables\Row::class,
-        'cell' => \TALLKit\Components\Tables\Cell::class,
+        'table' => \TALLKit\Components\Tables\Table::class,
 
         /**
          * Uploaders.
@@ -897,10 +898,7 @@ return [
                     ],
 
                     'content' => [
-                        ':class' => '{
-                            \'invisible\': typeof isLoading === \'function\' && isLoading(),
-                            \'w-0\': typeof isLoading === \'function\' && isLoading()
-                        }',
+                        ':style' => '{ \'text-indent\': typeof isLoading === \'function\' && isLoading() ? \'-9999px\' : \'inherit\' }',
                     ],
 
                     'loading' => [
@@ -1093,6 +1091,18 @@ return [
                         'color' => 'info',
                         'loading' => 'Viewing',
                     ],
+
+                    'move-up' => [
+                        'text' => 'Move up',
+                        'color' => 'success',
+                        'loading' => 'Moving',
+                    ],
+
+                    'move-down' => [
+                        'text' => 'Move down',
+                        'color' => 'success',
+                        'loading' => 'Moving',
+                    ],
                 ],
             ],
 
@@ -1139,6 +1149,10 @@ return [
 
                 'edit' => [],
 
+                'move-up' => [],
+
+                'move-down' => [],
+
                 'destroy' => [],
             ],
 
@@ -1152,7 +1166,7 @@ return [
                 ],
 
                 'actions' => [
-                    'class' => 'hidden lg:flex space-x-4 items-center',
+                    'class' => 'hidden lg:flex space-x-2 items-center',
                 ],
             ],
 
@@ -1165,7 +1179,11 @@ return [
 
                 'create' => [],
 
-                'table' => [],
+                'datatable' => [],
+
+                'row-actions' => [
+                    'class' => 'flex space-x-2 items-center justify-end',
+                ],
 
                 'actions' => [],
             ],
@@ -1204,7 +1222,7 @@ return [
                 'header-back' => [],
 
                 'footer' => [
-                    'class' => 'flex space-x-4 items-center pt-4',
+                    'class' => 'flex space-x-2 items-center pt-4',
                 ],
 
                 'footer-actions' => [],
@@ -1403,8 +1421,7 @@ return [
                 'errors' => [],
 
                 'display' => [
-                    'class' => 'flex items-center justify-center my-4 text-center border border-gray-200 rounded shadow bg-white p-2',
-                    'style' => 'max-width: 360px; max-height: 280px;',
+                    'class' => 'flex items-center justify-center my-4 text-center border border-gray-200 rounded shadow bg-white p-2 max-w-xs max-h-72',
                 ],
             ],
 
@@ -3021,6 +3038,12 @@ return [
                 ],
             ],
 
+            'datatable' => [
+                'container' => [],
+
+                'table' => [],
+            ],
+
             'heading' => [
                 'th' => [
                     'class' => 'py-4 px-6 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
@@ -3090,7 +3113,7 @@ return [
                 ],
 
                 'display' => [
-                    'style' => 'max-width: 120px; max-height: 120px;',
+                    'class' => 'max-w-xs max-h-8',
                 ],
             ],
 
