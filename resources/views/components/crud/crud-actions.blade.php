@@ -17,7 +17,7 @@
     />
 @endforeach
 
-@if ($routeName !== 'show' && $route = route_detect([$prefix.'.show', $prefix.'.view'], $parameters, null))
+@if (! in_array($routeName, ['show', 'view']) && $route = route_detect([$prefix.'.show', $prefix.'.view'], $parameters, null))
     <x-button
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'show') }}
         preset="show"
@@ -26,7 +26,7 @@
     />
 @endif
 
-@if ($routeName !== 'edit' && $route = route_detect([$prefix.'.edit', $prefix.'.update', $prefix.'.form'], $parameters, null))
+@if (! in_array($routeName, ['edit', 'update', 'form']) && $route = route_detect([$prefix.'.edit', $prefix.'.update', $prefix.'.form'], $parameters, null))
     <x-button
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'edit') }}
         preset="edit"
@@ -35,7 +35,25 @@
     />
 @endif
 
-@if ($routeName !== 'destroy' && $route = route_detect([$prefix.'.destroy', $prefix.'.exclude'], $parameters, null))
+@if (! in_array($routeName, ['up', 'move-up']) && $route = route_detect([$prefix.'.up', $prefix.'.move-up'], $parameters, null))
+    <x-form-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'move-up') }}
+        preset="move-up"
+        :action="$route"
+        :theme="$theme"
+    />
+@endif
+
+@if (! in_array($routeName, ['down', 'move-down']) && $route = route_detect([$prefix.'.down', $prefix.'.move-down'], $parameters, null))
+    <x-form-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'move-down') }}
+        preset="move-down"
+        :action="$route"
+        :theme="$theme"
+    />
+@endif
+
+@if (! in_array($routeName, ['destroy', 'exclude']) && $route = route_detect([$prefix.'.destroy', $prefix.'.exclude'], $parameters, null))
     <x-form-button
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'destroy') }}
         preset="delete"
