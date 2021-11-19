@@ -121,7 +121,3 @@
         @endif
     </table>
 </div>
-
-@if ($paginator)
-    {{ $paginator->withQueryString()->links() }}
-@endif
