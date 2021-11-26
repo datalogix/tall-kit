@@ -18,7 +18,7 @@
 >
     @if ($loading && $type === 'submit')<span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'content') }}>@endif
         <x-icon
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'iconLeft') }}
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-left') }}
             :name="$iconLeft"
         >
             {!! $iconLeft ?? $icon !!}
@@ -41,7 +41,7 @@
     @if ($loading && $type === 'submit')
         <x-loading
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'loading') }}
-            :text="is_string($loading) ? $loading : null"
+            :text="is_string($loading) && ($slot->isNotEmpty() || $text) ? $loading : ''"
         />
     @endif
 </{{ $href ? 'a' : 'button' }}>

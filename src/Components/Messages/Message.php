@@ -161,7 +161,7 @@ class Message extends BladeComponent
         $this->dismissibleIconName = data_get($target, 'dismissibleIconName', $dismissibleIconName ?? $this->themeProvider->dismissible->get('icon-name'));
         $this->dismissibleText = data_get($target, 'dismissibleText', $dismissibleText ?? $typeTheme['dismissibleText'] ?? null);
         $this->title = data_get($target, 'title', $title ?? $typeTheme['title'] ?? null);
-        $this->message = data_get($target, 'message', $message ?? (is_string(session($session)) ? session($session) : null) ?? $typeTheme['message'] ?? null);
+        $this->message = data_get($target, 'message', $message ?? (is_string($target) ? $target : null) ?? $typeTheme['message'] ?? null);
         $this->on = data_get($target, 'on', $on ?? $typeTheme['on'] ?? null);
     }
 }

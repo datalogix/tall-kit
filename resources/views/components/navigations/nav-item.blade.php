@@ -13,7 +13,7 @@
         }}
     >
         <x-icon
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'iconLeft') }}
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-left') }}
             :name="$iconLeft"
         >
             {!! $iconLeft !!}

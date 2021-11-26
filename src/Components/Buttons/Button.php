@@ -138,15 +138,15 @@ class Button extends BladeComponent
         $this->preset = $preset;
 
         if ($this->preset && $presetProperties = $this->themeProvider->presets->get($this->preset)) {
-            $this->text = $text ?? $presetProperties['text'];
-            $this->iconLeft = $iconLeft ?? $presetProperties['icon-left'] ?? $presetProperties['icon'] ?? null;
-            $this->iconRight = $iconRight ?? $presetProperties['icon-right'] ?? null;
-            $this->color = $color ?? $presetProperties['color'] ?? 'default';
-            $this->rounded = $rounded ?? $presetProperties['rounded'] ?? 'default';
-            $this->shadow = $shadow ?? $presetProperties['shadow'] ?? 'default';
-            $this->outlined = $outlined ?? $presetProperties['outlined'] ?? null;
-            $this->bordered = $bordered ?? $presetProperties['bordered'] ?? null;
-            $this->loading = $loading ?? $presetProperties['loading'] ?? null;
+            $this->text = $text ?? data_get($presetProperties, 'text');
+            $this->iconLeft = $iconLeft ?? data_get($presetProperties, 'icon-left', data_get($presetProperties, 'icon'));
+            $this->iconRight = $iconRight ?? data_get($presetProperties, 'icon-right');
+            $this->color = $color ?? data_get($presetProperties, 'color', 'default');
+            $this->rounded = $rounded ?? data_get($presetProperties, 'rounded', 'default');
+            $this->shadow = $shadow ?? data_get($presetProperties, 'shadow', 'default');
+            $this->outlined = $outlined ?? data_get($presetProperties, 'outlined');
+            $this->bordered = $bordered ?? data_get($presetProperties, 'bordered');
+            $this->loading = $loading ?? data_get($presetProperties, 'loading');
         }
 
         if ($this->color && $colorProperties = $this->themeProvider->colors->get($this->color)) {
