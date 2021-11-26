@@ -21,11 +21,11 @@
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}
                     color="none"
                     rounded="full"
-                    :icon-left="$iconName ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'iconName')->first()"
+                    :icon-left="$iconName ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-name')->first()"
                     :theme="$theme"
                 >
                     <x-slot name="iconLeft">
-                        {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'iconSvg')->first() !!}
+                        {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-svg')->first() !!}
                     </x-slot>
                 </x-button>
             @endisset

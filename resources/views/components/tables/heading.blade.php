@@ -7,8 +7,8 @@
         {!! $slot->isEmpty() ? __($text) : $slot !!}
 
         @if ($sortable)
-            <x-icon :name="$attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable)['iconName']">
-                {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable)['iconSvg'] !!}
+            <x-icon :name="$attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable)['icon-name']">
+                {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable)['icon-svg'] !!}
             </x-icon>
         @endif
     </div>

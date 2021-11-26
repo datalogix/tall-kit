@@ -12,8 +12,8 @@
             :href="$item['href'] ?? null"
             :target="$item['target'] ?? null"
             :click="$item['click'] ?? null"
-            :icon-left="$item['iconLeft'] ?? $item['icon'] ?? null"
-            :icon-right="$item['iconRight'] ?? null"
+            :icon-left="$item['icon-left'] ?? $item['icon'] ?? null"
+            :icon-right="$item['icon-right'] ?? null"
             :theme="$theme"
         />
     @empty

@@ -19,10 +19,10 @@
                 :theme="$theme"
             >
                 <x-icon
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'prevIcon') }}
-                    :name="$prevIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'prevIconName')->first()"
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'prev-icon') }}
+                    :name="$prevIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'prev-icon-name')->first()"
                 >
-                    {!! $prev ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'prevIconSvg')->first() !!}
+                    {!! $prev ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'prev-icon-svg')->first() !!}
                 </x-icon>
             </x-button>
 
@@ -33,10 +33,10 @@
                 :theme="$theme"
             >
                 <x-icon
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'nextIcon') }}
-                    :name="$nextIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'nextIconName')->first()"
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'next-icon') }}
+                    :name="$nextIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'next-icon-name')->first()"
                 >
-                    {!! $next ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'nextIconSvg')->first() !!}
+                    {!! $next ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'next-icon-svg')->first() !!}
                 </x-icon>
             </x-button>
         @endisset

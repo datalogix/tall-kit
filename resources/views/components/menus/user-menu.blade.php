@@ -15,12 +15,12 @@
         @elseif ($userName || $userAvatar || $avatarSearch || isset($avatar))
             <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'user') }}>
                 @if ($userAvatar || $avatarSearch || isset($avatar))
-                    <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'userAvatar') }}>
+                    <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'user-avatar') }}>
                         @isset ($avatar)
                             {{ $avatar }}
                         @else
                             <x-avatar
-                                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'userAvatarContainer') }}
+                                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'user-avatar-container') }}
                                 :src="$userAvatar"
                                 :search="$avatarSearch"
                                 :provider="$avatarProvider"
@@ -35,7 +35,7 @@
                 @endif
 
                 @if ($userName)
-                    <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'userName') }}>
+                    <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'user-name') }}>
                         {{ $userName }}
                     </span>
                 @endif

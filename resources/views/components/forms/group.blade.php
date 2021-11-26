@@ -6,7 +6,7 @@
     :theme="$theme"
 >
     <x-label
-        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label-text') }}
         :label="$label"
         :theme="$theme"
     >

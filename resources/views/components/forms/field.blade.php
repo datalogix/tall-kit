@@ -27,7 +27,7 @@
     @else
         <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
             <x-label
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label-text') }}
                 :label="$label"
                 :theme="$theme"
             >

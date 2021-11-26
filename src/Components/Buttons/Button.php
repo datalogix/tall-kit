@@ -139,8 +139,8 @@ class Button extends BladeComponent
 
         if ($this->preset && $presetProperties = $this->themeProvider->presets->get($this->preset)) {
             $this->text = $text ?? $presetProperties['text'];
-            $this->iconLeft = $iconLeft ?? $presetProperties['iconLeft'] ?? $presetProperties['icon'] ?? null;
-            $this->iconRight = $iconRight ?? $presetProperties['iconRight'] ?? null;
+            $this->iconLeft = $iconLeft ?? $presetProperties['icon-left'] ?? $presetProperties['icon'] ?? null;
+            $this->iconRight = $iconRight ?? $presetProperties['icon-right'] ?? null;
             $this->color = $color ?? $presetProperties['color'] ?? 'default';
             $this->rounded = $rounded ?? $presetProperties['rounded'] ?? 'default';
             $this->shadow = $shadow ?? $presetProperties['shadow'] ?? 'default';

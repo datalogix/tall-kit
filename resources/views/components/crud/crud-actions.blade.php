@@ -3,8 +3,8 @@
         :text="$action['text'] ?? $action"
         :href="$action['href'] ?? route_detect(($action['prefix'] ?? true) ? $prefix.'.'.$route : $route, $action['parameters'] ?? $parameters)"
         :icon="$action['icon'] ?? null"
-        :icon-left="$action['iconLeft'] ?? null"
-        :icon-right="$action['iconRight'] ?? null"
+        :icon-left="$action['icon-left'] ?? null"
+        :icon-right="$action['icon-right'] ?? null"
         :color="$action['color'] ?? null"
         :rounded="$action['rounded'] ?? null"
         :shadow="$action['shadow'] ?? null"
@@ -31,6 +31,15 @@
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'edit') }}
         preset="edit"
         :href="$route"
+        :theme="$theme"
+    />
+@endif
+
+@if (! in_array($routeName, ['copy', 'duplicate', 'clone']) && $route = route_detect([$prefix.'.copy', $prefix.'.duplicate', $prefix.'.clone'], $parameters, null))
+    <x-form-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'copy') }}
+        preset="copy"
+        :action="$route"
         :theme="$theme"
     />
 @endif

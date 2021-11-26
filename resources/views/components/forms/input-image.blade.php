@@ -7,7 +7,7 @@
 >
     <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
         <x-label
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label-text') }}
             :label="$label"
             :theme="$theme"
         >
@@ -42,7 +42,7 @@
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'empty') }}
                     color="blue"
                     :text="$emptyText"
-                    :icon="$emptyIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'emptyIconSvg')->first()"
+                    :icon="$emptyIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'empty-icon-svg')->first()"
                     :theme="$theme"
                 >{{ $slot }}</x-button>
             @endisset
@@ -52,10 +52,10 @@
                     {{ $loading }}
                 @else
                     <x-icon
-                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loadingIcon') }}
-                        :name="$loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loadingIconName')->first()"
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading-icon') }}
+                        :name="$loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loading-icon-name')->first()"
                     >
-                        {!! $loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loadingIconSvg')->first() !!}
+                        {!! $loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loading-icon-svg')->first() !!}
                     </x-icon>
                 @endisset
             </div>
@@ -67,7 +67,7 @@
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'error') }}
                     color="error"
                     :text="$errorText"
-                    :icon="$errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'errorIconSvg')->first()"
+                    :icon="$errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'error-icon-svg')->first()"
                     :theme="$theme"
                 />
             @endisset
@@ -94,10 +94,10 @@
                                 :theme="$theme"
                             >
                                 <x-icon
-                                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'editIcon') }}
-                                    :name="$editIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'editIconName')->first()"
+                                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'edit-icon') }}
+                                    :name="$editIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'edit-icon-name')->first()"
                                 >
-                                    {!! $editIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'editIconSvg')->first() !!}
+                                    {!! $editIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'edit-icon-svg')->first() !!}
                                 </x-icon>
                             </x-button>
                         @endisset
@@ -115,10 +115,10 @@
                                 :theme="$theme"
                             >
                                 <x-icon
-                                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'deleteIcon') }}
-                                    :name="$deleteIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'deleteIconName')->first()"
+                                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'delete-icon') }}
+                                    :name="$deleteIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'delete-icon-name')->first()"
                                 >
-                                    {!! $deleteIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'deleteIconSvg')->first() !!}
+                                    {!! $deleteIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'delete-icon-svg')->first() !!}
                                 </x-icon>
                             </x-button>
                         @endisset

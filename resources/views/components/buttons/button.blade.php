@@ -31,7 +31,7 @@
         @endif
 
         <x-icon
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'iconRight') }}
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-right') }}
             :name="$iconRight"
         >
             {!! $iconRight !!}

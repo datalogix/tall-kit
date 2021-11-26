@@ -9,19 +9,19 @@
     @if ($icon !== false)
         <x-icon
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon') }}
-            :name="$icon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'iconName')->first()"
+            :name="$icon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-name')->first()"
         >
-            {!! $slot->isEmpty() ? $attributes->mergeOnlyThemeProvider($themeProvider, 'iconSvg')->first() : $slot !!}
+            {!! $slot->isEmpty() ? $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-svg')->first() : $slot !!}
         </x-icon>
     @else
         @isset ($loading)
             {{ $loading }}
         @elseif ($loadingIcon !== false)
             <x-icon
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loadingIcon') }}
-                :name="$loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loadingIconName')->first()"
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading-icon') }}
+                :name="$loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loading-icon-name')->first()"
             >
-                {!! $loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loadingIconSvg')->first() !!}
+                {!! $loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loading-icon-svg')->first() !!}
             </x-icon>
         @endisset
 
@@ -29,10 +29,10 @@
             {{ $error }}
         @elseif ($errorIcon !== false)
             <x-icon
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'errorIcon') }}
-                :name="$errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'errorIconName')->first()"
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'error-icon') }}
+                :name="$errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'error-icon-name')->first()"
             >
-                {!! $errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'errorIconSvg')->first() !!}
+                {!! $errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'error-icon-svg')->first() !!}
             </x-icon>
         @endisset
     @endisset

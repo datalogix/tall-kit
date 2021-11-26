@@ -74,7 +74,7 @@
                             colspan="{{ count($cols) }}"
                             :theme="$theme"
                         >
-                            <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'emptyText') }}>
+                            <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'empty-text') }}>
                                 {!! __($emptyText ?? 'No records') !!}
                             </span>
                         </x-cell>

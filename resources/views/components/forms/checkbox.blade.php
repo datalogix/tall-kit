@@ -29,7 +29,7 @@
         />
 
         <x-label
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'labelText') }}
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label-text') }}
             :theme="$theme"
         >
             {!! $slot->isEmpty() ? $label : $slot !!}
