@@ -31,9 +31,15 @@
         </x-crud-header>
     @endisset
 
-    <div {{ $attributes->mergeThemeProvider($themeProvider, 'content') }}>
+    <x-card {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
+        @if ($fields)
+            @bind($resource)
+                <x-fields-generator :fields="$fields" />
+            @endbind
+        @endif
+
         {{ $slot }}
-    </div>
+    </x-card>
 
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer') }}>
         @isset($actionsFooter)

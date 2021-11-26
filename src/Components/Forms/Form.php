@@ -25,6 +25,16 @@ class Form extends BladeComponent
     public $action;
 
     /**
+     * @var string|string[]|null
+     */
+    public $route;
+
+    /**
+     * @var mixed
+     */
+    public $bind;
+
+    /**
      * @var string|bool|null
      */
     public $enctype;
@@ -43,6 +53,11 @@ class Form extends BladeComponent
     public $spoofMethod;
 
     /**
+     * @var mixed
+     */
+    public $fields;
+
+    /**
      * Create a new component instance.
      *
      * @param  bool|null  $init
@@ -52,6 +67,7 @@ class Form extends BladeComponent
      * @param  mixed  $bind
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
+     * @param  mixed  $fields
      * @param  string|null  $theme
      * @return void
      */
@@ -63,6 +79,7 @@ class Form extends BladeComponent
         $bind = null,
         $enctype = null,
         $confirm = null,
+        $fields = null,
         $theme = null
     ) {
         parent::__construct($theme);
@@ -70,8 +87,11 @@ class Form extends BladeComponent
         $this->init = $init ?? true;
         $this->method = strtoupper($method ?? 'post');
         $this->action = $action ?? route_detect($route, $bind ?: $this->getBoundTarget(), null);
+        $this->route = $route;
+        $this->bind = $bind;
         $this->enctype = $enctype;
         $this->confirm = $confirm;
         $this->spoofMethod = in_array($this->method, ['PUT', 'PATCH', 'DELETE']);
+        $this->fields = $fields;
     }
 }

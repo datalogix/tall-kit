@@ -17,6 +17,11 @@ class CrudForm extends Crud
     public $action;
 
     /**
+     * @var mixed
+     */
+    public $fields;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $prefix
@@ -28,6 +33,7 @@ class CrudForm extends Crud
      * @param  string|null  $routeName
      * @param  string|bool|null  $method
      * @param  string|bool|null  $action
+     * @param  mixed  $fields
      * @param  string|null  $theme
      * @return void
      */
@@ -41,6 +47,7 @@ class CrudForm extends Crud
         $routeName = null,
         $method = null,
         $action = null,
+        $fields = null,
         $theme = null
     ) {
         parent::__construct(
@@ -61,5 +68,6 @@ class CrudForm extends Crud
             array_merge($this->parameters, [$this->resource]),
             null
         );
+        $this->fields = $fields;
     }
 }

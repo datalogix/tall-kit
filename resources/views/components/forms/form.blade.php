@@ -21,6 +21,11 @@
         @method($method)
     @endif
 
+    @if ($fields)
+        @bind($bind)
+            <x-fields-generator :fields="$fields" />
+        @endbind
+    @endif
+
     {{ $slot }}
 </form>
-
