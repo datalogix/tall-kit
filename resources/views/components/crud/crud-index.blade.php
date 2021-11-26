@@ -29,6 +29,8 @@
     @else
         <x-datatable
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'datatable') }}
+            :search="$search"
+            :search-default="$searchDefault"
             :cols="$cols"
             :resource="$resource"
             :footer="$footer"
@@ -64,6 +66,18 @@
                     @endscopedslot
                 @endisset
             @endforeach
+
+            @isset ($searchFields)
+                <x-slot name="searchFields">
+                    {{ $searchFields }}
+                </x-slot>
+            @endisset
+
+            @isset ($searchSubmit)
+                <x-slot name="searchSubmit">
+                    {{ $searchSubmit }}
+                </x-slot>
+            @endisset
 
             @isset ($head)
                 <x-slot name="head">

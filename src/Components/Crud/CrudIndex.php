@@ -8,6 +8,16 @@ use TALLKit\Components\Tables\Datatable;
 class CrudIndex extends Crud
 {
     /**
+     * @var mixed
+     */
+    public $search;
+
+    /**
+     * @var bool|null
+     */
+    public $searchDefault;
+
+    /**
      * @var bool
      */
     public $displayIdColumn;
@@ -48,6 +58,8 @@ class CrudIndex extends Crud
      * @param  string|bool|null  $prefix
      * @param  string|bool|null  $key
      * @param  string|bool|null  $title
+     * @param  mixed  $search
+     * @param  bool|null  $searchDefault
      * @param  mixed  $parameters
      * @param  mixed  $resource
      * @param  mixed  $customActions
@@ -67,6 +79,8 @@ class CrudIndex extends Crud
         $prefix = null,
         $key = null,
         $title = null,
+        $search = null,
+        $searchDefault = null,
         $parameters = null,
         $resource = null,
         $customActions = null,
@@ -86,13 +100,15 @@ class CrudIndex extends Crud
             $key,
             $title,
             $parameters,
-            Datatable::getRows($resource ?? $rows, $paginator),
+            Datatable::getRows($resource ?? $rows, $cols, Datatable::getSearch($search, $searchDefault), $paginator),
             $customActions,
             $routeName,
             $theme
         );
 
         $this->title = $this->titlePlural;
+        $this->search = $search;
+        $this->searchDefault = $searchDefault;
         $this->displayIdColumn = $displayIdColumn ?? false;
         $this->displayActionsColumn = $displayActionsColumn ?? true;
         $this->mapRelationsColumn = $mapRelationsColumn ?? true;

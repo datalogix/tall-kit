@@ -1,4 +1,29 @@
 <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
+    @if ($search->isNotEmpty())
+        <x-card {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'search') }}>
+            <x-form
+                {{
+                    $attributes
+                        ->mergeOnlyThemeProvider($themeProvider, 'search-fields')
+                        ->merge(['class' => 'md:grid-cols-'.$search->count()])
+                }}
+                method="GET"
+                :fields="$search"
+                :bind="request()"
+            >
+                {{ $searchFields ?? '' }}
+
+                @isset ($searchSubmit)
+                    {{ $searchSubmit }}
+                @else
+                    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'search-submit') }}>
+                        <x-submit preset="search" />
+                    </div>
+                @endif
+            </x-form>
+        </x-card>
+    @endif
+
     <x-table
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'table') }}
         :cols="$cols"
