@@ -339,6 +339,7 @@ return [
         'errors' => \TALLKit\Components\Forms\Errors::class,
         'field' => \TALLKit\Components\Forms\Field::class,
         'field-group' => \TALLKit\Components\Forms\FieldGroup::class,
+        'fields-generator' => \TALLKit\Components\Forms\FieldsGenerator::class,
         'form' => \TALLKit\Components\Forms\Form::class,
         'group' => \TALLKit\Components\Forms\Group::class,
         'input' => \TALLKit\Components\Forms\Input::class,
@@ -463,6 +464,9 @@ return [
          */
         'bt' => \TALLKit\Components\Buttons\Button::class,
         'btn' => \TALLKit\Components\Buttons\Button::class,
+        'button-form' => \TALLKit\Components\Buttons\FormButton::class,
+        'bt-form' => \TALLKit\Components\Buttons\FormButton::class,
+        'btn-form' => \TALLKit\Components\Buttons\FormButton::class,
         'form-bt' => \TALLKit\Components\Buttons\FormButton::class,
         'form-btn' => \TALLKit\Components\Buttons\FormButton::class,
 
@@ -495,6 +499,7 @@ return [
         'error' => \TALLKit\Components\Forms\Errors::class,
         'form-field' => \TALLKit\Components\Forms\Field::class,
         'form-group' => \TALLKit\Components\Forms\Group::class,
+        'generator-fields' => \TALLKit\Components\Forms\FieldsGenerator::class,
         'image-preview' => \TALLKit\Components\Forms\InputImage::class,
         'lbl' => \TALLKit\Components\Forms\Label::class,
         'validation-bag' => \TALLKit\Components\Forms\ValidationErrors::class,
@@ -907,9 +912,9 @@ return [
                     ],
                 ],
 
-                'iconLeft' => [],
+                'icon-left' => [],
 
-                'iconRight' => [],
+                'icon-right' => [],
 
                 'text' => [],
 
@@ -1103,6 +1108,18 @@ return [
                         'color' => 'success',
                         'loading' => 'Moving',
                     ],
+
+                    'copy' => [
+                        'text' => 'Copy',
+                        'color' => 'indigo',
+                        'loading' => 'Copying',
+                    ],
+
+                    'search' => [
+                        'text' => 'Search',
+                        'color' => 'info',
+                        'loading' => 'Searching',
+                    ],
                 ],
             ],
 
@@ -1134,9 +1151,9 @@ return [
                     'class' => 'w-6 h-6',
                 ],
 
-                'iconName' => 'menu',
+                'icon-name' => 'menu',
 
-                'iconSvg' => [
+                'icon-svg' => [
                     '<svg class="fill-current" viewBox="0 0 24 24"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
                 ],
             ],
@@ -1148,6 +1165,8 @@ return [
                 'show' => [],
 
                 'edit' => [],
+
+                'copy' => [],
 
                 'move-up' => [],
 
@@ -1166,7 +1185,7 @@ return [
                 ],
 
                 'actions' => [
-                    'class' => 'hidden lg:flex space-x-2 items-center',
+                    'class' => 'flex space-x-2 items-center',
                 ],
             ],
 
@@ -1189,7 +1208,9 @@ return [
             ],
 
             'crud-form' => [
-                'container' => [],
+                'container' => [
+                    'class' => 'mb-4',
+                ],
 
                 'header' => [],
 
@@ -1197,9 +1218,7 @@ return [
 
                 'header-back' => [],
 
-                'content' => [
-                    'class' => 'mb-4',
-                ],
+                'content' => [],
 
                 'footer' => [
                     'class' => 'flex space-x-4 items-center justify-between pt-4',
@@ -1220,6 +1239,8 @@ return [
                 'header-actions' => [],
 
                 'header-back' => [],
+
+                'content' => [],
 
                 'footer' => [
                     'class' => 'flex space-x-2 items-center pt-4',
@@ -1277,7 +1298,7 @@ return [
                     'class' => 'block',
                 ],
 
-                'labelText' => [
+                'label-text' => [
                     'class' => 'mb-1',
                 ],
 
@@ -1302,7 +1323,7 @@ return [
                     'class' => 'block',
                 ],
 
-                'labelText' => [
+                'label-text' => [
                     'class' => 'mb-1',
                 ],
 
@@ -1348,7 +1369,7 @@ return [
                     'class' => 'block',
                 ],
 
-                'labelText' => [
+                'label-text' => [
                     'class' => 'mb-1',
                 ],
 
@@ -1372,7 +1393,7 @@ return [
                     'class' => 'flex items-center',
                 ],
 
-                'labelText' => [
+                'label-text' => [
                     'class' => 'ml-3',
                 ],
 
@@ -1414,7 +1435,7 @@ return [
                     'class' => 'block',
                 ],
 
-                'labelText' => [
+                'label-text' => [
                     'class' => 'mb-1',
                 ],
 
@@ -1434,8 +1455,12 @@ return [
                 ],
             ],
 
+            'fields-generator' => [
+                'container' => [],
+            ],
+
             'group' => [
-                'labelText' => [
+                'label-text' => [
                     'class' => 'mb-1',
                 ],
 
@@ -1506,7 +1531,7 @@ return [
 
                 'label' => [],
 
-                'labelText' => [
+                'label-text' => [
                     'class' => 'mb-1',
                 ],
 
@@ -1527,18 +1552,18 @@ return [
                     'class' => 'w-full h-full',
                 ],
 
-                'emptyIconSvg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>',
+                'empty-icon-svg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>',
 
                 'loading' => [
                     'x-show' => 'isLoading()',
                     'class' => 'w-full h-full flex items-center justify-center p-2',
                 ],
 
-                'loadingIcon' => 'animate-spin w-6 h-6 shadown',
+                'loading-icon' => 'animate-spin w-6 h-6 shadown',
 
-                'loadingIconName' => 'loading',
+                'loading-icon-name' => 'loading',
 
-                'loadingIconSvg' => '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
+                'loading-icon-svg' => '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
 
                 'error' => [
                     'x-show' => 'isFailed()',
@@ -1546,7 +1571,7 @@ return [
                     'class' => 'w-full h-full',
                 ],
 
-                'errorIconSvg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
+                'error-icon-svg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
 
                 'complete' => [
                     'x-show' => 'isCompleted()',
@@ -1567,25 +1592,25 @@ return [
                     'class' => 'transition transform hover:scale-125',
                 ],
 
-                'editIcon' => [
+                'edit-icon' => [
                     'class' => 'w-6 h-6',
                 ],
 
-                'editIconName' => 'pencil',
+                'edit-icon-name' => 'pencil',
 
-                'editIconSvg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>',
+                'edit-icon-svg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>',
 
                 'delete' => [
                     'class' => 'transition transform hover:scale-125',
                 ],
 
-                'deleteIcon' => [
+                'delete-icon' => [
                     'class' => 'w-6 h-6',
                 ],
 
-                'deleteIconName' => 'trash',
+                'delete-icon-name' => 'trash',
 
-                'deleteIconSvg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>',
+                'delete-icon-svg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>',
             ],
 
             'input' => [
@@ -1627,7 +1652,7 @@ return [
                     'class' => 'inline-flex items-center',
                 ],
 
-                'labelText' => [
+                'label-text' => [
                     'class' => 'ml-3',
                 ],
 
@@ -1638,11 +1663,11 @@ return [
 
             'select' => [
                 'multiselect' => [
-                    'class' => 'block w-full py-2 px-3 outline-none focus:outline-none',
+                    'class' => 'block w-full py-2.5 px-3 outline-none focus:outline-none',
                 ],
 
                 'select' => [
-                    'class' => 'block w-full py-2 px-3 outline-none focus:outline-none',
+                    'class' => 'block w-full py-2.5 px-3 outline-none focus:outline-none',
                 ],
             ],
 
@@ -1785,9 +1810,9 @@ return [
                     'class' => 'animate-spin w-6 h-6',
                 ],
 
-                'iconName' => 'spinner',
+                'icon-name' => 'spinner',
 
-                'iconSvg' => [
+                'icon-svg' => [
                     '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
                 ],
 
@@ -1874,9 +1899,9 @@ return [
                     'style' => 'padding: 0;',
                 ],
 
-                'iconName' => 'ellipsis-v',
+                'icon-name' => 'ellipsis-v',
 
-                'iconSvg' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 192 512"><path fill="currentColor" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>',
+                'icon-svg' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 192 512"><path fill="currentColor" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>',
             ],
 
             'menu' => [
@@ -1910,11 +1935,11 @@ return [
                     'class' => 'flex items-center space-x-2',
                 ],
 
-                'userAvatar' => [
+                'user-avatar' => [
                     'class' => 'w-8 h-8 rounded-full overflow-hidden bg-indigo-700 text-white shadow flex items-center justify-center font-bold',
                 ],
 
-                'userAvatarContainer' => [
+                'user-avatar-container' => [
                     'theme:container' => [
                         'theme:image' => [
                             'class' => 'w-full h-full',
@@ -1926,7 +1951,7 @@ return [
                     ],
                 ],
 
-                'userName' => [
+                'user-name' => [
                     'class' => 'hidden sm:block',
                 ],
             ],
@@ -2001,9 +2026,9 @@ return [
                         'class' => 'absolute top-0 right-0 transition hover:opacity-75 text-sm',
                     ],
 
-                    'iconName' => 'close',
+                    'icon-name' => 'close',
 
-                    'iconSvg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
+                    'icon-svg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
                 ],
 
                 'title' => [
@@ -2015,43 +2040,43 @@ return [
                 'types' => [
                     'default' => [
                         'color' => 'gray',
-                        'iconSvg' => false,
-                        'iconName' => false,
+                        'icon-svg' => false,
+                        'icon-name' => false,
                         'title' => false,
                     ],
 
                     'error' => [
                         'color' => 'red',
-                        'iconName' => 'close',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
+                        'icon-name' => 'close',
+                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Error',
                     ],
 
                     'info' => [
                         'color' => 'blue',
-                        'iconName' => 'information',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
+                        'icon-name' => 'information',
+                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Info',
                     ],
 
                     'success' => [
                         'color' => 'green',
-                        'iconName' => 'check',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'icon-name' => 'check',
+                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Success',
                     ],
 
                     'warning' => [
                         'color' => 'yellow',
-                        'iconName' => 'alert',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
+                        'icon-name' => 'alert',
+                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Warning',
                     ],
 
                     'created' => [
                         'color' => 'green',
-                        'iconName' => 'check',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'icon-name' => 'check',
+                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Created',
                         'message' => 'Record created successfully!',
                         'dismissible' => true,
@@ -2060,8 +2085,8 @@ return [
 
                     'updated' => [
                         'color' => 'blue',
-                        'iconName' => 'check',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'icon-name' => 'check',
+                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Updated',
                         'message' => 'Record updated successfully!',
                         'dismissible' => true,
@@ -2070,8 +2095,8 @@ return [
 
                     'deleted' => [
                         'color' => 'red',
-                        'iconName' => 'check',
-                        'iconSvg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'icon-name' => 'check',
+                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Deleted',
                         'message' => 'Record deleted successfully!',
                         'dismissible' => true,
@@ -2288,9 +2313,9 @@ return [
                     'class' => 'font-semibold',
                 ],
 
-                'iconLeft' => [],
+                'icon-left' => [],
 
-                'iconRight' => [],
+                'icon-right' => [],
             ],
 
             'nav' => [
@@ -2804,13 +2829,13 @@ return [
                     'class' => 'absolute top-0 left-0 h-full opacity-50 hover:opacity-100 z-20',
                 ],
 
-                'prevIcon' => [
+                'prev-icon' => [
                     'class' => 'w-6 h-6',
                 ],
 
-                'prevIconName' => 'chevron-left',
+                'prev-icon-name' => 'chevron-left',
 
-                'prevIconSvg' => [
+                'prev-icon-svg' => [
                     '<svg viewBox="0 0 320 512"><path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path></svg>',
                 ],
 
@@ -2820,13 +2845,13 @@ return [
                     'class' => 'absolute top-0 right-0 h-full opacity-50 hover:opacity-100 z-20',
                 ],
 
-                'nextIcon' => [
+                'next-icon' => [
                     'class' => 'w-6 h-6',
                 ],
 
-                'nextIconName' => 'chevron-right',
+                'next-icon-name' => 'chevron-right',
 
-                'nextIconSvg' => [
+                'next-icon-svg' => [
                     '<svg viewBox="0 0 320 512"><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg>',
                 ],
 
@@ -2975,36 +3000,36 @@ return [
                     'x-show' => 'isLoading() || isFailed()',
                 ],
 
-                'iconName' => [
+                'icon-name' => [
                     'image',
                 ],
 
-                'iconSvg' => [
+                'icon-svg' => [
                     '<svg class="fill-current" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 336H54a6 6 0 0 1-6-6V118a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v276a6 6 0 0 1-6 6zM128 152c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zM96 352h320v-80l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L192 304l-39.515-39.515c-4.686-4.686-12.284-4.686-16.971 0L96 304v48z"></path></svg>',
                 ],
 
-                'loadingIcon' => [
+                'loading-icon' => [
                     'x-show' => 'isLoading()',
                     'class' => 'animate-spin',
                 ],
 
-                'loadingIconName' => [
+                'loading-icon-name' => [
                     'loading',
                 ],
 
-                'loadingIconSvg' => [
+                'loading-icon-svg' => [
                     '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
                 ],
 
-                'errorIcon' => [
+                'error-icon' => [
                     'x-show' => 'isFailed()',
                 ],
 
-                'errorIconName' => [
+                'error-icon-name' => [
                     'times',
                 ],
 
-                'errorIconSvg' => [
+                'error-icon-svg' => [
                     '<svg class="fill-current" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
                 ],
             ],
@@ -3041,6 +3066,25 @@ return [
             'datatable' => [
                 'container' => [],
 
+                'search' => [],
+
+                'search-fields' => [
+                    '_purge' => '
+                        md:grid-cols-1,
+                        md:grid-cols-2,
+                        md:grid-cols-3,
+                        md:grid-cols-4,
+                        md:grid-cols-5,
+                        md:grid-cols-6,
+                    ',
+
+                    'class' => 'grid grid-cols-1 gap-x-4',
+                ],
+
+                'search-submit' => [
+                    'class' => 'col-span-full',
+                ],
+
                 'table' => [],
             ],
 
@@ -3070,13 +3114,13 @@ return [
 
                 'sortable' => [
                     'asc' => [
-                        'iconName' => 'chevron-up',
-                        'iconSvg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg>',
+                        'icon-name' => 'chevron-up',
+                        'icon-svg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg>',
                     ],
 
                     'desc' => [
-                        'iconName' => 'chevron-down',
-                        'iconSvg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>',
+                        'icon-name' => 'chevron-down',
+                        'icon-svg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>',
                     ],
                 ],
             ],
@@ -3108,7 +3152,7 @@ return [
 
                 'tfoot' => [],
 
-                'emptyText' => [
+                'empty-text' => [
                     'class' => 'px-6 py-4 whitespace-nowrap text-lg text-gray-500 text-center',
                 ],
 
