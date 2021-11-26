@@ -30,9 +30,19 @@
         @endif
 
         @forelse ($options as $key => $option)
-            <option value="{{ $key }}" @if ($isSelected($key)) selected="selected" @endif>
-                {{ $option }}
-            </option>
+            @if (is_iterable($option))
+                <optgroup label="{{ $key }}">
+                    @foreach ($option as $subkey => $suboption)
+                        <option value="{{ $subkey }}" @if ($isSelected($subkey)) selected="selected" @endif>
+                            {{ $suboption }}
+                        </option>
+                    @endforeach
+                </optgroup>
+            @else
+                <option value="{{ $key }}" @if ($isSelected($key)) selected="selected" @endif>
+                    {{ $option }}
+                </option>
+            @endif
         @empty
             {{ $slot }}
         @endforelse

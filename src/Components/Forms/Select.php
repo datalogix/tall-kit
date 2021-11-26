@@ -137,7 +137,9 @@ class Select extends Field
         return Collection::make($options)
             ->mapWithKeys(function ($value, $key) {
                 $key = data_get($value, $this->itemValue, $key);
-                $value = data_get($value, $this->itemText, $value);
+                $value = is_iterable($value)
+                    ? $this->prepareOptions($value)
+                    : data_get($value, $this->itemText, data_get($value, 'title', data_get($value, 'name', $value)));
 
                 return [$key => $value];
             });
