@@ -158,16 +158,16 @@ class Datatable extends Table
      */
     protected static function applyFilters($rows, $cols = null, $search = null)
     {
-        if (!($rows instanceof Builder && $rows->hasGlobalMacro('filter'))) {
+        if (! ($rows instanceof Builder && $rows->hasGlobalMacro('filter'))) {
             return $rows;
         }
 
         $cols = Collection::make($cols);
-        $search = Collection::make($search)->map(function($value, $key) {
+        $search = Collection::make($search)->map(function ($value, $key) {
             return $value['name'] ?? $key;
         });
 
-        $rows = $rows->when($search->only($cols)->isNotEmpty(), function(Builder $query) use ($search, $cols) {
+        $rows = $rows->when($search->only($cols)->isNotEmpty(), function (Builder $query) use ($search, $cols) {
             return $query->filter(request($search->only($cols)->toArray()));
         });
 

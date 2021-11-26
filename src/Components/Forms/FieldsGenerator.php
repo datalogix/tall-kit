@@ -42,7 +42,7 @@ class FieldsGenerator extends BladeComponent
     {
         $name = $field['name'] ?? is_int($key) ? $field : $key;
 
-        if (!$name || is_array($name)) {
+        if (! $name || is_array($name)) {
             return 'input';
         }
 
