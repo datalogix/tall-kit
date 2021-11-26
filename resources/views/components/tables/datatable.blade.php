@@ -5,7 +5,7 @@
                 {{
                     $attributes
                         ->mergeOnlyThemeProvider($themeProvider, 'search-fields')
-                        ->merge(['class' => 'md:grid-cols-'.$search->count()])
+                        ->mergeOnlyThemeProvider($themeProvider, 'search-cols', $search->count()
                 }}
                 method="GET"
                 :fields="$search"

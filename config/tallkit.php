@@ -3069,16 +3069,33 @@ return [
                 'search' => [],
 
                 'search-fields' => [
-                    '_purge' => '
-                        md:grid-cols-1,
-                        md:grid-cols-2,
-                        md:grid-cols-3,
-                        md:grid-cols-4,
-                        md:grid-cols-5,
-                        md:grid-cols-6,
-                    ',
-
                     'class' => 'grid grid-cols-1 gap-x-4',
+                ],
+
+                'search-cols' => [
+                    '1' => [
+                        'class' => 'md:grid-cols-1',
+                    ],
+
+                    '2' => [
+                        'class' => 'md:grid-cols-2',
+                    ],
+
+                    '3' => [
+                        'class' => 'md:grid-cols-3',
+                    ],
+
+                    '4' => [
+                        'class' => 'md:grid-cols-4',
+                    ],
+
+                    '5' => [
+                        'class' => 'md:grid-cols-5',
+                    ],
+
+                    '6' => [
+                        'class' => 'md:grid-cols-6',
+                    ],
                 ],
 
                 'search-submit' => [
