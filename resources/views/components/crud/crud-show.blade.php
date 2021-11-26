@@ -1,4 +1,5 @@
 <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
+
     @isset($header)
         {{ $header }}
     @else
@@ -28,7 +29,9 @@
         </x-crud-header>
     @endisset
 
-    {{ $slot }}
+    <x-card {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
+        {{ $slot }}
+    </x-card>
 
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer') }}>
         @isset($actionsFooter)
