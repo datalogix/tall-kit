@@ -875,7 +875,7 @@ return [
                     hover:bg-yellow-700
                     border-yellow-500
                     border-yellow-700
-                    bg-green-500
+                    bg-yellow-500
                     bg-yellow-700
                     text-yellow-700
                     text-yellow-500
