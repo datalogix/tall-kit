@@ -84,7 +84,7 @@ class FieldsGenerator extends BladeComponent
 
         $name = $field['name'] ?? is_int($key) ? $field : $key;
 
-        if (Str::endsWith($name, '_id')) {
+        if (is_string($name) && Str::endsWith($name, '_id')) {
             try {
                 $model = app('\App\Models\\'.Str::of($name)->replace('_id', '')->studly());
 
