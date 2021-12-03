@@ -599,7 +599,6 @@ return [
             'navbar' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
-                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'navbar\')',
                     '@click.away' => 'close',
                     '@click.outside' => 'close',
@@ -762,7 +761,6 @@ return [
             'sidebar' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
-                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'sidebar\')',
                     '@resize.window' => 'check',
                 ],
@@ -1312,7 +1310,8 @@ return [
             'easymde' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,easymde',
-                    'wire:ignore' => 'true',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'easymde\')',
                 ],
 
@@ -1337,7 +1336,8 @@ return [
             'quill' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,quill',
-                    'wire:ignore' => 'true',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'quill\')',
                 ],
 
@@ -1381,7 +1381,8 @@ return [
             'trix' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,trix',
-                    'wire:ignore' => 'true',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'trix\')',
                     'x-init' => 'setup',
                     'x-on:trix-change' => 'change',
@@ -1468,17 +1469,16 @@ return [
                 ],
             ],
 
+            'fields-generator' => [
+                'container' => [],
+            ],
+
             'form' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
-                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'form\')',
                     '@submit' => 'prepareSubmit',
                 ],
-            ],
-
-            'fields-generator' => [
-                'container' => [],
             ],
 
             'group' => [
@@ -1546,6 +1546,7 @@ return [
             'input-image' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'input-image\')',
                     'x-init' => 'setup',
@@ -2272,7 +2273,7 @@ return [
             'dropdown' => [
                 'trigger' => [
                     '@click' => 'toggle',
-                    'class' => 'inline-block cursor-pointer',
+                    'class' => 'cursor-pointer',
                 ],
 
                 'dropdown' => [
@@ -2549,6 +2550,7 @@ return [
             'accordion-item' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'accordion-item\')',
                     'class' => 'border-b',
@@ -2654,6 +2656,7 @@ return [
             'tab' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'tab\')',
                 ],
@@ -2730,6 +2733,7 @@ return [
             'flatpickr' => [
                 'flatpickr' => [
                     'data-tallkit-assets' => 'alpine,flatpickr',
+                    'wire:ignore' => '',
                     'x-data' => 'window.tallkit.component(\'flatpickr\')',
                     'x-ref' => 'input',
                     'autocomplete' => 'off',
@@ -2744,7 +2748,7 @@ return [
             'pickr' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,pickr',
-                    'wire:ignore' => 'true',
+                    'wire:ignore' => '',
                     'x-data' => 'window.tallkit.component(\'pickr\')',
                 ],
 
@@ -2790,6 +2794,7 @@ return [
             'pikaday' => [
                 'pikaday' => [
                     'data-tallkit-assets' => 'alpine,moment,pikaday',
+                    'wire:ignore' => '',
                     'x-data' => 'window.tallkit.component(\'pikaday\')',
                     'x-ref' => 'input',
                     'autocomplete' => 'off',
@@ -2806,6 +2811,7 @@ return [
             'flickity' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,flickity',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'flickity\')',
                 ],
@@ -2822,6 +2828,7 @@ return [
             'slider' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'slider\')',
                     '@mouseenter' => 'onMouseEnter',
@@ -2906,6 +2913,7 @@ return [
             'splide' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,splide',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'splide\')',
                     'class' => 'splide',
@@ -2937,6 +2945,7 @@ return [
             'swiper' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,swiper',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'swiper\')',
                     'class' => 'swiper',
@@ -3008,6 +3017,7 @@ return [
             'image-loader' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'image-loader\')',
                     'x-init' => 'setup',
@@ -3206,6 +3216,7 @@ return [
             'dropzone' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,dropzone',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'dropzone\')',
                 ],
@@ -3223,6 +3234,7 @@ return [
             'filepond' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'filepond\')',
                 ],
