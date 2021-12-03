@@ -10,14 +10,14 @@
     "production": "mix --production"
   },
   "devDependencies": {
-    "eslint": "^8.2",
+    "eslint": "^8.3",
     "eslint-config-standard": "^16.0",
     "eslint-plugin-import": "^2.25",
     "eslint-plugin-node": "^11.1",
-    "eslint-plugin-promise": "^5.1",
+    "eslint-plugin-promise": "^5.2",
     "eslint-webpack-plugin": "^3.1",
     "laravel-mix": "^6.0",
-    "postcss": "^8.3"
+    "postcss": "^8.4"
   },
   "dependencies": {
     "defu": "^5.0.0"
