@@ -7,6 +7,8 @@
     @if ($googleFonts) <x-google-fonts family="{{ $googleFonts }}" /> @endif
     <title>{{ __($title) }}</title>
     {{ $head ?? '' }}
+    @if ($googleAnalytics) <x-google-analytics id="{{ $googleAnalytics }}" /> @endif
+    @if ($googleTagManager) <x-google-tag-manager id="{{ $googleTagManager }}" /> @endif
     @if ($livewire) @livewireStyles @endif
     @if (is_array($tallkit)) @tallkitStyles($tallkit) @endif
     @if ($mixStyles) <link href="{{ mix($mixStyles) }}" rel="stylesheet"> @endif
@@ -14,6 +16,7 @@
     @if ($stackStyles) @stack($stackStyles) @endif
 </head>
 <body {{ $attributes->mergeThemeProvider($themeProvider, 'body') }}>
+    @if ($googleTagManager) <x-google-tag-manager id="{{ $googleTagManager }}" noscript /> @endif
     {{ $slot }}
     @if ($livewire) @livewireScripts @endif
     @if (is_array($tallkit)) @tallkitScripts($tallkit) @endif

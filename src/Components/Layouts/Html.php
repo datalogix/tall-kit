@@ -28,9 +28,19 @@ class Html extends BladeComponent
     public $csrfToken;
 
     /**
+     * @var string|bool|null
+     */
+    public $googleAnalytics;
+
+    /**
      * @var string|null
      */
     public $googleFonts;
+
+    /**
+     * @var string|bool|null
+     */
+    public $googleTagManager;
 
     /**
      * @var bool
@@ -80,7 +90,9 @@ class Html extends BladeComponent
      * @param  string|null  $charset
      * @param  string|null  $viewport
      * @param  bool|null  $csrfToken
+     * @param  string|bool|null  $googleAnalytics
      * @param  string|null  $googleFonts
+     * @param  string|bool|null  $googleTagManager
      * @param  bool|null  $livewire
      * @param  string|bool|null  $mixStyles
      * @param  string|bool|null  $mixScripts
@@ -100,7 +112,9 @@ class Html extends BladeComponent
         $charset = null,
         $viewport = null,
         $csrfToken = null,
+        $googleAnalytics = null,
         $googleFonts = null,
+        $googleTagManager = null,
         $livewire = null,
         $mixStyles = null,
         $mixScripts = null,
@@ -124,7 +138,9 @@ class Html extends BladeComponent
         $this->charset = data_get($options, 'charset', $charset ?? 'utf-8');
         $this->viewport = data_get($options, 'viewport', $viewport ?? 'width=device-width, initial-scale=1');
         $this->csrfToken = data_get($options, 'csrfToken', $csrfToken ?? true);
-        $this->googleFonts = data_get($options, 'googleFonts', $googleFonts);
+        $this->googleAnalytics = data_get($options, 'googleAnalytics', data_get($options, 'analytics', $googleAnalytics));
+        $this->googleFonts = data_get($options, 'googleFonts', data_get($options, 'fonts', $googleFonts));
+        $this->googleTagManager = data_get($options, 'googleTagManager', data_get($options, 'gtm', $googleTagManager));
         $this->livewire = data_get($options, 'livewire', $livewire ?? true) && class_exists('\Livewire\Livewire');
 
         $mixStyles = data_get($options, 'mixStyles', $mixStyles ?? 'css/app.css');

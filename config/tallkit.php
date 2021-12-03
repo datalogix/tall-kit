@@ -363,7 +363,9 @@ return [
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'container' => \TALLKit\Components\Layouts\Container::class,
         'display' => \TALLKit\Components\Layouts\Display::class,
+        'google-analytics' => \TALLKit\Components\Layouts\GoogleAnalytics::class,
         'google-fonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
+        'google-tag-manager' => \TALLKit\Components\Layouts\GoogleTagManager::class,
         'html' => \TALLKit\Components\Layouts\Html::class,
         'loading' => \TALLKit\Components\Layouts\Loading::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
@@ -520,7 +522,11 @@ return [
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'content' => \TALLKit\Components\Layouts\Container::class,
+        'analytics' => \TALLKit\Components\Layouts\GoogleAnalytics::class,
+        'googleanalytics' => \TALLKit\Components\Layouts\GoogleAnalytics::class,
         'googlefonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
+        'googletagmanager' => \TALLKit\Components\Layouts\GoogleTagManager::class,
+        'gtm' => \TALLKit\Components\Layouts\GoogleTagManager::class,
         'preview' => \TALLKit\Components\Layouts\Display::class,
 
         /**
