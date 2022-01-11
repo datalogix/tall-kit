@@ -70,7 +70,7 @@ class Markdown extends BladeComponent
     {
         $config = $this->options;
         $blocks = data_get($config, 'blocks', []);
-        $inlines = data_get($config , 'inlines', []);
+        $inlines = data_get($config, 'inlines', []);
         $delimiters = data_get($config, 'delimiters', []);
         $renderers = data_get($config, 'renderers', []);
         $extensions = data_get($config, 'extensions', []);

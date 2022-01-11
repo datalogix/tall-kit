@@ -94,7 +94,7 @@ class TALLKit
             return '<link href="'.$url.'" rel="stylesheet" />';
         })->join("\n");
 
-        $nonce = data_get($options, 'nonce') ? " nonce=\"{".data_get($options, 'nonce')."}\"" : '';
+        $nonce = data_get($options, 'nonce') ? ' nonce="'.data_get($options, 'nonce').'"' : '';
 
         $htmlScrips = $scripts->flatten()->filter(function ($value) {
             return Str::endsWith($value, '.js');
@@ -137,7 +137,7 @@ HTML;
         $fullAssetPath = "{$appUrl}/tallkit{$versionedFileName}";
         $assetWarning = null;
 
-        $nonce = data_get($options, 'nonce') ? " nonce=\"{".data_get($options, 'nonce')."}\"" : '';
+        $nonce = data_get($options, 'nonce') ? ' nonce="'.data_get($options, 'nonce').'"' : '';
 
         // Use static assets if they have been published.
         if (file_exists(public_path('vendor/tallkit/mix-manifest.json'))) {
