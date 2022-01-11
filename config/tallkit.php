@@ -21,7 +21,7 @@ return [
         |
         */
 
-        'asset_url' => null,
+        'asset_url' => env('TALLKIT_ASSET_URL', null),
 
         /*
         |--------------------------------------------------------------------------
@@ -133,6 +133,11 @@ return [
             'https://cdn.jsdelivr.net/npm/@yaireo/tagify@4/dist/tagify.polyfills.min.js',
             'https://cdn.jsdelivr.net/npm/@yaireo/tagify@4/dist/tagify.min.js',
         ],
+
+        /**
+         * Layouts.
+         */
+        'turbo' => 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@7/dist/turbo.es2017-umd.js',
 
         /**
          * Moment.
@@ -298,6 +303,7 @@ return [
          * Bars.
          */
         'navbar' => \TALLKit\Components\Bars\Navbar::class,
+        'progressbar' => \TALLKit\Components\Bars\Progressbar::class,
         'sidebar' => \TALLKit\Components\Bars\Sidebar::class,
         'toolbar' => \TALLKit\Components\Bars\Toolbar::class,
 
@@ -363,6 +369,7 @@ return [
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'container' => \TALLKit\Components\Layouts\Container::class,
         'display' => \TALLKit\Components\Layouts\Display::class,
+        'facebook-pixel-code' => \TALLKit\Components\Layouts\FacebookPixelCode::class,
         'google-analytics' => \TALLKit\Components\Layouts\GoogleAnalytics::class,
         'google-fonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
         'google-tag-manager' => \TALLKit\Components\Layouts\GoogleTagManager::class,
@@ -370,6 +377,7 @@ return [
         'loading' => \TALLKit\Components\Layouts\Loading::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
         'meta' => \TALLKit\Components\Layouts\Meta::class,
+        'turbo' => \TALLKit\Components\Layouts\Turbo::class,
 
         /**
          * Markdowns.
@@ -462,6 +470,14 @@ return [
 
     'aliases' => [
         /**
+         * Bars.
+         */
+        'nav-bar' => \TALLKit\Components\Bars\Navbar::class,
+        'progress-bar' => \TALLKit\Components\Bars\Progressbar::class,
+        'side-bar' => \TALLKit\Components\Bars\Sidebar::class,
+        'tool-bar' => \TALLKit\Components\Bars\Toolbar::class,
+
+        /**
          * Buttons.
          */
         'bt' => \TALLKit\Components\Buttons\Button::class,
@@ -522,12 +538,16 @@ return [
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'content' => \TALLKit\Components\Layouts\Container::class,
+        'facebookpixelcode' => \TALLKit\Components\Layouts\FacebookPixelCode::class,
+        'facebookpixel' => \TALLKit\Components\Layouts\FacebookPixelCode::class,
+        'facebook-pixel' => \TALLKit\Components\Layouts\FacebookPixelCode::class,
         'analytics' => \TALLKit\Components\Layouts\GoogleAnalytics::class,
         'googleanalytics' => \TALLKit\Components\Layouts\GoogleAnalytics::class,
         'googlefonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
         'googletagmanager' => \TALLKit\Components\Layouts\GoogleTagManager::class,
         'gtm' => \TALLKit\Components\Layouts\GoogleTagManager::class,
         'preview' => \TALLKit\Components\Layouts\Display::class,
+        'turbolinks' => \TALLKit\Components\Layouts\Turbo::class,
 
         /**
          * Markdowns.
@@ -764,6 +784,134 @@ return [
                 ],
             ],
 
+            'progressbar' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'progressbar\')',
+                ],
+
+                'bar' => [
+                    'class' => 'bg-gray-200',
+                ],
+
+                'progress' => [
+                    'class' => 'text-center text-white',
+                    ':style' => 'style()',
+                ],
+
+                'colors' => [
+                    'default' => [
+                        'class' => 'bg-blue-400',
+                    ],
+
+                    'info' => [
+                        'class' => 'bg-blue-400',
+                    ],
+
+                    'error' => [
+                        'class' => 'bg-red-400',
+                    ],
+
+                    'success' => [
+                        'class' => 'bg-green-400',
+                    ],
+
+                    'warning' => [
+                        'class' => 'bg-yellow-400',
+                    ],
+
+                    'indigo' => [
+                        'class' => 'bg-indigo-400',
+                    ],
+
+                    'none' => [],
+                ],
+
+                'durations' => [
+                    'default' => [
+                        'class' => 'duration-500',
+                    ],
+
+                    '100' => [
+                        'class' => 'duration-100',
+                    ],
+
+                    '300' => [
+                        'class' => 'duration-300',
+                    ],
+
+                    '500' => [
+                        'class' => 'duration-500',
+                    ],
+
+                    '700' => [
+                        'class' => 'duration-700',
+                    ],
+
+                    '1000' => [
+                        'class' => 'duration-1000',
+                    ],
+
+                    'none' => [],
+                ],
+
+                'sizes' => [
+                    'default' => [
+                        'class' => 'h-4 text-sm leading-4',
+                    ],
+
+                    'sm' => [
+                        'class' => 'h-2 text-xs leading-2',
+                    ],
+
+                    'md' => [
+                        'class' => 'h-4 text-sm leading-4',
+                    ],
+
+                    'lg' => [
+                        'class' => 'h-6 text-base leading-6',
+                    ],
+
+                    'xl' => [
+                        'class' => 'h-8 text-lg leading-8',
+                    ],
+
+                    '2xl' => [
+                        'class' => 'h-10 text-xl leading-10',
+                    ],
+
+                    'none' => [],
+                ],
+
+                'roundeds' => [
+                    'default' => [
+                        'class' => 'rounded',
+                    ],
+
+                    'sm' => [
+                        'class' => 'rounded-sm',
+                    ],
+
+                    'md' => [
+                        'class' => 'rounded-md',
+                    ],
+
+                    'lg' => [
+                        'class' => 'rounded-lg',
+                    ],
+
+                    'full' => [
+                        'class' => 'rounded-full',
+                    ],
+
+                    'none' => [
+                        'class' => 'rounded-none',
+                    ],
+                ],
+            ],
+
             'sidebar' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
@@ -805,7 +953,7 @@ return [
                     ],
                 ],
 
-                'overlay' => [
+                'overlays' => [
                     'sm' => [
                         'class' => 'sm:hidden',
                     ],
@@ -968,7 +1116,7 @@ return [
                     ],
                 ],
 
-                'rounded' => [
+                'roundeds' => [
                     'default' => [
                         'class' => 'rounded',
                     ],
@@ -994,7 +1142,7 @@ return [
                     ],
                 ],
 
-                'shadow' => [
+                'shadows' => [
                     'default' => [
                         'class' => 'shadow',
                     ],
@@ -1731,7 +1879,9 @@ return [
              * Layouts.
              */
             'admin-panel' => [
-                'html' => [],
+                'html' => [
+                    'turbo' => true,
+                ],
 
                 'container' => [
                     'class' => 'flex h-screen bg-gray-100',
@@ -1863,6 +2013,8 @@ return [
             ],
 
             'meta' => [],
+
+            'turbo' => [],
 
             /**
              * Markdowns.
@@ -2163,7 +2315,7 @@ return [
                     ],
                 ],
 
-                'rounded' => [
+                'roundeds' => [
                     'default' => [
                         'class' => 'rounded',
                     ],
@@ -2185,7 +2337,7 @@ return [
                     ],
                 ],
 
-                'shadow' => [
+                'shadows' => [
                     'default' => [
                         'class' => 'shadow',
                     ],
@@ -3145,12 +3297,12 @@ return [
 
             'heading' => [
                 'th' => [
-                    'class' => 'py-4 px-6 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
+                    'class' => 'bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
                     'scope' => 'col',
                 ],
 
                 'container' => [
-                    'class' => 'flex items-center',
+                    'class' => 'flex items-center py-4 px-6',
                 ],
 
                 'aligns' => [
