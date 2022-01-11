@@ -147,24 +147,27 @@ class CrudIndex extends Crud
         }
 
         if ($this->displayActionsColumn) {
-            $cols->push('actions');
+            $cols->push(['name' => 'actions', 'sortable' => false]);
         }
 
         if ($this->mapRelationsColumn) {
             $mappedRelations = [];
 
-            $cols = $cols->map(function ($item) use (&$mappedRelations) {
-                if (in_array($item, $mappedRelations)) {
+            $cols = $cols->map(function ($col) use (&$mappedRelations) {
+                $col = is_array($col) ? $col : ['name' => $col];
+                $name = data_get($col, 'name', $col);
+
+                if (in_array($name, $mappedRelations)) {
                     return false;
                 }
 
-                if (Str::endsWith($item, '_id')) {
-                    $item = Str::replaceLast('_id', '', $item);
+                if (Str::endsWith($name, '_id')) {
+                    array_push($mappedRelations, $name);
 
-                    array_push($mappedRelations, $item);
+                    data_set($col, 'name', Str::replaceLast('_id', '', $name));
                 }
 
-                return $item;
+                return $col;
             })->filter();
         }
 

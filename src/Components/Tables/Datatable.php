@@ -6,6 +6,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class Datatable extends Table
 {
@@ -116,6 +117,13 @@ class Datatable extends Table
         $rows = self::applyFilters($rows, $cols, $search);
 
         if ($rows instanceof Builder) {
+            // orderby
+            if ($orderby = request('orderby')) {
+                $direction = Str::lower(request('direction'));
+                $rows->orderBy($orderby, $direction === 'asc' || $direction == 'desc' ? $direction : 'asc');
+            }
+
+            // paginator
             $rows = ($paginator ?? true)
                 ? $rows->paginate()
                 : $rows->get();
@@ -142,6 +150,21 @@ class Datatable extends Table
         if ($firstRow->isEmpty() && $cols->isEmpty()) {
             return [];
         }
+
+        $orderby = request('orderby');
+        $direction = request('direction', 'asc');
+
+        $cols = $cols->map(function($col) use ($orderby, $direction) {
+            $col = is_array($col) ? $col : ['name' => $col];
+            $name = data_get($col, 'name', $col);
+            $sortable = data_get($col, 'sortable', true);
+
+            if ($sortable && ($orderby === $name || $orderby === $name.'_id')) {
+                data_set($col, 'sortable', $direction);
+            }
+
+            return $col;
+        });
 
         return is_callable($parse)
             ? $parse($cols)

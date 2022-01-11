@@ -3,6 +3,7 @@
 namespace TALLKit\Components\Tables;
 
 use TALLKit\Components\BladeComponent;
+use Illuminate\Support\Str;
 
 class Heading extends BladeComponent
 {
@@ -33,13 +34,28 @@ class Heading extends BladeComponent
     public function __construct(
         $text = null,
         $align = null,
-        $sortable = false,
+        $sortable = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->text = $text;
         $this->align = $align ?: 'left';
-        $this->sortable = ($sortable ?? false) ? strtolower($sortable === true ? 'asc' : $sortable) : false;
+        $this->sortable = Str::lower($sortable) ?: true;
+    }
+
+    /**
+     * Generate url sortable with order by and direction.
+     *
+     * @param  string|null  $orderby
+     * @param  string|null  $direcion
+     * @return string
+     */
+    public function url($orderby = null, $direcion = null)
+    {
+        $orderby = $orderby ?: $this->text;
+        $direction = $direcion ?: ($this->sortable === 'asc' ? 'desc' : 'asc');
+
+       return request()->fullUrlWithQuery(compact('orderby', 'direction'));
     }
 }

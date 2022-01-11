@@ -1,15 +1,16 @@
 <th {{ $attributes->mergeThemeProvider($themeProvider, 'th') }}>
-    <div {{
+    <{{ $sortable ? 'a' : 'div'}} {{
         $attributes
             ->mergeOnlyThemeProvider($themeProvider, 'container')
             ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
+            ->merge($sortable ? ['href' => $url((string) $slot)] : [])
      }}>
         {!! $slot->isEmpty() ? __($text) : $slot !!}
 
-        @if ($sortable)
+        @if ($sortable === 'asc' || $sortable === 'desc')
             <x-icon :name="$attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable)['icon-name']">
                 {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable)['icon-svg'] !!}
             </x-icon>
         @endif
-    </div>
+    </{{ $sortable ? 'a' : 'div'}}>
 </th>
