@@ -1,4 +1,3 @@
-
 @if ($id)
     <!-- Google Analytics -->
     <script>

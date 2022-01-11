@@ -7,7 +7,7 @@ use TALLKit\Components\BladeComponent;
 class GoogleTagManager extends BladeComponent
 {
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $id;
 
@@ -27,7 +27,7 @@ class GoogleTagManager extends BladeComponent
     {
         parent::__construct(null);
 
-        $this->id = is_string($id) ? $id : ($id === true ? config('services.google-tag-manager.id') : null);
+        $this->id = $id === true ? config('services.google-tag-manager.id') : $id;
         $this->noscript = $noscript ?? false;
     }
 }

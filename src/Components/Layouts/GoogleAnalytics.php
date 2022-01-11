@@ -7,7 +7,7 @@ use TALLKit\Components\BladeComponent;
 class GoogleAnalytics extends BladeComponent
 {
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $id;
 
@@ -21,6 +21,6 @@ class GoogleAnalytics extends BladeComponent
     {
         parent::__construct(null);
 
-        $this->id = is_string($id) ? $id : ($id === true ? config('services.google-analytics.id') : null);
+        $this->id = $id === true ? config('services.google-analytics.id') : $id;
     }
 }

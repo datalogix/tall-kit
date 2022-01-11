@@ -1,8 +1,8 @@
 <{{ $href ? 'a' : 'button' }} {{
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
-        ->mergeOnlyThemeProvider($themeProvider, 'rounded', $rounded)
-        ->mergeOnlyThemeProvider($themeProvider, 'shadow', $shadow)
+        ->mergeOnlyThemeProvider($themeProvider, 'roundeds', $rounded)
+        ->mergeOnlyThemeProvider($themeProvider, 'shadows', $shadow)
         ->mergeOnlyThemeProvider($themeProvider, $loading && $type === 'submit' ? 'loading' : null, $loading ? 'container' : null)
         ->merge($colorName ? [
             'class' => $outlined

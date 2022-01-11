@@ -63,7 +63,7 @@ class Sidebar extends Drawer
         return $this->attributes
             ->mergeOnlyThemeProvider($this->themeProvider, 'container')
             ->merge(['x-init' => 'setup(\''.$this->name.'\', \''.$this->breakpoint.'\')'], false)
-            ->merge(['theme:overlay' => $this->themeProvider->overlay->get($this->breakpoint, [])], false)
+            ->merge(['theme:overlay' => $this->themeProvider->overlays->get($this->breakpoint, [])], false)
             ->getAttributes();
     }
 

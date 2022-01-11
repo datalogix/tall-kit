@@ -3,8 +3,8 @@
         $attributes
             ->mergeThemeProvider($themeProvider, 'container')
             ->mergeOnlyThemeProvider($themeProvider, 'modes', $mode)
-            ->mergeOnlyThemeProvider($themeProvider, 'rounded', $rounded)
-            ->mergeOnlyThemeProvider($themeProvider, 'shadow', $shadow)
+            ->mergeOnlyThemeProvider($themeProvider, 'roundeds', $rounded)
+            ->mergeOnlyThemeProvider($themeProvider, 'shadows', $shadow)
             ->merge(['class' => ($mode !== 'outlined' ? 'bg-'.$color.'-200 ' : '').'border-'.$color.'-300'])
             ->merge(['x-init' => 'setup(\''.$on.'\', '.$timeout.')'])
         }}
