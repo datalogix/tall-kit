@@ -28,19 +28,29 @@ class Html extends BladeComponent
     public $csrfToken;
 
     /**
-     * @var string|bool|null
-     */
-    public $googleAnalytics;
-
-    /**
      * @var string|null
      */
     public $googleFonts;
 
     /**
+     * @var bool|null
+     */
+    public $turbo;
+
+    /**
+     * @var string|bool|null
+     */
+    public $googleAnalytics;
+
+    /**
      * @var string|bool|null
      */
     public $googleTagManager;
+
+    /**
+     * @var string|bool|null
+     */
+    public $facebookPixelCode;
 
     /**
      * @var bool
@@ -90,9 +100,11 @@ class Html extends BladeComponent
      * @param  string|null  $charset
      * @param  string|null  $viewport
      * @param  bool|null  $csrfToken
-     * @param  string|bool|null  $googleAnalytics
      * @param  string|null  $googleFonts
+     * @param  bool|null  $turbo
+     * @param  string|bool|null  $googleAnalytics
      * @param  string|bool|null  $googleTagManager
+     * @param  string|bool|null  $facebookPixelCode
      * @param  bool|null  $livewire
      * @param  string|bool|null  $mixStyles
      * @param  string|bool|null  $mixScripts
@@ -112,9 +124,11 @@ class Html extends BladeComponent
         $charset = null,
         $viewport = null,
         $csrfToken = null,
-        $googleAnalytics = null,
         $googleFonts = null,
+        $turbo = null,
+        $googleAnalytics = null,
         $googleTagManager = null,
+        $facebookPixelCode = null,
         $livewire = null,
         $mixStyles = null,
         $mixScripts = null,
@@ -138,9 +152,11 @@ class Html extends BladeComponent
         $this->charset = data_get($options, 'charset', $charset ?? 'utf-8');
         $this->viewport = data_get($options, 'viewport', $viewport ?? 'width=device-width, initial-scale=1');
         $this->csrfToken = data_get($options, 'csrfToken', $csrfToken ?? true);
-        $this->googleAnalytics = data_get($options, 'googleAnalytics', data_get($options, 'analytics', $googleAnalytics));
         $this->googleFonts = data_get($options, 'googleFonts', data_get($options, 'fonts', $googleFonts));
+        $this->turbo = data_get($options, 'turbo', $turbo);
+        $this->googleAnalytics = data_get($options, 'googleAnalytics', data_get($options, 'analytics', $googleAnalytics));
         $this->googleTagManager = data_get($options, 'googleTagManager', data_get($options, 'gtm', $googleTagManager));
+        $this->facebookPixelCode = data_get($options, 'facebookPixelCode', data_get($options, 'facebookPixel', $facebookPixelCode));
         $this->livewire = data_get($options, 'livewire', $livewire ?? true) && class_exists('\Livewire\Livewire');
 
         $mixStyles = data_get($options, 'mixStyles', $mixStyles ?? 'css/app.css');
@@ -148,8 +164,8 @@ class Html extends BladeComponent
 
         $this->mixStyles = $mixStyles && file_exists(public_path($mixStyles)) ? $mixStyles : null;
         $this->mixScripts = $mixScripts && file_exists(public_path($mixScripts)) ? $mixScripts : null;
-        $this->styles = array_merge(data_get($options, 'styles', []), Arr::wrap($styles));
-        $this->scripts = array_merge(data_get($options, 'scripts', []), Arr::wrap($scripts));
+        $this->styles = array_merge(Arr::wrap(data_get($options, 'styles')), Arr::wrap($styles));
+        $this->scripts = array_merge(Arr::wrap(data_get($options, 'scripts')), Arr::wrap($scripts));
         $this->stackStyles = data_get($options, 'stackStyles', $stackStyles ?? 'styles');
         $this->stackScripts = data_get($options, 'stackScripts', $stackScripts ?? 'scripts');
 
