@@ -56,6 +56,6 @@ class Heading extends BladeComponent
         $orderby = $orderby ?: $this->text;
         $direction = $direcion ?: ($this->sortable === 'asc' ? 'desc' : 'asc');
 
-       return request()->fullUrlWithQuery(compact('orderby', 'direction'));
+        return request()->fullUrlWithQuery(compact('orderby', 'direction'));
     }
 }
