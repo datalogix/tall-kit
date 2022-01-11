@@ -2,8 +2,8 @@
 
 namespace TALLKit\Components\Tables;
 
-use TALLKit\Components\BladeComponent;
 use Illuminate\Support\Str;
+use TALLKit\Components\BladeComponent;
 
 class Heading extends BladeComponent
 {
