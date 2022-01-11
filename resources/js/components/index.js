@@ -1,4 +1,5 @@
 import navbar from './bars/navbar'
+import progressbar from './bars/progressbar'
 import sidebar from './bars/sidebar'
 import carbon from './datetimes/carbon'
 import countdown from './datetimes/countdown'
@@ -33,6 +34,7 @@ export default {
    * Bars.
    */
   navbar,
+  progressbar,
   sidebar,
 
   /**
