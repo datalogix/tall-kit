@@ -154,7 +154,7 @@ class Datatable extends Table
         $orderby = request('orderby');
         $direction = request('direction', 'asc');
 
-        $cols = $cols->map(function($col) use ($orderby, $direction) {
+        $cols = $cols->map(function ($col) use ($orderby, $direction) {
             $col = is_array($col) ? $col : ['name' => $col];
             $name = data_get($col, 'name', $col);
             $sortable = data_get($col, 'sortable', true);

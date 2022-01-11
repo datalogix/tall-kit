@@ -54,9 +54,9 @@ class Progressbar extends BladeComponent
      * @param  int|null  $max
      * @param  string|bool|null  $color
      * @param  string|int|bool|null  $duration
-     * @param  string|bool|null $size
-     * @param  string|bool|null $rounded
-     * @param  bool|null $displayValue
+     * @param  string|bool|null  $size
+     * @param  string|bool|null  $rounded
+     * @param  bool|null  $displayValue
      * @param  string|null  $theme
      * @return void
      */
