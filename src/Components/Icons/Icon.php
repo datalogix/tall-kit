@@ -34,12 +34,10 @@ class Icon extends BladeComponent
         }
 
         $attributes = $this->attributes->getAttributes();
+        $class = data_get($attributes, 'class', '');
+        data_set($attributes, 'class', null);
 
-        $class = $attributes['class'] ?? '';
-
-        unset($attributes['class']);
-
-        return svg($this->name, $class, $attributes);
+        return svg($this->name, $class, array_filter($attributes));
     }
 
     /**
@@ -50,23 +48,26 @@ class Icon extends BladeComponent
     protected function renderIcon()
     {
         return function (array $data) {
-            if (empty(trim($data['slot'])) && empty($data['attributes'])) {
+            $slot = data_get($data, 'slot');
+            $attributes = data_get($data, 'attributes');
+
+            if (empty(trim($slot)) && empty($attributes)) {
                 return '';
             }
 
-            if (empty(trim($data['slot'])) && (string) $data['attributes']) {
-                return '<i '.$data['attributes'].'></i>';
+            if (empty(trim($slot)) && (string) $attributes) {
+                return '<i '.$attributes.'></i>';
             }
 
-            if (Str::startsWith($data['slot'], '<svg')) {
-                return str_replace('<svg', sprintf('<svg %s', $data['attributes']), $data['slot']);
+            if (Str::startsWith($slot, '<svg')) {
+                return str_replace('<svg', sprintf('<svg %s', $attributes), $slot);
             }
 
-            if ((string) $data['attributes']) {
-                return '<span '.$data['attributes'].'>'.$data['slot'].'</span>';
+            if ((string) $attributes) {
+                return '<span '.$attributes.'>'.$slot.'</span>';
             }
 
-            return (string) $data['slot'];
+            return (string) $slot;
         };
     }
 }

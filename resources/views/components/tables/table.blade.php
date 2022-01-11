@@ -10,16 +10,16 @@
                         <x-heading {{
                                 $attributes
                                     ->mergeOnlyThemeProvider($themeProvider, 'th')
-                                    ->merge(isset($col['class']) ? ['class' => $col['class']] : [])
-                                    ->merge(isset($col['style']) ? ['style' => $col['style']] : [])
-                                    ->merge(isset($col['attrs']) ? $col['attrs'] : [])
+                                    ->merge(['class' => data_get($col, 'class')])
+                                    ->merge(['style' => data_get($col, 'style')])
+                                    ->merge(data_get($col, 'attrs', []))
                             }}
-                            :text="$col['name'] ?? $col"
-                            :align="$col['align'] ?? null"
-                            :sortable="$col['sortable'] ?? null"
+                            :text="data_get($col, 'name', $col)"
+                            :align="data_get($col, 'align')"
+                            :sortable="data_get($col, 'sortable')"
                             :theme="$theme"
                         >
-                            {!! __($col['name'] ?? $col) !!}
+                            {!! __(data_get($col, 'name', $col)) !!}
                         </x-heading>
                     @empty
                         {{ $head }}
@@ -38,11 +38,11 @@
                         <x-cell {{
                                 $attributes
                                     ->mergeOnlyThemeProvider($themeProvider, 'td')
-                                    ->merge(isset($col['class']) ? ['class' => $col['class']] : ($loop->last ? ['class' => 'w-40'] : []))
-                                    ->merge(isset($col['style']) ? ['style' => $col['style']] : [])
-                                    ->merge(isset($col['attrs']) ? $col['attrs'] : [])
+                                    ->merge(['class' => data_get($col, 'class', $loop->last ? 'w-40' : null)])
+                                    ->merge(['style' => data_get($col, 'style')])
+                                    ->merge(data_get($col, 'attrs', []))
                             }}
-                            :align="$col['align'] ?? null"
+                            :align="data_get($col, 'align')"
                             :theme="$theme"
                         >
                             @isset(${'col_'.(is_int($key) ? data_get($col, 'name', $col) : $key)})
@@ -95,11 +95,11 @@
                             <x-cell {{
                                     $attributes
                                         ->mergeOnlyThemeProvider($themeProvider, 'td')
-                                        ->merge(isset($col['class']) ? ['class' => $col['class']] : [])
-                                        ->merge(isset($col['style']) ? ['style' => $col['style']] : [])
-                                        ->merge(isset($col['attrs']) ? $col['attrs'] : [])
+                                        ->merge(['class' => data_get($col, 'class')])
+                                        ->merge(['style' => data_get($col, 'style')])
+                                        ->merge(data_get($col, 'attrs', []))
                                 }}
-                                :align="$col['align']"
+                                :align="data_get($col, 'align')"
                                 :theme="$theme"
                             >
                                 @isset(${'col_'.(is_int($key) ? data_get($col, 'name', $col) : $key).'_footer'})

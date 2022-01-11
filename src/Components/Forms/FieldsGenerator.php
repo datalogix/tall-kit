@@ -40,17 +40,17 @@ class FieldsGenerator extends BladeComponent
      */
     public function getFieldComponent($key, $field)
     {
-        $name = $field['name'] ?? is_int($key) ? $field : $key;
+        $name = data_get($field, 'name', is_int($key) ? $field : $key);
 
         if (! $name || is_array($name)) {
             return 'input';
         }
 
-        if (isset($field['type'])) {
-            return $field['type'];
+        if ($fieldType = data_get($field, 'type')) {
+            return $fieldType;
         }
 
-        if (isset($field['options']) || Str::endsWith($name, '_id')) {
+        if (data_get($field, 'options') || Str::endsWith($name, '_id')) {
             return 'select';
         }
 
@@ -78,11 +78,11 @@ class FieldsGenerator extends BladeComponent
      */
     public function getFieldOptions($key, $field)
     {
-        if (isset($field['options'])) {
-            return $field['options'];
+        if ($options = data_get($field, 'options')) {
+            return $options;
         }
 
-        $name = $field['name'] ?? is_int($key) ? $field : $key;
+        $name = data_get($field, 'name', is_int($key) ? $field : $key);
 
         if (is_string($name) && Str::endsWith($name, '_id')) {
             try {

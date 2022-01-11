@@ -165,6 +165,7 @@ class CrudIndex extends Crud
                     array_push($mappedRelations, $name);
 
                     data_set($col, 'name', Str::replaceLast('_id', '', $name));
+                    data_set($col, 'original_name', $name);
                 }
 
                 return $col;

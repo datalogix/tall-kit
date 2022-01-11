@@ -147,21 +147,21 @@ class Message extends BladeComponent
         $this->type = data_get($target, 'type', $type ?? 'info');
         $typeTheme = $this->themeProvider->types->get($this->type, $this->themeProvider->types->get('default'));
 
-        $this->color = data_get($target, 'color', $typeTheme['color'] ?? null);
-        $this->mode = data_get($target, 'mode', $mode ?? $typeTheme['mode'] ?? 'default');
-        $this->rounded = data_get($target, 'rounded', $rounded ?? $typeTheme['rounded'] ?? 'default');
-        $this->shadow = data_get($target, 'shadow', $shadow ?? $typeTheme['shadow'] ?? 'default');
-        $this->icon = data_get($target, 'icon', $icon ?? $typeTheme['icon'] ?? true);
-        $this->iconSvg = data_get($target, 'icon-svg', $iconSvg ?? $typeTheme['icon-svg'] ?? null);
-        $this->iconName = data_get($target, 'icon-name', $iconName ?? $typeTheme['icon-name'] ?? null);
-        $this->timeout = data_get($target, 'timeout', $timeout ?? $typeTheme['timeout'] ?? 0);
-        $this->dismissible = data_get($target, 'dismissible', $dismissible ?? $typeTheme['dismissible'] ?? false);
-        $this->dismissibleIcon = data_get($target, 'dismissibleIcon', $dismissibleIcon ?? $typeTheme['dismissibleIcon'] ?? true);
+        $this->color = data_get($target, 'color', data_get($typeTheme, 'color'));
+        $this->mode = data_get($target, 'mode', $mode ?? data_get($typeTheme, 'mode', 'default'));
+        $this->rounded = data_get($target, 'rounded', $rounded ?? data_get($typeTheme, 'rounded', 'default'));
+        $this->shadow = data_get($target, 'shadow', $shadow ?? data_get($typeTheme, 'shadow', 'default'));
+        $this->icon = data_get($target, 'icon', $icon ?? data_get($typeTheme, 'icon', true));
+        $this->iconSvg = data_get($target, 'icon-svg', $iconSvg ?? data_get($typeTheme, 'icon-svg'));
+        $this->iconName = data_get($target, 'icon-name', $iconName ?? data_get($typeTheme, 'icon-name'));
+        $this->timeout = data_get($target, 'timeout', $timeout ?? data_get($typeTheme, 'timeout', 0));
+        $this->dismissible = data_get($target, 'dismissible', $dismissible ?? data_get($typeTheme, 'dismissible', false));
+        $this->dismissibleIcon = data_get($target, 'dismissibleIcon', $dismissibleIcon ?? data_get($typeTheme, 'dismissibleIcon', true));
         $this->dismissibleIconSvg = data_get($target, 'dismissibleIconSvg', $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('icon-svg'));
         $this->dismissibleIconName = data_get($target, 'dismissibleIconName', $dismissibleIconName ?? $this->themeProvider->dismissible->get('icon-name'));
-        $this->dismissibleText = data_get($target, 'dismissibleText', $dismissibleText ?? $typeTheme['dismissibleText'] ?? null);
-        $this->title = data_get($target, 'title', $title ?? $typeTheme['title'] ?? null);
-        $this->message = data_get($target, 'message', $message ?? (is_string($target) ? $target : null) ?? $typeTheme['message'] ?? null);
-        $this->on = data_get($target, 'on', $on ?? $typeTheme['on'] ?? null);
+        $this->dismissibleText = data_get($target, 'dismissibleText', $dismissibleText ?? data_get($typeTheme, 'dismissibleText'));
+        $this->title = data_get($target, 'title', $title ?? data_get($typeTheme, 'title'));
+        $this->message = data_get($target, 'message', $message ?? (is_string($target) ? $target : null) ?? data_get($typeTheme, 'message'));
+        $this->on = data_get($target, 'on', $on ?? data_get($typeTheme, 'on'));
     }
 }

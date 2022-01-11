@@ -69,21 +69,21 @@ class Markdown extends BladeComponent
     protected function converter()
     {
         $config = $this->options;
-        $blocks = $config['blocks'] ?? [];
-        $inlines = $config['inlines'] ?? [];
-        $delimiters = $config['delimiters'] ?? [];
-        $renderers = $config['renderers'] ?? [];
-        $extensions = $config['extensions'] ?? [];
-        $listeners = $config['listeners'] ?? [];
+        $blocks = data_get($config, 'blocks', []);
+        $inlines = data_get($config , 'inlines', []);
+        $delimiters = data_get($config, 'delimiters', []);
+        $renderers = data_get($config, 'renderers', []);
+        $extensions = data_get($config, 'extensions', []);
+        $listeners = data_get($config, 'listeners', []);
 
-        unset($config['blocks']);
-        unset($config['inlines']);
-        unset($config['delimiters']);
-        unset($config['renderers']);
-        unset($config['extensions']);
-        unset($config['listeners']);
+        data_set($config, 'blocks', null);
+        data_set($config, 'inlines', null);
+        data_set($config, 'delimiters', null);
+        data_set($config, 'renderers', null);
+        data_set($config, 'extensions', null);
+        data_set($config, 'listeners', null);
 
-        $environment = new Environment($config);
+        $environment = new Environment(array_filter($config));
         $environment->addExtension(new CommonMarkCoreExtension());
 
         foreach ($blocks as $block) {

@@ -187,7 +187,7 @@ class Datatable extends Table
 
         $cols = Collection::make($cols);
         $search = Collection::make($search)->map(function ($value, $key) {
-            return $value['name'] ?? $key;
+            return data_get($value, 'name', $key);
         });
 
         $rows = $rows->when($search->only($cols)->isNotEmpty(), function (Builder $query) use ($search, $cols) {

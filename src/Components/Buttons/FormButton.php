@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Buttons;
 
+use Illuminate\Support\Str;
 use TALLKit\Components\Forms\Form;
 
 class FormButton extends Form
@@ -130,8 +131,8 @@ class FormButton extends Form
         $this->preset = $preset;
 
         if ($this->preset && $presetProperties = $this->themeProvider->presets->get($this->preset)) {
-            $this->method = strtoupper($presetProperties['method']) ?? $this->method;
-            $this->confirm = $this->confirm ?? $presetProperties['confirm'];
+            $this->method = Str::upper(data_get($presetProperties, 'method', $this->method));
+            $this->confirm = $this->confirm ?? data_get($presetProperties, 'confirm');
         }
     }
 }

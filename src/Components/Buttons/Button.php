@@ -150,9 +150,9 @@ class Button extends BladeComponent
         }
 
         if ($this->color && $colorProperties = $this->themeProvider->colors->get($this->color)) {
-            $this->colorName = $colorProperties['name'] ?? $colorProperties;
-            $this->colorWeight = $colorProperties['weight'] ?? 500;
-            $this->colorHover = $colorProperties['hover'] ?? 700;
+            $this->colorName = data_get($colorProperties, 'name', $colorProperties);
+            $this->colorWeight = data_get($colorProperties, 'weight', 500);
+            $this->colorHover = data_get($colorProperties, 'hover', 700);
         }
     }
 }

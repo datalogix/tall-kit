@@ -69,17 +69,17 @@ class TALLKit
         $styles = Collection::make();
         $scripts = Collection::make();
 
-        if ($options['inject']['tailwindcss'] && $assets['tailwindcss']) {
-            $styles->add($assets['tailwindcss']);
-            $scripts->add($assets['tailwindcss']);
+        if ($tailwindcss = data_get($assets, 'tailwindcss') && data_get($options, 'inject.tailwindcss')) {
+            $styles->add($tailwindcss);
+            $scripts->add($tailwindcss);
         }
 
-        if ($options['inject']['alpine'] && $assets['alpine']) {
-            $styles->add($assets['alpine']);
-            $scripts->add($assets['alpine']);
+        if ($alpine = data_get($assets, 'alpine') && data_get($options, 'inject.alpine')) {
+            $styles->add($alpine);
+            $scripts->add($alpine);
         }
 
-        if ($options['load_type'] === true) {
+        if (data_get($options, 'load_type') === true) {
             Collection::make($assets)->filter(function ($key) {
                 return $key !== 'tailwindcss' && $key !== 'alpine';
             })->each(function ($asset) use ($styles, $scripts) {
@@ -94,12 +94,12 @@ class TALLKit
             return '<link href="'.$url.'" rel="stylesheet" />';
         })->join("\n");
 
-        $nonce = isset($options['nonce']) ? " nonce=\"{$options['nonce']}\"" : '';
+        $nonce = data_get($options, 'nonce') ? " nonce=\"{".data_get($options, 'nonce')."}\"" : '';
 
         $htmlScrips = $scripts->flatten()->filter(function ($value) {
             return Str::endsWith($value, '.js');
         })->map(function ($url) use ($assets, $nonce) {
-            return '<script src="'.$url.'"'.((in_array($url, $assets['alpine'])) ? ' defer' : '').$nonce.'></script>';
+            return '<script src="'.$url.'"'.(in_array($url, data_get($assets, 'alpine', [])) ? ' defer' : '').$nonce.'></script>';
         })->join("\n");
 
         return <<<HTML
@@ -128,20 +128,21 @@ HTML;
         $jsonEncodedOptions = $options ? json_encode($options) : '';
         $jsonEncodedAssets = $assets ? json_encode($assets) : '';
 
-        $appUrl = rtrim($options['asset_url'] ?? '', '/');
+        $appUrl = rtrim(data_get($options, 'asset_url', ''), '/');
 
         $manifest = json_decode(file_get_contents(__DIR__.'/../dist/mix-manifest.json'), true);
-        $versionedFileName = $manifest['/tallkit.js'];
+        $versionedFileName = data_get($manifest, '/tallkit.js');
 
         // Default to dynamic `tallkit.js` (served by a Laravel route).
         $fullAssetPath = "{$appUrl}/tallkit{$versionedFileName}";
         $assetWarning = null;
-        $nonce = isset($options['nonce']) ? " nonce=\"{$options['nonce']}\"" : '';
+
+        $nonce = data_get($options, 'nonce') ? " nonce=\"{".data_get($options, 'nonce')."}\"" : '';
 
         // Use static assets if they have been published.
         if (file_exists(public_path('vendor/tallkit/mix-manifest.json'))) {
             $publishedManifest = json_decode(file_get_contents(public_path('vendor/tallkit/mix-manifest.json')), true);
-            $versionedFileName = $publishedManifest['/tallkit.js'];
+            $versionedFileName = data_get($publishedManifest, '/tallkit.js');
 
             $fullAssetPath = ($this->isRunningServerless() ? config('app.asset_url') : $appUrl).'/vendor/tallkit'.$versionedFileName;
 
@@ -205,7 +206,7 @@ HTML;
      */
     protected function isRunningServerless()
     {
-        return in_array($_ENV['SERVER_SOFTWARE'] ?? null, [
+        return in_array(data_get($_ENV, 'SERVER_SOFTWARE'), [
             'vapor',
             'bref',
         ]);
