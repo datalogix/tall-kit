@@ -95,8 +95,8 @@ return [
          * Alpine.
          */
         'alpine' => [
-            //'https://cdn.jsdelivr.net/npm/alpinejs@2/dist/alpine.min.js',
-            'https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js',
+            //'https://cdn.jsdelivr.net/npm/alpinejs@2/dist/alpine.min.js', // v2
+            'https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js', // v3
         ],
 
         /**
@@ -135,11 +135,6 @@ return [
         ],
 
         /**
-         * Layouts.
-         */
-        'turbo' => 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@7/dist/turbo.es2017-umd.js',
-
-        /**
          * Moment.
          */
         'moment' => [
@@ -176,6 +171,14 @@ return [
         'pikaday' => [
             'https://cdn.jsdelivr.net/npm/pikaday@1/css/pikaday.min.css',
             'https://cdn.jsdelivr.net/npm/pikaday@1/pikaday.min.js',
+        ],
+
+        /**
+         * Scripts.
+         */
+        'turbo' => [
+            'module' => 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@7/dist/turbo.es2017-umd.js',
+            'livewire' => 'https://cdn.jsdelivr.net/npm/livewire-turbolinks/dist/livewire-turbolinks.js',
         ],
 
         /**
@@ -369,15 +372,10 @@ return [
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'container' => \TALLKit\Components\Layouts\Container::class,
         'display' => \TALLKit\Components\Layouts\Display::class,
-        'facebook-pixel-code' => \TALLKit\Components\Layouts\FacebookPixelCode::class,
-        'google-analytics' => \TALLKit\Components\Layouts\GoogleAnalytics::class,
-        'google-fonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
-        'google-tag-manager' => \TALLKit\Components\Layouts\GoogleTagManager::class,
         'html' => \TALLKit\Components\Layouts\Html::class,
         'loading' => \TALLKit\Components\Layouts\Loading::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
         'meta' => \TALLKit\Components\Layouts\Meta::class,
-        'turbo' => \TALLKit\Components\Layouts\Turbo::class,
 
         /**
          * Markdowns.
@@ -431,6 +429,15 @@ return [
         'flatpickr' => \TALLKit\Components\Pickers\Flatpickr::class,
         'pickr' => \TALLKit\Components\Pickers\Pickr::class,
         'pikaday' => \TALLKit\Components\Pickers\Pikaday::class,
+
+        /**
+         * Scripts.
+         */
+        'facebook-pixel-code' => \TALLKit\Components\Scripts\FacebookPixelCode::class,
+        'google-analytics' => \TALLKit\Components\Scripts\GoogleAnalytics::class,
+        'google-fonts' => \TALLKit\Components\Scripts\GoogleFonts::class,
+        'google-tag-manager' => \TALLKit\Components\Scripts\GoogleTagManager::class,
+        'turbo' => \TALLKit\Components\Scripts\Turbo::class,
 
         /**
          * Sliders.
@@ -538,16 +545,7 @@ return [
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'content' => \TALLKit\Components\Layouts\Container::class,
-        'facebookpixelcode' => \TALLKit\Components\Layouts\FacebookPixelCode::class,
-        'facebookpixel' => \TALLKit\Components\Layouts\FacebookPixelCode::class,
-        'facebook-pixel' => \TALLKit\Components\Layouts\FacebookPixelCode::class,
-        'analytics' => \TALLKit\Components\Layouts\GoogleAnalytics::class,
-        'googleanalytics' => \TALLKit\Components\Layouts\GoogleAnalytics::class,
-        'googlefonts' => \TALLKit\Components\Layouts\GoogleFonts::class,
-        'googletagmanager' => \TALLKit\Components\Layouts\GoogleTagManager::class,
-        'gtm' => \TALLKit\Components\Layouts\GoogleTagManager::class,
         'preview' => \TALLKit\Components\Layouts\Display::class,
-        'turbolinks' => \TALLKit\Components\Layouts\Turbo::class,
 
         /**
          * Markdowns.
@@ -568,8 +566,16 @@ return [
         /**
          * Navigations.
          */
+        'menu-item' => \TALLKit\Components\Navigations\NavItem::class,
+        'menuitem' => \TALLKit\Components\Navigations\NavItem::class,
+        'menu-dropdown-item' => \TALLKit\Components\Navigations\NavItem::class,
+        'menudropdownitem' => \TALLKit\Components\Navigations\NavItem::class,
         'navigation-drawer' => \TALLKit\Components\Navigations\Drawer::class,
         'navitem' => \TALLKit\Components\Navigations\NavItem::class,
+        'sidebar-item' => \TALLKit\Components\Navigations\NavItem::class,
+        'sidebaritem' => \TALLKit\Components\Navigations\NavItem::class,
+        'user-menu-item' => \TALLKit\Components\Navigations\NavItem::class,
+        'usermenuitem' => \TALLKit\Components\Navigations\NavItem::class,
 
         /**
          * Overlays.
@@ -592,6 +598,19 @@ return [
         'colorpicker' => \TALLKit\Components\Pickers\Pickr::class,
         'date-picker' => \TALLKit\Components\Pickers\Pikaday::class,
         'datepicker' => \TALLKit\Components\Pickers\Pikaday::class,
+
+        /**
+         * Scripts.
+         */
+        'facebookpixelcode' => \TALLKit\Components\Scripts\FacebookPixelCode::class,
+        'facebookpixel' => \TALLKit\Components\Scripts\FacebookPixelCode::class,
+        'facebook-pixel' => \TALLKit\Components\Scripts\FacebookPixelCode::class,
+        'analytics' => \TALLKit\Components\Scripts\GoogleAnalytics::class,
+        'googleanalytics' => \TALLKit\Components\Scripts\GoogleAnalytics::class,
+        'googlefonts' => \TALLKit\Components\Scripts\GoogleFonts::class,
+        'googletagmanager' => \TALLKit\Components\Scripts\GoogleTagManager::class,
+        'gtm' => \TALLKit\Components\Scripts\GoogleTagManager::class,
+        'turbolinks' => \TALLKit\Components\Scripts\Turbo::class,
 
         /**
          * Sliders.
@@ -1918,7 +1937,9 @@ return [
             ],
 
             'authentication-card' => [
-                'html' => [],
+                'html' => [
+                    'turbo' => true,
+                ],
 
                 'container' => [
                     'class' => 'min-h-screen flex flex-col items-center pt-6 bg-gray-100',
@@ -2013,8 +2034,6 @@ return [
             ],
 
             'meta' => [],
-
-            'turbo' => [],
 
             /**
              * Markdowns.
@@ -2487,7 +2506,7 @@ return [
                 'container' => [],
 
                 'item' => [
-                    'class' => 'w-full flex items-center py-2 px-3 transition outline-none focus:outline-none hover:opacity-75',
+                    'class' => 'w-full flex items-center space-x-2 py-2 px-3 transition outline-none focus:outline-none hover:opacity-75',
                 ],
 
                 'active' => [
@@ -2495,6 +2514,8 @@ return [
                 ],
 
                 'icon-left' => [],
+
+                'text' => [],
 
                 'icon-right' => [],
             ],
