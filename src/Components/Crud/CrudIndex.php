@@ -135,7 +135,7 @@ class CrudIndex extends Crud
         }
 
         if (! $this->displayIdColumn) {
-            $pos = $cols->search(function($col, $key) {
+            $pos = $cols->search(function ($col, $key) {
                 return Str::lower(data_get($col, 'name', is_int($key) ? $col : $key)) === 'id';
             });
 

@@ -171,7 +171,7 @@ class Datatable extends Table
      */
     public static function getDefaultSortable($rows)
     {
-        return !($rows instanceof EloquentCollection || $rows instanceof Paginator);
+        return ! ($rows instanceof EloquentCollection || $rows instanceof Paginator);
     }
 
     /**
