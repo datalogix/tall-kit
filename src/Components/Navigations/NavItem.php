@@ -35,6 +35,11 @@ class NavItem extends BladeComponent
     /**
      * @var string|bool|null
      */
+    public $wireClick;
+
+    /**
+     * @var string|bool|null
+     */
     public $icon;
 
     /**
@@ -55,6 +60,7 @@ class NavItem extends BladeComponent
      * @param  string|bool|null  $href
      * @param  string|bool|null  $target
      * @param  string|bool|null  $click
+     * @param  string|bool|null  $wireClick
      * @param  string|bool|null  $icon
      * @param  string|bool|null  $iconLeft
      * @param  string|bool|null  $iconRight
@@ -67,6 +73,7 @@ class NavItem extends BladeComponent
         $href = null,
         $target = null,
         $click = null,
+        $wireClick = null,
         $icon = null,
         $iconLeft = null,
         $iconRight = null,
@@ -79,6 +86,7 @@ class NavItem extends BladeComponent
         $this->href = $href;
         $this->target = $target;
         $this->click = $click;
+        $this->wireClick = $wireClick;
         $this->icon = $icon;
         $this->iconLeft = $iconLeft ?? $this->icon;
         $this->iconRight = $iconRight;

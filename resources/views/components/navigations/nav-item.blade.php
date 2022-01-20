@@ -3,6 +3,7 @@
         @if ($href) href="{{ $href }}" @endif
         @if ($target) target="{{ $target }}" @endif
         @if ($click) @click="{{ $click }}" @endif
+        @if ($wireClick) wire:click="{{ $wireClick }}" @endif
         {{
             $attributes
                 ->mergeThemeProvider($themeProvider, 'item')
@@ -19,7 +20,9 @@
             {!! $iconLeft !!}
         </x-icon>
 
-        {!! $slot->isEmpty() ? __($text) : $slot !!}
+        <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'text') }}>
+            {!! $slot->isEmpty() ? __($text) : $slot !!}
+        </span>
 
         <x-icon
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-right') }}
