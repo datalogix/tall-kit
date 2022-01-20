@@ -7,7 +7,7 @@
     @endisset
 @endif
 
-<div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
+<div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
     <x-sidebar
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'sidebar') }}
         :items="$sidebarItems"

@@ -1,11 +1,11 @@
 <div {{
     $attributes
-        ->mergeThemeProvider($themeProvider, 'container')
+        ->mergeOnlyThemeProvider($themeProvider, 'container')
         ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
     }}
 >
     <x-dropdown
-        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dropdown') }}
+        {{ $attributes->mergeThemeProvider($themeProvider, 'dropdown') }}
         :name="$name"
         :show="$show"
         :overlay="$overlay"

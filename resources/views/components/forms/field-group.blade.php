@@ -1,4 +1,4 @@
-<div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
+<div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
     @if (isset($prepend) || $prependText || $prependIcon)
         <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'prepend') }}>
             {{ $prepend ?? '' }}
