@@ -4,6 +4,7 @@ class Assets {
   constructor (items = {}) {
     this.items = {}
     this.loaded = []
+    this.loading = []
 
     for (const item in items) {
       this.register(item, items[item])
@@ -45,11 +46,11 @@ class Assets {
   }
 
   async load (asset) {
-    if (this.loaded.includes(asset) || !this.has(asset)) {
+    if (this.loading.includes(asset) || this.loaded.includes(asset) || !this.has(asset)) {
       return Promise.resolve()
     }
 
-    this.loaded.push(asset)
+    this.loading.push(asset)
 
     const assets = this.get(asset)
     const promisses = []
@@ -77,6 +78,8 @@ class Assets {
     }
 
     await Promise.all(promisses)
+
+    this.loaded.push(asset)
 
     dispatch(`tallkit:asset.${asset}`, this)
   }

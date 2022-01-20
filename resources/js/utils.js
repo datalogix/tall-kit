@@ -17,12 +17,16 @@ export function detectAssets (el, attributeKey) {
 export function loadComponentAssets (asset) {
   return new Promise((resolve, reject) => {
     if (!window.tallkit || !window.tallkit.assets) {
-      reject(new Error('TALLKit is not defined.'))
+      return reject(new Error('TALLKit is not defined.'))
     }
 
-    window.tallkit.assets.load(asset)
+    if (window.tallkit.assets.loaded.includes(asset)) {
+      return resolve()
+    }
 
     window.addEventListener(`tallkit:asset.${asset}`, resolve)
+
+    window.tallkit.assets.load(asset)
   })
 }
 
