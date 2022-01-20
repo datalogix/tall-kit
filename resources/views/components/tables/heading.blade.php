@@ -3,9 +3,12 @@
         $attributes
             ->mergeOnlyThemeProvider($themeProvider, 'container')
             ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
-            ->merge($sortable ? ['href' => $url((string) $slot)] : [])
+            ->merge($sortable && isset($name)
+                ? ['href' => request()->fullUrlWithQuery(['orderby' => $name, 'direction' => $sortable === 'asc' ? 'desc' : 'asc'])]
+                : []
+            )
      }}>
-        {!! $slot->isEmpty() ? __($text) : $slot !!}
+        {!! $slot->isEmpty() ? __($name) : $slot !!}
 
         @if ($sortable === 'asc' || $sortable === 'desc')
             <x-icon :name="$attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable)['icon-name']">

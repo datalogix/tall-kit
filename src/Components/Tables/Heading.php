@@ -10,7 +10,7 @@ class Heading extends BladeComponent
     /**
      * @var string|null
      */
-    public $text;
+    public $name;
 
     /**
      * @var string
@@ -25,37 +25,22 @@ class Heading extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  string|null  $text
+     * @param  string|null  $name
      * @param  string|bool|null  $align
      * @param  string|bool|null  $sortable
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
-        $text = null,
+        $name = null,
         $align = null,
         $sortable = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->text = $text;
+        $this->name = $name;
         $this->align = $align ?: 'left';
-        $this->sortable = Str::lower($sortable) ?: true;
-    }
-
-    /**
-     * Generate url sortable with order by and direction.
-     *
-     * @param  string|null  $orderby
-     * @param  string|null  $direcion
-     * @return string
-     */
-    public function url($orderby = null, $direcion = null)
-    {
-        $orderby = $orderby ?: $this->text;
-        $direction = $direcion ?: ($this->sortable === 'asc' ? 'desc' : 'asc');
-
-        return request()->fullUrlWithQuery(compact('orderby', 'direction'));
+        $this->sortable = Str::lower($sortable) ?: false;
     }
 }

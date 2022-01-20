@@ -36,12 +36,12 @@
 
         @foreach ($cols as $key => $col)
             @php
-            $colName = 'col_'.(is_int($key) ? data_get($col, 'name', $col) : $key);
-            $action = isset(${$colName}) ? ${$colName} : null;
+            $colname = 'col_'.data_get($col, 'name', is_int($key) ? $col : $key);
+            $action = isset(${$colname}) ? ${$colname} : null;
             @endphp
 
             @isset ($action)
-                @scopedslot($colName, ($row), ($action))
+                @scopedslot($colname, ($row), ($action))
                     {{ $action($row) }}
                 @endscopedslot
             @endisset

@@ -4,6 +4,7 @@ namespace TALLKit\Components\Tables;
 
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -34,6 +35,7 @@ class Datatable extends Table
      * @param  callable|null  $parseSearch
      * @param  callable|null  $parseCols
      * @param  callable|null  $parseRows
+     * @param  bool|null  $sortable
      * @param  string|null  $theme
      * @return void
      */
@@ -49,12 +51,13 @@ class Datatable extends Table
         $parseSearch = null,
         $parseCols = null,
         $parseRows = null,
+        $sortable = null,
         $theme = null
     ) {
         $this->search = self::getSearch($search, $searchDefault, $parseSearch);
 
         $rows = self::getRows($rows ?? $resource, $cols, $this->search, $paginator, $parseRows);
-        $cols = self::getCols($cols, $rows, $parseCols);
+        $cols = self::getCols($cols, $rows, $sortable ?? self::getDefaultSortable($resource ?? $rows), $parseCols);
 
         $this->paginator = $paginator;
 
@@ -114,19 +117,10 @@ class Datatable extends Table
             $rows = $rows->query();
         }
 
-        $rows = self::applyFilters($rows, $cols, $search);
-
         if ($rows instanceof Builder) {
-            // orderby
-            if ($orderby = request('orderby')) {
-                $direction = Str::lower(request('direction'));
-                $rows->orderBy($orderby, $direction === 'asc' || $direction == 'desc' ? $direction : 'asc');
-            }
-
-            // paginator
-            $rows = ($paginator ?? true)
-                ? $rows->paginate()
-                : $rows->get();
+            $rows = self::applyFilters($rows, $cols, $search);
+            $rows = self::applyOrderBy($rows);
+            $rows = self::applyPaginator($rows, $paginator);
         }
 
         return is_callable($parse)
@@ -142,7 +136,7 @@ class Datatable extends Table
      * @param  callable|null  $parse
      * @return mixed
      */
-    public static function getCols($cols, $rows = null, $parse = null)
+    public static function getCols($cols, $rows = null, $defaultSortable = null, $parse = null)
     {
         $firstRow = Collection::make(Collection::make($rows instanceof Paginator ? $rows->items() : $rows)->first());
         $cols = Collection::make($cols ?? $firstRow->keys());
@@ -151,17 +145,15 @@ class Datatable extends Table
             return [];
         }
 
-        $orderby = request('orderby');
-        $direction = request('direction', 'asc');
+        $cols = $cols->map(function ($col, $key) use ($defaultSortable) {
+            $col = is_array($col)
+                ? $col
+                : ['name' => is_int($key) ? $col : $key, 'title' => is_string($col) ? $col : $key];
 
-        $cols = $cols->map(function ($col) use ($orderby, $direction) {
-            $col = is_array($col) ? $col : ['name' => $col];
-            $name = data_get($col, 'name', $col);
-            $sortable = data_get($col, 'sortable', true);
+            $name = data_get($col, 'name', is_int($key) ? $col : $key);
+            $sortable = data_get($col, 'sortable', $defaultSortable);
 
-            if ($sortable && ($orderby === $name || $orderby === $name.'_id')) {
-                data_set($col, 'sortable', $direction);
-            }
+            data_set($col, 'sortable', $sortable && request('orderby') === $name ? request('direction', 'asc') : $sortable);
 
             return $col;
         });
@@ -169,6 +161,17 @@ class Datatable extends Table
         return is_callable($parse)
             ? $parse($cols)
             : $cols;
+    }
+
+    /**
+     * Get sortable.
+     *
+     * @param  mixed  $rows
+     * @return bool
+     */
+    public static function getDefaultSortable($rows)
+    {
+        return !($rows instanceof EloquentCollection || $rows instanceof Paginator);
     }
 
     /**
@@ -181,7 +184,7 @@ class Datatable extends Table
      */
     protected static function applyFilters($rows, $cols = null, $search = null)
     {
-        if (! ($rows instanceof Builder && $rows->hasGlobalMacro('filter'))) {
+        if (! $rows->hasGlobalMacro('filter')) {
             return $rows;
         }
 
@@ -199,5 +202,38 @@ class Datatable extends Table
         }
 
         return $rows;
+    }
+
+    /**
+     * Apply orderBy.
+     *
+     * @param  mixed  $rows
+     * @return mixed
+     */
+    protected static function applyOrderBy($rows)
+    {
+        $orderby = request('orderby');
+
+        if (! $orderby) {
+            return $rows;
+        }
+
+        $direction = Str::lower(request('direction'));
+
+        return $rows->orderBy($orderby, $direction === 'asc' || $direction == 'desc' ? $direction : 'asc');
+    }
+
+    /**
+     * Apply paginator.
+     *
+     * @param  mixed  $rows
+     * @param  bool  $paginator
+     * @return mixed
+     */
+    protected static function applyPaginator($rows, $paginator = true)
+    {
+        return $paginator
+            ? $rows->paginate()
+            : $rows->get();
     }
 }

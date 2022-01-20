@@ -13,13 +13,14 @@
                                     ->merge(['class' => data_get($col, 'class')])
                                     ->merge(['style' => data_get($col, 'style')])
                                     ->merge(data_get($col, 'attrs', []))
+                                    ->merge(data_get($col, 'attributes', []))
                             }}
-                            :text="data_get($col, 'name', $col)"
+                            :name="data_get($col, 'name', is_int($key) ? $col : $key)"
                             :align="data_get($col, 'align')"
                             :sortable="data_get($col, 'sortable')"
                             :theme="$theme"
                         >
-                            {!! __(data_get($col, 'name', $col)) !!}
+                            {!! __(data_get($col, 'title')) !!}
                         </x-heading>
                     @empty
                         {{ $head }}
@@ -45,13 +46,13 @@
                             :align="data_get($col, 'align')"
                             :theme="$theme"
                         >
-                            @isset(${'col_'.(is_int($key) ? data_get($col, 'name', $col) : $key)})
-                                {{ ${'col_'.(is_int($key) ? data_get($col, 'name', $col) : $key)}($row, $key, $col) }}
+                            @isset(${'col_'.data_get($col, 'name', is_int($key) ? $col : $key)})
+                                {{ ${'col_'.data_get($col, 'name', is_int($key) ? $col : $key)}($row, $key, $col) }}
                             @else
                                 <x-display
                                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
                                     :target="$row"
-                                    :key="is_int($key) ? data_get($col, 'name', $col) : $key"
+                                    :key="data_get($col, 'name', is_int($key) ? $col : $key)"
                                     :theme="$theme"
                                 />
                             @endisset
@@ -102,13 +103,13 @@
                                 :align="data_get($col, 'align')"
                                 :theme="$theme"
                             >
-                                @isset(${'col_'.(is_int($key) ? data_get($col, 'name', $col) : $key).'_footer'})
-                                    {{ ${'col_'.(is_int($key) ? data_get($col, 'name', $col) : $key).'_footer'}($row, $key, $col) }}
+                                @isset(${'col_'.data_get($col, 'name', is_int($key) ? $col : $key).'_footer'})
+                                    {{ ${'col_'.data_get($col, 'name', is_int($key) ? $col : $key).'_footer'}($row, $key, $col) }}
                                 @else
                                     <x-display
                                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
                                         :target="$row"
-                                        :key="is_int($key) ? data_get($col, 'name', $col) : $key"
+                                        :key="data_get($col, 'name', is_int($key) ? $col : $key)"
                                         :theme="$theme"
                                     />
                                 @endisset
