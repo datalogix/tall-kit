@@ -22,9 +22,10 @@
     @if ($facebookPixelCode) <x-facebook-pixel-code id="{{ $facebookPixelCode }}" noscript /> @endif
     {{ $slot }}
     @if ($livewire) @livewireScripts @endif
+    @if ($livewire && $turbo) <x-turbo livewire /> @endif
     @if (is_array($tallkit)) @tallkitScripts($tallkit) @endif
-    @if ($mixScripts) <script src="{{ mix($mixScripts) }}"></script> @endif
-    @foreach ($scripts as $script) <script src="{{ $script }}"></script> @endforeach
+    @if ($mixScripts) <script src="{{ mix($mixScripts) }}" data-turbo-eval="false" data-turbolinks-eval="false"></script> @endif
+    @foreach ($scripts as $script) <script src="{{ $script }}" data-turbo-eval="false" data-turbolinks-eval="false"></script> @endforeach
     @if ($stackScripts) @stack($stackScripts) @endif
 </body>
 </html>
