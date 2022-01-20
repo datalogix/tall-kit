@@ -20,7 +20,7 @@ class Form extends BladeComponent
     public $method;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $action;
 
@@ -62,7 +62,7 @@ class Form extends BladeComponent
      *
      * @param  bool|null  $init
      * @param  string|null  $method
-     * @param  string|null  $action
+     * @param  string|bool|null  $action
      * @param  string|string[]|null  $route
      * @param  mixed  $bind
      * @param  string|bool|null  $enctype
