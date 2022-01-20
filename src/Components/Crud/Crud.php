@@ -98,11 +98,8 @@ abstract class Crud extends BladeComponent
             $this->key = end($parts);
         }
 
-        $this->titlePlural = $this->title;
-
         if (is_null($this->title)) {
             $this->title = (string) Str::of($this->key)->replace('-', ' ')->singular()->title();
-            $this->titlePlural = (string) Str::of($this->key)->replace('-', ' ')->plural()->title();
         }
     }
 }

@@ -1,10 +1,9 @@
 <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
-
     @isset($header)
         {{ $header }}
     @else
         <x-crud-header
-            {{ $attributes->mergeThemeProvider($themeProvider, 'header') }}
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header') }}
             :title="$title"
             :theme="$theme"
         >
@@ -14,7 +13,7 @@
                 {{ $actions }}
             @else
                 <x-crud-actions
-                    {{ $attributes->mergeThemeProvider($themeProvider, 'header-actions') }}
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-actions') }}
                     :custom-actions="$customActions"
                     :prefix="$prefix"
                     :parameters="array_merge($parameters, [$resource])"
@@ -22,7 +21,7 @@
                 />
 
                 <x-back
-                    {{ $attributes->mergeThemeProvider($themeProvider, 'header-back') }}
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-back') }}
                     :theme="$theme"
                 />
             @endisset
@@ -48,7 +47,7 @@
             />
 
             <x-back
-                {{ $attributes->mergeThemeProvider($themeProvider, 'footer-back') }}
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-back') }}
                 :theme="$theme"
             />
         @endisset

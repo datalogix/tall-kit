@@ -72,6 +72,7 @@ class CrudIndex extends Crud
      * @param  mixed  $footer
      * @param  string|null  $emptyText
      * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
+     * @param  bool|null  $sortable
      * @param  string|null  $theme
      * @return void
      */
@@ -93,6 +94,7 @@ class CrudIndex extends Crud
         $footer = null,
         $emptyText = null,
         $paginator = null,
+        $sortable = null,
         $theme = null
     ) {
         parent::__construct(
@@ -106,13 +108,13 @@ class CrudIndex extends Crud
             $theme
         );
 
-        $this->title = $this->titlePlural;
+        $this->title = (string) Str::of($this->title)->plural()->title();
         $this->search = $search;
         $this->searchDefault = $searchDefault;
         $this->displayIdColumn = $displayIdColumn ?? false;
         $this->displayActionsColumn = $displayActionsColumn ?? true;
         $this->mapRelationsColumn = $mapRelationsColumn ?? true;
-        $this->cols = $this->getCols($cols);
+        $this->cols = $this->getCols($cols, $sortable ?? Datatable::getDefaultSortable($resource ?? $rows));
         $this->footer = $footer;
         $this->emptyText = $emptyText;
         $this->paginator = $paginator;
@@ -124,25 +126,21 @@ class CrudIndex extends Crud
      * @param  mixed  $cols
      * @return mixed
      */
-    protected function getCols($cols)
+    protected function getCols($cols, $sortable = null)
     {
-        $cols = Datatable::getCols($cols, $this->resource);
+        $cols = Datatable::getCols($cols, $this->resource, $sortable);
 
         if (empty($cols)) {
             return $cols;
         }
 
         if (! $this->displayIdColumn) {
-            if ($cols->search('id') !== false) {
-                $cols->forget($cols->search('id'));
-            }
+            $pos = $cols->search(function($col, $key) {
+                return Str::lower(data_get($col, 'name', is_int($key) ? $col : $key)) === 'id';
+            });
 
-            if ($cols->search('Id') !== false) {
-                $cols->forget($cols->search('Id'));
-            }
-
-            if ($cols->search('ID') !== false) {
-                $cols->forget($cols->search('ID'));
+            if ($pos !== false) {
+                $cols->forget($pos);
             }
         }
 
@@ -153,22 +151,19 @@ class CrudIndex extends Crud
         if ($this->mapRelationsColumn) {
             $mappedRelations = [];
 
-            $cols = $cols->map(function ($col) use (&$mappedRelations) {
-                $col = is_array($col) ? $col : ['name' => $col];
-                $name = data_get($col, 'name', $col);
+            $cols = $cols->mapWithKeys(function ($col, $key) use (&$mappedRelations) {
+                $name = data_get($col, 'name', is_int($key) ? $col : $key);
 
                 if (in_array($name, $mappedRelations)) {
-                    return false;
+                    return [];
                 }
 
                 if (Str::endsWith($name, '_id')) {
                     array_push($mappedRelations, $name);
-
                     data_set($col, 'name', Str::replaceLast('_id', '', $name));
-                    data_set($col, 'original_name', $name);
                 }
 
-                return $col;
+                return [Str::replaceLast('_id', '', $name) => $col];
             })->filter();
         }
 

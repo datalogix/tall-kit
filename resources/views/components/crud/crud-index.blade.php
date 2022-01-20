@@ -40,11 +40,11 @@
         >
             @foreach ($cols as $key => $col)
                 @php
-                $colName = 'col_'.(is_int($key) ? data_get($col, 'name', $col) : $key);
-                $action = isset(${$colName}) ? ${$colName} : null;
+                $colname = 'col_'.data_get($col, 'name', is_int($key) ? $col : $key);
+                $action = isset(${$colname}) ? ${$colname} : null;
                 @endphp
 
-                @if ($displayActionsColumn && $colName === 'col_actions')
+                @if ($displayActionsColumn && $colname === 'col_actions')
                     @scopedslot('col_actions', ($row), ($customActions, $prefix, $parameters, $attributes, $themeProvider, $theme))
                         <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'row-actions') }}>
                             <x-crud-actions
@@ -61,7 +61,7 @@
                 @endif
 
                 @isset ($action)
-                    @scopedslot($colName, ($row), ($action))
+                    @scopedslot($colname, ($row), ($action))
                         {{ $action($row) }}
                     @endscopedslot
                 @endisset

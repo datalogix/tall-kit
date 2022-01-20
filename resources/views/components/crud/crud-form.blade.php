@@ -1,7 +1,10 @@
 <x-form
-    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
+    {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
+    :init="$init"
     :method="$method"
     :action="$action"
+    :enctype="$enctype"
+    :confirm="$confirm"
     :theme="$theme"
 >
     @isset($header)

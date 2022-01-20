@@ -7,6 +7,11 @@ use Illuminate\Support\Str;
 class CrudForm extends Crud
 {
     /**
+     * @var bool
+     */
+    public $init;
+
+    /**
      * @var string
      */
     public $method;
@@ -15,6 +20,16 @@ class CrudForm extends Crud
      * @var string|bool|null
      */
     public $action;
+
+    /**
+     * @var string|bool|null
+     */
+    public $enctype;
+
+    /**
+     * @var string|bool|null
+     */
+    public $confirm;
 
     /**
      * @var mixed
@@ -31,8 +46,11 @@ class CrudForm extends Crud
      * @param  mixed  $resource
      * @param  mixed  $customActions
      * @param  string|null  $routeName
-     * @param  string|bool|null  $method
+     * @param  bool|null  $init
+     * @param  string|null  $method
      * @param  string|bool|null  $action
+     * @param  string|bool|null  $enctype
+     * @param  string|bool|null  $confirm
      * @param  mixed  $fields
      * @param  string|null  $theme
      * @return void
@@ -45,8 +63,11 @@ class CrudForm extends Crud
         $resource = null,
         $customActions = null,
         $routeName = null,
+        $init = null,
         $method = null,
         $action = null,
+        $enctype = null,
+        $confirm = null,
         $fields = null,
         $theme = null
     ) {
@@ -62,12 +83,15 @@ class CrudForm extends Crud
         );
 
         $this->title = $title ?? __(Str::title($this->resource ? 'edit' : 'create')).' '.__($this->title);
+        $this->init = $init;
         $this->method = $method ?? ($this->resource ? 'patch' : 'post');
         $this->action = $action ?? route_detect(
             $this->prefix.'.'.($this->resource ? 'update' : 'store'),
             array_merge($this->parameters, [$this->resource]),
             null
         );
+        $this->enctype = $enctype;
+        $this->confirm = $confirm;
         $this->fields = $fields;
     }
 }
