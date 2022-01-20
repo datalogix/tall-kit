@@ -1,6 +1,6 @@
 <?php
 
-namespace TALLKit\Components\Layouts;
+namespace TALLKit\Components\Scripts;
 
 use TALLKit\Components\BladeComponent;
 
