@@ -32,7 +32,7 @@ class Nav extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->items = Collection::make($items);
+        $this->items = Collection::make($items)->filter();
         $this->inline = $inline ?? true;
     }
 }
