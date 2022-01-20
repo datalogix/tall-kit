@@ -69,12 +69,12 @@ class TALLKit
         $styles = Collection::make();
         $scripts = Collection::make();
 
-        if ($tailwindcss = data_get($assets, 'tailwindcss') && data_get($options, 'inject.tailwindcss')) {
+        if (data_get($options, 'inject.tailwindcss') && $tailwindcss = data_get($assets, 'tailwindcss')) {
             $styles->add($tailwindcss);
             $scripts->add($tailwindcss);
         }
 
-        if ($alpine = data_get($assets, 'alpine') && data_get($options, 'inject.alpine')) {
+        if (data_get($options, 'inject.alpine') && $alpine = data_get($assets, 'alpine')) {
             $styles->add($alpine);
             $scripts->add($alpine);
         }
@@ -131,7 +131,7 @@ HTML;
         $appUrl = rtrim(data_get($options, 'asset_url', ''), '/');
 
         $manifest = json_decode(file_get_contents(__DIR__.'/../dist/mix-manifest.json'), true);
-        $versionedFileName = data_get($manifest, '/tallkit.js');
+        $versionedFileName = $manifest['/tallkit.js'];
 
         // Default to dynamic `tallkit.js` (served by a Laravel route).
         $fullAssetPath = "{$appUrl}/tallkit{$versionedFileName}";
@@ -142,7 +142,7 @@ HTML;
         // Use static assets if they have been published.
         if (file_exists(public_path('vendor/tallkit/mix-manifest.json'))) {
             $publishedManifest = json_decode(file_get_contents(public_path('vendor/tallkit/mix-manifest.json')), true);
-            $versionedFileName = data_get($publishedManifest, '/tallkit.js');
+            $versionedFileName = $publishedManifest['/tallkit.js'];
 
             $fullAssetPath = ($this->isRunningServerless() ? config('app.asset_url') : $appUrl).'/vendor/tallkit'.$versionedFileName;
 
