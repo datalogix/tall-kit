@@ -1917,6 +1917,14 @@ return [
             'admin-panel' => [
                 'html' => [
                     'turbo' => true,
+
+                    'mix-styles' => [
+                        'css/admin.css',
+                    ],
+
+                    'mix-scripts' => [
+                        'js/admin.js',
+                    ],
                 ],
 
                 'container' => [

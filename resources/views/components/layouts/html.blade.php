@@ -13,7 +13,7 @@
     @if ($facebookPixelCode) <x-facebook-pixel-code id="{{ $facebookPixelCode }}" /> @endif
     @if ($livewire) @livewireStyles @endif
     @if (is_array($tallkit)) @tallkitStyles($tallkit) @endif
-    @if ($mixStyles) <link href="{{ mix($mixStyles) }}" rel="stylesheet"> @endif
+    @foreach ($mixStyles as $mixStyle) <link href="{{ mix($mixStyle) }}" rel="stylesheet"> @endforeach
     @foreach ($styles as $style) <link href="{{ $style }}" rel="stylesheet"> @endforeach
     @if ($stackStyles) @stack($stackStyles) @endif
 </head>
@@ -24,7 +24,7 @@
     @if ($livewire) @livewireScripts @endif
     @if ($livewire && $turbo) <x-turbo livewire /> @endif
     @if (is_array($tallkit)) @tallkitScripts($tallkit) @endif
-    @if ($mixScripts) <script src="{{ mix($mixScripts) }}" data-turbo-eval="false" data-turbolinks-eval="false"></script> @endif
+    @foreach ($mixScripts as $mixScript) <script src="{{ mix($mixScript) }}" data-turbo-eval="false" data-turbolinks-eval="false"></script> @endforeach
     @foreach ($scripts as $script) <script src="{{ $script }}" data-turbo-eval="false" data-turbolinks-eval="false"></script> @endforeach
     @if ($stackScripts) @stack($stackScripts) @endif
 </body>

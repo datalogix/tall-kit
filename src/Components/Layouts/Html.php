@@ -151,25 +151,28 @@ class Html extends BladeComponent
         $this->title = data_get($options, 'title', $title ?? config('app.name'));
         $this->charset = data_get($options, 'charset', $charset ?? 'utf-8');
         $this->viewport = data_get($options, 'viewport', $viewport ?? 'width=device-width, initial-scale=1');
-        $this->csrfToken = data_get($options, 'csrfToken', $csrfToken ?? true);
-        $this->googleFonts = data_get($options, 'googleFonts', data_get($options, 'fonts', $googleFonts));
+        $this->csrfToken = data_get($options, 'csrf-token', $csrfToken ?? true);
+        $this->googleFonts = data_get($options, 'google-fonts', data_get($options, 'fonts', $googleFonts));
         $this->turbo = data_get($options, 'turbo', $turbo);
-        $this->googleAnalytics = data_get($options, 'googleAnalytics', data_get($options, 'analytics', $googleAnalytics));
-        $this->googleTagManager = data_get($options, 'googleTagManager', data_get($options, 'gtm', $googleTagManager));
-        $this->facebookPixelCode = data_get($options, 'facebookPixelCode', data_get($options, 'facebookPixel', $facebookPixelCode));
+        $this->googleAnalytics = data_get($options, 'google-analytics', data_get($options, 'analytics', $googleAnalytics));
+        $this->googleTagManager = data_get($options, 'google-tag-manager', data_get($options, 'gtm', $googleTagManager));
+        $this->facebookPixelCode = data_get($options, 'facebook-pixel-code', data_get($options, 'facebook-pixel', $facebookPixelCode));
         $this->livewire = data_get($options, 'livewire', $livewire ?? true) && class_exists('\Livewire\Livewire');
 
-        $mixStyles = data_get($options, 'mixStyles', $mixStyles ?? 'css/app.css');
-        $mixScripts = data_get($options, 'mixScripts', $mixScripts ?? 'js/app.js');
+        $this->mixStyles = collect(Arr::wrap(data_get($options, 'mix-styles', $mixStyles ?? 'css/app.css')))->filter(function($file) {
+            return file_exists(public_path($file));
+        })->unique();
 
-        $this->mixStyles = $mixStyles && file_exists(public_path($mixStyles)) ? $mixStyles : null;
-        $this->mixScripts = $mixScripts && file_exists(public_path($mixScripts)) ? $mixScripts : null;
+        $this->mixScripts = collect(Arr::wrap(data_get($options, 'mix-scripts', $mixScripts ?? 'js/app.js')))->filter(function($file) {
+            return file_exists(public_path($file));
+        })->unique();
+
         $this->styles = array_merge(Arr::wrap(data_get($options, 'styles')), Arr::wrap($styles));
         $this->scripts = array_merge(Arr::wrap(data_get($options, 'scripts')), Arr::wrap($scripts));
-        $this->stackStyles = data_get($options, 'stackStyles', $stackStyles ?? 'styles');
-        $this->stackScripts = data_get($options, 'stackScripts', $stackScripts ?? 'scripts');
+        $this->stackStyles = data_get($options, 'stack-styles', $stackStyles ?? 'styles');
+        $this->stackScripts = data_get($options, 'stack-scripts', $stackScripts ?? 'scripts');
 
-        $tailwindcss = $tailwindcss ?? is_null($this->mixStyles);
+        $tailwindcss = $tailwindcss ?? $this->mixStyles->isEmpty();
 
         $this->tallkit = ($tallkit ?? true) ? array_replace_recursive(
             Arr::wrap($tallkit),
