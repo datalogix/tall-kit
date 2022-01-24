@@ -18,10 +18,8 @@ class TALLKit {
     }
   }
 
-  async init () {
-    if (this.ready) {
-      return Promise.resolve()
-    }
+  init () {
+    if (this.ready) return
 
     this.ready = true
 

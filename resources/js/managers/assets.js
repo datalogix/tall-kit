@@ -46,8 +46,12 @@ class Assets {
   }
 
   async load (asset) {
-    if (this.loading.includes(asset) || this.loaded.includes(asset) || !this.has(asset)) {
+    if (this.loaded.includes(asset) || !this.has(asset)) {
       return Promise.resolve()
+    }
+
+    if (this.loading.includes(asset)) {
+      return new Promise(resolve => window.addEventListener(`tallkit:asset.${asset}`, resolve))
     }
 
     this.loading.push(asset)

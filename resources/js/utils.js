@@ -15,19 +15,11 @@ export function detectAssets (el, attributeKey) {
 }
 
 export function loadComponentAssets (asset) {
-  return new Promise((resolve, reject) => {
-    if (!window.tallkit || !window.tallkit.assets) {
-      return reject(new Error('TALLKit is not defined.'))
-    }
+  if (!window.tallkit || !window.tallkit.assets) {
+    throw new Error('TALLKit is not defined.')
+  }
 
-    if (window.tallkit.assets.loaded.includes(asset)) {
-      return resolve()
-    }
-
-    window.addEventListener(`tallkit:asset.${asset}`, resolve)
-
-    window.tallkit.assets.load(asset)
-  })
+  return window.tallkit.assets.load(asset)
 }
 
 export function dispatch (name, detail = {}) {
