@@ -42,6 +42,7 @@
                                     ->merge(['class' => data_get($col, 'class', $loop->last ? 'w-40' : null)])
                                     ->merge(['style' => data_get($col, 'style')])
                                     ->merge(data_get($col, 'attrs', []))
+                                    ->merge(data_get($col, 'attributes', []))
                             }}
                             :align="data_get($col, 'align')"
                             :theme="$theme"
@@ -99,6 +100,7 @@
                                         ->merge(['class' => data_get($col, 'class')])
                                         ->merge(['style' => data_get($col, 'style')])
                                         ->merge(data_get($col, 'attrs', []))
+                                        ->merge(data_get($col, 'attributes', []))
                                 }}
                                 :align="data_get($col, 'align')"
                                 :theme="$theme"

@@ -1,5 +1,9 @@
 @foreach ($customActions as $route => $action)
-    <x-button
+    <x-button {{
+            $attributes->mergeOnlyThemeProvider($themeProvider, 'custom')
+                ->merge(data_get($action, 'attrs', []))
+                ->merge(data_get($action, 'attributes', []))
+        }}
         :text="data_get($action, 'text', $action)"
         :href="data_get($action, 'href', route_detect(data_get($action, 'href', true) ? $prefix.'.'.$route : $route, data_get($action, 'parameters', $parameters)))"
         :icon="data_get($action, 'icon')"
