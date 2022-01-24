@@ -12,6 +12,7 @@
         ->merge($bordered && $colorName ? [
             'class' => 'border border-'.$colorName.'-'.$colorHover,
         ] : [])
+        ->merge($tooltip ? ['data-tippy-content' => __($tooltip)] : [], false)
     }}
     @if ($href) href="{{ $href }}" @endif
     @if (!$href) type="{{ $type }}" @endif

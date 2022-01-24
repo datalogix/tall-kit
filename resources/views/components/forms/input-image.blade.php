@@ -108,7 +108,7 @@
                             <x-button {{
                                 $attributes
                                     ->mergeOnlyThemeProvider($themeProvider, 'delete')
-                                    ->merge(['@click' => 'remove(\''.__('Do you really want to remove this image?').'\')'])
+                                    ->merge(['@click' => 'remove(\''.__($deleteConfirm ?? 'Do you really want to remove this image?').'\')'])
                                 }}
                                 color="transparent"
                                 shadow="none"

@@ -82,6 +82,11 @@ class Message extends BladeComponent
     public $dismissibleText;
 
     /**
+     * @var string|bool|null
+     */
+    public $dismissibleTooltip;
+
+    /**
      * @var string|null
      */
     public $title;
@@ -113,6 +118,7 @@ class Message extends BladeComponent
      * @param  string|bool|null  $dismissibleIconSvg
      * @param  string|bool|null  $dismissibleIconName
      * @param  string|null  $dismissibleText
+     * @param  string|bool|null  $dismissibleTooltip
      * @param  string|null  $title
      * @param  string|null  $message
      * @param  string|null  $on
@@ -134,6 +140,7 @@ class Message extends BladeComponent
         $dismissibleIconSvg = null,
         $dismissibleIconName = null,
         $dismissibleText = null,
+        $dismissibleTooltip = null,
         $title = null,
         $message = null,
         $on = null,
@@ -160,6 +167,7 @@ class Message extends BladeComponent
         $this->dismissibleIconSvg = data_get($target, 'dismissibleIconSvg', $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('icon-svg'));
         $this->dismissibleIconName = data_get($target, 'dismissibleIconName', $dismissibleIconName ?? $this->themeProvider->dismissible->get('icon-name'));
         $this->dismissibleText = data_get($target, 'dismissibleText', $dismissibleText ?? data_get($typeTheme, 'dismissibleText'));
+        $this->dismissibleTooltip = data_get($target, 'dismissibleTooltip', $dismissibleTooltip ?? data_get($typeTheme, 'dismissibleTooltip'));
         $this->title = data_get($target, 'title', $title ?? data_get($typeTheme, 'title'));
         $this->message = data_get($target, 'message', $message ?? (is_string($target) ? $target : null) ?? data_get($typeTheme, 'message'));
         $this->on = data_get($target, 'on', $on ?? data_get($typeTheme, 'on'));

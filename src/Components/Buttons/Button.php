@@ -37,6 +37,21 @@ class Button extends BladeComponent
     public $iconRight;
 
     /**
+     * @var string|null
+     */
+    public $colorName;
+
+    /**
+     * @var int|null
+     */
+    public $colorWeight;
+
+    /**
+     * @var int|null
+     */
+    public $colorHover;
+
+    /**
      * @var string|bool
      */
     public $rounded;
@@ -72,19 +87,9 @@ class Button extends BladeComponent
     public $color;
 
     /**
-     * @var string|null
+     * @var string|bool|null
      */
-    public $colorName;
-
-    /**
-     * @var int|null
-     */
-    public $colorWeight;
-
-    /**
-     * @var int|null
-     */
-    public $colorHover;
+    public $tooltip;
 
     /**
      * Create a new component instance.
@@ -102,6 +107,7 @@ class Button extends BladeComponent
      * @param  bool|null  $bordered
      * @param  string|bool|null  $loading
      * @param  string|null  $preset
+     * @param  string|null  $tooltip
      * @param  string|null  $theme
      * @return void
      */
@@ -119,6 +125,7 @@ class Button extends BladeComponent
         $bordered = null,
         $loading = null,
         $preset = null,
+        $tooltip = null,
         $theme = null
     ) {
         parent::__construct($theme);
@@ -136,6 +143,7 @@ class Button extends BladeComponent
         $this->bordered = $bordered;
         $this->loading = $loading;
         $this->preset = $preset;
+        $this->tooltip = $tooltip;
 
         if ($this->preset && $presetProperties = $this->themeProvider->presets->get($this->preset)) {
             $this->text = $text ?? data_get($presetProperties, 'text');
@@ -147,6 +155,7 @@ class Button extends BladeComponent
             $this->outlined = $outlined ?? data_get($presetProperties, 'outlined');
             $this->bordered = $bordered ?? data_get($presetProperties, 'bordered');
             $this->loading = $loading ?? data_get($presetProperties, 'loading');
+            $this->tooltip = is_string($tooltip) ? $tooltip : ($tooltip === true ? data_get($presetProperties, 'tooltip') : false);
         }
 
         if ($this->color && $colorProperties = $this->themeProvider->colors->get($this->color)) {

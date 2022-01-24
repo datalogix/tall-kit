@@ -12,5 +12,6 @@
     :bordered="$bordered"
     :loading="$loading"
     :preset="$preset ?? 'back'"
+    :tooltip="$tooltip"
     :theme="$theme"
 >{{ $slot }}</x-button>

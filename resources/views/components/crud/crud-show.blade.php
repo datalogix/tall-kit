@@ -17,11 +17,14 @@
                     :custom-actions="$customActions"
                     :prefix="$prefix"
                     :parameters="array_merge($parameters, [$resource])"
+                    :tooltip="$tooltip"
                     :theme="$theme"
                 />
 
                 <x-back
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-back') }}
+                    :text="$tooltip ? '' : null"
+                    :tooltip="$tooltip"
                     :theme="$theme"
                 />
             @endisset
@@ -43,11 +46,14 @@
                 :custom-actions="$customActions"
                 :prefix="$prefix"
                 :parameters="array_merge($parameters, [$resource])"
+                :tooltip="$tooltip"
                 :theme="$theme"
             />
 
             <x-back
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-back') }}
+                :text="$tooltip ? '' : null"
+                :tooltip="$tooltip"
                 :theme="$theme"
             />
         @endisset

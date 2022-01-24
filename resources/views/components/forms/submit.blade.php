@@ -12,5 +12,6 @@
     :bordered="$bordered"
     :loading="$loading ?? true"
     :preset="$preset"
+    :tooltip="$tooltip"
     :theme="$theme"
 >{{ $slot }}</x-button>

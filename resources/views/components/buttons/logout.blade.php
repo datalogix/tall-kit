@@ -16,6 +16,7 @@
     :bordered="$bordered"
     :loading="$loading"
     :preset="$preset"
+    :tooltip="$tooltip"
     :theme="$theme"
 >
     {{ $slot }}

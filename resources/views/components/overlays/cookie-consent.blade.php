@@ -50,6 +50,7 @@
                             :shadow="$buttonShadow"
                             :outlined="$buttonOutlined"
                             :bordered="$buttonBordered"
+                            :tooltip="$buttonTooltip"
                             :theme="$theme"
                         />
                     @endisset

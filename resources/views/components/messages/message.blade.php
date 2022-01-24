@@ -28,6 +28,7 @@
                 shadow="none"
                 :icon-left="$dismissibleIcon ? $dismissibleIconName : null"
                 :text="$dismissibleText"
+                :tooltip="$dismissibleTooltip"
                 :theme="$theme"
             >
                 @if ($dismissibleIcon)

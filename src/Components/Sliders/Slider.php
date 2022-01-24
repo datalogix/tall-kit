@@ -17,7 +17,17 @@ class Slider extends BladeComponent
     /**
      * @var string|bool|null
      */
+    public $prevTooltip;
+
+    /**
+     * @var string|bool|null
+     */
     public $nextIcon;
+
+    /**
+     * @var string|bool|null
+     */
+    public $nextTooltip;
 
     /**
      * Create a new component instance.
@@ -32,7 +42,9 @@ class Slider extends BladeComponent
      * @param  bool|null  $stopOnOver
      * @param  mixed  $options
      * @param  string|bool|null  $prevIcon
+     * @param  string|bool|null  $prevTooltip
      * @param  string|bool|null  $nextIcon
+     * @param  string|bool|null  $nextTooltip
      * @param  string|null  $theme
      * @return void
      */
@@ -47,7 +59,9 @@ class Slider extends BladeComponent
         $stopOnOver = null,
         $options = null,
         $prevIcon = null,
+        $prevTooltip = null,
         $nextIcon = null,
+        $nextTooltip = null,
         $theme = null
     ) {
         parent::__construct($theme);
@@ -64,6 +78,8 @@ class Slider extends BladeComponent
         ], $options ?? []));
 
         $this->prevIcon = $prevIcon;
+        $this->prevTooltip = $prevTooltip;
         $this->nextIcon = $nextIcon;
+        $this->nextTooltip = $nextTooltip;
     }
 }

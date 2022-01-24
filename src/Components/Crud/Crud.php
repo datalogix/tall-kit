@@ -45,6 +45,11 @@ abstract class Crud extends BladeComponent
     public $routeName;
 
     /**
+     * @var string|bool|null
+     */
+    public $tooltip;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|bool|null  $prefix
@@ -54,6 +59,7 @@ abstract class Crud extends BladeComponent
      * @param  mixed  $resource
      * @param  mixed  $customActions
      * @param  string|bool|null  $routeName
+     * @param  string|bool|null  $tooltip
      * @param  string|null  $theme
      * @return void
      */
@@ -65,6 +71,7 @@ abstract class Crud extends BladeComponent
         $resource = null,
         $customActions = null,
         $routeName = null,
+        $tooltip = null,
         $theme = null
     ) {
         parent::__construct($theme);
@@ -76,6 +83,7 @@ abstract class Crud extends BladeComponent
         $this->resource = $resource;
         $this->customActions = Arr::wrap($customActions);
         $this->routeName = $routeName;
+        $this->tooltip = $tooltip;
 
         $parts = null;
 

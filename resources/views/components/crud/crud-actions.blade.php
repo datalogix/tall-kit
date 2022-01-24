@@ -17,78 +17,73 @@
         :preset="data_get($action, 'preset')"
         :class="data_get($action, 'class')"
         :style="data_get($action, 'style')"
+        :tooltip="data_get($action, 'tooltip')"
         :theme="$theme"
     />
 @endforeach
 
 @if (! in_array($routeName, ['show', 'view']) && $route = route_detect([$prefix.'.show', $prefix.'.view'], $parameters, null))
-    <x-tooltip value="Show">
-        <x-button
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'show') }}
-            preset="show"
-            text=""
-            :href="$route"
-            :theme="$theme"
-        />
-    </x-tooltip>
+    <x-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'show') }}
+        preset="show"
+        :text="$tooltip ? '' : null"
+        :tooltip="$tooltip"
+        :href="$route"
+        :theme="$theme"
+    />
 @endif
 
 @if (! in_array($routeName, ['edit', 'update', 'form']) && $route = route_detect([$prefix.'.edit', $prefix.'.update', $prefix.'.form'], $parameters, null))
-    <x-tooltip value="Edit">
-        <x-button
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'edit') }}
-            preset="edit"
-            text=""
-            :href="$route"
-            :theme="$theme"
-        />
-    </x-tooltip>
+    <x-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'edit') }}
+        preset="edit"
+        :text="$tooltip ? '' : null"
+        :tooltip="$tooltip"
+        :href="$route"
+        :theme="$theme"
+    />
 @endif
 
 @if (! in_array($routeName, ['copy', 'duplicate', 'clone']) && $route = route_detect([$prefix.'.copy', $prefix.'.duplicate', $prefix.'.clone'], $parameters, null))
-    <x-tooltip value="Copy">
-        <x-form-button
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'copy') }}
-            preset="copy"
-            text=""
-            :action="$route"
-            :theme="$theme"
-        />
-    </x-tooltip>
+    <x-form-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'copy') }}
+        preset="copy"
+        :text="$tooltip ? '' : null"
+        :tooltip="$tooltip"
+        :action="$route"
+        :theme="$theme"
+    />
 @endif
 
 @if (! in_array($routeName, ['up', 'move-up']) && $route = route_detect([$prefix.'.up', $prefix.'.move-up'], $parameters, null))
-    <x-tooltip value="Move up">
-        <x-form-button
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'move-up') }}
-            preset="move-up"
-            text=""
-            :action="$route"
-            :theme="$theme"
-        />
-    </x-tooltip>
+    <x-form-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'move-up') }}
+        preset="move-up"
+        :text="$tooltip ? '' : null"
+        :tooltip="$tooltip"
+        :action="$route"
+        :theme="$theme"
+    />
 @endif
 
 @if (! in_array($routeName, ['down', 'move-down']) && $route = route_detect([$prefix.'.down', $prefix.'.move-down'], $parameters, null))
-    <x-tooltip value="Move down">
-        <x-form-button
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'move-down') }}
-            preset="move-down"
-            text=""
-            :action="$route"
-            :theme="$theme"
-        />
-    </x-tooltip>
+    <x-form-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'move-down') }}
+        preset="move-down"
+        :text="$tooltip ? '' : null"
+        :tooltip="$tooltip"
+        :action="$route"
+        :theme="$theme"
+    />
 @endif
 
 @if (! in_array($routeName, ['destroy', 'exclude']) && $route = route_detect([$prefix.'.destroy', $prefix.'.exclude'], $parameters, null))
-    <x-tooltip value="Delete">
-        <x-form-button
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'destroy') }}
-            preset="delete"
-            text=""
-            :action="$route"
-            :theme="$theme"
-        />
-    </x-tooltip>
+    <x-form-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'destroy') }}
+        preset="delete"
+        :text="$tooltip ? '' : null"
+        :tooltip="$tooltip"
+        :action="$route"
+        :theme="$theme"
+    />
 @endif

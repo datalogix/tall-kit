@@ -15,6 +15,8 @@
                 <x-button
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create') }}
                     preset="create"
+                    :text="$tooltip ? '' : null"
+                    :tooltip="$tooltip"
                     :href="$route"
                     :theme="$theme"
                 />
@@ -45,13 +47,14 @@
                 @endphp
 
                 @if ($displayActionsColumn && $colname === 'col_actions')
-                    @scopedslot('col_actions', ($row), ($customActions, $prefix, $parameters, $attributes, $themeProvider, $theme))
+                    @scopedslot('col_actions', ($row), ($customActions, $prefix, $parameters, $tooltip, $attributes, $themeProvider, $theme))
                         <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'row-actions') }}>
                             <x-crud-actions
                                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
                                 :custom-actions="$customActions"
                                 :prefix="$prefix"
                                 :parameters="array_merge($parameters, [$row])"
+                                :tooltip="$tooltip ?? true"
                                 :theme="$theme"
                             />
                         </div>

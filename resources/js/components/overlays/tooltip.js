@@ -10,12 +10,16 @@ export default () => ({
   }
 })
 
-window.addEventListener('tallkit:load', async () => {
-  const elements = document.querySelectorAll('[data-tooltip]')
+async function loadTippy () {
+  const elements = document.querySelectorAll('[data-tippy-content]')
 
   if (elements.length) {
     await loadComponentAssets('tooltip')
 
     window.tippy(elements)
   }
-})
+}
+
+window.addEventListener('tallkit:load', loadTippy)
+window.addEventListener('turbo:load', loadTippy)
+window.addEventListener('turbolinks:load', loadTippy)

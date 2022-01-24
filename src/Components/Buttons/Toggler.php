@@ -12,18 +12,26 @@ class Toggler extends BladeComponent
     public $icon;
 
     /**
+     * @var string|bool|null
+     */
+    public $tooltip;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|bool|null  $icon
+     * @param  string|bool|null  $tooltip
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $icon = null,
+        $tooltip = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->icon = $icon;
+        $this->tooltip = $tooltip;
     }
 }

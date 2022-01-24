@@ -70,6 +70,11 @@ class InputImage extends Input
     public $deleteIcon;
 
     /**
+     * @var string|null
+     */
+    public $deleteConfirm;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $name
@@ -93,6 +98,7 @@ class InputImage extends Input
      * @param  string|null  $editIcon
      * @param  string|null  $delete
      * @param  string|null  $deleteIcon
+     * @param  string|null  $deleteConfirm
      * @return void
      */
     public function __construct(
@@ -116,7 +122,8 @@ class InputImage extends Input
         $edit = null,
         $editIcon = null,
         $delete = null,
-        $deleteIcon = null
+        $deleteIcon = null,
+        $deleteConfirm = null
     ) {
         parent::__construct(
             $name,
@@ -147,5 +154,6 @@ class InputImage extends Input
         $this->editIcon = $editIcon;
         $this->delete = $delete;
         $this->deleteIcon = $deleteIcon;
+        $this->deleteConfirm = $deleteConfirm;
     }
 }

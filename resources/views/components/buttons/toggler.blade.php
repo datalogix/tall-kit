@@ -2,6 +2,7 @@
     {{ $attributes->mergeThemeProvider($themeProvider, 'button') }}
     color="none"
     shadow="none"
+    :tooltip="$tooltip"
     :theme="$theme"
 >
     <x-icon

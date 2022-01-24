@@ -63,6 +63,11 @@ class FormButton extends Form
     public $preset;
 
     /**
+     * @var string|bool|null
+     */
+    public $tooltip;
+
+    /**
      * Create a new component instance.
      *
      * @param  bool|null  $init
@@ -83,6 +88,7 @@ class FormButton extends Form
      * @param  bool|null  $bordered
      * @param  string|bool|null  $loading
      * @param  string|null  $preset
+     * @param  string|bool|null  $tooltip
      * @param  string|null  $theme
      * @return void
      */
@@ -105,6 +111,7 @@ class FormButton extends Form
         $bordered = null,
         $loading = null,
         $preset = null,
+        $tooltip = null,
         $theme = null
     ) {
         parent::__construct(
@@ -129,6 +136,7 @@ class FormButton extends Form
         $this->bordered = $bordered;
         $this->loading = $loading;
         $this->preset = $preset;
+        $this->tooltip = $tooltip;
 
         if ($this->preset && $presetProperties = $this->themeProvider->presets->get($this->preset)) {
             $this->method = Str::upper(data_get($presetProperties, 'method', $this->method));

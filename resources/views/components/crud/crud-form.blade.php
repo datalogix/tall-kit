@@ -23,11 +23,15 @@
                 <x-submit
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save') }}
                     preset="save"
+                    :text="$tooltip ? '' : null"
+                    :tooltip="$tooltip"
                     :theme="$theme"
                 />
 
                 <x-back
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-back') }}
+                    :text="$tooltip ? '' : null"
+                    :tooltip="$tooltip"
                     :theme="$theme"
                 />
             @endisset
@@ -52,12 +56,16 @@
         @else
             <x-submit
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save') }}
+                :text="$tooltip ? '' : null"
+                :tooltip="$tooltip"
                 preset="save"
                 :theme="$theme"
             />
 
             <x-back
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-back') }}
+                :text="$tooltip ? '' : null"
+                :tooltip="$tooltip"
                 :theme="$theme"
             />
         @endisset

@@ -25,6 +25,7 @@ class Logout extends FormButton
      * @param  bool|null  $bordered
      * @param  string|bool|null  $loading
      * @param  string|null  $preset
+     * @param  string|bool|null  $tooltip
      * @param  string|null  $theme
      * @return void
      */
@@ -47,6 +48,7 @@ class Logout extends FormButton
         $bordered = null,
         $loading = null,
         $preset = null,
+        $tooltip = null,
         $theme = null
     ) {
         parent::__construct(
@@ -68,6 +70,7 @@ class Logout extends FormButton
             $bordered,
             $loading,
             $preset,
+            $tooltip,
             $theme
         );
     }

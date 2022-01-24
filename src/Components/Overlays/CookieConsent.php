@@ -75,6 +75,11 @@ class CookieConsent extends Modal
     public $buttonBordered;
 
     /**
+     * @var string|bool|null
+     */
+    public $buttonTooltip;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $name
@@ -97,6 +102,7 @@ class CookieConsent extends Modal
      * @param  string|bool|null  $buttonShadow
      * @param  bool|null  $buttonOutlined
      * @param  bool|null  $buttonBordered
+     * @param  string|bool|null  $buttonTooltip
      * @param  string|null  $theme
      * @return void
      */
@@ -121,6 +127,7 @@ class CookieConsent extends Modal
         $buttonShadow = null,
         $buttonOutlined = null,
         $buttonBordered = null,
+        $buttonTooltip = null,
         $theme = null
     ) {
         parent::__construct(
@@ -148,5 +155,6 @@ class CookieConsent extends Modal
         $this->buttonShadow = $buttonShadow ?? 'default';
         $this->buttonOutlined = $buttonOutlined ?? false;
         $this->buttonBordered = $buttonBordered ?? false;
+        $this->buttonTooltip = $buttonTooltip;
     }
 }

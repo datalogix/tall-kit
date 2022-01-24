@@ -16,6 +16,7 @@
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'prev') }}
                 color="none"
                 shadow="none"
+                :tooltip="$prevTooltip"
                 :theme="$theme"
             >
                 <x-icon
@@ -30,6 +31,7 @@
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'next') }}
                 color="none"
                 shadow="none"
+                :tooltip="$nextTooltip"
                 :theme="$theme"
             >
                 <x-icon

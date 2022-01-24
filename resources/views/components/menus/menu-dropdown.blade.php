@@ -22,6 +22,7 @@
                     color="none"
                     rounded="full"
                     :icon-left="$iconName ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-name')->first()"
+                    :tooltip="$tooltip"
                     :theme="$theme"
                 >
                     <x-slot name="iconLeft">

@@ -64,6 +64,7 @@ class CrudIndex extends Crud
      * @param  mixed  $resource
      * @param  mixed  $customActions
      * @param  string|bool|null  $routeName
+     * @param  string|bool|null  $tooltip
      * @param  bool|null  $displayIdColumn
      * @param  bool|null  $displayActionsColumn
      * @param  bool|null  $mapRelationsColumn
@@ -86,6 +87,7 @@ class CrudIndex extends Crud
         $resource = null,
         $customActions = null,
         $routeName = null,
+        $tooltip = null,
         $displayIdColumn = null,
         $displayActionsColumn = null,
         $mapRelationsColumn = null,
@@ -105,6 +107,7 @@ class CrudIndex extends Crud
             Datatable::getRows($resource ?? $rows, $cols, Datatable::getSearch($search, $searchDefault), $paginator),
             $customActions,
             $routeName,
+            $tooltip,
             $theme
         );
 
