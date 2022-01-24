@@ -159,11 +159,11 @@ class Html extends BladeComponent
         $this->facebookPixelCode = data_get($options, 'facebook-pixel-code', data_get($options, 'facebook-pixel', $facebookPixelCode));
         $this->livewire = data_get($options, 'livewire', $livewire ?? true) && class_exists('\Livewire\Livewire');
 
-        $this->mixStyles = collect(Arr::wrap(data_get($options, 'mix-styles', $mixStyles ?? 'css/app.css')))->filter(function($file) {
+        $this->mixStyles = collect(Arr::wrap(data_get($options, 'mix-styles', $mixStyles ?? 'css/app.css')))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 
-        $this->mixScripts = collect(Arr::wrap(data_get($options, 'mix-scripts', $mixScripts ?? 'js/app.js')))->filter(function($file) {
+        $this->mixScripts = collect(Arr::wrap(data_get($options, 'mix-scripts', $mixScripts ?? 'js/app.js')))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 
