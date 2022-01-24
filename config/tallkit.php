@@ -1969,23 +1969,21 @@ return [
             'display' => [
                 'container' => [],
 
-                'types' => [
-                    'img' => [
-                        'class' => 'mx-auto w-full h-full object-contain',
-                    ],
+                'img' => [
+                    'class' => 'mx-auto w-full h-full object-contain',
+                ],
 
-                    'audio' => [
-                        'controls' => true,
-                    ],
+                'audio' => [
+                    'controls' => true,
+                ],
 
-                    'video' => [
-                        'controls' => true,
-                        'class' => 'mx-auto w-full h-full object-contain',
-                    ],
+                'video' => [
+                    'controls' => true,
+                    'class' => 'mx-auto w-full h-full object-contain',
+                ],
 
-                    'download' => [
-                        'target' => '_blank',
-                    ],
+                'download' => [
+                    'target' => '_blank',
                 ],
             ],
 
@@ -3385,7 +3383,9 @@ return [
                 ],
 
                 'display' => [
-                    'class' => 'max-w-xs max-h-8',
+                    'theme:img' => 'max-w-xs max-h-40',
+                    'theme:audio' => 'max-w-xs max-h-40',
+                    'theme:video' => 'max-w-xs max-h-40',
                 ],
             ],
 
