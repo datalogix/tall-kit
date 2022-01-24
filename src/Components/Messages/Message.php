@@ -163,11 +163,11 @@ class Message extends BladeComponent
         $this->iconName = data_get($target, 'icon-name', $iconName ?? data_get($typeTheme, 'icon-name'));
         $this->timeout = data_get($target, 'timeout', $timeout ?? data_get($typeTheme, 'timeout', 0));
         $this->dismissible = data_get($target, 'dismissible', $dismissible ?? data_get($typeTheme, 'dismissible', false));
-        $this->dismissibleIcon = data_get($target, 'dismissibleIcon', $dismissibleIcon ?? data_get($typeTheme, 'dismissibleIcon', true));
-        $this->dismissibleIconSvg = data_get($target, 'dismissibleIconSvg', $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('icon-svg'));
-        $this->dismissibleIconName = data_get($target, 'dismissibleIconName', $dismissibleIconName ?? $this->themeProvider->dismissible->get('icon-name'));
-        $this->dismissibleText = data_get($target, 'dismissibleText', $dismissibleText ?? data_get($typeTheme, 'dismissibleText'));
-        $this->dismissibleTooltip = data_get($target, 'dismissibleTooltip', $dismissibleTooltip ?? data_get($typeTheme, 'dismissibleTooltip'));
+        $this->dismissibleIcon = data_get($target, 'dismissible-icon', $dismissibleIcon ?? data_get($typeTheme, 'dismissible-icon', true));
+        $this->dismissibleIconSvg = data_get($target, 'dismissible-icon-svg', $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('icon-svg'));
+        $this->dismissibleIconName = data_get($target, 'dismissible-icon-name', $dismissibleIconName ?? $this->themeProvider->dismissible->get('icon-name'));
+        $this->dismissibleText = data_get($target, 'dismissible-text', $dismissibleText ?? data_get($typeTheme, 'dismissible-text'));
+        $this->dismissibleTooltip = data_get($target, 'dismissible-tooltip', $dismissibleTooltip ?? data_get($typeTheme, 'dismissible-tooltip'));
         $this->title = data_get($target, 'title', $title ?? data_get($typeTheme, 'title'));
         $this->message = data_get($target, 'message', $message ?? (is_string($target) ? $target : null) ?? data_get($typeTheme, 'message'));
         $this->on = data_get($target, 'on', $on ?? data_get($typeTheme, 'on'));
