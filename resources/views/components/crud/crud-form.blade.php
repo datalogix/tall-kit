@@ -30,6 +30,7 @@
 
                 <x-back
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-back') }}
+                    preset="back-right"
                     :text="$tooltip ? '' : null"
                     :tooltip="$tooltip"
                     :theme="$theme"
@@ -64,6 +65,7 @@
 
             <x-back
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-back') }}
+                preset="back-right"
                 :text="$tooltip ? '' : null"
                 :tooltip="$tooltip"
                 :theme="$theme"
