@@ -6,7 +6,7 @@
     :theme="$theme"
 >
     <label {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label') }}>
-        @if ($value === 1 && $isNotWired())
+        @if ($value === 1 && $isNotWired() && !Str::endsWith($name, '[]'))
             <input type="hidden" value="0" name="{{ $name }}" />
         @endif
 

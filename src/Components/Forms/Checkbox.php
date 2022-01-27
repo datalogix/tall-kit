@@ -2,6 +2,8 @@
 
 namespace TALLKit\Components\Forms;
 
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 
 class Checkbox extends Field
@@ -53,6 +55,14 @@ class Checkbox extends Field
 
         if (! session()->hasOldInput() && $this->isNotWired()) {
             $boundValue = $this->getFieldBoundValue($bind);
+
+            if ($boundValue instanceof Collection && $firstItem = $boundValue->first()) {
+                $boundValue = $boundValue->pluck($firstItem->getKeyName())->toArray();
+            }
+
+            if ($boundValue instanceof Arrayable) {
+                $boundValue = $boundValue->toArray();
+            }
 
             $this->checked = is_null($boundValue)
                 ? ($default ?? false)
