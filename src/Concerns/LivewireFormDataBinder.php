@@ -13,7 +13,9 @@ trait LivewireFormDataBinder
      */
     public function isWired()
     {
-        return app(FormDataBinder::class)->isWired();
+        return $this->attributes && count($this->attributes->whereStartsWith('wire:model')->getIterator())
+            ? false
+            : app(FormDataBinder::class)->isWired();
     }
 
     /**
