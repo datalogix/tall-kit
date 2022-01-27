@@ -344,6 +344,7 @@ return [
         /**
          * Forms.
          */
+        'checkbox-list' => \TALLKit\Components\Forms\CheckboxList::class,
         'checkbox' => \TALLKit\Components\Forms\Checkbox::class,
         'errors' => \TALLKit\Components\Forms\Errors::class,
         'field' => \TALLKit\Components\Forms\Field::class,
@@ -520,6 +521,7 @@ return [
         /**
          * Forms.
          */
+        'checkboxes' => \TALLKit\Components\Forms\CheckboxList::class,
         'check' => \TALLKit\Components\Forms\Checkbox::class,
         'error' => \TALLKit\Components\Forms\Errors::class,
         'form-field' => \TALLKit\Components\Forms\Field::class,
@@ -1605,6 +1607,12 @@ return [
             /**
              * Forms.
              */
+            'checkbox-list' => [
+                'container' => [],
+
+                'checkbox' => [],
+            ],
+
             'checkbox' => [
                 'container' => [
                     'class' => 'flex flex-col',
