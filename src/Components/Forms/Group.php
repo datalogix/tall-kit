@@ -5,9 +5,14 @@ namespace TALLKit\Components\Forms;
 class Group extends Field
 {
     /**
-     * @var string
+     * @var bool|null
      */
-    public $type;
+    public $inline;
+
+    /**
+     * @var string|bool|int|null
+     */
+    public $grid;
 
     /**
      * Create a new component instance.
@@ -35,14 +40,25 @@ class Group extends Field
             $theme
         );
 
-        $this->type = 'block';
+        $this->inline = $inline;
+        $this->grid = $grid;
+    }
 
-        if ($inline ?? false) {
-            $this->type = 'inline';
+    /**
+     * Get type
+     *
+     * @return bool
+     */
+    public function getType()
+    {
+        if ($this->grid ?? false) {
+            return 'grid-'.($this->grid === true ? 1 : $this->grid);
         }
 
-        if ($grid ?? false) {
-            $this->type = 'grid-'.($grid === true ? 1 : $grid);
+        if ($this->inline ?? false) {
+            return 'inline';
         }
+
+        return 'block';
     }
 }
