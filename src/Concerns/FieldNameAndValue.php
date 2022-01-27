@@ -87,9 +87,7 @@ trait FieldNameAndValue
      */
     public function getFieldValue($bind = null, $default = null)
     {
-        $default = $this->getFieldBoundValue($bind) ?: $default;
-
-        return $this->oldFieldValue($default);
+        return $this->oldFieldValue($this->getFieldBoundValue($bind) ?? $default);
     }
 
     /**
