@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Forms;
 
+use Illuminate\Support\Str;
 use TALLKit\Concerns\FieldNameAndValue;
 use TALLKit\Concerns\ValidationErrors;
 
@@ -62,7 +63,7 @@ class Field extends FieldGroup
 
         $this->setName($name);
 
-        $this->label = $label ?? $name;
+        $this->label = $label ?? Str::before($name, '[]');
         $this->showErrors = ($showErrors ?? true) && $name;
         $this->groupable = $groupable ?? false;
         $this->display = $display;
