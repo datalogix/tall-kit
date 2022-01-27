@@ -45,7 +45,7 @@ class Group extends Field
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return bool
      */
