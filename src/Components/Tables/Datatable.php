@@ -22,6 +22,11 @@ class Datatable extends Table
     public $paginator;
 
     /**
+     * @var string
+     */
+    public $paginatorPosition;
+
+    /**
      * Create a new component instance.
      *
      * @param  mixed  $search
@@ -32,6 +37,7 @@ class Datatable extends Table
      * @param  mixed  $footer
      * @param  string|null  $emptyText
      * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
+     * @param  string|null  $paginatorPosition
      * @param  callable|null  $parseSearch
      * @param  callable|null  $parseCols
      * @param  callable|null  $parseRows
@@ -48,6 +54,7 @@ class Datatable extends Table
         $footer = null,
         $emptyText = null,
         $paginator = null,
+        $paginatorPosition = null,
         $parseSearch = null,
         $parseCols = null,
         $parseRows = null,
@@ -59,6 +66,7 @@ class Datatable extends Table
         $rows = self::getRows($rows ?? $resource, $cols, $this->search, $paginator, $parseRows);
         $cols = self::getCols($cols, $rows, $sortable ?? self::getDefaultSortable($resource ?? $rows), $parseCols);
 
+        $this->paginatorPosition = $paginatorPosition ?? 'both';
         $this->paginator = $paginator;
 
         if ($rows instanceof Paginator) {

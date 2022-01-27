@@ -53,6 +53,11 @@ class CrudIndex extends Crud
     public $paginator;
 
     /**
+     * @var string|null
+     */
+    public $paginatorPosition;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|bool|null  $prefix
@@ -73,6 +78,7 @@ class CrudIndex extends Crud
      * @param  mixed  $footer
      * @param  string|null  $emptyText
      * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
+     * @param  string|null  $paginatorPosition
      * @param  bool|null  $sortable
      * @param  string|null  $theme
      * @return void
@@ -96,6 +102,7 @@ class CrudIndex extends Crud
         $footer = null,
         $emptyText = null,
         $paginator = null,
+        $paginatorPosition = null,
         $sortable = null,
         $theme = null
     ) {
@@ -121,6 +128,7 @@ class CrudIndex extends Crud
         $this->footer = $footer;
         $this->emptyText = $emptyText;
         $this->paginator = $paginator;
+        $this->paginatorPosition = $paginatorPosition;
     }
 
     /**

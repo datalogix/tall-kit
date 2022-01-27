@@ -24,6 +24,10 @@
         </x-card>
     @endif
 
+    @if (in_array($paginatorPosition, ['both', 'top']) && $paginator instanceof \Illuminate\Contracts\Pagination\Paginator)
+        {{ $paginator->withQueryString()->links() }}
+    @endif
+
     <x-table
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'table') }}
         :cols="$cols"
@@ -72,7 +76,7 @@
         @endisset
     </x-table>
 
-    @if ($paginator instanceof \Illuminate\Contracts\Pagination\Paginator)
+    @if (in_array($paginatorPosition, ['both', 'bottom']) && $paginator instanceof \Illuminate\Contracts\Pagination\Paginator)
         {{ $paginator->withQueryString()->links() }}
     @endif
 </div>

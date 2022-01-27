@@ -38,6 +38,7 @@
             :footer="$footer"
             :empty-text="$emptyText"
             :paginator="$paginator"
+            :paginator-position="$paginatorPosition"
             :theme="$theme"
         >
             @foreach ($cols as $key => $col)
