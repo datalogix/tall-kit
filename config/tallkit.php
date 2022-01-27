@@ -3308,7 +3308,9 @@ return [
             'datatable' => [
                 'container' => [],
 
-                'search' => [],
+                'search' => [
+                    'class' => 'mb-4',
+                ],
 
                 'search-fields' => [
                     'class' => 'grid grid-cols-1 gap-x-4',
