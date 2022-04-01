@@ -64,9 +64,9 @@ class Checkbox extends Field
                 $boundValue = $boundValue->toArray();
             }
 
-            $this->checked = is_null($boundValue)
-                ? ($default ?? false)
-                : in_array($value, Arr::wrap($boundValue));
+            $this->checked = is_array($boundValue)
+                ? in_array($value, $boundValue)
+                : (is_null($boundValue) ? ($default ?? false) : $boundValue);
         }
     }
 }
