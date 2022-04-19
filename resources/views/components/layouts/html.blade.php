@@ -18,6 +18,7 @@
     @if ($stackStyles) @stack($stackStyles) @endif
 </head>
 <body {{ $attributes->mergeThemeProvider($themeProvider, 'body') }}>
+    @if ($googleFonts) <x-google-fonts family="{{ $googleFonts }}" noscript /> @endif
     @if ($googleTagManager) <x-google-tag-manager id="{{ $googleTagManager }}" noscript /> @endif
     @if ($facebookPixelCode) <x-facebook-pixel-code id="{{ $facebookPixelCode }}" noscript /> @endif
     {{ $slot }}
