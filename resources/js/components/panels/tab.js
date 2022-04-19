@@ -1,4 +1,4 @@
-export default () => ({
+export default ({ dispatch }) => ({
   selected: null,
   tabs: [],
 
@@ -39,14 +39,20 @@ export default () => ({
     if (index) {
       this.tabs.splice(index, 0, tab)
 
+      dispatch('add', this, tab)
+
       return this.reloadTab(index)
     }
 
     this.reloadTab(this.tabs.push(tab))
+
+    dispatch('add', this, tab)
   },
 
   removeTab (index) {
     this.tabs.splice(index, 1)
+
+    dispatch('remove', this, index)
   },
 
   setSelected (tab) {
@@ -56,11 +62,15 @@ export default () => ({
 
     if (typeof tab !== 'object') {
       this.selected = null
+
+      dispatch('selected', this, null)
       return
     }
 
     if (!tab.disabled) {
       this.selected = tab
+
+      dispatch('selected', this, tab)
     }
   },
 
