@@ -45,13 +45,13 @@ class Heading extends BladeComponent
     }
 
     /**
-     * Sortable action;
+     * Sortable action.
      *
      * @return array
      */
     public function sortableAction()
     {
-        if (!$this->sortable || !isset($this->name)) {
+        if (! $this->sortable || ! isset($this->name)) {
             return [];
         }
 

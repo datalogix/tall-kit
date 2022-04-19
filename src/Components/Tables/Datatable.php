@@ -111,7 +111,7 @@ class Datatable extends Table
             $search->prepend(['placeholder' => __('Enter your search term...')], 'q');
         }
 
-        $search = $search->map(function($field, $key) use ($searchValues) {
+        $search = $search->map(function ($field, $key) use ($searchValues) {
             $field = is_scalar($field) ? ['name' => $field] : $field;
             data_set($field, 'name', data_get($field, 'name', $key));
 
