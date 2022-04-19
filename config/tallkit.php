@@ -941,7 +941,7 @@ return [
                 ],
 
                 'nav' => [
-                    'class' => 'h-full relative bg-gray-700 overflow-y-auto',
+                    'class' => 'h-full bg-gray-700 overflow-y-auto',
                 ],
 
                 'item' => [
@@ -1064,6 +1064,7 @@ return [
 
                 'container' => [
                     'class' => 'inline-flex justify-between items-center space-x-2 py-2 px-3 outline-none focus:outline-none',
+                    'wire:ignore' => '',
                 ],
 
                 'loading' => [
@@ -1643,7 +1644,7 @@ return [
                 ],
 
                 'field' => [
-                    'class' => 'flex-1 w-full relative',
+                    'class' => 'flex-1 w-full',
                 ],
 
                 'prepend' => [
@@ -1765,7 +1766,7 @@ return [
                 ],
 
                 'field' => [
-                    'class' => 'bg-white inline-block relative overflow-hidden border border-gray-200 rounded shadow focus-within:ring',
+                    'class' => 'bg-white inline-block overflow-hidden border border-gray-200 rounded shadow focus-within:ring',
                 ],
 
                 'input' => [
@@ -2797,7 +2798,7 @@ return [
 
             'card' => [
                 'container' => [
-                    'class' => 'bg-white shadow rounded relative',
+                    'class' => 'bg-white shadow rounded',
                 ],
 
                 'link' => [
