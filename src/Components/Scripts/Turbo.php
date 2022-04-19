@@ -2,9 +2,7 @@
 
 namespace TALLKit\Components\Scripts;
 
-use TALLKit\Components\BladeComponent;
-
-class Turbo extends BladeComponent
+class Turbo extends Script
 {
     /**
      * @var bool
@@ -19,8 +17,6 @@ class Turbo extends BladeComponent
      */
     public function __construct($livewire = null)
     {
-        parent::__construct(null);
-
         $this->livewire = $livewire ?? false;
     }
 }

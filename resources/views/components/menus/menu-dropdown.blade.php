@@ -2,8 +2,7 @@
     $attributes
         ->mergeOnlyThemeProvider($themeProvider, 'container')
         ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
-    }}
->
+}}>
     <x-dropdown
         {{ $attributes->mergeThemeProvider($themeProvider, 'dropdown') }}
         :name="$name"

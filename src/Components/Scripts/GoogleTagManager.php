@@ -2,19 +2,12 @@
 
 namespace TALLKit\Components\Scripts;
 
-use TALLKit\Components\BladeComponent;
-
-class GoogleTagManager extends BladeComponent
+class GoogleTagManager extends Script
 {
     /**
      * @var string|bool|null
      */
     public $id;
-
-    /**
-     * @var bool
-     */
-    public $noscript;
 
     /**
      * Create a new component instance.
@@ -25,9 +18,8 @@ class GoogleTagManager extends BladeComponent
      */
     public function __construct($id = null, $noscript = null)
     {
-        parent::__construct(null);
+        parent::__construct($noscript);
 
         $this->id = $id === true ? config('services.google-tag-manager.id') : $id;
-        $this->noscript = $noscript ?? false;
     }
 }

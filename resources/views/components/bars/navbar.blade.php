@@ -3,8 +3,7 @@
         ->mergeThemeProvider($themeProvider, 'container')
         ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
         ->merge($breakpointStyles->get('container', []))
-    }}
->
+}}>
     <x-logo
         {{
             $attributes

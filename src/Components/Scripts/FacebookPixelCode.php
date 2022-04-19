@@ -2,19 +2,12 @@
 
 namespace TALLKit\Components\Scripts;
 
-use TALLKit\Components\BladeComponent;
-
-class FacebookPixelCode extends BladeComponent
+class FacebookPixelCode extends Script
 {
     /**
      * @var string|bool|null
      */
     public $id;
-
-    /**
-     * @var bool
-     */
-    public $noscript;
 
     /**
      * Create a new component instance.
@@ -25,9 +18,8 @@ class FacebookPixelCode extends BladeComponent
      */
     public function __construct($id = null, $noscript = null)
     {
-        parent::__construct(null);
+        parent::__construct($noscript);
 
         $this->id = $id === true ? config('services.facebook-pixel-code.id') : $id;
-        $this->noscript = $noscript ?? false;
     }
 }

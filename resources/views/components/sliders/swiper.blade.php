@@ -2,8 +2,7 @@
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
         ->merge(['x-init' => 'setup('.$jsonOptions().')'])
-    }}
->
+}}>
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'wrapper') }}>
         {{ $slot }}
     </div>

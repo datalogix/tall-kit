@@ -3,8 +3,7 @@
         ->mergeOnlyThemeProvider($themeProvider, 'container')
         ->merge(['x-init' => 'setup('.$show.')'])
         ->merge($events())
-    }}
->
+}}>
     <div {{
         $attributes
             ->mergeOnlyThemeProvider($themeProvider, 'box')

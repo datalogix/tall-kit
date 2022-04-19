@@ -2,8 +2,7 @@
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
         ->mergeOnlyThemeProvider($themeProvider, 'aligns', $inline ? 'inline' : 'outline')
-    }}
->
+}}>
     @forelse ($items as $item)
         <x-nav-item {{
                 $attributes

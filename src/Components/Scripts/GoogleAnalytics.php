@@ -2,9 +2,7 @@
 
 namespace TALLKit\Components\Scripts;
 
-use TALLKit\Components\BladeComponent;
-
-class GoogleAnalytics extends BladeComponent
+class GoogleAnalytics extends Script
 {
     /**
      * @var string|bool|null
@@ -19,8 +17,6 @@ class GoogleAnalytics extends BladeComponent
      */
     public function __construct($id = null)
     {
-        parent::__construct(null);
-
         $this->id = $id === true ? config('services.google-analytics.id') : $id;
     }
 }
