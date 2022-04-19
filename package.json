@@ -9,17 +9,17 @@
     "prod": "yarn production",
     "production": "mix --production"
   },
+  "dependencies": {
+    "defu": "^6.0"
+  },
   "devDependencies": {
-    "eslint": "^8.7",
+    "eslint": "^8.13",
     "eslint-config-standard": "^16.0",
-    "eslint-plugin-import": "^2.25",
+    "eslint-plugin-import": "^2.26",
     "eslint-plugin-node": "^11.1",
     "eslint-plugin-promise": "^6.0",
     "eslint-webpack-plugin": "^3.1",
     "laravel-mix": "^6.0",
     "postcss": "^8.4"
-  },
-  "dependencies": {
-    "defu": "^5.0"
   }
 }
