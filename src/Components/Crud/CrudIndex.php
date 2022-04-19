@@ -48,14 +48,19 @@ class CrudIndex extends Crud
     public $emptyText;
 
     /**
-     * @var \Illuminate\Contracts\Pagination\Paginator|bool|null
+     * @var string|null
      */
-    public $paginator;
+    public $paginatorPosition;
 
     /**
      * @var string|null
      */
-    public $paginatorPosition;
+    public $orderBy;
+
+    /**
+     * @var string|null
+     */
+    public $orderByDirection;
 
     /**
      * Create a new component instance.
@@ -65,6 +70,7 @@ class CrudIndex extends Crud
      * @param  string|bool|null  $title
      * @param  mixed  $search
      * @param  bool|null  $searchDefault
+     * @param  mixed  $searchValues
      * @param  mixed  $parameters
      * @param  mixed  $resource
      * @param  mixed  $customActions
@@ -79,7 +85,12 @@ class CrudIndex extends Crud
      * @param  string|null  $emptyText
      * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
      * @param  string|null  $paginatorPosition
+     * @param  callable|null  $parseSearch
+     * @param  callable|null  $parseCols
+     * @param  callable|null  $parseRows
      * @param  bool|null  $sortable
+     * @param  string|null  $orderBy
+     * @param  string|null  $orderByDirection
      * @param  string|null  $theme
      * @return void
      */
@@ -89,6 +100,7 @@ class CrudIndex extends Crud
         $title = null,
         $search = null,
         $searchDefault = null,
+        $searchValues = null,
         $parameters = null,
         $resource = null,
         $customActions = null,
@@ -103,15 +115,22 @@ class CrudIndex extends Crud
         $emptyText = null,
         $paginator = null,
         $paginatorPosition = null,
+        $parseSearch = null,
+        $parseCols = null,
+        $parseRows = null,
         $sortable = null,
+        $orderBy = null,
+        $orderByDirection = null,
         $theme = null
     ) {
+        $search = Datatable::getSearch($search, $searchDefault, $searchValues, $parseSearch);
+
         parent::__construct(
             $prefix,
             $key,
             $title,
             $parameters,
-            Datatable::getRows($resource ?? $rows, $cols, Datatable::getSearch($search, $searchDefault), $paginator),
+            Datatable::getRows($resource ?? $rows, $cols, $search, $orderBy, $orderByDirection, $paginator ?? true, $parseRows),
             $customActions,
             $routeName,
             $tooltip,
@@ -124,22 +143,25 @@ class CrudIndex extends Crud
         $this->displayIdColumn = $displayIdColumn ?? false;
         $this->displayActionsColumn = $displayActionsColumn ?? true;
         $this->mapRelationsColumn = $mapRelationsColumn ?? true;
-        $this->cols = $this->getCols($cols, $sortable ?? Datatable::getDefaultSortable($resource ?? $rows));
+        $this->cols = $this->getCols($cols, $sortable ?? Datatable::getSortable($resource ?? $rows), $parseCols);
         $this->footer = $footer;
         $this->emptyText = $emptyText;
-        $this->paginator = $paginator;
         $this->paginatorPosition = $paginatorPosition;
+        $this->orderBy = $orderBy;
+        $this->orderByDirection = $orderByDirection;
     }
 
     /**
      * Get cols.
      *
      * @param  mixed  $cols
+     * @param  bool|null  $sortable
+     * @param  callable|null  $parse
      * @return mixed
      */
-    protected function getCols($cols, $sortable = null)
+    protected function getCols($cols, $sortable = null, $parse = null)
     {
-        $cols = Datatable::getCols($cols, $this->resource, $sortable);
+        $cols = Datatable::getCols($cols, $this->resource, $sortable, $this->orderBy, $this->orderByDirection, $parse);
 
         if (empty($cols)) {
             return $cols;

@@ -37,8 +37,9 @@
             :resource="$resource"
             :footer="$footer"
             :empty-text="$emptyText"
-            :paginator="$paginator"
             :paginator-position="$paginatorPosition"
+            :order-by="$orderBy"
+            :order-by-direction="$orderByDirection"
             :theme="$theme"
         >
             @foreach ($cols as $key => $col)

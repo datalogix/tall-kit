@@ -43,4 +43,32 @@ class Heading extends BladeComponent
         $this->align = $align ?: 'left';
         $this->sortable = Str::lower($sortable) ?: false;
     }
+
+    /**
+     * Sortable action;
+     *
+     * @return array
+     */
+    public function sortableAction()
+    {
+        if (!$this->sortable || !isset($this->name)) {
+            return [];
+        }
+
+        $sortable = $this->sortable === 'asc' ? 'desc' : 'asc';
+
+        if ($this->isWired()) {
+            return [
+                'class' => 'cursor-pointer',
+                'wire:click' => 'updateOrderBy(\''.$this->name.'\', \''.$sortable.'\')',
+            ];
+        }
+
+        return [
+            'href' => request()->fullUrlWithQuery([
+                'orderBy' => $this->name,
+                'orderByDirection' => $sortable,
+            ]),
+        ];
+    }
 }

@@ -9,13 +9,13 @@
                 }}
                 method="GET"
                 :fields="$search"
-                :bind="request()"
+                :bind="request()->all()"
             >
                 {{ $searchFields ?? '' }}
 
                 @isset ($searchSubmit)
                     {{ $searchSubmit }}
-                @else
+                @elseif (! $isWired() || $wireModifier() === '.defer')
                     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'search-submit') }}>
                         <x-submit preset="search" />
                     </div>

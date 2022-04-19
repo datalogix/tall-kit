@@ -3,10 +3,7 @@
         $attributes
             ->mergeOnlyThemeProvider($themeProvider, 'container')
             ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
-            ->merge($sortable && isset($name)
-                ? ['href' => request()->fullUrlWithQuery(['orderby' => $name, 'direction' => $sortable === 'asc' ? 'desc' : 'asc'])]
-                : []
-            )
+            ->merge($sortableAction())
      }}>
         {!! $slot->isEmpty() ? __($name) : $slot !!}
 

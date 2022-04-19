@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Tables;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -17,7 +18,7 @@ class Datatable extends Table
     public $search;
 
     /**
-     * @var \Illuminate\Contracts\Pagination\Paginator|bool|null
+     * @var \Illuminate\Contracts\Pagination\Paginator|int|bool|null
      */
     public $paginator;
 
@@ -31,23 +32,27 @@ class Datatable extends Table
      *
      * @param  mixed  $search
      * @param  bool|null  $searchDefault
+     * @param  mixed  $searchValues
      * @param  mixed  $cols
      * @param  mixed  $rows
      * @param  mixed  $resource
      * @param  mixed  $footer
      * @param  string|null  $emptyText
-     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
+     * @param  \Illuminate\Contracts\Pagination\Paginator|int|bool|null  $paginator
      * @param  string|null  $paginatorPosition
      * @param  callable|null  $parseSearch
      * @param  callable|null  $parseCols
      * @param  callable|null  $parseRows
      * @param  bool|null  $sortable
+     * @param  string|null  $orderBy
+     * @param  string|null  $orderByDirection
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $search = null,
         $searchDefault = null,
+        $searchValues = null,
         $cols = null,
         $rows = null,
         $resource = null,
@@ -59,12 +64,17 @@ class Datatable extends Table
         $parseCols = null,
         $parseRows = null,
         $sortable = null,
+        $orderBy = null,
+        $orderByDirection = null,
         $theme = null
     ) {
-        $this->search = self::getSearch($search, $searchDefault, $parseSearch);
+        $orderBy = $orderBy ?? request('orderBy');
+        $orderByDirection = $orderByDirection ?? request('orderByDirection', 'asc');
 
-        $rows = self::getRows($rows ?? $resource, $cols, $this->search, $paginator, $parseRows);
-        $cols = self::getCols($cols, $rows, $sortable ?? self::getDefaultSortable($resource ?? $rows), $parseCols);
+        $this->search = self::getSearch($search, $searchDefault, $searchValues, $parseSearch);
+
+        $rows = self::getRows($rows ?? $resource, $cols, $this->search, $orderBy, $orderByDirection, $paginator ?? true, $parseRows);
+        $cols = self::getCols($cols, $rows, $sortable ?? self::getSortable($resource ?? $rows), $orderBy, $orderByDirection, $parseCols);
 
         $this->paginatorPosition = $paginatorPosition ?? 'both';
         $this->paginator = $paginator;
@@ -88,16 +98,25 @@ class Datatable extends Table
      *
      * @param  mixed  $search
      * @param  bool|null  $searchDefault
+     * @param  mixed  $searchValues
      * @param  callable|null  $parse
      * @return mixed
      */
-    public static function getSearch($search, $searchDefault = true, $parse = null)
+    public static function getSearch($search, $searchDefault = true, $searchValues = null, $parse = null)
     {
         $search = Collection::make($search);
+        $searchValues = Collection::make($searchValues ?? request()->all());
 
         if ($searchDefault ?? true) {
             $search->prepend(['placeholder' => __('Enter your search term...')], 'q');
         }
+
+        $search = $search->map(function($field, $key) use ($searchValues) {
+            $field = is_scalar($field) ? ['name' => $field] : $field;
+            data_set($field, 'name', data_get($field, 'name', $key));
+
+            return data_set($field, 'value', data_get($field, 'value', $searchValues->get($key)));
+        });
 
         return is_callable($parse)
             ? $parse($search)
@@ -110,14 +129,20 @@ class Datatable extends Table
      * @param  mixed  $rows
      * @param  mixed  $cols
      * @param  mixed  $search
-     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|null  $paginator
+     * @param  string|null  $orderBy
+     * @param  string|null  $orderByDirection
+     * @param  \Illuminate\Contracts\Pagination\Paginator|int|bool|null  $paginator
      * @param  callable|null  $parse
      * @return mixed
      */
-    public static function getRows($rows, $cols = null, $search = null, $paginator = true, $parse = null)
+    public static function getRows($rows, $cols = null, $search = null, $orderBy = null, $orderByDirection = null, $paginator = true, $parse = null)
     {
         if (is_string($rows)) {
-            $rows = app($rows);
+            try {
+                $rows = app($rows);
+            } catch (BindingResolutionException $e) {
+                $rows = app('App\Models\\'.Str::studly($rows));
+            }
         }
 
         if ($rows instanceof Model) {
@@ -127,7 +152,7 @@ class Datatable extends Table
 
         if ($rows instanceof Builder) {
             $rows = self::applyFilters($rows, $cols, $search);
-            $rows = self::applyOrderBy($rows);
+            $rows = self::applyOrderBy($rows, $orderBy, $orderByDirection);
             $rows = self::applyPaginator($rows, $paginator);
         }
 
@@ -141,10 +166,13 @@ class Datatable extends Table
      *
      * @param  mixed  $cols
      * @param  mixed  $rows
+     * @param  bool|null  $sortable
+     * @param  string|null  $orderBy
+     * @param  string|null  $orderByDirection
      * @param  callable|null  $parse
      * @return mixed
      */
-    public static function getCols($cols, $rows = null, $defaultSortable = null, $parse = null)
+    public static function getCols($cols, $rows = null, $sortable = null, $orderBy = null, $orderByDirection = null, $parse = null)
     {
         $firstRow = Collection::make(Collection::make($rows instanceof Paginator ? $rows->items() : $rows)->first());
         $cols = Collection::make($cols ?? $firstRow->keys());
@@ -153,15 +181,15 @@ class Datatable extends Table
             return [];
         }
 
-        $cols = $cols->map(function ($col, $key) use ($defaultSortable) {
+        $cols = $cols->map(function ($col, $key) use ($sortable, $orderBy, $orderByDirection) {
             $col = is_array($col)
                 ? $col
                 : ['name' => is_int($key) ? $col : $key, 'title' => is_string($col) ? $col : $key];
 
             $name = data_get($col, 'name', is_int($key) ? $col : $key);
-            $sortable = data_get($col, 'sortable', $defaultSortable);
+            $colSortable = data_get($col, 'sortable', $sortable);
 
-            data_set($col, 'sortable', $sortable && request('orderby') === $name ? request('direction', 'asc') : $sortable);
+            data_set($col, 'sortable', $colSortable && $orderBy === $name ? $orderByDirection : $colSortable);
 
             return $col;
         });
@@ -177,7 +205,7 @@ class Datatable extends Table
      * @param  mixed  $rows
      * @return bool
      */
-    public static function getDefaultSortable($rows)
+    public static function getSortable($rows)
     {
         return ! ($rows instanceof EloquentCollection || $rows instanceof Paginator);
     }
@@ -197,15 +225,18 @@ class Datatable extends Table
         }
 
         $cols = Collection::make($cols);
-        $search = Collection::make($search)->map(function ($value, $key) {
-            return data_get($value, 'name', $key);
+        $search = Collection::make($search);
+        $searchCols = $search->pluck('name')->only($cols);
+
+        $rows = $rows->when($searchCols->isNotEmpty(), function (Builder $query) use ($searchCols, $search) {
+            $searchFilter = $searchCols->mapWithKeys(function ($name) use ($search) {
+                return [$name => data_get($search->get($name), 'value')];
+            });
+
+            return $query->filter($searchFilter->toArray());
         });
 
-        $rows = $rows->when($search->only($cols)->isNotEmpty(), function (Builder $query) use ($search, $cols) {
-            return $query->filter(request($search->only($cols)->toArray()));
-        });
-
-        if ($search->has('q') && $cols->isNotEmpty() && $q = request('q')) {
+        if ($search->has('q') && $cols->isNotEmpty() && $q = data_get($search->get('q'), 'value')) {
             $rows = $rows->whereLike($cols->toArray(), $q);
         }
 
@@ -216,32 +247,38 @@ class Datatable extends Table
      * Apply orderBy.
      *
      * @param  mixed  $rows
+     * @param  string|null  $orderBy
+     * @param  string|null  $orderByDirection
      * @return mixed
      */
-    protected static function applyOrderBy($rows)
+    protected static function applyOrderBy($rows, $orderBy = null, $orderByDirection = null)
     {
-        $orderby = request('orderby');
-
-        if (! $orderby) {
+        if (! $orderBy) {
             return $rows;
         }
 
-        $direction = Str::lower(request('direction'));
+        $direction = $orderByDirection === 'asc' || $orderByDirection == 'desc' ? $orderByDirection : 'asc';
 
-        return $rows->orderBy($orderby, $direction === 'asc' || $direction == 'desc' ? $direction : 'asc');
+        return $rows->orderBy($orderBy, $direction);
     }
 
     /**
      * Apply paginator.
      *
      * @param  mixed  $rows
-     * @param  bool  $paginator
+     * @param  \Illuminate\Contracts\Pagination\Paginator|bool|int|null  $paginator
      * @return mixed
      */
     protected static function applyPaginator($rows, $paginator = true)
     {
-        return $paginator
-            ? $rows->paginate()
-            : $rows->get();
+        if ($paginator === true) {
+            return $rows->paginate();
+        }
+
+        if (intval($paginator)) {
+            return $rows->paginate(intval($paginator));
+        }
+
+        return $rows->get();
     }
 }
