@@ -1,4 +1,4 @@
-# TALL Kit
+# TALLKit
 
 [![Latest Stable Version](https://poser.pugx.org/datalogix/tall-kit/version)](https://packagist.org/packages/datalogix/tall-kit)
 [![Total Downloads](https://poser.pugx.org/datalogix/tall-kit/downloads)](https://packagist.org/packages/datalogix/tall-kit)
@@ -11,7 +11,7 @@
 
 ## Official Documentation
 
-Documentation for TALL Kit can be found on its [website](https://tall-kit.netlify.app/).
+Documentation for TALLKit can be found on its [website](https://tall-kit.netlify.app/).
 
 ## Changelog
 
@@ -19,4 +19,4 @@ Check out the [CHANGELOG](CHANGELOG.md) in this repository for all the recent ch
 
 ## License
 
-TALL Kit is open-sourced software licensed under [the MIT license](./LICENSE).
+TALLKit is open-sourced software licensed under [the MIT license](./LICENSE).
