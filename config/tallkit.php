@@ -81,7 +81,6 @@ return [
             | See https://tailwindcss.com/docs/installation#using-tailwind-via-cdn
             |
             */
-
             'tailwindcss' => false,
 
             /*
@@ -91,7 +90,6 @@ return [
             | See https://alpinejs.dev/essentials/installation#from-a-script-tag
             |
             */
-
             'alpine' => true,
         ],
 
@@ -726,7 +724,6 @@ return [
             /**
              * Bars.
              */
-
             'navbar' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
@@ -1094,7 +1091,6 @@ return [
             /**
              * Buttons.
              */
-
             'button' => [
                 '_purge' => '
                     hover:bg-gray-500
@@ -1467,7 +1463,6 @@ return [
             /**
              * Crud.
              */
-
             'crud-actions' => [
                 'show' => [],
 
@@ -1561,7 +1556,6 @@ return [
             /**
              * Datetimes.
              */
-
             'carbon' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,moment,moment-timezone',
@@ -1595,7 +1589,6 @@ return [
             /**
              * Editors.
              */
-
             'easymde' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,easymde',
@@ -1696,7 +1689,6 @@ return [
             /**
              * Forms.
              */
-
             'checkbox-list' => [
                 'container' => [],
 
@@ -2020,7 +2012,6 @@ return [
             /**
              * Layouts.
              */
-
             'admin-panel' => [
                 'html' => [
                     'turbo' => true,
@@ -2168,7 +2159,6 @@ return [
             /**
              * Markdowns.
              */
-
             'markdown' => [
                 'container' => [],
             ],
@@ -2186,7 +2176,6 @@ return [
             /**
              * Menus.
              */
-
             'menu-dropdown' => [
                 'container' => [],
 
@@ -2291,7 +2280,6 @@ return [
             /**
              * Messages.
              */
-
             'message' => [
                 '_purge' => [
                     'bg-gray-200',
@@ -2535,7 +2523,6 @@ return [
             /**
              * Navigations.
              */
-
             'drawer' => [
                 'container' => [],
 
@@ -2684,7 +2671,6 @@ return [
             /**
              * Overlays.
              */
-
             'cookie-consent' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
@@ -2855,7 +2841,6 @@ return [
             /**
              * Panels.
              */
-
             'accordion' => [
                 'container' => [
                     'class' => 'border',
@@ -3045,7 +3030,6 @@ return [
             /**
              * Pickers.
              */
-
             'flatpickr' => [
                 'flatpickr' => [
                     'data-tallkit-assets' => 'alpine,flatpickr',
@@ -3124,7 +3108,6 @@ return [
             /**
              * Sliders.
              */
-
             'flickity' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,flickity',
@@ -3315,7 +3298,6 @@ return [
             /**
              * Supports.
              */
-
             'avatar' => [
                 'container' => [
                     'theme:iconName' => [
