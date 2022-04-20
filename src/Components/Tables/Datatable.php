@@ -68,8 +68,8 @@ class Datatable extends Table
         $orderByDirection = null,
         $theme = null
     ) {
-        $orderBy = $orderBy ?? request('orderBy');
-        $orderByDirection = $orderByDirection ?? request('orderByDirection', 'asc');
+        $orderBy = Str::lower($orderBy ?? request('orderBy'));
+        $orderByDirection = Str::lower($orderByDirection ?? request('orderByDirection', 'asc'));
 
         $this->search = self::getSearch($search, $searchDefault, $searchValues, $parseSearch);
 
@@ -111,11 +111,16 @@ class Datatable extends Table
             $search->prepend(['placeholder' => __('Enter your search term...')], 'q');
         }
 
-        $search = $search->map(function ($field, $key) use ($searchValues) {
+        $search = $search->mapWithKeys(function ($field, $key) use ($searchValues) {
             $field = is_scalar($field) ? ['name' => $field] : $field;
-            data_set($field, 'name', data_get($field, 'name', $key));
 
-            return data_set($field, 'value', data_get($field, 'value', $searchValues->get($key)));
+            $name = data_get($field, 'name', $key);
+            $value = data_get($field, 'value', $searchValues->get($name));
+
+            $field = data_set($field, 'name', $name);
+            $field = data_set($field, 'value', $value);
+
+            return [$name => $field];
         });
 
         return is_callable($parse)
@@ -186,7 +191,7 @@ class Datatable extends Table
                 ? $col
                 : ['name' => is_int($key) ? $col : $key, 'title' => is_string($col) ? $col : $key];
 
-            $name = data_get($col, 'name', is_int($key) ? $col : $key);
+            $name = Str::lower(data_get($col, 'name', is_int($key) ? $col : $key));
             $colSortable = data_get($col, 'sortable', $sortable);
 
             data_set($col, 'sortable', $colSortable && $orderBy === $name ? $orderByDirection : $colSortable);
@@ -226,7 +231,7 @@ class Datatable extends Table
 
         $cols = Collection::make($cols);
         $search = Collection::make($search);
-        $searchCols = $search->pluck('name')->only($cols);
+        $searchCols = $search->pluck('name', 'name')->only($cols);
 
         $rows = $rows->when($searchCols->isNotEmpty(), function (Builder $query) use ($searchCols, $search) {
             $searchFilter = $searchCols->mapWithKeys(function ($name) use ($search) {
