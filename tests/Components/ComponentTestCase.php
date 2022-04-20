@@ -3,6 +3,7 @@
 namespace TALLKit\Tests\Components;
 
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
+use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase;
 use TALLKit\TALLKitServiceProvider;
 
@@ -26,7 +27,7 @@ abstract class ComponentTestCase extends TestCase
 
     protected function getPackageProviders($app)
     {
-        return [TALLKitServiceProvider::class];
+        return [LivewireServiceProvider::class, TALLKitServiceProvider::class];
     }
 
     public function assertComponentRenders($expected, $template, array $data = [])
