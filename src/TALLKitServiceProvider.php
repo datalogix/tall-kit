@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\ComponentAttributeBag;
+use Livewire\Livewire;
 use TALLKit\Binders\FormDataBinder;
 use TALLKit\Binders\ThemeBinder;
 use TALLKit\Components\ThemeProvider;
@@ -127,7 +128,7 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     protected function bootLivewireComponents()
     {
-        if (! class_exists('\Livewire\Livewire')) {
+        if (! class_exists(Livewire::class)) {
             return;
         }
 
@@ -135,7 +136,7 @@ class TALLKitServiceProvider extends ServiceProvider
 
         /** @var \TALLKit\Components\LivewireComponent $component */
         foreach (config('tallkit.livewire', []) as $alias => $component) {
-            \Livewire\Livewire::component($prefix ? "$prefix-$alias" : $alias, $component);
+            Livewire::component($prefix ? "$prefix-$alias" : $alias, $component);
         }
     }
 
