@@ -65,6 +65,7 @@ class TALLKitServiceProvider extends ServiceProvider
         $this->bootResources();
         $this->bootRoutes();
         $this->bootBladeComponents();
+        $this->bootLivewireComponents();
         $this->bootDirectives();
         $this->bootPublishing();
     }
@@ -111,13 +112,30 @@ class TALLKitServiceProvider extends ServiceProvider
     protected function bootBladeComponents()
     {
         $prefix = config('tallkit.prefix', '');
-        $components = config('tallkit.components', []);
-        $aliases = config('tallkit.aliases', []);
 
-        $this->loadViewComponentsAs($prefix, $components);
+        $this->loadViewComponentsAs($prefix, config('tallkit.components', []));
 
         if (config('tallkit.options.aliases')) {
-            $this->loadViewComponentsAs($prefix, $aliases);
+            $this->loadViewComponentsAs($prefix, config('tallkit.aliases', []));
+        }
+    }
+
+    /**
+     * Bootstrap livewire components.
+     *
+     * @return void
+     */
+    protected function bootLivewireComponents()
+    {
+        if (! class_exists('\Livewire\Livewire')) {
+            return;
+        }
+
+        $prefix = config('tallkit.prefix', '');
+
+        /** @var \TALLKit\Components\LivewireComponent $component */
+        foreach (config('tallkit.livewire', []) as $alias => $component) {
+            \Livewire\Livewire::component($prefix ? "$prefix-$alias" : $alias, $component);
         }
     }
 

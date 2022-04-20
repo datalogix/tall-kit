@@ -2,20 +2,14 @@
 
 namespace TALLKit\Components;
 
-use Illuminate\Support\Str;
-use Illuminate\View\Component as BaseComponent;
+use Illuminate\View\Component;
+use TALLKit\Concerns\Componentable;
 use TALLKit\Concerns\LivewireFormDataBinder;
 
-abstract class BladeComponent extends BaseComponent
+abstract class BladeComponent extends Component
 {
+    use Componentable;
     use LivewireFormDataBinder;
-
-    /**
-     * The theme provider.
-     *
-     * @var \TALLKit\Components\ThemeProvider
-     */
-    public $themeProvider;
 
     /**
      * The theme name.
@@ -25,18 +19,18 @@ abstract class BladeComponent extends BaseComponent
     public $theme;
 
     /**
+     * The theme provider.
+     *
+     * @var \TALLKit\Components\ThemeProvider
+     */
+    public $themeProvider;
+
+    /**
      * The theme key.
      *
      * @var string
      */
     protected $themeKey;
-
-    /**
-     * The component key.
-     *
-     * @var string
-     */
-    protected $componentKey;
 
     /**
      * Create a new component instance.
@@ -59,29 +53,5 @@ abstract class BladeComponent extends BaseComponent
     protected function getThemeKey()
     {
         return $this->themeKey ?? $this->getComponentKey();
-    }
-
-    /**
-     * Get component key.
-     *
-     * @return string
-     */
-    protected function getComponentKey()
-    {
-        return $this->componentKey ?? Str::kebab(class_basename($this));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function render()
-    {
-        return (string) Str::of(get_class($this))
-                ->beforeLast('\\')
-                ->replace([__NAMESPACE__, '\\'], ['', '.'])
-                ->lower()
-                ->prepend('tallkit::components')
-                ->append('.')
-                ->append($this->getComponentKey());
     }
 }
