@@ -1,0 +1,21 @@
+@wire($modifier)
+    <x-datatable
+        :search="$search"
+        :search-default="$searchDefault"
+        :search-values="$searchValues"
+        :cols="$cols"
+        :rows="$rows"
+        :resource="$resource"
+        :footer="$footer"
+        :empty-text="$emptyText"
+        :paginator="$paginator"
+        :paginator-position="$paginatorPosition"
+        :parse-search="$parseSearch"
+        :parse-cols="$parseCols"
+        :parse-rows="$parseRows"
+        :sortable="$sortable"
+        :order-by="$orderBy"
+        :order-by-direction="$orderByDirection"
+        :theme="$theme"
+    />
+@endwire
