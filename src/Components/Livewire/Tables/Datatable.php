@@ -1,6 +1,6 @@
 <?php
 
-namespace TALLKit\Components\Livewire;
+namespace TALLKit\Components\Livewire\Tables;
 
 use Livewire\WithPagination;
 use TALLKit\Components\LivewireComponent;

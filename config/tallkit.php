@@ -758,7 +758,7 @@ return [
     */
 
     'livewire' => [
-        'datatable' => \TALLKit\Components\Livewire\Datatable::class,
+        'datatable' => \TALLKit\Components\Livewire\Tables\Datatable::class,
     ],
 
     /*
