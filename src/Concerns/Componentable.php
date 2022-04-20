@@ -33,7 +33,7 @@ trait Componentable
         return (string) Str::of(get_called_class())
                 ->beforeLast('\\')
                 ->lower()
-                ->replace(['tallkit\\', '\\'], ['tallkit::', '.',])
+                ->replace(['tallkit\\', '\\'], ['tallkit::', '.'])
                 ->append('.')
                 ->append($this->getComponentKey());
     }

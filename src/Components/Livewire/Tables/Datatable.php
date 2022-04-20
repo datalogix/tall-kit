@@ -147,7 +147,7 @@ class Datatable extends LivewireComponent
     protected function searchFields()
     {
         $this->searchFields = TablesDatatable::getSearch($this->search, $this->searchDefault, $this->searchValues);
-        $this->searchFields->each(function($field, $key) {
+        $this->searchFields->each(function ($field, $key) {
             $name = data_get($field, 'name', $key);
             $this->searchValues[$name] = $this->{$name} = $this->{$name} ?? data_get($field, 'value');
         });

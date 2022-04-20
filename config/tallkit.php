@@ -46,7 +46,6 @@ return [
         | Examples: "/assets", "myurl.com/app".
         |
         */
-
         'asset_url' => env('TALLKIT_ASSET_URL', null),
 
         /*
@@ -61,7 +60,6 @@ return [
         | false: Disable load assets, you need to inject manually.
         |
         */
-
         'load_type' => 'data-tallkit-assets',
 
         /*
@@ -73,7 +71,6 @@ return [
         | with this option you can inject them automatically or not.
         |
         */
-
         'inject' => [
 
             /*
@@ -106,7 +103,6 @@ return [
         | This option registers some components with multiple names, using `aliases`.
         |
         */
-
         'aliases' => true,
     ],
 
@@ -126,7 +122,6 @@ return [
         /**
          * Tailwindcss.
          */
-
         'tailwindcss' => [
             'https://cdn.jsdelivr.net/npm/tailwindcss@2/dist/tailwind.min.css',
         ],
@@ -134,7 +129,6 @@ return [
         /**
          * Alpine.
          */
-
         'alpine' => [
             //'https://cdn.jsdelivr.net/npm/alpinejs@2/dist/alpine.min.js', // v2
             'https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js', // v3
@@ -143,7 +137,6 @@ return [
         /**
          * Editors.
          */
-
         'easymde' => [
             'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.css',
             'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.js',
@@ -162,7 +155,6 @@ return [
         /**
          * Forms.
          */
-
         'cleave' => [
             'https://cdn.jsdelivr.net/npm/cleave.js@1/dist/cleave.min.js',
         ],
@@ -180,7 +172,6 @@ return [
         /**
          * Moment.
          */
-
         'moment' => [
             'https://cdn.jsdelivr.net/npm/moment@2/moment.min.js',
         ],
@@ -192,7 +183,6 @@ return [
         /**
          * Overlays.
          */
-
         'tooltip' => [
             'https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js',
             'https://cdn.jsdelivr.net/npm/tippy.js@6/dist/tippy.umd.min.js',
@@ -202,7 +192,6 @@ return [
         /**
          * Pickers.
          */
-
         'flatpickr' => [
             'https://cdn.jsdelivr.net/npm/flatpickr@4/dist/flatpickr.min.css',
             'https://cdn.jsdelivr.net/npm/flatpickr@4/dist/flatpickr.min.js',
@@ -222,7 +211,6 @@ return [
         /**
          * Scripts.
          */
-
         'turbo' => [
             'module' => 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@7/dist/turbo.es2017-umd.js',
             'livewire' => 'https://cdn.jsdelivr.net/npm/livewire-turbolinks/dist/livewire-turbolinks.js',
@@ -231,7 +219,6 @@ return [
         /**
          * Sliders.
          */
-
         'flickity' => [
             'https://cdn.jsdelivr.net/npm/flickity@2/dist/flickity.min.css',
             'https://cdn.jsdelivr.net/npm/flickity@2/dist/flickity.pkgd.min.js',
@@ -250,7 +237,6 @@ return [
         /**
          * Uploaders.
          */
-
         'dropzone' => [
             'https://cdn.jsdelivr.net/npm/dropzone@6.0.0-beta.1/dist/dropzone.css',
             'https://cdn.jsdelivr.net/npm/dropzone@6.0.0-beta.1/dist/dropzone-min.js',
@@ -366,7 +352,6 @@ return [
         /**
          * Bars.
          */
-
         'navbar' => \TALLKit\Components\Bars\Navbar::class,
         'progressbar' => \TALLKit\Components\Bars\Progressbar::class,
         'sidebar' => \TALLKit\Components\Bars\Sidebar::class,
@@ -375,7 +360,6 @@ return [
         /**
          * Buttons.
          */
-
         'back' => \TALLKit\Components\Buttons\Back::class,
         'button' => \TALLKit\Components\Buttons\Button::class,
         'form-button' => \TALLKit\Components\Buttons\FormButton::class,
@@ -385,7 +369,6 @@ return [
         /**
          * Crud.
          */
-
         'crud-header' => \TALLKit\Components\Crud\CrudHeader::class,
         'crud-actions' => \TALLKit\Components\Crud\CrudActions::class,
         'crud-index' => \TALLKit\Components\Crud\CrudIndex::class,
@@ -395,14 +378,12 @@ return [
         /**
          * Datetimes.
          */
-
         'carbon' => \TALLKit\Components\Datetimes\Carbon::class,
         'countdown' => \TALLKit\Components\Datetimes\Countdown::class,
 
         /**
          * Editors.
          */
-
         'easymde' => \TALLKit\Components\Editors\Easymde::class,
         'quill' => \TALLKit\Components\Editors\Quill::class,
         'trix' => \TALLKit\Components\Editors\Trix::class,
@@ -410,7 +391,6 @@ return [
         /**
          * Forms.
          */
-
         'checkbox-list' => \TALLKit\Components\Forms\CheckboxList::class,
         'checkbox' => \TALLKit\Components\Forms\Checkbox::class,
         'errors' => \TALLKit\Components\Forms\Errors::class,
@@ -431,13 +411,11 @@ return [
         /**
          * Icons.
          */
-
         'icon' => \TALLKit\Components\Icons\Icon::class,
 
         /**
          * Layouts.
          */
-
         'admin-panel' => \TALLKit\Components\Layouts\AdminPanel::class,
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'container' => \TALLKit\Components\Layouts\Container::class,
@@ -450,14 +428,12 @@ return [
         /**
          * Markdowns.
          */
-
         'markdown' => \TALLKit\Components\Markdowns\Markdown::class,
         'toc' => \TALLKit\Components\Markdowns\Toc::class,
 
         /**
          * Menus.
          */
-
         'menu-dropdown' => \TALLKit\Components\Menus\MenuDropdown::class,
         'menu' => \TALLKit\Components\Menus\Menu::class,
         'user-menu' => \TALLKit\Components\Menus\UserMenu::class,
@@ -465,13 +441,11 @@ return [
         /**
          * Messages.
          */
-
         'message' => \TALLKit\Components\Messages\Message::class,
 
         /**
          * Navigations.
          */
-
         'drawer' => \TALLKit\Components\Navigations\Drawer::class,
         'dropdown' => \TALLKit\Components\Navigations\Dropdown::class,
         'nav' => \TALLKit\Components\Navigations\Nav::class,
@@ -481,7 +455,6 @@ return [
         /**
          * Overlays.
          */
-
         'cookie-consent' => \TALLKit\Components\Overlays\CookieConsent::class,
         'modal' => \TALLKit\Components\Overlays\Modal::class,
         'overlay' => \TALLKit\Components\Overlays\Overlay::class,
@@ -490,7 +463,6 @@ return [
         /**
          * Panels.
          */
-
         'accordion' => \TALLKit\Components\Panels\Accordion::class,
         'accordion-item' => \TALLKit\Components\Panels\AccordionItem::class,
         'card' => \TALLKit\Components\Panels\Card::class,
@@ -509,7 +481,6 @@ return [
         /**
          * Scripts.
          */
-
         'facebook-pixel-code' => \TALLKit\Components\Scripts\FacebookPixelCode::class,
         'google-analytics' => \TALLKit\Components\Scripts\GoogleAnalytics::class,
         'google-fonts' => \TALLKit\Components\Scripts\GoogleFonts::class,
@@ -519,7 +490,6 @@ return [
         /**
          * Sliders.
          */
-
         'flickity' => \TALLKit\Components\Sliders\Flickity::class,
         'flickity-item' => \TALLKit\Components\Sliders\FlickityItem::class,
         'slider' => \TALLKit\Components\Sliders\Slider::class,
@@ -532,7 +502,6 @@ return [
         /**
          * Supports.
          */
-
         'avatar' => \TALLKit\Components\Supports\Avatar::class,
         'cron' => \TALLKit\Components\Supports\Cron::class,
         'image-loader' => \TALLKit\Components\Supports\ImageLoader::class,
@@ -541,7 +510,6 @@ return [
         /**
          * Tables.
          */
-
         'cell' => \TALLKit\Components\Tables\Cell::class,
         'datatable' => \TALLKit\Components\Tables\Datatable::class,
         'heading' => \TALLKit\Components\Tables\Heading::class,
@@ -551,7 +519,6 @@ return [
         /**
          * Uploaders.
          */
-
         'dropzone' => \TALLKit\Components\Uploaders\Dropzone::class,
         'filepond' => \TALLKit\Components\Uploaders\Filepond::class,
     ],
@@ -571,7 +538,6 @@ return [
         /**
          * Bars.
          */
-
         'nav-bar' => \TALLKit\Components\Bars\Navbar::class,
         'progress-bar' => \TALLKit\Components\Bars\Progressbar::class,
         'side-bar' => \TALLKit\Components\Bars\Sidebar::class,
@@ -580,7 +546,6 @@ return [
         /**
          * Buttons.
          */
-
         'bt' => \TALLKit\Components\Buttons\Button::class,
         'btn' => \TALLKit\Components\Buttons\Button::class,
         'button-form' => \TALLKit\Components\Buttons\FormButton::class,
@@ -592,7 +557,6 @@ return [
         /**
          * Crud.
          */
-
         'crud-list' => \TALLKit\Components\Crud\CrudIndex::class,
         'crud-new' => \TALLKit\Components\Crud\CrudForm::class,
         'crud-create' => \TALLKit\Components\Crud\CrudForm::class,
@@ -603,13 +567,11 @@ return [
         /**
          * Datetimes.
          */
-
         'count-down' => \TALLKit\Components\Datetimes\Countdown::class,
 
         /**
          * Editors.
          */
-
         'editor' => \TALLKit\Components\Editors\Quill::class,
         'easy-mde' => \TALLKit\Components\Editors\Easymde::class,
         'mde' => \TALLKit\Components\Editors\Easymde::class,
@@ -617,7 +579,6 @@ return [
         /**
          * Forms.
          */
-
         'checkboxes' => \TALLKit\Components\Forms\CheckboxList::class,
         'check' => \TALLKit\Components\Forms\Checkbox::class,
         'error' => \TALLKit\Components\Forms\Errors::class,
@@ -633,13 +594,11 @@ return [
         /**
          * Icons.
          */
-
         'i' => \TALLKit\Components\Icons\Icon::class,
 
         /**
          * Layouts.
          */
-
         'admin' => \TALLKit\Components\Layouts\AdminPanel::class,
         'admin-card' => \TALLKit\Components\Layouts\AdminPanel::class,
         'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class,
@@ -651,26 +610,22 @@ return [
         /**
          * Markdowns.
          */
-
         'md' => \TALLKit\Components\Markdowns\Markdown::class,
 
         /**
          * Menus.
          */
-
         'dropdown-menu' => \TALLKit\Components\Menus\MenuDropdown::class,
         'menu-user' => \TALLKit\Components\Menus\UserMenu::class,
 
         /**
          * Messages.
          */
-
         'alert' => \TALLKit\Components\Messages\Message::class,
 
         /**
          * Navigations.
          */
-
         'menu-item' => \TALLKit\Components\Navigations\NavItem::class,
         'menuitem' => \TALLKit\Components\Navigations\NavItem::class,
         'menu-dropdown-item' => \TALLKit\Components\Navigations\NavItem::class,
@@ -685,21 +640,18 @@ return [
         /**
          * Overlays.
          */
-
         'backdrop' => \TALLKit\Components\Overlays\Overlay::class,
         'consent' =>  \TALLKit\Components\Overlays\CookieConsent::class,
 
         /**
          * Panels.
          */
-
         'accordionitem' => \TALLKit\Components\Panels\AccordionItem::class,
         'tabitem' => \TALLKit\Components\Panels\TabItem::class,
 
         /**
          * Pickers.
          */
-
         'datetime-picker' => \TALLKit\Components\Pickers\Flatpickr::class,
         'datetimepicker' => \TALLKit\Components\Pickers\Flatpickr::class,
         'color-picker' => \TALLKit\Components\Pickers\Pickr::class,
@@ -710,7 +662,6 @@ return [
         /**
          * Scripts.
          */
-
         'facebookpixelcode' => \TALLKit\Components\Scripts\FacebookPixelCode::class,
         'facebookpixel' => \TALLKit\Components\Scripts\FacebookPixelCode::class,
         'facebook-pixel' => \TALLKit\Components\Scripts\FacebookPixelCode::class,
@@ -724,7 +675,6 @@ return [
         /**
          * Sliders.
          */
-
         'flickityitem' => \TALLKit\Components\Sliders\FlickityItem::class,
         'slideritem' => \TALLKit\Components\Sliders\SliderItem::class,
         'splideitem' => \TALLKit\Components\Sliders\SplideItem::class,
@@ -740,7 +690,6 @@ return [
         /**
          * Tables.
          */
-
         'head' => \TALLKit\Components\Tables\Heading::class,
         'th' => \TALLKit\Components\Tables\Heading::class,
         'tr' => \TALLKit\Components\Tables\Row::class,
@@ -3442,7 +3391,6 @@ return [
             /**
              * Tables.
              */
-
             'cell' => [
                 'td' => [
                     'class' => 'px-6 py-4 whitespace-nowrap text-gray-500',
@@ -3587,7 +3535,6 @@ return [
             /**
              * Uploaders.
              */
-
             'dropzone' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,dropzone',
