@@ -5,28 +5,16 @@ namespace TALLKit\Components\Forms;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use TALLKit\Concerns\PrepareOptions;
 
 class Select extends Field
 {
+    use PrepareOptions;
+
     /**
      * @var mixed
      */
     public $selectedKey;
-
-    /**
-     * @var \Illuminate\Support\Collection
-     */
-    public $options;
-
-    /**
-     * @var string|array|int
-     */
-    public $itemText = null;
-
-    /**
-     * @var string|array|int
-     */
-    public $itemValue = null;
 
     /**
      * @var bool
@@ -43,9 +31,9 @@ class Select extends Field
      *
      * @param  string|null  $name
      * @param  string|bool|null  $label
-     * @param  string|array|int|null  $itemText
-     * @param  string|array|int|null  $itemValue
      * @param  mixed  $options
+     * @param  string|array|int|null  $itemValue
+     * @param  string|array|int|null  $itemText
      * @param  mixed  $bind
      * @param  mixed  $default
      * @param  bool|null  $multiple
@@ -62,9 +50,9 @@ class Select extends Field
     public function __construct(
         $name = null,
         $label = null,
-        $itemText = null,
-        $itemValue = null,
         $options = null,
+        $itemValue = null,
+        $itemText = null,
         $bind = null,
         $default = null,
         $multiple = null,
@@ -89,9 +77,7 @@ class Select extends Field
             $appendIcon
         );
 
-        $this->itemText = $itemText ?: 'name';
-        $this->itemValue = $itemValue ?: 'id';
-        $this->options = $this->prepareOptions($options);
+        $this->setOptions($options, $itemValue, $itemText);
 
         if ($this->isNotWired()) {
             $this->selectedKey = $this->getFieldValue($bind, $default);
@@ -124,24 +110,5 @@ class Select extends Field
         }
 
         return in_array($key, Arr::wrap($value));
-    }
-
-    /**
-     * Prepare options.
-     *
-     * @param  mixed  $options
-     * @return \Illuminate\Support\Collection
-     */
-    protected function prepareOptions($options)
-    {
-        return Collection::make($options)
-            ->mapWithKeys(function ($value, $key) {
-                $key = data_get($value, $this->itemValue, $key);
-                $value = is_iterable($value)
-                    ? $this->prepareOptions($value)
-                    : data_get($value, $this->itemText, data_get($value, 'title', data_get($value, 'name', $value)));
-
-                return [$key => $value];
-            });
     }
 }
