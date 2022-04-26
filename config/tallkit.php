@@ -1782,51 +1782,51 @@ return [
                     ],
 
                     'grid-1' => [
-                        'class' => 'grid gap-6 grid-cols-1',
+                        'class' => 'grid gap-x-4 grid-cols-1',
                     ],
 
                     'grid-2' => [
-                        'class' => 'grid gap-6 grid-cols-2',
+                        'class' => 'grid gap-x-4 grid-cols-2',
                     ],
 
                     'grid-3' => [
-                        'class' => 'grid gap-6 grid-cols-3',
+                        'class' => 'grid gap-x-4 grid-cols-3',
                     ],
 
                     'grid-4' => [
-                        'class' => 'grid gap-6 grid-cols-4',
+                        'class' => 'grid gap-x-4 grid-cols-4',
                     ],
 
                     'grid-5' => [
-                        'class' => 'grid gap-6 grid-cols-5',
+                        'class' => 'grid gap-x-4 grid-cols-5',
                     ],
 
                     'grid-6' => [
-                        'class' => 'grid gap-6 grid-cols-6',
+                        'class' => 'grid gap-x-4 grid-cols-6',
                     ],
 
                     'grid-7' => [
-                        'class' => 'grid gap-6 grid-cols-7',
+                        'class' => 'grid gap-x-4 grid-cols-7',
                     ],
 
                     'grid-8' => [
-                        'class' => 'grid gap-6 grid-cols-8',
+                        'class' => 'grid gap-x-4 grid-cols-8',
                     ],
 
                     'grid-9' => [
-                        'class' => 'grid gap-6 grid-cols-9',
+                        'class' => 'grid gap-x-4 grid-cols-9',
                     ],
 
                     'grid-10' => [
-                        'class' => 'grid gap-6 grid-cols-10',
+                        'class' => 'grid gap-x-4 grid-cols-10',
                     ],
 
                     'grid-11' => [
-                        'class' => 'grid gap-6 grid-cols-11',
+                        'class' => 'grid gap-x-4 grid-cols-11',
                     ],
 
                     'grid-12' => [
-                        'class' => 'grid gap-6 grid-cols-12',
+                        'class' => 'grid gap-x-4 grid-cols-12',
                     ],
                 ],
             ],
