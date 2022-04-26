@@ -4,6 +4,7 @@
     :label="$label"
     :inline="$inline"
     :grid="$grid"
+    :fieldset="$fieldset"
     :show-errors="$showErrors"
     :theme="$theme"
 >

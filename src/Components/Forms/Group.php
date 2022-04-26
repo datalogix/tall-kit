@@ -15,12 +15,18 @@ class Group extends Field
     public $grid;
 
     /**
+     * @var bool|null
+     */
+    public $fieldset;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $name
      * @param  string|bool|null  $label
      * @param  bool|null  $inline
      * @param  string|bool|int|null  $grid
+     * @param  bool|null  $fieldset
      * @param  bool|null  $showErrors
      * @param  string|null  $theme
      * @return void
@@ -30,6 +36,7 @@ class Group extends Field
         $label = null,
         $inline = null,
         $grid = null,
+        $fieldset = null,
         $showErrors = null,
         $theme = null
     ) {
@@ -42,6 +49,7 @@ class Group extends Field
 
         $this->inline = $inline;
         $this->grid = $grid;
+        $this->fieldset = $fieldset;
     }
 
     /**

@@ -13,7 +13,11 @@
         {{ $labelContent ?? '' }}
     </x-label>
 
-    <div {{ $attributes->mergeThemeProvider($themeProvider, 'types', $getType()) }}>
+    <{{ $fieldset ? 'fieldset' : 'div' }} {{
+        $attributes
+            ->mergeOnlyThemeProvider($themeProvider, $fieldset ? 'fieldset' : null)
+            ->mergeThemeProvider($themeProvider, 'types', $getType())
+    }}>
         {{ $slot }}
-    </div>
+    </{{ $fieldset ? 'fieldset' : 'div' }}>
 </x-field>

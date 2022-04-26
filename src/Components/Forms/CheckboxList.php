@@ -23,6 +23,7 @@ class CheckboxList extends Group
      * @param  string|array|int|null  $itemText
      * @param  bool|null  $inline
      * @param  string|bool|int|null  $grid
+     * @param  bool|null  $fieldset
      * @param  bool|null  $showErrors
      * @param  mixed  $bind
      * @param  string|null  $theme
@@ -36,6 +37,7 @@ class CheckboxList extends Group
         $itemText = null,
         $inline = null,
         $grid = null,
+        $fieldset = null,
         $showErrors = null,
         $bind = null,
         $theme = null
@@ -45,6 +47,7 @@ class CheckboxList extends Group
             $label,
             $inline,
             $grid,
+            $fieldset,
             $showErrors,
             $theme
         );
