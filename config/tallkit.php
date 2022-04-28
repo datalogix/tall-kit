@@ -401,6 +401,7 @@ return [
         'input-image' => \TALLKit\Components\Forms\InputImage::class,
         'label' => \TALLKit\Components\Forms\Label::class,
         'radio' => \TALLKit\Components\Forms\Radio::class,
+        'radio-list' => \TALLKit\Components\Forms\RadioList::class,
         'select' => \TALLKit\Components\Forms\Select::class,
         'submit' => \TALLKit\Components\Forms\Submit::class,
         'textarea' => \TALLKit\Components\Forms\Textarea::class,
@@ -585,6 +586,7 @@ return [
         'generator-fields' => \TALLKit\Components\Forms\FieldsGenerator::class,
         'image-preview' => \TALLKit\Components\Forms\InputImage::class,
         'lbl' => \TALLKit\Components\Forms\Label::class,
+        'radios' => \TALLKit\Components\Forms\RadioList::class,
         'validation-bag' => \TALLKit\Components\Forms\ValidationErrors::class,
         'validation-error' => \TALLKit\Components\Forms\ValidationErrors::class,
         'validation' => \TALLKit\Components\Forms\ValidationErrors::class,
@@ -1960,6 +1962,12 @@ return [
                 'container' => [
                     'class' => 'block',
                 ],
+            ],
+
+            'radio-list' => [
+                'container' => [],
+
+                'radio' => [],
             ],
 
             'radio' => [
