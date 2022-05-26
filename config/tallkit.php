@@ -1709,7 +1709,7 @@ return [
                         'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                         'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
                         'insertdatetime', 'media', 'table', 'help', 'wordcount',
-                        'autoresize', 'autosave','codesample', 'directionality', 'emoticons', 'nonbreaking',
+                        'autoresize', 'autosave', 'codesample', 'directionality', 'emoticons', 'nonbreaking',
                         'pagebreak', 'visualchars',
                     ],
                     'toolbar' => 'undo redo | blocks | bold italic
