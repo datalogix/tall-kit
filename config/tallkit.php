@@ -1716,7 +1716,7 @@ return [
                         | forecolor backcolor
                         | alignleft aligncenter alignright alignjustify
                         | bullist numlist | image media | table | link
-                        | preview | fullscreen | removeformat',
+                        | preview | code | removeformat | fullscreen',
                 ],
             ],
 

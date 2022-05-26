@@ -11,7 +11,7 @@ export default ({ loadComponentAssets, updateInputValue }) => ({
       setup: (ed) => {
         this.tinymce = ed
 
-        ed.on('input', () => {
+        ed.on('input NodeChange', () => {
           updateInputValue(input, ed.getContent())
         })
 
