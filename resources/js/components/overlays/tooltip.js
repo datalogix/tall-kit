@@ -20,6 +20,7 @@ async function loadTippy () {
   }
 }
 
+window.addEventListener('alpine:initialized', loadTippy)
 window.addEventListener('tallkit:load', loadTippy)
 window.addEventListener('turbo:load', loadTippy)
 window.addEventListener('turbolinks:load', loadTippy)
