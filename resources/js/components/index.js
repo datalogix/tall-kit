@@ -6,6 +6,7 @@ import countdown from './datetimes/countdown'
 import easymde from './editors/easymde'
 import quill from './editors/quill'
 import trix from './editors/trix'
+import tinymce from './editors/tinymce'
 import cleave from './forms/cleave'
 import form from './forms/form'
 import inputImage from './forms/input-image'
@@ -49,6 +50,7 @@ export default {
   easymde,
   quill,
   trix,
+  tinymce,
 
   /**
    * Forms.

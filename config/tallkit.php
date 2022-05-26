@@ -145,6 +145,10 @@ return [
             'https://cdn.jsdelivr.net/npm/quill@1/dist/quill.min.js',
         ],
 
+        'tinymce' => [
+            'https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js',
+        ],
+
         'trix' => [
             'https://cdn.jsdelivr.net/npm/trix@1/dist/trix.min.css',
             'https://cdn.jsdelivr.net/npm/trix@1/dist/trix.min.js',
@@ -385,6 +389,7 @@ return [
         'easymde' => \TALLKit\Components\Editors\Easymde::class,
         'quill' => \TALLKit\Components\Editors\Quill::class,
         'trix' => \TALLKit\Components\Editors\Trix::class,
+        'tinymce' => \TALLKit\Components\Editors\Tinymce::class,
 
         /**
          * Forms.
@@ -571,9 +576,11 @@ return [
         /**
          * Editors.
          */
-        'editor' => \TALLKit\Components\Editors\Quill::class,
+        'editor' => \TALLKit\Components\Editors\Tinymce::class,
         'easy-mde' => \TALLKit\Components\Editors\Easymde::class,
         'mde' => \TALLKit\Components\Editors\Easymde::class,
+        'tiny' => \TALLKit\Components\Editors\Tinymce::class,
+        'tiny-mce' => \TALLKit\Components\Editors\Tinymce::class,
 
         /**
          * Forms.
@@ -1298,6 +1305,14 @@ return [
                         'loading' => 'Showing',
                     ],
 
+                    'add' => [
+                        'text' => 'Add',
+                        'tooltip' => 'Add',
+                        'color' => 'success',
+                        'icon' => '<svg class="w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
+                        'loading' => 'Adding',
+                    ],
+
                     'create' => [
                         'text' => 'Create',
                         'tooltip' => 'Create',
@@ -1659,6 +1674,49 @@ return [
                         ],
                     ],
                     'theme' => 'snow',
+                ],
+            ],
+
+            'tinymce' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,tinymce',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'tinymce\')',
+                ],
+
+                'label' => [
+                    'class' => 'block',
+                ],
+
+                'label-text' => [
+                    'class' => 'mb-1',
+                ],
+
+                'input' => [
+                    'x-ref' => 'input',
+                ],
+
+                'tinymce' => [
+                    'x-ref' => 'editor',
+                ],
+
+                'options' => [
+                    'branding' => false,
+                    'menubar' => false,
+                    'language' => app()->getLocale(),
+                    'plugins' => [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                        'insertdatetime', 'media', 'table', 'help', 'wordcount',
+                        'autoresize', 'autosave','codesample', 'directionality', 'emoticons', 'nonbreaking',
+                        'pagebreak', 'visualchars'
+                    ],
+                    'toolbar' => 'undo redo | blocks | bold italic
+                        | forecolor backcolor
+                        | alignleft aligncenter alignright alignjustify
+                        | bullist numlist | image media | table | link
+                        | preview | fullscreen | removeformat',
                 ],
             ],
 
