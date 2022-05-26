@@ -1710,7 +1710,7 @@ return [
                         'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
                         'insertdatetime', 'media', 'table', 'help', 'wordcount',
                         'autoresize', 'autosave','codesample', 'directionality', 'emoticons', 'nonbreaking',
-                        'pagebreak', 'visualchars'
+                        'pagebreak', 'visualchars',
                     ],
                     'toolbar' => 'undo redo | blocks | bold italic
                         | forecolor backcolor
