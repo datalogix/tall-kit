@@ -5,6 +5,7 @@ export default ({ loadComponentAssets, updateInputValue }) => ({
     await loadComponentAssets('quill')
 
     const { input, editor } = this.$refs
+
     this.quill = new window.Quill(editor, options)
 
     this.quill.on('text-change', () => {
