@@ -12,7 +12,8 @@ use Livewire\Livewire;
 use TALLKit\Binders\FormDataBinder;
 use TALLKit\Binders\ThemeBinder;
 use TALLKit\Components\ThemeProvider;
-use TALLKit\Controllers\TALLKitJavaScriptAssets;
+use TALLKit\Controllers\JavaScriptAssets;
+use TALLKit\Controllers\Upload;
 use TALLKit\Macros\MergeOnlyThemeProvider;
 use TALLKit\Macros\MergeThemeProvider;
 
@@ -99,10 +100,18 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     protected function bootRoutes()
     {
-        Route::get('/tallkit/tallkit.js', [TALLKitJavaScriptAssets::class, 'source']);
-        Route::get('/tallkit/tallkit.js.map', [TALLKitJavaScriptAssets::class, 'maps']);
-        Route::get('/tallkit/component/{name}', [TALLKitJavaScriptAssets::class, 'component'])
-            ->name('tallkit.component');
+        Route::get('/tallkit/tallkit.js', [JavaScriptAssets::class, 'source']);
+        Route::get('/tallkit/tallkit.js.map', [JavaScriptAssets::class, 'maps']);
+        Route::get('/tallkit/component/{name}', [JavaScriptAssets::class, 'component'])->name('tallkit.component');
+
+        if (config('tallkit.options.upload.enabled')) {
+            Route::post('/tallkit/upload', [Upload::class, 'store'])
+                ->middleware(config('tallkit.options.upload.middleware'))
+                ->name('tallkit.upload');
+
+            Route::delete('/tallkit/upload', [Upload::class, 'destroy'])
+                ->middleware(config('tallkit.options.upload.middleware'));
+        }
     }
 
     /**

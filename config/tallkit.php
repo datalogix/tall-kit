@@ -46,7 +46,7 @@ return [
         | Examples: "/assets", "myurl.com/app".
         |
         */
-        'asset_url' => env('TALLKIT_ASSET_URL', null),
+        'asset_url' => env('TALLKIT_ASSET_URL'),
 
         /*
         |--------------------------------------------------------------------------
@@ -102,6 +102,22 @@ return [
         |
         */
         'aliases' => true,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Upload
+        |--------------------------------------------------------------------------
+        |
+        | This option registers route to upload files
+        | using specific disk and middleware.
+        |
+        */
+        'upload' => [
+            'enabled' => env('TALLKIT_UPLOAD_ENABLED', true),
+            'disk' => env('TALLKIT_UPLOAD_DISK'),
+            'folder' => env('TALLKIT_UPLOAD_FOLDER', 'uploads'),
+            'middleware' => env('TALLKIT_UPLOAD_MIDDLEWARE', ['auth:admin']),
+        ],
     ],
 
     /*
@@ -3613,16 +3629,16 @@ return [
                     'x-data' => 'window.tallkit.component(\'filepond\')',
                 ],
 
+                'filepond' => [
+                    'x-ref' => 'filepond',
+                ],
+
                 'options' => [
                     // See https://pqina.nl/filepond/docs/api/instance/properties/
 
                     'plugins' => [
                         // See https://pqina.nl/filepond/docs/api/plugins/
                     ],
-                ],
-
-                'filepond' => [
-                    'x-ref' => 'filepond',
                 ],
             ],
         ],

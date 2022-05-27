@@ -7,7 +7,6 @@ export default ({ loadComponentAssets, getCsrfToken }) => ({
     await loadComponentAssets('dropzone')
 
     const defaults = {
-      url: '/',
       withCredentials: true,
       headers: getCsrfToken(true)
     }

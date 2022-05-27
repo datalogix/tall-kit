@@ -1,4 +1,6 @@
-export default ({ loadComponentAssets, updateInputValue }) => ({
+import { defu } from 'defu'
+
+export default ({ loadComponentAssets, updateInputValue, getCsrfToken }) => ({
   tinymce: null,
 
   async setup (options) {
@@ -6,7 +8,7 @@ export default ({ loadComponentAssets, updateInputValue }) => ({
 
     const { input, editor } = this.$refs
 
-    await window.tinymce.init({
+    await window.tinymce.init(defu(options, {
       target: editor,
       setup: (ed) => {
         this.tinymce = ed
@@ -19,8 +21,49 @@ export default ({ loadComponentAssets, updateInputValue }) => ({
           ed.setContent(input.value)
         })
       },
-      ...options
-    })
+
+      file_picker_callback: options.upload_url
+        ? function (cb, value, meta) {
+          const input = document.createElement('input')
+          input.setAttribute('type', 'file')
+
+          if (meta.filetype === 'image') {
+            input.setAttribute('accept', 'image/*')
+          }
+
+          if (meta.filetype === 'media') {
+            input.setAttribute('accept', 'audio/*,video/*')
+          }
+
+          input.onchange = function () {
+            const formData = new window.FormData()
+            formData.append('file', input.files[0])
+
+            if (options.disk) {
+              formData.append('disk', options.disk)
+            }
+
+            if (meta.filetype) {
+              formData.append('folder', meta.filetype)
+            }
+
+            window.fetch(options.upload_url, {
+              body: formData,
+              method: 'post',
+              mode: 'same-origin',
+              credentials: 'same-origin',
+              headers: {
+                Accept: 'application/json',
+                'X-CSRF-TOKEN': getCsrfToken()
+              }
+            })
+              .then(response => response.json())
+              .then(response => cb(response.location))
+          }
+          input.click()
+        }
+        : null
+    }))
   }
 })
 

@@ -11,7 +11,11 @@ class Filepond extends Uploader
      */
     protected function getOptionsValues()
     {
-        return [
+        $server = config('tallkit.options.upload.enabled')
+            ? ['server' => ['url' => route('tallkit.upload')]]
+            : [];
+
+        return $server + [
             'labelIdle' => __('Drag & Drop your files or <span class="filepond--label-action"> Browse </span>'),
             'labelInvalidField' => __('Field contains invalid files'),
             'labelFileWaitingForSize' => __('Waiting for size'),
