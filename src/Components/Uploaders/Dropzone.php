@@ -11,7 +11,7 @@ class Dropzone extends Uploader
      */
     protected function getOptionsValues()
     {
-        if (!config('tallkit.options.upload.enabled')) {
+        if (! config('tallkit.options.upload.enabled')) {
             return [];
         }
 
