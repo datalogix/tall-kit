@@ -4,7 +4,7 @@ namespace TALLKit\Controllers;
 
 use TALLKit\Facades\TALLKit;
 
-class TALLKitJavaScriptAssets
+class JavaScriptAssets
 {
     use CanPretendToBeAFile;
 
