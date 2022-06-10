@@ -106,11 +106,12 @@ class TALLKitServiceProvider extends ServiceProvider
 
         if (config('tallkit.options.upload.enabled')) {
             Route::post('/tallkit/upload', [Upload::class, 'store'])
-                ->middleware(config('tallkit.options.upload.middleware'))
+                ->middleware(config('tallkit.options.upload.middleware', 'web'))
+                ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class)
                 ->name('tallkit.upload');
 
             Route::delete('/tallkit/upload', [Upload::class, 'destroy'])
-                ->middleware(config('tallkit.options.upload.middleware'));
+                ->middleware(config('tallkit.options.upload.middleware', 'web'));
         }
     }
 

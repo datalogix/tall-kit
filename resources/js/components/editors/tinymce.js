@@ -50,7 +50,6 @@ export default ({ loadComponentAssets, updateInputValue, getCsrfToken }) => ({
             window.fetch(options.upload_url, {
               body: formData,
               method: 'post',
-              mode: 'same-origin',
               credentials: 'same-origin',
               headers: {
                 Accept: 'application/json',

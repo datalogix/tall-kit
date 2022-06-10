@@ -116,7 +116,7 @@ return [
             'enabled' => env('TALLKIT_UPLOAD_ENABLED', true),
             'disk' => env('TALLKIT_UPLOAD_DISK'),
             'folder' => env('TALLKIT_UPLOAD_FOLDER', 'uploads'),
-            'middleware' => env('TALLKIT_UPLOAD_MIDDLEWARE', ['auth:admin']),
+            'middleware' => env('TALLKIT_UPLOAD_MIDDLEWARE', 'web'),
         ],
     ],
 
