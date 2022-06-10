@@ -13,7 +13,7 @@
     "defu": "^6.0"
   },
   "devDependencies": {
-    "eslint": "^8.14",
+    "eslint": "^8.17",
     "eslint-config-standard": "^17.0",
     "eslint-plugin-import": "^2.26",
     "eslint-plugin-n": "^15.2",
