@@ -20,7 +20,7 @@
         </label>
     @endif
 
-   <x-input
+    <x-input
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
         :name="$name"
         :id="$id"
