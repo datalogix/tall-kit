@@ -1718,6 +1718,7 @@ return [
                 ],
 
                 'options' => [
+                    'hidden_input' => false,
                     'branding' => false,
                     'menubar' => false,
                     'language' => app()->getLocale(),

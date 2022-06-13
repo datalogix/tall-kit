@@ -14,7 +14,6 @@ export default ({ loadComponentAssets, updateInputValue, getCsrfToken }) => ({
         this.tinymce = ed
 
         ed.on('change keyup', () => {
-          ed.save()
           updateInputValue(input, ed.getContent())
         })
 
