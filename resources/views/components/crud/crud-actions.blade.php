@@ -22,6 +22,17 @@
     />
 @endforeach
 
+@if (! in_array($routeName, ['index', 'create', 'new', 'form']) && $route = route_detect([$prefix.'.create', $prefix.'.new', $prefix.'.form'], $parameters, null))
+    <x-button
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create') }}
+        preset="create"
+        :text="$tooltip ? '' : null"
+        :tooltip="$tooltip"
+        :href="$route"
+        :theme="$theme"
+    />
+@endif
+
 @if (! in_array($routeName, ['show', 'view']) && $route = route_detect([$prefix.'.show', $prefix.'.view'], $parameters, null))
     <x-button
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'show') }}

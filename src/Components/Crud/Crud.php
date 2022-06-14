@@ -98,6 +98,11 @@ abstract class Crud extends BladeComponent
             $this->prefix = implode('.', $parts);
         }
 
+        if (! $this->routeName) {
+            $parts = explode('.', Route::currentRouteName());
+            $this->routeName = end($parts);
+        }
+
         if (! $parts) {
             $parts = explode('.', $this->prefix);
         }

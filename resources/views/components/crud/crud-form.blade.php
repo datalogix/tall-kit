@@ -28,6 +28,16 @@
                     :theme="$theme"
                 />
 
+                @if (Route::has($prefix.'.show') || Route::has($prefix.'.view'))
+                    <x-submit
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save-and-view') }}
+                        preset="save-and-view"
+                        :text="$tooltip ? '' : null"
+                        :tooltip="$tooltip"
+                        :theme="$theme"
+                    />
+                @endif
+
                 <x-back
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-back') }}
                     preset="back-right"
@@ -57,11 +67,21 @@
         @else
             <x-submit
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save') }}
+                preset="save"
                 :text="$tooltip ? '' : null"
                 :tooltip="$tooltip"
-                preset="save"
                 :theme="$theme"
             />
+
+            @if (Route::has($prefix.'.show') || Route::has($prefix.'.view'))
+                <x-submit
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save-and-view') }}
+                    preset="save-and-view"
+                    :text="$tooltip ? '' : null"
+                    :tooltip="$tooltip"
+                    :theme="$theme"
+                />
+            @endif
 
             <x-back
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-back') }}
