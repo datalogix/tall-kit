@@ -15,8 +15,8 @@
 
     <{{ $fieldset ? 'fieldset' : 'div' }} {{
         $attributes
-            ->mergeOnlyThemeProvider($themeProvider, $fieldset ? 'fieldset' : null)
-            ->mergeThemeProvider($themeProvider, 'types', $getType())
+            ->mergeThemeProvider($themeProvider, $fieldset ? 'fieldset' : null)
+            ->mergeOnlyThemeProvider($themeProvider, 'types', $getType())
     }}>
         {{ $slot }}
     </{{ $fieldset ? 'fieldset' : 'div' }}>
