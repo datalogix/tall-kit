@@ -3,7 +3,7 @@
 namespace TALLKit\Components\Crud;
 
 use Illuminate\Support\Str;
-use TALLKit\Components\Tables\Datatable;
+use TALLKit\Concerns\DatatableHelpers;
 
 class CrudIndex extends Crud
 {
@@ -123,14 +123,14 @@ class CrudIndex extends Crud
         $orderByDirection = null,
         $theme = null
     ) {
-        $search = Datatable::getSearch($search, $searchDefault, $searchValues, $parseSearch);
+        $search = DatatableHelpers::getSearch($search, $searchDefault, $searchValues, $parseSearch);
 
         parent::__construct(
             $prefix,
             $key,
             $title,
             $parameters,
-            Datatable::getRows($resource ?? $rows, $cols, $search, $orderBy, $orderByDirection, $paginator ?? true, $parseRows),
+            DatatableHelpers::getRows($resource ?? $rows, $cols, $search, $orderBy, $orderByDirection, $paginator ?? true, $parseRows),
             $customActions,
             $routeName,
             $tooltip,
@@ -143,7 +143,7 @@ class CrudIndex extends Crud
         $this->displayIdColumn = $displayIdColumn ?? false;
         $this->displayActionsColumn = $displayActionsColumn ?? true;
         $this->mapRelationsColumn = $mapRelationsColumn ?? true;
-        $this->cols = $this->getCols($cols, $sortable ?? Datatable::getSortable($resource ?? $rows), $parseCols);
+        $this->cols = $this->getCols($cols, $sortable ?? DatatableHelpers::getSortable($resource ?? $rows), $parseCols);
         $this->footer = $footer;
         $this->emptyText = $emptyText;
         $this->paginatorPosition = $paginatorPosition;
@@ -161,7 +161,7 @@ class CrudIndex extends Crud
      */
     protected function getCols($cols, $sortable = null, $parse = null)
     {
-        $cols = Datatable::getCols($cols, $this->resource, $sortable, $this->orderBy, $this->orderByDirection, $parse);
+        $cols = DatatableHelpers::getCols($cols, $this->resource, $sortable, $this->orderBy, $this->orderByDirection, $parse);
 
         if (empty($cols)) {
             return $cols;

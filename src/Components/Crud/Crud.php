@@ -86,9 +86,10 @@ abstract class Crud extends BladeComponent
         $this->tooltip = $tooltip;
 
         $parts = null;
+        $route = Route::currentRouteName();
 
-        if (! $this->prefix) {
-            $parts = explode('.', Route::currentRouteName());
+        if (! $this->prefix && ! Str::startsWith($route, 'livewire.')) {
+            $parts = explode('.', $route);
 
             if (! $this->routeName) {
                 $this->routeName = end($parts);
@@ -98,8 +99,8 @@ abstract class Crud extends BladeComponent
             $this->prefix = implode('.', $parts);
         }
 
-        if (! $this->routeName) {
-            $parts = explode('.', Route::currentRouteName());
+        if (! $this->routeName && ! Str::startsWith($route, 'livewire.')) {
+            $parts = explode('.', $route);
             $this->routeName = end($parts);
         }
 
