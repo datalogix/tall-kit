@@ -5,7 +5,7 @@
                 ->merge(data_get($action, 'attributes', []))
         }}
         :text="data_get($action, 'text', $action)"
-        :href="data_get($action, 'href', route_detect(data_get($action, 'href', true) ? $prefix.'.'.$route : $route, data_get($action, 'parameters', $parameters)))"
+        :href="data_get($action, 'href', route_detect(data_get($action, 'prefix', true) ? $prefix.'.'.$route : $route, data_get($action, 'parameters', $parameters)))"
         :icon="data_get($action, 'icon')"
         :icon-left="data_get($action, 'icon-left')"
         :icon-right="data_get($action, 'icon-right')"
