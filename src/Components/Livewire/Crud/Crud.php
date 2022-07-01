@@ -1,0 +1,48 @@
+<?php
+
+namespace TALLKit\Components\Livewire\Crud;
+
+use TALLKit\Components\LivewireComponent;
+
+abstract class Crud extends LivewireComponent
+{
+    /**
+     * @var string
+     */
+    public $prefix;
+
+    /**
+     * @var string
+     */
+    public $key;
+
+    /**
+     * @var string|bool
+     */
+    public $title;
+
+    /**
+     * @var array
+     */
+    public $parameters;
+
+    /**
+     * @var mixed
+     */
+    public $resource;
+
+    /**
+     * @var array
+     */
+    public $customActions;
+
+    /**
+     * @var string|bool|null
+     */
+    public $routeName;
+
+    /**
+     * @var string|bool|null
+     */
+    public $tooltip;
+}

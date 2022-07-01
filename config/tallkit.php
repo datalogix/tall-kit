@@ -577,6 +577,7 @@ return [
         /**
          * Crud.
          */
+        'crud' => \TALLKit\Components\Crud\CrudIndex::class,
         'crud-list' => \TALLKit\Components\Crud\CrudIndex::class,
         'crud-new' => \TALLKit\Components\Crud\CrudForm::class,
         'crud-create' => \TALLKit\Components\Crud\CrudForm::class,
@@ -730,6 +731,15 @@ return [
     */
 
     'livewire' => [
+        /**
+         * Crud.
+         */
+        'crud' => \TALLKit\Components\Livewire\Crud\CrudIndex::class,
+        'crud-index' => \TALLKit\Components\Livewire\Crud\CrudIndex::class,
+
+        /**
+         * Tables.
+         */
         'datatable' => \TALLKit\Components\Livewire\Tables\Datatable::class,
     ],
 
