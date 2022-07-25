@@ -1,8 +1,8 @@
-@if ($noscript && !$useStylesheet)
+@if ($noscript && ! $useStylesheet)
     <noscript><link rel="stylesheet" href="{!! $url !!}" /></noscript>
 @endif
 
-@if (!$noscript)
+@if (! $noscript)
     @if ($prefetch)
         <link rel="dns-prefetch" href="https://fonts.gstatic.com/" />
     @endif

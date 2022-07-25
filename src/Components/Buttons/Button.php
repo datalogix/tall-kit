@@ -223,7 +223,7 @@ class Button extends BladeComponent
             return true;
         }
 
-        if (!$this->href) {
+        if (! $this->href) {
             return false;
         }
 

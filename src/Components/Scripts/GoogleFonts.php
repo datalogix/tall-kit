@@ -59,7 +59,7 @@ class GoogleFonts extends Script
         $this->preload = $preload ?? false;
         $this->useStylesheet = $useStylesheet ?? false;
 
-        if (!$display && $this->preload) {
+        if (! $display && $this->preload) {
             $display = 'swap';
         }
 
@@ -79,7 +79,7 @@ class GoogleFonts extends Script
             return $families;
         }
 
-        $params = Collection::make($families)->map(function($family) {
+        $params = Collection::make($families)->map(function ($family) {
             return 'family='.$family;
         });
 

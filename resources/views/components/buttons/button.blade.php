@@ -14,14 +14,14 @@
         ->merge($bordered && $colorName ? [
             'class' => 'border border-'.$colorName.'-'.$colorHover,
         ] : [])
-        ->merge(!$outlined && !$linkText && $colorName ? [
+        ->merge(! $outlined && ! $linkText && $colorName ? [
             'class' => 'bg-'.$colorName.'-'.$colorWeight.' hover:bg-'.$colorName.'-'.$colorHover.' text-white',
         ] : [])
         ->merge($isActive() ? $attributes->mergeOnlyThemeProvider($themeProvider, 'active')->getAttributes() : [])
         ->merge($tooltip ? ['data-tippy-content' => __($tooltip)] : [], false)
     }}
     @if ($href) href="{{ $href }}" @endif
-    @if (!$href) type="{{ $type }}" @endif
+    @if (! $href) type="{{ $type }}" @endif
     @if ($href && $target) target="{{ $target }}" @endif
     @if ($click) @click="{{ $click }}" @endif
     @if ($wireClick) wire:click="{{ $wireClick }}" @endif

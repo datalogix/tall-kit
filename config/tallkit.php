@@ -1257,7 +1257,7 @@ return [
                 'icon-right' => [],
 
                 'text' => [
-                    'class' => 'flex-1 text-left'
+                    'class' => 'flex-1 text-left',
                 ],
 
                 'colors' => [
@@ -1395,7 +1395,7 @@ return [
                         'text' => 'Options',
                         'tooltip' => 'Options',
                         'color' => 'none',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 192 512"><path fill="currentColor" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>'
+                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 192 512"><path fill="currentColor" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>',
                     ],
 
                     'show' => [
@@ -2253,7 +2253,7 @@ return [
                     'turbo' => true,
 
                     'meta' => [
-                        'turbo-cache-control' => 'no-preview'
+                        'turbo-cache-control' => 'no-preview',
                     ],
 
                     'google-fonts' => [
@@ -2311,7 +2311,7 @@ return [
                     'turbo' => true,
 
                     'meta' => [
-                        'turbo-cache-control' => 'no-preview'
+                        'turbo-cache-control' => 'no-preview',
                     ],
 
                     'google-fonts' => [

@@ -25,7 +25,7 @@
             multiple
         @endif
     >
-        @if ($emptyOption && !$multiple)
+        @if ($emptyOption && ! $multiple)
             <option value="">{{ $emptyOption === true ? '---' : $emptyOption }}</option>
         @endif
 

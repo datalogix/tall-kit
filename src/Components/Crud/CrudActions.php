@@ -55,9 +55,9 @@ class CrudActions extends Crud
             $theme
         );
 
-        $this->actions = $this->actions->concat($this->getDefaultActions())->map(function($action, $name) {
+        $this->actions = $this->actions->concat($this->getDefaultActions())->map(function ($action, $name) {
             return Arr::set($action, 'route', Arr::get($action, 'route', $this->getRoute($name, $action)));
-        })->filter(function($action) {
+        })->filter(function ($action) {
             return $action['route'];
         });
 
