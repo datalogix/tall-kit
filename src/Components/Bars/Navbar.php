@@ -3,7 +3,7 @@
 namespace TALLKit\Components\Bars;
 
 use Illuminate\Support\Collection;
-use TALLKit\Components\Navigations\Nav;
+use TALLKit\Components\Menus\Nav;
 
 class Navbar extends Nav
 {

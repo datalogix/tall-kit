@@ -1,7 +1,11 @@
 <x-button
     {{ $attributes }}
     :text="$text"
+    :active="$active"
     :href="$href ?? url()->previous()"
+    :target="$target"
+    :click="$click"
+    :wire-click="$wireClick"
     :icon="$icon"
     :icon-left="$iconLeft"
     :icon-right="$iconRight"
@@ -9,6 +13,7 @@
     :rounded="$rounded"
     :shadow="$shadow"
     :outlined="$outlined"
+    :link-text="$linkText"
     :bordered="$bordered"
     :loading="$loading"
     :preset="$preset ?? 'back'"

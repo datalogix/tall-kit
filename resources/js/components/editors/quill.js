@@ -1,7 +1,11 @@
-export default ({ loadComponentAssets, updateInputValue }) => ({
+export default ({ loadComponentAssets, updateInputValue, loadable }) => ({
+  ...loadable(),
+
   quill: null,
 
   async setup (options) {
+    this.start()
+
     await loadComponentAssets('quill')
 
     const { input, editor } = this.$refs
@@ -13,5 +17,7 @@ export default ({ loadComponentAssets, updateInputValue }) => ({
     })
 
     this.quill.root.innerHTML = input.value
+
+    this.complete()
   }
 })

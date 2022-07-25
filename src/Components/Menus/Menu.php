@@ -2,8 +2,6 @@
 
 namespace TALLKit\Components\Menus;
 
-use TALLKit\Components\Navigations\Nav;
-
 class Menu extends Nav
 {
     /**

@@ -3,6 +3,7 @@
 namespace TALLKit\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use TALLKit\Requests\UploadRequest;
 
@@ -16,7 +17,7 @@ class Upload
      */
     public function store(UploadRequest $request)
     {
-        $files = collect($request->allFiles());
+        $files = Collection::make($request->allFiles());
 
         if ($files->isEmpty()) {
             return response()->json([], 422);

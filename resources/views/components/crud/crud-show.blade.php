@@ -9,12 +9,14 @@
         >
             @isset($actionsHeader)
                 {{ $actionsHeader }}
-            @elseif(isset($actions))
-                {{ $actions }}
+            @elseif(isset($actionsShow))
+                {{ $actionsShow }}
             @else
                 <x-crud-actions
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-actions') }}
-                    :custom-actions="$customActions"
+                    :force-menu="$forceMenu"
+                    :max-actions="$maxActions"
+                    :actions="$actions"
                     :prefix="$prefix"
                     :parameters="array_merge($parameters, [$resource])"
                     :tooltip="$tooltip"
@@ -39,12 +41,14 @@
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer') }}>
         @isset($actionsFooter)
             {{ $actionsFooter }}
-        @elseif(isset($actions))
-            {{ $actions }}
+        @elseif(isset($actionsShow))
+            {{ $actionsShow }}
         @else
             <x-crud-actions
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-actions') }}
-                :custom-actions="$customActions"
+                :force-menu="$forceMenu"
+                :max-actions="$maxActions"
+                :actions="$actions"
                 :prefix="$prefix"
                 :parameters="array_merge($parameters, [$resource])"
                 :tooltip="$tooltip"

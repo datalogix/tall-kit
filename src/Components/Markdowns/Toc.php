@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Markdowns;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 
@@ -55,7 +56,7 @@ class Toc extends BladeComponent
         // Remove code blocks which might contain headers.
         $markdown = preg_replace('(```[a-z]*\n[\s\S]*?\n```)', '', $markdown);
 
-        return collect(explode(PHP_EOL, $markdown))
+        return Collection::make(explode(PHP_EOL, $markdown))
             ->filter(function ($line) {
                 for ($c = $this->min; $c <= $this->max; $c++) {
                     if (Str::startsWith(trim($line), Str::repeat('#', $c).' ')) {

@@ -20,6 +20,8 @@
         </label>
     @endif
 
+    <x-loading {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading') }} />
+
     <x-input {{
         $attributes->mergeThemeProvider($themeProvider, 'filepond') }}
         :name="$name"

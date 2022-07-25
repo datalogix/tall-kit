@@ -1,6 +1,6 @@
 <?php
 
-namespace TALLKit\Components\Navigations;
+namespace TALLKit\Components\Overlays;
 
 class Drawer extends Toggleable
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace TALLKit\Components\Navigations;
+namespace TALLKit\Components\Overlays;
 
 class Dropdown extends Toggleable
 {

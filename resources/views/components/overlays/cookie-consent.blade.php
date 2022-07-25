@@ -49,6 +49,7 @@
                             :rounded="$buttonRounded"
                             :shadow="$buttonShadow"
                             :outlined="$buttonOutlined"
+                            :link-text="$buttonLinkText"
                             :bordered="$buttonBordered"
                             :tooltip="$buttonTooltip"
                             :theme="$theme"

@@ -1,9 +1,13 @@
 import { defu } from 'defu'
 
-export default ({ loadComponentAssets, updateInputValue, getCsrfToken }) => ({
+export default ({ loadComponentAssets, updateInputValue, getCsrfToken, loadable }) => ({
+  ...loadable(),
+
   tinymce: null,
 
   async setup (options) {
+    this.start()
+
     await loadComponentAssets('tinymce')
 
     const { input, editor } = this.$refs
@@ -19,7 +23,9 @@ export default ({ loadComponentAssets, updateInputValue, getCsrfToken }) => ({
 
         ed.on('init', function () {
           ed.setContent(input.value)
-        })
+
+          this.complete()
+        }.bind(this))
       },
 
       file_picker_callback: options.upload_url

@@ -89,8 +89,7 @@
                         @else
                             <x-button
                                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'edit') }}
-                                color="transparent"
-                                shadow="none"
+                                preset="none"
                                 :theme="$theme"
                             >
                                 <x-icon
@@ -110,8 +109,7 @@
                                     ->mergeOnlyThemeProvider($themeProvider, 'delete')
                                     ->merge(['@click' => 'remove(\''.__($deleteConfirm ?? 'Do you really want to remove this image?').'\')'])
                                 }}
-                                color="transparent"
-                                shadow="none"
+                                preset="none"
                                 :theme="$theme"
                             >
                                 <x-icon

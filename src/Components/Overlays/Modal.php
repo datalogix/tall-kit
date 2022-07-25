@@ -2,8 +2,6 @@
 
 namespace TALLKit\Components\Overlays;
 
-use TALLKit\Components\Navigations\Toggleable;
-
 class Modal extends Toggleable
 {
     protected static $ALIGN_DEFAULT = 'center';

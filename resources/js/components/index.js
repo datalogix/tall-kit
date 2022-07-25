@@ -1,6 +1,7 @@
 import navbar from './bars/navbar'
 import progressbar from './bars/progressbar'
 import sidebar from './bars/sidebar'
+import button from './buttons/button'
 import carbon from './datetimes/carbon'
 import countdown from './datetimes/countdown'
 import easymde from './editors/easymde'
@@ -13,9 +14,9 @@ import inputImage from './forms/input-image'
 import mask from './forms/mask'
 import tagify from './forms/tagify'
 import message from './messages/message'
-import toggleable from './navigations/toggleable'
 import cookieConsent from './overlays/cookie-consent'
 import modal from './overlays/modal'
+import toggleable from './overlays/toggleable'
 import tooltip from './overlays/tooltip'
 import accordionItem from './panels/accordion-item'
 import tab from './panels/tab'
@@ -37,6 +38,11 @@ export default {
   navbar,
   progressbar,
   sidebar,
+
+  /**
+   * Buttons.
+   */
+  button,
 
   /**
    * Datetimes.
@@ -67,15 +73,11 @@ export default {
   message,
 
   /**
-   * Navigations.
-   */
-  toggleable,
-
-  /**
    * Overlays.
    */
   'cookie-consent': cookieConsent,
   modal,
+  toggleable,
   tooltip,
 
   /**

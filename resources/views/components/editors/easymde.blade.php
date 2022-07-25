@@ -20,6 +20,8 @@
         </label>
     @endif
 
+    <x-loading {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading') }} />
+
     <x-textarea
         {{ $attributes->mergeThemeProvider($themeProvider, 'easymde') }}
         :name="$name"

@@ -13,6 +13,21 @@ class FormButton extends Form
     public $text;
 
     /**
+     * @var bool|null
+     */
+    public $active;
+
+    /**
+     * @var string|bool|null
+     */
+    public $click;
+
+    /**
+     * @var string|bool|null
+     */
+    public $wireClick;
+
+    /**
      * @var string|bool|null
      */
     public $icon;
@@ -50,6 +65,11 @@ class FormButton extends Form
     /**
      * @var bool|null
      */
+    public $linkText;
+
+    /**
+     * @var bool|null
+     */
     public $bordered;
 
     /**
@@ -78,6 +98,9 @@ class FormButton extends Form
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  string|null  $text
+     * @param  bool|null  $active
+     * @param  string|bool|null  $click
+     * @param  string|bool|null  $wireClick
      * @param  string|bool|null  $icon
      * @param  string|bool|null  $iconLeft
      * @param  string|bool|null  $iconRight
@@ -85,6 +108,7 @@ class FormButton extends Form
      * @param  string|bool|null  $rounded
      * @param  string|bool|null  $shadow
      * @param  bool|null  $outlined
+     * @param  bool|null  $linkText
      * @param  bool|null  $bordered
      * @param  string|bool|null  $loading
      * @param  string|null  $preset
@@ -101,6 +125,9 @@ class FormButton extends Form
         $enctype = null,
         $confirm = null,
         $text = null,
+        $active = null,
+        $click = null,
+        $wireClick = null,
         $icon = null,
         $iconLeft = null,
         $iconRight = null,
@@ -108,6 +135,7 @@ class FormButton extends Form
         $rounded = null,
         $shadow = null,
         $outlined = null,
+        $linkText = null,
         $bordered = null,
         $loading = null,
         $preset = null,
@@ -126,6 +154,9 @@ class FormButton extends Form
         );
 
         $this->text = $text;
+        $this->active = $active;
+        $this->click = $click;
+        $this->wireClick = $wireClick;
         $this->icon = $icon;
         $this->iconLeft = $iconLeft;
         $this->iconRight = $iconRight;
@@ -133,6 +164,7 @@ class FormButton extends Form
         $this->rounded = $rounded;
         $this->shadow = $shadow;
         $this->outlined = $outlined;
+        $this->linkText = $linkText;
         $this->bordered = $bordered;
         $this->loading = $loading;
         $this->preset = $preset;

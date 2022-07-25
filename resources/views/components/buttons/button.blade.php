@@ -1,23 +1,32 @@
 <{{ $href ? 'a' : 'button' }} {{
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
+        ->mergeOnlyThemeProvider($themeProvider, 'types', $href ? 'link' : 'button')
         ->mergeOnlyThemeProvider($themeProvider, 'roundeds', $rounded)
         ->mergeOnlyThemeProvider($themeProvider, 'shadows', $shadow)
-        ->mergeOnlyThemeProvider($themeProvider, $loading && $type === 'submit' ? 'loading' : null, $loading ? 'container' : null)
-        ->merge($colorName ? [
-            'class' => $outlined
-                ? 'bg-transparent hover:bg-'.$colorName.'-'.$colorWeight.' text-'.$colorName.'-'.$colorHover.' hover:text-white border border-'.$colorName.'-'.$colorWeight.' hover:border-transparent'
-                : 'bg-'.$colorName.'-'.$colorWeight.' hover:bg-'.$colorName.'-'.$colorHover.' text-white',
+        ->mergeOnlyThemeProvider($themeProvider, $loading ? 'loading' : null, $loading ? 'container' : null)
+        ->merge($outlined && $colorName ? [
+            'class' => 'bg-transparent hover:bg-'.$colorName.'-'.$colorWeight.' text-'.$colorName.'-'.$colorHover.' hover:text-white border border-'.$colorName.'-'.$colorWeight.' hover:border-transparent',
+        ] : [])
+        ->merge($linkText && $colorName ? [
+            'class' => 'hover:text-'.$colorName.'-'.$colorHover,
         ] : [])
         ->merge($bordered && $colorName ? [
             'class' => 'border border-'.$colorName.'-'.$colorHover,
         ] : [])
+        ->merge(!$outlined && !$linkText && $colorName ? [
+            'class' => 'bg-'.$colorName.'-'.$colorWeight.' hover:bg-'.$colorName.'-'.$colorHover.' text-white',
+        ] : [])
+        ->merge($isActive() ? $attributes->mergeOnlyThemeProvider($themeProvider, 'active')->getAttributes() : [])
         ->merge($tooltip ? ['data-tippy-content' => __($tooltip)] : [], false)
     }}
     @if ($href) href="{{ $href }}" @endif
     @if (!$href) type="{{ $type }}" @endif
+    @if ($href && $target) target="{{ $target }}" @endif
+    @if ($click) @click="{{ $click }}" @endif
+    @if ($wireClick) wire:click="{{ $wireClick }}" @endif
 >
-    @if ($loading && $type === 'submit')<span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'content') }}>@endif
+    @if ($loading)<span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'content', false) }}>@endif
         <x-icon
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-left') }}
             :name="$iconLeft"
@@ -37,12 +46,12 @@
         >
             {!! $iconRight !!}
         </x-icon>
-    @if ($loading && $type === 'submit')</span>@endif
+    @if ($loading)</span>@endif
 
-    @if ($loading && $type === 'submit')
+    @if ($loading)
         <x-loading
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'loading') }}
-            :text="is_string($loading) && ($slot->isNotEmpty() || $text) ? $loading : ''"
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'component', false) }}
+            :text="is_string($loading) && ($slot->isNotEmpty() || $text) ? $loading : ($slot->isEmpty() ? __($text) : $slot)"
         />
     @endif
 </{{ $href ? 'a' : 'button' }}>

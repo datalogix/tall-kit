@@ -1,6 +1,6 @@
 <?php
 
-namespace TALLKit\Components\Navigations;
+namespace TALLKit\Components\Menus;
 
 use Illuminate\Support\Collection;
 use TALLKit\Components\BladeComponent;

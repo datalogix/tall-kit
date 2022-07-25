@@ -1,6 +1,12 @@
-export default ({ dispatchInputEvent, loadComponentAssets }) => ({
+export default ({ dispatchInputEvent, loadComponentAssets, loadable }) => ({
+  ...loadable(),
+
   async setup () {
+    this.start()
+
     await loadComponentAssets('trix')
+
+    this.complete()
   },
 
   change ($event) {

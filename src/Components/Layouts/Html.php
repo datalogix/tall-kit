@@ -3,6 +3,7 @@
 namespace TALLKit\Components\Layouts;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use TALLKit\Components\BladeComponent;
 
 class Html extends BladeComponent
@@ -28,7 +29,12 @@ class Html extends BladeComponent
     public $csrfToken;
 
     /**
-     * @var string|null
+     * @var array
+     */
+    public $meta;
+
+    /**
+     * @var array|string|null
      */
     public $googleFonts;
 
@@ -100,7 +106,8 @@ class Html extends BladeComponent
      * @param  string|null  $charset
      * @param  string|null  $viewport
      * @param  bool|null  $csrfToken
-     * @param  string|null  $googleFonts
+     * @param  array|null  $meta
+     * @param  array|string|null  $googleFonts
      * @param  bool|null  $turbo
      * @param  string|bool|null  $googleAnalytics
      * @param  string|bool|null  $googleTagManager
@@ -124,6 +131,7 @@ class Html extends BladeComponent
         $charset = null,
         $viewport = null,
         $csrfToken = null,
+        $meta = null,
         $googleFonts = null,
         $turbo = null,
         $googleAnalytics = null,
@@ -152,6 +160,7 @@ class Html extends BladeComponent
         $this->charset = data_get($options, 'charset', $charset ?? 'utf-8');
         $this->viewport = data_get($options, 'viewport', $viewport ?? 'width=device-width, initial-scale=1');
         $this->csrfToken = data_get($options, 'csrf-token', $csrfToken ?? true);
+        $this->meta = Collection::make(data_get($options, 'meta', $meta));
         $this->googleFonts = data_get($options, 'google-fonts', data_get($options, 'fonts', $googleFonts));
         $this->turbo = data_get($options, 'turbo', $turbo);
         $this->googleAnalytics = data_get($options, 'google-analytics', data_get($options, 'analytics', $googleAnalytics));
@@ -159,11 +168,11 @@ class Html extends BladeComponent
         $this->facebookPixelCode = data_get($options, 'facebook-pixel-code', data_get($options, 'facebook-pixel', $facebookPixelCode));
         $this->livewire = data_get($options, 'livewire', $livewire ?? true) && class_exists('\Livewire\Livewire');
 
-        $this->mixStyles = collect(Arr::wrap(data_get($options, 'mix-styles', $mixStyles ?? 'css/app.css')))->filter(function ($file) {
+        $this->mixStyles = Collection::make(data_get($options, 'mix-styles', $mixStyles ?? 'css/app.css'))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 
-        $this->mixScripts = collect(Arr::wrap(data_get($options, 'mix-scripts', $mixScripts ?? 'js/app.js')))->filter(function ($file) {
+        $this->mixScripts = Collection::make(data_get($options, 'mix-scripts', $mixScripts ?? 'js/app.js'))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 

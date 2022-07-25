@@ -3,6 +3,7 @@
 namespace TALLKit\Components\Crud;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
@@ -35,9 +36,19 @@ abstract class Crud extends BladeComponent
     public $resource;
 
     /**
-     * @var array
+     * @var bool|null
      */
-    public $customActions;
+    public $forceMenu;
+
+    /**
+     * @var int|null
+     */
+    public $maxActions;
+
+    /**
+     * @var \Illuminate\Support\Collection
+     */
+    public $actions;
 
     /**
      * @var string|bool|null
@@ -57,7 +68,9 @@ abstract class Crud extends BladeComponent
      * @param  string|bool|null  $title
      * @param  mixed  $parameters
      * @param  mixed  $resource
-     * @param  mixed  $customActions
+     * @param  bool|null  $forceMenu
+     * @param  int|null  $maxActions
+     * @param  mixed  $actions
      * @param  string|bool|null  $routeName
      * @param  string|bool|null  $tooltip
      * @param  string|null  $theme
@@ -69,7 +82,9 @@ abstract class Crud extends BladeComponent
         $title = null,
         $parameters = null,
         $resource = null,
-        $customActions = null,
+        $forceMenu = null,
+        $maxActions = null,
+        $actions = null,
         $routeName = null,
         $tooltip = null,
         $theme = null
@@ -81,7 +96,9 @@ abstract class Crud extends BladeComponent
         $this->title = $title;
         $this->parameters = Arr::wrap($parameters);
         $this->resource = $resource;
-        $this->customActions = Arr::wrap($customActions);
+        $this->forceMenu = $forceMenu;
+        $this->maxActions = $maxActions ?? 4;
+        $this->actions = Collection::make($actions);
         $this->routeName = $routeName;
         $this->tooltip = $tooltip;
 

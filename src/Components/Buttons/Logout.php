@@ -15,6 +15,9 @@ class Logout extends FormButton
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  string|null  $text
+     * @param  bool|null  $active
+     * @param  string|bool|null  $click
+     * @param  string|bool|null  $wireClick
      * @param  string|bool|null  $icon
      * @param  string|bool|null  $iconLeft
      * @param  string|bool|null  $iconRight
@@ -38,6 +41,9 @@ class Logout extends FormButton
         $enctype = null,
         $confirm = null,
         $text = null,
+        $active = null,
+        $click = null,
+        $wireClick = null,
         $icon = null,
         $iconLeft = null,
         $iconRight = null,
@@ -60,6 +66,9 @@ class Logout extends FormButton
             $enctype,
             $confirm,
             $text ?? 'Log out',
+            $active,
+            $click,
+            $wireClick,
             $icon,
             $iconLeft,
             $iconRight,

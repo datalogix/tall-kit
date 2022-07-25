@@ -10,9 +10,7 @@
                     ->mergeOnlyThemeProvider($themeProvider, 'item')
                     ->mergeOnlyThemeProvider($themeProvider, 'modes-item', $mode)
                 }}
-                color="none"
-                shadow="none"
-                rounded="none"
+                preset="none"
                 :theme="$theme"
                 ::class="{
                     '{{ $attributes

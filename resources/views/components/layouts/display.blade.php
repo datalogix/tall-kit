@@ -13,7 +13,6 @@
         <x-button {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'download') }}
             href="{{ $value }}"
             preset="download"
-            target="_blank"
             :theme="$theme"
         />
     @else

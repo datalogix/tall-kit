@@ -1,6 +1,6 @@
 <?php
 
-namespace TALLKit\Components\Navigations;
+namespace TALLKit\Components\Overlays;
 
 use TALLKit\Components\BladeComponent;
 use TALLKit\Concerns\Toggleable as ConcernsToggleable;

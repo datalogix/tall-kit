@@ -44,7 +44,9 @@ class CrudForm extends Crud
      * @param  string|bool|null  $title
      * @param  mixed  $parameters
      * @param  mixed  $resource
-     * @param  mixed  $customActions
+     * @param  bool|null  $forceMenu
+     * @param  int|null  $maxActions
+     * @param  mixed  $actions
      * @param  string|bool|null  $routeName
      * @param  string|bool|null  $tooltip
      * @param  bool|null  $init
@@ -62,7 +64,9 @@ class CrudForm extends Crud
         $title = null,
         $parameters = null,
         $resource = null,
-        $customActions = null,
+        $forceMenu = null,
+        $maxActions = null,
+        $actions = null,
         $routeName = null,
         $tooltip = null,
         $init = null,
@@ -79,7 +83,9 @@ class CrudForm extends Crud
             $title,
             $parameters,
             $resource,
-            $customActions,
+            $forceMenu,
+            $maxActions,
+            $actions,
             $routeName,
             $tooltip,
             $theme

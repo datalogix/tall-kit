@@ -1,7 +1,11 @@
-export default ({ loadComponentAssets, updateInputValue }) => ({
+export default ({ loadComponentAssets, updateInputValue, loadable }) => ({
+  ...loadable(),
+
   easymde: null,
 
   async setup (options) {
+    this.start()
+
     await loadComponentAssets('easymde')
 
     const { editor } = this.$refs
@@ -14,5 +18,7 @@ export default ({ loadComponentAssets, updateInputValue }) => ({
     this.easymde.codemirror.on('change', () => {
       updateInputValue(editor, this.easymde.value())
     })
+
+    this.complete()
   }
 })

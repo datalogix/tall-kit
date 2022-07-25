@@ -9,8 +9,8 @@
         >
             @isset($actionsHeader)
                 {{ $actionsHeader }}
-            @elseif(isset($actions))
-                {{ $actions }}
+            @elseif(isset($actionsIndex))
+                {{ $actionsIndex }}
             @elseif($route = route_detect([$prefix.'.create', $prefix.'.new', $prefix.'.form'], $parameters, null))
                 <x-button
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create') }}
@@ -49,11 +49,13 @@
                 @endphp
 
                 @if ($displayActionsColumn && $colname === 'col_actions')
-                    @scopedslot('col_actions', ($row), ($customActions, $prefix, $parameters, $tooltip, $attributes, $themeProvider, $theme))
+                    @scopedslot('col_actions', ($row), ($forceMenu, $maxActions, $actions, $prefix, $parameters, $tooltip, $attributes, $themeProvider, $theme))
                         <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'row-actions') }}>
                             <x-crud-actions
                                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
-                                :custom-actions="$customActions"
+                                :force-menu="$forceMenu"
+                                :max-actions="$maxActions"
+                                :actions="$actions"
                                 :prefix="$prefix"
                                 :parameters="array_merge($parameters, [$row])"
                                 :tooltip="$tooltip ?? true"

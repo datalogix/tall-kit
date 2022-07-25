@@ -3,7 +3,7 @@
 namespace TALLKit\Components\Bars;
 
 use Illuminate\Support\Collection;
-use TALLKit\Components\Navigations\Drawer;
+use TALLKit\Components\Overlays\Drawer;
 
 class Sidebar extends Drawer
 {

@@ -24,8 +24,7 @@
         @if ($dismissible)
             <x-button
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'button') }}
-                color="none"
-                shadow="none"
+                preset="none"
                 :icon-left="$dismissibleIcon ? $dismissibleIconName : null"
                 :text="$dismissibleText"
                 :tooltip="$dismissibleTooltip"

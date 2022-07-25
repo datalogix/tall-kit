@@ -67,6 +67,7 @@
                     {{ $toolbarRight }}
                 @else
                     <x-user-menu
+                        {{ $attributes->mergeThemeProvider($themeProvider, 'user-menu') }}
                         :items="$userMenuItems"
                         :inline="$userMenuInline"
                         :name="$userMenuName"

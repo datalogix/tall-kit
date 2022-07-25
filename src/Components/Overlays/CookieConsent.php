@@ -72,6 +72,11 @@ class CookieConsent extends Modal
     /**
      * @var bool
      */
+    public $buttonLinkText;
+
+    /**
+     * @var bool
+     */
     public $buttonBordered;
 
     /**
@@ -101,6 +106,7 @@ class CookieConsent extends Modal
      * @param  string|bool|null  $buttonRounded
      * @param  string|bool|null  $buttonShadow
      * @param  bool|null  $buttonOutlined
+     * @param  bool|null  $buttonLinkText
      * @param  bool|null  $buttonBordered
      * @param  string|bool|null  $buttonTooltip
      * @param  string|null  $theme
@@ -126,6 +132,7 @@ class CookieConsent extends Modal
         $buttonRounded = null,
         $buttonShadow = null,
         $buttonOutlined = null,
+        $buttonLinkText = null,
         $buttonBordered = null,
         $buttonTooltip = null,
         $theme = null
@@ -154,6 +161,7 @@ class CookieConsent extends Modal
         $this->buttonRounded = $buttonRounded ?? 'default';
         $this->buttonShadow = $buttonShadow ?? 'default';
         $this->buttonOutlined = $buttonOutlined ?? false;
+        $this->buttonLinkText = $buttonLinkText ?? false;
         $this->buttonBordered = $buttonBordered ?? false;
         $this->buttonTooltip = $buttonTooltip;
     }

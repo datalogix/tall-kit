@@ -32,9 +32,19 @@ abstract class Crud extends LivewireComponent
     public $resource;
 
     /**
-     * @var array
+     * @var bool|null
      */
-    public $customActions;
+    public $forceMenu;
+
+    /**
+     * @var int|null
+     */
+    public $maxActions;
+
+    /**
+     * @var \Illuminate\Support\Collection
+     */
+    public $actions;
 
     /**
      * @var string|bool|null

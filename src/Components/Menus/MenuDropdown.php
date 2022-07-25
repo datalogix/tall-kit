@@ -55,4 +55,16 @@ class MenuDropdown extends Menu
         $this->iconName = $iconName;
         $this->tooltip = $tooltip;
     }
+
+    /**
+     * Get container.
+     *
+     * @return array
+     */
+    public function container()
+    {
+        return $this->attributes
+            ->mergeOnlyThemeProvider($this->themeProvider, $this->align !== 'auto' ? null : 'auto')
+            ->getAttributes();
+    }
 }

@@ -1,16 +1,17 @@
 <div {{
     $attributes
-        ->mergeOnlyThemeProvider($themeProvider, 'container')
+        ->mergeThemeProvider($themeProvider, 'container')
         ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
 }}>
     <x-dropdown
-        {{ $attributes->mergeThemeProvider($themeProvider, 'dropdown') }}
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dropdown') }}
         :name="$name"
         :show="$show"
         :overlay="$overlay"
         :closeable="$closeable"
         :align="$align"
         :theme="$theme"
+        :theme:container="$container()"
     >
         <x-slot name="trigger">
             @isset ($trigger)
@@ -18,16 +19,10 @@
             @else
                 <x-button
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}
-                    color="none"
-                    rounded="full"
-                    :icon-left="$iconName ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-name')->first()"
+                    preset="trigger"
                     :tooltip="$tooltip"
                     :theme="$theme"
-                >
-                    <x-slot name="iconLeft">
-                        {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-svg')->first() !!}
-                    </x-slot>
-                </x-button>
+                />
             @endisset
         </x-slot>
 

@@ -13,8 +13,7 @@
         @else
             <x-button
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'prev') }}
-                color="none"
-                shadow="none"
+                preset="none"
                 :tooltip="$prevTooltip"
                 :theme="$theme"
             >
@@ -28,8 +27,7 @@
 
             <x-button
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'next') }}
-                color="none"
-                shadow="none"
+                preset="none"
                 :tooltip="$nextTooltip"
                 :theme="$theme"
             >

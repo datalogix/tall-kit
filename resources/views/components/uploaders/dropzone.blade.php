@@ -20,5 +20,7 @@
         </label>
     @endif
 
+    <x-loading {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading') }} />
+
     <div {{ $attributes->mergeThemeProvider($themeProvider, 'dropzone') }}></div>
 </x-field>

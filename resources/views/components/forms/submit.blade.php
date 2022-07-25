@@ -2,6 +2,9 @@
     {{ $attributes }}
     type="submit"
     :text="$text"
+    :active="$active"
+    :click="$click"
+    :wire-click="$wireClick"
     :icon="$icon"
     :icon-left="$iconLeft"
     :icon-right="$iconRight"
@@ -9,6 +12,7 @@
     :rounded="$rounded"
     :shadow="$shadow"
     :outlined="$outlined"
+    :link-text="$linkText"
     :bordered="$bordered"
     :loading="$loading ?? true"
     :preset="$preset"

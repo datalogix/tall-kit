@@ -1,9 +1,13 @@
 import { defu } from 'defu'
 
-export default ({ loadComponentAssets, getCsrfToken }) => ({
+export default ({ loadComponentAssets, getCsrfToken, loadable }) => ({
+  ...loadable(),
+
   filepond: null,
 
   async setup (options = {}) {
+    this.start()
+
     const plugins = Object.values(options.plugins || [])
 
     for (const plugin of plugins) {
@@ -28,5 +32,7 @@ export default ({ loadComponentAssets, getCsrfToken }) => ({
       this.$refs.filepond,
       defu(options, defaults)
     )
+
+    this.complete()
   }
 })

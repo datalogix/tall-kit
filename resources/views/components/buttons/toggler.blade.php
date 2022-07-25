@@ -1,7 +1,6 @@
 <x-button
     {{ $attributes->mergeThemeProvider($themeProvider, 'button') }}
-    color="none"
-    shadow="none"
+    preset="none"
     :tooltip="$tooltip"
     :theme="$theme"
 >

@@ -17,8 +17,8 @@
         >
             @isset($actionsHeader)
                 {{ $actionsHeader }}
-            @elseif(isset($actions))
-                {{ $actions }}
+            @elseif(isset($actionsForm))
+                {{ $actionsForm }}
             @else
                 <x-submit
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save') }}
@@ -62,8 +62,8 @@
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer') }}>
         @isset($actionsFooter)
             {{ $actionsFooter }}
-        @elseif(isset($actions))
-            {{ $actions }}
+        @elseif(isset($actionsForm))
+            {{ $actionsForm }}
         @else
             <x-submit
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save') }}
