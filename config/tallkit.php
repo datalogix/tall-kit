@@ -2266,11 +2266,11 @@ return [
                 ],
 
                 'table' => [
-                    'x-ref' => 'items'
+                    'x-ref' => 'items',
                 ],
 
                 'row' => [
-                    'x-ref' => 'item'
+                    'x-ref' => 'item',
                 ],
 
                 'td' => [],
@@ -2282,7 +2282,7 @@ return [
                 ],
 
                 'actions' => [
-                    'class' => 'w-20'
+                    'class' => 'w-20',
                 ],
 
                 'create' => [

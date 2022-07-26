@@ -3,8 +3,8 @@
 namespace TALLKit\Components\Layouts;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 
 class AuthenticationCard extends BladeComponent

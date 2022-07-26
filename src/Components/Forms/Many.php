@@ -90,7 +90,7 @@ class Many extends Group
         $this->fields = Collection::make($fields)->map(function ($field, $key) {
             $field = is_array($field) ? $field : [
                 'name' => is_int($key) ? $field : $key,
-                'label' => is_string($field) ? $field : $key
+                'label' => is_string($field) ? $field : $key,
             ];
 
             data_set($field, 'label', data_get($field, 'name'), false);
