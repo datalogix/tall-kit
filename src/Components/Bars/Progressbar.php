@@ -44,7 +44,7 @@ class Progressbar extends BladeComponent
     /**
      * @var bool
      */
-    public $displayValue;
+    public $showValue;
 
     /**
      * Create a new component instance.
@@ -56,7 +56,7 @@ class Progressbar extends BladeComponent
      * @param  string|int|bool|null  $duration
      * @param  string|bool|null  $size
      * @param  string|bool|null  $rounded
-     * @param  bool|null  $displayValue
+     * @param  bool|null  $showValue
      * @param  string|null  $theme
      * @return void
      */
@@ -68,7 +68,7 @@ class Progressbar extends BladeComponent
         $duration = null,
         $size = null,
         $rounded = null,
-        $displayValue = null,
+        $showValue = null,
         $theme = null
     ) {
         parent::__construct($theme);
@@ -80,6 +80,6 @@ class Progressbar extends BladeComponent
         $this->duration = $duration ?? 'default';
         $this->size = $size ?? 'default';
         $this->rounded = $rounded ?? 'default';
-        $this->displayValue = $displayValue ?? true;
+        $this->showValue = $showValue ?? true;
     }
 }

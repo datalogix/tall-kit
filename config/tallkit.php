@@ -382,7 +382,6 @@ return [
         'button' => \TALLKit\Components\Buttons\Button::class,
         'form-button' => \TALLKit\Components\Buttons\FormButton::class,
         'logout' => \TALLKit\Components\Buttons\Logout::class,
-        'toggler' => \TALLKit\Components\Buttons\Toggler::class,
 
         /**
          * Crud.
@@ -421,6 +420,7 @@ return [
         'input' => \TALLKit\Components\Forms\Input::class,
         'input-image' => \TALLKit\Components\Forms\InputImage::class,
         'label' => \TALLKit\Components\Forms\Label::class,
+        'many' => \TALLKit\Components\Forms\Many::class,
         'radio' => \TALLKit\Components\Forms\Radio::class,
         'radio-list' => \TALLKit\Components\Forms\RadioList::class,
         'select' => \TALLKit\Components\Forms\Select::class,
@@ -439,6 +439,7 @@ return [
         'admin-panel' => \TALLKit\Components\Layouts\AdminPanel::class,
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'container' => \TALLKit\Components\Layouts\Container::class,
+        'control-panel' => \TALLKit\Components\Layouts\ControlPanel::class,
         'display' => \TALLKit\Components\Layouts\Display::class,
         'html' => \TALLKit\Components\Layouts\Html::class,
         'loading' => \TALLKit\Components\Layouts\Loading::class,
@@ -614,6 +615,7 @@ return [
         'generator-fields' => \TALLKit\Components\Forms\FieldsGenerator::class,
         'image-preview' => \TALLKit\Components\Forms\InputImage::class,
         'lbl' => \TALLKit\Components\Forms\Label::class,
+        'multiple' => \TALLKit\Components\Forms\Many::class,
         'radios' => \TALLKit\Components\Forms\RadioList::class,
         'validation-bag' => \TALLKit\Components\Forms\ValidationErrors::class,
         'validation-error' => \TALLKit\Components\Forms\ValidationErrors::class,
@@ -633,6 +635,8 @@ return [
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'content' => \TALLKit\Components\Layouts\Container::class,
+        'control' => \TALLKit\Components\Layouts\ControlPanel::class,
+        'cp' => \TALLKit\Components\Layouts\ControlPanel::class,
         'preview' => \TALLKit\Components\Layouts\Display::class,
 
         /**
@@ -1208,23 +1212,19 @@ return [
                 ],
 
                 'types' => [
+                    'link' => [],
+
+                    'button' => [],
+                ],
+
+                'loading' => [
                     'link' => [
                         'x-data' => 'window.tallkit.component(\'button\')',
                         '@click' => 'click',
                     ],
 
                     'button' => [],
-                ],
 
-                'loading-container' => [
-                    ':disabled' => 'typeof isLoading === \'function\' && isLoading()',
-                    ':class' => '{
-                        \'cursor-wait\': typeof isLoading === \'function\' && isLoading(),
-                        \'space-x-2\': typeof isLoading === \'function\' && !isLoading()
-                    }',
-                ],
-
-                'loading' => [
                     'container' => [
                         ':disabled' => 'typeof isLoading === \'function\' && isLoading()',
                         ':class' => '{
@@ -1267,7 +1267,19 @@ return [
                         'hover' => 700,
                     ],
 
+                    'gray' => [
+                        'name' => 'gray',
+                        'weight' => 500,
+                        'hover' => 700,
+                    ],
+
                     'info' => [
+                        'name' => 'blue',
+                        'weight' => 500,
+                        'hover' => 700,
+                    ],
+
+                    'blue' => [
                         'name' => 'blue',
                         'weight' => 500,
                         'hover' => 700,
@@ -1279,13 +1291,31 @@ return [
                         'hover' => 700,
                     ],
 
+                    'red' => [
+                        'name' => 'red',
+                        'weight' => 500,
+                        'hover' => 700,
+                    ],
+
                     'success' => [
                         'name' => 'green',
                         'weight' => 500,
                         'hover' => 700,
                     ],
 
+                    'green' => [
+                        'name' => 'green',
+                        'weight' => 500,
+                        'hover' => 700,
+                    ],
+
                     'warning' => [
+                        'name' => 'yellow',
+                        'weight' => 500,
+                        'hover' => 700,
+                    ],
+
+                    'yellow' => [
                         'name' => 'yellow',
                         'weight' => 500,
                         'hover' => 700,
@@ -1558,6 +1588,31 @@ return [
                         'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h7v2H5v14h7v2Zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5Z"></path></svg>',
                         'loading' => true,
                     ],
+
+                    'select-all' => [
+                        'text' => 'Select All',
+                        'link-text' => true,
+                        'color' => 'blue',
+                        'rounded' => 'none',
+                        'shadow' => 'none',
+                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 24 24"><path fill="currentColor" d="m10.6 16.2l7.05-7.05l-1.4-1.4l-5.65 5.65l-2.85-2.85l-1.4 1.4ZM5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm0-2h14V5H5v14ZM5 5v14V5Z"></path></svg>',
+                    ],
+
+                    'deselect-all' => [
+                        'text' => 'Deselect All',
+                        'link-text' => true,
+                        'color' => 'blue',
+                        'rounded' => 'none',
+                        'shadow' => 'none',
+                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm0-2h14V5H5v14Z"></path></svg>',
+                    ],
+
+                    'toggler' => [
+                        'color' => 'none',
+                        'rounded' => 'none',
+                        'shadow' => 'none',
+                        'icon' => '<svg class="mx-auto w-6 h-6" viewBox="0 0 24 24"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                    ],
                 ],
             ],
 
@@ -1580,22 +1635,6 @@ return [
                 'button' => [],
             ],
 
-            'toggler' => [
-                'button' => [
-                    'class' => 'flex',
-                ],
-
-                'icon' => [
-                    'class' => 'w-6 h-6',
-                ],
-
-                'icon-name' => 'menu',
-
-                'icon-svg' => [
-                    '<svg class="fill-current" viewBox="0 0 24 24"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-                ],
-            ],
-
             /**
              * Crud.
              */
@@ -1604,6 +1643,10 @@ return [
 
                 'menu-dropdown' => [
                     'class' => 'w-full',
+
+                    'theme:container' => [
+                        'class' => 'w-full',
+                    ],
                 ],
 
                 'show' => [],
@@ -1916,7 +1959,27 @@ return [
              * Forms.
              */
             'checkbox-list' => [
-                'container' => [],
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
+                    'x-data' => 'window.tallkit.component(\'checkbox-list\')',
+                ],
+
+                'group' => [],
+
+                'header' => [
+                    'class' => 'flex items-center justify-between',
+                ],
+
+                'actions' => [],
+
+                'select-all' => [
+                    '@click' => 'select(true)',
+                ],
+
+                'deselect-all' => [
+                    '@click' => 'select(false)',
+                ],
 
                 'checkbox' => [],
             ],
@@ -2001,7 +2064,7 @@ return [
                 ],
 
                 'fieldset' => [
-                    'class' => 'border p-6 rounded shadow',
+                    'class' => 'border p-6 rounded shadow overflow-auto',
                 ],
 
                 'types' => [
@@ -2120,6 +2183,8 @@ return [
                 ],
 
                 'img' => [
+                    'data-turbo-cache' => 'false',
+                    'data-turbolinks-cache' => 'false',
                     'x-ref' => 'output',
                     'class' => 'm-4 cursor-pointer',
                 ],
@@ -2188,6 +2253,49 @@ return [
                 ],
             ],
 
+            'many' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
+                    'x-data' => 'window.tallkit.component(\'many\')',
+                    'x-cloak' => '',
+                ],
+
+                'header-create' => [
+                    '@click' => 'create',
+                ],
+
+                'table' => [
+                    'x-ref' => 'items'
+                ],
+
+                'row' => [
+                    'x-ref' => 'item'
+                ],
+
+                'td' => [],
+
+                'field' => [
+                    'theme:container' => [
+                        'style' => 'margin: 0;',
+                    ],
+                ],
+
+                'actions' => [
+                    'class' => 'w-20'
+                ],
+
+                'create' => [
+                    'x-show' => 'showCreate(index)',
+                    '@click' => 'create',
+                ],
+
+                'delete' => [
+                    'x-show' => 'showRemove(index)',
+                    '@click' => 'remove(index)',
+                ],
+            ],
+
             'radio-list' => [
                 'container' => [],
 
@@ -2248,7 +2356,7 @@ return [
             /**
              * Layouts.
              */
-            'admin-panel' => [
+            'authentication-card' => [
                 'html' => [
                     'turbo' => true,
 
@@ -2261,13 +2369,90 @@ return [
                             'Nunito:wght@100;200;300;400;500;600;700;800;900',
                         ],
                     ],
+                ],
 
-                    'mix-styles' => [
-                        'css/admin.css',
+                'panels' => [
+                    'default' => [
+                        'mix-styles' => [
+                            'css/auth.css',
+                        ],
+
+                        'mix-scripts' => [
+                            'js/auth.js',
+                        ],
                     ],
 
-                    'mix-scripts' => [
-                        'js/admin.js',
+                    'admin' => [
+                        'mix-styles' => [
+                            'css/admin.css',
+                        ],
+
+                        'mix-scripts' => [
+                            'js/admin.js',
+                        ],
+                    ],
+                ],
+
+                'container' => [
+                    'style' => 'font-family: Nunito;',
+                    'class' => 'min-h-screen flex flex-col items-center pt-6 bg-gray-100',
+                ],
+
+                'header' => [],
+
+                'logo' => [
+                    'class' => 'p-10',
+                ],
+
+                'card' => [
+                    'class' => 'w-full sm:max-w-md p-6 sm:p-14 bg-white overflow-hidden shadow rounded',
+                ],
+
+                'message' => [
+                    'class' => 'mb-6',
+                ],
+            ],
+
+            'container' => [
+                'container' => [
+                    'class' => 'container mx-auto',
+                ],
+            ],
+
+            'control-panel' => [
+                'html' => [
+                    'turbo' => true,
+
+                    'meta' => [
+                        'turbo-cache-control' => 'no-preview',
+                    ],
+
+                    'google-fonts' => [
+                        'families' => [
+                            'Nunito:wght@100;200;300;400;500;600;700;800;900',
+                        ],
+                    ],
+                ],
+
+                'panels' => [
+                    'default' => [
+                        'mix-styles' => [
+                            'css/control-panel.css',
+                        ],
+
+                        'mix-scripts' => [
+                            'js/control-panel.js',
+                        ],
+                    ],
+
+                    'admin' => [
+                        'mix-styles' => [
+                            'css/admin.css',
+                        ],
+
+                        'mix-scripts' => [
+                            'js/admin.js',
+                        ],
                     ],
                 ],
 
@@ -2303,55 +2488,6 @@ return [
 
                 'message' => [
                     'class' => 'mb-6',
-                ],
-            ],
-
-            'authentication-card' => [
-                'html' => [
-                    'turbo' => true,
-
-                    'meta' => [
-                        'turbo-cache-control' => 'no-preview',
-                    ],
-
-                    'google-fonts' => [
-                        'families' => [
-                            'Nunito:wght@100;200;300;400;500;600;700;800;900',
-                        ],
-                    ],
-
-                    'mix-styles' => [
-                        'css/admin.css',
-                    ],
-
-                    'mix-scripts' => [
-                        'js/admin.js',
-                    ],
-                ],
-
-                'container' => [
-                    'style' => 'font-family: Nunito;',
-                    'class' => 'min-h-screen flex flex-col items-center pt-6 bg-gray-100',
-                ],
-
-                'header' => [],
-
-                'logo' => [
-                    'class' => 'p-10',
-                ],
-
-                'card' => [
-                    'class' => 'w-full sm:max-w-md p-6 sm:p-14 bg-white overflow-hidden shadow rounded',
-                ],
-
-                'message' => [
-                    'class' => 'mb-6',
-                ],
-            ],
-
-            'container' => [
-                'container' => [
-                    'class' => 'container mx-auto',
                 ],
             ],
 

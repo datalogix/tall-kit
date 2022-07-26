@@ -2,7 +2,6 @@
 
 namespace TALLKit\Components\Crud;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class CrudActions extends Crud
@@ -56,7 +55,7 @@ class CrudActions extends Crud
         );
 
         $this->actions = $this->actions->concat($this->getDefaultActions())->map(function ($action, $name) {
-            return Arr::set($action, 'route', Arr::get($action, 'route', $this->getRoute($name, $action)));
+            return data_set($action, 'route', $this->getRoute($name, $action), false);
         })->filter(function ($action) {
             return $action['route'];
         });

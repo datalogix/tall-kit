@@ -14,6 +14,16 @@ class CheckboxList extends Group
     public $bind;
 
     /**
+     * @var bool|null
+     */
+    public $selectAll;
+
+    /**
+     * @var bool|null
+     */
+    public $deselectAll;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $name
@@ -26,6 +36,8 @@ class CheckboxList extends Group
      * @param  bool|null  $fieldset
      * @param  bool|null  $showErrors
      * @param  mixed  $bind
+     * @param  bool|null  $selectAll
+     * @param  bool|null  $deselectAll
      * @param  string|null  $theme
      * @return void
      */
@@ -40,6 +52,8 @@ class CheckboxList extends Group
         $fieldset = null,
         $showErrors = null,
         $bind = null,
+        $selectAll = null,
+        $deselectAll = null,
         $theme = null
     ) {
         parent::__construct(
@@ -54,5 +68,7 @@ class CheckboxList extends Group
 
         $this->setOptions($options, $itemValue, $itemText);
         $this->bind = $bind;
+        $this->selectAll = $selectAll ?? $this->fieldset;
+        $this->deselectAll = $deselectAll ?? $this->fieldset;
     }
 }

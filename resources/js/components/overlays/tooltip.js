@@ -6,7 +6,9 @@ export default () => ({
   async setup (options) {
     await loadComponentAssets('tooltip')
 
-    this.tippy = window.tippy(this.$refs.root ? this.$refs.root : this.$el, options)
+    this.$nextTick(() => {
+      this.tippy = window.tippy(this.$refs.root ? this.$refs.root : this.$el, options)
+    })
   }
 })
 
@@ -20,6 +22,7 @@ async function loadTippy () {
   }
 }
 
+window.addEventListener('tooltip:load', loadTippy)
 window.addEventListener('alpine:initialized', loadTippy)
 window.addEventListener('tallkit:load', loadTippy)
 window.addEventListener('turbo:load', loadTippy)

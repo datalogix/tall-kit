@@ -18,16 +18,17 @@
         {{ $logo ?? '' }}
     </x-logo>
 
-    <x-toggler
+    <x-button
         {{
             $attributes
                 ->mergeOnlyThemeProvider($themeProvider, 'toggler')
                 ->merge($breakpointStyles->get('toggler', []))
         }}
+        preset="toggler"
         :theme="$theme"
     >
         {{ $toggler ?? '' }}
-    </x-toggler>
+    </x-button>
 
     <x-nav
         {{

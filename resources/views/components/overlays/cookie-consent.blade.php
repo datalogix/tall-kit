@@ -27,7 +27,7 @@
                             {{ $content }}
                         @else
                             {{ __($description ?? 'Hi! Our website uses cookies so that we can optimize the service we provide you. By using our website, you agree to their use.') }}
-                            <a href="{{ $url }}" {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'link') }}>
+                            <a {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'link')->merge('href', $url) }}>
                                 {{ __($more ?? 'To learn more, read our cookie policy.') }}
                             </a>
                         @endisset
@@ -36,11 +36,9 @@
                     @isset ($button)
                         {{ $button }}
                     @else
-                        <x-button {{
-                            $attributes
-                                ->mergeOnlyThemeProvider($themeProvider, 'button')
-                                ->merge(['@click' => '$dispatch(\''.$name.'-close\')'])
-                            }}
+                        <x-button
+                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'button') }}
+                            :click="'$dispatch(\''.$name.'-close\')'"
                             :text="__($buttonText ?? 'I agree')"
                             :icon="$buttonIcon"
                             :icon-left="$buttonIconLeft"

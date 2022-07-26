@@ -99,7 +99,7 @@ class Input extends Field
             $display
         );
 
-        $this->id = $id ?? $this->name;
+        $this->id = $id ?? Str::endsWith($this->name, '[]') ? false : $this->name;
         $this->type = $type ?: $this->getTypeByName($this->name);
         $this->default = $default;
 

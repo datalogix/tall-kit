@@ -16,7 +16,7 @@
                 ->mergeOnlyThemeProvider($themeProvider, 'durations', $duration)
                 ->mergeOnlyThemeProvider($themeProvider, 'sizes', $size)
                 ->mergeOnlyThemeProvider($themeProvider, 'roundeds', $rounded)
-                ->merge($displayValue && $size !== 'sm' ? ['x-text' => '`${value}%`'] : [])
+                ->merge($showValue && $size !== 'sm' ? ['x-text' => '`${value}%`'] : [])
         }}></div>
     </div>
 

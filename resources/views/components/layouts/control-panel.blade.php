@@ -52,13 +52,14 @@
                 @isset ($toolbarLeft)
                     {{ $toolbarLeft }}
                 @else
-                    <x-toggler
+                    <x-button
                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'toggler') }}
-                        @click="$dispatch('{{ $sidebarName }}-toggle')"
+                        preset="toggler"
+                        :click="'$dispatch(\''.$sidebarName.'-toggle\')'"
                         :theme="$theme"
                     >
                         {{ $toggler ?? '' }}
-                    </x-toggler>
+                    </x-button>
                 @endisset
             </x-slot>
 

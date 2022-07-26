@@ -10,7 +10,6 @@
         $attributes
             ->mergeThemeProvider($themeProvider, 'drawer')
             ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
-
     }}>
         {{ $slot }}
     </div>

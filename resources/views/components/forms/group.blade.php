@@ -5,13 +5,17 @@
     :show-errors="$showErrors"
     :theme="$theme"
 >
-    <x-label
-        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label-text') }}
-        :label="$label"
-        :theme="$theme"
-    >
-        {{ $labelContent ?? '' }}
-    </x-label>
+    @isset ($header)
+        {{ $header }}
+    @else
+        <x-label
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label-text') }}
+            :label="$label"
+            :theme="$theme"
+        >
+            {{ $labelContent ?? '' }}
+        </x-label>
+    @endisset
 
     <{{ $fieldset ? 'fieldset' : 'div' }} {{
         $attributes

@@ -1,4 +1,11 @@
-@if (is_array($html))<x-html :options="$html">@endif
+@if (is_array($html))
+    <x-html :options="$html">
+    @isset ($head)
+        <x-slot name="head">
+            {{ $head }}
+        </x-slot>
+    @endisset
+@endif
 <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}>
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header') }}>
         <x-logo
@@ -22,4 +29,6 @@
         {{ $slot }}
     </div>
 </div>
-@if (is_array($html))</x-html>@endif
+@if (is_array($html))
+    </x-html>
+@endif

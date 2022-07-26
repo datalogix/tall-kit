@@ -33,11 +33,9 @@ class DatatableHelpers
         $search = $search->mapWithKeys(function ($field, $key) use ($searchValues) {
             $field = is_scalar($field) ? ['name' => $field] : $field;
 
-            $name = data_get($field, 'name', $key);
-            $value = data_get($field, 'value', $searchValues->get($name));
-
-            $field = data_set($field, 'name', $name);
-            $field = data_set($field, 'value', $value);
+            $field = data_set($field, 'name', $key, false);
+            $name = data_get($field, 'name');
+            $field = data_set($field, 'value', $searchValues->get($name), false);
 
             return [$name => $field];
         });

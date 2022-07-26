@@ -40,7 +40,7 @@
             @else
                 <x-button
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'empty') }}
-                    color="blue"
+                    color="none"
                     :text="$emptyText"
                     :icon="$emptyIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'empty-icon-svg')->first()"
                     :theme="$theme"
@@ -104,11 +104,9 @@
                         @isset ($delete)
                             {{ $delete }}
                         @else
-                            <x-button {{
-                                $attributes
-                                    ->mergeOnlyThemeProvider($themeProvider, 'delete')
-                                    ->merge(['@click' => 'remove(\''.__($deleteConfirm ?? 'Do you really want to remove this image?').'\')'])
-                                }}
+                            <x-button
+                                {{ $attributes ->mergeOnlyThemeProvider($themeProvider, 'delete') }}
+                                click="remove('{{ __($deleteConfirm ?? 'Do you really want to remove this image?') }}')"
                                 preset="none"
                                 :theme="$theme"
                             >

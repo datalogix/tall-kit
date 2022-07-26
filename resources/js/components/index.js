@@ -8,9 +8,11 @@ import easymde from './editors/easymde'
 import quill from './editors/quill'
 import trix from './editors/trix'
 import tinymce from './editors/tinymce'
+import checkboxList from './forms/checkbox-list'
 import cleave from './forms/cleave'
 import form from './forms/form'
 import inputImage from './forms/input-image'
+import many from './forms/many'
 import mask from './forms/mask'
 import tagify from './forms/tagify'
 import message from './messages/message'
@@ -61,9 +63,11 @@ export default {
   /**
    * Forms.
    */
+  'checkbox-list': checkboxList,
   cleave,
   form,
   'input-image': inputImage,
+  many,
   mask,
   tagify,
 

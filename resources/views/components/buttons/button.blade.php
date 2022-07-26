@@ -4,6 +4,7 @@
         ->mergeOnlyThemeProvider($themeProvider, 'types', $href ? 'link' : 'button')
         ->mergeOnlyThemeProvider($themeProvider, 'roundeds', $rounded)
         ->mergeOnlyThemeProvider($themeProvider, 'shadows', $shadow)
+        ->mergeOnlyThemeProvider($themeProvider, $loading ? 'loading' : null, $loading ? ($href ? 'link' : 'button') : null)
         ->mergeOnlyThemeProvider($themeProvider, $loading ? 'loading' : null, $loading ? 'container' : null)
         ->merge($outlined && $colorName ? [
             'class' => 'bg-transparent hover:bg-'.$colorName.'-'.$colorWeight.' text-'.$colorName.'-'.$colorHover.' hover:text-white border border-'.$colorName.'-'.$colorWeight.' hover:border-transparent',

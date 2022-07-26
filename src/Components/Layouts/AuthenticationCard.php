@@ -3,6 +3,8 @@
 namespace TALLKit\Components\Layouts;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
 use TALLKit\Components\BladeComponent;
 
 class AuthenticationCard extends BladeComponent
@@ -55,6 +57,7 @@ class AuthenticationCard extends BladeComponent
 
         $this->html = ($html ?? true) ? array_replace_recursive(
             $this->themeProvider->html->getAttributes(),
+            $this->themeProvider->panels->get(Str::before(Route::currentRouteName(), '.') ?? 'default', []),
             Arr::wrap($html)
         ) : false;
 

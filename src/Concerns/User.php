@@ -41,7 +41,7 @@ trait User
             return null;
         }
 
-        foreach (Arr::wrap($keys) as $key) {
+        foreach (array_filter(Arr::wrap($keys)) as $key) {
             $result = method_exists($this->user, $key)
                 ? $this->user->{$key}()
                 : data_get($this->user, $key);

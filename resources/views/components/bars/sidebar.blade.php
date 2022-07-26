@@ -15,6 +15,7 @@
         {{ $header ?? '' }}
 
         <x-nav
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'ul') }}
             :items="$items"
             :inline="false"
             :theme="$theme"

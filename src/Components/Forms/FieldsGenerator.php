@@ -46,8 +46,8 @@ class FieldsGenerator extends BladeComponent
             return 'input';
         }
 
-        if ($fieldType = data_get($field, 'type')) {
-            return $fieldType;
+        if ($component = data_get($field, 'component')) {
+            return $component;
         }
 
         if (data_get($field, 'options') || Str::endsWith($name, '_id')) {
@@ -60,9 +60,9 @@ class FieldsGenerator extends BladeComponent
             'editor' => ['description', 'content', 'body'],
         ];
 
-        foreach ($types as $type => $names) {
+        foreach ($types as $component => $names) {
             if (Str::contains($name, $names)) {
-                return $type;
+                return $component;
             }
         }
 
