@@ -86,7 +86,6 @@ class Many extends Group
         $labels = null,
         $theme = null
     ) {
-
         $this->fields = Collection::make($fields)->map(function ($field, $key) {
             $field = is_array($field) ? $field : [
                 'name' => is_int($key) ? $field : $key,
