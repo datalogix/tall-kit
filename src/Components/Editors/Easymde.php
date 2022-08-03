@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Editors;
 
-class Easymde extends Editor
+class Easymde extends BaseEditor
 {
     //
 }

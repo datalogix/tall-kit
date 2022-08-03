@@ -52,7 +52,7 @@
     @if ($loading)
         <x-loading
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'component', false) }}
-            :text="is_string($loading) && ($slot->isNotEmpty() || $text) ? $loading : ($slot->isEmpty() ? __($text) : $slot)"
+            text="{!! is_string($loading) && ($slot->isNotEmpty() || $text) ? $loading : ($slot->isEmpty() ? __($text) : $slot) !!}"
         />
     @endif
 </{{ $href ? 'a' : 'button' }}>

@@ -23,7 +23,7 @@
     <x-loading {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading') }} />
 
     <x-textarea
-        {{ $attributes->mergeThemeProvider($themeProvider, 'easymde') }}
+        {{ $attributes->mergeThemeProvider($themeProvider, 'editor') }}
         :name="$name"
         :id="$id"
         :label="false"

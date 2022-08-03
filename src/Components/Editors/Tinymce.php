@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Editors;
 
-class Tinymce extends Editor
+class Tinymce extends BaseEditor
 {
     /**
      * Get options values.

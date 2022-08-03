@@ -50,7 +50,7 @@ class Checkbox extends Field
         $this->checked = false;
 
         if ($oldData = $this->oldFieldValue()) {
-            $this->checked = in_array($value, Arr::wrap($oldData));
+            $this->checked = in_array($this->value, Arr::wrap($oldData));
         }
 
         if (! session()->hasOldInput() && $this->isNotWired()) {
@@ -65,7 +65,7 @@ class Checkbox extends Field
             }
 
             $this->checked = is_array($boundValue)
-                ? in_array($value, $boundValue)
+                ? in_array($this->value, $boundValue)
                 : (is_null($boundValue) ? ($default ?? false) : $boundValue);
         }
     }

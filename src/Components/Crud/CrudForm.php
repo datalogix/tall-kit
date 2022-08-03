@@ -37,6 +37,11 @@ class CrudForm extends Crud
     public $fields;
 
     /**
+     * @var string|bool|null
+     */
+    public $back;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $prefix
@@ -55,6 +60,7 @@ class CrudForm extends Crud
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  mixed  $fields
+     * @param  string|bool|null  $back
      * @param  string|null  $theme
      * @return void
      */
@@ -75,6 +81,7 @@ class CrudForm extends Crud
         $enctype = null,
         $confirm = null,
         $fields = null,
+        $back = null,
         $theme = null
     ) {
         parent::__construct(
@@ -102,5 +109,6 @@ class CrudForm extends Crud
         $this->enctype = $enctype;
         $this->confirm = $confirm;
         $this->fields = $fields;
+        $this->back = $back;
     }
 }

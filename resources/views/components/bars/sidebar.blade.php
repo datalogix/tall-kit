@@ -27,3 +27,13 @@
         {{ $footer ?? '' }}
     </nav>
 </x-drawer>
+
+@isset ($trigger)
+    <div {{
+        $attributes
+            ->mergeOnlyThemeProvider($themeProvider, 'trigger')
+            ->merge(['@click' => '$dispatch(\''.$name.'-toggle\')'])
+    }}>
+        {{ $trigger }}
+    </div>
+@endisset

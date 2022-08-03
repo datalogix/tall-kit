@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Editors;
 
-class Trix extends Editor
+class Trix extends BaseEditor
 {
     //
 }

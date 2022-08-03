@@ -1,4 +1,4 @@
-import { loadComponentAssets } from '@/utils'
+import { loadComponentAssets, timeout } from '@/utils'
 
 export default () => ({
   tippy: null,
@@ -18,7 +18,11 @@ async function loadTippy () {
   if (elements.length) {
     await loadComponentAssets('tooltip')
 
-    window.tippy(elements)
+    timeout(() => {
+      if (window.tippy) {
+        window.tippy(elements)
+      }
+    }, 1000)
   }
 }
 

@@ -83,6 +83,14 @@ class CrudActions extends Crud
     protected function getDefaultActions()
     {
         return Collection::make([
+            'create-many' => [
+                'component' => 'button',
+                'preset' => 'create-many',
+                'except' => ['index', 'create-many', 'new-many', 'form-many'],
+                'routes' => [$this->prefix.'.create-many', $this->prefix.'.new-many', $this->prefix.'.form-many'],
+                'priority' => false,
+            ],
+
             'create' => [
                 'component' => 'button',
                 'preset' => 'create',

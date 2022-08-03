@@ -34,7 +34,7 @@ class Display extends BladeComponent
 
         // Model - Relation
         if ($value instanceof Model) {
-            $value = data_get($value, 'name', data_get($value, 'title'));
+            $value = data_get($value, 'name', data_get($value, 'title', data_get($value, 'text')));
         }
 
         // Storage

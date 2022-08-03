@@ -1,5 +1,9 @@
 @if (is_array($html))
-    <x-html :options="$html">
+    <x-html
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'html', 'attrs') }}
+        :options="$html"
+        :theme="$theme"
+    >
     @isset ($head)
         <x-slot name="head">
             {{ $head }}

@@ -11,7 +11,7 @@
                         ->merge(data_get($item, 'attributes', []))
                 }}
                 :component="data_get($item, 'component', 'button')"
-                :text="data_get($item, 'text', data_get($item, 'title'))"
+                :text="data_get($item, 'name', data_get($item, 'title', data_get($item, 'text')))"
                 :active="data_get($item, 'active')"
                 :href="data_get($item, 'component', 'button') === 'button' ? data_get($item, 'href', data_get($item, 'action', data_get($item, 'route'))) : null"
                 :action="data_get($item, 'component', 'button') === 'form-button' ? data_get($item, 'href', data_get($item, 'action', data_get($item, 'route'))) : null"

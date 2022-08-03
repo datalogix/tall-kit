@@ -6,9 +6,13 @@
     :closeable="$closeable"
     :theme="$theme"
 >
-    <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}>
-        {!! $trigger ?? __('Clique to open (Provide your trigger)') !!}
-    </div>
+    @isset ($trigger)
+        {{ $trigger }}
+    @else
+        <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}>
+            {{ __('Clique to open (Provide your trigger)') }}
+        </div>
+    @endisset
 
     <div {{
         $attributes

@@ -40,7 +40,7 @@ abstract class BladeComponent extends Component
      */
     public function __construct($theme = null)
     {
-        $this->theme = $theme;
+        $this->theme = $theme ?? 'default';
         $this->themeProvider = app(ThemeProvider::class)
             ->make($this->theme, $this->getThemeKey());
     }

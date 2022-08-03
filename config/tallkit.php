@@ -374,6 +374,7 @@ return [
         'progressbar' => \TALLKit\Components\Bars\Progressbar::class,
         'sidebar' => \TALLKit\Components\Bars\Sidebar::class,
         'toolbar' => \TALLKit\Components\Bars\Toolbar::class,
+        'user-sidebar' => \TALLKit\Components\Bars\UserSidebar::class,
 
         /**
          * Buttons.
@@ -382,6 +383,7 @@ return [
         'button' => \TALLKit\Components\Buttons\Button::class,
         'form-button' => \TALLKit\Components\Buttons\FormButton::class,
         'logout' => \TALLKit\Components\Buttons\Logout::class,
+        'user-button' => \TALLKit\Components\Buttons\UserButton::class,
 
         /**
          * Crud.
@@ -402,6 +404,7 @@ return [
          * Editors.
          */
         'easymde' => \TALLKit\Components\Editors\Easymde::class,
+        'editor' => \TALLKit\Components\Editors\Editor::class,
         'quill' => \TALLKit\Components\Editors\Quill::class,
         'trix' => \TALLKit\Components\Editors\Trix::class,
         'tinymce' => \TALLKit\Components\Editors\Tinymce::class,
@@ -436,7 +439,7 @@ return [
         /**
          * Layouts.
          */
-        'admin-panel' => \TALLKit\Components\Layouts\AdminPanel::class,
+        'admin-panel' => \TALLKit\Components\Layouts\ControlPanel::class,
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'container' => \TALLKit\Components\Layouts\Container::class,
         'control-panel' => \TALLKit\Components\Layouts\ControlPanel::class,
@@ -558,6 +561,8 @@ return [
         'progress-bar' => \TALLKit\Components\Bars\Progressbar::class,
         'side-bar' => \TALLKit\Components\Bars\Sidebar::class,
         'tool-bar' => \TALLKit\Components\Bars\Toolbar::class,
+        'usersidebar' => \TALLKit\Components\Bars\UserSidebar::class,
+        'user-side-bar' => \TALLKit\Components\Bars\UserSidebar::class,
 
         /**
          * Buttons.
@@ -576,8 +581,8 @@ return [
         'navitem' => \TALLKit\Components\Buttons\Button::class,
         'sidebar-item' => \TALLKit\Components\Buttons\Button::class,
         'sidebaritem' => \TALLKit\Components\Buttons\Button::class,
-        'user-menu-item' => \TALLKit\Components\Buttons\Button::class,
-        'usermenuitem' => \TALLKit\Components\Buttons\Button::class,
+        'user-bt' => \TALLKit\Components\Buttons\UserButton::class,
+        'userbutton' => \TALLKit\Components\Buttons\UserButton::class,
 
         /**
          * Crud.
@@ -598,7 +603,6 @@ return [
         /**
          * Editors.
          */
-        'editor' => \TALLKit\Components\Editors\Tinymce::class,
         'easy-mde' => \TALLKit\Components\Editors\Easymde::class,
         'mde' => \TALLKit\Components\Editors\Easymde::class,
         'tiny' => \TALLKit\Components\Editors\Tinymce::class,
@@ -629,8 +633,8 @@ return [
         /**
          * Layouts.
          */
-        'admin' => \TALLKit\Components\Layouts\AdminPanel::class,
-        'admin-card' => \TALLKit\Components\Layouts\AdminPanel::class,
+        'admin' => \TALLKit\Components\Layouts\ControlPanel::class,
+        'admin-card' => \TALLKit\Components\Layouts\ControlPanel::class,
         'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class,
@@ -1044,6 +1048,8 @@ return [
             ],
 
             'sidebar' => [
+                'drawer' => [],
+
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
                     'x-data' => 'window.tallkit.component(\'sidebar\')',
@@ -1105,15 +1111,36 @@ return [
                         'class' => '2xl:hidden',
                     ],
                 ],
+
+                'trigger' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-data' => '',
+                    'class' => 'cursor-pointer',
+                ],
             ],
 
             'toolbar' => [
                 'container' => [
-                    'class' => 'flex justify-between items-center py-4 px-6 bg-white border-b-4 border-indigo-700',
+                    'class' => 'flex justify-between items-center p-4 bg-white border-b-4 border-indigo-700',
                 ],
 
                 'title' => [
                     'class' => 'hidden sm:block flex-1 text-2xl font-medium',
+                ],
+            ],
+
+            'user-sidebar' => [
+                'container' => [],
+
+                'logo' => [
+                    'class' => 'text-white w-60 p-10',
+                ],
+
+                'trigger' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-data' => 'window.tallkit.component(\'user-sidebar\')',
+                    'class' => 'fixed z-10 bottom-2 right-2 bg-white',
+                    '@click' => 'click',
                 ],
             ],
 
@@ -1207,7 +1234,6 @@ return [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
                     'wire:ignore' => '',
-                    'x-cloak' => '',
                     'class' => 'inline-flex items-center space-x-2 py-2 px-3 transition outline-none focus:outline-none',
                 ],
 
@@ -1220,6 +1246,7 @@ return [
                 'loading' => [
                     'link' => [
                         'x-data' => 'window.tallkit.component(\'button\')',
+                        'x-cloak' => '',
                         '@click' => 'click',
                     ],
 
@@ -1452,6 +1479,14 @@ return [
                         'loading' => 'Creating',
                     ],
 
+                    'create-many' => [
+                        'text' => 'Create many',
+                        'tooltip' => 'Create many',
+                        'color' => 'success',
+                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
+                        'loading' => 'Creating',
+                    ],
+
                     'edit' => [
                         'text' => 'Edit',
                         'tooltip' => 'Edit',
@@ -1635,6 +1670,16 @@ return [
                 'button' => [],
             ],
 
+            'user-button' => [
+                'container' => [],
+
+                'icon' => [
+                    'class' => 'w-8 h-8 rounded-full overflow-hidden bg-indigo-700 text-white shadow flex items-center justify-center font-bold',
+                ],
+
+                'avatar' => [],
+            ],
+
             /**
              * Crud.
              */
@@ -1811,7 +1856,7 @@ return [
                     'class' => 'mb-4 w-full py-2 px-3 bg-white border border-gray-200 bg-white rounded shadow',
                 ],
 
-                'easymde' => [
+                'editor' => [
                     ':class' => '{\'invisible\': !isCompleted()}',
                     'x-ref' => 'editor',
                 ],
@@ -1847,7 +1892,7 @@ return [
                     'x-ref' => 'input',
                 ],
 
-                'quill' => [
+                'editor' => [
                     'x-ref' => 'editor',
                     ':class' => '{\'invisible\': !isCompleted()}',
                     'class' => 'quill-container bg-white',
@@ -1898,7 +1943,7 @@ return [
                     'x-ref' => 'input',
                 ],
 
-                'tinymce' => [
+                'editor' => [
                     ':class' => '{\'invisible\': !isCompleted()}',
                     'x-ref' => 'editor',
                 ],
@@ -1948,7 +1993,7 @@ return [
 
                 'input' => [],
 
-                'trix' => [
+                'editor' => [
                     // See https://trix-editor.org/
                     ':class' => '{\'invisible\': !isCompleted()}',
                     'class' => 'trix-content block w-full border-gray-200 rounded shadow bg-white',
@@ -2334,9 +2379,7 @@ return [
             ],
 
             'validation-errors' => [
-                'message' => [
-                    'class' => 'mb-4',
-                ],
+                'message' => [],
 
                 'container' => [
                     'class' => 'mb-4',
@@ -2357,19 +2400,7 @@ return [
              * Layouts.
              */
             'authentication-card' => [
-                'html' => [
-                    'turbo' => true,
-
-                    'meta' => [
-                        'turbo-cache-control' => 'no-preview',
-                    ],
-
-                    'google-fonts' => [
-                        'families' => [
-                            'Nunito:wght@100;200;300;400;500;600;700;800;900',
-                        ],
-                    ],
-                ],
+                'html' => [],
 
                 'panels' => [
                     'default' => [
@@ -2408,9 +2439,7 @@ return [
                     'class' => 'w-full sm:max-w-md p-6 sm:p-14 bg-white overflow-hidden shadow rounded',
                 ],
 
-                'message' => [
-                    'class' => 'mb-6',
-                ],
+                'message' => [],
             ],
 
             'container' => [
@@ -2420,19 +2449,7 @@ return [
             ],
 
             'control-panel' => [
-                'html' => [
-                    'turbo' => true,
-
-                    'meta' => [
-                        'turbo-cache-control' => 'no-preview',
-                    ],
-
-                    'google-fonts' => [
-                        'families' => [
-                            'Nunito:wght@100;200;300;400;500;600;700;800;900',
-                        ],
-                    ],
-                ],
+                'html' => [],
 
                 'panels' => [
                     'default' => [
@@ -2463,10 +2480,6 @@ return [
 
                 'sidebar' => [],
 
-                'logo' => [
-                    'class' => 'text-white w-60 p-10',
-                ],
-
                 'box' => [
                     'class' => 'flex-1 flex flex-col overflow-hidden',
                 ],
@@ -2486,9 +2499,7 @@ return [
                     'class' => 'p-6 lg:p-10',
                 ],
 
-                'message' => [
-                    'class' => 'mb-6',
-                ],
+                'message' => [],
             ],
 
             'display' => [
@@ -2521,6 +2532,20 @@ return [
 
                 'body' => [
                     'class' => 'text-gray-700',
+                ],
+
+                'options' => [
+                    'turbo' => true,
+
+                    'meta' => [
+                        'turbo-cache-control' => 'no-preview',
+                    ],
+
+                    'google-fonts' => [
+                        'families' => [
+                            'Nunito:wght@100;200;300;400;500;600;700;800;900',
+                        ],
+                    ],
                 ],
             ],
 
@@ -2625,6 +2650,7 @@ return [
                 ],
 
                 'trigger' => [
+                    '@click' => 'toggle',
                     'class' => 'bg-white',
                 ],
             ],
@@ -2636,7 +2662,9 @@ return [
                     'theme:item' => [
                         'class' => 'hover:bg-gray-100 hover:text-gray-900',
 
-                        'theme:active' => 'bg-gray-100 text-gray-900',
+                        'theme:active' => [
+                            'class' => 'bg-gray-100 text-gray-900',
+                        ],
                     ],
                 ],
 
@@ -2680,28 +2708,14 @@ return [
             'user-menu' => [
                 'container' => [],
 
-                'user' => [
-                    'class' => 'flex items-center space-x-2',
-                ],
+                'trigger' => [
+                    '@click' => 'toggle',
 
-                'user-avatar' => [
-                    'class' => 'w-8 h-8 rounded-full overflow-hidden bg-indigo-700 text-white shadow flex items-center justify-center font-bold',
-                ],
-
-                'user-avatar-container' => [
                     'theme:container' => [
-                        'theme:image' => [
-                            'class' => 'w-full h-full',
-                        ],
-
-                        'theme:icon' => [
-                            'class' => 'w-4 h-4',
+                        'theme:text' => [
+                            'class' => 'hidden sm:block',
                         ],
                     ],
-                ],
-
-                'user-name' => [
-                    'class' => 'hidden sm:block',
                 ],
             ],
 
@@ -2762,7 +2776,7 @@ return [
                     'x-transition:leave' => 'ease-in duration-200',
                     'x-transition:leave-start' => 'opacity-100',
                     'x-transition:leave-end' => 'opacity-0',
-                    'class' => 'flex flex-row p-4 rounded relative transition',
+                    'class' => 'flex flex-row p-4 rounded relative transition mb-4',
                 ],
 
                 'icon' => [
@@ -3900,9 +3914,17 @@ return [
                 ],
 
                 'display' => [
-                    'theme:img' => 'max-w-xs max-h-40',
-                    'theme:audio' => 'max-w-xs max-h-40',
-                    'theme:video' => 'max-w-xs max-h-40',
+                    'theme:img' => [
+                        'class' => 'max-w-xs max-h-40',
+                    ],
+
+                    'theme:audio' => [
+                        'class' => 'max-w-xs max-h-40',
+                    ],
+
+                    'theme:video' => [
+                        'class' => 'max-w-xs max-h-40',
+                    ],
                 ],
             ],
 
@@ -3959,6 +3981,27 @@ return [
 
                     'plugins' => [
                         // See https://pqina.nl/filepond/docs/api/plugins/
+                    ],
+                ],
+            ],
+        ],
+
+        'app' => [
+            'html' => [
+                'html' => [
+                    'lang' => $lang,
+                ],
+
+                'head' => [],
+
+                'body' => [],
+
+                'options' => [
+                    'components' => [
+                        'user-sidebar' => [
+                            'guard' => 'admin',
+                            'target' => '_blank',
+                        ],
                     ],
                 ],
             ],

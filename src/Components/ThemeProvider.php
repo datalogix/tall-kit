@@ -43,9 +43,9 @@ class ThemeProvider
      */
     public function make($name, $component)
     {
-        $name = $name ?: app(ThemeBinder::class)->get();
+        $name = $name ?? app(ThemeBinder::class)->get();
         $default = data_get($this->themes, 'default');
-        $theme = $this->themes[$name] ?? $default;
+        $theme = data_get($this->themes, $name, $default);
 
         $this->items = $this->items->wrap($theme[$component] ?? $default[$component] ?? []);
 

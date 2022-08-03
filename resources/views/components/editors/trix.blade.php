@@ -29,7 +29,7 @@
     />
 
     <trix-editor
-        {{ $attributes->mergeThemeProvider($themeProvider, 'trix') }}
+        {{ $attributes->mergeThemeProvider($themeProvider, 'editor') }}
         input="{{ $id }}"
     ></trix-editor>
 </x-field>

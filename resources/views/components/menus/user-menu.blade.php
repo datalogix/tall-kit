@@ -13,33 +13,30 @@
         @isset ($trigger)
             {{ $trigger }}
         @elseif ($userName || $userAvatar || $avatarSearch || isset($avatar))
-            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'user') }}>
-                @if ($userAvatar || $avatarSearch || isset($avatar))
-                    <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'user-avatar') }}>
-                        @isset ($avatar)
-                            {{ $avatar }}
-                        @else
-                            <x-avatar
-                                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'user-avatar-container') }}
-                                :src="$userAvatar"
-                                :search="$avatarSearch"
-                                :provider="$avatarProvider"
-                                :fallback="$avatarFallback"
-                                :icon="$avatarIcon"
-                                :theme="$theme"
-                            >
-                                {{ $avatarContent ?? '' }}
-                            </x-avatar>
-                        @endisset
-                    </span>
-                @endif
+            <x-user-button
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}
+                :user="$user"
+                :guard="$guard"
+                :user-name="$userName"
+                :user-avatar="$userAvatar"
+                :avatar-search="$avatarSearch"
+                :avatar-orovider="$avatarProvider"
+                :avatar-fallback="$avatarFallback"
+                :avatar-icon="$avatarIcon"
+                :theme="$theme"
+            >
+                @isset ($avatar)
+                    <x-slot name="avatar">
+                        {{ $avatar }}
+                    </x-slot>
+                @endisset
 
-                @if ($userName)
-                    <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'user-name') }}>
-                        {{ $userName }}
-                    </span>
-                @endif
-            </div>
+                @isset ($avatarContent)
+                    <x-slot name="avatarContent">
+                        {{ $avatarContent }}
+                    </x-slot>
+                @endisset
+            </x-user-button>
         @endisset
     </x-slot>
 

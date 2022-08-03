@@ -1,14 +1,17 @@
 @if (is_array($html))
-    <x-html :options="$html">
+    <x-html
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'html', 'attrs') }}
+        :options="$html"
+        :theme="$theme"
+    >
     @isset ($head)
         <x-slot name="head">
             {{ $head }}
         </x-slot>
     @endisset
 @endif
-
 <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
-    <x-sidebar
+    <x-user-sidebar
         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'sidebar') }}
         :items="$sidebarItems"
         :breakpoint="$sidebarBreakpoint"
@@ -17,28 +20,30 @@
         :overlay="$sidebarOverlay"
         :closeable="$sidebarCloseable"
         :align="$sidebarAlign"
+        :align="$sidebarTarget"
+        :logo-image="$logoImage"
+        :logo-name="$logoName"
+        :logo-url="$logoUrl"
+        :user="$user"
+        :guard="$guard"
         :theme="$theme"
     >
         {{ $sidebar ?? '' }}
 
-        <x-slot name="header">
-            <x-logo
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'logo') }}
-                :image="$logoImage"
-                :name="$logoName"
-                :url="$logoUrl"
-                :theme="$theme"
-            >
-                {{ $sidebarHeader ?? '' }}
-            </x-logo>
-        </x-slot>
+        @isset ($sidebarHeader)
+            <x-slot name="header">
+                {{ $sidebarHeader }}
+            </x-slot>
+        @endisset
 
         @isset ($sidebarFooter)
             <x-slot name="footer">
                 {{ $sidebarFooter }}
             </x-slot>
         @endisset
-    </x-sidebar>
+
+        <x-slot name="trigger"></x-slot>
+    </x-user-sidebar>
 
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'box') }}>
         <x-toolbar
@@ -100,6 +105,12 @@
                                 {{ $userMenuAvatar }}
                             </x-slot>
                         @endisset
+
+                        @isset ($userMenuAvatarContent)
+                            <x-slot name="avatarContent">
+                                {{ $userMenuAvatarContent }}
+                            </x-slot>
+                        @endisset
                     </x-user-menu>
                 @endisset
             </x-slot>
@@ -120,7 +131,6 @@
         </main>
     </div>
 </div>
-
 @if (is_array($html))
     </x-html>
 @endif

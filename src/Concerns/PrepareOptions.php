@@ -39,7 +39,7 @@ trait PrepareOptions
                 $key = data_get($value, $itemValue ?: 'id', $key);
                 $value = is_iterable($value)
                     ? $this->prepareOptions($value, $itemValue, $itemText)
-                    : data_get($value, $itemText ?: 'name', data_get($value, 'title', data_get($value, 'name', $value)));
+                    : data_get($value, $itemText ?: 'name', data_get($value, 'title', data_get($value, 'text', $value)));
 
                 return [$key => $value];
             });

@@ -31,5 +31,5 @@
         :theme="$theme"
     />
 
-    <div {{ $attributes->mergeThemeProvider($themeProvider, 'tinymce') }}></div>
+    <div {{ $attributes->mergeThemeProvider($themeProvider, 'editor') }}></div>
 </x-field>

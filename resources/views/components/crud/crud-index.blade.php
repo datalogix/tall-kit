@@ -11,15 +11,28 @@
                 {{ $actionsHeader }}
             @elseif(isset($actionsIndex))
                 {{ $actionsIndex }}
-            @elseif($route = route_detect([$prefix.'.create', $prefix.'.new', $prefix.'.form'], $parameters, null))
-                <x-button
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create') }}
-                    preset="create"
-                    :text="$tooltip ? '' : null"
-                    :tooltip="$tooltip"
-                    :href="$route"
-                    :theme="$theme"
-                />
+            @else
+                @if($route = route_detect([$prefix.'.create-many', $prefix.'.new-many', $prefix.'.form-many'], $parameters, null))
+                    <x-button
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create-many') }}
+                        preset="create-many"
+                        :text="$tooltip ? '' : null"
+                        :tooltip="$tooltip"
+                        :href="$route"
+                        :theme="$theme"
+                    />
+                @endif
+
+                @if($route = route_detect([$prefix.'.create', $prefix.'.new', $prefix.'.form'], $parameters, null))
+                    <x-button
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create') }}
+                        preset="create"
+                        :text="$tooltip ? '' : null"
+                        :tooltip="$tooltip"
+                        :href="$route"
+                        :theme="$theme"
+                    />
+                @endif
             @endisset
         </x-crud-header>
     @endisset
@@ -42,22 +55,39 @@
             :order-by-direction="$orderByDirection"
             :theme="$theme"
         >
-            @foreach ($cols as $key => $col)
+            @foreach ($cols as $keyCol => $col)
                 @php
-                $colname = 'col_'.data_get($col, 'name', is_int($key) ? $col : $key);
+                $colname = 'col_'.data_get($col, 'name', is_int($keyCol) ? $col : $keyCol);
                 $action = isset(${$colname}) ? ${$colname} : null;
                 @endphp
 
                 @if ($displayActionsColumn && $colname === 'col_actions')
-                    @scopedslot('col_actions', ($row), ($forceMenu, $maxActions, $actions, $prefix, $parameters, $tooltip, $attributes, $themeProvider, $theme))
+                    @scopedslot('col_actions', ($row), (
+                        $attributes,
+                        $themeProvider,
+                        $prefix,
+                        $key,
+                        $title,
+                        $parameters,
+                        $forceMenu,
+                        $maxActions,
+                        $actions,
+                        $routeName,
+                        $tooltip,
+                        $theme
+                    ))
                         <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'row-actions') }}>
                             <x-crud-actions
                                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'actions') }}
+                                :prefix="$prefix"
+                                :key="$key"
+                                :title="$title"
+                                :parameters="array_merge($parameters, [$row])"
+                                :resource="$row"
                                 :force-menu="$forceMenu"
                                 :max-actions="$maxActions"
                                 :actions="$actions"
-                                :prefix="$prefix"
-                                :parameters="array_merge($parameters, [$row])"
+                                :route-name="$routeName"
                                 :tooltip="$tooltip ?? true"
                                 :theme="$theme"
                             />

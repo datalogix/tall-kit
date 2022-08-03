@@ -1,24 +1,17 @@
 <?php
 
-namespace TALLKit\Components\Menus;
+namespace TALLKit\Components\Buttons;
 
+use TALLKit\Components\BladeComponent;
 use TALLKit\Concerns\User;
 
-class UserMenu extends MenuDropdown
+class UserButton extends BladeComponent
 {
     use User;
 
     /**
      * Create a new component instance.
      *
-     * @param  mixed  $items
-     * @param  bool|null  $inline
-     * @param  string|bool|null  $name
-     * @param  bool|null  $show
-     * @param  bool|null  $overlay
-     * @param  bool|null  $closeable
-     * @param  string|null  $align
-     * @param  string|bool|null  $iconName
      * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed|null  $user
      * @param  string|null  $guard
      * @param  string|bool|null  $userName
@@ -31,14 +24,6 @@ class UserMenu extends MenuDropdown
      * @return void
      */
     public function __construct(
-        $items = null,
-        $inline = null,
-        $name = null,
-        $show = null,
-        $overlay = null,
-        $closeable = null,
-        $align = null,
-        $iconName = null,
         $user = null,
         $guard = null,
         $userName = null,
@@ -49,19 +34,9 @@ class UserMenu extends MenuDropdown
         $avatarIcon = null,
         $theme = null
     ) {
+        parent::__construct($theme);
+
         $this->setUser($user, $guard);
         $this->setUserInfo($userName, $userAvatar, $avatarSearch, $avatarProvider, $avatarFallback, $avatarIcon);
-
-        parent::__construct(
-            $items ?? $this->getUserValue('userMenu'),
-            $inline ?? false,
-            $name,
-            $show,
-            $overlay,
-            $closeable,
-            $align ?? 'right',
-            $iconName,
-            $theme
-        );
     }
 }

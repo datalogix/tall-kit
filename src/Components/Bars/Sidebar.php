@@ -18,6 +18,11 @@ class Sidebar extends Drawer
     public $breakpoint;
 
     /**
+     * @var string|null
+     */
+    public $target;
+
+    /**
      * Create a new component instance.
      *
      * @param  mixed  $items
@@ -27,6 +32,7 @@ class Sidebar extends Drawer
      * @param  bool|null  $overlay
      * @param  bool|null  $closeable
      * @param  string|null  $align
+     * @param  string|null  $target
      * @param  string|null  $theme
      * @return void
      */
@@ -38,6 +44,7 @@ class Sidebar extends Drawer
         $overlay = null,
         $closeable = null,
         $align = null,
+        $target = null,
         $theme = null
     ) {
         parent::__construct(
@@ -51,6 +58,7 @@ class Sidebar extends Drawer
 
         $this->items = Collection::make($items)->filter();
         $this->breakpoint = $breakpoint ?? 'none';
+        $this->target = $target;
     }
 
     /**
@@ -83,6 +91,7 @@ class Sidebar extends Drawer
                     ->mergeOnlyThemeProvider($this->themeProvider, 'active')
                     ->get('class'),
             ])
+            ->merge($this->target ? ['target' => $this->target] : [])
             ->getAttributes();
     }
 }

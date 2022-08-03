@@ -5,7 +5,7 @@
                 ->merge(data_get($action, 'attributes', []))
         }}
         :component="data_get($action, 'component', 'button')"
-        :text="data_get($action, 'tooltip', $tooltip) ? '' : data_get($action, 'text', is_string($action) ? $action : null)"
+        :text="data_get($action, 'tooltip', $tooltip) ? '' : data_get($action, 'name', data_get($action, 'title', data_get($action, 'text', is_string($action) ? $action : null)))"
         :active="data_get($action, 'active')"
         :href="data_get($action, 'component', 'button') === 'button' ? data_get($action, 'href', data_get($action, 'action', data_get($action, 'route'))) : null"
         :action="data_get($action, 'component', 'button') === 'form-button' ? data_get($action, 'href', data_get($action, 'action', data_get($action, 'route'))) : null"
@@ -43,7 +43,7 @@
                             ->merge(data_get($action, 'attributes', []))
                     }}
                     :component="data_get($action, 'component', 'button')"
-                    :text="data_get($action, 'text', is_string($action) ? $action : null)"
+                    :text="data_get($action, 'name', data_get($action, 'title', data_get($action, 'text', is_string($action) ? $action : null)))"
                     :active="data_get($action, 'active')"
                     :href="data_get($action, 'component', 'button') === 'button' ? data_get($action, 'href', data_get($action, 'action', data_get($action, 'route'))) : null"
                     :action="data_get($action, 'component', 'button') === 'form-button' ? data_get($action, 'href', data_get($action, 'action', data_get($action, 'route'))) : null"

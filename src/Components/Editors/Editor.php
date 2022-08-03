@@ -2,50 +2,29 @@
 
 namespace TALLKit\Components\Editors;
 
-use TALLKit\Components\Forms\Textarea;
-use TALLKit\Concerns\JsonOptions;
+use Illuminate\Support\Str;
 
-abstract class Editor extends Textarea
+class Editor extends BaseEditor
 {
-    use JsonOptions;
+    /**
+     * Get component key.
+     *
+     * @return string
+     */
+    protected function getComponentKey()
+    {
+        return $this->provider ?? 'tinymce';
+    }
 
     /**
-     * Create a new component instance.
+     * Json options.
      *
-     * @param  string|null  $name
-     * @param  string|null  $id
-     * @param  string|bool|null  $label
-     * @param  mixed  $bind
-     * @param  mixed  $default
-     * @param  string|bool|null  $language
-     * @param  bool|null  $showErrors
-     * @param  string|null  $theme
-     * @param  mixed  $options
-     * @return void
+     * @return string
      */
-    public function __construct(
-        $name = null,
-        $id = null,
-        $label = null,
-        $bind = null,
-        $default = null,
-        $language = null,
-        $showErrors = null,
-        $theme = null,
-        $options = null
-    ) {
-        parent::__construct(
-            $name,
-            $id,
-            $label,
-            $bind,
-            $default,
-            $language,
-            $showErrors,
-            $theme,
-            false
-        );
+    public function jsonOptions(...$args)
+    {
+        $editor = app(__NAMESPACE__.'\\'.Str::ucfirst($this->getComponentKey()));
 
-        $this->setOptions($options);
+        return $editor->jsonOptions(...$args);
     }
 }

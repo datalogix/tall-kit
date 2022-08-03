@@ -34,7 +34,7 @@
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'row') }}
                 :theme="$theme"
             >
-                @foreach($fields as $field)
+                @forelse($fields as $field)
                     <x-cell {{
                         $attributes
                             ->mergeOnlyThemeProvider($themeProvider, 'td')
@@ -57,7 +57,9 @@
                             />
                         @endisset
                     </x-cell>
-                @endforeach
+                @empty
+                    {{ $slot }}
+                @endforelse
 
                 @isset ($actions)
                     {{ $actions }}

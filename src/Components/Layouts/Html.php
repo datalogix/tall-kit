@@ -29,7 +29,7 @@ class Html extends BladeComponent
     public $csrfToken;
 
     /**
-     * @var array
+     * @var \Illuminate\Support\Collection
      */
     public $meta;
 
@@ -64,22 +64,22 @@ class Html extends BladeComponent
     public $livewire;
 
     /**
-     * @var string|null
+     * @var \Illuminate\Support\Collection
      */
     public $mixStyles;
 
     /**
-     * @var string|null
+     * @var \Illuminate\Support\Collection
      */
     public $mixScripts;
 
     /**
-     * @var array
+     * @var \Illuminate\Support\Collection
      */
     public $styles;
 
     /**
-     * @var array
+     * @var \Illuminate\Support\Collection
      */
     public $scripts;
 
@@ -99,29 +99,35 @@ class Html extends BladeComponent
     public $tallkit;
 
     /**
+     * @var \Illuminate\Support\Collection
+     */
+    public $components;
+
+    /**
      * Create a new component instance.
      *
-     * @param  array|null  $options
+     * @param  mixed  $options
      * @param  string|null  $title
      * @param  string|null  $charset
      * @param  string|null  $viewport
      * @param  bool|null  $csrfToken
-     * @param  array|null  $meta
+     * @param  mixed  $meta
      * @param  array|string|null  $googleFonts
      * @param  bool|null  $turbo
      * @param  string|bool|null  $googleAnalytics
      * @param  string|bool|null  $googleTagManager
      * @param  string|bool|null  $facebookPixelCode
      * @param  bool|null  $livewire
-     * @param  string|bool|null  $mixStyles
-     * @param  string|bool|null  $mixScripts
-     * @param  array|string|null  $styles
-     * @param  array|string|null  $scripts
+     * @param  mixed  $mixStyles
+     * @param  mixed  $mixScripts
+     * @param  mixed  $styles
+     * @param  mixed  $scripts
      * @param  string|bool|null  $stackStyles
      * @param  string|bool|null  $stackScripts
      * @param  bool|null  $tailwindcss
      * @param  bool|null  $alpine
      * @param  array|bool|null  $tallkit
+     * @param  mixed  $components
      * @param  string|null  $theme
      * @return void
      */
@@ -147,39 +153,40 @@ class Html extends BladeComponent
         $tailwindcss = null,
         $alpine = null,
         $tallkit = null,
+        $components = null,
         $theme = null
     ) {
-        parent::__construct($theme);
+        parent::__construct($theme ?? 'app');
 
         $options = array_merge_recursive(
             $this->themeProvider->options->getAttributes(),
-            $options ?? []
+            Arr::wrap($options)
         );
 
-        $this->title = data_get($options, 'title', $title ?? config('app.name'));
-        $this->charset = data_get($options, 'charset', $charset ?? 'utf-8');
-        $this->viewport = data_get($options, 'viewport', $viewport ?? 'width=device-width, initial-scale=1');
-        $this->csrfToken = data_get($options, 'csrf-token', $csrfToken ?? true);
-        $this->meta = Collection::make(data_get($options, 'meta', $meta));
-        $this->googleFonts = data_get($options, 'google-fonts', data_get($options, 'fonts', $googleFonts));
-        $this->turbo = data_get($options, 'turbo', $turbo);
-        $this->googleAnalytics = data_get($options, 'google-analytics', data_get($options, 'analytics', $googleAnalytics));
-        $this->googleTagManager = data_get($options, 'google-tag-manager', data_get($options, 'gtm', $googleTagManager));
-        $this->facebookPixelCode = data_get($options, 'facebook-pixel-code', data_get($options, 'facebook-pixel', $facebookPixelCode));
-        $this->livewire = data_get($options, 'livewire', $livewire ?? true) && class_exists('\Livewire\Livewire');
+        $this->title = $title ?? data_get($options, 'title');
+        $this->charset = $charset ?? data_get($options, 'charset', 'utf-8');
+        $this->viewport = $viewport ?? data_get($options, 'viewport', 'width=device-width, initial-scale=1');
+        $this->csrfToken = $csrfToken ?? data_get($options, 'csrf-token', true);
+        $this->meta = Collection::make($meta)->merge(data_get($options, 'meta'));
+        $this->googleFonts = $googleFonts ?? data_get($options, 'google-fonts', data_get($options, 'fonts'));
+        $this->turbo = $turbo ?? data_get($options, 'turbo');
+        $this->googleAnalytics = $googleAnalytics ?? data_get($options, 'google-analytics', data_get($options, 'analytics'));
+        $this->googleTagManager = $googleTagManager ?? data_get($options, 'google-tag-manager', data_get($options, 'gtm'));
+        $this->facebookPixelCode = $facebookPixelCode ?? data_get($options, 'facebook-pixel-code', data_get($options, 'facebook-pixel'));
+        $this->livewire = $livewire ?? data_get($options, 'livewire', true) && class_exists('\Livewire\Livewire');
 
-        $this->mixStyles = Collection::make(data_get($options, 'mix-styles', $mixStyles ?? 'css/app.css'))->filter(function ($file) {
+        $this->mixStyles = Collection::make($mixStyles)->merge(data_get($options, 'mix-styles', 'css/app.css'))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 
-        $this->mixScripts = Collection::make(data_get($options, 'mix-scripts', $mixScripts ?? 'js/app.js'))->filter(function ($file) {
+        $this->mixScripts = Collection::make($mixScripts)->merge(data_get($options, 'mix-scripts', 'js/app.js'))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 
-        $this->styles = array_merge(Arr::wrap(data_get($options, 'styles')), Arr::wrap($styles));
-        $this->scripts = array_merge(Arr::wrap(data_get($options, 'scripts')), Arr::wrap($scripts));
-        $this->stackStyles = data_get($options, 'stack-styles', $stackStyles ?? 'styles');
-        $this->stackScripts = data_get($options, 'stack-scripts', $stackScripts ?? 'scripts');
+        $this->styles = Collection::make($styles)->merge(data_get($options, 'styles'))->unique();
+        $this->scripts = Collection::make($scripts)->merge(data_get($options, 'scripts'))->unique();
+        $this->stackStyles = $stackStyles ?? data_get($options, 'stack-styles', 'styles');
+        $this->stackScripts = $stackScripts ?? data_get($options, 'stack-scripts', 'scripts');
 
         $tailwindcss = $tailwindcss ?? $this->mixStyles->isEmpty();
 
@@ -189,5 +196,11 @@ class Html extends BladeComponent
             is_bool($alpine) ? ['options' => ['inject' => ['alpine' => $alpine]]] : [],
             data_get($options, 'tallkit', []),
         ) : false;
+
+        $this->components = Collection::make($components)
+            ->merge(data_get($options, 'components'))
+            ->filter(function ($component) {
+                return ! value(data_get($component, 'disabled'));
+            });
     }
 }

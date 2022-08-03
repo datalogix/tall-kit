@@ -1,4 +1,4 @@
-export default ({ loadable }) => ({
+export default ({ loadable, timeout }) => ({
   ...loadable(),
 
   click (event) {
@@ -7,7 +7,7 @@ export default ({ loadable }) => ({
     const el = this.$refs.root ? this.$refs.root : this.$el
 
     if (el.target || (event && event.ctrlKey)) {
-      this.$nextTick(() => this.complete())
+      timeout(() => this.complete())
     }
   }
 })

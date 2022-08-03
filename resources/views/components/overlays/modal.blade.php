@@ -28,7 +28,7 @@
 
     @isset ($trigger)
         <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}>
-            {!! $trigger !!}
+            {{ $trigger }}
         </div>
     @endisset
 </div>

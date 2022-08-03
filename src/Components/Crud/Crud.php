@@ -36,6 +36,11 @@ abstract class Crud extends BladeComponent
     public $resource;
 
     /**
+     * @var mixed
+     */
+    public $resourceTitle;
+
+    /**
      * @var bool|null
      */
     public $forceMenu;
@@ -96,6 +101,7 @@ abstract class Crud extends BladeComponent
         $this->title = $title;
         $this->parameters = Arr::wrap($parameters);
         $this->resource = $resource;
+        $this->resourceTitle = data_get($this->resource, 'title', data_get($this->resource, 'name'));
         $this->forceMenu = $forceMenu;
         $this->maxActions = $maxActions ?? 4;
         $this->actions = Collection::make($actions);

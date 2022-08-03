@@ -63,8 +63,8 @@ class Field extends FieldGroup
 
         $this->setName($name);
 
-        $this->label = $label ?? Str::before($name, '[]');
-        $this->showErrors = ($showErrors ?? true) && $name;
+        $this->label = $label ?? $this->getFieldKey();
+        $this->showErrors = ($showErrors ?? true) && $this->name;
         $this->groupable = $groupable ?? false;
         $this->display = $display;
     }

@@ -43,27 +43,27 @@ class ControlPanel extends BladeComponent
     public $sidebarItems;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $sidebarBreakpoint;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $sidebarName;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $sidebarShow;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $sidebarOverlay;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $sidebarCloseable;
 
@@ -73,32 +73,37 @@ class ControlPanel extends BladeComponent
     public $sidebarAlign;
 
     /**
+     * @var string|null
+     */
+    public $sidebarTarget;
+
+    /**
      * @var mixed
      */
     public $userMenuItems;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $userMenuInline;
 
     /**
-     * @var string|bool
+     * @var string|bool|null
      */
     public $userMenuName;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $userMenuShow;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $userMenuOverlay;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     public $userMenuCloseable;
 
@@ -153,8 +158,8 @@ class ControlPanel extends BladeComponent
      * @param  array|bool|null  $html
      * @param  string|bool|null  $title
      * @param  string|null  $key
-     * @param  string|null  $guard
      * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed|null  $user
+     * @param  string|null  $guard
      * @param  string|bool|null  $logoImage
      * @param  string|bool|null  $logoName
      * @param  string|bool|null  $logoUrl
@@ -165,13 +170,14 @@ class ControlPanel extends BladeComponent
      * @param  bool|null  $sidebarOverlay
      * @param  bool|null  $sidebarCloseable
      * @param  string|null  $sidebarAlign
+     * @param  string|null  $sidebarTarget
      * @param  mixed  $userMenuItems
      * @param  bool|null  $userMenuInline
      * @param  string|bool|null  $userMenuName
      * @param  bool|null  $userMenuShow
      * @param  bool|null  $userMenuOverlay
      * @param  bool|null  $userMenuCloseable
-     * @param  string|bool|null  $userMenuAlign
+     * @param  string|null  $userMenuAlign
      * @param  string|bool|null  $userMenuIconName
      * @param  string|bool|null  $userMenuUserName
      * @param  string|bool|null  $userMenuUserAvatar
@@ -187,8 +193,8 @@ class ControlPanel extends BladeComponent
         $html = null,
         $title = null,
         $key = null,
-        $guard = null,
         $user = null,
+        $guard = null,
         $logoImage = null,
         $logoName = null,
         $logoUrl = null,
@@ -199,6 +205,7 @@ class ControlPanel extends BladeComponent
         $sidebarOverlay = null,
         $sidebarCloseable = null,
         $sidebarAlign = null,
+        $sidebarTarget = null,
         $userMenuItems = null,
         $userMenuInline = null,
         $userMenuName = null,
@@ -218,35 +225,36 @@ class ControlPanel extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $key = $key ?? Str::endsWith(get_class($this), 'AdminPanel') ? 'admin' : Str::before(Route::currentRouteName(), '.');
+        $key = $key ?? Str::before(Route::currentRouteName(), '.');
 
         $this->setUser($user, $guard ?? $key);
 
         $this->html = ($html ?? true) ? array_replace_recursive(
             $this->themeProvider->html->getAttributes(),
             $this->themeProvider->panels->get($key ?? 'default', []),
-            $this->getUserValue('html', $key ? $key.'Html' : null) ?? [],
+            $this->getUserValue('html', $key.'Html') ?? [],
             Arr::wrap($html)
         ) : false;
 
         $this->title = $title ?? config('app.name');
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
-        $this->logoUrl = $logoUrl ?? route_detect([$key.'.index', $key.'.dashboard', $key.'.home', 'index', 'dashboard', 'home']);
-        $this->sidebarItems = $sidebarItems ?? $this->getUserValue('sidebar', $key ? $key.'Sidebar' : null);
-        $this->sidebarBreakpoint = $this->getUserValue('sidebarBreakpoint', $key ? $key.'SidebarBreakpoint' : null) ?? $sidebarBreakpoint ?? 'lg';
-        $this->sidebarName = $sidebarName ?? 'sidebar';
-        $this->sidebarShow = $sidebarShow ?? false;
-        $this->sidebarOverlay = $sidebarOverlay ?? true;
-        $this->sidebarCloseable = $sidebarCloseable ?? true;
+        $this->logoUrl = $logoUrl;
+        $this->sidebarItems = $sidebarItems;
+        $this->sidebarBreakpoint = $sidebarBreakpoint ?? 'lg';
+        $this->sidebarName = $sidebarName ?? $key ? $key.'-sidebar' : 'sidebar';
+        $this->sidebarShow = $sidebarShow;
+        $this->sidebarOverlay = $sidebarOverlay;
+        $this->sidebarCloseable = $sidebarCloseable;
         $this->sidebarAlign = $sidebarAlign;
-        $this->userMenuItems = $userMenuItems ?? $this->getUserValue('userMenu', $key ? $key.'UserMenu' : null);
-        $this->userMenuInline = $userMenuInline ?? false;
-        $this->userMenuName = $userMenuName ?? 'user-menu';
-        $this->userMenuShow = $userMenuShow ?? false;
-        $this->userMenuOverlay = $userMenuOverlay ?? true;
-        $this->userMenuCloseable = $userMenuCloseable ?? true;
-        $this->userMenuAlign = $userMenuAlign ?? 'right';
+        $this->sidebarTarget = $sidebarTarget;
+        $this->userMenuItems = $userMenuItems;
+        $this->userMenuInline = $userMenuInline;
+        $this->userMenuName = $userMenuName;
+        $this->userMenuShow = $userMenuShow;
+        $this->userMenuOverlay = $userMenuOverlay;
+        $this->userMenuCloseable = $userMenuCloseable;
+        $this->userMenuAlign = $userMenuAlign;
         $this->userMenuIconName = $userMenuIconName;
         $this->userMenuUserName = $userMenuUserName;
         $this->userMenuUserAvatar = $userMenuUserAvatar;

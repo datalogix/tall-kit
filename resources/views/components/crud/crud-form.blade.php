@@ -20,31 +20,36 @@
             @elseif(isset($actionsForm))
                 {{ $actionsForm }}
             @else
-                <x-submit
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save') }}
-                    preset="save"
-                    :text="$tooltip ? '' : null"
-                    :tooltip="$tooltip"
-                    :theme="$theme"
-                />
-
-                @if (Route::has($prefix.'.show') || Route::has($prefix.'.view'))
+                @if ($action !== false)
                     <x-submit
-                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save-and-view') }}
-                        preset="save-and-view"
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save') }}
+                        preset="save"
+                        :text="$tooltip ? '' : null"
+                        :tooltip="$tooltip"
+                        :theme="$theme"
+                    />
+
+                    @if (Route::has($prefix.'.show') || Route::has($prefix.'.view'))
+                        <x-submit
+                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save-and-view') }}
+                            preset="save-and-view"
+                            :text="$tooltip ? '' : null"
+                            :tooltip="$tooltip"
+                            :theme="$theme"
+                        />
+                    @endif
+                @endif
+
+                @if ($back !== false)
+                    <x-back
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-back') }}
+                        preset="back-right"
+                        :href="$back"
                         :text="$tooltip ? '' : null"
                         :tooltip="$tooltip"
                         :theme="$theme"
                     />
                 @endif
-
-                <x-back
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-back') }}
-                    preset="back-right"
-                    :text="$tooltip ? '' : null"
-                    :tooltip="$tooltip"
-                    :theme="$theme"
-                />
             @endisset
         </x-crud-header>
     @endisset
@@ -65,31 +70,36 @@
         @elseif(isset($actionsForm))
             {{ $actionsForm }}
         @else
-            <x-submit
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save') }}
-                preset="save"
-                :text="$tooltip ? '' : null"
-                :tooltip="$tooltip"
-                :theme="$theme"
-            />
-
-            @if (Route::has($prefix.'.show') || Route::has($prefix.'.view'))
+            @if ($action !== false)
                 <x-submit
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save-and-view') }}
-                    preset="save-and-view"
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save') }}
+                    preset="save"
+                    :text="$tooltip ? '' : null"
+                    :tooltip="$tooltip"
+                    :theme="$theme"
+                />
+
+                @if (Route::has($prefix.'.show') || Route::has($prefix.'.view'))
+                    <x-submit
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save-and-view') }}
+                        preset="save-and-view"
+                        :text="$tooltip ? '' : null"
+                        :tooltip="$tooltip"
+                        :theme="$theme"
+                    />
+                @endif
+            @endif
+
+            @if ($back !== false)
+                <x-back
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-back') }}
+                    preset="back-right"
+                    :href="$back"
                     :text="$tooltip ? '' : null"
                     :tooltip="$tooltip"
                     :theme="$theme"
                 />
             @endif
-
-            <x-back
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-back') }}
-                preset="back-right"
-                :text="$tooltip ? '' : null"
-                :tooltip="$tooltip"
-                :theme="$theme"
-            />
         @endisset
     </div>
 </x-form>
