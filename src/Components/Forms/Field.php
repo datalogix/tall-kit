@@ -2,7 +2,6 @@
 
 namespace TALLKit\Components\Forms;
 
-use Illuminate\Support\Str;
 use TALLKit\Concerns\FieldNameAndValue;
 use TALLKit\Concerns\ValidationErrors;
 

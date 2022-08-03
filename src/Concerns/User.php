@@ -53,7 +53,8 @@ trait User
      * @param  string|null  $guard
      * @return void
      */
-    public function setUser($user = null, $guard = null) {
+    public function setUser($user = null, $guard = null)
+    {
         $this->user = $user ?? (auth($guard)->check() ? auth($guard)->user() : null);
         $this->guard = $guard;
     }
