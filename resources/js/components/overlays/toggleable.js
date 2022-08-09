@@ -8,13 +8,13 @@ export default ({ toggleable }) => ({
       const { dropdown } = this.$refs
       const rectDropdown = dropdown.getBoundingClientRect()
 
-      if (rectEl.top + rectEl.height + window.scrollY + rectDropdown.height > window.innerHeight) {
+      if (rectEl.top + rectEl.height + window.scrollY + rectDropdown.height > window.innerHeight - 20) {
         dropdown.style.top = rectEl.top - rectDropdown.height + window.scrollY + 'px'
       } else {
         dropdown.style.top = rectEl.top + rectEl.height + window.scrollY + 'px'
       }
 
-      if (rectEl.left + rectDropdown.width + window.scrollX > window.innerWidth) {
+      if (rectEl.left + rectDropdown.width + window.scrollX > window.innerWidth - 20) {
         dropdown.style.left = rectEl.left + rectEl.width - rectDropdown.width + window.scrollX + 'px'
       } else {
         dropdown.style.left = rectEl.left + window.scrollX + 'px'
