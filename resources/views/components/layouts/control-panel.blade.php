@@ -56,7 +56,7 @@
             <x-slot name="left">
                 @isset ($toolbarLeft)
                     {{ $toolbarLeft }}
-                @else
+                @elseif ($user)
                     <x-button
                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'toggler') }}
                         preset="toggler"
@@ -71,7 +71,7 @@
             <x-slot name="right">
                 @isset ($toolbarRight)
                     {{ $toolbarRight }}
-                @else
+                @elseif (isset($userMenuTrigger) || $user)
                     <x-user-menu
                         {{ $attributes->mergeThemeProvider($themeProvider, 'user-menu') }}
                         :items="$userMenuItems"
