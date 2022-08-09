@@ -1,7 +1,7 @@
-import AssetsManager from '@/managers/assets'
-import ComponentsManager from '@/managers/components'
-import components from '@/components'
-import { dispatch } from '@/utils'
+import AssetsManager from './managers/assets'
+import ComponentsManager from './managers/components'
+import components from './components'
+import { dispatch } from './utils'
 
 class TALLKit {
   constructor (options = {}, assets = {}) {

@@ -100,8 +100,7 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     protected function bootRoutes()
     {
-        Route::get('/tallkit/tallkit.js', [JavaScriptAssets::class, 'source']);
-        Route::get('/tallkit/tallkit.js.map', [JavaScriptAssets::class, 'maps']);
+        Route::get('/tallkit/{path}', [JavaScriptAssets::class, 'source'])->name('tallkit.source');
         Route::get('/tallkit/component/{name}', [JavaScriptAssets::class, 'component'])->name('tallkit.component');
 
         if (config('tallkit.options.upload.enabled')) {

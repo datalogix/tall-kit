@@ -13,19 +13,9 @@ class JavaScriptAssets
      *
      * @return \Illuminate\Http\Response
      */
-    public function source()
+    public function source($path)
     {
-        return $this->pretendResponseIsFile(__DIR__.'/../../dist/tallkit.js');
-    }
-
-    /**
-     * JavaScript source maps.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function maps()
-    {
-        return $this->pretendResponseIsFile(__DIR__.'/../../dist/tallkit.js.map');
+        return $this->pretendResponseIsFile(__DIR__.'/../../dist/'.$path);
     }
 
     /**

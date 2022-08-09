@@ -1,25 +1,20 @@
 {
   "private": true,
   "scripts": {
-    "dev": "yarn development",
-    "development": "mix",
-    "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "hot": "mix watch --hot",
-    "prod": "yarn production",
-    "production": "mix --production"
+    "dev": "vite build --watch",
+    "build": "vite build"
   },
   "dependencies": {
     "defu": "^6.0"
   },
   "devDependencies": {
-    "eslint": "^8.20",
+    "eslint": "^8.21",
     "eslint-config-standard": "^17.0",
     "eslint-plugin-import": "^2.26",
     "eslint-plugin-n": "^15.2",
     "eslint-plugin-promise": "^6.0",
-    "eslint-webpack-plugin": "^3.2",
-    "laravel-mix": "^6.0",
-    "postcss": "^8.4"
+    "rollup-plugin-output-manifest": "^2.0",
+    "vite": "^3.0",
+    "vite-plugin-eslint": "^1.7"
   }
 }

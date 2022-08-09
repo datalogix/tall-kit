@@ -130,21 +130,21 @@ HTML;
 
         $appUrl = rtrim(data_get($options, 'asset_url', ''), '/');
 
-        $manifest = json_decode(file_get_contents(__DIR__.'/../dist/mix-manifest.json'), true);
-        $versionedFileName = $manifest['/tallkit.js'];
+        $manifest = json_decode(file_get_contents(__DIR__.'/../dist/manifest.json'), true);
+        $versionedFileName = $manifest['tallkit.js'];
 
         // Default to dynamic `tallkit.js` (served by a Laravel route).
-        $fullAssetPath = "{$appUrl}/tallkit{$versionedFileName}";
+        $fullAssetPath = "{$appUrl}/tallkit/{$versionedFileName}";
         $assetWarning = null;
 
         $nonce = data_get($options, 'nonce') ? ' nonce="'.data_get($options, 'nonce').'"' : '';
 
         // Use static assets if they have been published.
-        if (file_exists(public_path('vendor/tallkit/mix-manifest.json'))) {
-            $publishedManifest = json_decode(file_get_contents(public_path('vendor/tallkit/mix-manifest.json')), true);
-            $versionedFileName = $publishedManifest['/tallkit.js'];
+        if (file_exists(public_path('vendor/tallkit/manifest.json'))) {
+            $publishedManifest = json_decode(file_get_contents(public_path('vendor/tallkit/manifest.json')), true);
+            $versionedFileName = $publishedManifest['tallkit.js'];
 
-            $fullAssetPath = ($this->isRunningServerless() ? config('app.asset_url') : $appUrl).'/vendor/tallkit'.$versionedFileName;
+            $fullAssetPath = ($this->isRunningServerless() ? config('app.asset_url') : $appUrl).'/vendor/tallkit/'.$versionedFileName;
 
             if ($manifest !== $publishedManifest) {
                 $assetWarning = <<<'HTML'
