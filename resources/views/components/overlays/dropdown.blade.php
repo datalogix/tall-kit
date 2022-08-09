@@ -10,7 +10,7 @@
         {{ $trigger }}
     @else
         <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'trigger') }}>
-            {{ __('Clique to open (Provide your trigger)') }}
+            {!! __('Clique to open (Provide your trigger)') !!}
         </div>
     @endisset
 
