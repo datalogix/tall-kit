@@ -3,6 +3,13 @@ import progressbar from './bars/progressbar'
 import sidebar from './bars/sidebar'
 import userSidebar from './bars/user-sidebar'
 import button from './buttons/button'
+import apexCharts from './charts/apex-charts'
+import c3 from './charts/c3'
+import chartJs from './charts/chart-js'
+import echarts from './charts/echarts'
+import frappeCharts from './charts/frappe-charts'
+import fusionCharts from './charts/fusion-charts'
+import highcharts from './charts/highcharts'
 import carbon from './datetimes/carbon'
 import countdown from './datetimes/countdown'
 import easymde from './editors/easymde'
@@ -30,6 +37,7 @@ import flickity from './sliders/flickity'
 import slider from './sliders/slider'
 import splide from './sliders/splide'
 import swiper from './sliders/swiper'
+import fetchable from './supports/fetchable'
 import imageLoader from './supports/image-loader'
 import dropzone from './uploaders/dropzone'
 import filepond from './uploaders/filepond'
@@ -47,6 +55,17 @@ export default {
    * Buttons.
    */
   button,
+
+  /**
+   * Charts.
+   */
+  'apex-charts': apexCharts,
+  c3,
+  'chart-js': chartJs,
+  echarts,
+  'frappe-charts': frappeCharts,
+  'fusion-charts': fusionCharts,
+  highcharts,
 
   /**
    * Datetimes.
@@ -110,6 +129,7 @@ export default {
   /**
    * Supports.
    */
+  fetchable,
   'image-loader': imageLoader,
 
   /**
