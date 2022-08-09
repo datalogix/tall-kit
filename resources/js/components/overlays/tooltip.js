@@ -1,4 +1,4 @@
-import { loadComponentAssets, timeout } from '@/utils'
+import { loadComponentAssets, timeout } from '../../utils'
 
 export default () => ({
   tippy: null,

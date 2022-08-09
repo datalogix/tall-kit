@@ -1,4 +1,4 @@
-import { dispatch, detectAssets } from '@/utils'
+import { dispatch, detectAssets } from '../utils'
 
 class Assets {
   constructor (items = {}) {
