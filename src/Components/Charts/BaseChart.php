@@ -88,7 +88,7 @@ abstract class BaseChart extends BladeComponent
         return [
             'style' => $sizes->map(function ($value, $key) {
                 return $key.':'.$value;
-            })->join(';')
+            })->join(';'),
         ];
     }
 
