@@ -149,6 +149,54 @@ return [
         ],
 
         /**
+         * Charts.
+         */
+        'apex-charts' => [
+            'https://cdn.jsdelivr.net/npm/apexcharts@3/dist/apexcharts.min.js',
+        ],
+        'c3' => [
+            'https://cdn.jsdelivr.net/npm/c3@0.7/c3.min.css',
+            'https://cdn.jsdelivr.net/npm/d3@5/dist/d3.min.js',
+            'https://cdn.jsdelivr.net/npm/c3@0.7/c3.min.js',
+        ],
+        'chart-js' => [
+            'https://cdn.jsdelivr.net/npm/chart.js@3/dist/chart.min.js',
+        ],
+        'echarts' => [
+            'https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js',
+        ],
+        'frappe-charts' => [
+            'https://cdn.jsdelivr.net/npm/frappe-charts@1/dist/frappe-charts.min.umd.js',
+        ],
+        'fusion-charts' => [
+            'https://cdn.jsdelivr.net/npm/fusioncharts@3/fusioncharts.js',
+        ],
+        'fusion-charts-fusion' => [
+            'https://cdn.jsdelivr.net/npm/fusioncharts@3/themes/fusioncharts.theme.fusion.js',
+        ],
+        'fusion-charts-gammel' => [
+            'https://cdn.jsdelivr.net/npm/fusioncharts@3/themes/fusioncharts.theme.gammel.js',
+        ],
+        'fusion-charts-candy' => [
+            'https://cdn.jsdelivr.net/npm/fusioncharts@3/themes/fusioncharts.theme.candy.js',
+        ],
+        'fusion-charts-zune' => [
+            'https://cdn.jsdelivr.net/npm/fusioncharts@3/themes/fusioncharts.theme.zune.js',
+        ],
+        'fusion-charts-ocean' => [
+            'https://cdn.jsdelivr.net/npm/fusioncharts@3/themes/fusioncharts.theme.ocean.js',
+        ],
+        'fusion-charts-carbon' => [
+            'https://cdn.jsdelivr.net/npm/fusioncharts@3/themes/fusioncharts.theme.carbon.js',
+        ],
+        'fusion-charts-umber' => [
+            'https://cdn.jsdelivr.net/npm/fusioncharts@3/themes/fusioncharts.theme.umber.js',
+        ],
+        'highcharts' => [
+            'https://cdn.jsdelivr.net/npm/highcharts@10/highcharts.min.js',
+        ],
+
+        /**
          * Editors.
          */
         'easymde' => [
@@ -386,6 +434,17 @@ return [
         'user-button' => \TALLKit\Components\Buttons\UserButton::class,
 
         /**
+         * Charts.
+         */
+        'apex-charts' => \TALLKit\Components\Charts\ApexCharts::class,
+        'c3' => \TALLKit\Components\Charts\C3::class,
+        'chart-js' => \TALLKit\Components\Charts\ChartJs::class,
+        'echarts' => \TALLKit\Components\Charts\Echarts::class,
+        'frappe-charts' => \TALLKit\Components\Charts\FrappeCharts::class,
+        'fusion-charts' => \TALLKit\Components\Charts\FusionCharts::class,
+        'highcharts' => \TALLKit\Components\Charts\Highcharts::class,
+
+        /**
          * Crud.
          */
         'crud-header' => \TALLKit\Components\Crud\CrudHeader::class,
@@ -523,6 +582,7 @@ return [
          */
         'avatar' => \TALLKit\Components\Supports\Avatar::class,
         'cron' => \TALLKit\Components\Supports\Cron::class,
+        'fetchable' => \TALLKit\Components\Supports\Fetchable::class,
         'image-loader' => \TALLKit\Components\Supports\ImageLoader::class,
         'unsplash' => \TALLKit\Components\Supports\Unsplash::class,
 
@@ -583,6 +643,26 @@ return [
         'sidebaritem' => \TALLKit\Components\Buttons\Button::class,
         'user-bt' => \TALLKit\Components\Buttons\UserButton::class,
         'userbutton' => \TALLKit\Components\Buttons\UserButton::class,
+
+        /**
+         * Charts.
+         */
+        'apex-chart' => \TALLKit\Components\Charts\ApexCharts::class,
+        'apexchart' => \TALLKit\Components\Charts\ApexCharts::class,
+        'apexcharts' => \TALLKit\Components\Charts\ApexCharts::class,
+        'chartjs' => \TALLKit\Components\Charts\ChartJs::class,
+        'chart.js' => \TALLKit\Components\Charts\ChartJs::class,
+        'echart' => \TALLKit\Components\Charts\Echarts::class,
+        'frappe' => \TALLKit\Components\Charts\FrappeCharts::class,
+        'frappe-chart' => \TALLKit\Components\Charts\FrappeCharts::class,
+        'frappechart' => \TALLKit\Components\Charts\FrappeCharts::class,
+        'frappecharts' => \TALLKit\Components\Charts\FrappeCharts::class,
+        'fusion-chart' => \TALLKit\Components\Charts\FusionCharts::class,
+        'fusionchart' => \TALLKit\Components\Charts\FusionCharts::class,
+        'fusioncharts' => \TALLKit\Components\Charts\FusionCharts::class,
+        'highchart' => \TALLKit\Components\Charts\Highcharts::class,
+        'high-chart' => \TALLKit\Components\Charts\Highcharts::class,
+        'high-charts' => \TALLKit\Components\Charts\Highcharts::class,
 
         /**
          * Crud.
@@ -707,6 +787,8 @@ return [
         /**
          * Supports.
          */
+        'api' => \TALLKit\Components\Supports\Fetchable::class,
+        'fetch' => \TALLKit\Components\Supports\Fetchable::class,
         'img-loader' => \TALLKit\Components\Supports\ImageLoader::class,
         'load-img' => \TALLKit\Components\Supports\ImageLoader::class,
         'load-image' => \TALLKit\Components\Supports\ImageLoader::class,
@@ -1052,6 +1134,8 @@ return [
 
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'sidebar\')',
                     '@resize.window' => 'check',
                 ],
@@ -1452,14 +1536,14 @@ return [
                         'text' => 'Options',
                         'tooltip' => 'Options',
                         'color' => 'none',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 192 512"><path fill="currentColor" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 192 512"><path fill="currentColor" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>',
                     ],
 
                     'show' => [
                         'text' => 'Show',
                         'tooltip' => 'Show',
                         'color' => 'default',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>',
                         'loading' => 'Showing',
                     ],
 
@@ -1467,7 +1551,7 @@ return [
                         'text' => 'Add',
                         'tooltip' => 'Add',
                         'color' => 'success',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
                         'loading' => 'Adding',
                     ],
 
@@ -1475,7 +1559,7 @@ return [
                         'text' => 'Create',
                         'tooltip' => 'Create',
                         'color' => 'success',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
                         'loading' => 'Creating',
                     ],
 
@@ -1483,7 +1567,7 @@ return [
                         'text' => 'Create many',
                         'tooltip' => 'Create many',
                         'color' => 'success',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
                         'loading' => 'Creating',
                     ],
 
@@ -1491,7 +1575,7 @@ return [
                         'text' => 'Edit',
                         'tooltip' => 'Edit',
                         'color' => 'info',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>',
                         'loading' => 'Editing',
                     ],
 
@@ -1499,7 +1583,7 @@ return [
                         'text' => 'Delete',
                         'tooltip' => 'Delete',
                         'color' => 'error',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>',
                         'loading' => 'Deleting',
                     ],
 
@@ -1507,7 +1591,7 @@ return [
                         'text' => 'Save',
                         'tooltip' => 'Save',
                         'color' => 'success',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path></svg>',
                         'loading' => 'Saving',
                     ],
 
@@ -1515,7 +1599,7 @@ return [
                         'text' => 'Save and view',
                         'tooltip' => 'Save and view',
                         'color' => 'success',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path></svg>',
                         'loading' => 'Saving',
                     ],
 
@@ -1523,7 +1607,7 @@ return [
                         'text' => 'Send',
                         'tooltip' => 'Send',
                         'color' => 'info',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z"></path></svg>',
                         'loading' => 'Sending',
                     ],
 
@@ -1531,7 +1615,7 @@ return [
                         'text' => 'Back',
                         'tooltip' => 'Back',
                         'color' => 'default',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg>',
                         'loading' => 'Returning',
                     ],
 
@@ -1539,7 +1623,7 @@ return [
                         'text' => 'Back',
                         'tooltip' => 'Back',
                         'color' => 'default',
-                        'icon-right' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 256 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg>',
+                        'icon-right' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 256 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg>',
                         'loading' => 'Returning',
                     ],
 
@@ -1554,7 +1638,7 @@ return [
                         'text' => 'Enter',
                         'tooltip' => 'Enter',
                         'color' => 'indigo',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"></path></svg>',
                         'loading' => 'Entering',
                     ],
 
@@ -1562,7 +1646,7 @@ return [
                         'text' => 'Update',
                         'tooltip' => 'Update',
                         'color' => 'info',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path></svg>',
                         'loading' => 'Updating',
                     ],
 
@@ -1570,7 +1654,7 @@ return [
                         'text' => 'Download',
                         'tooltip' => 'Download',
                         'color' => 'info',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path></svg>',
                         'loading' => 'Downloading',
                     ],
 
@@ -1578,7 +1662,7 @@ return [
                         'text' => 'View',
                         'tooltip' => 'View',
                         'color' => 'info',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>',
                         'loading' => 'Viewing',
                     ],
 
@@ -1586,7 +1670,7 @@ return [
                         'text' => 'Move up',
                         'tooltip' => 'Move up',
                         'color' => 'success',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path></svg>',
                         'loading' => 'Moving',
                     ],
 
@@ -1594,7 +1678,7 @@ return [
                         'text' => 'Move down',
                         'tooltip' => 'Move down',
                         'color' => 'success',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"></path></svg>',
                         'loading' => 'Moving',
                     ],
 
@@ -1602,7 +1686,7 @@ return [
                         'text' => 'Copy',
                         'tooltip' => 'Copy',
                         'color' => 'warning',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 448 512"><path fill="currentColor" d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 448 512"><path fill="currentColor" d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"></path></svg>',
                         'loading' => 'Copying',
                     ],
 
@@ -1610,7 +1694,7 @@ return [
                         'text' => 'Search',
                         'tooltip' => 'Search',
                         'color' => 'info',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg>',
                         'loading' => 'Searching',
                     ],
 
@@ -1620,7 +1704,7 @@ return [
                         'color' => 'none',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h7v2H5v14h7v2Zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5Z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h7v2H5v14h7v2Zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5Z"></path></svg>',
                         'loading' => true,
                     ],
 
@@ -1630,7 +1714,7 @@ return [
                         'color' => 'blue',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 24 24"><path fill="currentColor" d="m10.6 16.2l7.05-7.05l-1.4-1.4l-5.65 5.65l-2.85-2.85l-1.4 1.4ZM5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm0-2h14V5H5v14ZM5 5v14V5Z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 24 24"><path fill="currentColor" d="m10.6 16.2l7.05-7.05l-1.4-1.4l-5.65 5.65l-2.85-2.85l-1.4 1.4ZM5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm0-2h14V5H5v14ZM5 5v14V5Z"></path></svg>',
                     ],
 
                     'deselect-all' => [
@@ -1639,14 +1723,14 @@ return [
                         'color' => 'blue',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => '<svg class="mx-auto w-4 h-4" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm0-2h14V5H5v14Z"></path></svg>',
+                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm0-2h14V5H5v14Z"></path></svg>',
                     ],
 
                     'toggler' => [
                         'color' => 'none',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => '<svg class="mx-auto w-6 h-6" viewBox="0 0 24 24"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                        'icon' => '<svg class="w-6 h-6 mx-auto" viewBox="0 0 24 24"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
                     ],
                 ],
             ],
@@ -1681,6 +1765,104 @@ return [
             ],
 
             /**
+             * Charts.
+             */
+            'apex-charts' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,apex-charts',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'apex-charts\')',
+                ],
+
+                'fetchable' => [
+                    'theme:content' => 'grid place-items-center',
+                ],
+            ],
+
+            'c3' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,c3',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'c3\')',
+                ],
+
+                'fetchable' => [
+                    'theme:content' => 'grid place-items-center',
+                ],
+            ],
+
+            'chart-js' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,chart-js',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'chart-js\')',
+                ],
+
+                'fetchable' => [
+                    'theme:content' => 'grid place-items-center',
+                ],
+
+                'canvas' => [
+                    'x-ref' => 'canvas',
+                ],
+            ],
+
+            'echarts' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,echarts',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'echarts\')',
+                ],
+
+                'fetchable' => [
+                    'theme:content' => 'grid place-items-center',
+                ],
+            ],
+
+            'frappe-charts' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,frappe-charts',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'frappe-charts\')',
+                ],
+
+                'fetchable' => [
+                    'theme:content' => 'grid place-items-center',
+                ],
+            ],
+
+            'fusion-charts' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,fusion-charts',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'fusion-charts\')',
+                ],
+
+                'fetchable' => [
+                    'theme:content' => 'grid place-items-center',
+                ],
+            ],
+
+            'highcharts' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,highcharts',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'highcharts\')',
+                ],
+
+                'fetchable' => [
+                    'theme:content' => 'grid place-items-center',
+                ],
+            ],
+
+            /**
              * Crud.
              */
             'crud-actions' => [
@@ -1709,7 +1891,7 @@ return [
 
             'crud-header' => [
                 'container' => [
-                    'class' => 'flex space-x-4 items-center justify-between pb-4',
+                    'class' => 'flex flex-col space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4 lg:items-center justify-between pb-4',
                 ],
 
                 'title' => [
@@ -1717,7 +1899,7 @@ return [
                 ],
 
                 'actions' => [
-                    'class' => 'flex space-x-2 items-center',
+                    'class' => 'flex space-x-2 items-center justify-end',
                 ],
             ],
 
@@ -1805,6 +1987,8 @@ return [
             'carbon' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,moment,moment-timezone',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'carbon\')',
                 ],
             ],
@@ -1812,6 +1996,8 @@ return [
             'countdown' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'countdown\')',
                 ],
 
@@ -2201,7 +2387,7 @@ return [
                     'class' => 'w-full h-full',
                 ],
 
-                'empty-icon-svg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>',
+                'empty-icon-svg' => '<svg class="inline-block w-6 h-6" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>',
 
                 'loading' => [
                     'x-show' => 'isLoading()',
@@ -2220,7 +2406,7 @@ return [
                     'class' => 'w-full h-full',
                 ],
 
-                'error-icon-svg' => '<svg class="w-6 h-6 inline-block" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
+                'error-icon-svg' => '<svg class="inline-block w-6 h-6" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
 
                 'complete' => [
                     'x-show' => 'isCompleted()',
@@ -2302,8 +2488,8 @@ return [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
                     'wire:ignore' => '',
-                    'x-data' => 'window.tallkit.component(\'many\')',
                     'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'many\')',
                 ],
 
                 'header-create' => [
@@ -2642,11 +2828,13 @@ return [
 
                 'dropdown' => [],
 
-                'auto' => [
-                    'style' => 'position: static;',
-                    '@open' => 'alignAuto',
-                    '@scroll.window' => 'alignAuto',
-                    '@resize.window' => 'alignAuto',
+                'dropdown-aligns' => [
+                    'auto' => [
+                        'style' => 'position: static;',
+                        '@open' => 'alignAuto',
+                        '@scroll.window' => 'close',
+                        '@resize.window' => 'close',
+                    ],
                 ],
 
                 'trigger' => [
@@ -2791,7 +2979,7 @@ return [
 
                     'icon-name' => 'close',
 
-                    'icon-svg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
+                    'icon-svg' => '<svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
                 ],
 
                 'title' => [
@@ -2811,35 +2999,35 @@ return [
                     'error' => [
                         'color' => 'red',
                         'icon-name' => 'close',
-                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
+                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Error',
                     ],
 
                     'info' => [
                         'color' => 'blue',
                         'icon-name' => 'information',
-                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
+                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Info',
                     ],
 
                     'success' => [
                         'color' => 'green',
                         'icon-name' => 'check',
-                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Success',
                     ],
 
                     'warning' => [
                         'color' => 'yellow',
                         'icon-name' => 'alert',
-                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
+                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Warning',
                     ],
 
                     'created' => [
                         'color' => 'green',
                         'icon-name' => 'check',
-                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Created',
                         'message' => 'Record created successfully!',
                         'dismissible' => true,
@@ -2849,7 +3037,7 @@ return [
                     'updated' => [
                         'color' => 'blue',
                         'icon-name' => 'check',
-                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Updated',
                         'message' => 'Record updated successfully!',
                         'dismissible' => true,
@@ -2859,7 +3047,7 @@ return [
                     'deleted' => [
                         'color' => 'red',
                         'icon-name' => 'check',
-                        'icon-svg' => '<svg class="fill-current w-6 h-6" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
+                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Deleted',
                         'message' => 'Record deleted successfully!',
                         'dismissible' => true,
@@ -3720,6 +3908,41 @@ return [
                 'container' => [],
             ],
 
+            'fetchable' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'fetchable\')',
+                    'class' => 'flex flex-col',
+                ],
+
+                'content' => [
+                    'class' => 'flex-1',
+                ],
+
+                'empty' => [
+                    'x-show' => 'isEmpty()',
+                ],
+
+                'loading' => [
+                    'x-show' => 'isLoading()',
+                ],
+
+                'completed' => [
+                    'x-show' => 'isCompleted()',
+                ],
+
+                'failed' => [
+                    'x-show' => 'isFailed()',
+                ],
+
+                'options' => [
+                    'method' => 'get',
+                    'headers' => ['Accept' => 'application/json'],
+                    'responseType' => 'json',
+                ],
+            ],
+
             'image-loader' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
@@ -3872,12 +4095,12 @@ return [
                 'sortable' => [
                     'asc' => [
                         'icon-name' => 'chevron-up',
-                        'icon-svg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg>',
+                        'icon-svg' => '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg>',
                     ],
 
                     'desc' => [
                         'icon-name' => 'chevron-down',
-                        'icon-svg' => '<svg class="fill-current w-4 h-4" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>',
+                        'icon-svg' => '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>',
                     ],
                 ],
             ],

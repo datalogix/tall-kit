@@ -64,7 +64,7 @@ class MenuDropdown extends Menu
     public function container()
     {
         return $this->attributes
-            ->mergeOnlyThemeProvider($this->themeProvider, $this->align !== 'auto' ? null : 'auto')
+            ->mergeOnlyThemeProvider($this->themeProvider, 'dropdown-aligns', $this->align)
             ->getAttributes();
     }
 }
