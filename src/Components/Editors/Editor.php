@@ -23,7 +23,7 @@ class Editor extends BaseEditor
      */
     public function jsonOptions(...$args)
     {
-        $editor = app(__NAMESPACE__.'\\'.Str::ucfirst($this->getComponentKey()));
+        $editor = app(__NAMESPACE__.'\\'.Str::studly($this->getComponentKey()));
 
         return $editor->jsonOptions(...$args);
     }
