@@ -46,7 +46,7 @@ class CrudShow extends Crud
             $title,
             $parameters,
             $resource,
-            $forceMenu,
+            $forceMenu ?? true,
             $maxActions,
             $actions,
             $routeName,
