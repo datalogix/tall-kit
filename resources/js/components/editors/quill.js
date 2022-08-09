@@ -3,7 +3,7 @@ export default ({ loadComponentAssets, updateInputValue, loadable }) => ({
 
   quill: null,
 
-  async setup (options) {
+  async setup (options = {}) {
     this.start()
 
     await loadComponentAssets('quill')

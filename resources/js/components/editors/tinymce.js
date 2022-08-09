@@ -5,7 +5,7 @@ export default ({ loadComponentAssets, updateInputValue, getCsrfToken, loadable 
 
   tinymce: null,
 
-  async setup (options) {
+  async setup (options = {}) {
     this.start()
 
     await loadComponentAssets('tinymce')
