@@ -4,7 +4,6 @@ namespace TALLKit\Components\Layouts;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Blade;
 use TALLKit\Components\BladeComponent;
 
 class Html extends BladeComponent
