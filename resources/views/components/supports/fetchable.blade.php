@@ -1,7 +1,7 @@
 <div {{
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
-        ->merge(['x-init' => 'setup(\''.$url.'\', \''.$autoload.'\', '.$jsonOptions().')'])
+        ->merge(['x-init' => 'setup(\''.$url.'\', '.$default.', \''.$autoload.'\', '.$jsonOptions().')'])
 }}>
     {{ $header ?? '' }}
 
@@ -10,14 +10,6 @@
             <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'empty') }}>
                 {{ $empty }}
             </div>
-        @endisset
-
-        @isset ($loading)
-            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading') }}>
-                {{ $loading }}
-            </div>
-        @else
-            <x-loading {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading') }} />
         @endisset
 
         <template x-if="isCompleted()">
@@ -30,10 +22,20 @@
             @endisset
         </template>
 
-        @isset ($failed)
-            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'failed') }}>
-                {{ $failed }}
+        @isset ($loading)
+            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading') }}>
+                {{ $loading }}
             </div>
+        @else
+            <x-loading {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading') }} />
+        @endisset
+
+        @isset ($error)
+            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'error') }}>
+                {{ $error }}
+            </div>
+        @else
+            <x-error {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'error') }} />
         @endisset
     </div>
 

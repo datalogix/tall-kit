@@ -3,6 +3,7 @@
 namespace TALLKit\Concerns;
 
 use Illuminate\Support\Arr;
+use InvalidArgumentException;
 
 trait User
 {
@@ -55,7 +56,21 @@ trait User
      */
     public function setUser($user = null, $guard = null)
     {
-        $this->user = $user ?? (auth($guard)->check() ? auth($guard)->user() : null);
+        if ($user) {
+            $this->user = $user;
+            $this->guard = $guard;
+
+            return;
+        }
+
+        try {
+            $auth = auth($guard);
+        } catch (InvalidArgumentException $e) {
+            $auth = auth();
+            $guard = null;
+        }
+
+        $this->user = $auth->check() ? $auth->user() : null;
         $this->guard = $guard;
     }
 

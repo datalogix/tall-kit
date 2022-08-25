@@ -92,8 +92,9 @@ class FormButton extends Form
      *
      * @param  bool|null  $init
      * @param  string|null  $method
+     * @param  string|bool|null  $target
      * @param  string|null  $action
-     * @param  array|string|null  $route
+     * @param  string|string[]|null  $route
      * @param  mixed  $bind
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
@@ -119,6 +120,7 @@ class FormButton extends Form
     public function __construct(
         $init = null,
         $method = null,
+        $target = null,
         $action = null,
         $route = null,
         $bind = null,
@@ -145,6 +147,7 @@ class FormButton extends Form
         parent::__construct(
             $init,
             $method ?? 'POST',
+            $target,
             $action ?? request()->url(),
             $route,
             $bind,

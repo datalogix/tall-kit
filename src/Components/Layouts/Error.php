@@ -1,37 +1,37 @@
 <?php
 
-namespace TALLKit\Components\Tables;
+namespace TALLKit\Components\Layouts;
 
 use TALLKit\Components\BladeComponent;
 
-class Cell extends BladeComponent
+class Error extends BladeComponent
 {
     /**
-     * @var string|null
+     * @var string|bool|null
      */
     public $text;
 
     /**
-     * @var string
+     * @var string|bool|null
      */
-    public $align;
+    public $icon;
 
     /**
      * Create a new component instance.
      *
-     * @param  string|null  $text
-     * @param  string|bool|null  $align
+     * @param  string|bool|null  $text
+     * @param  string|bool|null  $icon
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $text = null,
-        $align = null,
+        $icon = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $this->text = $text;
-        $this->align = $align ?? 'left';
+        $this->text = $text ?? 'Error';
+        $this->icon = $icon;
     }
 }

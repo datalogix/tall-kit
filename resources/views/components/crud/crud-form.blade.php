@@ -3,6 +3,8 @@
     :init="$init"
     :method="$method"
     :action="$action"
+    :route="$route"
+    :bind="array_merge($parameters, [$resource])"
     :enctype="$enctype"
     :confirm="$confirm"
     :theme="$theme"

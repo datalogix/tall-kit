@@ -6,7 +6,17 @@
         : $attributes
     }}
     method="{{ $spoofMethod ? 'POST' : $method }}"
-    @if ($action) action="{{ $action }}" @endif
+
+    @if ($target)
+        target="{{ $target }}"
+        data-turbo="false"
+        data-turbolinks="false"
+    @endif
+
+    @if ($action)
+        action="{{ $action }}"
+    @endif
+
     @if ($enctype)
         enctype="{{ $enctype }}"
     @elseif (Str::contains($slot, 'type="file"'))

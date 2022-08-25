@@ -4,7 +4,7 @@ namespace TALLKit\Components\Forms;
 
 use TALLKit\Components\BladeComponent;
 
-class Errors extends BladeComponent
+class FieldError extends BladeComponent
 {
     /**
      * @var string

@@ -77,11 +77,13 @@ return [
             |
             | Enable when you want to inject tailwindcss directly from the CDN,
             | the url is in `assets.tailwindcss`.
-            | This option is disabled for several reasons.
-            | See https://tailwindcss.com/docs/installation#using-tailwind-via-cdn
+            | This option use Play CDN what is it designed for development purposes only,
+            | and is not the best choice for production.
+            | See https://tailwindcss.com/docs/installation/play-cdn
             |
             */
-            'tailwindcss' => false,
+
+            'tailwindcss' => config('app.env') === 'local',
 
             /*
             |
@@ -118,6 +120,19 @@ return [
             'folder' => env('TALLKIT_UPLOAD_FOLDER', 'uploads'),
             'middleware' => env('TALLKIT_UPLOAD_MIDDLEWARE', 'web'),
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Themes by route
+        |--------------------------------------------------------------------------
+        |
+        | This option detect the theme name by route
+        | using patterns with `Route::is(...$patterns)`.
+        |
+        */
+        'themes_by_route' => [
+            'admin' => ['admin.*'],
+        ],
     ],
 
     /*
@@ -137,7 +152,8 @@ return [
          * Tailwindcss.
          */
         'tailwindcss' => [
-            'https://cdn.jsdelivr.net/npm/tailwindcss@2/dist/tailwind.min.css',
+            //'https://cdn.jsdelivr.net/npm/tailwindcss@2/dist/tailwind.min.css', // v2
+            'https://cdn.tailwindcss.com', // v3
         ],
 
         /**
@@ -471,11 +487,12 @@ return [
         /**
          * Forms.
          */
-        'checkbox-list' => \TALLKit\Components\Forms\CheckboxList::class,
         'checkbox' => \TALLKit\Components\Forms\Checkbox::class,
-        'errors' => \TALLKit\Components\Forms\Errors::class,
+        'checkbox-list' => \TALLKit\Components\Forms\CheckboxList::class,
         'field' => \TALLKit\Components\Forms\Field::class,
+        'field-error' => \TALLKit\Components\Forms\FieldError::class,
         'field-group' => \TALLKit\Components\Forms\FieldGroup::class,
+        'field-view' => \TALLKit\Components\Forms\FieldView::class,
         'fields-generator' => \TALLKit\Components\Forms\FieldsGenerator::class,
         'form' => \TALLKit\Components\Forms\Form::class,
         'group' => \TALLKit\Components\Forms\Group::class,
@@ -503,6 +520,7 @@ return [
         'container' => \TALLKit\Components\Layouts\Container::class,
         'control-panel' => \TALLKit\Components\Layouts\ControlPanel::class,
         'display' => \TALLKit\Components\Layouts\Display::class,
+        'error' => \TALLKit\Components\Layouts\Error::class,
         'html' => \TALLKit\Components\Layouts\Html::class,
         'loading' => \TALLKit\Components\Layouts\Loading::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
@@ -517,8 +535,8 @@ return [
         /**
          * Menus.
          */
-        'menu-dropdown' => \TALLKit\Components\Menus\MenuDropdown::class,
         'menu' => \TALLKit\Components\Menus\Menu::class,
+        'menu-dropdown' => \TALLKit\Components\Menus\MenuDropdown::class,
         'nav' => \TALLKit\Components\Menus\Nav::class,
         'user-menu' => \TALLKit\Components\Menus\UserMenu::class,
 
@@ -629,11 +647,6 @@ return [
          */
         'bt' => \TALLKit\Components\Buttons\Button::class,
         'btn' => \TALLKit\Components\Buttons\Button::class,
-        'button-form' => \TALLKit\Components\Buttons\FormButton::class,
-        'bt-form' => \TALLKit\Components\Buttons\FormButton::class,
-        'btn-form' => \TALLKit\Components\Buttons\FormButton::class,
-        'form-bt' => \TALLKit\Components\Buttons\FormButton::class,
-        'form-btn' => \TALLKit\Components\Buttons\FormButton::class,
         'menu-item' => \TALLKit\Components\Buttons\Button::class,
         'menuitem' => \TALLKit\Components\Buttons\Button::class,
         'menu-dropdown-item' => \TALLKit\Components\Buttons\Button::class,
@@ -641,6 +654,11 @@ return [
         'navitem' => \TALLKit\Components\Buttons\Button::class,
         'sidebar-item' => \TALLKit\Components\Buttons\Button::class,
         'sidebaritem' => \TALLKit\Components\Buttons\Button::class,
+        'button-form' => \TALLKit\Components\Buttons\FormButton::class,
+        'bt-form' => \TALLKit\Components\Buttons\FormButton::class,
+        'btn-form' => \TALLKit\Components\Buttons\FormButton::class,
+        'form-bt' => \TALLKit\Components\Buttons\FormButton::class,
+        'form-btn' => \TALLKit\Components\Buttons\FormButton::class,
         'user-bt' => \TALLKit\Components\Buttons\UserButton::class,
         'userbutton' => \TALLKit\Components\Buttons\UserButton::class,
 
@@ -691,16 +709,29 @@ return [
         /**
          * Forms.
          */
-        'checkboxes' => \TALLKit\Components\Forms\CheckboxList::class,
         'check' => \TALLKit\Components\Forms\Checkbox::class,
-        'error' => \TALLKit\Components\Forms\Errors::class,
+        'checklist' => \TALLKit\Components\Forms\CheckboxList::class,
+        'check-list' => \TALLKit\Components\Forms\CheckboxList::class,
+        'checkboxlist' => \TALLKit\Components\Forms\CheckboxList::class,
+        'checkboxes' => \TALLKit\Components\Forms\CheckboxList::class,
         'form-field' => \TALLKit\Components\Forms\Field::class,
+        'input-error' => \TALLKit\Components\Forms\FieldError::class,
+        'form-error' => \TALLKit\Components\Forms\FieldError::class,
+        'form-field-error' => \TALLKit\Components\Forms\FieldError::class,
+        'form-field-view' => \TALLKit\Components\Forms\FieldView::class,
+        'input-view' => \TALLKit\Components\Forms\FieldView::class,
+        'view' => \TALLKit\Components\Forms\FieldView::class,
+        'view-field' => \TALLKit\Components\Forms\FieldView::class,
+        'view-input' => \TALLKit\Components\Forms\FieldView::class,
         'form-group' => \TALLKit\Components\Forms\Group::class,
         'generator-fields' => \TALLKit\Components\Forms\FieldsGenerator::class,
         'image-preview' => \TALLKit\Components\Forms\InputImage::class,
         'lbl' => \TALLKit\Components\Forms\Label::class,
         'multiple' => \TALLKit\Components\Forms\Many::class,
+        'radiolist' => \TALLKit\Components\Forms\RadioList::class,
         'radios' => \TALLKit\Components\Forms\RadioList::class,
+        'radioslist' => \TALLKit\Components\Forms\RadioList::class,
+        'radios-list' => \TALLKit\Components\Forms\RadioList::class,
         'validation-bag' => \TALLKit\Components\Forms\ValidationErrors::class,
         'validation-error' => \TALLKit\Components\Forms\ValidationErrors::class,
         'validation' => \TALLKit\Components\Forms\ValidationErrors::class,
@@ -713,14 +744,15 @@ return [
         /**
          * Layouts.
          */
-        'admin' => \TALLKit\Components\Layouts\ControlPanel::class,
-        'admin-card' => \TALLKit\Components\Layouts\ControlPanel::class,
         'auth' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'auth-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'authentication' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'content' => \TALLKit\Components\Layouts\Container::class,
+        'admin' => \TALLKit\Components\Layouts\ControlPanel::class,
+        'admin-card' => \TALLKit\Components\Layouts\ControlPanel::class,
         'control' => \TALLKit\Components\Layouts\ControlPanel::class,
         'cp' => \TALLKit\Components\Layouts\ControlPanel::class,
+        'panel' => \TALLKit\Components\Layouts\ControlPanel::class,
         'preview' => \TALLKit\Components\Layouts\Display::class,
 
         /**
@@ -788,6 +820,7 @@ return [
          * Supports.
          */
         'api' => \TALLKit\Components\Supports\Fetchable::class,
+        'data' => \TALLKit\Components\Supports\Fetchable::class,
         'fetch' => \TALLKit\Components\Supports\Fetchable::class,
         'img-loader' => \TALLKit\Components\Supports\ImageLoader::class,
         'load-img' => \TALLKit\Components\Supports\ImageLoader::class,
@@ -796,10 +829,10 @@ return [
         /**
          * Tables.
          */
+        'td' => \TALLKit\Components\Tables\Cell::class,
         'head' => \TALLKit\Components\Tables\Heading::class,
         'th' => \TALLKit\Components\Tables\Heading::class,
         'tr' => \TALLKit\Components\Tables\Row::class,
-        'td' => \TALLKit\Components\Tables\Cell::class,
     ],
 
     /*
@@ -890,7 +923,7 @@ return [
                         ],
 
                         'nav' => [
-                            'class' => 'sm:flex sm:w-auto sm:flex-grow-0 sm:flex-row sm:items-center sm:max-h-full sm:relative',
+                            'class' => 'sm:flex sm:w-auto sm:grow-0 sm:flex-row sm:items-center sm:max-h-full sm:relative',
                         ],
 
                         'animated' => [
@@ -910,7 +943,7 @@ return [
                         ],
 
                         'nav' => [
-                            'class' => 'md:flex md:w-auto md:flex-grow-0 md:flex-row md:items-center md:max-h-full md:relative',
+                            'class' => 'md:flex md:w-auto md:grow-0 md:flex-row md:items-center md:max-h-full md:relative',
                         ],
 
                         'animated' => [
@@ -930,7 +963,7 @@ return [
                         ],
 
                         'nav' => [
-                            'class' => 'lg:flex lg:w-auto lg:flex-grow-0 lg:flex-row lg:items-center lg:max-h-full lg:relative',
+                            'class' => 'lg:flex lg:w-auto lg:grow-0 lg:flex-row lg:items-center lg:max-h-full lg:relative',
                         ],
 
                         'animated' => [
@@ -950,7 +983,7 @@ return [
                         ],
 
                         'nav' => [
-                            'class' => 'xl:flex xl:w-auto xl:flex-grow-0 xl:flex-row xl:items-center xl:max-h-full xl:relative',
+                            'class' => 'xl:flex xl:w-auto xl:grow-0 xl:flex-row xl:items-center xl:max-h-full xl:relative',
                         ],
 
                         'animated' => [
@@ -970,7 +1003,7 @@ return [
                         ],
 
                         'nav' => [
-                            'class' => '2xl:flex 2xl:w-auto 2xl:flex-grow-0 2xl:flex-row 2xl:items-center 2xl:max-h-full 2xl:relative',
+                            'class' => '2xl:flex 2xl:w-auto 2xl:grow-0 2xl:flex-row 2xl:items-center 2xl:max-h-full 2xl:relative',
                         ],
 
                         'animated' => [
@@ -989,7 +1022,7 @@ return [
                     'x-ref' => 'nav',
                     ':class' => '{ \'hidden\': isClosed() }',
                     ':style' => 'style()',
-                    'class' => 'w-full flex-grow flex-col items-start max-h-0',
+                    'class' => 'w-full grow flex-col items-start max-h-0',
 
                     'theme:li' => [
                         'class' => 'w-full',
@@ -1145,11 +1178,11 @@ return [
                 ],
 
                 'item' => [
-                    'class' => 'text-gray-100 py-4 px-6 hover:bg-black hover:bg-opacity-10',
+                    'class' => 'text-gray-100 !py-4 !px-6 hover:bg-black/10',
                 ],
 
                 'active' => [
-                    'class' => 'bg-black bg-opacity-25 hover:bg-opacity-25',
+                    'class' => 'bg-black/25 hover:bg-black/25',
                 ],
 
                 'breakpoints' => [
@@ -1349,16 +1382,15 @@ return [
 
                         ':style' => '{
                             \'text-indent\': typeof isLoading === \'function\' && isLoading() ? \'-9999px\' : \'inherit\',
-                            \'width\': typeof isLoading === \'function\' && isLoading() ? \'0px\' : \'auto\',
                         }',
 
                         ':class' => '{
-                            \'invisible\': typeof isLoading === \'function\' && isLoading(),
+                            \'invisible w-0\': typeof isLoading === \'function\' && isLoading(),
                         }',
                     ],
 
                     'component' => [
-                        'style' => 'display:none;',
+                        'style' => 'display: none;',
                         'x-show' => 'typeof isLoading === \'function\' && isLoading()',
                     ],
                 ],
@@ -1434,12 +1466,6 @@ return [
 
                     'indigo' => [
                         'name' => 'indigo',
-                        'weight' => 500,
-                        'hover' => 700,
-                    ],
-
-                    'yellow' => [
-                        'name' => 'yellow',
                         'weight' => 500,
                         'hover' => 700,
                     ],
@@ -1653,7 +1679,7 @@ return [
                     'download' => [
                         'text' => 'Download',
                         'tooltip' => 'Download',
-                        'color' => 'info',
+                        'color' => 'indigo',
                         'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path></svg>',
                         'loading' => 'Downloading',
                     ],
@@ -1661,7 +1687,7 @@ return [
                     'view' => [
                         'text' => 'View',
                         'tooltip' => 'View',
-                        'color' => 'info',
+                        'color' => 'default',
                         'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>',
                         'loading' => 'Viewing',
                     ],
@@ -2189,6 +2215,24 @@ return [
             /**
              * Forms.
              */
+            'checkbox' => [
+                'container' => [
+                    'class' => 'flex flex-col',
+                ],
+
+                'label' => [
+                    'class' => 'flex items-center',
+                ],
+
+                'label-text' => [
+                    'class' => 'ml-3',
+                ],
+
+                'checkbox' => [
+                    'class' => 'h-4 w-4 border-gray-200 rounded shadow shrink-0',
+                ],
+            ],
+
             'checkbox-list' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
@@ -2212,28 +2256,32 @@ return [
                     '@click' => 'select(false)',
                 ],
 
-                'checkbox' => [],
+                'checkbox' => [
+                    'theme:container' => '!mb-0',
+                ],
             ],
 
-            'checkbox' => [
+            'field' => [
                 'container' => [
-                    'class' => 'flex flex-col',
+                    'class' => 'mb-4',
                 ],
 
                 'label' => [
-                    'class' => 'flex items-center',
+                    'class' => 'block',
                 ],
 
                 'label-text' => [
-                    'class' => 'ml-3',
+                    'class' => 'mb-1',
                 ],
 
-                'checkbox' => [
-                    'class' => 'h-4 w-4 border-gray-200 rounded shadow flex-shrink-0',
+                'field-error' => [],
+
+                'display' => [
+                    'class' => 'flex items-center justify-center my-4 text-center border border-gray-200 rounded shadow bg-white p-2 max-w-xs max-h-72',
                 ],
             ],
 
-            'errors' => [
+            'field-error' => [
                 'container' => [
                     'class' => 'mt-1 text-red-600 text-sm italic',
                 ],
@@ -2257,23 +2305,23 @@ return [
                 ],
             ],
 
-            'field' => [
-                'container' => [
-                    'class' => 'mb-4',
-                ],
-
-                'label' => [
-                    'class' => 'block',
-                ],
-
-                'label-text' => [
-                    'class' => 'mb-1',
-                ],
-
-                'errors' => [],
+            'field-view' => [
+                'container' => [],
 
                 'display' => [
-                    'class' => 'flex items-center justify-center my-4 text-center border border-gray-200 rounded shadow bg-white p-2 max-w-xs max-h-72',
+                    'class' => 'py-2 px-3',
+
+                    'theme:img' => [
+                        'class' => 'mx-auto max-w-xs max-h-72',
+                    ],
+
+                    'theme:audio' => [
+                        'class' => 'mx-auto max-w-xs max-h-72',
+                    ],
+
+                    'theme:video' => [
+                        'class' => 'mx-auto max-w-xs max-h-72',
+                    ],
                 ],
             ],
 
@@ -2290,13 +2338,17 @@ return [
             ],
 
             'group' => [
+                'container' => [],
+
                 'label-text' => [
                     'class' => 'mb-1',
                 ],
 
                 'fieldset' => [
-                    'class' => 'border p-6 rounded shadow overflow-auto',
+                    'class' => 'bg-white border p-6 rounded shadow overflow-auto',
                 ],
+
+                'div' => [],
 
                 'types' => [
                     'block' => [],
@@ -2306,52 +2358,80 @@ return [
                     ],
 
                     'grid-1' => [
-                        'class' => 'grid gap-x-6 grid-cols-1',
+                        'class' => 'grid gap- grid-cols-1',
                     ],
 
                     'grid-2' => [
-                        'class' => 'grid gap-x-6 grid-cols-2',
+                        'class' => 'grid gap-6 grid-cols-2',
                     ],
 
                     'grid-3' => [
-                        'class' => 'grid gap-x-6 grid-cols-3',
+                        'class' => 'grid gap-6 grid-cols-3',
                     ],
 
                     'grid-4' => [
-                        'class' => 'grid gap-x-6 grid-cols-4',
+                        'class' => 'grid gap-6 grid-cols-4',
                     ],
 
                     'grid-5' => [
-                        'class' => 'grid gap-x-6 grid-cols-5',
+                        'class' => 'grid gap-6 grid-cols-5',
                     ],
 
                     'grid-6' => [
-                        'class' => 'grid gap-x-6 grid-cols-6',
+                        'class' => 'grid gap-6 grid-cols-6',
                     ],
 
                     'grid-7' => [
-                        'class' => 'grid gap-x-6 grid-cols-7',
+                        'class' => 'grid gap-6 grid-cols-7',
                     ],
 
                     'grid-8' => [
-                        'class' => 'grid gap-x-6 grid-cols-8',
+                        'class' => 'grid gap-6 grid-cols-8',
                     ],
 
                     'grid-9' => [
-                        'class' => 'grid gap-x-6 grid-cols-9',
+                        'class' => 'grid gap-6 grid-cols-9',
                     ],
 
                     'grid-10' => [
-                        'class' => 'grid gap-x-6 grid-cols-10',
+                        'class' => 'grid gap-6 grid-cols-10',
                     ],
 
                     'grid-11' => [
-                        'class' => 'grid gap-x-6 grid-cols-11',
+                        'class' => 'grid gap-6 grid-cols-11',
                     ],
 
                     'grid-12' => [
-                        'class' => 'grid gap-x-6 grid-cols-12',
+                        'class' => 'grid gap-6 grid-cols-12',
                     ],
+                ],
+            ],
+
+            'input' => [
+                'hidden' => [
+                    'class' => 'hidden',
+                ],
+
+                'input' => [
+                    'class' => 'block w-full py-2 px-3 outline-none focus:outline-none',
+                ],
+
+                'mask' => [
+                    'data-tallkit-assets' => 'alpine,imask',
+                    'x-data' => 'window.tallkit.component(\'mask\')',
+                    'x-ref' => 'input',
+                ],
+
+                'cleave' => [
+                    'data-tallkit-assets' => 'alpine,cleave',
+                    'x-data' => 'window.tallkit.component(\'cleave\')',
+                    'x-ref' => 'input',
+                ],
+
+                'tagify' => [
+                    'data-tallkit-assets' => 'alpine,tagify',
+                    'x-data' => 'window.tallkit.component(\'tagify\')',
+                    'x-ref' => 'input',
                 ],
             ],
 
@@ -2371,13 +2451,13 @@ return [
                 ],
 
                 'field' => [
-                    'class' => 'bg-white inline-block overflow-hidden border border-gray-200 rounded shadow focus-within:ring',
+                    'class' => 'relative bg-white inline-block overflow-hidden border border-gray-200 rounded shadow focus-within:ring',
                 ],
 
                 'input' => [
                     'x-ref' => 'input',
                     '@change' => 'change',
-                    'class' => 'hidden',
+                    'class' => 'absolute opacity-0 w-full h-full -z-50',
                     'type' => 'file',
                 ],
 
@@ -2450,34 +2530,6 @@ return [
                 'delete-icon-svg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>',
             ],
 
-            'input' => [
-                'hidden' => [
-                    'class' => 'hidden',
-                ],
-
-                'input' => [
-                    'class' => 'block w-full py-2 px-3 outline-none focus:outline-none',
-                ],
-
-                'mask' => [
-                    'data-tallkit-assets' => 'alpine,imask',
-                    'x-data' => 'window.tallkit.component(\'mask\')',
-                    'x-ref' => 'input',
-                ],
-
-                'cleave' => [
-                    'data-tallkit-assets' => 'alpine,cleave',
-                    'x-data' => 'window.tallkit.component(\'cleave\')',
-                    'x-ref' => 'input',
-                ],
-
-                'tagify' => [
-                    'data-tallkit-assets' => 'alpine,tagify',
-                    'x-data' => 'window.tallkit.component(\'tagify\')',
-                    'x-ref' => 'input',
-                ],
-            ],
-
             'label' => [
                 'container' => [
                     'class' => 'block',
@@ -2508,7 +2560,7 @@ return [
 
                 'field' => [
                     'theme:container' => [
-                        'style' => 'margin: 0;',
+                        'class' => '!m-0',
                     ],
                 ],
 
@@ -2527,12 +2579,6 @@ return [
                 ],
             ],
 
-            'radio-list' => [
-                'container' => [],
-
-                'radio' => [],
-            ],
-
             'radio' => [
                 'label' => [
                     'class' => 'inline-flex items-center',
@@ -2547,13 +2593,21 @@ return [
                 ],
             ],
 
+            'radio-list' => [
+                'container' => [],
+
+                'radio' => [
+                    'theme:container' => '!mb-0',
+                ],
+            ],
+
             'select' => [
                 'multiselect' => [
-                    'class' => 'block w-full py-2.5 px-3 outline-none focus:outline-none',
+                    'class' => 'block w-full py-2 px-3 outline-none focus:outline-none',
                 ],
 
                 'select' => [
-                    'class' => 'block w-full py-2.5 px-3 outline-none focus:outline-none',
+                    'class' => 'block w-full py-2 px-3 outline-none focus:outline-none',
                 ],
             ],
 
@@ -2583,21 +2637,65 @@ return [
             ],
 
             /**
+             * Icons.
+             */
+            'icon' => [
+                'presets' => [
+                    'check' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59L21 7Z"></path></svg>',
+                    'close' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"></path></svg>',
+                    'dots-horizontal' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M16 12a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2m-6 0a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2Z"></path></svg>',
+                    'dots-vertical' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2Z"></path></svg>',
+                    'eye' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"></path></svg>',
+                    'plus' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"></path></svg>',
+                    'pencil' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>',
+                    'delete' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12Z"></path></svg>',
+                    'content-copy' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1Z"></path></svg>',
+                    'content-cut' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="m19 3l-6 6l2 2l7-7V3m-10 9.5a.5.5 0 0 1-.5-.5a.5.5 0 0 1 .5-.5a.5.5 0 0 1 .5.5a.5.5 0 0 1-.5.5M6 20a2 2 0 0 1-2-2a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2M6 8a2 2 0 0 1-2-2a2 2 0 0 1 2-2a2 2 0 0 1 2 2a2 2 0 0 1-2 2m3.64-.36c.23-.5.36-1.05.36-1.64a4 4 0 0 0-4-4a4 4 0 0 0-4 4a4 4 0 0 0 4 4c.59 0 1.14-.13 1.64-.36L10 12l-2.36 2.36C7.14 14.13 6.59 14 6 14a4 4 0 0 0-4 4a4 4 0 0 0 4 4a4 4 0 0 0 4-4c0-.59-.13-1.14-.36-1.64L12 14l7 7h3v-1L9.64 7.64Z"></path></svg>',
+                    'content-duplicate' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M11 17H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h12v2H4v12h7v-2l4 3l-4 3v-2m8 4V7H8v6H6V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2h2v2h11Z"></path></svg>',
+                    'content-paste' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 20H5V4h2v3h10V4h2m-7-2a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1m7 0h-4.18C14.4.84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"></path></svg>',
+                    'content-save' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M15 9H5V5h10m-3 14a3 3 0 0 1-3-3a3 3 0 0 1 3-3a3 3 0 0 1 3 3a3 3 0 0 1-3 3m5-16H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4Z"></path></svg>',
+                    'send' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="m2 21l21-9L2 3v7l15 2l-15 2v7Z"></path></svg>',
+                    'arrow-left' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 11v2H8l5.5 5.5l-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5L8 11h12Z"></path></svg>',
+                    'arrow-right' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 11v2h12l-5.5 5.5l1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5L16 11H4Z"></path></svg>',
+                    'arrow-up' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M13 20h-2V8l-5.5 5.5l-1.42-1.42L12 4.16l7.92 7.92l-1.42 1.42L13 8v12Z"></path></svg>',
+                    'arrow-down' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M11 4h2v12l5.5-5.5l1.42 1.42L12 19.84l-7.92-7.92L5.5 10.5L11 16V4Z"></path></svg>',
+                    'chevron-left' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.42Z"></path></svg>',
+                    'chevron-right' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6l-6 6l-1.41-1.42Z"></path></svg>',
+                    'chevron-up' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6l-6 6l1.41 1.41Z"></path></svg>',
+                    'chevron-down' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6l1.41-1.42Z"></path></svg>',
+                    'login' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M10 17v-3H3v-4h7V7l5 5l-5 5m0-15h9a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-2h2v2h9V4h-9v2H8V4a2 2 0 0 1 2-2Z"></path></svg>',
+                    'logout' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M16 17v-3H9v-4h7V7l5 5l-5 5M14 2a2 2 0 0 1 2 2v2h-2V4H5v16h9v-2h2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9Z"></path></svg>',
+                    'download' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7l7-7Z"></path></svg>',
+                    'filter' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 12v7.88c.04.3-.06.62-.29.83a.996.996 0 0 1-1.41 0l-2.01-2.01a.989.989 0 0 1-.29-.83V12h-.03L4.21 4.62a1 1 0 0 1 .17-1.4c.19-.14.4-.22.62-.22h14c.22 0 .43.08.62.22a1 1 0 0 1 .17 1.4L14.03 12H14Z"></path></svg>',
+                    'menu' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>',
+                    'toggler' => '<svg viewBox="0 0 24 24"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                    'loading' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 4V2A10 10 0 0 0 2 12h2a8 8 0 0 1 8-8Z"></path></svg>',
+                    'spinner' => '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
+                    'information' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2Z"></path></svg>',
+                    'alert' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M13 14h-2V9h2m0 9h-2v-2h2M1 21h22L12 2L1 21Z"></path></svg>',
+                    'image' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="m8.5 13.5l2.5 3l3.5-4.5l4.5 6H5m16 1V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2Z"></path></svg>',
+                    'camera' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5a5 5 0 0 0 5 5a5 5 0 0 0 5-5a5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3Z"></path></svg>',
+                    'account' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"></path></svg>',
+                    'checkbox-blank-outline' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m0 2v14H5V5h14Z"></path></svg>',
+                    'checkbox-marked-outline' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 19H5V5h10V3H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8h-2m-11.09-.92L6.5 11.5L11 16L21 6l-1.41-1.42L11 13.17l-3.09-3.09Z"></path></svg>',
+                    'search' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="m18.9 20.3l-5.6-5.6q-.75.6-1.725.95Q10.6 16 9.5 16q-2.725 0-4.612-1.887Q3 12.225 3 9.5q0-2.725 1.888-4.613Q6.775 3 9.5 3t4.613 1.887Q16 6.775 16 9.5q0 1.1-.35 2.075q-.35.975-.95 1.725l5.625 5.625q.275.275.275.675t-.3.7q-.275.275-.7.275q-.425 0-.7-.275ZM9.5 14q1.875 0 3.188-1.312Q14 11.375 14 9.5q0-1.875-1.312-3.188Q11.375 5 9.5 5Q7.625 5 6.312 6.312Q5 7.625 5 9.5q0 1.875 1.312 3.188Q7.625 14 9.5 14Z"></path></svg>',
+                ],
+            ],
+
+            /**
              * Layouts.
              */
             'authentication-card' => [
-                'html' => [],
-
-                'panels' => [
-                    'default' => [
-                        'mix-styles' => [
-                            'css/auth.css',
-                        ],
-
-                        'mix-scripts' => [
-                            'js/auth.js',
+                'html' => [
+                    'components' => [
+                        'user-sidebar' => [
+                            'disabled' => true,
                         ],
                     ],
+                ],
+
+                'panels' => [
+                    'default' => [],
 
                     'admin' => [
                         'mix-styles' => [
@@ -2607,11 +2705,14 @@ return [
                         'mix-scripts' => [
                             'js/admin.js',
                         ],
+
+                        'vite' => [
+                            'resources/js/admin.js',
+                        ],
                     ],
                 ],
 
                 'container' => [
-                    'style' => 'font-family: Nunito;',
                     'class' => 'min-h-screen flex flex-col items-center pt-6 bg-gray-100',
                 ],
 
@@ -2635,18 +2736,16 @@ return [
             ],
 
             'control-panel' => [
-                'html' => [],
-
-                'panels' => [
-                    'default' => [
-                        'mix-styles' => [
-                            'css/control-panel.css',
-                        ],
-
-                        'mix-scripts' => [
-                            'js/control-panel.js',
+                'html' => [
+                    'components' => [
+                        'user-sidebar' => [
+                            'disabled' => true,
                         ],
                     ],
+                ],
+
+                'panels' => [
+                    'default' => [],
 
                     'admin' => [
                         'mix-styles' => [
@@ -2656,11 +2755,14 @@ return [
                         'mix-scripts' => [
                             'js/admin.js',
                         ],
+
+                        'vite' => [
+                            'resources/js/admin.js',
+                        ],
                     ],
                 ],
 
                 'container' => [
-                    'style' => 'font-family: Nunito;',
                     'class' => 'flex h-screen bg-gray-100',
                 ],
 
@@ -2691,9 +2793,7 @@ return [
             'display' => [
                 'container' => [],
 
-                'img' => [
-                    'class' => 'mx-auto w-full h-full object-contain',
-                ],
+                'img' => [],
 
                 'audio' => [
                     'controls' => true,
@@ -2701,12 +2801,37 @@ return [
 
                 'video' => [
                     'controls' => true,
-                    'class' => 'mx-auto w-full h-full object-contain',
                 ],
 
                 'download' => [
                     'target' => '_blank',
                 ],
+
+                'check' => [
+                    'class' => 'fill-current w-6 h-6 text-green-500',
+                ],
+
+                'uncheck' => [
+                    'class' => 'fill-current w-6 h-6 text-red-500',
+                ],
+            ],
+
+            'error' => [
+                'container' => [
+                    'class' => 'justify-center inline-flex items-center space-x-2',
+                ],
+
+                'icon' => [
+                    'class' => 'fill-current w-4 h-4 text-red-500',
+                ],
+
+                'icon-name' => 'times',
+
+                'icon-svg' => [
+                    '<svg viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
+                ],
+
+                'text' => [],
             ],
 
             'html' => [
@@ -2717,6 +2842,7 @@ return [
                 'head' => [],
 
                 'body' => [
+                    'style' => 'font-family: Nunito;',
                     'class' => 'text-gray-700',
                 ],
 
@@ -2728,8 +2854,13 @@ return [
                     ],
 
                     'google-fonts' => [
-                        'families' => [
-                            'Nunito:wght@100;200;300;400;500;600;700;800;900',
+                        'families' => 'Nunito:wght@100;200;300;400;500;600;700;800;900',
+                    ],
+
+                    'components' => [
+                        'user-sidebar' => [
+                            'guard' => 'admin',
+                            'target' => '_blank',
                         ],
                     ],
                 ],
@@ -2737,7 +2868,7 @@ return [
 
             'loading' => [
                 'container' => [
-                    'class' => 'inline-flex items-center space-x-2',
+                    'class' => 'justify-center inline-flex items-center space-x-2',
                 ],
 
                 'icon' => [
@@ -2789,6 +2920,30 @@ return [
             /**
              * Menus.
              */
+            'menu' => [
+                'container' => [
+                    'class' => 'bg-white ring-1 ring-black ring-opacity-5 divide-gray-100 rounded shadow',
+
+                    'theme:item' => [
+                        'class' => 'hover:bg-gray-100 hover:text-gray-900',
+
+                        'theme:active' => [
+                            'class' => 'bg-gray-100 text-gray-900',
+                        ],
+                    ],
+                ],
+
+                'aligns' => [
+                    'outline' => [
+                        'class' => 'divide-y',
+                    ],
+
+                    'inline' => [
+                        'class' => 'divide-x',
+                    ],
+                ],
+            ],
+
             'menu-dropdown' => [
                 'container' => [],
 
@@ -2830,7 +2985,7 @@ return [
 
                 'dropdown-aligns' => [
                     'auto' => [
-                        'style' => 'position: static;',
+                        'class' => '!static',
                         '@open' => 'alignAuto',
                         '@scroll.window' => 'close',
                         '@resize.window' => 'close',
@@ -2840,30 +2995,6 @@ return [
                 'trigger' => [
                     '@click' => 'toggle',
                     'class' => 'bg-white',
-                ],
-            ],
-
-            'menu' => [
-                'container' => [
-                    'class' => 'bg-white ring-1 ring-black ring-opacity-5 divide-gray-100 rounded shadow',
-
-                    'theme:item' => [
-                        'class' => 'hover:bg-gray-100 hover:text-gray-900',
-
-                        'theme:active' => [
-                            'class' => 'bg-gray-100 text-gray-900',
-                        ],
-                    ],
-                ],
-
-                'aligns' => [
-                    'outline' => [
-                        'class' => 'divide-y',
-                    ],
-
-                    'inline' => [
-                        'class' => 'divide-x',
-                    ],
                 ],
             ],
 
@@ -2968,7 +3099,7 @@ return [
                 ],
 
                 'icon' => [
-                    'class' => 'flex items-center border-2 justify-center h-10 w-10 flex-shrink-0 rounded-full mr-4',
+                    'class' => 'flex items-center border-2 justify-center h-10 w-10 shrink-0 rounded-full mr-4',
                 ],
 
                 'dismissible' => [
@@ -3543,7 +3674,7 @@ return [
                 ],
 
                 'actions' => [
-                    'class' => 'flex-shrink-0',
+                    'class' => 'shrink-0',
                 ],
             ],
 
@@ -3743,7 +3874,7 @@ return [
 
                 'slider' => [
                     'x-ref' => 'slider',
-                    'class' => 'slider-snap overflow-auto relative flex-no-wrap flex transition-all',
+                    'class' => 'snap-mandatory snap-x scroll-smooth overflow-hidden relative flex-no-wrap flex transition-all',
                 ],
 
                 'prev' => [
@@ -3786,8 +3917,7 @@ return [
                 'page' => [
                     '@click' => 'go(index)',
                     ':class' => '{ \'bg-opacity-100\': is(index) }',
-                    'class' => 'bg-opacity-25',
-                    'style' => 'padding: 8px;',
+                    'class' => 'bg-opacity-25 !p-2',
                 ],
 
                 'progressbar' => [
@@ -3799,8 +3929,7 @@ return [
 
             'slider-item' => [
                 'container' => [
-                    'class' => 'w-full flex-shrink-0',
-                    'style' => 'scroll-snap-align:center;',
+                    'class' => 'w-full shrink-0 snap-center',
                 ],
             ],
 
@@ -3932,8 +4061,11 @@ return [
                     'x-show' => 'isCompleted()',
                 ],
 
-                'failed' => [
+                'error' => [
                     'x-show' => 'isFailed()',
+                    'theme:text' => [
+                        'x-text' => 'error',
+                    ],
                 ],
 
                 'options' => [
@@ -3969,29 +4101,18 @@ return [
                     '<svg class="fill-current" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 336H54a6 6 0 0 1-6-6V118a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v276a6 6 0 0 1-6 6zM128 152c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zM96 352h320v-80l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L192 304l-39.515-39.515c-4.686-4.686-12.284-4.686-16.971 0L96 304v48z"></path></svg>',
                 ],
 
-                'loading-icon' => [
+                'loading' => [
                     'x-show' => 'isLoading()',
-                    'class' => 'animate-spin',
+                    'theme:icon' => [
+                        'class' => 'w-full h-full',
+                    ],
                 ],
 
-                'loading-icon-name' => [
-                    'loading',
-                ],
-
-                'loading-icon-svg' => [
-                    '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
-                ],
-
-                'error-icon' => [
+                'error' => [
                     'x-show' => 'isFailed()',
-                ],
-
-                'error-icon-name' => [
-                    'times',
-                ],
-
-                'error-icon-svg' => [
-                    '<svg class="fill-current" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
+                    'theme:icon' => [
+                        'class' => 'w-full h-full',
+                    ],
                 ],
             ],
 
@@ -4138,15 +4259,23 @@ return [
 
                 'display' => [
                     'theme:img' => [
-                        'class' => 'max-w-xs max-h-40',
+                        'class' => 'mx-auto max-w-xs max-h-40',
                     ],
 
                     'theme:audio' => [
-                        'class' => 'max-w-xs max-h-40',
+                        'class' => 'mx-auto max-w-xs max-h-40',
                     ],
 
                     'theme:video' => [
-                        'class' => 'max-w-xs max-h-40',
+                        'class' => 'mx-auto max-w-xs max-h-40',
+                    ],
+
+                    'theme:check' => [
+                        'class' => 'mx-auto',
+                    ],
+
+                    'theme:uncheck' => [
+                        'class' => 'mx-auto',
                     ],
                 ],
             ],
@@ -4204,27 +4333,6 @@ return [
 
                     'plugins' => [
                         // See https://pqina.nl/filepond/docs/api/plugins/
-                    ],
-                ],
-            ],
-        ],
-
-        'app' => [
-            'html' => [
-                'html' => [
-                    'lang' => $lang,
-                ],
-
-                'head' => [],
-
-                'body' => [],
-
-                'options' => [
-                    'components' => [
-                        'user-sidebar' => [
-                            'guard' => 'admin',
-                            'target' => '_blank',
-                        ],
                     ],
                 ],
             ],

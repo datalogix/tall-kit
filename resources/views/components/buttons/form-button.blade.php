@@ -3,6 +3,7 @@
     :init="$init"
     :method="$method"
     :action="$action"
+    :target="$target"
     :enctype="$enctype"
     :confirm="$confirm"
     :theme="$theme"

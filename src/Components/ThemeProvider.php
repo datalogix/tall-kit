@@ -3,11 +3,18 @@
 namespace TALLKit\Components;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\ComponentAttributeBag;
-use TALLKit\Binders\ThemeBinder;
 
 class ThemeProvider
 {
+    /**
+     * The theme name by route.
+     *
+     * @var string|null
+     */
+    protected static $themeByRoute;
+
     /**
      * The themes.
      *
@@ -28,7 +35,7 @@ class ThemeProvider
      * @param  array  $themes
      * @return void
      */
-    public function __construct(array $themes)
+    public function __construct(array $themes = [])
     {
         $this->themes = $themes;
         $this->items = Collection::make();
@@ -43,11 +50,11 @@ class ThemeProvider
      */
     public function make($name, $component)
     {
-        $name = $name ?? app(ThemeBinder::class)->get();
         $default = data_get($this->themes, 'default');
-        $theme = data_get($this->themes, $name, $default);
+        $theme = data_get($this->themes, $name);
+        $item = data_get($theme, $component, data_get($default, $component, []));
 
-        $this->items = $this->items->wrap($theme[$component] ?? $default[$component] ?? []);
+        $this->items = $this->items->wrap($item);
 
         return $this;
     }
@@ -64,5 +71,27 @@ class ThemeProvider
         $attributes = is_array($value) ? $value : ['class' => $value];
 
         return new ComponentAttributeBag($attributes);
+    }
+
+    /**
+     * Get the theme name by route.
+     *
+     * @return string
+     */
+    public static function getThemeByRoute()
+    {
+        if (static::$themeByRoute) {
+            return static::$themeByRoute;
+        }
+
+        $themesByRoute = config('tallkit.options.themes_by_route', []);
+
+        foreach ($themesByRoute as $theme => $patterns) {
+            if (Route::is($patterns)) {
+                return static::$themeByRoute = $theme;
+            }
+        }
+
+        return static::$themeByRoute = 'default';
     }
 }

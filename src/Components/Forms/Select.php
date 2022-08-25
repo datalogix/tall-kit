@@ -81,6 +81,14 @@ class Select extends Field
 
         if ($this->isNotWired()) {
             $this->selectedKey = $this->getFieldValue($bind, $default);
+
+            if ($this->selectedKey instanceof Collection) {
+                $this->selectedKey = $this->selectedKey->pluck($this->itemValue)->toArray();
+            }
+
+            if ($this->selectedKey instanceof Arrayable) {
+                $this->selectedKey = $this->selectedKey->toArray();
+            }
         }
 
         $this->multiple = $multiple ?? false;
@@ -93,22 +101,16 @@ class Select extends Field
      * @param  mixed  $key
      * @return bool
      */
-    public function isSelected($key)
+    public function isSelected($key = null)
     {
         if ($this->isWired()) {
             return false;
         }
 
-        $value = $this->selectedKey;
-
-        if ($value instanceof Collection) {
-            $value = $value->pluck($this->itemValue)->toArray();
+        if (is_null($key)) {
+            return empty(Arr::wrap($this->selectedKey));
         }
 
-        if ($value instanceof Arrayable) {
-            $value = $value->toArray();
-        }
-
-        return in_array($key, Arr::wrap($value));
+        return in_array($key, Arr::wrap($this->selectedKey));
     }
 }

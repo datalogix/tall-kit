@@ -9,8 +9,9 @@ class Logout extends FormButton
      *
      * @param  bool|null  $init
      * @param  string|null  $method
+     * @param  string|bool|null  $target
      * @param  string|null  $action
-     * @param  array|string|null  $route
+     * @param  string|string[]|null  $route
      * @param  mixed  $bind
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
@@ -35,6 +36,7 @@ class Logout extends FormButton
     public function __construct(
         $init = null,
         $method = null,
+        $target = null,
         $action = null,
         $route = null,
         $bind = null,
@@ -60,6 +62,7 @@ class Logout extends FormButton
         parent::__construct(
             $init,
             $method,
+            $target,
             $action ?? route_detect(['logout', 'auth.logout']),
             $route,
             $bind,

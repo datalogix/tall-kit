@@ -106,6 +106,22 @@ class CrudActions extends Crud
                 'priority' => false,
             ],
 
+            'download' => [
+                'component' => 'button',
+                'target' => '_blank',
+                'preset' => 'download',
+                'except' => ['download'],
+                'priority' => false,
+            ],
+
+            'download-execute' => [
+                'component' => 'form-button',
+                'target' => '_blank',
+                'preset' => 'download',
+                'except' => ['download-execute'],
+                'priority' => false,
+            ],
+
             'edit' => [
                 'component' => 'button',
                 'preset' => 'edit',

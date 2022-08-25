@@ -2,10 +2,10 @@ export default ({ loadable }) => ({
   ...loadable(),
 
   url: null,
+  data: null,
   options: null,
-  response: null,
 
-  setup (url, autoload = true, options = {
+  setup (url = null, data = {}, autoload = true, options = {
     method: 'get',
     headers: { Accept: 'application/json' },
     responseType: 'json'
@@ -13,11 +13,15 @@ export default ({ loadable }) => ({
     this.clear()
 
     this.url = url
+    this.data = data
     this.options = options
-    this.response = null
 
-    if (autoload) {
+    if (this.url && autoload) {
       this.load()
+    }
+
+    if (!this.url && this.data) {
+      this.complete()
     }
   },
 
@@ -36,7 +40,11 @@ export default ({ loadable }) => ({
     try {
       const response = await window.fetch(_url, _options)
 
-      this.response = _options.responseType
+      if (!response.ok) {
+        throw new Error(response.statusText)
+      }
+
+      this.data = _options.responseType
         ? await response[_options.responseType]()
         : response
 

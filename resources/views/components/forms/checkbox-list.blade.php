@@ -5,7 +5,7 @@
             ->merge(['x-init' => 'setup(\''.$name.'\')'])
     }}>
         <x-group
-            {{ $attributes->mergeThemeProvider($themeProvider, 'group') }}
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'group') }}
             :name="$name"
             :label="$label"
             :inline="$inline"
@@ -46,7 +46,7 @@
 
             @foreach ($options as $key => $option)
                 <x-checkbox
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'checkbox') }}
+                    {{ $attributes->mergeThemeProvider($themeProvider, 'checkbox') }}
                     :name="$name"
                     :label="$option"
                     :value="$key"

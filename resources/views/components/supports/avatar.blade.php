@@ -2,8 +2,6 @@
     {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
     :url="$url"
     :icon="$icon"
-    :loading-icon="$loadingIcon"
-    :error-icon="$errorIcon"
     :theme="$theme"
 >
     {{ $slot }}

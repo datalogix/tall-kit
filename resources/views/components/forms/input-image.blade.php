@@ -14,9 +14,9 @@
             {{ $labelContent ?? '' }}
         </x-label>
 
-        <div {{ $attributes->mergeThemeProvider($themeProvider, 'field') }}>
+        <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'field') }}>
             <input
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'input') }}
+                {{ $attributes->mergeThemeProvider($themeProvider, 'input') }}
 
                 @if ($name)
                     name="{{ $name }}"

@@ -4,7 +4,10 @@ namespace TALLKit\Concerns;
 
 trait Toggleable
 {
-    protected static $ALIGN_DEFAULT = 'left';
+    protected static $SHOW = false;
+    protected static $OVERLAY = false;
+    protected static $CLOSEABLE = true;
+    protected static $ALIGN = 'left';
 
     /**
      * @var string|bool|null
@@ -44,10 +47,10 @@ trait Toggleable
     public function setToggleable($name = null, $show = null, $overlay = null, $closeable = null, $align = null)
     {
         $this->name = $name;
-        $this->show = $show ?? false;
-        $this->overlay = $overlay ?? true;
-        $this->closeable = $closeable ?? true;
-        $this->align = $align ?? static::$ALIGN_DEFAULT;
+        $this->show = $show ?? static::$SHOW;
+        $this->overlay = $overlay ?? static::$OVERLAY;
+        $this->closeable = $closeable ?? static::$CLOSEABLE;
+        $this->align = $align ?? static::$ALIGN;
     }
 
     /**

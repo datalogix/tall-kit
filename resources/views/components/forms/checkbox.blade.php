@@ -30,9 +30,10 @@
 
         <x-label
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'label-text') }}
+            :label="$label"
             :theme="$theme"
         >
-            {!! $slot->isEmpty() ? $label : $slot !!}
+            {{ $slot }}
         </x-label>
     </label>
 </x-field>

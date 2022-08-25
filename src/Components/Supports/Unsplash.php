@@ -18,8 +18,6 @@ class Unsplash extends ImageLoader
      * @param  int|null  $width
      * @param  int|null  $height
      * @param  string|bool|null  $icon
-     * @param  string|bool|null  $loadingIcon
-     * @param  string|bool|null  $errorIcon
      * @param  int|bool|null  $ttl
      * @param  string|null  $theme
      * @return void
@@ -32,8 +30,6 @@ class Unsplash extends ImageLoader
         $width = null,
         $height = null,
         $icon = null,
-        $loadingIcon = null,
-        $errorIcon = null,
         $ttl = null,
         $theme = null
     ) {
@@ -48,8 +44,6 @@ class Unsplash extends ImageLoader
                 $ttl ?? 3600
             ),
             $icon,
-            $loadingIcon,
-            $errorIcon,
             $ttl,
             $theme
         );

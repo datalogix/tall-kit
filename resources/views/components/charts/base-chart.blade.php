@@ -44,7 +44,7 @@
     <div {{
         $attributes
             ->mergeThemeProvider($themeProvider, 'container')
-            ->merge(['x-init' => 'setup({...'.$jsonOptions().', ...(response || {})})'])
+            ->merge(['x-init' => 'setup({...'.$jsonOptions().', ...(data || {})})'])
             ->merge($name ? ['@'.$name.'-update.window' => 'update'] : [])
             ->merge($size())
     }}>
@@ -57,9 +57,9 @@
         @endif
     </div>
 
-    @isset ($failed)
-        <x-slot name="failed">
-            {{ $failed }}
+    @isset ($error)
+        <x-slot name="error">
+            {{ $error }}
         </x-slot>
     @endisset
 

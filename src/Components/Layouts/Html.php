@@ -4,6 +4,7 @@ namespace TALLKit\Components\Layouts;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Blade;
 use TALLKit\Components\BladeComponent;
 
 class Html extends BladeComponent
@@ -94,6 +95,11 @@ class Html extends BladeComponent
     public $stackScripts;
 
     /**
+     * @var \Illuminate\Support\Collection
+     */
+    public $vite;
+
+    /**
      * @var array|bool
      */
     public $tallkit;
@@ -124,6 +130,7 @@ class Html extends BladeComponent
      * @param  mixed  $scripts
      * @param  string|bool|null  $stackStyles
      * @param  string|bool|null  $stackScripts
+     * @param  mixed  $vite
      * @param  bool|null  $tailwindcss
      * @param  bool|null  $alpine
      * @param  array|bool|null  $tallkit
@@ -146,6 +153,7 @@ class Html extends BladeComponent
         $livewire = null,
         $mixStyles = null,
         $mixScripts = null,
+        $vite = null,
         $styles = null,
         $scripts = null,
         $stackStyles = null,
@@ -188,7 +196,12 @@ class Html extends BladeComponent
         $this->stackStyles = $stackStyles ?? data_get($options, 'stack-styles', 'styles');
         $this->stackScripts = $stackScripts ?? data_get($options, 'stack-scripts', 'scripts');
 
-        $tailwindcss = $tailwindcss ?? $this->mixStyles->isEmpty();
+        $this->vite = Collection::make($vite)
+            ->merge(data_get($options, 'vite', ['resources/js/app.js', 'resources/js/app.ts']))
+            ->filter(function ($file) {
+                return file_exists(base_path($file));
+            })
+            ->unique();
 
         $this->tallkit = ($tallkit ?? true) ? array_replace_recursive(
             Arr::wrap($tallkit),

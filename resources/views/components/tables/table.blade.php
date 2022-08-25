@@ -31,8 +31,13 @@
 
         <tbody {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tbody') }}>
             @forelse ($rows as $row)
-                <x-row
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'tr') }}
+                <x-row {{
+                    $attributes->mergeOnlyThemeProvider($themeProvider, 'tr')
+                        ->merge(['class' => data_get($row, 'class')])
+                        ->merge(['style' => data_get($row, 'style')])
+                        ->merge(data_get($row, 'attrs', []))
+                        ->merge(data_get($row, 'attributes', []))
+                    }}
                     :theme="$theme"
                 >
                     @foreach ($cols as $key => $col)
@@ -52,8 +57,10 @@
                             @else
                                 <x-display
                                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
-                                    :target="$row"
-                                    :key="data_get($col, 'name', is_int($key) ? $col : $key)"
+                                    :value="data_get($col, 'value')"
+                                    :bind="data_get($col, 'bind', $row)"
+                                    :name="data_get($col, 'name', is_int($key) ? $col : $key)"
+                                    :default="data_get($col, 'default')"
                                     :theme="$theme"
                                 />
                             @endisset
@@ -110,8 +117,10 @@
                                 @else
                                     <x-display
                                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
-                                        :target="$row"
-                                        :key="data_get($col, 'name', is_int($key) ? $col : $key)"
+                                        :value="data_get($col, 'value')"
+                                        :bind="data_get($col, 'bind', $row)"
+                                        :name="data_get($col, 'name', is_int($key) ? $col : $key)"
+                                        :default="data_get($col, 'default')"
                                         :theme="$theme"
                                     />
                                 @endisset

@@ -69,7 +69,7 @@ class FormDataBinder
      */
     public function wire($modifier = null)
     {
-        $this->wire = $modifier ?: null;
+        $this->wire = $modifier;
     }
 
     /**

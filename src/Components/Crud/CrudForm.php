@@ -22,6 +22,11 @@ class CrudForm extends Crud
     public $action;
 
     /**
+     * @var string|string[]|null
+     */
+    public $route;
+
+    /**
      * @var string|bool|null
      */
     public $enctype;
@@ -57,6 +62,7 @@ class CrudForm extends Crud
      * @param  bool|null  $init
      * @param  string|null  $method
      * @param  string|bool|null  $action
+     * @param  string|string[]|null  $route
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  mixed  $fields
@@ -78,6 +84,7 @@ class CrudForm extends Crud
         $init = null,
         $method = null,
         $action = null,
+        $route = null,
         $enctype = null,
         $confirm = null,
         $fields = null,
@@ -101,14 +108,11 @@ class CrudForm extends Crud
         $this->title = $title ?? __(Str::title($this->resource ? 'edit' : 'create')).' '.__($this->title);
         $this->init = $init;
         $this->method = $method ?? ($this->resource ? 'patch' : 'post');
-        $this->action = $action ?? route_detect(
-            $this->prefix.'.'.($this->resource ? 'update' : 'store'),
-            array_merge($this->parameters, [$this->resource]),
-            null
-        );
+        $this->action = $action;
+        $this->route = $route ?? $this->prefix.'.'.($this->resource ? 'update' : 'store');
         $this->enctype = $enctype;
         $this->confirm = $confirm;
         $this->fields = $fields;
-        $this->back = $back;
+        $this->back = $back ?? (url()->current() === url()->previous() ? route_detect($this->prefix.'.index', null, null) : null);
     }
 }

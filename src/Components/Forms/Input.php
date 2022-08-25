@@ -100,7 +100,7 @@ class Input extends Field
         );
 
         $this->id = $id ?? Str::endsWith($this->name, '[]') ? false : $this->name;
-        $this->type = $type ?: $this->getTypeByName($this->name);
+        $this->type = $type ?? $this->getTypeByName($this->name);
         $this->default = $default;
 
         if ($language) {
@@ -108,7 +108,7 @@ class Input extends Field
         }
 
         if ($this->type !== 'password') {
-            $this->setValue($bind, $default, $language);
+            $this->value = $this->getValue($bind, $default, $language);
         }
 
         $this->mask = $mask;
@@ -193,7 +193,7 @@ class Input extends Field
             'date' => ['date', 'birthdate', 'birth_date', '_at'],
             'datetime-local' => ['datetime', 'date_time'],
             'email' => ['email'],
-            'file' => ['image', 'picture', 'photo', 'logo', 'background', 'audio', 'video', 'file'],
+            'file' => ['image', 'picture', 'photo', 'logo', 'background', 'audio', 'video', 'file', 'document'],
             'password' => ['password', 'password_confirmation', 'new_password', 'new_password_confirmation'],
             'url' => ['url', 'website', 'youtube', 'vimeo', 'facebook', 'twitter', 'instagram', 'linkedin'],
             'time' => ['time'],
@@ -209,49 +209,6 @@ class Input extends Field
     }
 
     /**
-     * Set default and old value.
-     *
-     * @param  mixed  $bind
-     * @param  mixed  $default
-     * @param  mixed  $language
-     * @return void
-     */
-    protected function setValue($bind = null, $default = null, $language = null)
-    {
-        if ($this->isWired()) {
-            return;
-        }
-
-        if (! $this->hasName()) {
-            $this->value = $default;
-
-            return;
-        }
-
-        if (! $language) {
-            $this->value = $this->formatValue(
-                $this->getFieldValue($bind, $default)
-            );
-
-            return;
-        }
-
-        if ($bind !== false) {
-            $bind = $bind ?: $this->getBoundTarget();
-        }
-
-        if ($bind) {
-            $default = $this->formatValue(
-                $bind->getTranslation($this->getFieldKey(),
-                $language,
-                false
-            )) ?: $default;
-        }
-
-        $this->value = old("{$this->getFieldName()}.{$language}", $default);
-    }
-
-    /**
      * Format value.
      *
      * @param  mixed  $value
@@ -259,7 +216,7 @@ class Input extends Field
      */
     protected function formatValue($value)
     {
-        // dates
+        // date | datetime-local | time
         if ($value instanceof Carbon) {
             switch ($this->type) {
                 case 'date':
@@ -280,10 +237,14 @@ class Input extends Field
             }
         }
 
-        // files
+        // Storage
         if (
             is_string($value)
+            && ! filter_var($value, FILTER_VALIDATE_IP)
+            && ! filter_var($value, FILTER_VALIDATE_MAC)
             && ! filter_var($value, FILTER_VALIDATE_URL)
+            && ! filter_var($value, FILTER_VALIDATE_EMAIL)
+            && ! filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)
             && pathinfo($value, PATHINFO_EXTENSION)
             && Storage::exists($value)
         ) {

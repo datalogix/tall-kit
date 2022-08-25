@@ -7,6 +7,8 @@
         <li {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'li') }}>
             <x-dynamic-component {{
                     $attributes->mergeOnlyThemeProvider($themeProvider, 'item')
+                        ->merge(['class' => data_get($item, 'class')])
+                        ->merge(['style' => data_get($item, 'style')])
                         ->merge(data_get($item, 'attrs', []))
                         ->merge(data_get($item, 'attributes', []))
                 }}

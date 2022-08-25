@@ -15,6 +15,11 @@ class Fetchable extends BladeComponent
     public $url;
 
     /**
+     * @var mixed
+     */
+    public $default;
+
+    /**
      * @var bool
      */
     public $autoload;
@@ -23,6 +28,7 @@ class Fetchable extends BladeComponent
      * Create a new component instance.
      *
      * @param  string|null  $url
+     * @param  mixed  $data
      * @param  bool|null  $autoload
      * @param  array|null  $options
      * @param  string|null  $theme
@@ -30,12 +36,15 @@ class Fetchable extends BladeComponent
      */
     public function __construct(
         $url = null,
+        $data = null,
+        $autoload = null,
         $options = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->url = $url;
+        $this->default = json_encode((object) $data);
         $this->autoload = $autoload ?? true;
         $this->setOptions($options);
     }

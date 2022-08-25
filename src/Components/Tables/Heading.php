@@ -40,8 +40,8 @@ class Heading extends BladeComponent
         parent::__construct($theme);
 
         $this->name = $name;
-        $this->align = $align ?: 'left';
-        $this->sortable = Str::lower($sortable) ?: false;
+        $this->align = $align ?? 'left';
+        $this->sortable = Str::lower($sortable) ?? false;
     }
 
     /**

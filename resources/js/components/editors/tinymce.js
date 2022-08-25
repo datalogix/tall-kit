@@ -23,9 +23,9 @@ export default ({ loadComponentAssets, updateInputValue, getCsrfToken, loadable 
 
         ed.on('init', function () {
           ed.setContent(input.value)
+        })
 
-          this.complete()
-        }.bind(this))
+        this.complete()
       },
 
       file_picker_callback: options.upload_url

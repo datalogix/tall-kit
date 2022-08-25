@@ -1,6 +1,6 @@
 @if ($options->isNotEmpty())
     <x-group
-        {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
+        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
         :name="$name"
         :label="$label"
         :inline="$inline"
@@ -11,7 +11,7 @@
     >
         @foreach ($options as $key => $option)
             <x-radio
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'radio') }}
+                {{ $attributes->mergeThemeProvider($themeProvider, 'radio') }}
                 :name="$name"
                 :label="$option"
                 :value="$key"

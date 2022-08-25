@@ -3,7 +3,9 @@
 namespace TALLKit\Components\Layouts;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 
 class Display extends BladeComponent
@@ -17,20 +19,27 @@ class Display extends BladeComponent
      * Create a new component instance.
      *
      * @param  mixed  $value
-     * @param  mixed  $target
-     * @param  mixed  $key
+     * @param  mixed  $bind
+     * @param  mixed  $name
+     * @param  mixed  $default
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $value = null,
-        $target = null,
-        $key = null,
+        $bind = null,
+        $name = null,
+        $default = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
-        $value = $value ?? data_get($target, $key.'_formatted', data_get($target, $key.'_url', data_get($target, $key)));
+        $value = $value ?? data_get($bind, $name.'_formatted', data_get($bind, $name.'_url', data_get($bind, $name, $default)));
+
+        // Remove _id for relation
+        if (Str::endsWith($name, '_id')) {
+            $value = data_get($bind, Str::replaceLast('_id', '', $name));
+        }
 
         // Model - Relation
         if ($value instanceof Model) {
@@ -44,11 +53,16 @@ class Display extends BladeComponent
             && ! filter_var($value, FILTER_VALIDATE_MAC)
             && ! filter_var($value, FILTER_VALIDATE_URL)
             && ! filter_var($value, FILTER_VALIDATE_EMAIL)
-            && ! filter_var($value, FILTER_VALIDATE_DOMAIN)
+            && ! filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)
             && pathinfo($value, PATHINFO_EXTENSION)
             && Storage::exists($value)
         ) {
             $value = Storage::url($value);
+        }
+
+        // Date | DateTime
+        if ($value instanceof Carbon) {
+            $value = $value->format($value->toTimeString() === '00:00:00' ? 'd/m/Y' : 'd/m/Y H:i:s');
         }
 
         $this->value = $value;

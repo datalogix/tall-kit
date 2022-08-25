@@ -12,8 +12,6 @@ class Avatar extends ImageLoader
      * @param  string|bool|null  $provider
      * @param  string|bool|null  $fallback
      * @param  string|bool|null  $icon
-     * @param  string|bool|null  $loadingIcon
-     * @param  string|bool|null  $errorIcon
      * @param  int|bool|null  $ttl
      * @param  string|null  $theme
      * @return void
@@ -24,16 +22,12 @@ class Avatar extends ImageLoader
         $provider = null,
         $fallback = null,
         $icon = null,
-        $loadingIcon = null,
-        $errorIcon = null,
         $ttl = null,
         $theme = null
     ) {
         parent::__construct(
             $this->url($search, $src, $provider, $fallback),
             $icon,
-            $loadingIcon,
-            $errorIcon,
             $ttl ?? 3600,
             $theme
         );
@@ -59,7 +53,7 @@ class Avatar extends ImageLoader
         }
 
         $query = http_build_query([
-            'fallback' => $fallback ?: 'false',
+            'fallback' => $fallback ?? 'false',
         ]);
 
         return $provider

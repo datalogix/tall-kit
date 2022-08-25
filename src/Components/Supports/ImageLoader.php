@@ -25,22 +25,10 @@ class ImageLoader extends BladeComponent
     public $icon;
 
     /**
-     * @var string|bool|null
-     */
-    public $loadingIcon;
-
-    /**
-     * @var string|bool|null
-     */
-    public $errorIcon;
-
-    /**
      * Create a new component instance.
      *
      * @param  string|bool|null  $url
      * @param  string|bool|null  $icon
-     * @param  string|bool|null  $loadingIcon
-     * @param  string|bool|null  $errorIcon
      * @param  int|bool|null  $ttl
      * @param  string|null  $theme
      * @return void
@@ -48,8 +36,6 @@ class ImageLoader extends BladeComponent
     public function __construct(
         $url = null,
         $icon = null,
-        $loadingIcon = null,
-        $errorIcon = null,
         $ttl = null,
         $theme = null
     ) {
@@ -58,8 +44,6 @@ class ImageLoader extends BladeComponent
         $this->url = $url;
         $this->src = $this->cache($url, $ttl ?? 3600);
         $this->icon = $icon;
-        $this->loadingIcon = $loadingIcon;
-        $this->errorIcon = $errorIcon;
     }
 
     /**

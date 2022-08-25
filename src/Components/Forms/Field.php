@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Forms;
 
+use Illuminate\Support\Str;
 use TALLKit\Concerns\FieldNameAndValue;
 use TALLKit\Concerns\ValidationErrors;
 
@@ -61,10 +62,29 @@ class Field extends FieldGroup
         );
 
         $this->setName($name);
-
-        $this->label = $label ?? $this->getFieldKey();
+        $this->label = $label ?? $this->getLabel();
         $this->showErrors = ($showErrors ?? true) && $this->name;
         $this->groupable = $groupable ?? false;
         $this->display = $display;
+    }
+
+    /**
+     * Get label.
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        $label = $this->getFieldKey();
+
+        if (! Str::contains($label, '.')) {
+            return $label;
+        }
+
+        if (Str::afterLast($label, '.') === 'id') {
+            return Str::replace('.', '_', $label);
+        }
+
+        return Str::afterLast($label, '.');
     }
 }

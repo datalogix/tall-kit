@@ -27,7 +27,7 @@
                             {{ $content }}
                         @else
                             {!! __($description ?? 'Hi! Our website uses cookies so that we can optimize the service we provide you. By using our website, you agree to their use.') !!}
-                            <a {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'link')->merge('href', $url) }}>
+                            <a {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'link')->merge(['href' => $url]) }}>
                                 {!! __($more ?? 'To learn more, read our cookie policy.') !!}
                             </a>
                         @endisset

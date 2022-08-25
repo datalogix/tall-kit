@@ -15,25 +15,25 @@
         </x-icon>
     @else
         @isset ($loading)
-            {{ $loading }}
-        @elseif ($loadingIcon !== false)
-            <x-icon
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading-icon') }}
-                :name="$loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loading-icon-name')->first()"
-            >
-                {!! $loadingIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'loading-icon-svg')->first() !!}
-            </x-icon>
+            <div {{ $attributes->mergeThemeProvider($themeProvider, 'loading') }}>
+                {{ $loading }}
+            </div>
+        @else
+            <x-loading
+                {{ $attributes->mergeThemeProvider($themeProvider, 'loading') }}
+                :text="false"
+            />
         @endisset
 
         @isset ($error)
-            {{ $error }}
-        @elseif ($errorIcon !== false)
-            <x-icon
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'error-icon') }}
-                :name="$errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'error-icon-name')->first()"
-            >
-                {!! $errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'error-icon-svg')->first() !!}
-            </x-icon>
+            <div {{ $attributes->mergeThemeProvider($themeProvider, 'error') }}>
+                {{ $error }}
+            </div>
+        @else
+            <x-error
+                {{ $attributes->mergeThemeProvider($themeProvider, 'error') }}
+                :text="false"
+            />
         @endisset
     @endisset
 </div>

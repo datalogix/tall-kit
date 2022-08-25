@@ -58,6 +58,6 @@ class CrudShow extends Crud
             $this->title = $title ?? __($this->title).' - '.$this->resourceTitle;
         }
 
-        $this->back = $back;
+        $this->back = $back ?? (url()->current() === url()->previous() ? route_detect($this->prefix.'.index', null, null) : null);
     }
 }

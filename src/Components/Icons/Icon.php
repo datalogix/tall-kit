@@ -14,14 +14,34 @@ class Icon extends BladeComponent
     public $name;
 
     /**
+     * @var string|null
+     */
+    public $svg;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $name
+     * @param  string|null  $svg
+     * @param  string|null  $preset
+     * @param  string|null  $theme
      * @return void
      */
-    public function __construct($name = null)
-    {
+    public function __construct(
+        $name = null,
+        $svg = null,
+        $preset = null,
+        $theme = null
+    ) {
+        parent::__construct($theme);
+
         $this->name = $name;
+        $this->svg = $svg;
+
+        if ($preset && $presetProperties = $this->themeProvider->presets->get($preset)) {
+            $this->name = $name ?? data_get($presetProperties, 'name', $preset);
+            $this->svg = $svg ?? data_get($presetProperties, 'svg', $presetProperties);
+        }
     }
 
     /**
@@ -50,6 +70,10 @@ class Icon extends BladeComponent
         return function (array $data) {
             $slot = data_get($data, 'slot');
             $attributes = data_get($data, 'attributes');
+
+            if (empty(trim($slot)) && $this->svg) {
+                $slot = $this->svg;
+            }
 
             if (empty(trim($slot)) && empty($attributes)) {
                 return '';

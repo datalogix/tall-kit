@@ -3,6 +3,7 @@
 namespace TALLKit\Components;
 
 use Illuminate\View\Component;
+use TALLKit\Binders\ThemeBinder;
 use TALLKit\Concerns\Componentable;
 use TALLKit\Concerns\LivewireFormDataBinder;
 
@@ -40,9 +41,8 @@ abstract class BladeComponent extends Component
      */
     public function __construct($theme = null)
     {
-        $this->theme = $theme ?? 'default';
-        $this->themeProvider = app(ThemeProvider::class)
-            ->make($this->theme, $this->getThemeKey());
+        $this->theme = $theme ?? app(ThemeBinder::class)->get() ?? ThemeProvider::getThemeByRoute();
+        $this->themeProvider = app(ThemeProvider::class)->make($this->theme, $this->getThemeKey());
     }
 
     /**

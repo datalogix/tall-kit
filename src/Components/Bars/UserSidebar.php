@@ -80,7 +80,7 @@ class UserSidebar extends Sidebar
         parent::__construct(
             $items ?? $this->getUserValue('sidebar', $this->guard.'Sidebar'),
             $this->getUserValue('sidebarBreakpoint', $this->guard.'SidebarBreakpoint') ?? $breakpoint ?? 'none',
-            $name ?? $this->guard ? $this->guard.'-sidebar' : 'sidebar',
+            $name ?? ($this->guard ? $this->guard.'-sidebar' : 'sidebar'),
             $show,
             $overlay,
             $closeable,

@@ -1,6 +1,8 @@
 @foreach ($actions as $route => $action)
     <x-dynamic-component {{
             $attributes->mergeOnlyThemeProvider($themeProvider, 'custom')
+                ->merge(['class' => data_get($action, 'class')])
+                ->merge(['style' => data_get($action, 'style')])
                 ->merge(data_get($action, 'attrs', []))
                 ->merge(data_get($action, 'attributes', []))
         }}
@@ -39,6 +41,8 @@
             <li>
                 <x-dynamic-component {{
                         $attributes->mergeOnlyThemeProvider($themeProvider, 'menu-dropdown')
+                            ->merge(['class' => data_get($action, 'class')])
+                            ->merge(['style' => data_get($action, 'style')])
                             ->merge(data_get($action, 'attrs', []))
                             ->merge(data_get($action, 'attributes', []))
                     }}

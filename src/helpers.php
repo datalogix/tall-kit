@@ -14,7 +14,7 @@ if (! function_exists('route_detect')) {
      */
     function route_detect($routes, $parameters = null, $default = '/')
     {
-        foreach (Arr::wrap($routes) as $route) {
+        foreach (array_filter(Arr::wrap($routes)) as $route) {
             if (Route::has($route)) {
                 return route($route, $parameters);
             }

@@ -22,12 +22,12 @@ class Form extends BladeComponent
     /**
      * @var string|bool|null
      */
-    public $action;
+    public $target;
 
     /**
-     * @var string|string[]|null
+     * @var string|bool|null
      */
-    public $route;
+    public $action;
 
     /**
      * @var mixed
@@ -62,6 +62,7 @@ class Form extends BladeComponent
      *
      * @param  bool|null  $init
      * @param  string|null  $method
+     * @param  string|bool|null  $target
      * @param  string|bool|null  $action
      * @param  string|string[]|null  $route
      * @param  mixed  $bind
@@ -74,6 +75,7 @@ class Form extends BladeComponent
     public function __construct(
         $init = null,
         $method = null,
+        $target = null,
         $action = null,
         $route = null,
         $bind = null,
@@ -86,8 +88,8 @@ class Form extends BladeComponent
 
         $this->init = $init ?? true;
         $this->method = strtoupper($method ?? 'post');
-        $this->action = $action ?? route_detect($route, $bind ?: $this->getBoundTarget(), null);
-        $this->route = $route;
+        $this->target = $target;
+        $this->action = $action ?? route_detect($route, $bind ?? $this->getBoundTarget(), null);
         $this->bind = $bind;
         $this->enctype = $enctype;
         $this->confirm = $confirm;

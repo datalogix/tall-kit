@@ -26,20 +26,34 @@
         @endif
     >
         @if ($emptyOption && ! $multiple)
-            <option value="">{{ $emptyOption === true ? '---' : $emptyOption }}</option>
+            <option
+                value=""
+                @if ($isSelected()) selected="selected" @endif
+                @if ($name) wire:key="{{ $name }}-empty-option" @endif
+            >
+                {{ $emptyOption === true ? '---' : __($emptyOption) }}
+            </option>
         @endif
 
         @forelse ($options as $key => $option)
             @if (is_iterable($option))
                 <optgroup label="{{ $key }}">
                     @foreach ($option as $subkey => $suboption)
-                        <option value="{{ $subkey }}" @if ($isSelected($subkey)) selected="selected" @endif>
+                        <option
+                            value="{{ $subkey }}"
+                            @if ($isSelected($subkey)) selected="selected" @endif
+                            @if ($name) wire:key="{{ $name }}-{{ $subkey }}" @endif
+                        >
                             {{ $suboption }}
                         </option>
                     @endforeach
                 </optgroup>
             @else
-                <option value="{{ $key }}" @if ($isSelected($key)) selected="selected" @endif>
+                <option
+                    value="{{ $key }}"
+                    @if ($isSelected($key)) selected="selected" @endif
+                    @if ($name) wire:key="{{ $name }}-{{ $key }}" @endif
+                >
                     {{ $option }}
                 </option>
             @endif

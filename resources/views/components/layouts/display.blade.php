@@ -10,10 +10,21 @@
             <source src="{{ $value }}" type="video/mp4">
         </video>
     @elseif (filter_var($value, FILTER_VALIDATE_URL))
-        <x-button {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'download') }}
+        <x-button
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'download') }}
             href="{{ $value }}"
             preset="download"
             :theme="$theme"
+        />
+    @elseif ($value === true)
+        <x-icon
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'check') }}
+            preset="check"
+        />
+    @elseif ($value === false)
+        <x-icon
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'uncheck') }}
+            preset="close"
         />
     @else
         {{ $slot->isEmpty() ? $value : $slot }}

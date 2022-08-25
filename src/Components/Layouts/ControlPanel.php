@@ -3,8 +3,6 @@
 namespace TALLKit\Components\Layouts;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 use TALLKit\Concerns\User;
 
@@ -157,7 +155,6 @@ class ControlPanel extends BladeComponent
      *
      * @param  array|bool|null  $html
      * @param  string|bool|null  $title
-     * @param  string|null  $key
      * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed|null  $user
      * @param  string|null  $guard
      * @param  string|bool|null  $logoImage
@@ -192,7 +189,6 @@ class ControlPanel extends BladeComponent
     public function __construct(
         $html = null,
         $title = null,
-        $key = null,
         $user = null,
         $guard = null,
         $logoImage = null,
@@ -225,14 +221,12 @@ class ControlPanel extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $key = $key ?? Str::before(Route::currentRouteName(), '.');
-
-        $this->setUser($user, $guard ?? $key);
+        $this->setUser($user, $guard ?? ($this->theme === 'default' ? null : $this->theme));
 
         $this->html = ($html ?? true) ? array_replace_recursive(
             $this->themeProvider->html->getAttributes(),
-            $this->themeProvider->panels->get($key ?? 'default', []),
-            $this->getUserValue('html', $key.'Html') ?? [],
+            $this->themeProvider->panels->get($this->theme, []),
+            $this->getUserValue('html', $this->guard.'Html') ?? [],
             Arr::wrap($html)
         ) : false;
 
@@ -242,7 +236,7 @@ class ControlPanel extends BladeComponent
         $this->logoUrl = $logoUrl;
         $this->sidebarItems = $sidebarItems;
         $this->sidebarBreakpoint = $sidebarBreakpoint ?? 'lg';
-        $this->sidebarName = $sidebarName ?? $key ? $key.'-sidebar' : 'sidebar';
+        $this->sidebarName = $sidebarName ?? ($this->guard ? $this->guard.'-sidebar' : 'sidebar');
         $this->sidebarShow = $sidebarShow;
         $this->sidebarOverlay = $sidebarOverlay;
         $this->sidebarCloseable = $sidebarCloseable;

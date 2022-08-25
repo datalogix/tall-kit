@@ -9,7 +9,7 @@ export default ({ loadable }) => ({
 
   prepareSubmit (event) {
     if (!this.confirm || window.confirm(this.confirm)) {
-      return this.start()
+      return this.startAndComplete((this.$refs.root ? this.$refs.root : this.$el).target || (event && event.ctrlKey))
     }
 
     return event.preventDefault()

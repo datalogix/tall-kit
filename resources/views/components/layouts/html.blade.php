@@ -66,6 +66,10 @@
     @if ($stackStyles)
         @stack($stackStyles)
     @endif
+
+    @if (file_exists(base_path('vite.config.js')) || file_exists(base_path('vite.config.ts')))
+        @vite($vite)
+    @endif
 </head>
 <body {{ $attributes->mergeThemeProvider($themeProvider, 'body') }}>
     @if ($googleFonts)

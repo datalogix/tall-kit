@@ -3,7 +3,7 @@
         {{ $slot }}
     @elseif ($groupable === true && $label === false)
         <x-field-group
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'fieldGroup') }}
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'field-group') }}
             :theme="$theme"
             :prepend-text="$prependText"
             :prepend-icon="$prependIcon"
@@ -35,7 +35,7 @@
             </x-label>
 
             <x-field-group
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'fieldGroup') }}
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'field-group') }}
                 :theme="$theme"
                 :prepend-text="$prependText"
                 :prepend-icon="$prependIcon"
@@ -60,8 +60,8 @@
     @endif
 
     @if ($hasErrorAndShow())
-        <x-errors
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'errors') }}
+        <x-field-error
+            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'field-error') }}
             :name="$getFieldName()"
             :theme="$theme"
         />

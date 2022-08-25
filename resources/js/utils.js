@@ -135,6 +135,14 @@ export function loadable () {
       dispatch('fail', this)
     },
 
+    startAndComplete (completeOnNextTick = false) {
+      this.start()
+
+      if (completeOnNextTick) {
+        this.$nextTick(() => this.complete())
+      }
+    },
+
     isEmpty () {
       return this.empty === true
     },
