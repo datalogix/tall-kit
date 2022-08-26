@@ -1562,14 +1562,20 @@ return [
                         'text' => 'Options',
                         'tooltip' => 'Options',
                         'color' => 'none',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 192 512"><path fill="currentColor" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>',
+                        'icon' => [
+                            'name' => 'dots-vertical',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                     ],
 
                     'show' => [
                         'text' => 'Show',
                         'tooltip' => 'Show',
                         'color' => 'default',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>',
+                        'icon' => [
+                            'name' => 'eye',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Showing',
                     ],
 
@@ -1577,7 +1583,10 @@ return [
                         'text' => 'Add',
                         'tooltip' => 'Add',
                         'color' => 'success',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
+                        'icon' => [
+                            'name' => 'plus',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Adding',
                     ],
 
@@ -1585,7 +1594,10 @@ return [
                         'text' => 'Create',
                         'tooltip' => 'Create',
                         'color' => 'success',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
+                        'icon' => [
+                            'name' => 'plus',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Creating',
                     ],
 
@@ -1593,7 +1605,10 @@ return [
                         'text' => 'Create many',
                         'tooltip' => 'Create many',
                         'color' => 'success',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>',
+                        'icon' => [
+                            'name' => 'plus-box-multiple-outline',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Creating',
                     ],
 
@@ -1601,7 +1616,10 @@ return [
                         'text' => 'Edit',
                         'tooltip' => 'Edit',
                         'color' => 'info',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>',
+                        'icon' => [
+                            'name' => 'pencil',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Editing',
                     ],
 
@@ -1609,7 +1627,10 @@ return [
                         'text' => 'Delete',
                         'tooltip' => 'Delete',
                         'color' => 'error',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>',
+                        'icon' => [
+                            'name' => 'delete',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Deleting',
                     ],
 
@@ -1617,7 +1638,10 @@ return [
                         'text' => 'Save',
                         'tooltip' => 'Save',
                         'color' => 'success',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path></svg>',
+                        'icon' => [
+                            'name' => 'content-save',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Saving',
                     ],
 
@@ -1625,7 +1649,10 @@ return [
                         'text' => 'Save and view',
                         'tooltip' => 'Save and view',
                         'color' => 'success',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path></svg>',
+                        'icon' => [
+                            'name' => 'content-save-check',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Saving',
                     ],
 
@@ -1633,7 +1660,10 @@ return [
                         'text' => 'Send',
                         'tooltip' => 'Send',
                         'color' => 'info',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M503.691 189.836L327.687 37.851C312.281 24.546 288 35.347 288 56.015v80.053C127.371 137.907 0 170.1 0 322.326c0 61.441 39.581 122.309 83.333 154.132 13.653 9.931 33.111-2.533 28.077-18.631C66.066 312.814 132.917 274.316 288 272.085V360c0 20.7 24.3 31.453 39.687 18.164l176.004-152c11.071-9.562 11.086-26.753 0-36.328z"></path></svg>',
+                        'icon' => [
+                            'name' => 'send',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Sending',
                     ],
 
@@ -1641,7 +1671,10 @@ return [
                         'text' => 'Back',
                         'tooltip' => 'Back',
                         'color' => 'default',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg>',
+                        'icon' => [
+                            'name' => 'arrow-left',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Returning',
                     ],
 
@@ -1649,7 +1682,10 @@ return [
                         'text' => 'Back',
                         'tooltip' => 'Back',
                         'color' => 'default',
-                        'icon-right' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 256 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg>',
+                        'icon-right' => [
+                            'name' => 'arrow-right',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Returning',
                     ],
 
@@ -1664,7 +1700,10 @@ return [
                         'text' => 'Enter',
                         'tooltip' => 'Enter',
                         'color' => 'indigo',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"></path></svg>',
+                        'icon' => [
+                            'name' => 'login',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Entering',
                     ],
 
@@ -1672,7 +1711,10 @@ return [
                         'text' => 'Update',
                         'tooltip' => 'Update',
                         'color' => 'info',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path></svg>',
+                        'icon' => [
+                            'name' => 'content-save',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Updating',
                     ],
 
@@ -1680,7 +1722,10 @@ return [
                         'text' => 'Download',
                         'tooltip' => 'Download',
                         'color' => 'indigo',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path></svg>',
+                        'icon' => [
+                            'name' => 'download',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Downloading',
                     ],
 
@@ -1688,7 +1733,10 @@ return [
                         'text' => 'View',
                         'tooltip' => 'View',
                         'color' => 'default',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 576 512"><path fill="currentColor" d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"></path></svg>',
+                        'icon' => [
+                            'name' => 'eye',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Viewing',
                     ],
 
@@ -1696,7 +1744,10 @@ return [
                         'text' => 'Move up',
                         'tooltip' => 'Move up',
                         'color' => 'success',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"></path></svg>',
+                        'icon' => [
+                            'name' => 'arrow-up',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Moving',
                     ],
 
@@ -1704,7 +1755,10 @@ return [
                         'text' => 'Move down',
                         'tooltip' => 'Move down',
                         'color' => 'success',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"></path></svg>',
+                        'icon' => [
+                            'name' => 'arrow-down',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Moving',
                     ],
 
@@ -1712,16 +1766,46 @@ return [
                         'text' => 'Copy',
                         'tooltip' => 'Copy',
                         'color' => 'warning',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 448 512"><path fill="currentColor" d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z"></path></svg>',
+                        'icon' => [
+                            'name' => 'content-copy',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Copying',
+                    ],
+
+                    'duplicate' => [
+                        'text' => 'Duplicate',
+                        'tooltip' => 'Duplicate',
+                        'color' => 'purple',
+                        'icon' => [
+                            'name' => 'content-duplicate',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
+                        'loading' => 'Duplicating',
                     ],
 
                     'search' => [
                         'text' => 'Search',
                         'tooltip' => 'Search',
                         'color' => 'info',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg>',
+                        'icon' => [
+                            'name' => 'search',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => 'Searching',
+                    ],
+
+                    'login' => [
+                        'text' => 'Login',
+                        'tooltip' => 'Login',
+                        'color' => 'none',
+                        'rounded' => 'none',
+                        'shadow' => 'none',
+                        'icon' => [
+                            'name' => 'login',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
+                        'loading' => true,
                     ],
 
                     'logout' => [
@@ -1730,7 +1814,10 @@ return [
                         'color' => 'none',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h7v2H5v14h7v2Zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5Z"></path></svg>',
+                        'icon' => [
+                            'name' => 'logout',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                         'loading' => true,
                     ],
 
@@ -1740,7 +1827,10 @@ return [
                         'color' => 'blue',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 24 24"><path fill="currentColor" d="m10.6 16.2l7.05-7.05l-1.4-1.4l-5.65 5.65l-2.85-2.85l-1.4 1.4ZM5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm0-2h14V5H5v14ZM5 5v14V5Z"></path></svg>',
+                        'icon' => [
+                            'name' => 'checkbox-marked-outline',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
                     ],
 
                     'deselect-all' => [
@@ -1749,14 +1839,30 @@ return [
                         'color' => 'blue',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => '<svg class="w-4 h-4 mx-auto" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h14q.825 0 1.413.587Q21 4.175 21 5v14q0 .825-.587 1.413Q19.825 21 19 21Zm0-2h14V5H5v14Z"></path></svg>',
+                        'icon' => [
+                            'name' => 'checkbox-blank-outline',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
+                    ],
+
+                    'menu' => [
+                        'color' => 'none',
+                        'rounded' => 'none',
+                        'shadow' => 'none',
+                        'icon' => [
+                            'name' => 'menu',
+                            'class' => 'w-6 h-6 mx-auto',
+                        ],
                     ],
 
                     'toggler' => [
                         'color' => 'none',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => '<svg class="w-6 h-6 mx-auto" viewBox="0 0 24 24"><path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                        'icon' => [
+                            'name' => 'toggler',
+                            'class' => 'w-6 h-6 mx-auto',
+                        ],
                     ],
                 ],
             ],
@@ -2465,9 +2571,13 @@ return [
                     'x-show' => 'isEmpty()',
                     '@click.prevent' => 'edit',
                     'class' => 'w-full h-full',
+
+                    'theme:icon-left' => [
+                        'class' => 'inline-block w-6 h-6'
+                    ],
                 ],
 
-                'empty-icon-svg' => '<svg class="inline-block w-6 h-6" viewBox="0 0 512 512"><path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path></svg>',
+                'empty-icon-name' => 'camera',
 
                 'loading' => [
                     'x-show' => 'isLoading()',
@@ -2476,17 +2586,19 @@ return [
 
                 'loading-icon' => 'animate-spin w-6 h-6 shadown',
 
-                'loading-icon-name' => 'loading',
-
-                'loading-icon-svg' => '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
+                'loading-icon-name' => 'spinner',
 
                 'error' => [
                     'x-show' => 'isFailed()',
                     '@click.prevent' => 'edit',
                     'class' => 'w-full h-full',
+
+                    'theme:icon-left' => [
+                        'class' => 'inline-block w-6 h-6'
+                    ],
                 ],
 
-                'error-icon-svg' => '<svg class="inline-block w-6 h-6" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
+                'error-icon-name' => 'close',
 
                 'complete' => [
                     'x-show' => 'isCompleted()',
@@ -2515,8 +2627,6 @@ return [
 
                 'edit-icon-name' => 'pencil',
 
-                'edit-icon-svg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>',
-
                 'delete' => [
                     'class' => 'transition transform hover:scale-125',
                 ],
@@ -2525,9 +2635,7 @@ return [
                     'class' => 'w-6 h-6',
                 ],
 
-                'delete-icon-name' => 'trash',
-
-                'delete-icon-svg' => '<svg viewBox="0 0 512 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>',
+                'delete-icon-name' => 'delete',
             ],
 
             'label' => [
@@ -2647,6 +2755,7 @@ return [
                     'dots-vertical' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2Z"></path></svg>',
                     'eye' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5Z"></path></svg>',
                     'plus' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"></path></svg>',
+                    'plus-box-multiple-outline' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M18 11h-3v3h-2v-3h-3V9h3V6h2v3h3m2-5v12H8V4h12m0-2H8c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h12c1.11 0 2-.89 2-2V4a2 2 0 0 0-2-2M4 6H2v14a2 2 0 0 0 2 2h14v-2H4V6Z"/></svg>',
                     'pencil' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83l3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>',
                     'delete' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12Z"></path></svg>',
                     'content-copy' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1Z"></path></svg>',
@@ -2654,6 +2763,7 @@ return [
                     'content-duplicate' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M11 17H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h12v2H4v12h7v-2l4 3l-4 3v-2m8 4V7H8v6H6V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2h2v2h11Z"></path></svg>',
                     'content-paste' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 20H5V4h2v3h10V4h2m-7-2a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1m7 0h-4.18C14.4.84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"></path></svg>',
                     'content-save' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M15 9H5V5h10m-3 14a3 3 0 0 1-3-3a3 3 0 0 1 3-3a3 3 0 0 1 3 3a3 3 0 0 1-3 3m5-16H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4Z"></path></svg>',
+                    'content-save-check' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h6.81c-.39-.66-.64-1.4-.74-2.16a2.994 2.994 0 0 1-1.87-3.81C9.61 13.83 10.73 13 12 13c.44 0 .88.1 1.28.29c2.29-1.79 5.55-1.7 7.72.25V7l-4-4m-2 6H5V5h10v4m.75 12L13 18l1.16-1.16l1.59 1.59l3.59-3.59l1.16 1.41L15.75 21"/></svg>',
                     'send' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="m2 21l21-9L2 3v7l15 2l-15 2v7Z"></path></svg>',
                     'arrow-left' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 11v2H8l5.5 5.5l-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5L8 11h12Z"></path></svg>',
                     'arrow-right' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 11v2h12l-5.5 5.5l1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5L16 11H4Z"></path></svg>',
@@ -2825,11 +2935,7 @@ return [
                     'class' => 'fill-current w-4 h-4 text-red-500',
                 ],
 
-                'icon-name' => 'times',
-
-                'icon-svg' => [
-                    '<svg viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>',
-                ],
+                'icon-name' => 'close',
 
                 'text' => [],
             ],
@@ -2876,10 +2982,6 @@ return [
                 ],
 
                 'icon-name' => 'spinner',
-
-                'icon-svg' => [
-                    '<svg fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>',
-                ],
 
                 'text' => [],
             ],
@@ -3098,19 +3200,24 @@ return [
                     'class' => 'flex flex-row p-4 rounded relative transition mb-4',
                 ],
 
-                'icon' => [
+                'icon-area' => [
                     'class' => 'flex items-center border-2 justify-center h-10 w-10 shrink-0 rounded-full mr-4',
+                ],
+
+                'icon' => [
+                    'class' => 'w-6 h-6 fill-current',
                 ],
 
                 'dismissible' => [
                     'button' => [
                         '@click' => 'close',
+
                         'class' => 'absolute top-0 right-0 transition hover:opacity-75 text-sm',
+
+                        'theme:icon-left' => 'w-4 h-4 fill-current',
                     ],
 
                     'icon-name' => 'close',
-
-                    'icon-svg' => '<svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
                 ],
 
                 'title' => [
@@ -3122,43 +3229,37 @@ return [
                 'types' => [
                     'default' => [
                         'color' => 'gray',
-                        'icon-svg' => false,
-                        'icon-name' => false,
+                        'icon' => false,
                         'title' => false,
                     ],
 
                     'error' => [
                         'color' => 'red',
                         'icon-name' => 'close',
-                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Error',
                     ],
 
                     'info' => [
                         'color' => 'blue',
                         'icon-name' => 'information',
-                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Info',
                     ],
 
                     'success' => [
                         'color' => 'green',
                         'icon-name' => 'check',
-                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Success',
                     ],
 
                     'warning' => [
                         'color' => 'yellow',
                         'icon-name' => 'alert',
-                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Warning',
                     ],
 
                     'created' => [
                         'color' => 'green',
                         'icon-name' => 'check',
-                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Created',
                         'message' => 'Record created successfully!',
                         'dismissible' => true,
@@ -3168,7 +3269,6 @@ return [
                     'updated' => [
                         'color' => 'blue',
                         'icon-name' => 'check',
-                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Updated',
                         'message' => 'Record updated successfully!',
                         'dismissible' => true,
@@ -3178,7 +3278,6 @@ return [
                     'deleted' => [
                         'color' => 'red',
                         'icon-name' => 'check',
-                        'icon-svg' => '<svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>',
                         'title' => 'Deleted',
                         'message' => 'Record deleted successfully!',
                         'dismissible' => true,
@@ -3889,10 +3988,6 @@ return [
 
                 'prev-icon-name' => 'chevron-left',
 
-                'prev-icon-svg' => [
-                    '<svg viewBox="0 0 320 512"><path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path></svg>',
-                ],
-
                 'next' => [
                     '@click' => 'next',
                     ':class' => 'nextClass()',
@@ -3904,10 +3999,6 @@ return [
                 ],
 
                 'next-icon-name' => 'chevron-right',
-
-                'next-icon-svg' => [
-                    '<svg viewBox="0 0 320 512"><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg>',
-                ],
 
                 'paginator' => [
                     'x-show' => 'hasPaginator()',
@@ -4023,12 +4114,8 @@ return [
              */
             'avatar' => [
                 'container' => [
-                    'theme:iconName' => [
-                        'user',
-                    ],
-
-                    'theme:iconSvg' => [
-                        '<svg class="fill-current" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>',
+                    'theme:icon-name' => [
+                        'account'
                     ],
                 ],
             ],
@@ -4093,13 +4180,7 @@ return [
                     'x-show' => 'isLoading() || isFailed()',
                 ],
 
-                'icon-name' => [
-                    'image',
-                ],
-
-                'icon-svg' => [
-                    '<svg class="fill-current" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 336H54a6 6 0 0 1-6-6V118a6 6 0 0 1 6-6h404a6 6 0 0 1 6 6v276a6 6 0 0 1-6 6zM128 152c-22.091 0-40 17.909-40 40s17.909 40 40 40 40-17.909 40-40-17.909-40-40-40zM96 352h320v-80l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L192 304l-39.515-39.515c-4.686-4.686-12.284-4.686-16.971 0L96 304v48z"></path></svg>',
-                ],
+                'icon-name' => 'image',
 
                 'loading' => [
                     'x-show' => 'isLoading()',
@@ -4214,15 +4295,15 @@ return [
                 ],
 
                 'sortable' => [
-                    'asc' => [
-                        'icon-name' => 'chevron-up',
-                        'icon-svg' => '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg>',
-                    ],
+                    'class' => 'w-4 h-4',
+                ],
 
-                    'desc' => [
-                        'icon-name' => 'chevron-down',
-                        'icon-svg' => '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>',
-                    ],
+                'sortable-asc' => [
+                    'icon-name' => 'chevron-up',
+                ],
+
+                'sortable-desc' => [
+                    'icon-name' => 'chevron-down',
                 ],
             ],
 

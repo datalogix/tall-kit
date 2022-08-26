@@ -20,7 +20,7 @@ class ImageLoader extends BladeComponent
     public $src;
 
     /**
-     * @var string|bool|null
+     * @var string|bool|array|null
      */
     public $icon;
 
@@ -28,7 +28,7 @@ class ImageLoader extends BladeComponent
      * Create a new component instance.
      *
      * @param  string|bool|null  $url
-     * @param  string|bool|null  $icon
+     * @param  string|bool|array|null  $icon
      * @param  int|bool|null  $ttl
      * @param  string|null  $theme
      * @return void

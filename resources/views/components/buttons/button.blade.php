@@ -28,11 +28,19 @@
     @if ($wireClick) wire:click="{{ $wireClick }}" @endif
 >
     @if ($loading)<span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'content', false) }}>@endif
-        <x-icon
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-left') }}
-            :name="$iconLeft"
+        <x-icon {{
+                $attributes
+                    ->mergeOnlyThemeProvider($themeProvider, 'icon-left')
+                    ->merge(['class' => data_get($iconLeft, 'class')])
+                    ->merge(['style' => data_get($iconLeft, 'style')])
+            }}
+            :name="data_get($iconLeft, 'name', $iconLeft)"
         >
-            {!! $iconLeft ?? $icon !!}
+            @isset ($icon)
+                {{ $icon }}
+            @else
+                {!! data_get($iconLeft, 'name', $iconLeft) !!}
+            @endisset
         </x-icon>
 
         @if ($slot->isNotEmpty() || $text)
@@ -41,11 +49,15 @@
             </span>
         @endif
 
-        <x-icon
-            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon-right') }}
-            :name="$iconRight"
+        <x-icon {{
+            $attributes
+                ->mergeOnlyThemeProvider($themeProvider, 'icon-right')
+                ->merge(['class' => data_get($iconRight, 'class')])
+                ->merge(['style' => data_get($iconRight, 'style')])
+            }}
+            :name="data_get($iconRight, 'name', $iconRight)"
         >
-            {!! $iconRight !!}
+            {!! data_get($iconRight, 'name', $iconRight) !!}
         </x-icon>
     @if ($loading)</span>@endif
 

@@ -8,8 +8,11 @@
         {!! $slot->isEmpty() ? __($name) : $slot !!}
 
         @if ($sortable === 'asc' || $sortable === 'desc')
-            <x-icon :name="$attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable)['icon-name']">
-                {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'sortable')->get($sortable)['icon-svg'] !!}
+            <x-icon
+                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'sortable') }}
+                :name="$attributes->mergeOnlyThemeProvider($themeProvider, 'sortable-'.$sortable)->get('icon-name') ?? ''"
+            >
+                {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'sortable-'.$sortable)->get('icon-svg') ?? '' !!}
             </x-icon>
         @endif
     </{{ $sortable ? 'a' : 'div'}}>

@@ -28,17 +28,17 @@ class FormButton extends Form
     public $wireClick;
 
     /**
-     * @var string|bool|null
+     * @var string|bool|array|null
      */
     public $icon;
 
     /**
-     * @var string|bool|null
+     * @var string|bool|array|null
      */
     public $iconLeft;
 
     /**
-     * @var string|bool|null
+     * @var string|bool|array|null
      */
     public $iconRight;
 
@@ -102,9 +102,9 @@ class FormButton extends Form
      * @param  bool|null  $active
      * @param  string|bool|null  $click
      * @param  string|bool|null  $wireClick
-     * @param  string|bool|null  $icon
-     * @param  string|bool|null  $iconLeft
-     * @param  string|bool|null  $iconRight
+     * @param  string|bool|array|null  $icon
+     * @param  string|bool|array|null  $iconLeft
+     * @param  string|bool|array|null  $iconRight
      * @param  string|bool|null  $color
      * @param  string|bool|null  $rounded
      * @param  string|bool|null  $shadow

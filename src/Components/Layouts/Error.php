@@ -12,7 +12,7 @@ class Error extends BladeComponent
     public $text;
 
     /**
-     * @var string|bool|null
+     * @var string|bool|array|null
      */
     public $icon;
 
@@ -20,7 +20,7 @@ class Error extends BladeComponent
      * Create a new component instance.
      *
      * @param  string|bool|null  $text
-     * @param  string|bool|null  $icon
+     * @param  string|bool|array|null  $icon
      * @param  string|null  $theme
      * @return void
      */

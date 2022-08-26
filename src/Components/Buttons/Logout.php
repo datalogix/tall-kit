@@ -19,9 +19,9 @@ class Logout extends FormButton
      * @param  bool|null  $active
      * @param  string|bool|null  $click
      * @param  string|bool|null  $wireClick
-     * @param  string|bool|null  $icon
-     * @param  string|bool|null  $iconLeft
-     * @param  string|bool|null  $iconRight
+     * @param  string|bool|array|null  $icon
+     * @param  string|bool|array|null  $iconLeft
+     * @param  string|bool|array|null  $iconRight
      * @param  string|bool|null  $color
      * @param  string|bool|null  $rounded
      * @param  string|bool|null  $shadow

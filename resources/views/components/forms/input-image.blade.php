@@ -42,7 +42,7 @@
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'empty') }}
                     color="none"
                     :text="$emptyText"
-                    :icon="$emptyIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'empty-icon-svg')->first()"
+                    :icon="$emptyIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'empty-icon-name')->first()"
                     :theme="$theme"
                 >{{ $slot }}</x-button>
             @endisset
@@ -67,7 +67,7 @@
                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'error') }}
                     color="error"
                     :text="$errorText"
-                    :icon="$errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'error-icon-svg')->first()"
+                    :icon="$errorIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'error-icon-name')->first()"
                     :theme="$theme"
                 />
             @endisset

@@ -43,17 +43,12 @@ class Button extends BladeComponent
     public $wireClick;
 
     /**
-     * @var string|bool|null
-     */
-    public $icon;
-
-    /**
-     * @var string|bool|null
+     * @var string|bool|array|null
      */
     public $iconLeft;
 
     /**
-     * @var string|bool|null
+     * @var string|bool|array|null
      */
     public $iconRight;
 
@@ -127,9 +122,9 @@ class Button extends BladeComponent
      * @param  string|bool|null  $target
      * @param  string|bool|null  $click
      * @param  string|bool|null  $wireClick
-     * @param  string|bool|null  $icon
-     * @param  string|bool|null  $iconLeft
-     * @param  string|bool|null  $iconRight
+     * @param  string|bool|array|null  $icon
+     * @param  string|bool|array|null  $iconLeft
+     * @param  string|bool|array|null  $iconRight
      * @param  string|bool|null  $color
      * @param  string|bool|null  $rounded
      * @param  string|bool|null  $shadow
@@ -173,8 +168,7 @@ class Button extends BladeComponent
         $this->target = $target;
         $this->click = $click;
         $this->wireClick = $wireClick;
-        $this->icon = $icon;
-        $this->iconLeft = $iconLeft ?? $this->icon;
+        $this->iconLeft = $iconLeft ?? $icon;
         $this->iconRight = $iconRight;
         $this->color = $color ?? 'default';
         $this->rounded = $rounded ?? 'default';

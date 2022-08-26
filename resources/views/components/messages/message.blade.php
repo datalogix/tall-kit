@@ -10,32 +10,44 @@
         }}
     >
         @if ($icon)
-            <span {{
-                $attributes
-                    ->mergeOnlyThemeProvider($themeProvider, 'icon')
-                    ->merge(['class' => 'bg-'.$color.'-100 border-'.$color.'-500 text-'.$color.'-500'])
-            }}>
-                <x-icon :name="$iconName">
-                    {!! $iconSvg !!}
-                </x-icon>
-            </span>
+            @isset($iconArea)
+                {{ $iconArea }}
+            @else
+                <span {{
+                    $attributes
+                        ->mergeOnlyThemeProvider($themeProvider, 'icon-area')
+                        ->merge(['class' => 'bg-'.$color.'-100 border-'.$color.'-500 text-'.$color.'-500'])
+                    }}
+                >
+                    <x-icon
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon') }}
+                        :name="$iconName"
+                    >
+                        {!! $iconSvg !!}
+                    </x-icon>
+                </span>
+            @endif
         @endif
 
         @if ($dismissible)
-            <x-button
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'button') }}
-                preset="none"
-                :icon-left="$dismissibleIcon ? $dismissibleIconName : null"
-                :text="$dismissibleText"
-                :tooltip="$dismissibleTooltip"
-                :theme="$theme"
-            >
-                @if ($dismissibleIcon)
-                    <x-slot name="iconLeft">
-                        {!! $dismissibleIconSvg !!}
-                    </x-slot>
-                @endif
-            </x-button>
+            @isset($dismissibleButton)
+                {{ $dismissibleButton }}
+            @else
+                <x-button
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'dismissible', 'button') }}
+                    preset="none"
+                    :icon-left="$dismissibleIcon ? $dismissibleIconName : null"
+                    :text="$dismissibleText"
+                    :tooltip="$dismissibleTooltip"
+                    :theme="$theme"
+                >
+                    @if ($dismissibleIcon)
+                        <x-slot name="icon">
+                            {!! $dismissibleIconSvg !!}
+                        </x-slot>
+                    @endif
+                </x-button>
+            @endif
         @endif
 
         <div>
@@ -44,16 +56,18 @@
                     $attributes
                         ->mergeOnlyThemeProvider($themeProvider, 'title')
                         ->merge(['class' => 'text-'.$color.'-800'])
-                }}>
+                    }}
+                >
                     {!! __($title) !!}
                 </div>
             @endif
 
             <div {{
-                    $attributes
-                        ->mergeOnlyThemeProvider($themeProvider, 'message')
-                        ->merge(['class' => 'text-'.$color.'-600'])
-            }}>
+                $attributes
+                    ->mergeOnlyThemeProvider($themeProvider, 'message')
+                    ->merge(['class' => 'text-'.$color.'-600'])
+                }}
+            >
                 {!! $slot->isEmpty() ? __($message) : $slot !!}
             </div>
         </div>
