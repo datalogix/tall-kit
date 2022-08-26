@@ -1242,7 +1242,7 @@ return [
                 ],
 
                 'title' => [
-                    'class' => 'hidden sm:block flex-1 text-2xl font-medium',
+                    'class' => 'flex-1 text-2xl font-medium',
                 ],
             ],
 
