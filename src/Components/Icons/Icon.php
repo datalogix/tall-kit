@@ -39,7 +39,7 @@ class Icon extends BladeComponent
         }
 
         $attributes = $this->attributes->getAttributes();
-        $class = data_get($attributes, 'class', '');
+        $class = target_get($attributes, 'class', '');
         data_set($attributes, 'class', null);
 
         return svg($this->name, $class, array_filter($attributes));
@@ -53,8 +53,8 @@ class Icon extends BladeComponent
     protected function renderIcon()
     {
         return function (array $data) {
-            $slot = data_get($data, 'slot');
-            $attributes = data_get($data, 'attributes');
+            $slot = target_get($data, 'slot');
+            $attributes = target_get($data, 'attributes');
 
             if (! Str::startsWith($slot, '<svg') && $preset = $this->themeProvider->presets->get($this->name)) {
                 $slot = $preset;

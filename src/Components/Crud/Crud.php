@@ -101,7 +101,7 @@ abstract class Crud extends BladeComponent
         $this->title = $title;
         $this->parameters = Arr::wrap($parameters);
         $this->resource = $resource;
-        $this->resourceTitle = data_get($this->resource, 'title', data_get($this->resource, 'name'));
+        $this->resourceTitle = target_get($this->resource, ['title', 'name']);
         $this->forceMenu = $forceMenu;
         $this->maxActions = $maxActions ?? 4;
         $this->actions = Collection::make($actions);

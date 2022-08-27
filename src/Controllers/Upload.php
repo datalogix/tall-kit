@@ -53,7 +53,7 @@ class Upload
      */
     public function destroy(Request $request)
     {
-        if ($path = data_get(json_decode($request->getContent(), true), 'path')) {
+        if ($path = target_get(json_decode($request->getContent(), true), ['path', 'uri', 'url', 'file'])) {
             Storage::delete($path);
         }
 

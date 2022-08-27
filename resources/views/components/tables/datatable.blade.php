@@ -40,7 +40,7 @@
 
         @foreach ($cols as $key => $col)
             @php
-            $colname = 'col_'.data_get($col, 'name', is_int($key) ? $col : $key);
+            $colname = 'col_'.target_get($col, 'name', is_int($key) ? $col : $key);
             $action = isset(${$colname}) ? ${$colname} : null;
             @endphp
 

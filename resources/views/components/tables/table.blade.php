@@ -10,17 +10,16 @@
                         <x-heading {{
                                 $attributes
                                     ->mergeOnlyThemeProvider($themeProvider, 'th')
-                                    ->merge(['class' => data_get($col, 'class')])
-                                    ->merge(['style' => data_get($col, 'style')])
-                                    ->merge(data_get($col, 'attrs', []))
-                                    ->merge(data_get($col, 'attributes', []))
+                                    ->merge(['class' => target_get($col, 'class')])
+                                    ->merge(['style' => target_get($col, 'style')])
+                                    ->merge(target_get($col, ['attrs', 'attributes'], []))
                             }}
-                            :name="data_get($col, 'name', is_int($key) ? $col : $key)"
-                            :align="data_get($col, 'align')"
-                            :sortable="data_get($col, 'sortable')"
+                            :name="target_get($col, 'name', is_int($key) ? $col : $key)"
+                            :align="target_get($col, 'align')"
+                            :sortable="target_get($col, 'sortable')"
                             :theme="$theme"
                         >
-                            {!! __(data_get($col, 'title')) !!}
+                            {!! __(target_get($col, 'title')) !!}
                         </x-heading>
                     @empty
                         {{ $head }}
@@ -33,10 +32,9 @@
             @forelse ($rows as $row)
                 <x-row {{
                     $attributes->mergeOnlyThemeProvider($themeProvider, 'tr')
-                        ->merge(['class' => data_get($row, 'class')])
-                        ->merge(['style' => data_get($row, 'style')])
-                        ->merge(data_get($row, 'attrs', []))
-                        ->merge(data_get($row, 'attributes', []))
+                        ->merge(['class' => target_get($row, 'class')])
+                        ->merge(['style' => target_get($row, 'style')])
+                        ->merge(target_get($row, ['attrs', 'attributes'], []))
                     }}
                     :theme="$theme"
                 >
@@ -44,23 +42,22 @@
                         <x-cell {{
                                 $attributes
                                     ->mergeOnlyThemeProvider($themeProvider, 'td')
-                                    ->merge(['class' => data_get($col, 'class', $loop->last ? 'w-40' : null)])
-                                    ->merge(['style' => data_get($col, 'style')])
-                                    ->merge(data_get($col, 'attrs', []))
-                                    ->merge(data_get($col, 'attributes', []))
+                                    ->merge(['class' => target_get($col, 'class', $loop->last ? 'w-40' : null)])
+                                    ->merge(['style' => target_get($col, 'style')])
+                                    ->merge(target_get($col, ['attrs', 'attributes'], []))
                             }}
-                            :align="data_get($col, 'align')"
+                            :align="target_get($col, 'align')"
                             :theme="$theme"
                         >
-                            @isset(${'col_'.data_get($col, 'name', is_int($key) ? $col : $key)})
-                                {{ ${'col_'.data_get($col, 'name', is_int($key) ? $col : $key)}($row, $key, $col) }}
+                            @isset(${'col_'.target_get($col, 'name', is_int($key) ? $col : $key)})
+                                {{ ${'col_'.target_get($col, 'name', is_int($key) ? $col : $key)}($row, $key, $col) }}
                             @else
                                 <x-display
                                     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
-                                    :value="data_get($col, 'value')"
-                                    :bind="data_get($col, 'bind', $row)"
-                                    :name="data_get($col, 'name', is_int($key) ? $col : $key)"
-                                    :default="data_get($col, 'default')"
+                                    :value="target_get($col, 'value')"
+                                    :bind="target_get($col, 'bind', $row)"
+                                    :name="target_get($col, 'name', is_int($key) ? $col : $key)"
+                                    :default="target_get($col, 'default')"
                                     :theme="$theme"
                                 />
                             @endisset
@@ -104,23 +101,22 @@
                             <x-cell {{
                                     $attributes
                                         ->mergeOnlyThemeProvider($themeProvider, 'td')
-                                        ->merge(['class' => data_get($col, 'class')])
-                                        ->merge(['style' => data_get($col, 'style')])
-                                        ->merge(data_get($col, 'attrs', []))
-                                        ->merge(data_get($col, 'attributes', []))
+                                        ->merge(['class' => target_get($col, 'class')])
+                                        ->merge(['style' => target_get($col, 'style')])
+                                        ->merge(target_get($col, ['attrs', 'attributes'], []))
                                 }}
-                                :align="data_get($col, 'align')"
+                                :align="target_get($col, 'align')"
                                 :theme="$theme"
                             >
-                                @isset(${'col_'.data_get($col, 'name', is_int($key) ? $col : $key).'_footer'})
-                                    {{ ${'col_'.data_get($col, 'name', is_int($key) ? $col : $key).'_footer'}($row, $key, $col) }}
+                                @isset(${'col_'.target_get($col, 'name', is_int($key) ? $col : $key).'_footer'})
+                                    {{ ${'col_'.target_get($col, 'name', is_int($key) ? $col : $key).'_footer'}($row, $key, $col) }}
                                 @else
                                     <x-display
                                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'display') }}
-                                        :value="data_get($col, 'value')"
-                                        :bind="data_get($col, 'bind', $row)"
-                                        :name="data_get($col, 'name', is_int($key) ? $col : $key)"
-                                        :default="data_get($col, 'default')"
+                                        :value="target_get($col, 'value')"
+                                        :bind="target_get($col, 'bind', $row)"
+                                        :name="target_get($col, 'name', is_int($key) ? $col : $key)"
+                                        :default="target_get($col, 'default')"
                                         :theme="$theme"
                                     />
                                 @endisset

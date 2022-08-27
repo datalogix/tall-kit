@@ -116,7 +116,7 @@ trait User
         foreach (array_filter(Arr::wrap($keys)) as $key) {
             $result = ! is_array($this->user) && method_exists($this->user, $key)
                 ? $this->user->{$key}()
-                : data_get($this->user, $key);
+                : target_get($this->user, $key);
 
             if (! is_null($result)) {
                 return $result;

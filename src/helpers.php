@@ -23,3 +23,33 @@ if (! function_exists('route_detect')) {
         return $default;
     }
 }
+
+if (! function_exists('target_get')) {
+    /**
+     * Get an item from an array or object using keys and
+     * return the default value of the given value.
+     *
+     * @param  mixed  $target
+     * @param  string|array|int|null  $keys
+     * @param  mixed  $default
+     * @return mixed
+     */
+    function target_get($target, $keys = null, $default = null, ...$args)
+    {
+        $target = value($target, $keys, $default, ...$args);
+
+        foreach (array_filter(Arr::wrap($keys)) as $key) {
+            if ($key instanceof Closure) {
+                return value($key, $target, $default, ...$args);
+            }
+
+            $value = value(data_get($target, $key));
+
+            if (! is_null($value)) {
+                return $value;
+            }
+        }
+
+        return $default;
+    }
+}

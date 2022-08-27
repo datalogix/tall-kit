@@ -45,6 +45,11 @@ class Button extends BladeComponent
     /**
      * @var string|bool|array|null
      */
+    public $icon;
+
+    /**
+     * @var string|bool|array|null
+     */
     public $iconLeft;
 
     /**
@@ -168,7 +173,8 @@ class Button extends BladeComponent
         $this->target = $target;
         $this->click = $click;
         $this->wireClick = $wireClick;
-        $this->iconLeft = $iconLeft ?? $icon;
+        $this->icon = $icon;
+        $this->iconLeft = $iconLeft ?? $this->icon;
         $this->iconRight = $iconRight;
         $this->color = $color ?? 'default';
         $this->rounded = $rounded ?? 'default';
@@ -181,28 +187,28 @@ class Button extends BladeComponent
         $this->tooltip = $tooltip;
 
         if ($this->preset && $presetProperties = $this->themeProvider->presets->get($this->preset)) {
-            $this->text = $text ?? data_get($presetProperties, 'text');
-            $this->active = $active ?? data_get($presetProperties, 'active');
-            $this->href = $href ?? data_get($presetProperties, 'href');
-            $this->target = $target ?? data_get($presetProperties, 'target');
-            $this->click = $click ?? data_get($presetProperties, 'click');
-            $this->wireClick = $wireClick ?? data_get($presetProperties, 'wire-click');
-            $this->iconLeft = $iconLeft ?? data_get($presetProperties, 'icon-left', data_get($presetProperties, 'icon'));
-            $this->iconRight = $iconRight ?? data_get($presetProperties, 'icon-right');
-            $this->color = $color ?? data_get($presetProperties, 'color', 'default');
-            $this->rounded = $rounded ?? data_get($presetProperties, 'rounded', 'default');
-            $this->shadow = $shadow ?? data_get($presetProperties, 'shadow', 'default');
-            $this->outlined = $outlined ?? data_get($presetProperties, 'outlined');
-            $this->linkText = $linkText ?? data_get($presetProperties, 'link-text');
-            $this->bordered = $bordered ?? data_get($presetProperties, 'bordered');
-            $this->loading = $loading ?? data_get($presetProperties, 'loading');
-            $this->tooltip = is_string($tooltip) ? $tooltip : ($tooltip === true ? data_get($presetProperties, 'tooltip') : false);
+            $this->text = $text ?? target_get($presetProperties, 'text');
+            $this->active = $active ?? target_get($presetProperties, 'active');
+            $this->href = $href ?? target_get($presetProperties, 'href');
+            $this->target = $target ?? target_get($presetProperties, 'target');
+            $this->click = $click ?? target_get($presetProperties, 'click');
+            $this->wireClick = $wireClick ?? target_get($presetProperties, 'wire-click');
+            $this->iconLeft = $iconLeft ?? target_get($presetProperties, ['icon-left', 'icon']);
+            $this->iconRight = $iconRight ?? target_get($presetProperties, 'icon-right');
+            $this->color = $color ?? target_get($presetProperties, 'color', 'default');
+            $this->rounded = $rounded ?? target_get($presetProperties, 'rounded', 'default');
+            $this->shadow = $shadow ?? target_get($presetProperties, 'shadow', 'default');
+            $this->outlined = $outlined ?? target_get($presetProperties, 'outlined');
+            $this->linkText = $linkText ?? target_get($presetProperties, 'link-text');
+            $this->bordered = $bordered ?? target_get($presetProperties, 'bordered');
+            $this->loading = $loading ?? target_get($presetProperties, 'loading');
+            $this->tooltip = is_string($tooltip) ? $tooltip : ($tooltip === true ? target_get($presetProperties, 'tooltip') : false);
         }
 
         if ($this->color && $colorProperties = $this->themeProvider->colors->get($this->color)) {
-            $this->colorName = data_get($colorProperties, 'name', $colorProperties);
-            $this->colorWeight = data_get($colorProperties, 'weight', 500);
-            $this->colorHover = data_get($colorProperties, 'hover', 700);
+            $this->colorName = target_get($colorProperties, 'name', $colorProperties);
+            $this->colorWeight = target_get($colorProperties, 'weight', 500);
+            $this->colorHover = target_get($colorProperties, 'hover', 700);
         }
     }
 

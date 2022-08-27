@@ -174,8 +174,8 @@ class FormButton extends Form
         $this->tooltip = $tooltip;
 
         if ($this->preset && $presetProperties = $this->themeProvider->presets->get($this->preset)) {
-            $this->method = Str::upper(data_get($presetProperties, 'method', $this->method));
-            $this->confirm = $this->confirm ?? data_get($presetProperties, 'confirm');
+            $this->method = Str::upper(target_get($presetProperties, 'method', $this->method));
+            $this->confirm = $this->confirm ?? target_get($presetProperties, 'confirm');
         }
     }
 }

@@ -175,7 +175,7 @@ class CrudIndex extends Crud
 
         if (! $this->displayIdColumn) {
             $pos = $cols->search(function ($col, $key) {
-                return Str::lower(data_get($col, 'name', is_int($key) ? $col : $key)) === 'id';
+                return Str::lower(target_get($col, 'name', is_int($key) ? $col : $key)) === 'id';
             });
 
             if ($pos !== false) {
@@ -191,7 +191,7 @@ class CrudIndex extends Crud
             $mappedRelations = [];
 
             $cols = $cols->mapWithKeys(function ($col, $key) use (&$mappedRelations) {
-                $name = data_get($col, 'name', is_int($key) ? $col : $key);
+                $name = target_get($col, 'name', is_int($key) ? $col : $key);
 
                 if (in_array($name, $mappedRelations)) {
                     return [];

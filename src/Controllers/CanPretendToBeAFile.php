@@ -46,7 +46,7 @@ trait CanPretendToBeAFile
      */
     protected function matchesCache($lastModified)
     {
-        $ifModifiedSince = data_get($_SERVER, 'HTTP_IF_MODIFIED_SINCE', '');
+        $ifModifiedSince = target_get($_SERVER, 'HTTP_IF_MODIFIED_SINCE', '');
 
         return @strtotime($ifModifiedSince) === $lastModified;
     }

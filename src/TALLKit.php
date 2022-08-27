@@ -20,8 +20,8 @@ class TALLKit
         $debug = config('app.debug');
 
         $styles = $this->cssAssets(
-            array_replace_recursive(config('tallkit.options', []), data_get($config, 'options', [])),
-            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), data_get($config, 'assets', []))
+            array_replace_recursive(config('tallkit.options', []), target_get($config, 'options', [])),
+            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), target_get($config, 'assets', []))
         );
 
         // HTML Label.
@@ -44,8 +44,8 @@ class TALLKit
         $debug = config('app.debug');
 
         $scripts = $this->javascriptAssets(
-            array_replace_recursive(config('tallkit.options', []), data_get($config, 'options', [])),
-            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), data_get($config, 'assets', []))
+            array_replace_recursive(config('tallkit.options', []), target_get($config, 'options', [])),
+            array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), target_get($config, 'assets', []))
         );
 
         // HTML Label.
@@ -69,17 +69,17 @@ class TALLKit
         $styles = Collection::make();
         $scripts = Collection::make();
 
-        if (data_get($options, 'inject.tailwindcss') && $tailwindcss = data_get($assets, 'tailwindcss')) {
+        if (target_get($options, 'inject.tailwindcss') && $tailwindcss = target_get($assets, 'tailwindcss')) {
             $styles->add($tailwindcss);
             $scripts->add($tailwindcss);
         }
 
-        if (data_get($options, 'inject.alpine') && $alpine = data_get($assets, 'alpine')) {
+        if (target_get($options, 'inject.alpine') && $alpine = target_get($assets, 'alpine')) {
             $styles->add($alpine);
             $scripts->add($alpine);
         }
 
-        if (data_get($options, 'load_type') === true) {
+        if (target_get($options, 'load_type') === true) {
             Collection::make($assets)->filter(function ($key) {
                 return $key !== 'tailwindcss' && $key !== 'alpine';
             })->each(function ($asset) use ($styles, $scripts) {
@@ -94,12 +94,16 @@ class TALLKit
             return '<link href="'.$url.'" rel="stylesheet" />';
         })->join("\n");
 
-        $nonce = data_get($options, 'nonce') ? ' nonce="'.data_get($options, 'nonce').'"' : '';
+        $nonce = '';
+
+        if ($nonceValue = target_get($options, 'nonce')) {
+            $nonce = ' nonce="'.$nonceValue.'"';
+        }
 
         $htmlScrips = $scripts->flatten()->filter(function ($value) {
             return ! Str::endsWith($value, '.css');
         })->map(function ($url) use ($assets, $nonce) {
-            return '<script src="'.$url.'"'.(in_array($url, data_get($assets, 'alpine', [])) ? ' defer' : '').$nonce.'></script>';
+            return '<script src="'.$url.'"'.(in_array($url, target_get($assets, 'alpine', [])) ? ' defer' : '').$nonce.'></script>';
         })->join("\n");
 
         return <<<HTML
@@ -125,7 +129,7 @@ HTML;
         $jsonEncodedOptions = $options ? json_encode($options) : '';
         $jsonEncodedAssets = $assets ? json_encode($assets) : '';
 
-        $appUrl = rtrim(data_get($options, 'asset_url', ''), '/');
+        $appUrl = rtrim(target_get($options, 'asset_url', ''), '/');
 
         $manifest = json_decode(file_get_contents(__DIR__.'/../dist/manifest.json'), true);
         $versionedFileName = $manifest['tallkit.js'];
@@ -134,7 +138,11 @@ HTML;
         $fullAssetPath = "{$appUrl}/tallkit/{$versionedFileName}";
         $assetWarning = null;
 
-        $nonce = data_get($options, 'nonce') ? ' nonce="'.data_get($options, 'nonce').'"' : '';
+        $nonce = '';
+
+        if ($nonceValue = target_get($options, 'nonce')) {
+            $nonce = ' nonce="'.$nonceValue.'"';
+        }
 
         // Use static assets if they have been published.
         if (file_exists(public_path('vendor/tallkit/manifest.json'))) {
@@ -203,7 +211,7 @@ HTML;
      */
     protected function isRunningServerless()
     {
-        return in_array(data_get($_ENV, 'SERVER_SOFTWARE'), [
+        return in_array(target_get($_ENV, 'SERVER_SOFTWARE'), [
             'vapor',
             'bref',
         ]);

@@ -151,25 +151,25 @@ class Message extends BladeComponent
         $this->session = $session;
         $target = $session ? session($session) : [];
 
-        $this->type = data_get($target, 'type', $type ?? 'info');
+        $this->type = target_get($target, 'type', $type ?? 'info');
         $typeTheme = $this->themeProvider->types->get($this->type, $this->themeProvider->types->get('default'));
 
-        $this->color = data_get($target, 'color', data_get($typeTheme, 'color'));
-        $this->mode = data_get($target, 'mode', $mode ?? data_get($typeTheme, 'mode', 'default'));
-        $this->rounded = data_get($target, 'rounded', $rounded ?? data_get($typeTheme, 'rounded', 'default'));
-        $this->shadow = data_get($target, 'shadow', $shadow ?? data_get($typeTheme, 'shadow', 'default'));
-        $this->icon = data_get($target, 'icon', $icon ?? data_get($typeTheme, 'icon', true));
-        $this->iconSvg = data_get($target, 'icon-svg', $iconSvg ?? data_get($typeTheme, 'icon-svg'));
-        $this->iconName = data_get($target, 'icon-name', $iconName ?? data_get($typeTheme, 'icon-name'));
-        $this->timeout = data_get($target, 'timeout', $timeout ?? data_get($typeTheme, 'timeout', 0));
-        $this->dismissible = data_get($target, 'dismissible', $dismissible ?? data_get($typeTheme, 'dismissible', false));
-        $this->dismissibleIcon = data_get($target, 'dismissible-icon', $dismissibleIcon ?? data_get($typeTheme, 'dismissible-icon', true));
-        $this->dismissibleIconSvg = data_get($target, 'dismissible-icon-svg', $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('icon-svg'));
-        $this->dismissibleIconName = data_get($target, 'dismissible-icon-name', $dismissibleIconName ?? $this->themeProvider->dismissible->get('icon-name'));
-        $this->dismissibleText = data_get($target, 'dismissible-text', $dismissibleText ?? data_get($typeTheme, 'dismissible-text'));
-        $this->dismissibleTooltip = data_get($target, 'dismissible-tooltip', $dismissibleTooltip ?? data_get($typeTheme, 'dismissible-tooltip'));
-        $this->title = data_get($target, 'title', $title ?? data_get($typeTheme, 'title'));
-        $this->message = data_get($target, 'message', $message ?? (is_string($target) ? $target : null) ?? data_get($typeTheme, 'message'));
-        $this->on = data_get($target, 'on', $on ?? data_get($typeTheme, 'on'));
+        $this->color = target_get($target, 'color', target_get($typeTheme, 'color'));
+        $this->mode = target_get($target, 'mode', $mode ?? target_get($typeTheme, 'mode', 'default'));
+        $this->rounded = target_get($target, 'rounded', $rounded ?? target_get($typeTheme, 'rounded', 'default'));
+        $this->shadow = target_get($target, 'shadow', $shadow ?? target_get($typeTheme, 'shadow', 'default'));
+        $this->icon = target_get($target, 'icon', $icon ?? target_get($typeTheme, 'icon', true));
+        $this->iconSvg = target_get($target, 'icon-svg', $iconSvg ?? target_get($typeTheme, 'icon-svg'));
+        $this->iconName = target_get($target, 'icon-name', $iconName ?? target_get($typeTheme, 'icon-name'));
+        $this->timeout = target_get($target, 'timeout', $timeout ?? target_get($typeTheme, 'timeout', 0));
+        $this->dismissible = target_get($target, 'dismissible', $dismissible ?? target_get($typeTheme, 'dismissible', false));
+        $this->dismissibleIcon = target_get($target, 'dismissible-icon', $dismissibleIcon ?? target_get($typeTheme, 'dismissible-icon', true));
+        $this->dismissibleIconSvg = target_get($target, 'dismissible-icon-svg', $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('icon-svg'));
+        $this->dismissibleIconName = target_get($target, 'dismissible-icon-name', $dismissibleIconName ?? $this->themeProvider->dismissible->get('icon-name'));
+        $this->dismissibleText = target_get($target, 'dismissible-text', $dismissibleText ?? target_get($typeTheme, 'dismissible-text'));
+        $this->dismissibleTooltip = target_get($target, 'dismissible-tooltip', $dismissibleTooltip ?? target_get($typeTheme, 'dismissible-tooltip'));
+        $this->title = target_get($target, 'title', $title ?? target_get($typeTheme, 'title'));
+        $this->message = target_get($target, 'message', $message ?? (is_string($target) ? $target : null) ?? target_get($typeTheme, 'message'));
+        $this->on = target_get($target, 'on', $on ?? target_get($typeTheme, 'on'));
     }
 }

@@ -141,8 +141,8 @@ trait LivewireDatatable
     {
         $this->searchFields = DatatableHelpers::getSearch($this->search, $this->searchDefault, $this->searchValues);
         $this->searchFields->each(function ($field, $key) {
-            $name = data_get($field, 'name', $key);
-            $this->searchValues[$name] = $this->{$name} = $this->{$name} ?? data_get($field, 'value');
+            $name = target_get($field, 'name', $key);
+            $this->searchValues[$name] = $this->{$name} = $this->{$name} ?? target_get($field, 'value');
         });
     }
 

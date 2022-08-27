@@ -41,6 +41,6 @@ trait BoundValues
 
         $bind = $bind ?? $this->getBoundTarget();
 
-        return data_get($bind, $name);
+        return target_get($bind, $name);
     }
 }

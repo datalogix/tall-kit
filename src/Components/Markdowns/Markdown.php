@@ -69,12 +69,12 @@ class Markdown extends BladeComponent
     protected function converter()
     {
         $config = $this->options;
-        $blocks = data_get($config, 'blocks', []);
-        $inlines = data_get($config, 'inlines', []);
-        $delimiters = data_get($config, 'delimiters', []);
-        $renderers = data_get($config, 'renderers', []);
-        $extensions = data_get($config, 'extensions', []);
-        $listeners = data_get($config, 'listeners', []);
+        $blocks = target_get($config, 'blocks', []);
+        $inlines = target_get($config, 'inlines', []);
+        $delimiters = target_get($config, 'delimiters', []);
+        $renderers = target_get($config, 'renderers', []);
+        $extensions = target_get($config, 'extensions', []);
+        $listeners = target_get($config, 'listeners', []);
 
         data_set($config, 'blocks', null);
         data_set($config, 'inlines', null);

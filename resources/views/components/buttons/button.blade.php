@@ -31,15 +31,15 @@
         <x-icon {{
                 $attributes
                     ->mergeOnlyThemeProvider($themeProvider, 'icon-left')
-                    ->merge(['class' => data_get($iconLeft, 'class')])
-                    ->merge(['style' => data_get($iconLeft, 'style')])
+                    ->merge(['class' => target_get($iconLeft, 'class')])
+                    ->merge(['style' => target_get($iconLeft, 'style')])
             }}
-            :name="data_get($iconLeft, 'name', $iconLeft)"
+            :name="target_get($iconLeft, 'name', $iconLeft)"
         >
-            @isset ($icon)
-                {{ $icon }}
+            @isset ($iconContent)
+                {{ $iconContent }}
             @else
-                {!! data_get($iconLeft, 'name', $iconLeft) !!}
+                {!! target_get($iconLeft, 'name', $iconLeft) !!}
             @endisset
         </x-icon>
 
@@ -52,12 +52,12 @@
         <x-icon {{
             $attributes
                 ->mergeOnlyThemeProvider($themeProvider, 'icon-right')
-                ->merge(['class' => data_get($iconRight, 'class')])
-                ->merge(['style' => data_get($iconRight, 'style')])
+                ->merge(['class' => target_get($iconRight, 'class')])
+                ->merge(['style' => target_get($iconRight, 'style')])
             }}
-            :name="data_get($iconRight, 'name', $iconRight)"
+            :name="target_get($iconRight, 'name', $iconRight)"
         >
-            {!! data_get($iconRight, 'name', $iconRight) !!}
+            {!! target_get($iconRight, 'name', $iconRight) !!}
         </x-icon>
     @if ($loading)</span>@endif
 

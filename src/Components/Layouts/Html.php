@@ -170,33 +170,33 @@ class Html extends BladeComponent
             Arr::wrap($options)
         );
 
-        $this->title = $title ?? data_get($options, 'title');
-        $this->charset = $charset ?? data_get($options, 'charset', 'utf-8');
-        $this->viewport = $viewport ?? data_get($options, 'viewport', 'width=device-width, initial-scale=1');
-        $this->csrfToken = $csrfToken ?? data_get($options, 'csrf-token', true);
-        $this->meta = Collection::make($meta)->merge(data_get($options, 'meta'));
-        $this->googleFonts = $googleFonts ?? data_get($options, 'google-fonts', data_get($options, 'fonts'));
-        $this->turbo = $turbo ?? data_get($options, 'turbo');
-        $this->googleAnalytics = $googleAnalytics ?? data_get($options, 'google-analytics', data_get($options, 'analytics'));
-        $this->googleTagManager = $googleTagManager ?? data_get($options, 'google-tag-manager', data_get($options, 'gtm'));
-        $this->facebookPixelCode = $facebookPixelCode ?? data_get($options, 'facebook-pixel-code', data_get($options, 'facebook-pixel'));
-        $this->livewire = $livewire ?? data_get($options, 'livewire', true) && class_exists('\Livewire\Livewire');
+        $this->title = $title ?? target_get($options, 'title');
+        $this->charset = $charset ?? target_get($options, 'charset', 'utf-8');
+        $this->viewport = $viewport ?? target_get($options, 'viewport', 'width=device-width, initial-scale=1');
+        $this->csrfToken = $csrfToken ?? target_get($options, 'csrf-token', true);
+        $this->meta = Collection::make($meta)->merge(target_get($options, 'meta'));
+        $this->googleFonts = $googleFonts ?? target_get($options, ['google-fonts', 'fonts']);
+        $this->turbo = $turbo ?? target_get($options, 'turbo');
+        $this->googleAnalytics = $googleAnalytics ?? target_get($options, ['google-analytics', 'analytics']);
+        $this->googleTagManager = $googleTagManager ?? target_get($options, ['google-tag-manager', 'gtm']);
+        $this->facebookPixelCode = $facebookPixelCode ?? target_get($options, ['facebook-pixel-code', 'facebook-pixel']);
+        $this->livewire = $livewire ?? target_get($options, 'livewire', true) && class_exists('\Livewire\Livewire');
 
-        $this->mixStyles = Collection::make($mixStyles)->merge(data_get($options, 'mix-styles', 'css/app.css'))->filter(function ($file) {
+        $this->mixStyles = Collection::make($mixStyles)->merge(target_get($options, 'mix-styles', 'css/app.css'))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 
-        $this->mixScripts = Collection::make($mixScripts)->merge(data_get($options, 'mix-scripts', 'js/app.js'))->filter(function ($file) {
+        $this->mixScripts = Collection::make($mixScripts)->merge(target_get($options, 'mix-scripts', 'js/app.js'))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 
-        $this->styles = Collection::make($styles)->merge(data_get($options, 'styles'))->unique();
-        $this->scripts = Collection::make($scripts)->merge(data_get($options, 'scripts'))->unique();
-        $this->stackStyles = $stackStyles ?? data_get($options, 'stack-styles', 'styles');
-        $this->stackScripts = $stackScripts ?? data_get($options, 'stack-scripts', 'scripts');
+        $this->styles = Collection::make($styles)->merge(target_get($options, 'styles'))->unique();
+        $this->scripts = Collection::make($scripts)->merge(target_get($options, 'scripts'))->unique();
+        $this->stackStyles = $stackStyles ?? target_get($options, 'stack-styles', 'styles');
+        $this->stackScripts = $stackScripts ?? target_get($options, 'stack-scripts', 'scripts');
 
         $this->vite = Collection::make($vite)
-            ->merge(data_get($options, 'vite', ['resources/js/app.js', 'resources/js/app.ts']))
+            ->merge(target_get($options, 'vite', ['resources/js/app.js', 'resources/js/app.ts']))
             ->filter(function ($file) {
                 return file_exists(base_path($file));
             })
@@ -206,13 +206,13 @@ class Html extends BladeComponent
             Arr::wrap($tallkit),
             is_bool($tailwindcss) ? ['options' => ['inject' => ['tailwindcss' => $tailwindcss]]] : [],
             is_bool($alpine) ? ['options' => ['inject' => ['alpine' => $alpine]]] : [],
-            data_get($options, 'tallkit', []),
+            target_get($options, 'tallkit', []),
         ) : false;
 
         $this->components = Collection::make($components)
-            ->merge(data_get($options, 'components'))
+            ->merge(target_get($options, 'components'))
             ->filter(function ($component) {
-                return ! value(data_get($component, 'disabled'));
+                return ! target_get($component, 'disabled');
             });
     }
 }

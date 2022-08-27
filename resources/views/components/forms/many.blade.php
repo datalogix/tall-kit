@@ -38,21 +38,21 @@
                     <x-cell {{
                         $attributes
                             ->mergeOnlyThemeProvider($themeProvider, 'td')
-                            ->merge(data_get($field, 'td', []))
+                            ->merge(target_get($field, 'td', []))
                         }}
-                        :align="data_get(data_get($field, 'td', []), 'align')"
+                        :align="target_get($field, 'td.align')"
                         :theme="$theme"
                     >
-                        @isset(${'col_'.data_get($field, 'name')})
-                            {{ ${'col_'.data_get($field, 'name')}($field) }}
+                        @isset(${'col_'.target_get($field, 'name')})
+                            {{ ${'col_'.target_get($field, 'name')}($field) }}
                         @else
                             <x-fields-generator
                                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'field') }}
-                                x-model="item.{{ data_get($field, 'name') }}"
+                                x-model="item.{{ target_get($field, 'name') }}"
                                 id="false"
-                                :name="$name ? $name.'[]['.data_get($field, 'name').']' : data_get($field, 'name').'[]'"
+                                :name="$name ? $name.'[]['.target_get($field, 'name').']' : target_get($field, 'name').'[]'"
                                 :fields="[$field]"
-                                :label="$labels ? data_get(is_iterable($labels) ? $labels : $field, 'label') : false"
+                                :label="$labels ? target_get(is_iterable($labels) ? $labels : $field, 'label') : false"
                                 :theme="$theme"
                             />
                         @endisset

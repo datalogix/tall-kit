@@ -17,12 +17,12 @@
 
     @if ($googleFonts)
         <x-google-fonts
-            :families="data_get($googleFonts, 'families', $googleFonts)"
-            :display="data_get($googleFonts, 'display')"
-            :prefetch="data_get($googleFonts, 'prefetch')"
-            :preconnect="data_get($googleFonts, 'preconnect')"
-            :preload="data_get($googleFonts, 'preload')"
-            :use-stylesheet="data_get($googleFonts, 'use-stylesheet')"
+            :families="target_get($googleFonts, 'families', $googleFonts)"
+            :display="target_get($googleFonts, 'display')"
+            :prefetch="target_get($googleFonts, 'prefetch')"
+            :preconnect="target_get($googleFonts, 'preconnect')"
+            :preload="target_get($googleFonts, 'preload')"
+            :use-stylesheet="target_get($googleFonts, 'use-stylesheet')"
             :noscript="false"
         />
     @endif
@@ -74,12 +74,12 @@
 <body {{ $attributes->mergeThemeProvider($themeProvider, 'body') }}>
     @if ($googleFonts)
         <x-google-fonts
-            :families="data_get($googleFonts, 'families', $googleFonts)"
-            :display="data_get($googleFonts, 'display')"
-            :prefetch="data_get($googleFonts, 'prefetch')"
-            :preconnect="data_get($googleFonts, 'preconnect')"
-            :preload="data_get($googleFonts, 'preload')"
-            :use-stylesheet="data_get($googleFonts, 'use-stylesheet')"
+            :families="target_get($googleFonts, 'families', $googleFonts)"
+            :display="target_get($googleFonts, 'display')"
+            :prefetch="target_get($googleFonts, 'prefetch')"
+            :preconnect="target_get($googleFonts, 'preconnect')"
+            :preload="target_get($googleFonts, 'preload')"
+            :use-stylesheet="target_get($googleFonts, 'use-stylesheet')"
             :noscript="true"
         />
     @endif

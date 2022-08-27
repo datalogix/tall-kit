@@ -7,31 +7,30 @@
         <li {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'li') }}>
             <x-dynamic-component {{
                     $attributes->mergeOnlyThemeProvider($themeProvider, 'item')
-                        ->merge(['class' => data_get($item, 'class')])
-                        ->merge(['style' => data_get($item, 'style')])
-                        ->merge(data_get($item, 'attrs', []))
-                        ->merge(data_get($item, 'attributes', []))
+                        ->merge(['class' => target_get($item, 'class')])
+                        ->merge(['style' => target_get($item, 'style')])
+                        ->merge(target_get($item, ['attrs', 'attributes'], []))
                 }}
-                :component="data_get($item, 'component', 'button')"
-                :text="data_get($item, 'name', data_get($item, 'title', data_get($item, 'text')))"
-                :active="data_get($item, 'active')"
-                :href="data_get($item, 'component', 'button') === 'button' ? data_get($item, 'href', data_get($item, 'action', data_get($item, 'route'))) : null"
-                :action="data_get($item, 'component', 'button') === 'form-button' ? data_get($item, 'href', data_get($item, 'action', data_get($item, 'route'))) : null"
-                :target="data_get($item, 'target')"
-                :click="data_get($item, 'click')"
-                :wire-click="data_get($item, 'wire-click')"
-                :icon="data_get($item, 'icon')"
-                :icon-left="data_get($item, 'icon-left')"
-                :icon-right="data_get($item, 'icon-right')"
-                :color="data_get($item, 'color')"
-                :rounded="data_get($item, 'rounded')"
-                :shadow="data_get($item, 'shadow')"
-                :outlined="data_get($item, 'outlined')"
-                :link-text="data_get($item, 'link-text')"
-                :bordered="data_get($item, 'bordered')"
-                :loading="data_get($item, 'loading', true)"
-                :preset="data_get($item, 'preset', 'none')"
-                :tooltip="data_get($item, 'tooltip')"
+                :component="target_get($item, 'component', 'button')"
+                :text="target_get($item, ['name', 'title', 'text'])"
+                :active="target_get($item, 'active')"
+                :href="target_get($item, 'component', 'button') === 'button' ? target_get($item, ['href', 'action', 'route']) : null"
+                :action="target_get($item, 'component', 'button') === 'form-button' ? target_get($item, ['href', 'action', 'route']) : null"
+                :target="target_get($item, 'target')"
+                :click="target_get($item, 'click')"
+                :wire-click="target_get($item, 'wire-click')"
+                :icon="target_get($item, 'icon')"
+                :icon-left="target_get($item, 'icon-left')"
+                :icon-right="target_get($item, 'icon-right')"
+                :color="target_get($item, 'color')"
+                :rounded="target_get($item, 'rounded')"
+                :shadow="target_get($item, 'shadow')"
+                :outlined="target_get($item, 'outlined')"
+                :link-text="target_get($item, 'link-text')"
+                :bordered="target_get($item, 'bordered')"
+                :loading="target_get($item, 'loading', true)"
+                :preset="target_get($item, 'preset', 'none')"
+                :tooltip="target_get($item, 'tooltip')"
                 :theme="$theme"
             />
         </li>

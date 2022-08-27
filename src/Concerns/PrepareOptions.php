@@ -46,10 +46,10 @@ trait PrepareOptions
     {
         return Collection::make($options)
             ->mapWithKeys(function ($value, $key) {
-                $key = data_get($value, $this->itemValue, $key);
+                $key = target_get($value, $this->itemValue, $key);
                 $value = is_iterable($value)
                     ? $this->prepareOptions($value)
-                    : data_get($value, $this->itemText, data_get($value, 'name', data_get($value, 'title', data_get($value, 'text', $value))));
+                    : target_get($value, [$this->itemText, 'name', 'title', 'text'], null, $key);
 
                 return [$key => $value];
             });

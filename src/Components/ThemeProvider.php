@@ -50,9 +50,9 @@ class ThemeProvider
      */
     public function make($name, $component)
     {
-        $default = data_get($this->themes, 'default');
-        $theme = data_get($this->themes, $name);
-        $item = data_get($theme, $component, data_get($default, $component, []));
+        $default = target_get($this->themes, 'default');
+        $theme = target_get($this->themes, $name);
+        $item = target_get($theme, $component, target_get($default, $component, []));
 
         $this->items = $this->items->wrap($item);
 

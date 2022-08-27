@@ -92,8 +92,8 @@ class Many extends Group
                 'label' => is_string($field) ? $field : $key,
             ];
 
-            data_set($field, 'label', data_get($field, 'name'), false);
-            data_set($field, 'title', data_get($field, 'label'), false);
+            data_set($field, 'label', target_get($field, 'name'), false);
+            data_set($field, 'title', target_get($field, 'label'), false);
 
             return $field;
         });

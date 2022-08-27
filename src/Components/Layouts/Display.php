@@ -34,16 +34,16 @@ class Display extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $value = $value ?? data_get($bind, $name.'_formatted', data_get($bind, $name.'_url', data_get($bind, $name, $default)));
+        $value = $value ?? target_get($bind, [$name.'_formatted', $name.'_url', $name], $default);
 
         // Remove _id for relation
         if (Str::endsWith($name, '_id')) {
-            $value = data_get($bind, Str::replaceLast('_id', '', $name));
+            $value = target_get($bind, Str::replaceLast('_id', '', $name));
         }
 
         // Model - Relation
         if ($value instanceof Model) {
-            $value = data_get($value, 'name', data_get($value, 'title', data_get($value, 'text')));
+            $value = target_get($value, ['name', 'title', 'text']);
         }
 
         // Storage

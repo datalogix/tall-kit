@@ -136,6 +136,13 @@ class CrudActions extends Crud
                 'priority' => false,
             ],
 
+            'duplicate' => [
+                'component' => 'form-button',
+                'preset' => 'duplicate',
+                'except' => ['copy', 'duplicate', 'clone'],
+                'priority' => false,
+            ],
+
             'move-up' => [
                 'component' => 'form-button',
                 'preset' => 'move-up',
@@ -167,16 +174,16 @@ class CrudActions extends Crud
      */
     protected function getRoute($name, $action = [])
     {
-        $except = data_get($action, 'except', [$name]);
+        $except = target_get($action, 'except', [$name]);
 
         if (in_array($this->routeName, $except)) {
             return false;
         }
 
-        $prefix = data_get($action, 'prefix', true) ? $this->prefix.'.' : '';
-        $parameters = data_get($action, 'parameters', $this->parameters);
+        $prefix = target_get($action, 'prefix', true) ? $this->prefix.'.' : '';
+        $parameters = target_get($action, 'parameters', $this->parameters);
 
-        $routes = data_get($action, 'routes', array_map(function ($route) use ($prefix) {
+        $routes = target_get($action, 'routes', array_map(function ($route) use ($prefix) {
             return $prefix.$route;
         }, $except));
 

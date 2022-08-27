@@ -7,7 +7,7 @@
         {{ $slot }}
     </div>
 
-    @if (data_get($options, 'controls'))
+    @if (target_get($options, 'controls'))
         @isset($controls)
             {{ $controls }}
         @else
@@ -41,7 +41,7 @@
         @endisset
     @endif
 
-    @if (data_get($options, 'paginator'))
+    @if (target_get($options, 'paginator'))
         @isset($paginator)
             {{ $paginator }}
         @else
@@ -57,7 +57,7 @@
         @endisset
     @endif
 
-    @if (data_get($options, 'autoplay') && data_get($options, 'progressbar'))
+    @if (target_get($options, ['autoplay', 'progressbar']))
         @isset($progressbar)
             {{ $progressbar }}
         @else
