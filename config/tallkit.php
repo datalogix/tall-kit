@@ -252,6 +252,13 @@ return [
         ],
 
         /**
+         * Icons.
+         */
+        'iconify' => [
+            'https://code.iconify.design/2/2.2.1/iconify.min.js',
+        ],
+
+        /**
          * Moment.
          */
         'moment' => [
@@ -511,6 +518,7 @@ return [
          * Icons.
          */
         'icon' => \TALLKit\Components\Icons\Icon::class,
+        'iconify' => \TALLKit\Components\Icons\Iconify::class,
 
         /**
          * Layouts.
@@ -2799,6 +2807,16 @@ return [
                     'checkbox-blank-outline' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m0 2v14H5V5h14Z"></path></svg>',
                     'checkbox-marked-outline' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 19H5V5h10V3H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8h-2m-11.09-.92L6.5 11.5L11 16L21 6l-1.41-1.42L11 13.17l-3.09-3.09Z"></path></svg>',
                     'search' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="m18.9 20.3l-5.6-5.6q-.75.6-1.725.95Q10.6 16 9.5 16q-2.725 0-4.612-1.887Q3 12.225 3 9.5q0-2.725 1.888-4.613Q6.775 3 9.5 3t4.613 1.887Q16 6.775 16 9.5q0 1.1-.35 2.075q-.35.975-.95 1.725l5.625 5.625q.275.275.275.675t-.3.7q-.275.275-.7.275q-.425 0-.7-.275ZM9.5 14q1.875 0 3.188-1.312Q14 11.375 14 9.5q0-1.875-1.312-3.188Q11.375 5 9.5 5Q7.625 5 6.312 6.312Q5 7.625 5 9.5q0 1.875 1.312 3.188Q7.625 14 9.5 14Z"></path></svg>',
+                ],
+            ],
+
+            'iconify' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,iconify',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'iconify\')',
+                    'x-init' => 'setup',
+                    'class' => 'iconify',
                 ],
             ],
 

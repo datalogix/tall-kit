@@ -23,6 +23,7 @@ import inputImage from './forms/input-image'
 import many from './forms/many'
 import mask from './forms/mask'
 import tagify from './forms/tagify'
+import iconify from './icons/iconify'
 import message from './messages/message'
 import cookieConsent from './overlays/cookie-consent'
 import modal from './overlays/modal'
@@ -91,6 +92,11 @@ export default {
   many,
   mask,
   tagify,
+
+  /**
+   * Icons.
+   */
+  iconify,
 
   /**
    * Messages.
