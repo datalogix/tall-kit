@@ -32,13 +32,15 @@
                     />
 
                     @if (Route::has($prefix.'.show') || Route::has($prefix.'.view'))
-                        <x-submit
-                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save-and-view') }}
-                            preset="save-and-view"
-                            :text="$tooltip ? '' : null"
-                            :tooltip="$tooltip"
-                            :theme="$theme"
-                        />
+                        @can(['show', 'view'], $model)
+                            <x-submit
+                                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'header-save-and-view') }}
+                                preset="save-and-view"
+                                :text="$tooltip ? '' : null"
+                                :tooltip="$tooltip"
+                                :theme="$theme"
+                            />
+                        @endcan
                     @endif
                 @endif
 
@@ -81,14 +83,17 @@
                     :theme="$theme"
                 />
 
+
                 @if (Route::has($prefix.'.show') || Route::has($prefix.'.view'))
-                    <x-submit
-                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save-and-view') }}
-                        preset="save-and-view"
-                        :text="$tooltip ? '' : null"
-                        :tooltip="$tooltip"
-                        :theme="$theme"
-                    />
+                    @can(['show', 'view'], $model)
+                        <x-submit
+                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer-save-and-view') }}
+                            preset="save-and-view"
+                            :text="$tooltip ? '' : null"
+                            :tooltip="$tooltip"
+                            :theme="$theme"
+                        />
+                    @endcan
                 @endif
             @endif
 

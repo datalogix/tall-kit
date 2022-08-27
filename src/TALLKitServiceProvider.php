@@ -5,6 +5,7 @@ namespace TALLKit;
 use Illuminate\Contracts\Foundation\CachesConfiguration;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\ComponentAttributeBag;
@@ -63,6 +64,7 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->bootGate();
         $this->bootMacros();
         $this->bootResources();
         $this->bootRoutes();
@@ -70,6 +72,18 @@ class TALLKitServiceProvider extends ServiceProvider
         $this->bootLivewireComponents();
         $this->bootDirectives();
         $this->bootPublishing();
+    }
+
+    /**
+     * Bootstrap gate.
+     *
+     * @return void
+     */
+    protected function bootGate()
+    {
+        Gate::after(function ($user, $ability, $result, $arguments) {
+            return true;
+        });
     }
 
     /**

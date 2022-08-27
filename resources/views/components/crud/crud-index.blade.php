@@ -13,25 +13,29 @@
                 {{ $actionsIndex }}
             @else
                 @if($route = route_detect([$prefix.'.create-many', $prefix.'.new-many', $prefix.'.form-many'], $parameters, null))
-                    <x-button
-                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create-many') }}
-                        preset="create-many"
-                        :text="$tooltip ? '' : null"
-                        :tooltip="$tooltip"
-                        :href="$route"
-                        :theme="$theme"
-                    />
+                    @can(['create-many', 'new-many', 'form-many'], $model)
+                        <x-button
+                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create-many') }}
+                            preset="create-many"
+                            :text="$tooltip ? '' : null"
+                            :tooltip="$tooltip"
+                            :href="$route"
+                            :theme="$theme"
+                        />
+                    @endcan
                 @endif
 
                 @if($route = route_detect([$prefix.'.create', $prefix.'.new', $prefix.'.form'], $parameters, null))
-                    <x-button
-                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create') }}
-                        preset="create"
-                        :text="$tooltip ? '' : null"
-                        :tooltip="$tooltip"
-                        :href="$route"
-                        :theme="$theme"
-                    />
+                    @can(['create', 'new', 'form'], $model)
+                        <x-button
+                            {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'create') }}
+                            preset="create"
+                            :text="$tooltip ? '' : null"
+                            :tooltip="$tooltip"
+                            :href="$route"
+                            :theme="$theme"
+                        />
+                    @endcan
                 @endif
             @endisset
         </x-crud-header>

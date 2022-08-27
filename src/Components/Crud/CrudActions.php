@@ -3,6 +3,7 @@
 namespace TALLKit\Components\Crud;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Gate;
 
 class CrudActions extends Crud
 {
@@ -17,6 +18,7 @@ class CrudActions extends Crud
      * @param  string|null  $prefix
      * @param  string|null  $key
      * @param  string|bool|null  $title
+     * @param  mixed  $model
      * @param  mixed  $parameters
      * @param  mixed  $resource
      * @param  bool|null  $forceMenu
@@ -31,6 +33,7 @@ class CrudActions extends Crud
         $prefix = null,
         $key = null,
         $title = null,
+        $model = null,
         $parameters = null,
         $resource = null,
         $forceMenu = null,
@@ -44,6 +47,7 @@ class CrudActions extends Crud
             $prefix,
             $key,
             $title,
+            $model,
             $parameters,
             $resource,
             $forceMenu,
@@ -59,6 +63,10 @@ class CrudActions extends Crud
                 return data_set($action, 'route', $this->getRoute($name, $action), false);
             })->filter(function ($action) {
                 return $action['route'];
+            })->filter(function ($action, $name) {
+                $abilities = target_get($action, ['can', 'abilities', 'except'], [$name]);
+
+                return Gate::check($abilities, $this->resource);
             });
 
         $exceededActions = $this->actions->count() > $this->maxActions;
