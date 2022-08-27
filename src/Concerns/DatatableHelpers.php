@@ -2,7 +2,6 @@
 
 namespace TALLKit\Concerns;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -58,11 +57,7 @@ class DatatableHelpers
     public static function getRows($rows, $cols = null, $search = null, $orderBy = null, $orderByDirection = null, $paginator = true, $parse = null)
     {
         if (is_string($rows)) {
-            try {
-                $rows = app($rows);
-            } catch (BindingResolutionException $e) {
-                $rows = app('App\Models\\'.Str::studly($rows));
-            }
+            $rows = make_model($rows);
         }
 
         if ($rows instanceof Model) {

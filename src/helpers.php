@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 if (! function_exists('route_detect')) {
     /**
@@ -68,5 +70,28 @@ if (! function_exists('collect_value')) {
         return Collection::make(value($items, ...$args))->map(function ($item, $key) use ($args) {
             return value($item, $key, ...$args);
         })->filter();
+    }
+}
+
+if (! function_exists('make_model')) {
+    /**
+     * Make a model.
+     *
+     * @param  string  $class
+     * @return mixed
+     */
+    function make_model($class)
+    {
+        if (class_exists($class)) {
+            return app($class);
+        }
+
+        try {
+            return app('\App\Models\\'.Str::of($class)->studly());
+        } catch (BindingResolutionException $e) {
+            //
+        }
+
+        return null;
     }
 }

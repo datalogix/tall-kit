@@ -83,14 +83,8 @@ class FieldsGenerator extends BladeComponent
 
         $name = target_get($field, 'name', is_int($key) ? $field : $key);
 
-        if (is_string($name) && Str::endsWith($name, '_id')) {
-            try {
-                $model = app('\App\Models\\'.Str::of($name)->replaceLast('_id', '')->studly());
-
-                return $model->get();
-            } catch (BindingResolutionException $e) {
-                //
-            }
+        if (is_string($name) && Str::endsWith($name, '_id') && $model = make_model(Str::replaceLast('_id', '', $name))) {
+            return $model->get();
         }
 
         return null;
