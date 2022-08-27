@@ -30,7 +30,7 @@
         @endif
 
         @if ($isWired() && $name)
-            wire:model{!! $wireModifier() !!}="{{ $name }}"
+            wire:model{!! $wireModifier($modifier) !!}="{{ $name }}"
         @else
             value="{{ $value ?? $slot }}"
         @endif

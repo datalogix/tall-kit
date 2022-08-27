@@ -53,6 +53,7 @@ class FieldView extends Field
         parent::__construct(
             $name,
             $label,
+            null,
             $showErrors,
             $theme,
             $groupable,

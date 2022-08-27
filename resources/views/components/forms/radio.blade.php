@@ -16,7 +16,7 @@
             @endif
 
             @if ($isWired() && $name)
-                wire:model{!! $wireModifier() !!}="{{ $name }}"
+                wire:model{!! $wireModifier($modifier) !!}="{{ $name }}"
             @endif
 
             @if ($checked)

@@ -3,6 +3,7 @@
         :component="$getFieldComponent($key, $field)"
         :options="$getFieldOptions($key, $field)"
         :name="target_get($field, 'name', $key)"
+        :modifier="target_get($field, 'modifier')"
         :mask="target_get($field, 'mask')"
         :cleave="target_get($field, 'cleave')"
         :tagify="target_get($field, 'tagify')"

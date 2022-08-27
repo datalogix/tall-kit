@@ -7,6 +7,7 @@
     :name="$name"
     :id="$id"
     :label="$label"
+    :modifier="$modifier"
     :default="$slot->isEmpty() ? $default : $slot"
     :show-errors="$showErrors"
     :theme="$theme"

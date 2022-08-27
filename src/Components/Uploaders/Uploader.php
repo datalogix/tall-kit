@@ -50,6 +50,7 @@ abstract class Uploader extends Input
             $label,
             'file',
             $bind,
+            null,
             $default,
             null,
             null,

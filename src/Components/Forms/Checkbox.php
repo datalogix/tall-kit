@@ -25,6 +25,7 @@ class Checkbox extends Field
      * @param  string|bool|null  $label
      * @param  mixed  $value
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  bool|null  $default
      * @param  bool|null  $showErrors
      * @param  string|null  $theme
@@ -35,6 +36,7 @@ class Checkbox extends Field
         $label = null,
         $value = null,
         $bind = null,
+        $modifier = null,
         $default = null,
         $showErrors = null,
         $theme = null
@@ -42,6 +44,7 @@ class Checkbox extends Field
         parent::__construct(
             $name,
             $label,
+            $modifier,
             $showErrors,
             $theme
         );

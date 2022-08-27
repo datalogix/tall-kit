@@ -14,6 +14,11 @@ class RadioList extends Group
     public $bind;
 
     /**
+     * @var string|null
+     */
+    public $modifier;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $name
@@ -26,6 +31,7 @@ class RadioList extends Group
      * @param  bool|null  $fieldset
      * @param  bool|null  $showErrors
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  string|null  $theme
      * @return void
      */
@@ -40,6 +46,7 @@ class RadioList extends Group
         $fieldset = null,
         $showErrors = null,
         $bind = null,
+        $modifier = null,
         $theme = null
     ) {
         parent::__construct(
@@ -54,5 +61,6 @@ class RadioList extends Group
 
         $this->setOptions($options, $itemValue, $itemText);
         $this->bind = $bind;
+        $this->modifier = $modifier;
     }
 }

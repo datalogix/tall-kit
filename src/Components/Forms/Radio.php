@@ -21,6 +21,7 @@ class Radio extends Field
      * @param  string|bool|null  $label
      * @param  mixed  $value
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  mixed  $default
      * @param  bool|null  $showErrors
      * @param  string|null  $theme
@@ -31,6 +32,7 @@ class Radio extends Field
         $label = null,
         $value = null,
         $bind = null,
+        $modifier = null,
         $default = null,
         $showErrors = null,
         $theme = null
@@ -38,6 +40,7 @@ class Radio extends Field
         parent::__construct(
             $name,
             $label,
+            $modifier,
             $showErrors,
             $theme
         );

@@ -27,6 +27,7 @@
         :name="$name"
         :id="$id"
         :label="false"
+        :modifier="$modifier"
         :default="$slot->isEmpty() ? $default : $slot"
         :show-errors="$showErrors"
         :theme="$theme"

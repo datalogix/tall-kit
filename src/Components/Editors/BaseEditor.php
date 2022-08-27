@@ -22,6 +22,7 @@ abstract class BaseEditor extends Textarea
      * @param  string|null  $id
      * @param  string|bool|null  $label
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  mixed  $default
      * @param  string|bool|null  $language
      * @param  bool|null  $showErrors
@@ -35,6 +36,7 @@ abstract class BaseEditor extends Textarea
         $id = null,
         $label = null,
         $bind = null,
+        $modifier = null,
         $default = null,
         $language = null,
         $showErrors = null,
@@ -48,6 +50,7 @@ abstract class BaseEditor extends Textarea
             $id,
             $label,
             $bind,
+            $modifier,
             $default,
             $language,
             $showErrors,

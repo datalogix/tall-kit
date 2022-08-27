@@ -16,6 +16,7 @@
                 :label="$option"
                 :value="$key"
                 :bind="$bind"
+                :modifier="$modifier"
                 :show-errors="false"
                 :theme="$theme"
             />

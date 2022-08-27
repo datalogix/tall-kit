@@ -81,6 +81,7 @@ class InputImage extends Input
      * @param  string|bool|null  $id
      * @param  string|bool|null  $label
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  mixed  $default
      * @param  string|bool|null  $language
      * @param  bool|null  $showErrors
@@ -106,6 +107,7 @@ class InputImage extends Input
         $id = null,
         $label = null,
         $bind = null,
+        $modifier = null,
         $default = null,
         $language = null,
         $showErrors = null,
@@ -131,6 +133,7 @@ class InputImage extends Input
             $label,
             'file',
             $bind,
+            $modifier,
             $default,
             null,
             null,

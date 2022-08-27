@@ -17,6 +17,11 @@ class Field extends FieldGroup
     public $label;
 
     /**
+     * @var string|null
+     */
+    public $modifier;
+
+    /**
      * @var bool
      */
     public $groupable;
@@ -31,6 +36,7 @@ class Field extends FieldGroup
      *
      * @param  string|null  $name
      * @param  string|bool|null  $label
+     * @param  string|null  $modifier
      * @param  bool|null  $showErrors
      * @param  string|null  $theme
      * @param  bool|null  $groupable
@@ -44,6 +50,7 @@ class Field extends FieldGroup
     public function __construct(
         $name = null,
         $label = null,
+        $modifier = null,
         $showErrors = null,
         $theme = null,
         $groupable = null,
@@ -63,6 +70,7 @@ class Field extends FieldGroup
 
         $this->setName($name);
         $this->label = $label ?? $this->getLabel();
+        $this->modifier = $modifier;
         $this->showErrors = ($showErrors ?? true) && $this->name;
         $this->groupable = $groupable ?? false;
         $this->display = $display;

@@ -16,6 +16,7 @@ class Pickr extends Input
      * @param  string|null  $id
      * @param  string|bool|null  $label
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  mixed  $default
      * @param  string|bool|null  $language
      * @param  bool|null  $showErrors
@@ -28,6 +29,7 @@ class Pickr extends Input
         $id = null,
         $label = null,
         $bind = null,
+        $modifier = null,
         $default = null,
         $language = null,
         $showErrors = null,
@@ -40,6 +42,7 @@ class Pickr extends Input
             $label,
             'hidden',
             $bind,
+            $modifier,
             $default,
             null,
             null,

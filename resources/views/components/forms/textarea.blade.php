@@ -22,7 +22,7 @@
         @endif
 
         @if ($isWired() && $name)
-            wire:model{!! $wireModifier() !!}="{{ $name }}"
+            wire:model{!! $wireModifier($modifier) !!}="{{ $name }}"
         @endif
     >@unless($isWired()){{ $value ?? $slot }}@endunless</textarea>
 

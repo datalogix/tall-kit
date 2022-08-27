@@ -51,6 +51,7 @@ class Input extends Field
      * @param  string|bool|null  $label
      * @param  string|null  $type
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  mixed  $default
      * @param  mixed  $mask
      * @param  array|null  $cleave
@@ -72,6 +73,7 @@ class Input extends Field
         $label = null,
         $type = null,
         $bind = null,
+        $modifier = null,
         $default = null,
         $mask = null,
         $cleave = null,
@@ -89,6 +91,7 @@ class Input extends Field
         parent::__construct(
             $name,
             $label,
+            $modifier,
             $showErrors,
             $theme,
             $groupable ?? true,

@@ -14,6 +14,11 @@ class CheckboxList extends Group
     public $bind;
 
     /**
+     * @var string|null
+     */
+    public $modifier;
+
+    /**
      * @var bool|null
      */
     public $selectAll;
@@ -36,6 +41,7 @@ class CheckboxList extends Group
      * @param  bool|null  $fieldset
      * @param  bool|null  $showErrors
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  bool|null  $selectAll
      * @param  bool|null  $deselectAll
      * @param  string|null  $theme
@@ -52,6 +58,7 @@ class CheckboxList extends Group
         $fieldset = null,
         $showErrors = null,
         $bind = null,
+        $modifier = null,
         $selectAll = null,
         $deselectAll = null,
         $theme = null
@@ -68,6 +75,7 @@ class CheckboxList extends Group
 
         $this->setOptions($options, $itemValue, $itemText);
         $this->bind = $bind;
+        $this->modifier = $modifier;
         $this->selectAll = $selectAll ?? $this->fieldset;
         $this->deselectAll = $deselectAll ?? $this->fieldset;
     }

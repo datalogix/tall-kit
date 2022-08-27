@@ -2,7 +2,6 @@
 
 namespace TALLKit\Components\Forms;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 

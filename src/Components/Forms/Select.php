@@ -35,6 +35,7 @@ class Select extends Field
      * @param  string|array|int|null  $itemValue
      * @param  string|array|int|null  $itemText
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  mixed  $default
      * @param  bool|null  $multiple
      * @param  bool|null  $emptyOption
@@ -54,6 +55,7 @@ class Select extends Field
         $itemValue = null,
         $itemText = null,
         $bind = null,
+        $modifier = null,
         $default = null,
         $multiple = null,
         $emptyOption = null,
@@ -68,6 +70,7 @@ class Select extends Field
         parent::__construct(
             $name,
             $label,
+            $modifier,
             $showErrors,
             $theme,
             $groupable ?? true,

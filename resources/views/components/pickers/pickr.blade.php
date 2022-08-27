@@ -14,6 +14,7 @@
         type="hidden"
         :name="$name"
         :id="$id"
+        :modifier="$modifier"
         :default="$slot->isEmpty() ? $default : $slot"
         :theme="$theme"
     />

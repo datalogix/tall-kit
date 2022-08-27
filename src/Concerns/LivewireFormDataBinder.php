@@ -31,11 +31,12 @@ trait LivewireFormDataBinder
     /**
      * Returns the optional wire modifier.
      *
+     * @param  string|null  $modifier
      * @return string
      */
-    public function wireModifier()
+    public function wireModifier($modifier = null)
     {
-        $modifier = app(FormDataBinder::class)->getWireModifier();
+        $modifier = $modifier ?? app(FormDataBinder::class)->getWireModifier();
 
         return $modifier ? ".{$modifier}" : null;
     }

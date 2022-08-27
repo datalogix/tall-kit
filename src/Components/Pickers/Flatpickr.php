@@ -26,6 +26,7 @@ class Flatpickr extends Input
      * @param  string|bool|null  $id
      * @param  string|bool|null  $label
      * @param  mixed  $bind
+     * @param  string|null  $modifier
      * @param  mixed  $default
      * @param  string|bool|null  $language
      * @param  bool|null  $showErrors
@@ -45,6 +46,7 @@ class Flatpickr extends Input
         $id = null,
         $label = null,
         $bind = null,
+        $modifier = null,
         $default = null,
         $language = null,
         $showErrors = null,
@@ -64,6 +66,7 @@ class Flatpickr extends Input
             $label,
             'text',
             $bind,
+            $modifier,
             $default,
             null,
             null,
