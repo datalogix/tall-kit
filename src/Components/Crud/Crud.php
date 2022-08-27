@@ -26,6 +26,11 @@ abstract class Crud extends BladeComponent
     public $title;
 
     /**
+     * @var mixed
+     */
+    public $model;
+
+    /**
      * @var array
      */
     public $parameters;
@@ -71,6 +76,7 @@ abstract class Crud extends BladeComponent
      * @param  string|bool|null  $prefix
      * @param  string|bool|null  $key
      * @param  string|bool|null  $title
+     * @param  mixed  $model
      * @param  mixed  $parameters
      * @param  mixed  $resource
      * @param  bool|null  $forceMenu
@@ -85,6 +91,7 @@ abstract class Crud extends BladeComponent
         $prefix = null,
         $key = null,
         $title = null,
+        $model = null,
         $parameters = null,
         $resource = null,
         $forceMenu = null,
@@ -107,6 +114,7 @@ abstract class Crud extends BladeComponent
         $this->actions = Collection::make($actions);
         $this->routeName = $routeName;
         $this->tooltip = $tooltip;
+
 
         $parts = null;
         $route = Route::currentRouteName();
@@ -138,5 +146,7 @@ abstract class Crud extends BladeComponent
         if (is_null($this->title)) {
             $this->title = (string) Str::of($this->key)->replace('-', ' ')->singular()->title();
         }
+
+        $this->model = $model ?? make_model($this->title);
     }
 }

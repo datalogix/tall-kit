@@ -52,6 +52,7 @@ class CrudForm extends Crud
      * @param  string|null  $prefix
      * @param  string|null  $key
      * @param  string|bool|null  $title
+     * @param  mixed  $model
      * @param  mixed  $parameters
      * @param  mixed  $resource
      * @param  bool|null  $forceMenu
@@ -74,6 +75,7 @@ class CrudForm extends Crud
         $prefix = null,
         $key = null,
         $title = null,
+        $model = null,
         $parameters = null,
         $resource = null,
         $forceMenu = null,
@@ -95,6 +97,7 @@ class CrudForm extends Crud
             $prefix,
             $key,
             $title,
+            $model,
             $parameters,
             $resource,
             $forceMenu,

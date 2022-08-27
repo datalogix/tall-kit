@@ -22,6 +22,11 @@ abstract class Crud extends LivewireComponent
     public $title;
 
     /**
+     * @var mixed
+     */
+    public $model;
+
+    /**
      * @var array
      */
     public $parameters;

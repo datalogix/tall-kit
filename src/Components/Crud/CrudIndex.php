@@ -68,6 +68,7 @@ class CrudIndex extends Crud
      * @param  string|bool|null  $prefix
      * @param  string|bool|null  $key
      * @param  string|bool|null  $title
+     * @param  mixed  $model
      * @param  mixed  $search
      * @param  bool|null  $searchDefault
      * @param  mixed  $searchValues
@@ -100,6 +101,7 @@ class CrudIndex extends Crud
         $prefix = null,
         $key = null,
         $title = null,
+        $model = null,
         $search = null,
         $searchDefault = null,
         $searchValues = null,
@@ -133,6 +135,7 @@ class CrudIndex extends Crud
             $prefix,
             $key,
             $title,
+            $model,
             $parameters,
             DatatableHelpers::getRows($resource ?? $rows, $cols, $search, $orderBy, $orderByDirection, $paginator ?? true, $parseRows),
             $forceMenu,

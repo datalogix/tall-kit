@@ -3,6 +3,7 @@
         :prefix="$prefix"
         :key="$key"
         :title="$title"
+        :model="$model"
         :search="$search"
         :search-default="$searchDefault"
         :search-values="$searchValues"
