@@ -2,8 +2,6 @@
 
 namespace TALLKit\Concerns;
 
-use Illuminate\Support\Collection;
-
 trait JsonOptions
 {
     /**
@@ -21,7 +19,7 @@ trait JsonOptions
     {
         $this->options = array_replace_recursive(
             $this->themeProvider->options->getAttributes(),
-            Collection::make($options)->toArray()
+            collection_value($options)->toArray()
         );
     }
 
