@@ -34,15 +34,13 @@ class DatatableHelpers
             $field = is_scalar($field) ? ['name' => $field] : $field;
 
             $field = data_set($field, 'name', $key, false);
-            $name = data_get($field, 'name');
+            $name = target_get($field, 'name');
             $field = data_set($field, 'value', $searchValues->get($name), false);
 
             return [$name => $field];
         });
 
-        return is_callable($parse)
-            ? $parse($search)
-            : $search;
+        return collection_value(with($search, $parse));
     }
 
     /**
@@ -69,7 +67,7 @@ class DatatableHelpers
 
         if ($rows instanceof Model) {
             $cols = $cols ? Collection::make($cols)->map(function ($col, $key) {
-                return is_int($key) ? data_get($col, 'name', $col) : $key;
+                return is_int($key) ? target_get($col, 'name', $col) : $key;
             })->toArray() : $rows->getFillable();
             $rows = $rows->query();
         }
@@ -80,9 +78,7 @@ class DatatableHelpers
             $rows = self::applyPaginator($rows, $paginator);
         }
 
-        return is_callable($parse)
-            ? $parse($rows)
-            : $rows;
+        return collection_value(with($rows, $parse));
     }
 
     /**
@@ -110,17 +106,15 @@ class DatatableHelpers
                 ? $col
                 : ['name' => is_int($key) ? $col : $key, 'title' => is_string($col) ? $col : $key];
 
-            $name = Str::lower(data_get($col, 'name', is_int($key) ? $col : $key));
-            $colSortable = data_get($col, 'sortable', $sortable);
+            $name = Str::lower(target_get($col, 'name', is_int($key) ? $col : $key));
+            $colSortable = target_get($col, 'sortable', $sortable);
 
             data_set($col, 'sortable', $colSortable && $orderBy === $name ? $orderByDirection : $colSortable);
 
             return $col;
         });
 
-        return is_callable($parse)
-            ? $parse($cols)
-            : $cols;
+        return collection_value(with($cols, $parse));
     }
 
     /**
@@ -154,13 +148,13 @@ class DatatableHelpers
 
         $rows = $rows->when($searchCols->isNotEmpty(), function (Builder $query) use ($searchCols, $search) {
             $searchFilter = $searchCols->mapWithKeys(function ($name) use ($search) {
-                return [$name => data_get($search->get($name), 'value')];
+                return [$name => target_get($search->get($name), 'value')];
             });
 
             return $query->filter($searchFilter->toArray());
         });
 
-        if ($search->has('q') && $cols->isNotEmpty() && $q = data_get($search->get('q'), 'value')) {
+        if ($search->has('q') && $cols->isNotEmpty() && $q = target_get($search->get('q'), 'value')) {
             $rows = $rows->whereLike($cols->toArray(), $q);
         }
 

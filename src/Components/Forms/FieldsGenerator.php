@@ -3,7 +3,6 @@
 namespace TALLKit\Components\Forms;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 
@@ -26,7 +25,7 @@ class FieldsGenerator extends BladeComponent
         $fields = null,
         $theme = null
     ) {
-        $this->fields = Collection::make($fields);
+        $this->fields = collection_value($fields);
 
         parent::__construct($theme);
     }

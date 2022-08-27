@@ -54,11 +54,12 @@ class CrudActions extends Crud
             $theme
         );
 
-        $this->actions = $this->actions->concat($this->getDefaultActions())->map(function ($action, $name) {
-            return data_set($action, 'route', $this->getRoute($name, $action), false);
-        })->filter(function ($action) {
-            return $action['route'];
-        });
+        $this->actions = collection_value($this->actions->concat($this->getDefaultActions()))
+            ->map(function ($action, $name) {
+                return data_set($action, 'route', $this->getRoute($name, $action), false);
+            })->filter(function ($action) {
+                return $action['route'];
+            });
 
         $exceededActions = $this->actions->count() > $this->maxActions;
 

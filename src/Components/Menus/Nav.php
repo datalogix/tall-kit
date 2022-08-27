@@ -2,7 +2,6 @@
 
 namespace TALLKit\Components\Menus;
 
-use Illuminate\Support\Collection;
 use TALLKit\Components\BladeComponent;
 
 class Nav extends BladeComponent
@@ -32,7 +31,7 @@ class Nav extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->items = Collection::make($items)->filter();
+        $this->items = collection_value($items);
         $this->inline = $inline ?? true;
     }
 }

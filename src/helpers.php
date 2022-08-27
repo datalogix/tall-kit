@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 
 if (! function_exists('route_detect')) {
@@ -26,8 +27,8 @@ if (! function_exists('route_detect')) {
 
 if (! function_exists('target_get')) {
     /**
-     * Get an item from an array or object using keys and
-     * return the default value of the given value.
+     * Get an item from an array or object using keys
+     * and return the default value of the given value.
      *
      * @param  mixed  $target
      * @param  string|array|int|null  $keys
@@ -51,5 +52,21 @@ if (! function_exists('target_get')) {
         }
 
         return $default;
+    }
+}
+
+if (! function_exists('collection_value')) {
+    /**
+     * Create a collection from the given value
+     * and return the default value of every item.
+     *
+     * @param  mixed  $items
+     * @return \Illuminate\Support\Collection
+     */
+    function collection_value($items = null, ...$args)
+    {
+        return Collection::make(value($items, ...$args))->map(function ($item, $key) use ($args) {
+            return value($item, $key, ...$args);
+        })->filter();
     }
 }
