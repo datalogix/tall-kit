@@ -19,13 +19,17 @@
     @elseif ($value === true)
         <x-icon
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'check') }}
-            preset="check"
-        />
+            :name="$attributes->mergeOnlyThemeProvider($themeProvider, 'check-name')->first()"
+        >
+            {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'check-svg')->first() !!}
+        </x-icon>
     @elseif ($value === false)
         <x-icon
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'uncheck') }}
-            preset="close"
-        />
+            :name="$attributes->mergeOnlyThemeProvider($themeProvider, 'uncheck-name')->first()"
+        >
+            {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'uncheck-svg')->first() !!}
+        </x-icon>
     @else
         {{ $slot->isEmpty() ? $value : $slot }}
     @endif

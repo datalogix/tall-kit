@@ -1,6 +1,6 @@
 <x-button color="none" {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
     @if ($userAvatar || $avatarSearch || isset($avatar))
-        <x-slot name="icon">
+        <x-slot name="iconContent">
             <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'icon') }}>
                 @isset ($avatar)
                     {{ $avatar }}

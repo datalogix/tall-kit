@@ -2921,9 +2921,13 @@ return [
                     'class' => 'fill-current w-6 h-6 text-green-500',
                 ],
 
+                'check-name' => 'check',
+
                 'uncheck' => [
                     'class' => 'fill-current w-6 h-6 text-red-500',
                 ],
+
+                'uncheck-name' => 'close',
             ],
 
             'error' => [

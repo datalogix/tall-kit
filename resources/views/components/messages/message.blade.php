@@ -42,7 +42,7 @@
                     :theme="$theme"
                 >
                     @if ($dismissibleIcon)
-                        <x-slot name="icon">
+                        <x-slot name="iconContent">
                             {!! $dismissibleIconSvg !!}
                         </x-slot>
                     @endif
