@@ -1,6 +1,6 @@
 <?php
 
-namespace TALLKit\Components\Layouts;
+namespace TALLKit\Components\States;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;

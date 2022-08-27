@@ -519,10 +519,7 @@ return [
         'authentication-card' => \TALLKit\Components\Layouts\AuthenticationCard::class,
         'container' => \TALLKit\Components\Layouts\Container::class,
         'control-panel' => \TALLKit\Components\Layouts\ControlPanel::class,
-        'display' => \TALLKit\Components\Layouts\Display::class,
-        'error' => \TALLKit\Components\Layouts\Error::class,
         'html' => \TALLKit\Components\Layouts\Html::class,
-        'loading' => \TALLKit\Components\Layouts\Loading::class,
         'logo' => \TALLKit\Components\Layouts\Logo::class,
         'meta' => \TALLKit\Components\Layouts\Meta::class,
 
@@ -594,6 +591,13 @@ return [
         'splide-item' => \TALLKit\Components\Sliders\SplideItem::class,
         'swiper' => \TALLKit\Components\Sliders\Swiper::class,
         'swiper-item' => \TALLKit\Components\Sliders\SwiperItem::class,
+
+        /**
+         * States.
+         */
+        'display' => \TALLKit\Components\States\Display::class,
+        'error' => \TALLKit\Components\States\Error::class,
+        'loading' => \TALLKit\Components\States\Loading::class,
 
         /**
          * Supports.
@@ -753,7 +757,6 @@ return [
         'control' => \TALLKit\Components\Layouts\ControlPanel::class,
         'cp' => \TALLKit\Components\Layouts\ControlPanel::class,
         'panel' => \TALLKit\Components\Layouts\ControlPanel::class,
-        'preview' => \TALLKit\Components\Layouts\Display::class,
 
         /**
          * Markdowns.
@@ -815,6 +818,13 @@ return [
         'slideritem' => \TALLKit\Components\Sliders\SliderItem::class,
         'splideitem' => \TALLKit\Components\Sliders\SplideItem::class,
         'swiperitem' => \TALLKit\Components\Sliders\SwiperItem::class,
+
+        /**
+         * States.
+         */
+        'preview' => \TALLKit\Components\Layouts\Display::class,
+        'value' => \TALLKit\Components\Layouts\Display::class,
+        'spinner' => \TALLKit\Components\States\Loading::class,
 
         /**
          * Supports.
@@ -2900,50 +2910,6 @@ return [
                 'message' => [],
             ],
 
-            'display' => [
-                'container' => [],
-
-                'img' => [],
-
-                'audio' => [
-                    'controls' => true,
-                ],
-
-                'video' => [
-                    'controls' => true,
-                ],
-
-                'download' => [
-                    'target' => '_blank',
-                ],
-
-                'check' => [
-                    'class' => 'fill-current w-6 h-6 text-green-500',
-                ],
-
-                'check-name' => 'check',
-
-                'uncheck' => [
-                    'class' => 'fill-current w-6 h-6 text-red-500',
-                ],
-
-                'uncheck-name' => 'close',
-            ],
-
-            'error' => [
-                'container' => [
-                    'class' => 'justify-center inline-flex items-center space-x-2',
-                ],
-
-                'icon' => [
-                    'class' => 'fill-current w-4 h-4 text-red-500',
-                ],
-
-                'icon-name' => 'close',
-
-                'text' => [],
-            ],
-
             'html' => [
                 'html' => [
                     'lang' => $lang,
@@ -2974,20 +2940,6 @@ return [
                         ],
                     ],
                 ],
-            ],
-
-            'loading' => [
-                'container' => [
-                    'class' => 'justify-center inline-flex items-center space-x-2',
-                ],
-
-                'icon' => [
-                    'class' => 'animate-spin w-4 h-4',
-                ],
-
-                'icon-name' => 'spinner',
-
-                'text' => [],
             ],
 
             'logo' => [
@@ -4111,6 +4063,67 @@ return [
                 'container' => [
                     'class' => 'swiper-slide',
                 ],
+            ],
+
+            /**
+             * States.
+             */
+            'display' => [
+                'container' => [],
+
+                'img' => [],
+
+                'audio' => [
+                    'controls' => true,
+                ],
+
+                'video' => [
+                    'controls' => true,
+                ],
+
+                'download' => [
+                    'target' => '_blank',
+                ],
+
+                'check' => [
+                    'class' => 'fill-current w-6 h-6 text-green-500',
+                ],
+
+                'check-name' => 'check',
+
+                'uncheck' => [
+                    'class' => 'fill-current w-6 h-6 text-red-500',
+                ],
+
+                'uncheck-name' => 'close',
+            ],
+
+            'error' => [
+                'container' => [
+                    'class' => 'justify-center inline-flex items-center space-x-2',
+                ],
+
+                'icon' => [
+                    'class' => 'fill-current w-4 h-4 text-red-500',
+                ],
+
+                'icon-name' => 'close',
+
+                'text' => [],
+            ],
+
+            'loading' => [
+                'container' => [
+                    'class' => 'justify-center inline-flex items-center space-x-2',
+                ],
+
+                'icon' => [
+                    'class' => 'animate-spin w-4 h-4',
+                ],
+
+                'icon-name' => 'spinner',
+
+                'text' => [],
             ],
 
             /**
