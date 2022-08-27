@@ -31,7 +31,7 @@ class Nav extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->items = collection_value($items);
+        $this->items = collect_value($items);
         $this->inline = $inline ?? true;
     }
 }

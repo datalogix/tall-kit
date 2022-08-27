@@ -40,7 +40,7 @@ class DatatableHelpers
             return [$name => $field];
         });
 
-        return collection_value(with($search, $parse));
+        return collect_value(with($search, $parse));
     }
 
     /**
@@ -78,7 +78,11 @@ class DatatableHelpers
             $rows = self::applyPaginator($rows, $paginator);
         }
 
-        return collection_value(with($rows, $parse));
+        $rows = with($rows, $parse);
+
+        return $rows instanceof Paginator
+            ? $rows->setCollection(collect_value($rows->getCollection()))
+            : collect_value($rows);
     }
 
     /**
@@ -114,7 +118,7 @@ class DatatableHelpers
             return $col;
         });
 
-        return collection_value(with($cols, $parse));
+        return collect_value(with($cols, $parse));
     }
 
     /**

@@ -55,7 +55,7 @@ if (! function_exists('target_get')) {
     }
 }
 
-if (! function_exists('collection_value')) {
+if (! function_exists('collect_value')) {
     /**
      * Create a collection from the given value
      * and return the default value of every item.
@@ -63,7 +63,7 @@ if (! function_exists('collection_value')) {
      * @param  mixed  $items
      * @return \Illuminate\Support\Collection
      */
-    function collection_value($items = null, ...$args)
+    function collect_value($items = null, ...$args)
     {
         return Collection::make(value($items, ...$args))->map(function ($item, $key) use ($args) {
             return value($item, $key, ...$args);

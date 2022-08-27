@@ -19,7 +19,7 @@ trait JsonOptions
     {
         $this->options = array_replace_recursive(
             $this->themeProvider->options->getAttributes(),
-            collection_value($options)->toArray()
+            collect_value($options)->toArray()
         );
     }
 

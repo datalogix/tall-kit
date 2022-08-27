@@ -25,7 +25,7 @@ class FieldsGenerator extends BladeComponent
         $fields = null,
         $theme = null
     ) {
-        $this->fields = collection_value($fields);
+        $this->fields = collect_value($fields);
 
         parent::__construct($theme);
     }

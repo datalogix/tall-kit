@@ -54,7 +54,7 @@ class CrudActions extends Crud
             $theme
         );
 
-        $this->actions = collection_value($this->actions->concat($this->getDefaultActions()))
+        $this->actions = collect_value($this->actions->union($this->getDefaultActions()))
             ->map(function ($action, $name) {
                 return data_set($action, 'route', $this->getRoute($name, $action), false);
             })->filter(function ($action) {

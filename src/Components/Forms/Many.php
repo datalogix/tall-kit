@@ -86,7 +86,7 @@ class Many extends Group
         $labels = null,
         $theme = null
     ) {
-        $this->fields = collection_value($fields)->map(function ($field, $key) {
+        $this->fields = collect_value($fields)->map(function ($field, $key) {
             $field = is_array($field) ? $field : [
                 'name' => is_int($key) ? $field : $key,
                 'label' => is_string($field) ? $field : $key,
