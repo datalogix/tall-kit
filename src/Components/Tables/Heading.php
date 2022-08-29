@@ -41,7 +41,13 @@ class Heading extends BladeComponent
 
         $this->name = $name;
         $this->align = $align ?? 'left';
-        $this->sortable = Str::lower($sortable) ?? false;
+
+        if ($sortable) {
+            $orderBy = Str::lower(request('orderBy'));
+            $orderByDirection = Str::lower(request('orderByDirection', 'asc'));
+
+            $this->sortable = $orderBy === $this->name ? $orderByDirection : Str::lower($sortable);
+        }
     }
 
     /**
