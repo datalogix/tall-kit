@@ -115,7 +115,6 @@ abstract class Crud extends BladeComponent
         $this->routeName = $routeName;
         $this->tooltip = $tooltip;
 
-
         $parts = null;
         $route = Route::currentRouteName();
 

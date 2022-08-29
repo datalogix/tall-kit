@@ -2597,7 +2597,7 @@ return [
                     'class' => 'w-full h-full',
 
                     'theme:icon-left' => [
-                        'class' => 'inline-block w-6 h-6'
+                        'class' => 'inline-block w-6 h-6',
                     ],
                 ],
 
@@ -2618,7 +2618,7 @@ return [
                     'class' => 'w-full h-full',
 
                     'theme:icon-left' => [
-                        'class' => 'inline-block w-6 h-6'
+                        'class' => 'inline-block w-6 h-6',
                     ],
                 ],
 
@@ -2771,7 +2771,6 @@ return [
             /**
              * Icons.
              */
-
             'fortawesome' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,fortawesome',
@@ -4166,7 +4165,7 @@ return [
             'avatar' => [
                 'container' => [
                     'theme:icon-name' => [
-                        'account'
+                        'account',
                     ],
                 ],
             ],

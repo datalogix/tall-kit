@@ -45,10 +45,24 @@ class Fortawesome extends BladeComponent
         $this->icon = Str::replaceFirst('fa-', '', $icon ?? $name);
         $this->iconStyle = 'solid';
 
-        if ($solid) $this->iconStyle = 'solid';
-        if ($regular) $this->iconStyle = 'regular';
-        if ($light) $this->iconStyle = 'light';
-        if ($thin) $this->iconStyle = 'thin';
-        if ($duotone) $this->iconStyle = 'duotone';
+        if ($solid) {
+            $this->iconStyle = 'solid';
+        }
+
+        if ($regular) {
+            $this->iconStyle = 'regular';
+        }
+
+        if ($light) {
+            $this->iconStyle = 'light';
+        }
+
+        if ($thin) {
+            $this->iconStyle = 'thin';
+        }
+
+        if ($duotone) {
+            $this->iconStyle = 'duotone';
+        }
     }
 }
