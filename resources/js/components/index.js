@@ -23,6 +23,7 @@ import inputImage from './forms/input-image'
 import many from './forms/many'
 import mask from './forms/mask'
 import tagify from './forms/tagify'
+import fortawesome from './icons/fortawesome'
 import iconify from './icons/iconify'
 import message from './messages/message'
 import cookieConsent from './overlays/cookie-consent'
@@ -96,6 +97,7 @@ export default {
   /**
    * Icons.
    */
+  fortawesome,
   iconify,
 
   /**

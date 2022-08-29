@@ -254,6 +254,10 @@ return [
         /**
          * Icons.
          */
+        'fortawesome' => [
+            'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css',
+        ],
+
         'iconify' => [
             'https://code.iconify.design/2/2.2.1/iconify.min.js',
         ],
@@ -517,6 +521,7 @@ return [
         /**
          * Icons.
          */
+        'fortawesome' => \TALLKit\Components\Icons\Fortawesome::class,
         'icon' => \TALLKit\Components\Icons\Icon::class,
         'iconify' => \TALLKit\Components\Icons\Iconify::class,
 
@@ -751,6 +756,7 @@ return [
         /**
          * Icons.
          */
+        'fa' => \TALLKit\Components\Icons\Fortawesome::class,
         'i' => \TALLKit\Components\Icons\Icon::class,
 
         /**
@@ -2765,6 +2771,16 @@ return [
             /**
              * Icons.
              */
+
+            'fortawesome' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,fortawesome',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'fortawesome\')',
+                    'x-init' => 'setup',
+                ],
+            ],
+
             'icon' => [
                 'presets' => [
                     'check' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59L21 7Z"></path></svg>',
