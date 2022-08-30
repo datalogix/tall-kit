@@ -1888,6 +1888,24 @@ return [
                             'class' => 'w-6 h-6 mx-auto',
                         ],
                     ],
+
+                    'prev' => [
+                        'text' => 'Previous',
+                        'color' => 'blue',
+                        'icon' => [
+                            'name' => 'arrow-left',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
+                    ],
+
+                    'next' => [
+                        'text' => 'Next',
+                        'color' => 'blue',
+                        'icon-right' => [
+                            'name' => 'arrow-right',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
+                    ],
                 ],
             ],
 
