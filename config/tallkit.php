@@ -506,6 +506,9 @@ return [
         'field-view' => \TALLKit\Components\Forms\FieldView::class,
         'fields-generator' => \TALLKit\Components\Forms\FieldsGenerator::class,
         'form' => \TALLKit\Components\Forms\Form::class,
+        'form-step' => \TALLKit\Components\Forms\FormStep::class,
+        'form-stepper' => \TALLKit\Components\Forms\FormStepper::class,
+        'form-steps' => \TALLKit\Components\Forms\FormSteps::class,
         'group' => \TALLKit\Components\Forms\Group::class,
         'input' => \TALLKit\Components\Forms\Input::class,
         'input-image' => \TALLKit\Components\Forms\InputImage::class,
@@ -740,8 +743,9 @@ return [
         'view' => \TALLKit\Components\Forms\FieldView::class,
         'view-field' => \TALLKit\Components\Forms\FieldView::class,
         'view-input' => \TALLKit\Components\Forms\FieldView::class,
-        'form-group' => \TALLKit\Components\Forms\Group::class,
         'generator-fields' => \TALLKit\Components\Forms\FieldsGenerator::class,
+        'form-wizard' => \TALLKit\Components\Forms\FormStepper::class,
+        'form-group' => \TALLKit\Components\Forms\Group::class,
         'image-preview' => \TALLKit\Components\Forms\InputImage::class,
         'lbl' => \TALLKit\Components\Forms\Label::class,
         'multiple' => \TALLKit\Components\Forms\Many::class,
@@ -2482,6 +2486,204 @@ return [
                     'data-tallkit-assets' => 'alpine',
                     'x-data' => 'window.tallkit.component(\'form\')',
                     '@submit' => 'prepareSubmit',
+                ],
+            ],
+
+            'form-step' => [
+                'container' => [],
+
+                'active' => [
+                    'class' => 'active',
+                ],
+
+                'completed' => [
+                    'class' => 'completed',
+                ],
+
+                'uncompleted' => [
+                    'class' => 'uncompleted',
+                ],
+
+                'step' => [
+                    'class' => 'text-gray-400',
+                ],
+
+                'pointer' => [
+                    'class' => 'flex items-center justify-center h-8 w-8 rounded-full',
+                ],
+
+                'pointer-status' => [
+                    'active' => [
+                        'class' => 'border-2 border-blue-500 text-blue-500'
+                    ],
+
+                    'completed' => [
+                        'class' => 'bg-blue-500 text-white',
+                    ],
+
+                    'uncompleted' => [
+                        'class' => 'border-2 border-gray-300',
+                    ],
+                ],
+
+                'icon' => [
+                    'class' => 'w-4 h-4',
+                ],
+
+                'content' => [
+                    'class' => 'flex flex-col',
+                ],
+
+                'content-status' => [
+                    'active' => [
+                        'class' => 'text-gray-500 font-semibold',
+                    ],
+
+                    'completed' => [],
+
+                    'uncompleted' => [],
+                ],
+
+                'title' => [],
+
+                'subtitle' => [
+                    'class' => 'text-sm',
+                ],
+
+                'horizontal' => [
+                    'container' => [
+                        'class' => 'flex flex-1',
+                    ],
+
+                    'active' => [],
+
+                    'completed' => [],
+
+                    'uncompleted' => [],
+
+                    'step' => [
+                        'class' => 'mx-2',
+                    ],
+
+                    'pointer' => [
+                        'class' => 'mx-auto mb-2',
+                    ],
+
+                    'pointer-status' => [],
+
+                    'icon' => [],
+
+                    'content' => [],
+
+                    'title' => [],
+
+                    'subtitle' => [],
+                ],
+
+                'vertical' => [
+                    'container' => [
+                        'class' => 'relative',
+                    ],
+
+                    'active' => [],
+
+                    'completed' => [],
+
+                    'uncompleted' => [],
+
+                    'step' => [
+                        'class' => 'flex space-x-2 items-start',
+                    ],
+
+                    'pointer' => [],
+
+                    'pointer-status' => [],
+
+                    'icon' => [],
+
+                    'content' => [],
+
+                    'title' => [],
+
+                    'subtitle' => [],
+                ],
+            ],
+
+            'form-steps' => [
+                'container' => [
+                    'class' => 'flex justify-space-between',
+                ],
+
+                'step' => [],
+
+                'horizontal' => [
+                    'container' => [
+                        'class' => 'form-steps-horizontal text-center',
+                    ],
+
+                    'step' => [],
+                ],
+
+                'vertical' => [
+                    'container' => [
+                        'class' => 'form-steps-vertical flex-col space-y-10',
+                    ],
+
+                    'step' => [],
+                ],
+            ],
+
+            'form-stepper' => [
+                'container' => [],
+
+                'card' => [
+                    'class' => 'mt-4',
+
+                    'theme:footer' => [
+                        'class' => 'flex items-center justify-center space-x-4',
+                    ],
+                ],
+
+                'prev' => [],
+
+                'prev-wire' => [
+                    'wire:loading.remove' => true,
+                ],
+
+                'next' => [],
+
+                'next-wire' => [
+                    'wire:loading.remove' => true,
+                ],
+
+                'loading' => [
+                    'wire:loading' => true,
+                ],
+
+                'horizontal' => [
+                    'container' => [],
+
+                    'card' => [],
+
+                    'prev' => [],
+
+                    'next' => [],
+
+                    'loading' => [],
+                ],
+
+                'vertical' => [
+                    'container' => [],
+
+                    'card' => [
+                        'class' => 'ml-10',
+                    ],
+
+                    'prev' => [],
+
+                    'next' => [],
+
+                    'loading' => [],
                 ],
             ],
 
