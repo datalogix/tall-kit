@@ -50,3 +50,17 @@
         @endisset
     </x-input>
 </x-field>
+
+@once
+    @push('styles')
+        <style>
+            .filepond--root {
+                margin-bottom:0!important;
+            }
+
+            .filepond--panel-root{
+                border-radius:0!important;
+            }
+        </style>
+    @endpush
+@endonce

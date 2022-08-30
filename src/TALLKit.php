@@ -103,15 +103,11 @@ class TALLKit
         $htmlScrips = $scripts->flatten()->filter(function ($value) {
             return ! Str::endsWith($value, '.css');
         })->map(function ($url) use ($assets, $nonce) {
-            return '<script src="'.$url.'"'.(in_array($url, target_get($assets, 'alpine', [])) ? ' defer' : '').$nonce.'></script>';
+            return '<script data-turbo-eval="false" data-turbolinks-eval="false" src="'.$url.'"'.(in_array($url, target_get($assets, 'alpine', [])) ? ' defer' : '').$nonce.'></script>';
         })->join("\n");
 
         return <<<HTML
-<style>
-    [x-cloak]{display:none!important;}
-    .filepond--root{margin-bottom:0!important;}
-    .filepond--panel-root{border-radius:0!important;}
-</style>
+<style>[x-cloak]{display:none!important;}</style>
 {$htmlStyles}
 {$htmlScrips}
 HTML;
