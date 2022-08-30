@@ -2514,7 +2514,7 @@ return [
 
                 'pointer-status' => [
                     'active' => [
-                        'class' => 'border-2 border-blue-500 text-blue-500'
+                        'class' => 'border-2 border-blue-500 text-blue-500',
                     ],
 
                     'completed' => [
