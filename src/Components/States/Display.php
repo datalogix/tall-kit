@@ -62,7 +62,7 @@ class Display extends BladeComponent
 
         // Date | DateTime
         if ($value instanceof Carbon) {
-            $value = $value->format($value->toTimeString() === '00:00:00' ? 'd/m/Y' : 'd/m/Y H:i:s');
+            $value = $value->format(__($value->toTimeString() === '00:00:00' ? 'm/d/Y' : 'm/d/Y H:i:s'));
         }
 
         $this->value = $value;

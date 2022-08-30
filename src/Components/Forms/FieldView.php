@@ -64,7 +64,7 @@ class FieldView extends Field
             false,
         );
 
-        $this->default = $default ?? '---';
+        $this->default = $default ?? __('---');
         $this->value = $value;
         $this->bind = $bind ?? $this->getBoundTarget();
     }

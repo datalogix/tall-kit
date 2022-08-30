@@ -51,7 +51,7 @@ class Carbon extends BladeComponent
         parent::__construct($theme);
 
         $this->date = CarbonAlias::parse($date, $tz);
-        $this->format = $format ?? 'd/m/Y H:i:s';
+        $this->format = $format ?? __('m/d/Y H:i:s');
         $this->human = $human ?? false;
         $this->local = $local;
     }

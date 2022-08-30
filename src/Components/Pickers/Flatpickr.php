@@ -81,7 +81,7 @@ class Flatpickr extends Input
             $appendIcon
         );
 
-        $this->format = $format ?? 'd/m/Y H:i';
+        $this->format = $format ?? __('m/d/Y H:i');
         $this->placeholder = $placeholder;
         $this->setOptions($options);
     }

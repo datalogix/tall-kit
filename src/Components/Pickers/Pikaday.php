@@ -81,7 +81,7 @@ class Pikaday extends Input
             $appendIcon
         );
 
-        $this->format = $format ?? 'DD/MM/YYYY';
+        $this->format = $format ?? __('MM/DD/YYYY');
         $this->placeholder = $placeholder;
         $this->setOptions($options);
     }
