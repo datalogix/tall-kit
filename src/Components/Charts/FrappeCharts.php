@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Charts;
 
-class FrappeCharts extends BaseChart
+class FrappeCharts extends AbstractChart
 {
     //
 }

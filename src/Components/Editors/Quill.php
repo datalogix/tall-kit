@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Editors;
 
-class Quill extends BaseEditor
+class Quill extends AbstractEditor
 {
     //
 }

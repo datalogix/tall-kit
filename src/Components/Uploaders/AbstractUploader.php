@@ -5,7 +5,7 @@ namespace TALLKit\Components\Uploaders;
 use TALLKit\Components\Forms\Input;
 use TALLKit\Concerns\JsonOptions;
 
-abstract class Uploader extends Input
+abstract class AbstractUploader extends Input
 {
     use JsonOptions;
 

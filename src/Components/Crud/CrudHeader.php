@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Crud;
 
-class CrudHeader extends Crud
+class CrudHeader extends AbstractCrud
 {
     //
 }

@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Charts;
 
-class ChartJs extends BaseChart
+class ChartJs extends AbstractChart
 {
     /**
      * @var bool

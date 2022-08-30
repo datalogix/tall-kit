@@ -2,20 +2,12 @@
 
 namespace TALLKit\Components\Icons;
 
-use Illuminate\Support\Str;
-use TALLKit\Components\BladeComponent;
-
-class Fortawesome extends BladeComponent
+class Fortawesome extends AbstractIcon
 {
-    /**
-     * @var string|null
-     */
-    public $icon;
-
     /**
      * @var string
      */
-    public $iconStyle;
+    public $style;
 
     /**
      * Create a new component instance.
@@ -31,8 +23,8 @@ class Fortawesome extends BladeComponent
      * @return void
      */
     public function __construct(
-        $icon = null,
         $name = null,
+        $icon = null,
         $solid = null,
         $regular = null,
         $light = null,
@@ -40,29 +32,28 @@ class Fortawesome extends BladeComponent
         $duotone = null,
         $theme = null
     ) {
-        parent::__construct($theme);
+        parent::__construct($name, $icon, $theme);
 
-        $this->icon = Str::replaceFirst('fa-', '', $icon ?? $name);
-        $this->iconStyle = 'solid';
+        $this->style = 'solid';
 
         if ($solid) {
-            $this->iconStyle = 'solid';
+            $this->style = 'solid';
         }
 
         if ($regular) {
-            $this->iconStyle = 'regular';
+            $this->style = 'regular';
         }
 
         if ($light) {
-            $this->iconStyle = 'light';
+            $this->style = 'light';
         }
 
         if ($thin) {
-            $this->iconStyle = 'thin';
+            $this->style = 'thin';
         }
 
         if ($duotone) {
-            $this->iconStyle = 'duotone';
+            $this->style = 'duotone';
         }
     }
 }

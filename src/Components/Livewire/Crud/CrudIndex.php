@@ -4,7 +4,7 @@ namespace TALLKit\Components\Livewire\Crud;
 
 use TALLKit\Concerns\LivewireDatatable;
 
-class CrudIndex extends Crud
+class CrudIndex extends AbstractCrud
 {
     use LivewireDatatable;
 

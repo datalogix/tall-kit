@@ -5,7 +5,7 @@ namespace TALLKit\Components\Crud;
 use Illuminate\Support\Str;
 use TALLKit\Concerns\DatatableHelpers;
 
-class CrudIndex extends Crud
+class CrudIndex extends AbstractCrud
 {
     /**
      * @var mixed

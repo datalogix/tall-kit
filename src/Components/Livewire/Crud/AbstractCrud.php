@@ -4,7 +4,7 @@ namespace TALLKit\Components\Livewire\Crud;
 
 use TALLKit\Components\LivewireComponent;
 
-abstract class Crud extends LivewireComponent
+abstract class AbstractCrud extends LivewireComponent
 {
     /**
      * @var string

@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Charts;
 
-class Highcharts extends BaseChart
+class Highcharts extends AbstractChart
 {
     //
 }

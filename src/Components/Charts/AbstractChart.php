@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 use TALLKit\Concerns\JsonOptions;
 
-abstract class BaseChart extends BladeComponent
+abstract class AbstractChart extends BladeComponent
 {
     use JsonOptions;
 

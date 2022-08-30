@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 
-abstract class Crud extends BladeComponent
+abstract class AbstractCrud extends BladeComponent
 {
     /**
      * @var string

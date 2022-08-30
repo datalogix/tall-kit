@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Uploaders;
 
-class Dropzone extends Uploader
+class Dropzone extends AbstractUploader
 {
     /**
      * Get options values.

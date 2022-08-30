@@ -5,7 +5,7 @@ namespace TALLKit\Components\Crud;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 
-class CrudActions extends Crud
+class CrudActions extends AbstractCrud
 {
     /**
      * @var \Illuminate\Support\Collection

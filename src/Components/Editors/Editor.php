@@ -4,7 +4,7 @@ namespace TALLKit\Components\Editors;
 
 use Illuminate\Support\Str;
 
-class Editor extends BaseEditor
+class Editor extends AbstractEditor
 {
     /**
      * Get component key.

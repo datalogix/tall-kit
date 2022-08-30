@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Crud;
 
-class CrudShow extends Crud
+class CrudShow extends AbstractCrud
 {
     /**
      * @var string|bool|null

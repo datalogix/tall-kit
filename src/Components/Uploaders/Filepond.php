@@ -2,7 +2,7 @@
 
 namespace TALLKit\Components\Uploaders;
 
-class Filepond extends Uploader
+class Filepond extends AbstractUploader
 {
     /**
      * Get options values.

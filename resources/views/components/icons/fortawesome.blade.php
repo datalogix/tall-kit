@@ -1,6 +1,6 @@
 <i {{
     $attributes
         ->mergeThemeProvider($themeProvider, 'container')
-        ->merge(['class' => 'fa-'.$iconStyle])
-        ->merge(['class' => 'fa-'.($slot->isEmpty() ? $icon : $slot)])
+        ->merge(['class' => 'fa-'.$style])
+        ->merge(['class' => 'fa-'.Str::replaceFirst('fa-', '', ($slot->isEmpty() ? $name : $slot))])
 }}></i>

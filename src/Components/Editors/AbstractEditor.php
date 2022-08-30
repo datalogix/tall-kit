@@ -5,7 +5,7 @@ namespace TALLKit\Components\Editors;
 use TALLKit\Components\Forms\Textarea;
 use TALLKit\Concerns\JsonOptions;
 
-abstract class BaseEditor extends Textarea
+abstract class AbstractEditor extends Textarea
 {
     use JsonOptions;
 

@@ -4,7 +4,7 @@ namespace TALLKit\Components\Crud;
 
 use Illuminate\Support\Str;
 
-class CrudForm extends Crud
+class CrudForm extends AbstractCrud
 {
     /**
      * @var bool
