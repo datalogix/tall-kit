@@ -3,6 +3,8 @@ import ComponentsManager from './managers/components'
 import components from './components'
 import { dispatch } from './utils'
 
+import '../css/style.scss'
+
 class TALLKit {
   constructor (options = {}, assets = {}) {
     this.ready = false

@@ -13,7 +13,7 @@
     "eslint-plugin-import": "^2.26",
     "eslint-plugin-n": "^15.2",
     "eslint-plugin-promise": "^6.0",
-    "rollup-plugin-output-manifest": "^2.0",
+    "sass": "^1.54",
     "vite": "^3.0",
     "vite-plugin-eslint": "^1.8"
   }

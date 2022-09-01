@@ -2,6 +2,7 @@
 
 namespace TALLKit;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 trait Components
@@ -17,7 +18,7 @@ trait Components
      * Register component.
      *
      * @param  string  $name
-     * @param  string|null  $content
+     * @param  string|string[]|null  $content
      * @param  bool  $overwrite
      * @return void
      */
@@ -66,7 +67,7 @@ trait Components
      * Get component.
      *
      * @param  string  $name
-     * @return string
+     * @return string|string[]
      */
     public function getComponent($name)
     {
@@ -74,28 +75,57 @@ trait Components
     }
 
     /**
-     * Render components.
+     * Render styles components.
+     *
+     * @return string
+     */
+    public function renderStylesComponents()
+    {
+        $result = [];
+
+        foreach ($this->components as $name => $contents) {
+            foreach (Arr::wrap($contents) as $pos => $content) {
+                if (! Str::endsWith($content, '.css')) {
+                    continue;
+                }
+
+                $href = route('tallkit.component', compact('name', 'pos'));
+                $result[] = '<link href="'.$href.'" rel="stylesheet" />';
+            }
+        }
+
+        return implode("\n", $result);
+    }
+
+    /**
+     * Render scripts components.
      *
      * @param  string  $nonce
      * @return string
      */
-    public function renderComponents($nonce = '')
+    public function renderScriptsComponents($nonce = '')
     {
         $result = [];
 
-        foreach ($this->components as $name => $actions) {
-            if (Str::endsWith($actions, '.js') || Str::contains($actions, '.js?')) {
-                $componentSrc = route('tallkit.component', $name);
-                $result[] = <<<HTML
-<script src="{$componentSrc}" data-turbo-eval="false" data-turbolinks-eval="false"${$nonce}></script>
+        foreach ($this->components as $name => $contents) {
+            foreach (Arr::wrap($contents) as $pos => $content) {
+                if (Str::endsWith($content, '.css')) {
+                    continue;
+                }
+
+                if (Str::endsWith($content, '.js') || Str::contains($content, '.js?')) {
+                    $src = route('tallkit.component', compact('name', 'pos'));
+                    $result[] = <<<HTML
+<script src="{$src}" data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}></script>
 HTML;
-            } else {
-                $actionsEncoded = $actions ?? '{}';
-                $result[] = <<<HTML
+                } else {
+                    $content = $actions ?? '{}';
+                    $result[] = <<<HTML
 <script data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}>
-    window.tallkit.components.register('$name', $actionsEncoded);
+    window.tallkit.components.register('{$name}', $content);
 </script>
 HTML;
+                }
             }
         }
 

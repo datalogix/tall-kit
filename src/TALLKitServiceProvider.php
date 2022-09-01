@@ -13,8 +13,8 @@ use Livewire\Livewire;
 use TALLKit\Binders\FormDataBinder;
 use TALLKit\Binders\ThemeBinder;
 use TALLKit\Components\ThemeProvider;
-use TALLKit\Controllers\JavaScriptAssets;
-use TALLKit\Controllers\Upload;
+use TALLKit\Controllers\AssetsController;
+use TALLKit\Controllers\UploadController;
 use TALLKit\Macros\MergeOnlyThemeProvider;
 use TALLKit\Macros\MergeThemeProvider;
 
@@ -114,16 +114,16 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     protected function bootRoutes()
     {
-        Route::get('/tallkit/{path}', [JavaScriptAssets::class, 'source'])->name('tallkit.source');
-        Route::get('/tallkit/component/{name}', [JavaScriptAssets::class, 'component'])->name('tallkit.component');
+        Route::get('/tallkit/{path}', [AssetsController::class, 'source'])->name('tallkit.source');
+        Route::get('/tallkit/component/{name}', [AssetsController::class, 'component'])->name('tallkit.component');
 
         if (config('tallkit.options.upload.enabled')) {
-            Route::post('/tallkit/upload', [Upload::class, 'store'])
+            Route::post('/tallkit/upload', [UploadController::class, 'store'])
                 ->middleware(config('tallkit.options.upload.middleware', 'web'))
                 ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class)
                 ->name('tallkit.upload');
 
-            Route::delete('/tallkit/upload', [Upload::class, 'destroy'])
+            Route::delete('/tallkit/upload', [UploadController::class, 'destroy'])
                 ->middleware(config('tallkit.options.upload.middleware', 'web'));
         }
     }
@@ -170,7 +170,7 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     protected function bootDirectives()
     {
-        Blade::directive('tallkitStyles', [TALLKitBladeDirectives::class, 'styles']);
+        Blade::directive('tallkitHead', [TALLKitBladeDirectives::class, 'head']);
         Blade::directive('tallkitScripts', [TALLKitBladeDirectives::class, 'scripts']);
         Blade::directive('theme', [TALLKitBladeDirectives::class, 'theme']);
         Blade::directive('endtheme', [TALLKitBladeDirectives::class, 'endtheme']);

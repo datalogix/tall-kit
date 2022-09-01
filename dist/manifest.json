@@ -1,3 +1,11 @@
 {
-  "tallkit.js": "tallkit.017873e7.js"
+  "resources/js/tallkit.js": {
+    "file": "tallkit.fc94c62b.js",
+    "src": "resources/js/tallkit.js",
+    "isEntry": true
+  },
+  "style.css": {
+    "file": "style.00ec133f.css",
+    "src": "style.css"
+  }
 }

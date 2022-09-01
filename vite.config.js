@@ -1,10 +1,10 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import eslint from 'vite-plugin-eslint'
-import outputManifest from 'rollup-plugin-output-manifest'
 
 export default defineConfig({
   build: {
+    manifest: true,
     sourcemap: true,
     lib: {
       entry: resolve(__dirname, 'resources/js/tallkit.js'),
@@ -14,7 +14,8 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        entryFileNames: '[name].[hash].js'
+        entryFileNames: '[name].[hash].js',
+        assetFileNames: '[name].[hash].[ext]'
       }
     }
   },
@@ -22,7 +23,6 @@ export default defineConfig({
   plugins: [
     eslint({
       fix: true
-    }),
-    outputManifest()
+    })
   ]
 })

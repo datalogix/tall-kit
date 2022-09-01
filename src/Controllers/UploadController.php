@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use TALLKit\Requests\UploadRequest;
 
-class Upload
+class UploadController
 {
     /**
      * Store.

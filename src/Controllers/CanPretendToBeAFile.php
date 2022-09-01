@@ -2,20 +2,24 @@
 
 namespace TALLKit\Controllers;
 
+use Illuminate\Support\Str;
+
 trait CanPretendToBeAFile
 {
     /**
      * Pretend response is file.
      *
-     * @param  string  $file
-     * @param  string  $mimeType
+     * @param  string  $files
+     * @param  string|null  $mimeType
      * @return \Illuminate\Http\Response
      */
-    public function pretendResponseIsFile($file, $mimeType = 'application/javascript')
+    public function pretendResponseIsFile($file, $mimeType = null)
     {
+        $mimeType = $mimeType || $this->getMimeType($file);
+
         if (config('app.debug')) {
             return response()->file($file, [
-                'Content-Type' => "$mimeType; charset=utf-8",
+                'Content-Type' => ($mimeType ? $mimeType."; " : "") . "charset=utf-8",
             ]);
         }
 
@@ -31,7 +35,7 @@ trait CanPretendToBeAFile
         }
 
         return response()->file($file, [
-            'Content-Type' => "$mimeType; charset=utf-8",
+            'Content-Type' => ($mimeType ? $mimeType."; " : "") . "charset=utf-8",
             'Expires' => $this->httpDate($expires),
             'Cache-Control' => $cacheControl,
             'Last-Modified' => $this->httpDate($lastModified),
@@ -60,5 +64,22 @@ trait CanPretendToBeAFile
     protected function httpDate($timestamp)
     {
         return sprintf('%s GMT', gmdate('D, d M Y H:i:s', $timestamp));
+    }
+
+    /**
+     * Get mime type.
+     *
+     * @param  string  $file
+     * @return string|null
+     */
+    protected function getMimeType($file)
+    {
+        if (Str::endsWith($file, '.css')) {
+            return 'text/css';
+        }
+
+        if (Str::endsWith($file, '.js')) {
+            return 'application/javascript';
+        }
     }
 }

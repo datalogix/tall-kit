@@ -5,7 +5,7 @@ namespace TALLKit\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static string styles($config = null)
+ * @method static string head($config = null)
  * @method static string scripts($config = null)
  * @method static void registerAsset($name, $content = null, $overwrite = true)
  * @method static bool hasAsset($name)
@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Facade;
  * @method static array getAllAssets()
  * @method static string|string[] getAsset($name)
  * @method static string renderAssets()
- * @method static string registerComponent($name, $content = null, $overwrite = true)
+ * @method static void registerComponent($name, $content = null, $overwrite = true)
  * @method static bool hasComponent($name)
  * @method static void unregisterComponent($name)
  * @method static array getAllComponents()
- * @method static string getComponent($name)
- * @method static string renderComponents()
+ * @method static string|string[] getComponent($name)
+ * @method static string renderStylesComponents()
+ * @method static string renderScriptsComponents($nonce = '')
  *
  * @see \TALLKit\TALLKit
  */

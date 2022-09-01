@@ -7,14 +7,14 @@ use Illuminate\Support\Str;
 class TALLKitBladeDirectives
 {
     /**
-     * Styles.
+     * Head.
      *
      * @param  mixed  $expression
      * @return string
      */
-    public static function styles($expression)
+    public static function head($expression)
     {
-        return '<?php echo \TALLKit\Facades\TALLKit::styles('.$expression.'); ?>';
+        return '<?php echo \TALLKit\Facades\TALLKit::head('.$expression.'); ?>';
     }
 
     /**

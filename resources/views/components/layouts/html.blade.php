@@ -52,7 +52,7 @@
     @endif
 
     @if (is_array($tallkit))
-        @tallkitStyles($tallkit)
+        @tallkitHead($tallkit)
     @endif
 
     @foreach ($mixStyles as $mixStyle)

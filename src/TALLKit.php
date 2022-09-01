@@ -10,16 +10,16 @@ class TALLKit
     use Assets, Components;
 
     /**
-     * Styles.
+     * Head.
      *
      * @param  mixed  $config
      * @return string
      */
-    public function styles($config = null)
+    public function head($config = null)
     {
         $debug = config('app.debug');
 
-        $styles = $this->cssAssets(
+        $styles = $this->headAssets(
             array_replace_recursive(config('tallkit.options', []), target_get($config, 'options', [])),
             array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), target_get($config, 'assets', []))
         );
@@ -27,7 +27,7 @@ class TALLKit
         // HTML Label.
         $html = $debug ? ['<!-- TALLKit Styles -->'] : [];
 
-        // CSS assets.
+        // Assets.
         $html[] = $debug ? $styles : $this->minify($styles);
 
         return implode("\n", $html);
@@ -43,7 +43,7 @@ class TALLKit
     {
         $debug = config('app.debug');
 
-        $scripts = $this->javascriptAssets(
+        $assets = $this->scriptsAssets(
             array_replace_recursive(config('tallkit.options', []), target_get($config, 'options', [])),
             array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), target_get($config, 'assets', []))
         );
@@ -51,22 +51,22 @@ class TALLKit
         // HTML Label.
         $html = $debug ? ['<!-- TALLKit Scripts -->'] : [];
 
-        // JavaScript assets.
-        $html[] = $debug ? $scripts : $this->minify($scripts);
+        // Assets.
+        $html[] = $debug ? $assets : $this->minify($assets);
 
         return implode("\n", $html);
     }
 
     /**
-     * Css assets.
+     * Head assets.
      *
      * @param  array  $options
      * @param  array  $assets
      * @return string
      */
-    protected function cssAssets($options, $assets)
+    protected function headAssets($options, $assets)
     {
-        $styles = Collection::make();
+        $styles = Collection::make([$this->getFullAssetPath($options, 'style.css')]);
         $scripts = Collection::make();
 
         if (target_get($options, 'inject.tailwindcss') && $tailwindcss = target_get($assets, 'tailwindcss')) {
@@ -94,44 +94,40 @@ class TALLKit
             return '<link href="'.$url.'" rel="stylesheet" />';
         })->join("\n");
 
+        $tallkitStylesComponents = $this->renderStylesComponents();
+
         $nonce = '';
 
         if ($nonceValue = target_get($options, 'nonce')) {
             $nonce = ' nonce="'.$nonceValue.'"';
         }
 
-        $htmlScrips = $scripts->flatten()->filter(function ($value) {
+        $htmlScripts = $scripts->flatten()->filter(function ($value) {
             return ! Str::endsWith($value, '.css');
         })->map(function ($url) use ($assets, $nonce) {
-            return '<script data-turbo-eval="false" data-turbolinks-eval="false" src="'.$url.'"'.(in_array($url, target_get($assets, 'alpine', [])) ? ' defer' : '').$nonce.'></script>';
+            $defer = (in_array($url, target_get($assets, 'alpine', [])) ? ' defer' : '');
+            return '<script data-turbo-eval="false" data-turbolinks-eval="false" src="'.$url.'"'.$defer.$nonce.'></script>';
         })->join("\n");
 
         return <<<HTML
-<style>[x-cloak]{display:none!important;}</style>
 {$htmlStyles}
-{$htmlScrips}
+{$tallkitStylesComponents}
+{$htmlScripts}
 HTML;
     }
 
     /**
-     * Javascript assets.
+     * Scripts assets.
      *
      * @param  array  $options
      * @param  array  $assets
      * @return string
      */
-    protected function javascriptAssets($options, $assets)
+    protected function scriptsAssets($options, $assets)
     {
         $jsonEncodedOptions = $options ? json_encode($options) : '';
         $jsonEncodedAssets = $assets ? json_encode($assets) : '';
-
-        $appUrl = rtrim(target_get($options, 'asset_url', ''), '/');
-
-        $manifest = json_decode(file_get_contents(__DIR__.'/../dist/manifest.json'), true);
-        $versionedFileName = $manifest['tallkit.js'];
-
-        // Default to dynamic `tallkit.js` (served by a Laravel route).
-        $fullAssetPath = "{$appUrl}/tallkit/{$versionedFileName}";
+        $fullAssetPath = $this->getFullAssetPath($options, 'resources/js/tallkit.js');
         $assetWarning = null;
 
         $nonce = '';
@@ -140,24 +136,16 @@ HTML;
             $nonce = ' nonce="'.$nonceValue.'"';
         }
 
-        // Use static assets if they have been published.
-        if (file_exists(public_path('vendor/tallkit/manifest.json'))) {
-            $publishedManifest = json_decode(file_get_contents(public_path('vendor/tallkit/manifest.json')), true);
-            $versionedFileName = $publishedManifest['tallkit.js'];
-
-            $fullAssetPath = ($this->isRunningServerless() ? config('app.asset_url') : $appUrl).'/vendor/tallkit/'.$versionedFileName;
-
-            if ($manifest !== $publishedManifest) {
-                $assetWarning = <<<'HTML'
+        if ($this->isAssetsOutOfDate()) {
+            $assetWarning = <<<'HTML'
 <script{$nonce}>
-    console.warn("TALLKit: The published TALLKit assets are out of date.");
+    console.warn('TALLKit: The published TALLKit assets are out of date.');
 </script>
 HTML;
-            }
         }
 
         $tallkitAssets = $this->renderAssets();
-        $tallkitComponents = $this->renderComponents($nonce);
+        $tallkitScriptsComponents = $this->renderScriptsComponents($nonce);
 
         // Adding semicolons for this JavaScript is important,
         // because it will be minified in production.
@@ -170,7 +158,7 @@ HTML;
         {$tallkitAssets}
     }
 </script>
-{$tallkitComponents}
+{$tallkitScriptsComponents}
 <script data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}>
     window.deferLoadingAlpine = function (callback) {
         window.addEventListener('tallkit:load', function () {
@@ -198,6 +186,50 @@ HTML;
     protected function minify($subject)
     {
         return preg_replace('~(\v|\t|\s{2,})~m', '', $subject);
+    }
+
+    /**
+     * Get full asset path.
+     *
+     * @param  array  $options
+     * @param  string  $file
+     * @return string
+     */
+    protected function getFullAssetPath($options, $file)
+    {
+        $appUrl = rtrim(target_get($options, 'asset_url', ''), '/');
+
+        $manifest = json_decode(file_get_contents(__DIR__.'/../dist/manifest.json'), true);
+        $versionedFileName = $manifest[$file]['file'];
+        $fullAssetPath = "{$appUrl}/tallkit/{$versionedFileName}";
+
+        // Use static assets if they have been published.
+        if (file_exists(public_path('vendor/tallkit/manifest.json'))) {
+            $publishedManifest = json_decode(file_get_contents(public_path('vendor/tallkit/manifest.json')), true);
+            $versionedFileName = $publishedManifest[$file]['file'];
+            $fullAssetPath = ($this->isRunningServerless() ? config('app.asset_url') : $appUrl).'/vendor/tallkit/'.$versionedFileName;
+        }
+
+        return $fullAssetPath;
+    }
+
+    /**
+     * Is assets out of date.
+     *
+     * @return bool
+     */
+    protected function isAssetsOutOfDate()
+    {
+        $publicManifestPath = public_path('vendor/tallkit/manifest.json');
+
+        if (! file_exists($publicManifestPath)) {
+            return false;
+        }
+
+        $manifest = json_decode(file_get_contents(__DIR__.'/../dist/manifest.json'), true);
+        $publishedManifest = json_decode(file_get_contents($publicManifestPath), true);
+
+        return $manifest !== $publishedManifest;
     }
 
     /**

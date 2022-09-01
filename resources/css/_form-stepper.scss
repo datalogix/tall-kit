@@ -1,0 +1,54 @@
+.form-steps-horizontal {
+  li {
+    &:not(:last-child):after {
+      position: relative;
+      flex: 1;
+      height: 2px;
+      content: '';
+      top: 18px;
+    }
+
+    &:last-child {
+      flex: unset;
+    }
+
+    &.active:not(:last-child):after {
+      background-color: rgb(209 213 219);
+    }
+
+    &.completed:not(:last-child):after {
+      background-color: rgb(59 130 246);
+    }
+
+    &.uncompleted:not(:last-child):after {
+      background-color: rgb(209 213 219);
+    }
+  }
+}
+
+.form-steps-vertical {
+  li {
+    &:not(:last-child):after {
+      position: absolute;
+      left: 14px;
+      top: 36px;
+      content: '';
+      height: 100%;
+      width: 0;
+      border-left: 2px solid;
+      z-index: 10;
+    }
+
+    &.active:not(:last-child):after {
+      border-color: rgb(209 213 219);
+    }
+
+    &.completed:not(:last-child):after {
+      border-color: rgb(59 130 246);
+    }
+
+    &.uncompleted:not(:last-child):after {
+      border-color:  rgb(209 213 219);
+    }
+  }
+}

@@ -4,13 +4,14 @@ namespace TALLKit\Controllers;
 
 use TALLKit\Facades\TALLKit;
 
-class JavaScriptAssets
+class AssetsController
 {
     use CanPretendToBeAFile;
 
     /**
-     * JavaScript source.
+     * Source.
      *
+     * @param  string  $path
      * @return \Illuminate\Http\Response
      */
     public function source($path)
@@ -19,15 +20,17 @@ class JavaScriptAssets
     }
 
     /**
-     * JavaScript component.
+     * Component.
      *
-     * @param  string  $component
+     * @param  string  $name
      * @return \Illuminate\Http\Response
      */
     public function component($name)
     {
-        $file = explode('?', TALLKit::getComponent($name))[0];
+        $component = TALLKit::getComponent($name);
+        $pos = request()->get('pos', 0);
+        $file = target_get($component, $pos);
 
-        return $this->pretendResponseIsFile($file);
+        return $this->pretendResponseIsFile(explode('?', $file)[0]);
     }
 }
