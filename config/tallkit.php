@@ -2604,7 +2604,7 @@ return [
                     'icon' => [],
 
                     'content' => [
-                        'class' => 'flex'
+                        'class' => 'flex',
                     ],
 
                     'title' => [],

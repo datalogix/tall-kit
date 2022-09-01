@@ -19,7 +19,7 @@ trait CanPretendToBeAFile
 
         if (config('app.debug')) {
             return response()->file($file, [
-                'Content-Type' => ($mimeType ? $mimeType."; " : "") . "charset=utf-8",
+                'Content-Type' => ($mimeType ? $mimeType.'; ' : '').'charset=utf-8',
             ]);
         }
 
@@ -35,7 +35,7 @@ trait CanPretendToBeAFile
         }
 
         return response()->file($file, [
-            'Content-Type' => ($mimeType ? $mimeType."; " : "") . "charset=utf-8",
+            'Content-Type' => ($mimeType ? $mimeType.'; ' : '').'charset=utf-8',
             'Expires' => $this->httpDate($expires),
             'Cache-Control' => $cacheControl,
             'Last-Modified' => $this->httpDate($lastModified),

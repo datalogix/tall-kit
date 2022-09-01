@@ -106,6 +106,7 @@ class TALLKit
             return ! Str::endsWith($value, '.css');
         })->map(function ($url) use ($assets, $nonce) {
             $defer = (in_array($url, target_get($assets, 'alpine', [])) ? ' defer' : '');
+
             return '<script data-turbo-eval="false" data-turbolinks-eval="false" src="'.$url.'"'.$defer.$nonce.'></script>';
         })->join("\n");
 
