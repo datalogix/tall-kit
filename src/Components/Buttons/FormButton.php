@@ -153,6 +153,7 @@ class FormButton extends Form
             $bind,
             $enctype,
             $confirm,
+            null,
             $theme
         );
 

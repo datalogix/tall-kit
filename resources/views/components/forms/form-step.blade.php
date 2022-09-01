@@ -30,7 +30,7 @@
                     {!! $icon !!}
                 </x-icon>
             @else
-                {!! $label !!}
+                {!! __($label) !!}
             @endif
         </span>
 
@@ -48,7 +48,7 @@
                         ->mergeOnlyThemeProvider($themeProvider, $mode, 'title')
                     }}
                 >
-                    {!! $title !!}
+                    {!! __($title) !!}
                 </span>
             @endif
 
@@ -59,7 +59,7 @@
                         ->mergeOnlyThemeProvider($themeProvider, $mode, 'subtitle')
                     }}
                 >
-                    {!! $subtitle !!}
+                    {!! __($subtitle) !!}
                 </span>
             @endif
         </div>

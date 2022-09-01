@@ -2,10 +2,13 @@
     {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'container') }}
     :init="$init"
     :method="$method"
-    :action="$action"
     :target="$target"
+    :action="$action"
+    :route="$route"
+    :bind="$bind"
     :enctype="$enctype"
     :confirm="$confirm"
+    :fields="$fields"
     :theme="$theme"
 >
     <x-submit

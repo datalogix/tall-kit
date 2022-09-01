@@ -8,8 +8,14 @@ export default ({ loadable }) => ({
   },
 
   prepareSubmit (event) {
-    if (!this.confirm || window.confirm(this.confirm)) {
-      return this.startAndComplete((this.$refs.root ? this.$refs.root : this.$el).target || (event && event.ctrlKey))
+    const el = this.$refs.root ? this.$refs.root : this.$el
+
+    if (el.getAttribute('wire:id')) {
+      return event.preventDefault()
+    }
+
+    if (!this.confirm || window.confirm(this.conm)) {
+      return this.startAndComplete(el.target || (event && event.ctrlKey))
     }
 
     return event.preventDefault()

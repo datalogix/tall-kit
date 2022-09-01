@@ -39,9 +39,9 @@ return [
         | Assets URL
         |--------------------------------------------------------------------------
         |
-        | This value sets the path to TALLKit JavaScript assets, for cases where
+        | This value sets the path to TALLKit assets, for cases where
         | your app's domain root is not the correct path. By default, TALLKit
-        | will load its JavaScript assets from the app's "relative root".
+        | will load its assets from the app's "relative root".
         |
         | Examples: "/assets", "myurl.com/app".
         |
@@ -2531,12 +2531,12 @@ return [
                 ],
 
                 'content' => [
-                    'class' => 'flex flex-col',
+                    'class' => 'flex-col',
                 ],
 
                 'content-status' => [
                     'active' => [
-                        'class' => 'text-gray-500 font-semibold',
+                        'class' => 'text-gray-500 font-semibold !flex',
                     ],
 
                     'completed' => [],
@@ -2562,7 +2562,7 @@ return [
                     'uncompleted' => [],
 
                     'step' => [
-                        'class' => 'mx-2',
+                        'class' => 'mx-1 md:mx-2',
                     ],
 
                     'pointer' => [
@@ -2573,7 +2573,9 @@ return [
 
                     'icon' => [],
 
-                    'content' => [],
+                    'content' => [
+                        'class' => 'hidden lg:flex',
+                    ],
 
                     'title' => [],
 
@@ -2601,11 +2603,83 @@ return [
 
                     'icon' => [],
 
-                    'content' => [],
+                    'content' => [
+                        'class' => 'flex'
+                    ],
 
                     'title' => [],
 
                     'subtitle' => [],
+                ],
+            ],
+
+            'form-stepper' => [
+                'container' => [],
+
+                'header' => [
+                    'class' => 'mx-auto mb-6 text-xl font-semibold text-center',
+                ],
+
+                'steps' => [],
+
+                'card' => [
+                    'theme:footer' => [
+                        'class' => 'flex items-center justify-center space-x-4',
+                    ],
+                ],
+
+                'prev' => [],
+
+                'prev-wire' => [
+                    'theme:container.except.wire:ignore' => true,
+                    'wire:loading.remove' => '',
+                ],
+
+                'next' => [],
+
+                'next-wire' => [
+                    'theme:container.except.wire:ignore' => true,
+                    'wire:loading.remove' => '',
+                ],
+
+                'loading' => [
+                    'wire:loading' => '',
+                ],
+
+                'horizontal' => [
+                    'container' => [],
+
+                    'header' => [],
+
+                    'steps' => [],
+
+                    'card' => [
+                        'class' => 'mt-6',
+                    ],
+
+                    'prev' => [],
+
+                    'next' => [],
+
+                    'loading' => [],
+                ],
+
+                'vertical' => [
+                    'container' => [],
+
+                    'header' => [],
+
+                    'steps' => [],
+
+                    'card' => [
+                        'class' => 'mt-4 ml-10',
+                    ],
+
+                    'prev' => [],
+
+                    'next' => [],
+
+                    'loading' => [],
                 ],
             ],
 
@@ -2630,60 +2704,6 @@ return [
                     ],
 
                     'step' => [],
-                ],
-            ],
-
-            'form-stepper' => [
-                'container' => [],
-
-                'card' => [
-                    'class' => 'mt-4',
-
-                    'theme:footer' => [
-                        'class' => 'flex items-center justify-center space-x-4',
-                    ],
-                ],
-
-                'prev' => [],
-
-                'prev-wire' => [
-                    'wire:loading.remove' => true,
-                ],
-
-                'next' => [],
-
-                'next-wire' => [
-                    'wire:loading.remove' => true,
-                ],
-
-                'loading' => [
-                    'wire:loading' => true,
-                ],
-
-                'horizontal' => [
-                    'container' => [],
-
-                    'card' => [],
-
-                    'prev' => [],
-
-                    'next' => [],
-
-                    'loading' => [],
-                ],
-
-                'vertical' => [
-                    'container' => [],
-
-                    'card' => [
-                        'class' => 'ml-10',
-                    ],
-
-                    'prev' => [],
-
-                    'next' => [],
-
-                    'loading' => [],
                 ],
             ],
 

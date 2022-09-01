@@ -25,6 +25,11 @@ class Form extends BladeComponent
     public $target;
 
     /**
+     * @var string|string[]|null
+     */
+    public $route;
+
+    /**
      * @var string|bool|null
      */
     public $action;
@@ -90,6 +95,7 @@ class Form extends BladeComponent
         $this->method = strtoupper($method ?? 'post');
         $this->target = $target;
         $this->action = $action ?? route_detect($route, $bind ?? $this->getBoundTarget(), null);
+        $this->route = $route;
         $this->bind = $bind;
         $this->enctype = $enctype;
         $this->confirm = $confirm;
