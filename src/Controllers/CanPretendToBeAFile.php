@@ -15,7 +15,7 @@ trait CanPretendToBeAFile
      */
     public function pretendResponseIsFile($file, $mimeType = null)
     {
-        $mimeType = $mimeType || $this->getMimeType($file);
+        $mimeType = $mimeType ?? $this->getMimeType($file);
 
         if (config('app.debug')) {
             return response()->file($file, [
