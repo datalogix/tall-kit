@@ -83,7 +83,7 @@ return [
             |
             */
 
-            'tailwindcss' => config('app.env') === 'local',
+            'tailwindcss' => ! config('app.debug'),
 
             /*
             |
@@ -1206,7 +1206,8 @@ return [
                 ],
 
                 'item' => [
-                    'class' => 'text-gray-100 !py-4 !px-6 hover:bg-black/10',
+                    'class' => 'text-gray-100 !py-4 py-4 !px-6 px-6 hover:bg-black/10',
+                    'style' => 'padding: 1rem 1.5rem;',
                 ],
 
                 'active' => [
@@ -2121,7 +2122,7 @@ return [
                 'content' => [],
 
                 'footer' => [
-                    'class' => 'flex space-x-4 items-center justify-end pt-4',
+                    'class' => 'flex space-x-2 items-center justify-end pt-4',
                 ],
 
                 'footer-save' => [
@@ -2409,7 +2410,8 @@ return [
                 ],
 
                 'checkbox' => [
-                    'theme:container' => '!mb-0',
+                    'theme:container' => '!mb-0 mb-0',
+                    'style' => 'margin: 0;',
                 ],
             ],
 
@@ -2932,7 +2934,8 @@ return [
 
                 'field' => [
                     'theme:container' => [
-                        'class' => '!m-0',
+                        'class' => '!m-0 m-0',
+                        'style' => 'margin: 0;',
                     ],
                 ],
 
@@ -2969,7 +2972,8 @@ return [
                 'container' => [],
 
                 'radio' => [
-                    'theme:container' => '!mb-0',
+                    'theme:container' => '!mb-0 mb-0',
+                    'style' => 'margin: 0;',
                 ],
             ],
 
@@ -3316,7 +3320,8 @@ return [
 
                 'dropdown-aligns' => [
                     'auto' => [
-                        'class' => '!static',
+                        'class' => '!static static',
+                        'style' => 'position: static;',
                         '@open' => 'alignAuto',
                         '@scroll.window' => 'close',
                         '@resize.window' => 'close',
@@ -4237,7 +4242,8 @@ return [
                 'page' => [
                     '@click' => 'go(index)',
                     ':class' => '{ \'bg-opacity-100\': is(index) }',
-                    'class' => 'bg-opacity-25 !p-2',
+                    'class' => 'bg-opacity-25 !p-2 p-2',
+                    'style' => 'padding: 0.5rem;',
                 ],
 
                 'progressbar' => [
