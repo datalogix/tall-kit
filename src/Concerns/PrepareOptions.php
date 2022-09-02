@@ -49,7 +49,7 @@ trait PrepareOptions
                 $key = target_get($value, $this->itemValue, $key);
                 $value = is_iterable($value)
                     ? $this->prepareOptions($value)
-                    : target_get($value, [$this->itemText, 'name', 'title', 'text'], null, $key);
+                    : target_get($value, [$this->itemText, 'name', 'title', 'text'], $value, $key);
 
                 return [$key => $value];
             });
