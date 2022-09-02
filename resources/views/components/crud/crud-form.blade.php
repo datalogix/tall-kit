@@ -4,7 +4,7 @@
     :method="$method"
     :action="$action"
     :route="$route"
-    :bind="array_merge($parameters, [$resource])"
+    :bind="$resource"
     :enctype="$enctype"
     :confirm="$confirm"
     :theme="$theme"
@@ -59,13 +59,13 @@
     @endisset
 
     <x-card {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
-        @if ($fields)
-            @bind($resource)
+        @bind($resource)
+            @if ($fields)
                 <x-fields-generator :fields="$fields" />
-            @endbind
-        @endif
+            @endif
 
-        {{ $slot }}
+            {{ $slot }}
+        @endbind
     </x-card>
 
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer') }}>

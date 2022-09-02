@@ -31,11 +31,11 @@
         @method($method)
     @endif
 
-    @if ($fields)
-        @bind($bind)
+    @bind($bind)
+        @if ($fields)
             <x-fields-generator :fields="$fields" />
-        @endbind
-    @endif
+        @endif
 
-    {{ $slot }}
+        {{ $slot }}
+    @endbind
 </form>

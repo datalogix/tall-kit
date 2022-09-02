@@ -116,6 +116,6 @@ class CrudForm extends AbstractCrud
         $this->enctype = $enctype;
         $this->confirm = $confirm;
         $this->fields = $fields;
-        $this->back = $back ?? (url()->current() === url()->previous() ? route_detect($this->prefix.'.index', null, null) : null);
+        $this->back = $back ?? (url()->current() === url()->previous() ? route_detect($this->prefix.'.index', $parameters, null) : null);
     }
 }

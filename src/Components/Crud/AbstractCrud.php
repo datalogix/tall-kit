@@ -7,9 +7,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
+use TALLKit\Concerns\BoundValues;
 
 abstract class AbstractCrud extends BladeComponent
 {
+    use BoundValues;
+
     /**
      * @var string
      */
@@ -107,7 +110,7 @@ abstract class AbstractCrud extends BladeComponent
         $this->key = $key;
         $this->title = $title;
         $this->parameters = Arr::wrap($parameters);
-        $this->resource = $resource;
+        $this->resource = $resource ?? $this->getBoundTarget();
         $this->resourceTitle = target_get($this->resource, ['title', 'name']);
         $this->forceMenu = $forceMenu;
         $this->maxActions = $maxActions ?? 4;
