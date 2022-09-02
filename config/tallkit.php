@@ -1206,12 +1206,12 @@ return [
                 ],
 
                 'item' => [
-                    'class' => 'text-gray-100 !py-4 py-4 !px-6 px-6 hover:bg-black/10',
+                    'class' => 'text-gray-100 !py-4 py-4 !px-6 px-6 hover:bg-black/10 hover:bg-black hover:bg-opacity-10',
                     'style' => 'padding: 1rem 1.5rem;',
                 ],
 
                 'active' => [
-                    'class' => 'bg-black/25 hover:bg-black/25',
+                    'class' => 'bg-black/25 hover:bg-black/25 bg-black bg-opacity-25 hover:bg-opacity-25',
                 ],
 
                 'breakpoints' => [
