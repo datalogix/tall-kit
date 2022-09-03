@@ -63,7 +63,9 @@ class Icon extends AbstractIcon
             }
 
             if (Str::startsWith($slot, '<svg')) {
-                return str_replace('<svg', sprintf('<svg %s', $attributes), $slot);
+                return (empty($attributes) || (string) $attributes === 'class=""')
+                    ? (string) $slot
+                    : str_replace('<svg', sprintf('<svg %s', $attributes), $slot);
             }
 
             if ((string) $attributes) {
