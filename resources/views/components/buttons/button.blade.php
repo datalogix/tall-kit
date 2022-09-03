@@ -29,10 +29,10 @@
 >
     @if ($loading)<span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'loading', 'content', false) }}>@endif
         <x-icon {{
-                $attributes
-                    ->mergeOnlyThemeProvider($themeProvider, 'icon-left')
-                    ->merge(['class' => target_get($iconLeft, 'class')])
-                    ->merge(['style' => target_get($iconLeft, 'style')])
+            $attributes
+                ->mergeOnlyThemeProvider($themeProvider, 'icon-left')
+                ->merge(['class' => target_get($iconLeft, 'class')])
+                ->merge(['style' => target_get($iconLeft, 'style')])
             }}
             :name="target_get($iconLeft, 'name', $iconLeft)"
         >
