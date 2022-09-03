@@ -29,7 +29,7 @@
             <option
                 value=""
                 @if ($isSelected()) selected="selected" @endif
-                @if ($name) wire:key="{{ $name }}-empty-option" @endif
+                @if ($isWired() && $name) wire:key="{{ $name }}-empty-option" @endif
             >
                 {{ $emptyOption === true ? '---' : __($emptyOption) }}
             </option>
@@ -42,7 +42,7 @@
                         <option
                             value="{{ $subkey }}"
                             @if ($isSelected($subkey)) selected="selected" @endif
-                            @if ($name) wire:key="{{ $name }}-{{ $subkey }}" @endif
+                            @if ($isWired() && $name) wire:key="{{ $name }}-{{ $subkey }}" @endif
                         >
                             {{ $suboption }}
                         </option>
@@ -52,7 +52,7 @@
                 <option
                     value="{{ $key }}"
                     @if ($isSelected($key)) selected="selected" @endif
-                    @if ($name) wire:key="{{ $name }}-{{ $key }}" @endif
+                    @if ($isWired() && $name) wire:key="{{ $name }}-{{ $key }}" @endif
                 >
                     {{ $option }}
                 </option>
