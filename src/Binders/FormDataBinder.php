@@ -21,6 +21,13 @@ class FormDataBinder
     protected $wire = false;
 
     /**
+     * Model to a Alpine component.
+     *
+     * @var bool
+     */
+    protected $model = false;
+
+    /**
      * Bind a target to the current instance.
      *
      * @param  mixed  $target
@@ -90,5 +97,46 @@ class FormDataBinder
     public function getWireModifier()
     {
         return is_string($this->wire) ? $this->wire : null;
+    }
+
+    /**
+     * Returns wether the form is bound to a Alpine model.
+     *
+     * @return bool
+     */
+    public function isModel()
+    {
+        return $this->model !== false;
+    }
+
+    /**
+     * Enable Alpine binding with an optional modifier.
+     *
+     * @param  string|null  $modifier
+     * @return void
+     */
+    public function model($modifier = null)
+    {
+        $this->model = $modifier;
+    }
+
+    /**
+     * Disable Alpine binding.
+     *
+     * @return void
+     */
+    public function endModel()
+    {
+        $this->model = false;
+    }
+
+    /**
+     * Returns the modifier, if set.
+     *
+     * @return string|null
+     */
+    public function getModelModifier()
+    {
+        return is_string($this->model) ? $this->model : null;
     }
 }

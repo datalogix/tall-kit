@@ -4,12 +4,14 @@ namespace TALLKit\Components;
 
 use Illuminate\View\Component;
 use TALLKit\Binders\ThemeBinder;
+use TALLKit\Concerns\AlpineFormDataBinder;
 use TALLKit\Concerns\Componentable;
 use TALLKit\Concerns\LivewireFormDataBinder;
 
 abstract class BladeComponent extends Component
 {
     use Componentable;
+    use AlpineFormDataBinder;
     use LivewireFormDataBinder;
 
     /**

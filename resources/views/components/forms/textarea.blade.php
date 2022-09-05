@@ -21,6 +21,10 @@
             id="{{ $id }}"
         @endif
 
+        @if ($isModel() && $name)
+            x-model{!! $modelModifier($modifier) !!}="{{ $modelName($name) }}"
+        @endif
+
         @if ($isWired() && $name)
             wire:model{!! $wireModifier($modifier) !!}="{{ $name }}"
         @endif

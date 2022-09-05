@@ -71,6 +71,27 @@ class TALLKitBladeDirectives
     }
 
     /**
+     * Model.
+     *
+     * @param  mixed  $expression
+     * @return string
+     */
+    public static function model($expression)
+    {
+        return '<?php app(\TALLKit\Binders\FormDataBinder::class)->model('.$expression.'); ?>';
+    }
+
+    /**
+     * End model.
+     *
+     * @return string
+     */
+    public static function endmodel()
+    {
+        return '<?php app(\TALLKit\Binders\FormDataBinder::class)->endModel(); ?>';
+    }
+
+    /**
      * Wire.
      *
      * @param  mixed  $expression
