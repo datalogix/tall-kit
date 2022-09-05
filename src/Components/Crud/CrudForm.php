@@ -17,14 +17,14 @@ class CrudForm extends AbstractCrud
     public $method;
 
     /**
-     * @var string|bool|null
-     */
-    public $action;
-
-    /**
      * @var string|string[]|null
      */
     public $route;
+
+    /**
+     * @var string|bool|null
+     */
+    public $action;
 
     /**
      * @var string|bool|null
@@ -62,8 +62,8 @@ class CrudForm extends AbstractCrud
      * @param  string|bool|null  $tooltip
      * @param  bool|null  $init
      * @param  string|null  $method
-     * @param  string|bool|null  $action
      * @param  string|string[]|null  $route
+     * @param  string|bool|null  $action
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  mixed  $fields
@@ -85,8 +85,8 @@ class CrudForm extends AbstractCrud
         $tooltip = null,
         $init = null,
         $method = null,
-        $action = null,
         $route = null,
+        $action = null,
         $enctype = null,
         $confirm = null,
         $fields = null,
@@ -111,11 +111,11 @@ class CrudForm extends AbstractCrud
         $this->title = $title ?? __(Str::title($this->resource ? 'edit' : 'create')).' '.__($this->title);
         $this->init = $init;
         $this->method = $method ?? ($this->resource ? 'patch' : 'post');
-        $this->action = $action;
         $this->route = $route ?? $this->prefix.'.'.($this->resource ? 'update' : 'store');
+        $this->action = $action ?? route_detect($this->route, array_filter([...$this->parameters, $this->resource]), null);
         $this->enctype = $enctype;
         $this->confirm = $confirm;
         $this->fields = $fields;
-        $this->back = $back ?? (url()->current() === url()->previous() ? route_detect($this->prefix.'.index', $parameters, null) : null);
+        $this->back = $back ?? (url()->current() === url()->previous() ? route_detect($this->prefix.'.index', $this->parameters, null) : null);
     }
 }
