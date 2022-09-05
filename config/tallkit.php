@@ -83,7 +83,7 @@ return [
             |
             */
 
-            'tailwindcss' => ! config('app.debug'),
+            'tailwindcss' => env('TALLKIT_INJECT_TAILWINDCSS', config('app.debug')),
 
             /*
             |
@@ -92,7 +92,7 @@ return [
             | See https://alpinejs.dev/essentials/installation#from-a-script-tag
             |
             */
-            'alpine' => true,
+            'alpine' => env('TALLKIT_INJECT_ALPINE', true),
         ],
 
         /*
