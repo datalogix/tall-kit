@@ -69,7 +69,7 @@ class Icon extends AbstractIcon
             }
 
             if ((string) $attributes) {
-                return '<span '.$attributes.'>'.empty(trim($slot)) ? $slot : $this->name.'</span>';
+                return '<span '.$attributes.'>'.(empty(trim($slot)) ? $this->name : $slot).'</span>';
             }
 
             return (string) $slot;
