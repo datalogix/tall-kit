@@ -83,7 +83,7 @@ return [
             |
             */
 
-            'tailwindcss' => env('TALLKIT_INJECT_TAILWINDCSS', config('app.debug')),
+            'tailwindcss' => env('TALLKIT_INJECT_TAILWINDCSS', app()->isLocal()),
 
             /*
             |
