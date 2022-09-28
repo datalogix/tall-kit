@@ -611,6 +611,7 @@ return [
         /**
          * States.
          */
+        'badge' => \TALLKit\Components\States\Badge::class,
         'display' => \TALLKit\Components\States\Display::class,
         'error' => \TALLKit\Components\States\Error::class,
         'loading' => \TALLKit\Components\States\Loading::class,
@@ -840,6 +841,7 @@ return [
         /**
          * States.
          */
+        'status' => \TALLKit\Components\States\Badge::class,
         'preview' => \TALLKit\Components\Layouts\Display::class,
         'value' => \TALLKit\Components\Layouts\Display::class,
         'spinner' => \TALLKit\Components\States\Loading::class,
@@ -1463,6 +1465,12 @@ return [
                         'hover' => 700,
                     ],
 
+                    'danger' => [
+                        'name' => 'red',
+                        'weight' => 500,
+                        'hover' => 700,
+                    ],
+
                     'red' => [
                         'name' => 'red',
                         'weight' => 500,
@@ -1694,6 +1702,17 @@ return [
                             'class' => 'w-4 h-4 mx-auto',
                         ],
                         'loading' => 'Sending',
+                    ],
+
+                    'finish' => [
+                        'text' => 'Finish',
+                        'tooltip' => 'Finish',
+                        'color' => 'success',
+                        'icon' => [
+                            'name' => 'check',
+                            'class' => 'w-4 h-4 mx-auto',
+                        ],
+                        'loading' => 'Finishing',
                     ],
 
                     'back' => [
@@ -2630,23 +2649,15 @@ return [
                     ],
                 ],
 
-                'prev' => [],
-
-                'prev-wire' => [
-                    'theme:container.except.wire:ignore' => true,
-                    'wire:loading.remove' => '',
+                'actions' => [
+                    'class' => 'flex items-center justify-center space-x-4',
                 ],
+
+                'prev' => [],
 
                 'next' => [],
 
-                'next-wire' => [
-                    'theme:container.except.wire:ignore' => true,
-                    'wire:loading.remove' => '',
-                ],
-
-                'loading' => [
-                    'wire:loading' => '',
-                ],
+                'loading' => [],
 
                 'horizontal' => [
                     'container' => [],
@@ -2658,6 +2669,8 @@ return [
                     'card' => [
                         'class' => 'mt-6',
                     ],
+
+                    'actions' => [],
 
                     'prev' => [],
 
@@ -2677,11 +2690,32 @@ return [
                         'class' => 'mt-4 ml-10',
                     ],
 
+                    'actions' => [],
+
                     'prev' => [],
 
                     'next' => [],
 
                     'loading' => [],
+                ],
+
+                'wire' => [
+                    'actions' => [
+                        'wire:loading.remove' => '',
+                    ],
+
+                    'prev' => [
+                        'theme:container.except.wire:ignore' => true,
+                        'wire:click' => 'prev',
+                    ],
+
+                    'next' => [
+                        'theme:container.except.wire:ignore' => true,
+                    ],
+
+                    'loading' => [
+                        'wire:loading' => '',
+                    ],
                 ],
             ],
 
@@ -4347,6 +4381,38 @@ return [
             /**
              * States.
              */
+            'badge' => [
+                'container' => [
+                    'class' => 'inline-block px-2 py-1 text-sm rounded-full text-white',
+                ],
+
+                'types' => [
+                    'default' => [
+                        'class' => 'bg-gray-500',
+                    ],
+
+                    'info' => [
+                        'class' => 'bg-blue-500',
+                    ],
+
+                    'warning' => [
+                        'class' => 'bg-yellow-500',
+                    ],
+
+                    'danger' => [
+                        'class' => 'bg-red-500',
+                    ],
+
+                    'success' => [
+                        'class' => 'bg-green-500',
+                    ],
+
+                    'none' => [
+                        'class' => 'bg-gray-500',
+                    ],
+                ],
+            ],
+
             'display' => [
                 'container' => [],
 
@@ -4410,9 +4476,8 @@ return [
              */
             'avatar' => [
                 'container' => [
-                    'theme:icon-name' => [
-                        'account',
-                    ],
+                    'theme:icon' => 'w-4 h-4 mx-auto',
+                    'theme:icon-name' => ['account'],
                 ],
             ],
 
