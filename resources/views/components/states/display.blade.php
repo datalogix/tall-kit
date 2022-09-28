@@ -1,5 +1,10 @@
 <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
-    @if (Str::endsWith($value, ['.jpg', '.jpeg', '.gif', '.png']))
+    @if (is_array($value) && $component = target_get($value, 'component'))
+        <x-dynamic-component
+            {{ $attributes->merge(Arr::except($value, 'component')) }}
+            :component="$component"
+        />
+    @elseif (Str::endsWith($value, ['.jpg', '.jpeg', '.gif', '.png']))
         <img {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'img') }} src="{{ $value }}" />
     @elseif (Str::endsWith($value, '.mp3'))
         <audio {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'audio') }}>
@@ -31,6 +36,6 @@
             {!! $attributes->mergeOnlyThemeProvider($themeProvider, 'uncheck-svg')->first() !!}
         </x-icon>
     @else
-        {{ $slot->isEmpty() ? $value : $slot }}
+        {!! $slot->isEmpty() ? $value : $slot !!}
     @endif
 </div>

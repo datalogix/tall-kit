@@ -34,7 +34,7 @@ class Display extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $value = $value ?? target_get($bind, [$name.'_formatted', $name.'_url', $name], $default);
+        $value = $value ?? target_get($bind, [$name.'_html', $name.'_component', $name.'_formatted', $name.'_url', $name], $default);
 
         // Remove _id for relation
         if (Str::endsWith($name, '_id')) {
