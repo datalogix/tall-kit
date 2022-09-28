@@ -122,7 +122,7 @@ trait FieldNameAndValue
      */
     protected function getValue($bind = null, $default = null, $language = null)
     {
-        if ($this->isWired()) {
+        if ($this->isWired() && $this->type !== 'file') {
             return;
         }
 
