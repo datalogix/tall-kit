@@ -32,6 +32,8 @@ import toggleable from './overlays/toggleable'
 import tooltip from './overlays/tooltip'
 import accordionItem from './panels/accordion-item'
 import tab from './panels/tab'
+import creditCard from './payments/credit-card'
+import paymentFields from './payments/payment-fields'
 import flatpickr from './pickers/flatpickr'
 import pickr from './pickers/pickr'
 import pikaday from './pickers/pikaday'
@@ -118,6 +120,12 @@ export default {
    */
   'accordion-item': accordionItem,
   tab,
+
+  /**
+   * Payments.
+   */
+  'credit-card': creditCard,
+  'payment-fields': paymentFields,
 
   /**
    * Pickers.
