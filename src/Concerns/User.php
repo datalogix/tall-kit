@@ -93,9 +93,9 @@ trait User
         $avatarFallback = null,
         $avatarIcon = null
     ) {
-        $this->userName = $userName ?? $this->getUserValue('name');
-        $this->userAvatar = $userAvatar ?? $this->getUserValue('avatar_url', 'avatar');
-        $this->avatarSearch = $avatarSearch ?? $this->getUserValue('email');
+        $this->userName = $userName ?? $this->getUserValue('name_formatted', 'name');
+        $this->userAvatar = $userAvatar ?? $this->getUserValue('avatar_formatted', 'avatar_url', 'avatar');
+        $this->avatarSearch = $avatarSearch ?? $this->getUserValue('email_formatted', 'email');
         $this->avatarProvider = $avatarProvider ?? $this->getUserValue('avatar_provider', 'provider');
         $this->avatarFallback = $avatarFallback ?? $this->getUserValue('avatar_fallback', 'fallback');
         $this->avatarIcon = $avatarIcon ?? $this->getUserValue('avatar_icon', 'icon');
