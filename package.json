@@ -8,12 +8,12 @@
     "defu": "^6.1"
   },
   "devDependencies": {
-    "eslint": "^8.23",
+    "eslint": "^8.24",
     "eslint-config-standard": "^17.0",
     "eslint-plugin-import": "^2.26",
-    "eslint-plugin-n": "^15.2",
+    "eslint-plugin-n": "^15.3",
     "eslint-plugin-promise": "^6.0",
-    "sass": "^1.54",
+    "sass": "^1.55",
     "vite": "^3.1",
     "vite-plugin-eslint": "^1.8"
   }
