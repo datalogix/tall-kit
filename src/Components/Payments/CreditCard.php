@@ -28,7 +28,7 @@ class CreditCard extends BladeComponent
             'number' => $number,
             'type' => $type,
             'expirationDate' => $expirationDate,
-            'cvv' => $cvv
+            'cvv' => $cvv,
         ], $options ?? []));
     }
 }

@@ -2,7 +2,6 @@
 
 namespace TALLKit\Components\Buttons;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use TALLKit\Components\BladeComponent;
 

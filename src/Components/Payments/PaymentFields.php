@@ -39,15 +39,15 @@ class PaymentFields extends BladeComponent
 
     protected function getCardExpirationMonths()
     {
-        return collect(range(1, 12))->mapWithKeys(function($value) {
-                return [Str::padLeft($value, 2, '0') => Str::padLeft($value, 2, '0')];
-            })->toArray();
+        return collect(range(1, 12))->mapWithKeys(function ($value) {
+            return [Str::padLeft($value, 2, '0') => Str::padLeft($value, 2, '0')];
+        })->toArray();
     }
 
     protected function getCardExpirationYears()
     {
         return collect(range(intval(date('Y')), intval(date('Y') + $this->getOptions('cardExpirationMaxYears'))))
-            ->mapWithKeys(function($value) {
+            ->mapWithKeys(function ($value) {
                 return [$value => $value];
             })->toArray();
     }
