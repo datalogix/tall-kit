@@ -26,11 +26,16 @@ trait JsonOptions
     /**
      * Get options.
      *
-     * @return array
+     * @param  string|array|int|null  $key
+     * @return mixed
      */
-    protected function getOptions()
+    public function getOptions($key = null)
     {
-        return $this->options;
+        if (is_null($key)) {
+            return $this->options;
+        }
+
+        return target_get($this->options, $key);
     }
 
     /**

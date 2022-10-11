@@ -9,7 +9,12 @@ use TALLKit\Components\BladeComponent;
 class Html extends BladeComponent
 {
     /**
-     * @var string
+     * @var string|null
+     */
+    public $lang;
+
+    /**
+     * @var string|null
      */
     public $title;
 
@@ -112,6 +117,7 @@ class Html extends BladeComponent
      * Create a new component instance.
      *
      * @param  mixed  $options
+     * @param  string|null  $lang
      * @param  string|null  $title
      * @param  string|null  $charset
      * @param  string|null  $viewport
@@ -139,6 +145,7 @@ class Html extends BladeComponent
      */
     public function __construct(
         $options = null,
+        $lang = null,
         $title = null,
         $charset = null,
         $viewport = null,
@@ -170,6 +177,7 @@ class Html extends BladeComponent
             Arr::wrap($options)
         );
 
+        $this->lang = $lang ?? target_get($options, 'lang');
         $this->title = $title ?? target_get($options, 'title');
         $this->charset = $charset ?? target_get($options, 'charset', 'utf-8');
         $this->viewport = $viewport ?? target_get($options, 'viewport', 'width=device-width, initial-scale=1');
@@ -196,7 +204,13 @@ class Html extends BladeComponent
         $this->stackScripts = $stackScripts ?? target_get($options, 'stack-scripts', 'scripts');
 
         $this->vite = Collection::make($vite)
-            ->merge(target_get($options, 'vite', ['resources/js/app.js', 'resources/js/app.ts']))
+            ->merge(target_get($options, 'vite', [
+                'resources/css/app.css',
+                'resources/css/app.sass',
+                'resources/css/app.scss',
+                'resources/js/app.js',
+                'resources/js/app.ts',
+            ]))
             ->filter(function ($file) {
                 return file_exists(base_path($file));
             })

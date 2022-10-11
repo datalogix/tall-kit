@@ -4,6 +4,8 @@
         ->mergeOnlyThemeProvider($themeProvider, 'aligns', $align)
         ->merge($breakpointStyles->get('container', []))
 }}>
+    {{ $prepend ?? '' }}
+
     <x-logo
         {{
             $attributes
@@ -13,6 +15,7 @@
         :image="$logoImage"
         :name="$logoName"
         :url="$logoUrl"
+        :route="$logoRoute"
         :theme="$theme"
     >
         {{ $logo ?? '' }}
@@ -46,6 +49,20 @@
         :inline="$inline"
         :theme="$theme"
     >
+        @isset ($navPrepend)
+            <x-slot name="prepend">
+                {{ $navPrepend }}
+            </x-slot>
+        @endisset
+
+        @isset ($navAppend)
+            <x-slot name="append">
+                {{ $navAppend }}
+            </x-slot>
+        @endisset
+
         {{ $slot }}
     </x-nav>
+
+    {{ $append ?? '' }}
 </nav>

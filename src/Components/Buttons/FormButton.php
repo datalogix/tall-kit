@@ -148,7 +148,7 @@ class FormButton extends Form
             $init,
             $method ?? 'POST',
             $target,
-            $action ?? request()->url(),
+            $action ?? ($route ? null : request()->url()),
             $route,
             $bind,
             $enctype,

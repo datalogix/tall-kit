@@ -28,6 +28,11 @@ class AuthenticationCard extends BladeComponent
     public $logoUrl;
 
     /**
+     * @var string|string[]|null
+     */
+    public $logoRoute;
+
+    /**
      * @var string|bool
      */
     public $messageSession;
@@ -39,6 +44,7 @@ class AuthenticationCard extends BladeComponent
      * @param  string|bool|null  $logoImage
      * @param  string|bool|null  $logoName
      * @param  string|bool|null  $logoUrl
+     * @param  string|string[]|null  $logoRoute
      * @param  string|bool|null  $messageSession
      * @param  string|null  $theme
      * @return void
@@ -48,6 +54,7 @@ class AuthenticationCard extends BladeComponent
         $logoImage = null,
         $logoName = null,
         $logoUrl = null,
+        $logoRoute = null,
         $messageSession = null,
         $theme = null
     ) {
@@ -62,6 +69,7 @@ class AuthenticationCard extends BladeComponent
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
         $this->logoUrl = $logoUrl;
+        $this->logoRoute = $logoRoute;
         $this->messageSession = $messageSession ?? 'status';
     }
 }

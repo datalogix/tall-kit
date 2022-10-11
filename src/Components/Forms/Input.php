@@ -129,7 +129,7 @@ class Input extends Field
      */
     public function maskOptions()
     {
-        if (! $this->mask || $this->type === 'hidden') {
+        if (! $this->mask || $this->type !== 'text') {
             return [];
         }
 

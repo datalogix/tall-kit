@@ -162,6 +162,7 @@ class Message extends BladeComponent
         $this->iconSvg = target_get($target, 'icon-svg', $iconSvg ?? target_get($typeTheme, 'icon-svg'));
         $this->iconName = target_get($target, 'icon-name', $iconName ?? target_get($typeTheme, 'icon-name'));
         $this->timeout = target_get($target, 'timeout', $timeout ?? target_get($typeTheme, 'timeout', 0));
+        $this->timeout = $this->timeout === true ? $this->themeProvider->timeout->first() : $this->timeout;
         $this->dismissible = target_get($target, 'dismissible', $dismissible ?? target_get($typeTheme, 'dismissible', false));
         $this->dismissibleIcon = target_get($target, 'dismissible-icon', $dismissibleIcon ?? target_get($typeTheme, 'dismissible-icon', true));
         $this->dismissibleIconSvg = target_get($target, 'dismissible-icon-svg', $dismissibleIconSvg ?? $this->themeProvider->dismissible->get('icon-svg'));

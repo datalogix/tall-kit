@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Buttons;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use TALLKit\Components\BladeComponent;
 
@@ -26,6 +27,11 @@ class Button extends BladeComponent
      * @var string|bool|null
      */
     public $href;
+
+    /**
+     * @var string|string[]|null
+     */
+    public $route;
 
     /**
      * @var string|bool|null
@@ -124,6 +130,7 @@ class Button extends BladeComponent
      * @param  string|bool|null  $type
      * @param  bool|null  $active
      * @param  string|bool|null  $href
+     * @param  string|string[]|null  $route
      * @param  string|bool|null  $target
      * @param  string|bool|null  $click
      * @param  string|bool|null  $wireClick
@@ -147,6 +154,7 @@ class Button extends BladeComponent
         $type = null,
         $active = null,
         $href = null,
+        $route = null,
         $target = null,
         $click = null,
         $wireClick = null,
@@ -170,6 +178,7 @@ class Button extends BladeComponent
         $this->type = $type ?? 'button';
         $this->active = $active;
         $this->href = $href;
+        $this->route = $route;
         $this->target = $target;
         $this->click = $click;
         $this->wireClick = $wireClick;
@@ -210,6 +219,12 @@ class Button extends BladeComponent
             $this->colorWeight = target_get($colorProperties, 'weight', 500);
             $this->colorHover = target_get($colorProperties, 'hover', 700);
         }
+
+        $this->href = route_detect(
+            collect($this->href)->union($this->route)->toArray(),
+            null,
+            $this->href
+        );
     }
 
     /**

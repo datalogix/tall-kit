@@ -24,6 +24,11 @@ class UserSidebar extends Sidebar
     public $logoUrl;
 
     /**
+     * @var string|string[]|null
+     */
+    public $logoRoute;
+
+    /**
      * Create a new component instance.
      *
      * @param  mixed  $items
@@ -37,6 +42,7 @@ class UserSidebar extends Sidebar
      * @param  string|bool|null  $logoImage
      * @param  string|bool|null  $logoName
      * @param  string|bool|null  $logoUrl
+     * @param  string|string[]|null  $logoRoute
      * @param  \Illuminate\Contracts\Auth\Authenticatable|mixed|null  $user
      * @param  string|null  $guard
      * @param  string|bool|null  $userName
@@ -60,6 +66,7 @@ class UserSidebar extends Sidebar
         $logoImage = null,
         $logoName = null,
         $logoUrl = null,
+        $logoRoute = null,
         $user = null,
         $guard = null,
         $userName = null,
@@ -75,7 +82,8 @@ class UserSidebar extends Sidebar
 
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
-        $this->logoUrl = $logoUrl ?? route_detect([$this->guard.'.index', $this->guard.'.dashboard', $this->guard.'.home', 'index', 'dashboard', 'home']);
+        $this->logoUrl = $logoUrl;
+        $this->logoRoute = $logoRoute ?? [$this->guard.'.index', $this->guard.'.dashboard', $this->guard.'.home', 'index', 'dashboard', 'home'];
 
         parent::__construct(
             $items ?? $this->getUserValue('sidebar', $this->guard.'Sidebar'),

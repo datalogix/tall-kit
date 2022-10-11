@@ -3,6 +3,7 @@
     :text="$text"
     :active="$active"
     :href="$href ?? url()->previous()"
+    :route="$route"
     :target="$target"
     :click="$click"
     :wire-click="$wireClick"

@@ -12,7 +12,7 @@
     </span>
 
     @if (isset($append) || $appendText || $appendIcon)
-        <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'prepend') }}>
+        <span {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'append') }}>
             {{ $append ?? '' }}
             {{ $appendText ?? '' }}
             <x-icon :name="$appendIcon" />

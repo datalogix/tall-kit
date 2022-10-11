@@ -69,7 +69,7 @@ if (! function_exists('collect_value')) {
     {
         return Collection::make(value($items, ...$args))->map(function ($item, $key) use ($args) {
             return value($item, $key, ...$args);
-        })->filter();
+        })->whereNotNull();
     }
 }
 

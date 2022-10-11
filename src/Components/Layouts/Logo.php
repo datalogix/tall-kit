@@ -22,11 +22,17 @@ class Logo extends BladeComponent
     public $url;
 
     /**
+     * @var string|string[]|null
+     */
+    public $route;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|bool|null  $name
      * @param  string|bool|null  $image
      * @param  string|bool|null  $url
+     * @param  string|string[]|null  $route
      * @param  string|null  $theme
      * @return void
      */
@@ -34,13 +40,15 @@ class Logo extends BladeComponent
         $name = null,
         $image = null,
         $url = null,
+        $route = null,
         $theme = null
     ) {
         parent::__construct($theme);
 
         $this->name = $name ?? config('app.name');
         $this->image = $image ?? $this->imageAsset();
-        $this->url = $url;
+        $this->url = $url ?? route_detect($route, null, null);
+        $this->route = $route;
     }
 
     /**

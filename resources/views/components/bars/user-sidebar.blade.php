@@ -19,6 +19,7 @@
                 :image="$logoImage"
                 :name="$logoName"
                 :url="$logoUrl"
+                :route="$logoRoute"
                 :theme="$theme"
             >
                 {{ $header ?? '' }}

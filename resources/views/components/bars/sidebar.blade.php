@@ -21,6 +21,18 @@
             :theme="$theme"
             :theme:item="$item()"
         >
+            @isset ($prepend)
+                <x-slot name="prepend">
+                    {{ $prepend }}
+                </x-slot>
+            @endisset
+
+            @isset ($append)
+                <x-slot name="append">
+                    {{ $append }}
+                </x-slot>
+            @endisset
+
             {{ $slot }}
         </x-nav>
 

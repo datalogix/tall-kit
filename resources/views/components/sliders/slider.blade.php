@@ -11,33 +11,51 @@
         @isset($controls)
             {{ $controls }}
         @else
-            <x-button
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'prev') }}
-                preset="none"
-                :tooltip="$prevTooltip"
-                :theme="$theme"
-            >
-                <x-icon
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'prev-icon') }}
-                    :name="$prevIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'prev-icon-name')->first()"
+            <div {{
+                $attributes
+                    ->mergeOnlyThemeProvider($themeProvider, 'prev-container')
+                    ->merge($attributes->mergeOnlyThemeProvider($themeProvider, 'actions-container')->getAttributes())
+            }}>
+                <x-button {{
+                    $attributes
+                        ->mergeOnlyThemeProvider($themeProvider, 'prev')
+                        ->merge($attributes->mergeOnlyThemeProvider($themeProvider, 'actions')->getAttributes())
+                    }}
+                    preset="none"
+                    :tooltip="$prevTooltip"
+                    :theme="$theme"
                 >
-                    {!! $prev ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'prev-icon-svg')->first() !!}
-                </x-icon>
-            </x-button>
+                    <x-icon
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'prev-icon') }}
+                        :name="$prevIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'prev-icon-name')->first()"
+                    >
+                        {!! $prev ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'prev-icon-svg')->first() !!}
+                    </x-icon>
+                </x-button>
+            </div>
 
-            <x-button
-                {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'next') }}
-                preset="none"
-                :tooltip="$nextTooltip"
-                :theme="$theme"
-            >
-                <x-icon
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'next-icon') }}
-                    :name="$nextIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'next-icon-name')->first()"
+            <div {{
+                $attributes
+                    ->mergeOnlyThemeProvider($themeProvider, 'next-container')
+                    ->merge($attributes->mergeOnlyThemeProvider($themeProvider, 'actions-container')->getAttributes())
+            }}>
+                <x-button {{
+                    $attributes
+                        ->mergeOnlyThemeProvider($themeProvider, 'next')
+                        ->merge($attributes->mergeOnlyThemeProvider($themeProvider, 'actions')->getAttributes())
+                    }}
+                    preset="none"
+                    :tooltip="$nextTooltip"
+                    :theme="$theme"
                 >
-                    {!! $next ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'next-icon-svg')->first() !!}
-                </x-icon>
-            </x-button>
+                    <x-icon
+                        {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'next-icon') }}
+                        :name="$nextIcon ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'next-icon-name')->first()"
+                    >
+                        {!! $next ?? $attributes->mergeOnlyThemeProvider($themeProvider, 'next-icon-svg')->first() !!}
+                    </x-icon>
+                </x-button>
+            </div>
         @endisset
     @endif
 
@@ -57,11 +75,11 @@
         @endisset
     @endif
 
-    @if (target_get($options, ['autoplay', 'progressbar']))
+    @if (target_get($options, 'progressbar'))
         @isset($progressbar)
             {{ $progressbar }}
         @else
-            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'progressbar') }} />
+            <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'progressbar') }}></div>
         @endisset
     @endif
 </div>

@@ -10,6 +10,7 @@
         :active="target_get($action, 'active')"
         :href="target_get($action, 'component', 'button') === 'button' ? target_get($action, ['href', 'action', 'route']) : null"
         :action="target_get($action, 'component', 'button') === 'form-button' ? target_get($action, ['href', 'action', 'route']) : null"
+        :route="target_get($action, 'route')"
         :target="target_get($action, 'target')"
         :click="target_get($action, 'click')"
         :wire-click="target_get($action, 'wire-click')"
@@ -49,6 +50,7 @@
                     :active="target_get($action, 'active')"
                     :href="target_get($action, 'component', 'button') === 'button' ? target_get($action, ['href', 'action', 'route']) : null"
                     :action="target_get($action, 'component', 'button') === 'form-button' ? target_get($action, ['href', 'action', 'route']) : null"
+                    :route="target_get($action, 'route')"
                     :target="target_get($action, 'target')"
                     :click="target_get($action, 'click')"
                     :wire-click="target_get($action, 'wire-click')"
@@ -61,12 +63,24 @@
                     :outlined="target_get($action, 'outlined')"
                     :link-text="target_get($action, 'link-text', true)"
                     :bordered="target_get($action, 'bordered')"
-                    :loading="target_get($action, 'loading')"
+                    :loading="target_get($action, 'loading', true)"
                     :preset="target_get($action, 'preset')"
                     :tooltip="target_get($action, 'tooltip')"
                     :theme="$theme"
                 />
             </li>
         @endforeach
+
+        @isset ($prepend)
+            <x-slot name="prepend">
+                {{ $prepend }}
+            </x-slot>
+        @endisset
+
+        @isset ($append)
+            <x-slot name="append">
+                {{ $append }}
+            </x-slot>
+        @endisset
     </x-menu-dropdown>
 @endif

@@ -111,6 +111,18 @@
                                 {{ $userMenuAvatarContent }}
                             </x-slot>
                         @endisset
+
+                        @isset ($userMenuPrepend)
+                            <x-slot name="prepend">
+                                {{ $userMenuPrepend }}
+                            </x-slot>
+                        @endisset
+
+                        @isset ($userMenuAppend)
+                            <x-slot name="append">
+                                {{ $userMenuAppend }}
+                            </x-slot>
+                        @endisset
                     </x-user-menu>
                 @endisset
             </x-slot>

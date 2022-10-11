@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'html') }}>
+<html {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'html')->merge(['lang' => $lang]) }}>
 <head {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'head') }}>
     <meta charset="{{ $charset }}">
 

@@ -3,6 +3,8 @@
         ->mergeThemeProvider($themeProvider, 'container')
         ->mergeOnlyThemeProvider($themeProvider, 'aligns', $inline ? 'inline' : 'outline')
 }}>
+    {{ $prepend ?? '' }}
+
     @forelse ($items as $item)
         <li {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'li') }}>
             <x-dynamic-component {{
@@ -12,10 +14,11 @@
                         ->merge(target_get($item, ['attrs', 'attributes'], []))
                 }}
                 :component="target_get($item, 'component', 'button')"
-                :text="target_get($item, ['name', 'title', 'text'])"
+                :text="target_get($item, ['name', 'title', 'text'], is_string($item) ? $item : null)"
                 :active="target_get($item, 'active')"
                 :href="target_get($item, 'component', 'button') === 'button' ? target_get($item, ['href', 'action', 'route']) : null"
-                :action="target_get($item, 'component', 'button') === 'form-button' ? target_get($item, ['href', 'action', 'route']) : null"
+                :action="target_get($item, 'component', 'button') === 'form-button' ? target_get($item, ['href', 'action']) : null"
+                :route="target_get($item, 'route')"
                 :target="target_get($item, 'target')"
                 :click="target_get($item, 'click')"
                 :wire-click="target_get($item, 'wire-click')"
@@ -37,4 +40,6 @@
     @empty
         {{ $slot }}
     @endforelse
+
+    {{ $append ?? '' }}
 </ul>

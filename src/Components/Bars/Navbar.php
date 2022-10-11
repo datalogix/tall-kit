@@ -38,6 +38,11 @@ class Navbar extends Nav
     public $logoUrl;
 
     /**
+     * @var string|string[]|null
+     */
+    public $logoRoute;
+
+    /**
      * @var \Illuminate\Support\Collection
      */
     public $breakpointStyles;
@@ -52,6 +57,7 @@ class Navbar extends Nav
      * @param  string|bool|null  $logoImage
      * @param  string|bool|null  $logoName
      * @param  string|bool|null  $logoUrl
+     * @param  string|string[]|null  $logoRoute
      * @param  string|null  $theme
      * @return void
      */
@@ -63,6 +69,7 @@ class Navbar extends Nav
         $logoImage = null,
         $logoName = null,
         $logoUrl = null,
+        $logoRoute = null,
         $theme = null
     ) {
         parent::__construct($items, true, $theme);
@@ -73,6 +80,7 @@ class Navbar extends Nav
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
         $this->logoUrl = $logoUrl;
+        $this->logoRoute = $logoRoute;
         $this->breakpointStyles = Collection::make($this->themeProvider->breakpoints->get($this->breakpoint));
     }
 }
