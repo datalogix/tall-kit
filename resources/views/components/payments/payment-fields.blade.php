@@ -18,6 +18,7 @@
             ->mergeOnlyThemeProvider($themeProvider, 'fields', $getOptions('displayCreditCard') ? 'default' : 'only-form')
     }}>
         {{ $slot }}
+        {{ $prependFields ?? '' }}
 
         <x-input
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'card-holder-name') }}
@@ -86,6 +87,8 @@
                 maxlength="4"
             />
         </x-group>
+
+        {{ $appendFields ?? '' }}
     </div>
 
     {{ $append ?? '' }}
