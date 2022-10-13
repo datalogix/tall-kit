@@ -201,7 +201,7 @@ class Button extends BladeComponent
             $this->target = $target ?? target_get($presetProperties, 'target');
             $this->click = $click ?? target_get($presetProperties, 'click');
             $this->wireClick = $wireClick ?? target_get($presetProperties, 'wire-click');
-            $this->iconLeft = $iconLeft ?? target_get($presetProperties, ['icon-left', 'icon']);
+            $this->iconLeft = $icon ?? $iconLeft ?? target_get($presetProperties, ['icon-left', 'icon']);
             $this->iconRight = $iconRight ?? target_get($presetProperties, 'icon-right');
             $this->color = $color ?? target_get($presetProperties, 'color', 'default');
             $this->rounded = $rounded ?? target_get($presetProperties, 'rounded', 'default');
