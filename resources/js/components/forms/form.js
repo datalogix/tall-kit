@@ -26,8 +26,13 @@ export default ({ loadable }) => ({
   fillForm () {
     const form = {}
     const el = this.$refs.root ? this.$refs.root : this.$el
+    const elements = [...el.querySelectorAll('input,select,textarea')]
 
-    Array.from(el.querySelectorAll('input,select,textarea'))
+    el.querySelectorAll('template').forEach(template => {
+      elements.push(...template.content.querySelectorAll('input,select,textarea'))
+    })
+
+    Array.from(elements)
       .filter((element) => element.getAttributeNames().filter((attr) => attr.startsWith('x-model')).length)
       .forEach((element) => {
         const attr = element.getAttribute(element.getAttributeNames().find((attr) => attr.startsWith('x-model')) || 'name')
