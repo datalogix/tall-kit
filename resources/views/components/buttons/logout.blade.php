@@ -2,9 +2,14 @@
     {{ $attributes->mergeThemeProvider($themeProvider, 'button') }}
     :init="$init"
     :method="$method"
+    :target="$target"
     :action="$action"
+    :route="$route"
+    :bind="$bind"
+    :modelable="$modelable"
     :enctype="$enctype"
     :confirm="$confirm"
+    :fields="$fields"
     :text="$text"
     :active="$active"
     :click="$click"
@@ -25,3 +30,5 @@
 >
     {{ $slot }}
 </x-form-button>
+
+{{ $endFormDataBinder() }}

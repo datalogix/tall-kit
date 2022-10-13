@@ -29,6 +29,11 @@ class CrudForm extends AbstractCrud
     /**
      * @var string|bool|null
      */
+    public $modelable;
+
+     /**
+     * @var string|bool|null
+     */
     public $enctype;
 
     /**
@@ -64,6 +69,7 @@ class CrudForm extends AbstractCrud
      * @param  string|null  $method
      * @param  string|string[]|null  $route
      * @param  string|bool|null  $action
+     * @param  string|bool|null  $modelable
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  mixed  $fields
@@ -87,6 +93,7 @@ class CrudForm extends AbstractCrud
         $method = null,
         $route = null,
         $action = null,
+        $modelable = null,
         $enctype = null,
         $confirm = null,
         $fields = null,
@@ -113,9 +120,12 @@ class CrudForm extends AbstractCrud
         $this->method = $method ?? ($this->resource ? 'patch' : 'post');
         $this->route = $route ?? $this->prefix.'.'.($this->resource ? 'update' : 'store');
         $this->action = $action ?? route_detect($this->route, array_filter([...$this->parameters, $this->resource]), null);
+        $this->modelable = $modelable;
         $this->enctype = $enctype;
         $this->confirm = $confirm;
         $this->fields = $fields;
         $this->back = $back ?? (url()->current() === url()->previous() ? route_detect($this->prefix.'.index', $this->parameters, null) : null);
+
+        $this->startFormDataBinder($this->resource, $this->modelable);
     }
 }

@@ -9,6 +9,7 @@
     :action="$action"
     :route="$route"
     :bind="$bind"
+    :modelable="$modelable"
     :enctype="$enctype"
     :confirm="$confirm"
     :fields="$fields"
@@ -103,3 +104,5 @@
         </x-slot>
     </x-form-steps>
 </x-form>
+
+{{ $endFormDataBinder() }}

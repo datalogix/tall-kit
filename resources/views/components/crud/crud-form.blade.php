@@ -5,6 +5,7 @@
     :action="$action"
     :route="$route"
     :bind="$resource"
+    :modelable="$modelable"
     :enctype="$enctype"
     :confirm="$confirm"
     :theme="$theme"
@@ -59,13 +60,11 @@
     @endisset
 
     <x-card {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}>
-        @bind($resource)
-            @if ($fields)
-                <x-fields-generator :fields="$fields" />
-            @endif
+        @if ($fields)
+            <x-fields-generator :fields="$fields" />
+        @endif
 
-            {{ $slot }}
-        @endbind
+        {{ $slot }}
     </x-card>
 
     <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'footer') }}>
@@ -110,3 +109,5 @@
         @endisset
     </div>
 </x-form>
+
+{{ $endFormDataBinder() }}

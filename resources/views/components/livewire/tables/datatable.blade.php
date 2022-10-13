@@ -3,6 +3,7 @@
         :search="$search"
         :search-default="$searchDefault"
         :search-values="$searchValues"
+        :search-modelable="$searchModelable"
         :cols="$cols"
         :rows="$rows"
         :resource="$resource"

@@ -9,7 +9,8 @@
                 }}
                 method="GET"
                 :fields="$search"
-                :bind="request()->all()"
+                :bind="$searchValues"
+                :modelable="$searchModelable"
             >
                 {{ $searchFields ?? '' }}
 
@@ -21,6 +22,8 @@
                     </div>
                 @endif
             </x-form>
+
+            {{ $endFormDataBinder() }}
         </x-card>
     @endif
 

@@ -7,6 +7,7 @@
         :search="$search"
         :search-default="$searchDefault"
         :search-values="$searchValues"
+        :search-modelable="$searchModelable"
         :parameters="$parameters"
         :resource="$resource"
         :force-menu="$forceMenu"

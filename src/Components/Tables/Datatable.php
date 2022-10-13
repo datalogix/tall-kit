@@ -14,6 +14,16 @@ class Datatable extends Table
     public $search;
 
     /**
+     * @var mixed
+     */
+    public $searchValues;
+
+    /**
+     * @var string|bool|null
+     */
+    public $searchModelable;
+
+    /**
      * @var \Illuminate\Contracts\Pagination\Paginator|int|bool|null
      */
     public $paginator;
@@ -29,6 +39,7 @@ class Datatable extends Table
      * @param  mixed  $search
      * @param  bool|null  $searchDefault
      * @param  mixed  $searchValues
+     * @param  string|bool|null  $searchModelable
      * @param  mixed  $cols
      * @param  mixed  $rows
      * @param  mixed  $resource
@@ -49,6 +60,7 @@ class Datatable extends Table
         $search = null,
         $searchDefault = null,
         $searchValues = null,
+        $searchModelable = null,
         $cols = null,
         $rows = null,
         $resource = null,
@@ -68,6 +80,8 @@ class Datatable extends Table
         $orderByDirection = Str::lower($orderByDirection ?? request('orderByDirection', 'asc'));
 
         $this->search = DatatableHelpers::getSearch($search, $searchDefault, $searchValues, $parseSearch);
+        $this->searchValues = $searchValues ?? request()->all();
+        $this->searchModelable = $searchModelable;
 
         $rows = DatatableHelpers::getRows($rows ?? $resource, $cols, $this->search, $orderBy, $orderByDirection, $paginator ?? true, $parseRows);
         $cols = DatatableHelpers::getCols($cols, $rows, $sortable ?? DatatableHelpers::getSortable($resource ?? $rows), $orderBy, $orderByDirection, $parseCols);
@@ -87,5 +101,7 @@ class Datatable extends Table
             $emptyText,
             $theme
         );
+
+        $this->startFormDataBinder($this->searchValues, $this->searchModelable);
     }
 }

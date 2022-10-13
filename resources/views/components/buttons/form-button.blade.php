@@ -6,6 +6,7 @@
     :action="$action"
     :route="$route"
     :bind="$bind"
+    :modelable="$modelable"
     :enctype="$enctype"
     :confirm="$confirm"
     :fields="$fields"
@@ -34,3 +35,5 @@
         {{ $slot }}
     </x-submit>
 </x-form>
+
+{{ $endFormDataBinder() }}

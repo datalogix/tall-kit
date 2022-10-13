@@ -50,6 +50,8 @@
             {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'datatable') }}
             :search="$search"
             :search-default="$searchDefault"
+            :search-values="$searchValues"
+            :search-modelable="$searchModelable"
             :cols="$cols"
             :resource="$resource"
             :footer="$footer"
@@ -146,3 +148,5 @@
         </x-datatable>
     @endisset
 </div>
+
+{{ $endFormDataBinder() }}

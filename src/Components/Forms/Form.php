@@ -42,6 +42,11 @@ class Form extends BladeComponent
     /**
      * @var string|bool|null
      */
+    public $modelable;
+
+    /**
+     * @var string|bool|null
+     */
     public $enctype;
 
     /**
@@ -71,6 +76,7 @@ class Form extends BladeComponent
      * @param  string|bool|null  $action
      * @param  string|string[]|null  $route
      * @param  mixed  $bind
+     * @param  string|bool|null  $modelable
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  mixed  $fields
@@ -84,6 +90,7 @@ class Form extends BladeComponent
         $action = null,
         $route = null,
         $bind = null,
+        $modelable = null,
         $enctype = null,
         $confirm = null,
         $fields = null,
@@ -97,9 +104,12 @@ class Form extends BladeComponent
         $this->action = $action ?? route_detect($route, $bind ?? $this->getBoundTarget(), null);
         $this->route = $route;
         $this->bind = $bind;
+        $this->modelable = $modelable;
         $this->enctype = $enctype;
         $this->confirm = $confirm;
         $this->spoofMethod = in_array($this->method, ['PUT', 'PATCH', 'DELETE']);
         $this->fields = $fields;
+
+        $this->startFormDataBinder($this->bind, $this->modelable);
     }
 }

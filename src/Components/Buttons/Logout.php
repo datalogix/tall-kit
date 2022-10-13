@@ -13,8 +13,10 @@ class Logout extends FormButton
      * @param  string|null  $action
      * @param  string|string[]|null  $route
      * @param  mixed  $bind
+     * @param  string|bool|null  $modelable
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
+     * @param  mixed  $fields
      * @param  string|null  $text
      * @param  bool|null  $active
      * @param  string|bool|null  $click
@@ -26,6 +28,7 @@ class Logout extends FormButton
      * @param  string|bool|null  $rounded
      * @param  string|bool|null  $shadow
      * @param  bool|null  $outlined
+     * @param  bool|null  $linkText
      * @param  bool|null  $bordered
      * @param  string|bool|null  $loading
      * @param  string|null  $preset
@@ -40,8 +43,10 @@ class Logout extends FormButton
         $action = null,
         $route = null,
         $bind = null,
+        $modelable = null,
         $enctype = null,
         $confirm = null,
+        $fields = null,
         $text = null,
         $active = null,
         $click = null,
@@ -53,6 +58,7 @@ class Logout extends FormButton
         $rounded = null,
         $shadow = null,
         $outlined = null,
+        $linkText = null,
         $bordered = null,
         $loading = null,
         $preset = null,
@@ -66,8 +72,10 @@ class Logout extends FormButton
             $action ?? route_detect(['logout', 'auth.logout']),
             $route,
             $bind,
+            $modelable,
             $enctype,
             $confirm,
+            $fields,
             $text ?? 'Log out',
             $active,
             $click,
@@ -79,11 +87,12 @@ class Logout extends FormButton
             $rounded,
             $shadow,
             $outlined,
+            $linkText,
             $bordered,
             $loading,
             $preset,
             $tooltip,
-            $theme
+            $theme,
         );
     }
 }

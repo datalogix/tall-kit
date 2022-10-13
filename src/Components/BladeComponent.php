@@ -7,10 +7,12 @@ use TALLKit\Binders\ThemeBinder;
 use TALLKit\Concerns\AlpineFormDataBinder;
 use TALLKit\Concerns\Componentable;
 use TALLKit\Concerns\LivewireFormDataBinder;
+use TALLKit\Concerns\PrepareFormDataBinder;
 
 abstract class BladeComponent extends Component
 {
     use Componentable;
+    use PrepareFormDataBinder;
     use AlpineFormDataBinder;
     use LivewireFormDataBinder;
 

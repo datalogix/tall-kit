@@ -96,8 +96,10 @@ class FormButton extends Form
      * @param  string|null  $action
      * @param  string|string[]|null  $route
      * @param  mixed  $bind
+     * @param  string|bool|null  $modelable
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
+     * @param  mixed  $fields
      * @param  string|null  $text
      * @param  bool|null  $active
      * @param  string|bool|null  $click
@@ -124,8 +126,10 @@ class FormButton extends Form
         $action = null,
         $route = null,
         $bind = null,
+        $modelable = null,
         $enctype = null,
         $confirm = null,
+        $fields = null,
         $text = null,
         $active = null,
         $click = null,
@@ -151,9 +155,10 @@ class FormButton extends Form
             $action ?? ($route ? null : request()->url()),
             $route,
             $bind,
+            $modelable,
             $enctype,
             $confirm,
-            null,
+            $fields,
             $theme
         );
 

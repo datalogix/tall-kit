@@ -7,23 +7,13 @@ use TALLKit\Binders\FormDataBinder;
 trait BoundValues
 {
     /**
-     * Get an instance of FormDataBinder.
-     *
-     * @return \TALLKit\Binders\FormDataBinder
-     */
-    protected function getFormDataBinder()
-    {
-        return app(FormDataBinder::class);
-    }
-
-    /**
      * Get the latest bound target.
      *
      * @return mixed
      */
     protected function getBoundTarget()
     {
-        return $this->getFormDataBinder()->get();
+        return app(FormDataBinder::class)->getBind();
     }
 
     /**

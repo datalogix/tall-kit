@@ -29,6 +29,11 @@ trait LivewireDatatable
     public $searchValues;
 
     /**
+     * @var string|bool|null
+     */
+    public $searchModelable;
+
+    /**
      * @var mixed
      */
     public $cols;

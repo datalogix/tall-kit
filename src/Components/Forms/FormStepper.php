@@ -50,6 +50,7 @@ class FormStepper extends Form
      * @param  string|bool|null  $action
      * @param  string|string[]|null  $route
      * @param  mixed  $bind
+     * @param  string|bool|null  $modelable
      * @param  string|bool|null  $enctype
      * @param  string|bool|null  $confirm
      * @param  mixed  $fields
@@ -70,6 +71,7 @@ class FormStepper extends Form
         $action = null,
         $route = null,
         $bind = null,
+        $modelable = null,
         $enctype = null,
         $confirm = null,
         $fields = null,
@@ -89,6 +91,7 @@ class FormStepper extends Form
             $action,
             $route,
             $bind,
+            $modelable,
             $enctype,
             $confirm,
             $fields,

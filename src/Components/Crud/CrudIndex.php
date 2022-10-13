@@ -18,6 +18,16 @@ class CrudIndex extends AbstractCrud
     public $searchDefault;
 
     /**
+     * @var mixed
+     */
+    public $searchValues;
+
+    /**
+     * @var string|bool|null
+     */
+    public $searchModelable;
+
+    /**
      * @var bool
      */
     public $displayIdColumn;
@@ -72,6 +82,7 @@ class CrudIndex extends AbstractCrud
      * @param  mixed  $search
      * @param  bool|null  $searchDefault
      * @param  mixed  $searchValues
+     * @param  string|bool|null  $searchModelable
      * @param  mixed  $parameters
      * @param  mixed  $resource
      * @param  bool|null  $forceMenu
@@ -105,6 +116,7 @@ class CrudIndex extends AbstractCrud
         $search = null,
         $searchDefault = null,
         $searchValues = null,
+        $searchModelable = null,
         $parameters = null,
         $resource = null,
         $forceMenu = null,
@@ -149,6 +161,8 @@ class CrudIndex extends AbstractCrud
         $this->title = (string) Str::of($this->title)->plural()->title();
         $this->search = $search;
         $this->searchDefault = $searchDefault;
+        $this->searchValues = $searchValues ?? request()->all();
+        $this->searchModelable = $searchModelable;
         $this->displayIdColumn = $displayIdColumn ?? false;
         $this->displayActionsColumn = $displayActionsColumn ?? true;
         $this->mapRelationsColumn = $mapRelationsColumn ?? true;
@@ -158,6 +172,8 @@ class CrudIndex extends AbstractCrud
         $this->paginatorPosition = $paginatorPosition;
         $this->orderBy = $orderBy;
         $this->orderByDirection = $orderByDirection;
+
+        $this->startFormDataBinder($this->searchValues, $this->searchModelable);
     }
 
     /**
