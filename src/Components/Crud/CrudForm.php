@@ -31,7 +31,7 @@ class CrudForm extends AbstractCrud
      */
     public $modelable;
 
-     /**
+    /**
      * @var string|bool|null
      */
     public $enctype;
