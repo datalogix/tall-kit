@@ -4733,6 +4733,7 @@ return [
              */
             'avatar' => [
                 'container' => [
+                    'theme:icon' => 'w-4 h-4 mx-auto',
                     'theme:icon-name' => ['account'],
                 ],
             ],
