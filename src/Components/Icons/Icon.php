@@ -8,19 +8,28 @@ use Illuminate\Support\Str;
 class Icon extends AbstractIcon
 {
     /**
+     * @var string|null
+     */
+    public $size;
+
+    /**
      * Create a new component instance.
      *
      * @param  string|null  $name
      * @param  string|null  $icon
+     * @param  string|null  $size
      * @param  string|null  $theme
      * @return void
      */
     public function __construct(
         $name = null,
         $icon = null,
+        $size = null,
         $theme = null
     ) {
         parent::__construct($name, $icon, $theme);
+
+        $this->size = $size ?? 'default';
     }
 
     /**
@@ -49,6 +58,7 @@ class Icon extends AbstractIcon
         return function (array $data) {
             $slot = target_get($data, 'slot');
             $attributes = target_get($data, 'attributes');
+            $size = $this->themeProvider->sizes->get($this->size);
 
             if (! Str::startsWith($slot, '<svg') && $preset = $this->themeProvider->presets->get($this->name)) {
                 $slot = $preset;
@@ -59,13 +69,17 @@ class Icon extends AbstractIcon
             }
 
             if (empty(trim($slot)) && (string) $attributes) {
+                $attributes = $attributes->merge($size);
+
                 return '<i '.$attributes.'></i>';
             }
 
+            if (Str::startsWith($slot, '<svg') && (empty((string) $attributes) || (string) $attributes === 'class=""')) {
+                $attributes = $attributes->merge($size);
+            }
+
             if (Str::startsWith($slot, '<svg')) {
-                return (empty($attributes) || (string) $attributes === 'class=""')
-                    ? (string) $slot
-                    : str_replace('<svg', sprintf('<svg %s', $attributes), $slot);
+                return str_replace('<svg', sprintf('<svg %s', $attributes), $slot);
             }
 
             if ((string) $attributes) {
