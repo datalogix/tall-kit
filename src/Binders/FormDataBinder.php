@@ -31,11 +31,13 @@ class FormDataBinder
      * Bind a target to the current instance.
      *
      * @param  mixed  $target
-     * @return void
+     * @return \TALLKit\Binders\FormDataBinder
      */
     public function bind($target)
     {
         $this->bindings[] = $target;
+
+        return $this;
     }
 
     /**
@@ -43,7 +45,7 @@ class FormDataBinder
      *
      * @return mixed
      */
-    public function get()
+    public function getBind()
     {
         return Arr::last($this->bindings);
     }
@@ -51,11 +53,13 @@ class FormDataBinder
     /**
      * Remove the last binding target.
      *
-     * @return void
+     * @return \TALLKit\Binders\FormDataBinder
      */
-    public function pop()
+    public function endBind()
     {
         array_pop($this->bindings);
+
+        return $this;
     }
 
     /**
@@ -72,25 +76,29 @@ class FormDataBinder
      * Enable Livewire binding with an optional modifier.
      *
      * @param  string|null  $modifier
-     * @return void
+     * @return \TALLKit\Binders\FormDataBinder
      */
     public function wire($modifier = null)
     {
         $this->wire = $modifier;
+
+        return $this;
     }
 
     /**
      * Disable Livewire binding.
      *
-     * @return void
+     * @return \TALLKit\Binders\FormDataBinder
      */
     public function endWire()
     {
         $this->wire = false;
+
+        return $this;
     }
 
     /**
-     * Returns the modifier, if set.
+     * Returns the wire modifier, if set.
      *
      * @return string|null
      */
@@ -106,32 +114,36 @@ class FormDataBinder
      */
     public function isModel()
     {
-        return $this->model !== false;
+        return $this->model !== false && ! $this->isWired();
     }
 
     /**
      * Enable Alpine binding with an optional modifier.
      *
-     * @param  string|null  $modifier
-     * @return void
+     * @param  string|bool|null  $modifier
+     * @return \TALLKit\Binders\FormDataBinder
      */
     public function model($modifier = null)
     {
         $this->model = $modifier;
+
+        return $this;
     }
 
     /**
      * Disable Alpine binding.
      *
-     * @return void
+     * @return \TALLKit\Binders\FormDataBinder
      */
     public function endModel()
     {
         $this->model = false;
+
+        return $this;
     }
 
     /**
-     * Returns the modifier, if set.
+     * Returns the model modifier, if set.
      *
      * @return string|null
      */

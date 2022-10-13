@@ -173,13 +173,13 @@ class TALLKitServiceProvider extends ServiceProvider
         Blade::directive('tallkitHead', [TALLKitBladeDirectives::class, 'head']);
         Blade::directive('tallkitScripts', [TALLKitBladeDirectives::class, 'scripts']);
         Blade::directive('theme', [TALLKitBladeDirectives::class, 'theme']);
-        Blade::directive('endtheme', [TALLKitBladeDirectives::class, 'endtheme']);
+        Blade::directive('endtheme', [TALLKitBladeDirectives::class, 'endTheme']);
         Blade::directive('bind', [TALLKitBladeDirectives::class, 'bind']);
-        Blade::directive('endbind', [TALLKitBladeDirectives::class, 'endbind']);
+        Blade::directive('endbind', [TALLKitBladeDirectives::class, 'endBind']);
         Blade::directive('model', [TALLKitBladeDirectives::class, 'model']);
-        Blade::directive('endmodel', [TALLKitBladeDirectives::class, 'endmodel']);
+        Blade::directive('endmodel', [TALLKitBladeDirectives::class, 'endModel']);
         Blade::directive('wire', [TALLKitBladeDirectives::class, 'wire']);
-        Blade::directive('endwire', [TALLKitBladeDirectives::class, 'endwire']);
+        Blade::directive('endwire', [TALLKitBladeDirectives::class, 'endWire']);
         Blade::directive('scopedslot', [TALLKitBladeDirectives::class, 'scopedslot']);
         Blade::directive('endscopedslot', [TALLKitBladeDirectives::class, 'endscopedslot']);
     }

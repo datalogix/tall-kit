@@ -44,7 +44,7 @@ class TALLKitBladeDirectives
      *
      * @return string
      */
-    public static function endtheme()
+    public static function endTheme()
     {
         return '<?php app(\TALLKit\Binders\ThemeBinder::class)->pop(); ?>';
     }
@@ -65,9 +65,9 @@ class TALLKitBladeDirectives
      *
      * @return string
      */
-    public static function endbind()
+    public static function endBind()
     {
-        return '<?php app(\TALLKit\Binders\FormDataBinder::class)->pop(); ?>';
+        return '<?php app(\TALLKit\Binders\FormDataBinder::class)->endBind(); ?>';
     }
 
     /**
@@ -86,7 +86,7 @@ class TALLKitBladeDirectives
      *
      * @return string
      */
-    public static function endmodel()
+    public static function endModel()
     {
         return '<?php app(\TALLKit\Binders\FormDataBinder::class)->endModel(); ?>';
     }
@@ -107,7 +107,7 @@ class TALLKitBladeDirectives
      *
      * @return string
      */
-    public static function endwire()
+    public static function endWire()
     {
         return '<?php app(\TALLKit\Binders\FormDataBinder::class)->endWire(); ?>';
     }
