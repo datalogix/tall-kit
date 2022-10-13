@@ -1714,20 +1714,14 @@ return [
                         'text' => 'Options',
                         'tooltip' => 'Options',
                         'color' => 'none',
-                        'icon' => [
-                            'name' => 'dots-vertical',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'dots-vertical',
                     ],
 
                     'show' => [
                         'text' => 'Show',
                         'tooltip' => 'Show',
                         'color' => 'default',
-                        'icon' => [
-                            'name' => 'eye',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'eye',
                         'loading' => 'Showing',
                     ],
 
@@ -1735,10 +1729,7 @@ return [
                         'text' => 'Add',
                         'tooltip' => 'Add',
                         'color' => 'success',
-                        'icon' => [
-                            'name' => 'plus',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'plus',
                         'loading' => 'Adding',
                     ],
 
@@ -1746,10 +1737,7 @@ return [
                         'text' => 'Create',
                         'tooltip' => 'Create',
                         'color' => 'success',
-                        'icon' => [
-                            'name' => 'plus',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'plus',
                         'loading' => 'Creating',
                     ],
 
@@ -1757,10 +1745,7 @@ return [
                         'text' => 'Create many',
                         'tooltip' => 'Create many',
                         'color' => 'success',
-                        'icon' => [
-                            'name' => 'plus-box-multiple-outline',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'plus-box-multiple-outline',
                         'loading' => 'Creating',
                     ],
 
@@ -1768,10 +1753,7 @@ return [
                         'text' => 'Edit',
                         'tooltip' => 'Edit',
                         'color' => 'info',
-                        'icon' => [
-                            'name' => 'pencil',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'pencil',
                         'loading' => 'Editing',
                     ],
 
@@ -1779,10 +1761,7 @@ return [
                         'text' => 'Delete',
                         'tooltip' => 'Delete',
                         'color' => 'error',
-                        'icon' => [
-                            'name' => 'delete',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'delete',
                         'loading' => 'Deleting',
                     ],
 
@@ -1790,10 +1769,7 @@ return [
                         'text' => 'Save',
                         'tooltip' => 'Save',
                         'color' => 'success',
-                        'icon' => [
-                            'name' => 'content-save',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'content-save',
                         'loading' => 'Saving',
                     ],
 
@@ -1801,10 +1777,7 @@ return [
                         'text' => 'Save and view',
                         'tooltip' => 'Save and view',
                         'color' => 'success',
-                        'icon' => [
-                            'name' => 'content-save-check',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'content-save-check',
                         'loading' => 'Saving',
                     ],
 
@@ -1812,10 +1785,7 @@ return [
                         'text' => 'Send',
                         'tooltip' => 'Send',
                         'color' => 'info',
-                        'icon' => [
-                            'name' => 'send',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'send',
                         'loading' => 'Sending',
                     ],
 
@@ -1823,10 +1793,7 @@ return [
                         'text' => 'Finish',
                         'tooltip' => 'Finish',
                         'color' => 'success',
-                        'icon' => [
-                            'name' => 'check',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'check',
                         'loading' => 'Finishing',
                     ],
 
@@ -1834,10 +1801,7 @@ return [
                         'text' => 'Back',
                         'tooltip' => 'Back',
                         'color' => 'default',
-                        'icon' => [
-                            'name' => 'arrow-left',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'arrow-left',
                         'loading' => 'Returning',
                     ],
 
@@ -1845,10 +1809,7 @@ return [
                         'text' => 'Back',
                         'tooltip' => 'Back',
                         'color' => 'default',
-                        'icon-right' => [
-                            'name' => 'arrow-right',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon-right' => 'arrow-right',
                         'loading' => 'Returning',
                     ],
 
@@ -1863,10 +1824,7 @@ return [
                         'text' => 'Enter',
                         'tooltip' => 'Enter',
                         'color' => 'indigo',
-                        'icon' => [
-                            'name' => 'login',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'login',
                         'loading' => 'Entering',
                     ],
 
@@ -1874,10 +1832,7 @@ return [
                         'text' => 'Update',
                         'tooltip' => 'Update',
                         'color' => 'info',
-                        'icon' => [
-                            'name' => 'content-save',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'content-save',
                         'loading' => 'Updating',
                     ],
 
@@ -1886,10 +1841,7 @@ return [
                         'text' => 'Download',
                         'tooltip' => 'Download',
                         'color' => 'indigo',
-                        'icon' => [
-                            'name' => 'download',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'download',
                         'loading' => 'Downloading',
                     ],
 
@@ -1897,10 +1849,7 @@ return [
                         'text' => 'View',
                         'tooltip' => 'View',
                         'color' => 'default',
-                        'icon' => [
-                            'name' => 'eye',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'eye',
                         'loading' => 'Viewing',
                     ],
 
@@ -1908,10 +1857,7 @@ return [
                         'text' => 'Move up',
                         'tooltip' => 'Move up',
                         'color' => 'success',
-                        'icon' => [
-                            'name' => 'arrow-up',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'arrow-up',
                         'loading' => 'Moving',
                     ],
 
@@ -1919,10 +1865,7 @@ return [
                         'text' => 'Move down',
                         'tooltip' => 'Move down',
                         'color' => 'success',
-                        'icon' => [
-                            'name' => 'arrow-down',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'arrow-down',
                         'loading' => 'Moving',
                     ],
 
@@ -1930,10 +1873,7 @@ return [
                         'text' => 'Copy',
                         'tooltip' => 'Copy',
                         'color' => 'warning',
-                        'icon' => [
-                            'name' => 'content-copy',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'content-copy',
                         'loading' => 'Copying',
                     ],
 
@@ -1941,10 +1881,7 @@ return [
                         'text' => 'Duplicate',
                         'tooltip' => 'Duplicate',
                         'color' => 'purple',
-                        'icon' => [
-                            'name' => 'content-duplicate',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'content-duplicate',
                         'loading' => 'Duplicating',
                     ],
 
@@ -1952,10 +1889,7 @@ return [
                         'text' => 'Search',
                         'tooltip' => 'Search',
                         'color' => 'info',
-                        'icon' => [
-                            'name' => 'search',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'search',
                         'loading' => 'Searching',
                     ],
 
@@ -1965,10 +1899,7 @@ return [
                         'color' => 'none',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => [
-                            'name' => 'login',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'login',
                         'loading' => true,
                     ],
 
@@ -1978,10 +1909,7 @@ return [
                         'color' => 'none',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => [
-                            'name' => 'logout',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'logout',
                         'loading' => true,
                     ],
 
@@ -1991,10 +1919,7 @@ return [
                         'color' => 'blue',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => [
-                            'name' => 'checkbox-marked-outline',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'checkbox-marked-outline',
                     ],
 
                     'deselect-all' => [
@@ -2003,10 +1928,7 @@ return [
                         'color' => 'blue',
                         'rounded' => 'none',
                         'shadow' => 'none',
-                        'icon' => [
-                            'name' => 'checkbox-blank-outline',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'checkbox-blank-outline',
                     ],
 
                     'menu' => [
@@ -2015,7 +1937,7 @@ return [
                         'shadow' => 'none',
                         'icon' => [
                             'name' => 'menu',
-                            'class' => 'w-6 h-6 mx-auto',
+                            'class' => '!w-6 !h-6',
                         ],
                     ],
 
@@ -2025,36 +1947,27 @@ return [
                         'shadow' => 'none',
                         'icon' => [
                             'name' => 'toggler',
-                            'class' => 'w-6 h-6 mx-auto',
+                            'class' => '!w-6 !h-6',
                         ],
                     ],
 
                     'prev' => [
                         'text' => 'Previous',
                         'color' => 'blue',
-                        'icon' => [
-                            'name' => 'arrow-left',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'arrow-left',
                     ],
 
                     'next' => [
                         'text' => 'Next',
                         'color' => 'blue',
-                        'icon-right' => [
-                            'name' => 'arrow-right',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon-right' => 'arrow-right',
                     ],
 
                     'payment' => [
                         'text' => 'Payment',
                         'tooltip' => 'Payment',
                         'color' => 'green',
-                        'icon' => [
-                            'name' => 'payment',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'payment',
                         'loading' => true,
                     ],
 
@@ -2062,10 +1975,7 @@ return [
                         'text' => 'Pay',
                         'tooltip' => 'Pay',
                         'color' => 'green',
-                        'icon' => [
-                            'name' => 'payment',
-                            'class' => 'w-4 h-4 mx-auto',
-                        ],
+                        'icon' => 'payment',
                         'loading' => 'Paying',
                     ],
                 ],
@@ -2685,9 +2595,7 @@ return [
                     ],
                 ],
 
-                'icon' => [
-                    'class' => 'w-4 h-4',
-                ],
+                'icon' => [],
 
                 'content' => [
                     'class' => 'flex-col',
@@ -3136,7 +3044,7 @@ return [
                 ],
 
                 'radio' => [
-                    'class' => 'h-4 w-4 border-gray-200 shadow',
+                    'class' => 'w-4 h-4 border-gray-200 shadow',
                 ],
             ],
 
@@ -3197,6 +3105,28 @@ return [
             ],
 
             'icon' => [
+                'sizes' => [
+                    'default' => [
+                        'class' => 'w-4 h-4 mx-auto',
+                    ],
+
+                    'sm' => [
+                        'class' => 'w-2 h-2 mx-auto',
+                    ],
+
+                    'md' => [
+                        'class' => 'w-6 h-6 mx-auto',
+                    ],
+
+                    'lg' => [
+                        'class' => 'w-8 h-8 mx-auto',
+                    ],
+
+                    'xl' => [
+                        'class' => 'w-10 h-10 mx-auto',
+                    ],
+                ],
+
                 'presets' => [
                     'check' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59L21 7Z"></path></svg>',
                     'close' => '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"></path></svg>',
@@ -4803,7 +4733,6 @@ return [
              */
             'avatar' => [
                 'container' => [
-                    'theme:icon' => 'w-4 h-4 mx-auto',
                     'theme:icon-name' => ['account'],
                 ],
             ],
@@ -4982,9 +4911,7 @@ return [
                     ],
                 ],
 
-                'sortable' => [
-                    'class' => 'w-4 h-4',
-                ],
+                'sortable' => [],
 
                 'sortable-asc' => [
                     'icon-name' => 'chevron-up',
