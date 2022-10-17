@@ -17,7 +17,7 @@ trait PrepareFormDataBinder
     {
         app(FormDataBinder::class)
             ->bind($bind)
-            ->model($modelable);
+            ->model($modelable ?? false);
     }
 
     /**
