@@ -56,7 +56,7 @@ class Sidebar extends Drawer
             $theme
         );
 
-        $this->items = Collection::wrap($items)->filter();
+        $this->items = Collection::make($items)->filter();
         $this->breakpoint = $breakpoint ?? 'none';
         $this->target = $target;
     }

@@ -40,7 +40,7 @@ class FormSteps extends BladeComponent
         parent::__construct($theme);
 
         $this->mode = $mode ?? 'horizontal';
-        $this->steps = Collection::wrap($steps);
+        $this->steps = Collection::make($steps);
         $this->current = $current ?? 1;
     }
 }

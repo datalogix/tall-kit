@@ -26,6 +26,6 @@ class Messages extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->messages = Collection::wrap(session($session ?? Notify::getNotifyKey()))->sortKeysDesc();
+        $this->messages = Collection::make(session($session ?? Notify::getNotifyKey()))->sortKeysDesc();
     }
 }

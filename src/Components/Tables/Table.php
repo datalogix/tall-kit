@@ -46,9 +46,9 @@ class Table extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->cols = Collection::wrap($cols);
-        $this->rows = Collection::wrap($rows);
-        $this->footer = Collection::wrap($footer);
+        $this->cols = Collection::make($cols);
+        $this->rows = Collection::make($rows);
+        $this->footer = Collection::make($footer);
         $this->emptyText = $emptyText;
     }
 }

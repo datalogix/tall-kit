@@ -79,7 +79,7 @@ class GoogleFonts extends Script
             return $families;
         }
 
-        $params = Collection::wrap($families)->map(function ($family) {
+        $params = Collection::make($families)->map(function ($family) {
             return 'family='.$family;
         });
 

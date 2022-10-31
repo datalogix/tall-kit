@@ -221,7 +221,7 @@ class Button extends BladeComponent
         }
 
         $this->href = route_detect(
-            Collection::wrap($this->href)->union($this->route)->toArray(),
+            Collection::make($this->href)->union($this->route)->toArray(),
             null,
             $this->href
         );

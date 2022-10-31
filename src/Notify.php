@@ -30,7 +30,7 @@ class Notify implements Arrayable, JsonSerializable
      */
     public function __construct(array $attributes = [])
     {
-        $this->attributes = Collection::wrap($attributes);
+        $this->attributes = Collection::make($attributes);
     }
 
     /**

@@ -100,7 +100,7 @@ class FormStepper extends Form
 
         $this->mode = $mode ?? 'horizontal';
         $this->title = $title;
-        $this->steps = Collection::wrap($steps);
+        $this->steps = Collection::make($steps);
         $this->current = $current ?? 1;
         $this->prev = $prev ?? true;
         $this->next = $next ?? true;
