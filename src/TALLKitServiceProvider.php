@@ -49,6 +49,7 @@ class TALLKitServiceProvider extends ServiceProvider
     protected function registerSingleton()
     {
         $this->app->singleton(TALLKit::class);
+        $this->app->singleton(Notify::class);
         $this->app->singleton(FormDataBinder::class);
         $this->app->singleton(ThemeBinder::class);
         $this->app->alias(TALLKit::class, 'tallkit');
