@@ -114,7 +114,7 @@ abstract class AbstractCrud extends BladeComponent
         $this->resourceTitle = target_get($this->resource, ['title', 'name']);
         $this->forceMenu = $forceMenu;
         $this->maxActions = $maxActions ?? 4;
-        $this->actions = Collection::make($actions);
+        $this->actions = Collection::wrap($actions);
         $this->routeName = $routeName;
         $this->tooltip = $tooltip;
 

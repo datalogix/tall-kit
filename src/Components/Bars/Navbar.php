@@ -81,6 +81,6 @@ class Navbar extends Nav
         $this->logoName = $logoName;
         $this->logoUrl = $logoUrl;
         $this->logoRoute = $logoRoute;
-        $this->breakpointStyles = Collection::make($this->themeProvider->breakpoints->get($this->breakpoint));
+        $this->breakpointStyles = Collection::wrap($this->themeProvider->breakpoints->get($this->breakpoint));
     }
 }

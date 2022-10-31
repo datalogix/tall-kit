@@ -15,12 +15,12 @@ class MergeThemeProvider
                 return $this;
             }
 
-            $themeAttrs = Collection::make($this->whereStartsWith('theme:'))
+            $themeAttrs = Collection::wrap($this->whereStartsWith('theme:'))
                 ->mapWithKeys(function ($value, $key) {
                     return [Str::replace('theme:', '', $key) => MergeThemeProvider::convertStringToArrayClass($value)];
                 })->get($themeKey, []);
 
-            $exceptAttrs = Collection::make($this->whereStartsWith('theme:'.$themeKey.'.except.'))
+            $exceptAttrs = Collection::wrap($this->whereStartsWith('theme:'.$themeKey.'.except.'))
                 ->filter(function ($value) {
                     return $value !== false;
                 })->map(function ($value, $key) use ($themeKey) {

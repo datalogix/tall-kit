@@ -2,6 +2,7 @@
 
 namespace TALLKit\Components\Payments;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use TALLKit\Components\BladeComponent;
 use TALLKit\Concerns\JsonOptions;
@@ -39,14 +40,16 @@ class PaymentFields extends BladeComponent
 
     protected function getCardExpirationMonths()
     {
-        return collect(range(1, 12))->mapWithKeys(function ($value) {
-            return [Str::padLeft($value, 2, '0') => Str::padLeft($value, 2, '0')];
-        })->toArray();
+        return Collection::wrap(range(1, 12))
+            ->mapWithKeys(function ($value) {
+                 [Str::padLeft($value, 2, '0') => Str::padLeft($value, 2, '0')];
+            })
+            ->toArray();
     }
 
     protected function getCardExpirationYears()
     {
-        return collect(range(intval(date('Y')), intval(date('Y') + $this->getOptions('cardExpirationMaxYears'))))
+        return Collection::wrap(range(intval(date('Y')), intval(date('Y') + $this->getOptions('cardExpirationMaxYears'))))
             ->mapWithKeys(function ($value) {
                 return [$value => $value];
             })->toArray();

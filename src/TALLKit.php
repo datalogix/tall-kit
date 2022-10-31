@@ -66,7 +66,7 @@ class TALLKit
      */
     protected function headAssets($options, $assets)
     {
-        $styles = Collection::make([$this->getFullAssetPath($options, 'style.css')]);
+        $styles = Collection::wrap([$this->getFullAssetPath($options, 'style.css')]);
         $scripts = Collection::make();
 
         if (target_get($options, 'inject.tailwindcss') && $tailwindcss = target_get($assets, 'tailwindcss')) {
@@ -80,7 +80,7 @@ class TALLKit
         }
 
         if (target_get($options, 'load_type') === true) {
-            Collection::make($assets)->filter(function ($key) {
+            Collection::wrap($assets)->filter(function ($key) {
                 return $key !== 'tailwindcss' && $key !== 'alpine';
             })->each(function ($asset) use ($styles, $scripts) {
                 $styles->add($asset);

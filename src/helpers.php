@@ -67,7 +67,7 @@ if (! function_exists('collect_value')) {
      */
     function collect_value($items = null, ...$args)
     {
-        return Collection::make(value($items, ...$args))->map(function ($item, $key) use ($args) {
+        return Collection::wrap(value($items, ...$args))->map(function ($item, $key) use ($args) {
             return value($item, $key, ...$args);
         })->whereNotNull();
     }

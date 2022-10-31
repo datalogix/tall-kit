@@ -22,8 +22,8 @@ class DatatableHelpers
      */
     public static function getSearch($search, $searchDefault = true, $searchValues = null, $parse = null)
     {
-        $search = Collection::make($search);
-        $searchValues = Collection::make($searchValues ?? request()->all());
+        $search = Collection::wrap($search);
+        $searchValues = Collection::wrap($searchValues ?? request()->all());
 
         if ($searchDefault ?? true) {
             $search->prepend(['placeholder' => __('Enter your search term...')], 'q');
@@ -61,7 +61,7 @@ class DatatableHelpers
         }
 
         if ($rows instanceof Model) {
-            $cols = $cols ? Collection::make($cols)->map(function ($col, $key) {
+            $cols = $cols ? Collection::wrap($cols)->map(function ($col, $key) {
                 return is_int($key) ? target_get($col, 'name', $col) : $key;
             })->toArray() : $rows->getFillable();
             $rows = $rows->query();
@@ -93,8 +93,8 @@ class DatatableHelpers
      */
     public static function getCols($cols, $rows = null, $sortable = null, $orderBy = null, $orderByDirection = null, $parse = null)
     {
-        $firstRow = Collection::make(Collection::make($rows instanceof Paginator ? $rows->items() : $rows)->first());
-        $cols = Collection::make($cols ?? $firstRow->keys());
+        $firstRow = Collection::wrap(Collection::wrap($rows instanceof Paginator ? $rows->items() : $rows)->first());
+        $cols = Collection::wrap($cols ?? $firstRow->keys());
 
         if ($firstRow->isEmpty() && $cols->isEmpty()) {
             return [];
@@ -141,8 +141,8 @@ class DatatableHelpers
             return $rows;
         }
 
-        $cols = Collection::make($cols);
-        $search = Collection::make($search);
+        $cols = Collection::wrap($cols);
+        $search = Collection::wrap($search);
         $searchCols = $search->pluck('name', 'name')->only($cols);
 
         $rows = $rows->when($searchCols->isNotEmpty(), function (Builder $query) use ($searchCols, $search) {

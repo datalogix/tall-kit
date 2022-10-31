@@ -3,6 +3,7 @@
 namespace TALLKit\Components\Buttons;
 
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Collection;
 use TALLKit\Components\BladeComponent;
 
 class Button extends BladeComponent
@@ -220,7 +221,7 @@ class Button extends BladeComponent
         }
 
         $this->href = route_detect(
-            collect($this->href)->union($this->route)->toArray(),
+            Collection::wrap($this->href)->union($this->route)->toArray(),
             null,
             $this->href
         );

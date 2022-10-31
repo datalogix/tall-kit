@@ -44,7 +44,7 @@ trait PrepareOptions
      */
     protected function prepareOptions($options = null)
     {
-        return Collection::make($options)
+        return Collection::wrap($options)
             ->mapWithKeys(function ($value, $key) {
                 $key = target_get($value, $this->itemValue, $key);
                 $value = is_iterable($value)

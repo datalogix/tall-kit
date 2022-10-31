@@ -112,8 +112,8 @@ class Many extends Group
         $this->allowEmpty = $allowEmpty;
         $this->fieldset = $fieldset ?? $this->allowEmpty ?? $this->label ?? $this->name;
         $this->showHeaderCreate = $showHeaderCreate ?? $this->allowEmpty ?? $this->fieldset && $this->fields->count() > 1;
-        $this->cols = Collection::make($cols ?? $this->fields);
-        $this->footer = Collection::make($footer);
+        $this->cols = Collection::wrap($cols ?? $this->fields);
+        $this->footer = Collection::wrap($footer);
         $this->tooltip = $tooltip ?? true;
         $this->heading = $heading ?? $this->allowEmpty ?? ! $this->fieldset || $this->fields->count() > 1;
         $this->labels = $labels ?? ! $this->heading;

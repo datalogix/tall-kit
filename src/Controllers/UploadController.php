@@ -17,7 +17,7 @@ class UploadController
      */
     public function store(UploadRequest $request)
     {
-        $files = Collection::make($request->allFiles());
+        $files = Collection::wrap($request->allFiles());
 
         if ($files->isEmpty()) {
             return response()->json([], 422);

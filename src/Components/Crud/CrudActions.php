@@ -91,7 +91,7 @@ class CrudActions extends AbstractCrud
      */
     protected function getDefaultActions()
     {
-        return Collection::make([
+        return Collection::wrap([
             'create-many' => [
                 'component' => 'button',
                 'preset' => 'create-many',
