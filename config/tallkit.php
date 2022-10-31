@@ -314,6 +314,18 @@ return [
         ],
 
         /**
+         * Datetimes.
+         */
+        'full-calendar' => [
+            'https://cdn.jsdelivr.net/npm/fullcalendar@5/main.min.css',
+            'https://cdn.jsdelivr.net/npm/fullcalendar@5/main.min.js',
+        ],
+
+        'full-calendar-locales' => [
+            'https://cdn.jsdelivr.net/npm/fullcalendar@5/locales-all.min.js',
+        ],
+
+        /**
          * Editors.
          */
         'easymde' => [
@@ -340,6 +352,11 @@ return [
          */
         'cleave' => [
             'https://cdn.jsdelivr.net/npm/cleave.js@1/dist/cleave.min.js',
+        ],
+
+        'choices' => [
+            'https://cdn.jsdelivr.net/npm/choices.js@10/public/assets/styles/choices.min.css',
+            'https://cdn.jsdelivr.net/npm/choices.js@10/public/assets/scripts/choices.min.js',
         ],
 
         'imask' => [
@@ -586,6 +603,7 @@ return [
          */
         'carbon' => \TALLKit\Components\Datetimes\Carbon::class,
         'countdown' => \TALLKit\Components\Datetimes\Countdown::class,
+        'full-calendar' => \TALLKit\Components\Datetimes\FullCalendar::class,
 
         /**
          * Editors.
@@ -613,6 +631,7 @@ return [
         'group' => \TALLKit\Components\Forms\Group::class,
         'input' => \TALLKit\Components\Forms\Input::class,
         'input-image' => \TALLKit\Components\Forms\InputImage::class,
+        'input-switch' => \TALLKit\Components\Forms\InputSwitch::class,
         'label' => \TALLKit\Components\Forms\Label::class,
         'many' => \TALLKit\Components\Forms\Many::class,
         'radio' => \TALLKit\Components\Forms\Radio::class,
@@ -658,6 +677,7 @@ return [
          * Messages.
          */
         'message' => \TALLKit\Components\Messages\Message::class,
+        'messages' => \TALLKit\Components\Messages\Messages::class,
 
         /**
          * Overlays.
@@ -825,6 +845,8 @@ return [
          * Datetimes.
          */
         'count-down' => \TALLKit\Components\Datetimes\Countdown::class,
+        'calendar' => \TALLKit\Components\Datetimes\FullCalendar::class,
+        'fullcalendar' => \TALLKit\Components\Datetimes\FullCalendar::class,
 
         /**
          * Editors.
@@ -861,6 +883,8 @@ return [
         'radios' => \TALLKit\Components\Forms\RadioList::class,
         'radioslist' => \TALLKit\Components\Forms\RadioList::class,
         'radios-list' => \TALLKit\Components\Forms\RadioList::class,
+        'input-toggle' => \TALLKit\Components\Forms\InputSwitch::class,
+        'switch' => \TALLKit\Components\Forms\InputSwitch::class,
         'validation-bag' => \TALLKit\Components\Forms\ValidationErrors::class,
         'validation-error' => \TALLKit\Components\Forms\ValidationErrors::class,
         'validation' => \TALLKit\Components\Forms\ValidationErrors::class,
@@ -905,6 +929,7 @@ return [
          * Overlays.
          */
         'consent' =>  \TALLKit\Components\Overlays\CookieConsent::class,
+        'dialog' => \TALLKit\Components\Overlays\Modal::class,
         'backdrop' => \TALLKit\Components\Overlays\Overlay::class,
         'toggle' => \TALLKit\Components\Overlays\Toggleable::class,
 
@@ -1201,8 +1226,28 @@ return [
                         'class' => 'bg-blue-400',
                     ],
 
+                    'blue' => [
+                        'class' => 'bg-blue-400',
+                    ],
+
+                    'red' => [
+                        'class' => 'bg-red-400',
+                    ],
+
+                    'green' => [
+                        'class' => 'bg-green-400',
+                    ],
+
+                    'yellow' => [
+                        'class' => 'bg-yellow-400',
+                    ],
+
                     'info' => [
                         'class' => 'bg-blue-400',
+                    ],
+
+                    'danger' => [
+                        'class' => 'bg-red-400',
                     ],
 
                     'error' => [
@@ -1213,7 +1258,15 @@ return [
                         'class' => 'bg-green-400',
                     ],
 
+                    'ok' => [
+                        'class' => 'bg-green-400',
+                    ],
+
                     'warning' => [
+                        'class' => 'bg-yellow-400',
+                    ],
+
+                    'warn' => [
                         'class' => 'bg-yellow-400',
                     ],
 
@@ -1598,6 +1651,12 @@ return [
                         'hover' => 700,
                     ],
 
+                    'ok' => [
+                        'name' => 'green',
+                        'weight' => 500,
+                        'hover' => 700,
+                    ],
+
                     'green' => [
                         'name' => 'green',
                         'weight' => 500,
@@ -1605,6 +1664,12 @@ return [
                     ],
 
                     'warning' => [
+                        'name' => 'yellow',
+                        'weight' => 500,
+                        'hover' => 700,
+                    ],
+
+                    'warn' => [
                         'name' => 'yellow',
                         'weight' => 500,
                         'hover' => 700,
@@ -2230,6 +2295,15 @@ return [
             /**
              * Datetimes.
              */
+            'full-calendar' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,full-calendar',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'full-calendar\')',
+                ],
+            ],
+
             'carbon' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,moment,moment-timezone',
@@ -2871,19 +2945,25 @@ return [
                 'mask' => [
                     'data-tallkit-assets' => 'alpine,imask',
                     'x-data' => 'window.tallkit.component(\'mask\')',
-                    'x-ref' => 'input',
+                    'x-ref' => 'element',
                 ],
 
                 'cleave' => [
                     'data-tallkit-assets' => 'alpine,cleave',
                     'x-data' => 'window.tallkit.component(\'cleave\')',
-                    'x-ref' => 'input',
+                    'x-ref' => 'element',
+                ],
+
+                'choices' => [
+                    'data-tallkit-assets' => 'alpine,choices',
+                    'x-data' => 'window.tallkit.component(\'choices\')',
+                    'x-ref' => 'element',
                 ],
 
                 'tagify' => [
                     'data-tallkit-assets' => 'alpine,tagify',
                     'x-data' => 'window.tallkit.component(\'tagify\')',
-                    'x-ref' => 'input',
+                    'x-ref' => 'element',
                 ],
             ],
 
@@ -2984,6 +3064,28 @@ return [
                 'delete-icon-name' => 'delete',
             ],
 
+            'input-switch' => [
+                'container' => [
+                    'class' => 'input-switch flex flex-col',
+                ],
+
+                'label' => [
+                    'class' => 'flex items-center',
+                ],
+
+                'label-text' => [
+                    'class' => 'ml-3',
+                ],
+
+                'checkbox' => [
+                    'class' => 'w-0 h-0',
+                ],
+
+                'switch' => [
+                    'class' => 'switch block w-14 h-7 p-1 cursor-pointer bg-gray-500 relative rounded-2xl',
+                ],
+            ],
+
             'label' => [
                 'container' => [
                     'class' => 'block',
@@ -3064,6 +3166,12 @@ return [
 
                 'select' => [
                     'class' => 'block w-full py-2 px-3 outline-none focus:outline-none',
+                ],
+
+                'choices' => [
+                    'data-tallkit-assets' => 'alpine,choices',
+                    'x-data' => 'window.tallkit.component(\'choices\')',
+                    'x-ref' => 'element',
                 ],
             ],
 
@@ -3254,7 +3362,7 @@ return [
                     'class' => 'w-full sm:max-w-md p-6 sm:p-14 bg-white overflow-hidden shadow rounded',
                 ],
 
-                'message' => [],
+                'messages' => [],
             ],
 
             'container' => [
@@ -3334,7 +3442,7 @@ return [
                     'class' => 'p-6 lg:p-10',
                 ],
 
-                'message' => [],
+                'messages' => [],
             ],
 
             'html' => [
@@ -3610,6 +3718,12 @@ return [
                         'title' => false,
                     ],
 
+                    'danger' => [
+                        'color' => 'red',
+                        'icon-name' => 'close',
+                        'title' => 'Error',
+                    ],
+
                     'error' => [
                         'color' => 'red',
                         'icon-name' => 'close',
@@ -3628,7 +3742,19 @@ return [
                         'title' => 'Success',
                     ],
 
+                    'ok' => [
+                        'color' => 'green',
+                        'icon-name' => 'check',
+                        'title' => 'Success',
+                    ],
+
                     'warning' => [
+                        'color' => 'yellow',
+                        'icon-name' => 'alert',
+                        'title' => 'Warning',
+                    ],
+
+                    'warn' => [
                         'color' => 'yellow',
                         'icon-name' => 'alert',
                         'title' => 'Warning',
@@ -3755,6 +3881,10 @@ return [
                         'class' => 'shadow-none',
                     ],
                 ],
+            ],
+
+            'messages' => [
+                'container' => [],
             ],
 
             /**
@@ -4650,6 +4780,22 @@ return [
                         'class' => 'bg-gray-500',
                     ],
 
+                    'blue' => [
+                        'class' => 'bg-blue-500',
+                    ],
+
+                    'yellow' => [
+                        'class' => 'bg-yellow-500',
+                    ],
+
+                    'red' => [
+                        'class' => 'bg-red-500',
+                    ],
+
+                    'green' => [
+                        'class' => 'bg-green-500',
+                    ],
+
                     'info' => [
                         'class' => 'bg-blue-500',
                     ],
@@ -4658,11 +4804,23 @@ return [
                         'class' => 'bg-yellow-500',
                     ],
 
+                    'warn' => [
+                        'class' => 'bg-yellow-500',
+                    ],
+
                     'danger' => [
                         'class' => 'bg-red-500',
                     ],
 
+                    'error' => [
+                        'class' => 'bg-red-500',
+                    ],
+
                     'success' => [
+                        'class' => 'bg-green-500',
+                    ],
+
+                    'ok' => [
                         'class' => 'bg-green-500',
                     ],
 
