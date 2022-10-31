@@ -14,6 +14,7 @@ class ValidationErrors extends Message
     /**
      * Create a new component instance.
      *
+     * @param  mixed  $options
      * @param  string|null  $bag
      * @param  string|bool|null  $type
      * @param  string|bool|null  $mode
@@ -35,6 +36,7 @@ class ValidationErrors extends Message
      * @return void
      */
     public function __construct(
+        $options = null,
         $bag = null,
         $type = null,
         $mode = null,
@@ -55,6 +57,7 @@ class ValidationErrors extends Message
         $theme = null
     ) {
         parent::__construct(
+            $options,
             false,
             $type ?? 'danger',
             $mode,
