@@ -30,10 +30,10 @@
   "require-dev": {
     "league/commonmark": "^1.6|^2.0",
     "livewire/livewire": "^2.0",
-    "lorisleiva/cron-translator": "^0.2|^0.3",
-    "orchestra/testbench": "^6.20",
+    "lorisleiva/cron-translator": "^0.2|^0.3|^0.4",
+    "orchestra/testbench": "^6.20|^7.0",
     "phpunit/phpunit": "^9.5",
-    "spatie/laravel-translatable": "^4.0|^5.0",
+    "spatie/laravel-translatable": "^4.0|^5.0|^6.0",
     "spatie/phpunit-watcher": "^1.0"
   },
   "autoload": {
@@ -53,8 +53,8 @@
     "dev": [
       "@composer update",
       "@composer test",
-      "yarn",
-      "yarn watch"
+      "pnpm install",
+      "pnpm dev"
     ],
     "test": "vendor/bin/phpunit",
     "watch": "vendor/bin/phpunit-watcher watch"
