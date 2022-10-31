@@ -12,6 +12,7 @@ import fusionCharts from './charts/fusion-charts'
 import highcharts from './charts/highcharts'
 import carbon from './datetimes/carbon'
 import countdown from './datetimes/countdown'
+import fullCalendar from './datetimes/full-calendar'
 import easymde from './editors/easymde'
 import quill from './editors/quill'
 import trix from './editors/trix'
@@ -77,6 +78,7 @@ export default {
    */
   carbon,
   countdown,
+  'full-calendar': fullCalendar,
 
   /**
    * Editors.
