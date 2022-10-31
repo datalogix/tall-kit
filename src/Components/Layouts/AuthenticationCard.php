@@ -70,6 +70,6 @@ class AuthenticationCard extends BladeComponent
         $this->logoName = $logoName;
         $this->logoUrl = $logoUrl;
         $this->logoRoute = $logoRoute;
-        $this->messageSession = $messageSession ?? 'status';
+        $this->messageSession = $messageSession;
     }
 }

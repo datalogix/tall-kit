@@ -133,9 +133,10 @@
                 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'content') }}
                 :theme="$theme"
             >
-                <x-message
+                <x-messages
+                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'messages') }}
                     :session="$messageSession"
-                    {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'message') }}
+                    :theme="$theme"
                 />
 
                 {{ $slot }}

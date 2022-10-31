@@ -256,6 +256,6 @@ class ControlPanel extends BladeComponent
         $this->userMenuAvatarProvider = $userMenuAvatarProvider;
         $this->userMenuAvatarFallback = $userMenuAvatarFallback;
         $this->userMenuAvatarIcon = $userMenuAvatarIcon;
-        $this->messageSession = $messageSession ?? 'status';
+        $this->messageSession = $messageSession;
     }
 }
