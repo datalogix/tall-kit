@@ -23,7 +23,7 @@ export default ({ toggleable }) => ({
   get typeOptions () {
     return this.options.types[this.options.type]
       ? this.options.types[this.options.type]
-      : {}
+      : this.options.types.unknown
   },
 
   update (options = {}) {

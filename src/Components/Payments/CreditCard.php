@@ -22,7 +22,7 @@ class CreditCard extends BladeComponent
         parent::__construct($theme);
 
         $this->setOptions(array_replace_recursive([
-            'openned' => $openned,
+            'openned' => $openned ?? true,
             'types' => config('tallkit.options.card_types'),
             'holderName' => $holderName,
             'number' => $number,
