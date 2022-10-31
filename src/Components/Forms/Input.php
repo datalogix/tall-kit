@@ -41,6 +41,11 @@ class Input extends Field
     /**
      * @var array|bool|null
      */
+    protected $choices;
+
+    /**
+     * @var array|bool|null
+     */
     protected $tagify;
 
     /**
@@ -55,6 +60,7 @@ class Input extends Field
      * @param  mixed  $default
      * @param  mixed  $mask
      * @param  array|null  $cleave
+     * @param  array|bool|null  $choices
      * @param  array|bool|null  $tagify
      * @param  string|bool|null  $language
      * @param  bool|null  $showErrors
@@ -77,6 +83,7 @@ class Input extends Field
         $default = null,
         $mask = null,
         $cleave = null,
+        $choices = null,
         $tagify = null,
         $language = null,
         $showErrors = null,
@@ -116,6 +123,7 @@ class Input extends Field
 
         $this->mask = $mask;
         $this->cleave = $cleave;
+        $this->choices = $choices;
         $this->tagify = $tagify;
 
         $this->label = $this->type === 'hidden' || $this->tagify ? false : $this->label;
@@ -156,6 +164,25 @@ class Input extends Field
 
         return $this->attributes
             ->mergeOnlyThemeProvider($this->themeProvider, 'cleave')
+            ->merge(['x-init' => 'setup('.$encoded.')'], false)
+            ->getAttributes();
+    }
+
+    /**
+     * Choices options.
+     *
+     * @return array
+     */
+    public function choicesOptions()
+    {
+        if (! $this->choices || $this->choices === 'hidden') {
+            return [];
+        }
+
+        $encoded = json_encode((object) (is_array($this->choices) ? $this->choices : []));
+
+        return $this->attributes
+            ->mergeOnlyThemeProvider($this->themeProvider, 'choices')
             ->merge(['x-init' => 'setup('.$encoded.')'], false)
             ->getAttributes();
     }

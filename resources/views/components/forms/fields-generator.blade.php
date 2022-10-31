@@ -6,11 +6,12 @@
         :modifier="target_get($field, 'modifier')"
         :mask="target_get($field, 'mask')"
         :cleave="target_get($field, 'cleave')"
+        :choices="target_get($field, 'choices')"
         :tagify="target_get($field, 'tagify')"
         :theme="target_get($field, 'theme', $theme)"
         {{
             $attributes->merge(is_array($field)
-                ? Arr::except($field, ['name', 'mask', 'cleave', 'tagify', 'options', 'theme'])
+                ? Arr::except($field, ['name', 'mask', 'choices', 'cleave', 'tagify', 'options', 'theme'])
                 : ['label' => $field]
             )
         }}

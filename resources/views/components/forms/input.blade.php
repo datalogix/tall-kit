@@ -16,6 +16,7 @@
             ->mergeThemeProvider($themeProvider, 'input')
             ->merge($maskOptions())
             ->merge($cleaveOptions())
+            ->merge($choicesOptions())
             ->merge($tagifyOptions())
         }}
 

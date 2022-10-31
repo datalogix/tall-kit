@@ -18,6 +18,7 @@ import trix from './editors/trix'
 import tinymce from './editors/tinymce'
 import checkboxList from './forms/checkbox-list'
 import cleave from './forms/cleave'
+import choices from './forms/choices'
 import form from './forms/form'
 import inputImage from './forms/input-image'
 import many from './forms/many'
@@ -90,6 +91,7 @@ export default {
    */
   'checkbox-list': checkboxList,
   cleave,
+  choices,
   form,
   'input-image': inputImage,
   many,

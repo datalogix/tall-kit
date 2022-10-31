@@ -17,6 +17,11 @@ class Select extends Field
     public $selectedKey;
 
     /**
+     * @var array|bool|null
+     */
+    protected $choices;
+
+    /**
      * @var bool
      */
     public $multiple;
@@ -37,6 +42,7 @@ class Select extends Field
      * @param  mixed  $bind
      * @param  string|null  $modifier
      * @param  mixed  $default
+     * @param  array|bool|null  $choices
      * @param  bool|null  $multiple
      * @param  bool|null  $emptyOption
      * @param  bool|null  $showErrors
@@ -57,6 +63,7 @@ class Select extends Field
         $bind = null,
         $modifier = null,
         $default = null,
+        $choices = null,
         $multiple = null,
         $emptyOption = null,
         $showErrors = null,
@@ -94,6 +101,7 @@ class Select extends Field
             }
         }
 
+        $this->choices = $choices;
         $this->multiple = $multiple ?? false;
         $this->emptyOption = $emptyOption ?? true;
     }
@@ -115,5 +123,24 @@ class Select extends Field
         }
 
         return in_array($key, Arr::wrap($this->selectedKey));
+    }
+
+    /**
+     * Choices options.
+     *
+     * @return array
+     */
+    public function choicesOptions()
+    {
+        if (! $this->choices) {
+            return [];
+        }
+
+        $encoded = json_encode((object) (is_array($this->choices) ? $this->choices : []));
+
+        return $this->attributes
+            ->mergeOnlyThemeProvider($this->themeProvider, 'choices')
+            ->merge(['x-init' => 'setup('.$encoded.')'], false)
+            ->getAttributes();
     }
 }

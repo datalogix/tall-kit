@@ -71,6 +71,7 @@ class Pikaday extends Input
             null,
             null,
             null,
+            null,
             $language,
             $showErrors,
             $theme,

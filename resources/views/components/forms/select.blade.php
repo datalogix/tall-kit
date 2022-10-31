@@ -10,8 +10,11 @@
     :append-text="$appendText"
     :append-icon="$appendIcon"
 >
-    <select
-        {{ $attributes->mergeThemeProvider($themeProvider, $multiple ? 'multiselect' : 'select') }}
+    <select {{
+        $attributes
+            ->mergeThemeProvider($themeProvider, $multiple ? 'multiselect' : 'select')
+            ->merge($choicesOptions())
+        }}
 
         @if ($name)
             name="{{ $name }}"
