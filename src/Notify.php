@@ -76,7 +76,7 @@ class Notify implements Arrayable, JsonSerializable
     public function __call($name, $arguments)
     {
         $this->attributes = $this->attributes->merge([
-            $name => empty($arguments) ? true : $arguments[0]
+            $name => empty($arguments) ? true : $arguments[0],
         ]);
 
         return $this;
@@ -94,7 +94,7 @@ class Notify implements Arrayable, JsonSerializable
         session()->flash($key.'.'.count(session($key, [])), $this->toArray());
     }
 
-     /**
+    /**
      * Convert the notify to an array.
      *
      * @return array

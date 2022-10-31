@@ -42,7 +42,7 @@ class PaymentFields extends BladeComponent
     {
         return Collection::wrap(range(1, 12))
             ->mapWithKeys(function ($value) {
-                 [Str::padLeft($value, 2, '0') => Str::padLeft($value, 2, '0')];
+                [Str::padLeft($value, 2, '0') => Str::padLeft($value, 2, '0')];
             })
             ->toArray();
     }

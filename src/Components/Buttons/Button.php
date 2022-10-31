@@ -2,8 +2,8 @@
 
 namespace TALLKit\Components\Buttons;
 
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Request;
 use TALLKit\Components\BladeComponent;
 
 class Button extends BladeComponent
