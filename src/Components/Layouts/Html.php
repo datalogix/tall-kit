@@ -104,6 +104,11 @@ class Html extends BladeComponent
     public $vite;
 
     /**
+     * @var string
+     */
+    public $viteBuildDirectory;
+
+    /**
      * @var array|bool
      */
     public $tallkit;
@@ -136,6 +141,7 @@ class Html extends BladeComponent
      * @param  string|bool|null  $stackStyles
      * @param  string|bool|null  $stackScripts
      * @param  mixed  $vite
+     * @param  string|null  $viteBuildDirectory
      * @param  bool|null  $tailwindcss
      * @param  bool|null  $alpine
      * @param  array|bool|null  $tallkit
@@ -160,6 +166,7 @@ class Html extends BladeComponent
         $mixStyles = null,
         $mixScripts = null,
         $vite = null,
+        $viteBuildDirectory = null,
         $styles = null,
         $scripts = null,
         $stackStyles = null,
@@ -182,7 +189,7 @@ class Html extends BladeComponent
         $this->charset = $charset ?? target_get($options, 'charset', 'utf-8');
         $this->viewport = $viewport ?? target_get($options, 'viewport', 'width=device-width, initial-scale=1');
         $this->csrfToken = $csrfToken ?? target_get($options, 'csrf-token', true);
-        $this->meta = Collection::make($meta)->merge(target_get($options, 'meta'));
+        $this->meta = Collection::wrap($meta)->merge(target_get($options, 'meta'));
         $this->googleFonts = $googleFonts ?? target_get($options, ['google-fonts', 'fonts']);
         $this->turbo = $turbo ?? target_get($options, 'turbo');
         $this->googleAnalytics = $googleAnalytics ?? target_get($options, ['google-analytics', 'analytics']);
@@ -190,20 +197,21 @@ class Html extends BladeComponent
         $this->facebookPixelCode = $facebookPixelCode ?? target_get($options, ['facebook-pixel-code', 'facebook-pixel']);
         $this->livewire = $livewire ?? target_get($options, 'livewire', true) && class_exists('\Livewire\Livewire');
 
-        $this->mixStyles = Collection::make($mixStyles)->merge(target_get($options, 'mix-styles', 'css/app.css'))->filter(function ($file) {
+        $this->mixStyles = Collection::wrap($mixStyles)->merge(target_get($options, 'mix-styles', 'css/app.css'))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 
-        $this->mixScripts = Collection::make($mixScripts)->merge(target_get($options, 'mix-scripts', 'js/app.js'))->filter(function ($file) {
+        $this->mixScripts = Collection::wrap($mixScripts)->merge(target_get($options, 'mix-scripts', 'js/app.js'))->filter(function ($file) {
             return file_exists(public_path($file));
         })->unique();
 
-        $this->styles = Collection::make($styles)->merge(target_get($options, 'styles'))->unique();
-        $this->scripts = Collection::make($scripts)->merge(target_get($options, 'scripts'))->unique();
+        $this->styles = Collection::wrap($styles)->merge(target_get($options, 'styles'))->unique();
+        $this->scripts = Collection::wrap($scripts)->merge(target_get($options, 'scripts'))->unique();
         $this->stackStyles = $stackStyles ?? target_get($options, 'stack-styles', 'styles');
         $this->stackScripts = $stackScripts ?? target_get($options, 'stack-scripts', 'scripts');
 
-        $this->vite = Collection::make($vite)
+        $this->viteBuildDirectory = $viteBuildDirectory ?? 'build';
+        $this->vite = Collection::wrap($vite)
             ->merge(target_get($options, 'vite', [
                 'resources/css/app.css',
                 'resources/css/app.sass',
@@ -223,7 +231,7 @@ class Html extends BladeComponent
             target_get($options, 'tallkit', []),
         ) : false;
 
-        $this->components = Collection::make($components)
+        $this->components = Collection::wrap($components)
             ->merge(target_get($options, 'components'))
             ->filter(function ($component) {
                 return ! target_get($component, 'disabled');

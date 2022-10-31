@@ -67,8 +67,8 @@
         @stack($stackStyles)
     @endif
 
-    @if (file_exists(base_path('vite.config.js')) || file_exists(base_path('vite.config.ts')))
-        @vite($vite)
+    @if (file_exists(public_path($viteBuildDirectory.'/manifest.json')))
+        @vite($vite, $viteBuildDirectory)
     @endif
 </head>
 <body {{ $attributes->mergeThemeProvider($themeProvider, 'body') }}>
