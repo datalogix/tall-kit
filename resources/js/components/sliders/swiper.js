@@ -4,6 +4,6 @@ export default ({ loadComponentAssets }) => ({
   async setup (options = {}) {
     await loadComponentAssets('swiper')
 
-    this.swiper = new window.Swiper(this.$el, options)
+    this.swiper = new window.Swiper(this.$refs.root ? this.$refs.root : this.$el, options)
   }
 })

@@ -4,6 +4,6 @@ export default ({ loadComponentAssets }) => ({
   async setup (options = {}) {
     await loadComponentAssets('splide')
 
-    this.splide = new window.Splide(this.$el, options).mount()
+    this.splide = new window.Splide(this.$refs.root ? this.$refs.root : this.$el, options).mount()
   }
 })
