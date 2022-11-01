@@ -18,7 +18,9 @@
         :name="$name"
         :default="$default"
         :theme="$theme"
-    />
+    >
+        {{ $slot }}
+    </x-display>
 
     @isset ($prepend)
         <x-slot name="prepend">
