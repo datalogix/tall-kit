@@ -1,7 +1,7 @@
 <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
     @if (is_array($value) && $component = target_get($value, 'component'))
         <x-dynamic-component
-            {{ $attributes->merge(Arr::except($value, ['component', 'slot'])) }}
+            {{ $attributes->except(['class', 'style'])->merge(Arr::except($value, ['component', 'slot'])) }}
             :component="$component"
         >
             {!! target_get($value, 'slot', $slot) !!}
