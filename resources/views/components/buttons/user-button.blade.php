@@ -21,5 +21,5 @@
         </x-slot>
     @endif
 
-    {{ $slot->isEmpty() ? $userName : $slot }}
+    {!! $slot->isEmpty() ? $userName : $slot !!}
 </x-button>

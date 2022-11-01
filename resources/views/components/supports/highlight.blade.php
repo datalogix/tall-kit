@@ -3,7 +3,7 @@
 
     <pre><!--
         --><code {{ $attributes->mergeThemeProvider($themeProvider, 'highlight') }}><!--
-            -->{{ $slot->isEmpty() ? $code : $slot }}<!--
+            -->{!! $slot->isEmpty() ? $code : $slot !!}<!--
         --></code><!--
     --></pre>
 </div>
