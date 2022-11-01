@@ -2604,7 +2604,7 @@ return [
                 'container' => [],
 
                 'display' => [
-                    'class' => 'py-2 px-3',
+                    'class' => 'py-2 px-3 overflow-auto',
 
                     'theme:img' => [
                         'class' => 'mx-auto max-w-xs max-h-72',
