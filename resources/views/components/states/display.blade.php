@@ -1,9 +1,11 @@
 <div {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
     @if (is_array($value) && $component = target_get($value, 'component'))
         <x-dynamic-component
-            {{ $attributes->merge(Arr::except($value, 'component')) }}
+            {{ $attributes->merge(Arr::except($value, ['component', 'slot'])) }}
             :component="$component"
-        />
+        >
+            {!! target_get($value, 'slot', $slot) !!}
+        </x-dynamic-component>
     @elseif (Str::endsWith($value, ['.jpg', '.jpeg', '.gif', '.png']))
         <img {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'img') }} src="{{ $value }}" />
     @elseif (Str::endsWith($value, '.mp3'))
