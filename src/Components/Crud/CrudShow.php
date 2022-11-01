@@ -62,5 +62,7 @@ class CrudShow extends AbstractCrud
         }
 
         $this->back = $back ?? (url()->current() === url()->previous() ? route_detect($this->prefix.'.index', null, null) : null);
+
+        $this->startFormDataBinder($this->resource);
     }
 }
