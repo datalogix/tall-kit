@@ -446,6 +446,14 @@ return [
         ],
 
         /**
+         * Supports.
+         */
+        'highlight' => [
+            'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github.min.css',
+            'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js',
+        ],
+
+        /**
          * Uploaders.
          */
         'dropzone' => [
@@ -749,6 +757,7 @@ return [
         'avatar' => \TALLKit\Components\Supports\Avatar::class,
         'cron' => \TALLKit\Components\Supports\Cron::class,
         'fetchable' => \TALLKit\Components\Supports\Fetchable::class,
+        'highlight' => \TALLKit\Components\Supports\Highlight::class,
         'image-loader' => \TALLKit\Components\Supports\ImageLoader::class,
         'unsplash' => \TALLKit\Components\Supports\Unsplash::class,
 
@@ -992,6 +1001,7 @@ return [
         'api' => \TALLKit\Components\Supports\Fetchable::class,
         'data' => \TALLKit\Components\Supports\Fetchable::class,
         'fetch' => \TALLKit\Components\Supports\Fetchable::class,
+        'hljs' => \TALLKit\Components\Supports\Highlight::class,
         'img-loader' => \TALLKit\Components\Supports\ImageLoader::class,
         'load-img' => \TALLKit\Components\Supports\ImageLoader::class,
         'load-image' => \TALLKit\Components\Supports\ImageLoader::class,
@@ -4938,6 +4948,26 @@ return [
                 ],
             ],
 
+            'highlight' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,highlight',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'highlight\')',
+                    'x-init' => 'setup',
+                ],
+
+                'loading' => [
+                    'x-show' => 'isLoading()',
+                ],
+
+                'highlight' => [
+                    'class' => 'whitespace-pre',
+                    'x-show' => 'isCompleted()',
+                    'x-ref' => 'highlight',
+                ],
+            ],
+
             'image-loader' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
@@ -5164,7 +5194,7 @@ return [
 
             'filepond' => [
                 'container' => [
-                    'data-tallkit-assets' => 'alpine',
+                    'data-tallkit-assets' => 'alpine,filepond',
                     'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'filepond\')',

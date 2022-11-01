@@ -44,6 +44,7 @@ import slider from './sliders/slider'
 import splide from './sliders/splide'
 import swiper from './sliders/swiper'
 import fetchable from './supports/fetchable'
+import highlight from './supports/highlight'
 import imageLoader from './supports/image-loader'
 import dropzone from './uploaders/dropzone'
 import filepond from './uploaders/filepond'
@@ -150,6 +151,7 @@ export default {
    * Supports.
    */
   fetchable,
+  highlight,
   'image-loader': imageLoader,
 
   /**
