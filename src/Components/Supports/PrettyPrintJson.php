@@ -24,6 +24,6 @@ class PrettyPrintJson extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->code = json_encode((object) $code);;
+        $this->code = json_encode((object) $code);
     }
 }
