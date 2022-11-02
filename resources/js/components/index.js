@@ -46,6 +46,7 @@ import swiper from './sliders/swiper'
 import fetchable from './supports/fetchable'
 import highlight from './supports/highlight'
 import imageLoader from './supports/image-loader'
+import prettyPrintJson from './supports/pretty-print-json'
 import dropzone from './uploaders/dropzone'
 import filepond from './uploaders/filepond'
 
@@ -153,6 +154,7 @@ export default {
   fetchable,
   highlight,
   'image-loader': imageLoader,
+  'pretty-print-json': prettyPrintJson,
 
   /**
    * Uploaders.

@@ -453,6 +453,11 @@ return [
             'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js',
         ],
 
+        'pretty-print-json' => [
+            'https://cdn.jsdelivr.net/npm/pretty-print-json@1/dist/pretty-print-json.css',
+            'https://cdn.jsdelivr.net/npm/pretty-print-json@1/dist/pretty-print-json.min.js',
+        ],
+
         /**
          * Uploaders.
          */
@@ -757,8 +762,10 @@ return [
         'avatar' => \TALLKit\Components\Supports\Avatar::class,
         'cron' => \TALLKit\Components\Supports\Cron::class,
         'fetchable' => \TALLKit\Components\Supports\Fetchable::class,
+
         'highlight' => \TALLKit\Components\Supports\Highlight::class,
         'image-loader' => \TALLKit\Components\Supports\ImageLoader::class,
+        'pretty-print-json' => \TALLKit\Components\Supports\PrettyPrintJson::class,
         'unsplash' => \TALLKit\Components\Supports\Unsplash::class,
 
         /**
@@ -1005,6 +1012,13 @@ return [
         'img-loader' => \TALLKit\Components\Supports\ImageLoader::class,
         'load-img' => \TALLKit\Components\Supports\ImageLoader::class,
         'load-image' => \TALLKit\Components\Supports\ImageLoader::class,
+        'pretty-json' => \TALLKit\Components\Supports\PrettyPrintJson::class,
+        'prettyjson' => \TALLKit\Components\Supports\PrettyPrintJson::class,
+        'pretty-print' => \TALLKit\Components\Supports\PrettyPrintJson::class,
+        'prettyprint' => \TALLKit\Components\Supports\PrettyPrintJson::class,
+        'prettyprintjson' => \TALLKit\Components\Supports\PrettyPrintJson::class,
+        'print-json' => \TALLKit\Components\Supports\PrettyPrintJson::class,
+        'printjson' => \TALLKit\Components\Supports\PrettyPrintJson::class,
 
         /**
          * Tables.
@@ -5000,6 +5014,25 @@ return [
                     'theme:icon' => [
                         'class' => 'w-full h-full',
                     ],
+                ],
+            ],
+
+            'pretty-print-json' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,pretty-print-json',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'pretty-print-json\')',
+                ],
+
+                'loading' => [
+                    'x-show' => 'isLoading()',
+                ],
+
+                'pretty-print-json' => [
+                    'class' => 'json-container',
+                    'x-show' => 'isCompleted()',
+                    'x-ref' => 'prettyPrintJson',
                 ],
             ],
 
