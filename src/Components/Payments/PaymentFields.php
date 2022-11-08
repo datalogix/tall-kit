@@ -14,6 +14,20 @@ class PaymentFields extends BladeComponent
     public $cardExpirationMonths;
     public $cardExpirationYears;
 
+    /**
+     * Create a new component instance.
+     *
+     * @param  mixed  $options
+     * @param  bool|null  $displayCreditCard
+     * @param  bool|null  $displayCardIcon
+     * @param  bool|null  $displayCardIcon
+     * @param  bool|null  $displayCardExpirationDate
+     * @param  int|null  $cardExpirationMaxYears
+     * @param  array|null  $cardExpirationMonths
+     * @param  array|null  $cardExpirationYears
+     * @param  string|null  $theme
+     * @return void
+     */
     public function __construct(
         $options = null,
         $displayCreditCard = null,
@@ -38,15 +52,25 @@ class PaymentFields extends BladeComponent
         $this->cardExpirationYears = $cardExpirationYears ?? $this->getCardExpirationYears();
     }
 
+    /**
+     * Get card expiration months.
+     *
+     * @return array
+     */
     protected function getCardExpirationMonths()
     {
         return Collection::make(range(1, 12))
             ->mapWithKeys(function ($value) {
-                [Str::padLeft($value, 2, '0') => Str::padLeft($value, 2, '0')];
+                return [Str::padLeft($value, 2, '0') => Str::padLeft($value, 2, '0')];
             })
             ->toArray();
     }
 
+    /**
+     * Get card expiration years.
+     *
+     * @return array
+     */
     protected function getCardExpirationYears()
     {
         return Collection::make(range(intval(date('Y')), intval(date('Y') + $this->getOptions('cardExpirationMaxYears'))))

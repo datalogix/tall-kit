@@ -120,7 +120,7 @@ class Many extends Group
     }
 
     /**
-     * items.
+     * Items.
      *
      * @return string
      */

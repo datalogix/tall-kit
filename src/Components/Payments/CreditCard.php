@@ -9,6 +9,19 @@ class CreditCard extends BladeComponent
 {
     use JsonOptions;
 
+    /**
+     * Create a new component instance.
+     *
+     * @param  mixed  $options
+     * @param  bool|null  $openned
+     * @param  string|null  $holderName
+     * @param  string|int|null  $number
+     * @param  string|null  $type
+     * @param  string|null  $expirationDate
+     * @param  string|int|null  $cvv
+     * @param  string|null  $theme
+     * @return void
+     */
     public function __construct(
         $options = null,
         $openned = null,
