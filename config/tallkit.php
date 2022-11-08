@@ -1071,6 +1071,7 @@ return [
             'navbar' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
+                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'navbar\')',
                     '@click.away' => 'close',
                     '@click.outside' => 'close',
@@ -1231,7 +1232,6 @@ return [
             'progressbar' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
-                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'progressbar\')',
                 ],
@@ -1331,27 +1331,31 @@ return [
 
                 'sizes' => [
                     'default' => [
-                        'class' => 'h-4 text-sm leading-4',
-                    ],
-
-                    'sm' => [
-                        'class' => 'h-2 text-xs leading-2',
-                    ],
-
-                    'md' => [
-                        'class' => 'h-4 text-sm leading-4',
-                    ],
-
-                    'lg' => [
                         'class' => 'h-6 text-base leading-6',
                     ],
 
-                    'xl' => [
+                    'xs' => [
+                        'class' => 'h-2 text-xs leading-2',
+                    ],
+
+                    'sm' => [
+                        'class' => 'h-4 text-sm leading-4',
+                    ],
+
+                    'md' => [
+                        'class' => 'h-6 text-base leading-6',
+                    ],
+
+                    'lg' => [
                         'class' => 'h-8 text-lg leading-8',
                     ],
 
-                    '2xl' => [
+                    'xl' => [
                         'class' => 'h-10 text-xl leading-10',
+                    ],
+
+                    '2xl' => [
+                        'class' => 'h-12 text-2xl leading-12',
                     ],
 
                     'none' => [],
@@ -2319,20 +2323,10 @@ return [
             /**
              * Datetimes.
              */
-            'full-calendar' => [
-                'container' => [
-                    'data-tallkit-assets' => 'alpine,full-calendar',
-                    'wire:ignore' => '',
-                    'x-cloak' => '',
-                    'x-data' => 'window.tallkit.component(\'full-calendar\')',
-                ],
-            ],
-
             'carbon' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,moment,moment-timezone',
                     'wire:ignore' => '',
-                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'carbon\')',
                 ],
             ],
@@ -2341,7 +2335,6 @@ return [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
                     'wire:ignore' => '',
-                    'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'countdown\')',
                 ],
 
@@ -2359,6 +2352,15 @@ return [
 
                 'seconds' => [
                     'x-ref' => 'seconds',
+                ],
+            ],
+
+            'full-calendar' => [
+                'container' => [
+                    'data-tallkit-assets' => 'alpine,full-calendar',
+                    'wire:ignore' => '',
+                    'x-cloak' => '',
+                    'x-data' => 'window.tallkit.component(\'full-calendar\')',
                 ],
             ],
 
@@ -2652,6 +2654,7 @@ return [
                 'container' => [
                     'data-tallkit-assets' => 'alpine',
                     'x-data' => 'window.tallkit.component(\'form\')',
+                    'x-ref' => 'form',
                     '@submit' => 'prepareSubmit',
                 ],
             ],
@@ -3059,7 +3062,7 @@ return [
                     'data-turbo-cache' => 'false',
                     'data-turbolinks-cache' => 'false',
                     'x-ref' => 'output',
-                    'class' => 'm-4 cursor-pointer',
+                    'class' => 'm-4 cursor-pointer max-w-sm max-h-80',
                 ],
 
                 'actions' => [
@@ -4965,7 +4968,6 @@ return [
             'highlight' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,highlight',
-                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'highlight\')',
                     'x-init' => 'setup',
@@ -5020,7 +5022,6 @@ return [
             'pretty-print-json' => [
                 'container' => [
                     'data-tallkit-assets' => 'alpine,pretty-print-json',
-                    'wire:ignore' => '',
                     'x-cloak' => '',
                     'x-data' => 'window.tallkit.component(\'pretty-print-json\')',
                 ],
