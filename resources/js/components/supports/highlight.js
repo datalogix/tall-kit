@@ -6,8 +6,19 @@ export default ({ loadable, loadComponentAssets }) => ({
 
     await loadComponentAssets('highlight')
 
-    window.hljs.highlightElement(this.$refs.highlight)
-
+    this.highlightElement(this.$refs.highlight)
     this.complete()
+  },
+
+  update (code) {
+    this.$refs.highlight.innerHTML = this.highlightAuto(code).value
+  },
+
+  highlightElement (element) {
+    window.hljs.highlightElement(element)
+  },
+
+  highlightAuto (code) {
+    return window.hljs.highlightAuto(code)
   }
 })

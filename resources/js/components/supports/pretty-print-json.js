@@ -6,8 +6,15 @@ export default ({ loadable, loadComponentAssets }) => ({
 
     await loadComponentAssets('pretty-print-json')
 
-    this.$refs.prettyPrintJson.innerHTML = window.prettyPrintJson.toHtml(code)
-
+    this.update(code)
     this.complete()
+  },
+
+  update (code) {
+    this.$refs.prettyPrintJson.innerHTML = this.toHtml(code)
+  },
+
+  toHtml (code, options = {}) {
+    return window.prettyPrintJson.toHtml(code, options)
   }
 })

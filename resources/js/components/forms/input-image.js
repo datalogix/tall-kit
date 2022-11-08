@@ -47,10 +47,10 @@ export default ({ loadable, loadImg, timeout }) => ({
     loadImg(src, this.$refs.output)
       .then(() => {
         URL.revokeObjectURL(src)
-        timeout(() => this.complete(), 100)
+        this.complete(100)
       })
       .catch((e) => {
-        timeout(() => this.fail(e), 100)
+        this.fail(e, 100)
       })
   }
 })

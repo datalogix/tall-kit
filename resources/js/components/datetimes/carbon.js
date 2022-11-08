@@ -3,9 +3,17 @@ export default ({ loadComponentAssets }) => ({
     await loadComponentAssets('moment')
     await loadComponentAssets('moment-timezone')
 
+    this.update(timestamp, format)
+  },
+
+  update (timestamp, format) {
+    this.$el.innerHTML = this.format(timestamp, format)
+  },
+
+  format (timestamp, format) {
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
     const date = window.moment.unix(timestamp).tz(timeZone)
 
-    this.$el.innerHTML = date.format(format)
+    return date.format(format)
   }
 })

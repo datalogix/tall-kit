@@ -19,6 +19,6 @@ export default ({ loadComponentAssets, updateInputValue, loadable }) => ({
       updateInputValue(editor, this.easymde.value())
     })
 
-    this.complete()
+    this.complete(100)
   }
 })

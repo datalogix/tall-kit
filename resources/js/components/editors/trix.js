@@ -6,7 +6,7 @@ export default ({ dispatchInputEvent, loadComponentAssets, loadable }) => ({
 
     await loadComponentAssets('trix')
 
-    this.complete()
+    this.complete(100)
   },
 
   change ($event) {

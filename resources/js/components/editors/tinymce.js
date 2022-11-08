@@ -25,7 +25,7 @@ export default ({ loadComponentAssets, updateInputValue, getCsrfToken, loadable 
           ed.setContent(input.value)
         })
 
-        this.complete()
+        this.complete(100)
       },
 
       file_picker_callback: options.upload_url

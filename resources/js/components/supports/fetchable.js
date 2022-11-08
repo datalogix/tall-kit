@@ -2,6 +2,7 @@ export default ({ loadable }) => ({
   ...loadable(),
 
   url: null,
+  response: null,
   data: null,
   options: null,
 
@@ -38,15 +39,15 @@ export default ({ loadable }) => ({
     }
 
     try {
-      const response = await window.fetch(_url, _options)
+      this.response = await window.fetch(_url, _options)
 
-      if (!response.ok) {
-        throw new Error(response.statusText)
+      if (!this.response.ok) {
+        throw new Error(this.response.statusText)
       }
 
       this.data = _options.responseType
-        ? await response[_options.responseType]()
-        : response
+        ? await this.response[_options.responseType]()
+        : this.response
 
       this.complete()
     } catch (e) {

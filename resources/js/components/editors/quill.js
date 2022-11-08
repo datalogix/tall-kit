@@ -18,6 +18,6 @@ export default ({ loadComponentAssets, updateInputValue, loadable }) => ({
 
     this.quill.root.innerHTML = input.value
 
-    this.complete()
+    this.complete(100)
   }
 })

@@ -9,15 +9,17 @@ export default ({ loadable }) => ({
     this.form = this.fillForm()
   },
 
-  prepareSubmit (event) {
-    const el = this.$refs.root ? this.$refs.root : this.$el
+  submit () {
+    this.$refs.form.submit()
+  },
 
-    if (el.getAttribute('wire:id')) {
+  prepareSubmit (event) {
+    if (this.$refs.form.getAttribute('wire:id')) {
       return event.preventDefault()
     }
 
     if (!this.confirm || window.confirm(this.conm)) {
-      return this.startAndComplete(el.target || (event && event.ctrlKey))
+      return this.startAndComplete(this.$refs.form.target || (event && event.ctrlKey))
     }
 
     return event.preventDefault()
@@ -25,10 +27,9 @@ export default ({ loadable }) => ({
 
   fillForm () {
     const form = {}
-    const el = this.$refs.root ? this.$refs.root : this.$el
-    const elements = [...el.querySelectorAll('input,select,textarea')]
+    const elements = [...this.$refs.form.querySelectorAll('input,select,textarea')]
 
-    el.querySelectorAll('template').forEach(template => {
+    this.$refs.form.querySelectorAll('template').forEach(template => {
       elements.push(...template.content.querySelectorAll('input,select,textarea'))
     })
 

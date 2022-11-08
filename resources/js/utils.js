@@ -121,18 +121,22 @@ export function loadable () {
       dispatch('start', this)
     },
 
-    complete () {
-      this.reset()
-      this.loaded = true
+    complete (milliseconds = 0) {
+      timeout(() => {
+        this.reset()
+        this.loaded = true
 
-      dispatch('complete', this)
+        dispatch('complete', this)
+      }, milliseconds)
     },
 
-    fail (error) {
-      this.reset()
-      this.error = error
+    fail (error, milliseconds = 0) {
+      timeout(() => {
+        this.reset()
+        this.error = error
 
-      dispatch('fail', this)
+        dispatch('fail', this)
+      }, milliseconds)
     },
 
     startAndComplete (completeOnNextTick = false) {

@@ -33,6 +33,6 @@ export default ({ loadComponentAssets, getCsrfToken, loadable }) => ({
       defu(options, defaults)
     )
 
-    this.complete()
+    this.complete(100)
   }
 })
