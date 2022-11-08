@@ -16,11 +16,6 @@ trait FieldNameAndValue
     /**
      * @var string|null
      */
-    protected $realName;
-
-    /**
-     * @var string|null
-     */
     protected $fieldKey;
 
     /**
@@ -37,7 +32,6 @@ trait FieldNameAndValue
     public function setName($name = null)
     {
         $this->name = $name;
-        $this->realName = $name;
     }
 
     /**
@@ -48,7 +42,7 @@ trait FieldNameAndValue
     public function getFieldKey()
     {
         if (! $this->fieldKey) {
-            $this->fieldKey = Str::before($this->realName, '[]');
+            $this->fieldKey = Str::before($this->name, '[]');
         }
 
         return $this->fieldKey;
