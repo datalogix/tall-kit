@@ -7,17 +7,17 @@ use TALLKit\Components\BladeComponent;
 class Progressbar extends BladeComponent
 {
     /**
-     * @var int
+     * @var int|float
      */
     public $value;
 
     /**
-     * @var int
+     * @var int|float
      */
     public $min;
 
     /**
-     * @var int
+     * @var int|float
      */
     public $max;
 
@@ -49,9 +49,9 @@ class Progressbar extends BladeComponent
     /**
      * Create a new component instance.
      *
-     * @param  int|null  $value
-     * @param  int|null  $min
-     * @param  int|null  $max
+     * @param  int|float|null  $value
+     * @param  int|float|null  $min
+     * @param  int|float|null  $max
      * @param  string|bool|null  $color
      * @param  string|int|bool|null  $duration
      * @param  string|bool|null  $size
@@ -73,9 +73,9 @@ class Progressbar extends BladeComponent
     ) {
         parent::__construct($theme);
 
-        $this->value = $value ?? 0;
-        $this->min = $min ?? 0;
-        $this->max = $max ?? 100;
+        $this->value = filter_var($value, FILTER_VALIDATE_FLOAT | FILTER_VALIDATE_INT) ?: 0;
+        $this->min = filter_var($min, FILTER_VALIDATE_FLOAT | FILTER_VALIDATE_INT) ?: 0;
+        $this->max = filter_var($max, FILTER_VALIDATE_FLOAT | FILTER_VALIDATE_INT) ?: 100;
         $this->color = $color ?? 'default';
         $this->duration = $duration ?? 'default';
         $this->size = $size ?? 'default';
