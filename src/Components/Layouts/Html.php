@@ -39,14 +39,14 @@ class Html extends BladeComponent
     public $meta;
 
     /**
-     * @var array|string|null
-     */
-    public $googleFonts;
-
-    /**
      * @var bool|null
      */
     public $turbo;
+
+    /**
+     * @var array|string|null
+     */
+    public $googleFonts;
 
     /**
      * @var string|bool|null
@@ -128,8 +128,8 @@ class Html extends BladeComponent
      * @param  string|null  $viewport
      * @param  bool|null  $csrfToken
      * @param  mixed  $meta
-     * @param  array|string|null  $googleFonts
      * @param  bool|null  $turbo
+     * @param  array|string|null  $googleFonts
      * @param  string|bool|null  $googleAnalytics
      * @param  string|bool|null  $googleTagManager
      * @param  string|bool|null  $facebookPixelCode
@@ -146,6 +146,7 @@ class Html extends BladeComponent
      * @param  bool|null  $alpine
      * @param  array|bool|null  $tallkit
      * @param  mixed  $components
+     * @param  string|null  $typekit
      * @param  string|null  $theme
      * @return void
      */
@@ -157,8 +158,8 @@ class Html extends BladeComponent
         $viewport = null,
         $csrfToken = null,
         $meta = null,
-        $googleFonts = null,
         $turbo = null,
+        $googleFonts = null,
         $googleAnalytics = null,
         $googleTagManager = null,
         $facebookPixelCode = null,
@@ -175,6 +176,7 @@ class Html extends BladeComponent
         $alpine = null,
         $tallkit = null,
         $components = null,
+        $typekit = null,
         $theme = null
     ) {
         parent::__construct($theme ?? 'app');
@@ -190,8 +192,8 @@ class Html extends BladeComponent
         $this->viewport = $viewport ?? target_get($options, 'viewport', 'width=device-width, initial-scale=1');
         $this->csrfToken = $csrfToken ?? target_get($options, 'csrf-token', true);
         $this->meta = Collection::make($meta)->merge(target_get($options, 'meta'));
-        $this->googleFonts = $googleFonts ?? target_get($options, ['google-fonts', 'fonts']);
         $this->turbo = $turbo ?? target_get($options, 'turbo');
+        $this->googleFonts = $googleFonts ?? target_get($options, ['google-fonts', 'fonts']);
         $this->googleAnalytics = $googleAnalytics ?? target_get($options, ['google-analytics', 'analytics']);
         $this->googleTagManager = $googleTagManager ?? target_get($options, ['google-tag-manager', 'gtm']);
         $this->facebookPixelCode = $facebookPixelCode ?? target_get($options, ['facebook-pixel-code', 'facebook-pixel']);
@@ -236,5 +238,9 @@ class Html extends BladeComponent
             ->filter(function ($component) {
                 return ! target_get($component, 'disabled');
             });
+
+        if ($typekit = $typekit ?? target_get($options, 'typekit')) {
+            $this->styles->push('https://use.typekit.net/'.$typekit.'.css');
+        }
     }
 }
