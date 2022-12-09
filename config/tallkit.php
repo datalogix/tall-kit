@@ -3376,7 +3376,7 @@ return [
                 ],
 
                 'container' => [
-                    'class' => 'min-h-screen flex flex-col items-center pt-6 bg-gray-100',
+                    'class' => 'min-h-screen flex flex-col items-center p-6 bg-gray-100',
                 ],
 
                 'header' => [],
@@ -3386,7 +3386,7 @@ return [
                 ],
 
                 'card' => [
-                    'class' => 'w-full sm:max-w-md p-6 sm:p-14 bg-white overflow-hidden shadow rounded',
+                    'class' => 'w-full sm:max-w-lg p-6 sm:p-10 bg-white overflow-hidden shadow rounded',
                 ],
 
                 'messages' => [],
