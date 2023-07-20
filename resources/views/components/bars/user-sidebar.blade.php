@@ -1,4 +1,4 @@
-@if ($user)
+@if ($items->isNotEmpty() || $slot->isNotEmpty() || (isset($header) && $header->isNotEmpty()) || (isset($footer) && $footer->isNotEmpty()))
     <x-sidebar
         {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}
         :items="$items"
@@ -35,7 +35,7 @@
 
     @isset ($trigger)
         {{ $trigger }}
-    @else
+    @elseif ($user)
         <x-user-button {{
             $attributes
                 ->mergeOnlyThemeProvider($themeProvider, 'trigger')
@@ -46,7 +46,7 @@
             :user-name="$userName"
             :user-avatar="$userAvatar"
             :avatar-search="$avatarSearch"
-            :avatar-orovider="$avatarProvider"
+            :avatar-provider="$avatarProvider"
             :avatar-fallback="$avatarFallback"
             :avatar-icon="$avatarIcon"
             :theme="$theme"
