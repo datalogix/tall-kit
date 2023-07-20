@@ -5,16 +5,16 @@
     "build": "vite build"
   },
   "dependencies": {
-    "defu": "^6.1"
+    "defu": "^6.1.2"
   },
   "devDependencies": {
-    "eslint": "^8.29",
-    "eslint-config-standard": "^17.0",
-    "eslint-plugin-import": "^2.26",
-    "eslint-plugin-n": "^15.6",
-    "eslint-plugin-promise": "^6.1",
-    "sass": "^1.56",
-    "vite": "^3.2",
-    "vite-plugin-eslint": "^1.8"
+    "eslint": "^8.45.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "sass": "^1.64.0",
+    "vite": "^4.4.4",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }
