@@ -11,5 +11,5 @@ trim_trailing_whitespace = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{php,xml,xml.dist}]
+[*.{php,xml,xml.dist,json}]
 indent_size = 4

@@ -1,78 +1,78 @@
 {
-  "name": "datalogix/tall-kit",
-  "description": "A set of components to utilise in your Laravel Blade views using TALL stack.",
-  "keywords": [
-    "TALL",
-    "laravel",
-    "blade",
-    "tailwind",
-    "alphine",
-    "livewire",
-    "kit",
-    "components"
-  ],
-  "homepage": "https://github.com/datalogix/tall-kit",
-  "license": "MIT",
-  "type": "library",
-  "authors": [
-    {
-      "name": "Ricardo Gobbo de Souza",
-      "email": "ricardogobbosouza@yahoo.com.br"
-    }
-  ],
-  "require": {
-    "php": "^7.4|^8.0|^8.1|^8.2",
-    "illuminate/contracts": "^8.0|^9.0|^10.0",
-    "illuminate/database": "^8.0|^9.0|^9.0",
-    "illuminate/support": "^8.0|^9.0|^10.0",
-    "illuminate/view": "^8.0|^9.0|^10.0"
-  },
-  "require-dev": {
-    "league/commonmark": "^1.6|^2.0",
-    "livewire/livewire": "^2.0",
-    "lorisleiva/cron-translator": "^0.2|^0.3|^0.4",
-    "orchestra/testbench": "^6.20|^7.0|^8.0",
-    "phpunit/phpunit": "^9.5|^10.0",
-    "spatie/laravel-translatable": "^4.0|^5.0|^6.0",
-    "spatie/phpunit-watcher": "^1.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "TALLKit\\": "src/"
-    },
-    "files": [
-      "src/helpers.php"
-    ]
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "TALLKit\\Tests\\": "tests/"
-    }
-  },
-  "scripts": {
-    "dev": [
-      "@composer update",
-      "@composer test",
-      "pnpm install",
-      "pnpm dev"
+    "name": "datalogix/tall-kit",
+    "description": "A set of components to utilise in your Laravel Blade views using TALL stack.",
+    "keywords": [
+        "TALL",
+        "laravel",
+        "blade",
+        "tailwind",
+        "alphine",
+        "livewire",
+        "kit",
+        "components"
     ],
-    "test": "vendor/bin/phpunit",
-    "watch": "vendor/bin/phpunit-watcher watch"
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "TALLKit\\TALLKitServiceProvider"
-      ]
-    }
-  },
-  "suggest": {
-    "league/commonmark": "Required to use the markdown component (^2.0).",
-    "lorisleiva/cron-translator": "Required to use the cron component (^0.2)."
-  },
-  "config": {
-    "sort-packages": true
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "homepage": "https://github.com/datalogix/tall-kit",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ricardo Gobbo de Souza",
+            "email": "ricardogobbosouza@yahoo.com.br"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0|^8.1|^8.2",
+        "illuminate/contracts": "^8.0|^9.0|^10.0",
+        "illuminate/database": "^8.0|^9.0|^9.0",
+        "illuminate/support": "^8.0|^9.0|^10.0",
+        "illuminate/view": "^8.0|^9.0|^10.0"
+    },
+    "require-dev": {
+        "league/commonmark": "^1.6|^2.0",
+        "livewire/livewire": "^2.0",
+        "lorisleiva/cron-translator": "^0.2|^0.3|^0.4",
+        "orchestra/testbench": "^6.20|^7.0|^8.0",
+        "phpunit/phpunit": "^9.5|^10.0",
+        "spatie/laravel-translatable": "^4.0|^5.0|^6.0",
+        "spatie/phpunit-watcher": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "TALLKit\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TALLKit\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "dev": [
+            "@composer update",
+            "@composer test",
+            "pnpm install",
+            "pnpm dev"
+        ],
+        "test": "vendor/bin/phpunit",
+        "watch": "vendor/bin/phpunit-watcher watch"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TALLKit\\TALLKitServiceProvider"
+            ]
+        }
+    },
+    "suggest": {
+        "league/commonmark": "Required to use the markdown component (^2.0).",
+        "lorisleiva/cron-translator": "Required to use the cron component (^0.2)."
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
