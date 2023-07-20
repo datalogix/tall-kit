@@ -20,7 +20,7 @@
                 :user-name="$userName"
                 :user-avatar="$userAvatar"
                 :avatar-search="$avatarSearch"
-                :avatar-orovider="$avatarProvider"
+                :avatar-provider="$avatarProvider"
                 :avatar-fallback="$avatarFallback"
                 :avatar-icon="$avatarIcon"
                 :theme="$theme"
