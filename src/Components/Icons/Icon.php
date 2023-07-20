@@ -57,25 +57,29 @@ class Icon extends AbstractIcon
     {
         return function (array $data) {
             $slot = target_get($data, 'slot');
-            $attributes = target_get($data, 'attributes');
-            $size = $this->themeProvider->sizes->get($this->size);
+            $attributes = target_get($data, 'attributes')->filter(function($val, $key) {
+                return !(
+                    trim($key) === 'class' && trim($val) === ''
+                    || trim($key) === 'style' && trim($val) === ';'
+               );
+            });
 
             if (! Str::startsWith($slot, '<svg') && $preset = $this->themeProvider->presets->get($this->name)) {
                 $slot = $preset;
             }
 
-            if (empty(trim($slot)) && (empty($attributes) || (string) $attributes === 'class=""')) {
+            if (empty(trim($slot)) && empty(trim($attributes))) {
                 return '';
             }
 
             if (empty(trim($slot)) && (string) $attributes) {
-                $attributes = $attributes->merge($size);
+                $attributes = $attributes->merge($this->themeProvider->sizes->get($this->size));
 
                 return '<i '.$attributes.'></i>';
             }
 
-            if (Str::startsWith($slot, '<svg') && (empty((string) $attributes) || (string) $attributes === 'class=""')) {
-                $attributes = $attributes->merge($size);
+            if (Str::startsWith($slot, '<svg') && empty(trim($attributes))) {
+                $attributes = $attributes->merge($this->themeProvider->sizes->get($this->size));
             }
 
             if (Str::startsWith($slot, '<svg')) {
