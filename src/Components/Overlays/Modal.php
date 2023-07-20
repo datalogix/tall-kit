@@ -5,6 +5,7 @@ namespace TALLKit\Components\Overlays;
 class Modal extends Toggleable
 {
     protected static $OVERLAY = true;
+
     protected static $ALIGN = 'center';
 
     /**

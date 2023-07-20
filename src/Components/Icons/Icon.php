@@ -57,11 +57,11 @@ class Icon extends AbstractIcon
     {
         return function (array $data) {
             $slot = target_get($data, 'slot');
-            $attributes = target_get($data, 'attributes')->filter(function($val, $key) {
-                return !(
+            $attributes = target_get($data, 'attributes')->filter(function ($val, $key) {
+                return ! (
                     trim($key) === 'class' && trim($val) === ''
                     || trim($key) === 'style' && trim($val) === ';'
-               );
+                );
             });
 
             if (! Str::startsWith($slot, '<svg') && $preset = $this->themeProvider->presets->get($this->name)) {

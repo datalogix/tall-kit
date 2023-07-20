@@ -228,8 +228,6 @@ class TALLKitServiceProvider extends ServiceProvider
     /**
      * Merges the configs together and takes multi-dimensional arrays into account.
      *
-     * @param  array  $original
-     * @param  array  $merging
      * @return array
      */
     protected function mergeConfigs(array $original, array $merging)

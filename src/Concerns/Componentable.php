@@ -31,11 +31,11 @@ trait Componentable
     protected function getComponentView()
     {
         return (string) Str::of(get_called_class())
-                ->beforeLast('\\')
-                ->lower()
-                ->replace(['tallkit\\', '\\'], ['tallkit::', '.'])
-                ->append('.')
-                ->append($this->getComponentKey());
+            ->beforeLast('\\')
+            ->lower()
+            ->replace(['tallkit\\', '\\'], ['tallkit::', '.'])
+            ->append('.')
+            ->append($this->getComponentKey());
     }
 
     /**

@@ -32,7 +32,6 @@ class ThemeProvider
     /**
      * Create a new theme provider instance.
      *
-     * @param  array  $themes
      * @return void
      */
     public function __construct(array $themes = [])

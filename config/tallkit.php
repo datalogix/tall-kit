@@ -944,7 +944,7 @@ return [
         /**
          * Overlays.
          */
-        'consent' =>  \TALLKit\Components\Overlays\CookieConsent::class,
+        'consent' => \TALLKit\Components\Overlays\CookieConsent::class,
         'dialog' => \TALLKit\Components\Overlays\Modal::class,
         'backdrop' => \TALLKit\Components\Overlays\Overlay::class,
         'toggle' => \TALLKit\Components\Overlays\Toggleable::class,
@@ -1469,7 +1469,7 @@ return [
                 ],
 
                 'left' => [
-                    'class' => 'py-2 px-3 flex items-center space-x-2'
+                    'class' => 'py-2 px-3 flex items-center space-x-2',
                 ],
 
                 'title' => [
@@ -1477,8 +1477,8 @@ return [
                 ],
 
                 'right' => [
-                    'class' => 'py-2 px-3 flex items-center space-x-2'
-                ]
+                    'class' => 'py-2 px-3 flex items-center space-x-2',
+                ],
             ],
 
             'user-sidebar' => [

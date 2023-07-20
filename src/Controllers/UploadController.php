@@ -12,7 +12,6 @@ class UploadController
     /**
      * Store.
      *
-     * @param  \TALLKit\Requests\UploadRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(UploadRequest $request)
@@ -48,7 +47,6 @@ class UploadController
     /**
      * Destroy.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Request $request)

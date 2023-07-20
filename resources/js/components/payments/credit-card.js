@@ -1,4 +1,3 @@
-
 const CREDIT_CARD_DEFAULT = {
   openned: true,
   types: [],

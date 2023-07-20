@@ -12,6 +12,7 @@ class PaymentFields extends BladeComponent
     use JsonOptions;
 
     public $cardExpirationMonths;
+
     public $cardExpirationYears;
 
     /**

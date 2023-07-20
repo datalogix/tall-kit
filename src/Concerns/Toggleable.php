@@ -5,8 +5,11 @@ namespace TALLKit\Concerns;
 trait Toggleable
 {
     protected static $SHOW = false;
+
     protected static $OVERLAY = false;
+
     protected static $CLOSEABLE = true;
+
     protected static $ALIGN = 'left';
 
     /**
