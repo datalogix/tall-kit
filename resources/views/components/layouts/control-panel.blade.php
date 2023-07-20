@@ -51,12 +51,15 @@
             :title="$title"
             :theme="$theme"
         >
-            {{ $toolbar ?? '' }}
-
             <x-slot name="left">
                 @isset ($toolbarLeft)
                     {{ $toolbarLeft }}
-                @elseif ($user)
+                @elseif (
+                    $sidebarItems->isNotEmpty()
+                    || (isset($sidebar) && $sidebar->isNotEmpty())
+                    || (isset($sidebarHeader) && $sidebarHeader->isNotEmpty())
+                    || (isset($sidebarFooter) && $sidebarFooter->isNotEmpty())
+                )
                     <x-button
                         {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'toggler') }}
                         preset="toggler"
@@ -67,6 +70,8 @@
                     </x-button>
                 @endisset
             </x-slot>
+
+            {{ $toolbar ?? '' }}
 
             <x-slot name="right">
                 @isset ($toolbarRight)

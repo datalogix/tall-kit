@@ -1465,12 +1465,20 @@ return [
 
             'toolbar' => [
                 'container' => [
-                    'class' => 'flex justify-between items-center p-4 bg-white border-b-4 border-indigo-700',
+                    'class' => 'flex justify-between items-center bg-white border-b-4 border-indigo-700 gap-4',
+                ],
+
+                'left' => [
+                    'class' => 'py-2 px-3 flex items-center space-x-2'
                 ],
 
                 'title' => [
-                    'class' => 'flex-1 text-2xl font-medium',
+                    'class' => 'py-2 flex-1 text-2xl font-medium',
                 ],
+
+                'right' => [
+                    'class' => 'py-2 px-3 flex items-center space-x-2'
+                ]
             ],
 
             'user-sidebar' => [

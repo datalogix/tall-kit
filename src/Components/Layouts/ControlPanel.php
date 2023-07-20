@@ -3,6 +3,7 @@
 namespace TALLKit\Components\Layouts;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use TALLKit\Components\BladeComponent;
 use TALLKit\Concerns\User;
 
@@ -234,7 +235,7 @@ class ControlPanel extends BladeComponent
         $this->logoImage = $logoImage;
         $this->logoName = $logoName;
         $this->logoUrl = $logoUrl;
-        $this->sidebarItems = $sidebarItems;
+        $this->sidebarItems = Collection::make($sidebarItems ?? $this->getUserValue('sidebar', $this->guard.'Sidebar'))->filter();
         $this->sidebarBreakpoint = $sidebarBreakpoint ?? 'lg';
         $this->sidebarName = $sidebarName ?? ($this->guard ? $this->guard.'-sidebar' : 'sidebar');
         $this->sidebarShow = $sidebarShow;

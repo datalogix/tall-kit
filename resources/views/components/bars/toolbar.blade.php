@@ -1,9 +1,21 @@
 <header {{ $attributes->mergeThemeProvider($themeProvider, 'container') }}>
-    {{ $left ?? '' }}
+    @if(isset($left) || $title)
+        <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'left') }}>
+            {{ $left ?? '' }}
 
-    <h1 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'title') }}>
-        {!! $slot->isEmpty() ? __($title) : $slot !!}
-    </h1>
+            @if ($title)
+                <h1 {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'title') }}>
+                    {!! __($title) !!}
+                </h1>
+            @endif
+        </div>
+    @endisset
 
-    {{ $right ?? '' }}
+    {{ $slot }}
+
+    @isset($right)
+        <div {{ $attributes->mergeOnlyThemeProvider($themeProvider, 'right') }}>
+            {{ $right ?? '' }}
+        </div>
+    @endif
 </header>
