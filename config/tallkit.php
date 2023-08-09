@@ -1599,6 +1599,7 @@ return [
                     'link' => [
                         'x-data' => 'window.tallkit.component(\'button\')',
                         'x-cloak' => '',
+                        'x-init' => 'setup',
                         '@click' => 'click',
                     ],
 
