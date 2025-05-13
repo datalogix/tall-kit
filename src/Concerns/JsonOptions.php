@@ -2,6 +2,8 @@
 
 namespace TALLKit\Concerns;
 
+use Illuminate\Support\Js;
+
 trait JsonOptions
 {
     /**
@@ -18,7 +20,7 @@ trait JsonOptions
     protected function setOptions($options)
     {
         $this->options = array_replace_recursive(
-            $this->themeProvider->options->getAttributes(),
+            $this->getProps('options', []),
             collect_value($options)->toArray()
         );
     }
@@ -31,11 +33,7 @@ trait JsonOptions
      */
     public function getOptions($key = null)
     {
-        if (is_null($key)) {
-            return $this->options;
-        }
-
-        return target_get($this->options, $key);
+        return is_null($key) ? $this->options : target_get($this->options, $key);
     }
 
     /**
@@ -55,7 +53,7 @@ trait JsonOptions
      */
     public function jsonOptions(...$args)
     {
-        return json_encode((object) array_replace_recursive(
+        return Js::from(array_replace_recursive(
             $this->getOptionsValues(...func_get_args()),
             $this->getOptions()
         ));

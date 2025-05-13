@@ -4,7 +4,10 @@ namespace TALLKit;
 
 use Illuminate\Contracts\Foundation\CachesConfiguration;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -15,6 +18,7 @@ use TALLKit\Binders\ThemeBinder;
 use TALLKit\Components\ThemeProvider;
 use TALLKit\Controllers\AssetsController;
 use TALLKit\Controllers\UploadController;
+use TALLKit\Facades\TALLKit as TALLKitFacade;
 use TALLKit\Macros\MergeOnlyThemeProvider;
 use TALLKit\Macros\MergeThemeProvider;
 
@@ -38,7 +42,7 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     protected function registerConfig()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/tallkit.php', 'tallkit');
+        $this->mergeConfigFrom(__DIR__ . '/../config/tallkit.php', 'tallkit');
     }
 
     /**
@@ -53,9 +57,7 @@ class TALLKitServiceProvider extends ServiceProvider
         $this->app->singleton(FormDataBinder::class);
         $this->app->singleton(ThemeBinder::class);
         $this->app->alias(TALLKit::class, 'tallkit');
-        $this->app->bind(ThemeProvider::class, function () {
-            return new ThemeProvider(config('tallkit.themes'));
-        });
+        $this->app->bind(ThemeProvider::class, fn() => new ThemeProvider(config('tallkit.themes')));
     }
 
     /**
@@ -82,9 +84,7 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     protected function bootGate()
     {
-        Gate::after(function ($user, $ability, $result, $arguments) {
-            return true;
-        });
+        Gate::after(fn($user, $ability, $result, $arguments) => true);
     }
 
     /**
@@ -105,7 +105,7 @@ class TALLKitServiceProvider extends ServiceProvider
      */
     protected function bootResources()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'tallkit');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tallkit');
     }
 
     /**
@@ -139,9 +139,25 @@ class TALLKitServiceProvider extends ServiceProvider
         $prefix = config('tallkit.prefix', '');
 
         $this->loadViewComponentsAs($prefix, config('tallkit.components', []));
+        $this->loadViewComponentsAs('tallkit', config('tallkit.components', []));
+
+        /** @var \TALLKit\Components\BladeComponent $component */
+        foreach (config('tallkit.components', []) as $name => $component) {
+            $assets = Collection::make($component::assets());
+
+            if ($assets->isEmpty()) {
+                continue;
+            }
+
+            TALLKitFacade::registerAsset($name, $assets->filter(fn($asset, $key) => is_int($key)));
+
+            $assets->filter(fn($asset, $key) => is_string($key))
+                ->each(fn($asset, $key) => TALLKitFacade::registerAsset($key, $asset));
+        }
 
         if (config('tallkit.options.aliases')) {
             $this->loadViewComponentsAs($prefix, config('tallkit.aliases', []));
+            $this->loadViewComponentsAs('tallkit', config('tallkit.aliases', []));
         }
     }
 
@@ -194,15 +210,15 @@ class TALLKitServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../public' => public_path('vendor/tallkit'),
+                __DIR__ . '/../public' => public_path('vendor/tallkit'),
             ], 'tallkit-assets');
 
             $this->publishes([
-                __DIR__.'/../config/tallkit.php' => config_path('tallkit.php'),
+                __DIR__ . '/../config/tallkit.php' => config_path('tallkit.php'),
             ], 'tallkit-config');
 
             $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/tallkit'),
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/tallkit'),
             ], 'tallkit-views');
         }
     }
@@ -220,7 +236,8 @@ class TALLKitServiceProvider extends ServiceProvider
             $config = $this->app->make('config');
 
             $config->set($key, $this->mergeConfigs(
-                require $path, $config->get($key, [])
+                require $path,
+                $config->get($key, [])
             ));
         }
     }

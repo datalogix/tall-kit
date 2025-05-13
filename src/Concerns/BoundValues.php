@@ -29,7 +29,7 @@ trait BoundValues
             return null;
         }
 
-        $bind = $bind ?? $this->getBoundTarget();
+        $bind ??= $this->getBoundTarget();
 
         return target_get($bind, $name);
     }

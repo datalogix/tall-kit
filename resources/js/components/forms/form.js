@@ -18,7 +18,7 @@ export default ({ loadable }) => ({
       return event.preventDefault()
     }
 
-    if (!this.confirm || window.confirm(this.conm)) {
+    if (!this.confirm || window.confirm(this.confirm)) {
       return this.startAndComplete(this.$refs.form.target || (event && event.ctrlKey))
     }
 

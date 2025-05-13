@@ -1,6 +1,14 @@
 export default ({ loadComponentAssets, updateInputValue }) => ({
   pickr: null,
 
+  /*
+  TODO: assets
+  public static $assets = [
+      'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1/dist/themes/classic.min.css',
+      'https://cdn.jsdelivr.net/npm/@simonwep/pickr@1/dist/pickr.min.js',
+  ];
+    */
+
   async setup (options) {
     await loadComponentAssets('pickr')
 

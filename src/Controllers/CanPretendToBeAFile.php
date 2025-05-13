@@ -15,12 +15,11 @@ trait CanPretendToBeAFile
      */
     public function pretendResponseIsFile($file, $mimeType = null)
     {
-        $mimeType = $mimeType ?? $this->getMimeType($file);
+        $mimeType ??= $this->getMimeType($file);
+        $headers = ['Content-Type' => ($mimeType ? $mimeType.'; ' : '').'charset=utf-8'];
 
         if (config('app.debug')) {
-            return response()->file($file, [
-                'Content-Type' => ($mimeType ? $mimeType.'; ' : '').'charset=utf-8',
-            ]);
+            return response()->file($file, $headers);
         }
 
         $expires = strtotime('+1 year');
@@ -34,12 +33,11 @@ trait CanPretendToBeAFile
             ]);
         }
 
-        return response()->file($file, [
-            'Content-Type' => ($mimeType ? $mimeType.'; ' : '').'charset=utf-8',
-            'Expires' => $this->httpDate($expires),
-            'Cache-Control' => $cacheControl,
-            'Last-Modified' => $this->httpDate($lastModified),
-        ]);
+        $headers['Expires'] = $this->httpDate($expires);
+        $headers['Cache-Control'] = $cacheControl;
+        $headers['Last-Modified'] = $this->httpDate($lastModified);
+
+        return response()->file($file, $headers);
     }
 
     /**

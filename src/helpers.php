@@ -67,9 +67,9 @@ if (! function_exists('collect_value')) {
      */
     function collect_value($items = null, ...$args)
     {
-        return Collection::make(value($items, ...$args))->map(function ($item, $key) use ($args) {
-            return value($item, $key, ...$args);
-        })->whereNotNull();
+        return Collection::make(value($items, ...$args))
+            ->map(fn ($item, $key) => value($item, $key, ...$args))
+            ->whereNotNull();
     }
 }
 
@@ -93,5 +93,48 @@ if (! function_exists('make_model')) {
         }
 
         return null;
+    }
+}
+
+if (! function_exists('find_asset')) {
+    /**
+     * Find exists asset
+     *
+     * @param  string|string[]  $paths
+     * @return string|null
+     */
+    function find_asset($paths)
+    {
+        foreach (array_filter(Arr::wrap($paths)) as $path) {
+            if (file_exists(public_path($path))) {
+                return asset($path);
+            }
+        }
+    }
+}
+
+
+if (! function_exists('find_image')) {
+    /**
+     * Find exists image
+     *
+     * @param  string  $name
+     * @return string|null
+     */
+    function find_image($name)
+    {
+        $paths = [
+            $name.'.png',
+            $name.'.jpg',
+            $name.'.jpeg',
+            'imgs/'.$name.'.png',
+            'imgs/'.$name.'.jpg',
+            'imgs/'.$name.'.jpeg',
+            'images/'.$name.'.png',
+            'images/'.$name.'.jpg',
+            'images/'.$name.'.jpeg',
+        ];
+
+        return find_asset($paths);
     }
 }

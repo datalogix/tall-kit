@@ -20,8 +20,12 @@ class DatatableHelpers
      * @param  callable|null  $parse
      * @return mixed
      */
-    public static function getSearch($search, $searchDefault = true, $searchValues = null, $parse = null)
-    {
+    public static function getSearch(
+        $search,
+        $searchDefault = true,
+        $searchValues = null,
+        $parse = null
+    ) {
         $search = Collection::make($search);
         $searchValues = Collection::make($searchValues ?? request()->all());
 
@@ -54,8 +58,15 @@ class DatatableHelpers
      * @param  callable|null  $parse
      * @return mixed
      */
-    public static function getRows($rows, $cols = null, $search = null, $orderBy = null, $orderByDirection = null, $paginator = true, $parse = null)
-    {
+    public static function getRows(
+        $rows,
+        $cols = null,
+        $search = null,
+        $orderBy = null,
+        $orderByDirection = null,
+        $paginator = true,
+        $parse = null
+    ) {
         if (is_string($rows)) {
             $rows = make_model($rows);
         }
@@ -91,8 +102,14 @@ class DatatableHelpers
      * @param  callable|null  $parse
      * @return mixed
      */
-    public static function getCols($cols, $rows = null, $sortable = null, $orderBy = null, $orderByDirection = null, $parse = null)
-    {
+    public static function getCols(
+        $cols,
+        $rows = null,
+        $sortable = null,
+        $orderBy = null,
+        $orderByDirection = null,
+        $parse = null
+    ) {
         $firstRow = Collection::make(Collection::make($rows instanceof Paginator ? $rows->items() : $rows)->first());
         $cols = Collection::make($cols ?? $firstRow->keys());
 

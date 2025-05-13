@@ -1,4 +1,4 @@
-import { dispatch, detectAssets } from '../utils'
+import { dispatch } from '../utils'
 
 class Assets {
   constructor (items = {}) {
@@ -37,14 +37,6 @@ class Assets {
     return Array.isArray(content) ? content : [content]
   }
 
-  init (loadType) {
-    const assets = detectAssets(document, loadType)
-
-    for (const asset of assets) {
-      this.load(asset)
-    }
-  }
-
   async load (asset) {
     if (this.loaded.includes(asset) || !this.has(asset)) {
       return Promise.resolve()
@@ -57,31 +49,28 @@ class Assets {
     this.loading.push(asset)
 
     const assets = this.get(asset)
-    const promisses = []
 
     for (const content of assets) {
       if (content.endsWith('.css') || content.includes('.css?')) {
-        promisses.push(new Promise(resolve => {
+        await new Promise(resolve => {
           const link = document.createElement('link')
           link.setAttribute('rel', 'stylesheet')
           link.setAttribute('type', 'text/css')
           link.setAttribute('href', content)
           document.head.appendChild(link)
           link.addEventListener('load', resolve, false)
-        }))
+        })
       }
 
       if (content.endsWith('.js') || content.includes('.js?')) {
-        promisses.push(new Promise(resolve => {
+        await new Promise(resolve => {
           const script = document.createElement('script')
           script.setAttribute('src', content)
           document.body.appendChild(script)
           script.addEventListener('load', resolve, false)
-        }))
+        })
       }
     }
-
-    await Promise.all(promisses)
 
     this.loaded.push(asset)
 

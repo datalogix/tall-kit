@@ -1,6 +1,13 @@
 export default ({ loadComponentAssets, updateInputValue, loadable }) => ({
   ...loadable(),
 
+  /*
+    public static $assets = [
+        'https://cdn.jsdelivr.net/npm/quill@1/dist/quill.snow.min.css',
+        'https://cdn.jsdelivr.net/npm/quill@1/dist/quill.min.js',
+    ];
+    */
+
   quill: null,
 
   async setup (options = {}) {

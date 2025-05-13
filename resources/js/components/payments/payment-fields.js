@@ -15,6 +15,15 @@ export default ({ loadComponentAssets }) => ({
   cardExpirationDateMask: null,
   cardCVVMask: null,
 
+  /*
+    TODO: assets
+    public static $assets = [
+        'imask' => [
+            'https://cdn.jsdelivr.net/npm/imask@6/dist/imask.min.js',
+        ],
+    ];
+    */
+
   async setup (options = {}) {
     await loadComponentAssets('imask')
 

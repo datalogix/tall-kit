@@ -20,7 +20,7 @@ trait Componentable
      */
     protected function getComponentKey()
     {
-        return $this->componentKey ?? Str::kebab(class_basename($this));
+        return $this->componentKey ??= Str::of(class_basename($this))->kebab()->toString();
     }
 
     /**
@@ -30,19 +30,21 @@ trait Componentable
      */
     protected function getComponentView()
     {
-        return (string) Str::of(get_called_class())
-            ->beforeLast('\\')
-            ->lower()
-            ->replace(['tallkit\\', '\\'], ['tallkit::', '.'])
-            ->append('.')
-            ->append($this->getComponentKey());
+        return Str::of(static::class)
+             ->replace('\\', '/')
+             ->replace('TALLKit/', '')
+             ->prepend(__DIR__.'/../')
+             ->append('.blade.php')
+             ->toString();
     }
 
     /**
-     * {@inheritdoc}
+     * Get blade view.
+     *
+     * @return \Illuminate\Contracts\View\View
      */
-    public function render()
+    protected function blade()
     {
-        return view($this->getComponentView());
+        return view()->file($this->getComponentView());
     }
 }

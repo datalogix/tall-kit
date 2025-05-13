@@ -37,11 +37,7 @@ class UploadController
             return compact('originalName', 'name', 'extension', 'path', 'url', 'fullUrl', 'location');
         });
 
-        if ($uploads->count() > 1) {
-            return response()->json($uploads);
-        }
-
-        return response()->json($uploads->first());
+        return response()->json($uploads->count() > 1 ? $uploads : $uploads->first());
     }
 
     /**

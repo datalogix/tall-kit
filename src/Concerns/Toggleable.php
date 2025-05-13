@@ -4,12 +4,24 @@ namespace TALLKit\Concerns;
 
 trait Toggleable
 {
+    /**
+     * @var bool
+     */
     protected static $SHOW = false;
 
+    /**
+     * @var bool
+     */
     protected static $OVERLAY = false;
 
+    /**
+     * @var bool
+     */
     protected static $CLOSEABLE = true;
 
+    /**
+     * @var string
+     */
     protected static $ALIGN = 'left';
 
     /**
@@ -47,8 +59,13 @@ trait Toggleable
      * @param  string|null  $align
      * @return void
      */
-    public function setToggleable($name = null, $show = null, $overlay = null, $closeable = null, $align = null)
-    {
+    public function setToggleable(
+        $name = null,
+        $show = null,
+        $overlay = null,
+        $closeable = null,
+        $align = null
+    ) {
         $this->name = $name;
         $this->show = $show ?? static::$SHOW;
         $this->overlay = $overlay ?? static::$OVERLAY;
@@ -63,12 +80,14 @@ trait Toggleable
      */
     public function events()
     {
-        // 2x -> https://github.com/alpinejs/alpine/blob/2.x/README.pt.md#x-on
-        // 3x -> https://alpinejs.dev/directives/on#window
-        return $this->name ? [
+        if (!$this->name) {
+            return [];
+        }
+
+        return [
             '@'.$this->name.'-open.window' => 'open',
             '@'.$this->name.'-close.window' => 'close',
             '@'.$this->name.'-toggle.window' => 'toggle',
-        ] : [];
+        ];
     }
 }

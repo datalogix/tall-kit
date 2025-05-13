@@ -1,10 +1,20 @@
-export default ({ loadComponentAssets }) => ({
+export default ({ loadComponentAssets, timeout }) => ({
   chart: null,
+
+  /*
+    public static $assets = [
+        'https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js',
+    ];
+    */
 
   async setup (options = {}) {
     await loadComponentAssets('chart-js')
 
-    this.chart = new window.Chart(this.$refs.canvas.getContext('2d'), options)
+    if (this.chart) {
+      this.chart.destroy()
+    }
+
+    this.chart = new window.Chart(this.$refs.canvas, options)
   },
 
   update (event) {

@@ -7,8 +7,6 @@ use Illuminate\Support\ViewErrorBag;
 
 trait ValidationErrors
 {
-    use FieldNameAndValue;
-
     /**
      * Show errors.
      *
@@ -37,9 +35,10 @@ trait ValidationErrors
      */
     protected function getErrorBag($bag = 'default')
     {
-        $bags = View::shared('errors', function () {
-            return request()->session()->get('errors', new ViewErrorBag); // @codeCoverageIgnore
-        });
+        $bags = View::shared(
+            'errors',
+            fn () => request()->session()->get('errors', new ViewErrorBag)
+        );
 
         return $bags->getBag($bag);
     }
@@ -51,7 +50,7 @@ trait ValidationErrors
      * @param  string  $bag
      * @return bool
      */
-    public function hasError($bag = 'default')
+    protected function hasError($bag = 'default')
     {
         $name = $this->getFieldName();
         $errorBag = $this->getErrorBag($bag);

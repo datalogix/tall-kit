@@ -24,6 +24,10 @@ trait Components
      */
     public function registerComponent($name, $content = null, $overwrite = true)
     {
+        if (empty($content)) {
+            return;
+        }
+
         if ($overwrite || ! $this->hasComponent($name)) {
             $this->components[$name] = $content;
         }
@@ -116,12 +120,12 @@ trait Components
                 if (Str::endsWith($content, '.js') || Str::contains($content, '.js?')) {
                     $src = route('tallkit.component', compact('name', 'pos'));
                     $result[] = <<<HTML
-<script src="{$src}" data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}></script>
+<script src="{$src}"{$nonce}></script>
 HTML;
                 } else {
                     $content = $actions ?? '{}';
                     $result[] = <<<HTML
-<script data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}>
+<script{$nonce}>
     window.tallkit.components.register('{$name}', $content);
 </script>
 HTML;

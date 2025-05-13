@@ -1,6 +1,12 @@
 export default ({ loadComponentAssets }) => ({
   chart: null,
 
+  /*
+    public static $assets = [
+        'https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js',
+    ];
+    */
+
   async setup (options = {}) {
     await loadComponentAssets('echarts')
 

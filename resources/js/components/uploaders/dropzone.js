@@ -3,6 +3,17 @@ import { defu } from 'defu'
 export default ({ loadComponentAssets, getCsrfToken, loadable }) => ({
   ...loadable(),
 
+  /*
+    TODO: assets
+    public static function assets()
+    {
+        return [
+            'https://cdn.jsdelivr.net/npm/dropzone@6.0.0-beta.2/dist/dropzone.css',
+            'https://cdn.jsdelivr.net/npm/dropzone@6.0.0-beta.2/dist/dropzone-min.js',
+        ];
+    }
+    */
+
   dropzone: null,
 
   async setup (options = {}) {

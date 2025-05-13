@@ -1,5 +1,14 @@
 export default ({ loadComponentAssets }) => ({
+
   chart: null,
+
+  /*
+    public static $assets = [
+        'https://cdn.jsdelivr.net/npm/c3@0.7/c3.min.css',
+        'https://cdn.jsdelivr.net/npm/d3@5/dist/d3.min.js',
+        'https://cdn.jsdelivr.net/npm/c3@0.7/c3.min.js',
+    ];
+    */
 
   async setup (options = {}) {
     await loadComponentAssets('c3')

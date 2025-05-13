@@ -8,75 +8,67 @@ class CheckboxList extends Group
 {
     use PrepareOptions;
 
-    /**
-     * @var mixed
-     */
-    public $bind;
+    protected function props(): array
+    {
+        return array_merge(parent::props(), [
+            'bind' => false,
+            'modifier' => null,
+            'selectAll' => null,
+            'deselectAll' => null,
+        ]);
+    }
 
-    /**
-     * @var string|null
-     */
-    public $modifier;
+    protected function processed(array $data)
+    {
+        $this->selectAll ??= $this->fieldset;
+        $this->deselectAll ??= $this->fieldset;
+    }
 
-    /**
-     * @var bool|null
-     */
-    public $selectAll;
+    protected function attrs()
+    {
+        return [
+            'root' => [
+                'wire:ignore' => '',
+                'x-data' => 'window.tallkit.component(\'checkbox-list\')',
+                'x-init' => 'setup(\''.$this->name.'\')',
+            ],
 
-    /**
-     * @var bool|null
-     */
-    public $deselectAll;
+            'group' => [
+                'name' => $this->name,
+                'label' => $this->label,
+                'inline' => $this->inline,
+                'grid' => $this->grid,
+                'fieldset' => $this->fieldset,
+                'show-errors' => $this->showErrors
+            ],
 
-    /**
-     * Create a new component instance.
-     *
-     * @param  string|null  $name
-     * @param  string|bool|null  $label
-     * @param  mixed  $options
-     * @param  string|array|int|null  $itemValue
-     * @param  string|array|int|null  $itemText
-     * @param  bool|null  $inline
-     * @param  string|bool|int|null  $grid
-     * @param  bool|null  $fieldset
-     * @param  bool|null  $showErrors
-     * @param  mixed  $bind
-     * @param  string|null  $modifier
-     * @param  bool|null  $selectAll
-     * @param  bool|null  $deselectAll
-     * @param  string|null  $theme
-     * @return void
-     */
-    public function __construct(
-        $name = null,
-        $label = null,
-        $options = null,
-        $itemValue = null,
-        $itemText = null,
-        $inline = null,
-        $grid = null,
-        $fieldset = null,
-        $showErrors = null,
-        $bind = null,
-        $modifier = null,
-        $selectAll = null,
-        $deselectAll = null,
-        $theme = null
-    ) {
-        parent::__construct(
-            $name,
-            $label,
-            $inline,
-            $grid,
-            $fieldset,
-            $showErrors,
-            $theme
-        );
+            'header' => [
+                'class' => 'flex items-center justify-between',
+            ],
 
-        $this->setOptions($options, $itemValue, $itemText);
-        $this->bind = $bind;
-        $this->modifier = $modifier;
-        $this->selectAll = $selectAll ?? $this->fieldset;
-        $this->deselectAll = $deselectAll ?? $this->fieldset;
+            'label' => [
+                'label' => $this->label
+            ],
+
+            'actions' => [],
+
+            'select-all' => [
+                'preset' => 'select-all',
+                '@click' => 'select(true)',
+            ],
+
+            'deselect-all' => [
+                'preset' => 'deselect-all',
+                '@click' => 'select(false)',
+            ],
+
+            'checkbox' => [
+                'style' => 'margin: 0;',
+                'name' => $this->name,
+                'bind' => $this->bind,
+                'modifier' => $this->modifier,
+                'show-errors' => false
+            ],
+        ];
     }
 }

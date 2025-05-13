@@ -2,71 +2,90 @@
 
 namespace TALLKit\Components\Forms;
 
+use TALLKit\View\Attr;
+
 class Group extends Field
 {
-    /**
-     * @var bool|null
-     */
-    public $inline;
-
-    /**
-     * @var string|bool|int|null
-     */
-    public $grid;
-
-    /**
-     * @var bool|null
-     */
-    public $fieldset;
-
-    /**
-     * Create a new component instance.
-     *
-     * @param  string|null  $name
-     * @param  string|bool|null  $label
-     * @param  bool|null  $inline
-     * @param  string|bool|int|null  $grid
-     * @param  bool|null  $fieldset
-     * @param  bool|null  $showErrors
-     * @param  string|null  $theme
-     * @return void
-     */
-    public function __construct(
-        $name = null,
-        $label = null,
-        $inline = null,
-        $grid = null,
-        $fieldset = null,
-        $showErrors = null,
-        $theme = null
-    ) {
-        parent::__construct(
-            $name,
-            $label,
-            $showErrors,
-            $theme
-        );
-
-        $this->inline = $inline;
-        $this->grid = $grid;
-        $this->fieldset = $fieldset;
+    protected function props(): array
+    {
+        return array_merge(parent::props(), [
+            'inline' => false,
+            'grid' => null,
+            'fieldset' => null,
+        ]);
     }
 
-    /**
-     * Get type.
-     *
-     * @return bool
-     */
-    public function getType()
+    protected function attrs()
     {
+        $type = 'block';
+
         if ($this->grid ?? false) {
-            return 'grid-'.($this->grid === true ? 1 : $this->grid);
+            $type = 'grid-' . ($this->grid === true ? 1 : $this->grid);
         }
 
         if ($this->inline ?? false) {
-            return 'inline';
+            $type = 'inline';
         }
 
-        return 'block';
+        return [
+            'root' => Attr::make(
+                attributes: [
+                    'name' => $this->name,
+                    'label' => false,
+                    'show-errors' => $this->showErrors,
+                    'groupable' => $this->groupable,
+                    'icon-left' => $this->iconLeft ?? $this->icon,
+                    'icon-right' => $this->iconRight,
+                    'prepend' => $this->prepend,
+                    'append' => $this->append,
+                    'display' => $this->display,
+                ]
+            ),
+
+            'label' => Attr::make(
+                attributes: [
+                    'name' => $this->name,
+                    'label' => $this->label
+                ],
+                class: 'mb-1',
+            ),
+
+            'fieldset' => [
+                'class' => 'bg-white border p-6 rounded-lg shadow overflow-auto ' .
+                    ($type === 'block' ? '' : '') .
+                    ($type === 'inline' ? 'flex flex-wrap space-x-6' : '') .
+                    ($type === 'grid-1' ? 'grid gap-6 grid-cols-1' : '') .
+                    ($type === 'grid-2' ? 'grid gap-6 grid-cols-2' : '') .
+                    ($type === 'grid-3' ? 'grid gap-6 grid-cols-3' : '') .
+                    ($type === 'grid-4' ? 'grid gap-6 grid-cols-4' : '') .
+                    ($type === 'grid-5' ? 'grid gap-6 grid-cols-5' : '') .
+                    ($type === 'grid-6' ? 'grid gap-6 grid-cols-6' : '') .
+                    ($type === 'grid-7' ? 'grid gap-6 grid-cols-7' : '') .
+                    ($type === 'grid-8' ? 'grid gap-6 grid-cols-8' : '') .
+                    ($type === 'grid-9' ? 'grid gap-6 grid-cols-9' : '') .
+                    ($type === 'grid-10' ? 'grid gap-6 grid-cols-10' : '') .
+                    ($type === 'grid-11' ? 'grid gap-6 grid-cols-11' : '') .
+                    ($type === 'grid-12' ? 'grid gap-6 grid-cols-12' : '') .
+                    '',
+            ],
+
+            'div' => Attr::make(
+                class: ($type === 'block' ? '' : '') .
+                    ($type === 'inline' ? 'flex flex-wrap space-x-6' : '') .
+                    ($type === 'grid-1' ? 'grid gap-6 grid-cols-1' : '') .
+                    ($type === 'grid-2' ? 'grid gap-6 grid-cols-2' : '') .
+                    ($type === 'grid-3' ? 'grid gap-6 grid-cols-3' : '') .
+                    ($type === 'grid-4' ? 'grid gap-6 grid-cols-4' : '') .
+                    ($type === 'grid-5' ? 'grid gap-6 grid-cols-5' : '') .
+                    ($type === 'grid-6' ? 'grid gap-6 grid-cols-6' : '') .
+                    ($type === 'grid-7' ? 'grid gap-6 grid-cols-7' : '') .
+                    ($type === 'grid-8' ? 'grid gap-6 grid-cols-8' : '') .
+                    ($type === 'grid-9' ? 'grid gap-6 grid-cols-9' : '') .
+                    ($type === 'grid-10' ? 'grid gap-6 grid-cols-10' : '') .
+                    ($type === 'grid-11' ? 'grid gap-6 grid-cols-11' : '') .
+                    ($type === 'grid-12' ? 'grid gap-6 grid-cols-12' : '') .
+                    '',
+            ),
+        ];
     }
 }

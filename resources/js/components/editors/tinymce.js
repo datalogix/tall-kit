@@ -3,6 +3,12 @@ import { defu } from 'defu'
 export default ({ loadComponentAssets, updateInputValue, getCsrfToken, loadable }) => ({
   ...loadable(),
 
+  /*
+    public static $assets = [
+        'https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js',
+    ];
+    */
+
   tinymce: null,
 
   async setup (options = {}) {

@@ -5,216 +5,105 @@ namespace TALLKit\Components\Forms;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use TALLKit\View\Attr;
 
 class Input extends Field
 {
-    /**
-     * @var string|bool|null
-     */
-    public $id;
+    protected function props(): array
+    {
+        return array_merge(parent::props(), [
+            'id' => null,
+            'type' => null,
+            'value' => null,
+            'bind' => null,
+            'modifier' => null,
+            'default' => null,
+            'mask' => null,
+            'cleave' => null,
+            'choices' => null,
+            'tagify' => null,
+            'language' => null,
+            'groupable' => true,
+        ]);
+    }
 
-    /**
-     * @var string
-     */
-    public $type;
+    protected function processed(array $data)
+    {
+        $this->id ??= str($this->name)->endsWith('[]') ? false : $this->name;
+        $this->type ??= $this->getType();
 
-    /**
-     * @var mixed
-     */
-    public $value;
-
-    /**
-     * @var mixed
-     */
-    public $default;
-
-    /**
-     * @var mixed
-     */
-    protected $mask;
-
-    /**
-     * @var array|null
-     */
-    protected $cleave;
-
-    /**
-     * @var array|bool|null
-     */
-    protected $choices;
-
-    /**
-     * @var array|bool|null
-     */
-    protected $tagify;
-
-    /**
-     * Create a new component instance.
-     *
-     * @param  string|null  $name
-     * @param  string|bool|null  $id
-     * @param  string|bool|null  $label
-     * @param  string|null  $type
-     * @param  mixed  $bind
-     * @param  string|null  $modifier
-     * @param  mixed  $default
-     * @param  mixed  $mask
-     * @param  array|null  $cleave
-     * @param  array|bool|null  $choices
-     * @param  array|bool|null  $tagify
-     * @param  string|bool|null  $language
-     * @param  bool|null  $showErrors
-     * @param  string|null  $theme
-     * @param  bool|null  $groupable
-     * @param  string|null  $prependText
-     * @param  string|null  $prependIcon
-     * @param  string|null  $appendText
-     * @param  string|null  $appendIcon
-     * @param  mixed  $display
-     * @return void
-     */
-    public function __construct(
-        $name = null,
-        $id = null,
-        $label = null,
-        $type = null,
-        $bind = null,
-        $modifier = null,
-        $default = null,
-        $mask = null,
-        $cleave = null,
-        $choices = null,
-        $tagify = null,
-        $language = null,
-        $showErrors = null,
-        $theme = null,
-        $groupable = null,
-        $prependText = null,
-        $prependIcon = null,
-        $appendText = null,
-        $appendIcon = null,
-        $display = null
-    ) {
-        parent::__construct(
-            $name,
-            $label,
-            $modifier,
-            $showErrors,
-            $theme,
-            $groupable ?? true,
-            $prependText,
-            $prependIcon,
-            $appendText,
-            $appendIcon,
-            $display
-        );
-
-        $this->id = $id ?? Str::endsWith($this->name, '[]') ? false : $this->name;
-        $this->type = $type ?? $this->getTypeByName($this->name);
-        $this->default = $default;
-
-        if ($language) {
-            $this->name = "{$this->name}[{$language}]";
+        if ($this->language && !str($this->name)->endsWith("[$this->language]")) {
+            $this->name = "{$this->name}[{$this->language}]";
         }
 
         if ($this->type !== 'password') {
-            $this->value = $this->getValue($bind, $default, $language);
+            $this->value ??= $this->getValue($this->bind, $this->default, $this->language) ?? $data['slot'];
         }
-
-        $this->mask = $mask;
-        $this->cleave = $cleave;
-        $this->choices = $choices;
-        $this->tagify = $tagify;
 
         $this->label = $this->type === 'hidden' || $this->tagify ? false : $this->label;
-        $this->display = $display ?? ($this->type === 'file' ? $this->value : false);
+        $this->display ??= $this->type === 'file' ? $this->value : false;
+        $this->mask = $this->getMask();
     }
 
-    /**
-     * Mask options.
-     *
-     * @return array
-     */
-    public function maskOptions()
+    protected function attrs()
     {
-        if (! $this->mask || $this->type !== 'text') {
-            return [];
-        }
+        return [
+            'root' => Attr::make(
+                attributes: [
+                    'name' => $this->name,
+                    'label' => $this->label,
+                    'label-wrapper' => $this->labelWrapper,
+                    'show-errors' => $this->showErrors,
+                    'groupable' => $this->groupable,
+                    'icon' => $this->icon,
+                    'icon-left' => $this->iconLeft,
+                    'icon-right' => $this->iconRight,
+                    'prepend' => $this->prepend,
+                    'append' => $this->append,
+                    'display' => $this->display,
+                ],
+            )->when($this->type === 'hidden', fn ($attr) => $attr->class('hidden')),
 
-        $encoded = json_encode((object) (is_array($this->mask) ? $this->mask : ['mask' => $this->mask]));
-
-        return $this->attributes
-            ->mergeOnlyThemeProvider($this->themeProvider, 'mask')
-            ->merge(['x-init' => 'setup('.$encoded.')'], false)
-            ->getAttributes();
+            'input' => Attr::make(
+                attributes: ['type' => $this->type],
+                class: 'block w-full py-2 px-3 outline-none focus:outline-none',
+            )
+                ->when($this->name, fn ($attr, $value) => $attr->attr('name', $value))
+                ->when($this->id, fn ($attr, $value) => $attr->attr('id', $value))
+                ->when(
+                    $this->isModel() && $this->name,
+                    fn ($attr) => $attr->attr('x-model' . $this->modelModifier($this->modifier), $this->modelName($this->name))
+                )->when(
+                    $this->isWired() && $this->name,
+                    fn ($attr) => $attr->attr('wire:model' . $this->wireModifier($this->modifier), $this->name),
+                    fn ($attr) => $attr->attr('value', $this->value)
+                )
+                ->when($this->mask, fn ($attr) => $attr->merge(Attr::make(
+                    attributes: ['x-ref' => 'element'],
+                    component: 'mask',
+                    setup: json_encode((object) (is_array($this->mask) ? $this->mask : ['mask' => $this->mask]))
+                )))
+                ->when(is_array($this->cleave), fn ($attr) => $attr->merge(Attr::make(
+                    attributes: ['x-ref' => 'element'],
+                    component: 'cleave',
+                    setup: json_encode((object) $this->cleave)
+                )))
+                ->when($this->choices, fn ($attr) => $attr->merge(Attr::make(
+                    attributes: ['x-ref' => 'element'],
+                    component: 'choices',
+                    setup: json_encode((object) (is_array($this->choices) ? $this->choices : []))
+                )))
+                ->when($this->tagify, fn ($attr) => $attr->merge(Attr::make(
+                    attributes: ['x-ref' => 'element'],
+                    component: 'tagify',
+                    setup: json_encode((object) (is_array($this->tagify) ? $this->tagify : []))
+                ))),
+        ];
     }
 
-    /**
-     * Cleave options.
-     *
-     * @return array
-     */
-    public function cleaveOptions()
+    protected function getType()
     {
-        if (! is_array($this->cleave) || $this->type === 'hidden') {
-            return [];
-        }
-
-        $encoded = json_encode((object) $this->cleave);
-
-        return $this->attributes
-            ->mergeOnlyThemeProvider($this->themeProvider, 'cleave')
-            ->merge(['x-init' => 'setup('.$encoded.')'], false)
-            ->getAttributes();
-    }
-
-    /**
-     * Choices options.
-     *
-     * @return array
-     */
-    public function choicesOptions()
-    {
-        if (! $this->choices || $this->choices === 'hidden') {
-            return [];
-        }
-
-        $encoded = json_encode((object) (is_array($this->choices) ? $this->choices : []));
-
-        return $this->attributes
-            ->mergeOnlyThemeProvider($this->themeProvider, 'choices')
-            ->merge(['x-init' => 'setup('.$encoded.')'], false)
-            ->getAttributes();
-    }
-
-    /**
-     * Tagify options.
-     *
-     * @return array
-     */
-    public function tagifyOptions()
-    {
-        if (! $this->tagify || $this->type === 'hidden') {
-            return [];
-        }
-
-        $encoded = json_encode((object) (is_array($this->tagify) ? $this->tagify : []));
-
-        return $this->attributes
-            ->mergeOnlyThemeProvider($this->themeProvider, 'tagify')
-            ->merge(['x-init' => 'setup('.$encoded.')'], false)
-            ->getAttributes();
-    }
-
-    /**
-     * Get input type by name.
-     *
-     * @param  string|null  $name
-     * @return string
-     */
-    protected function getTypeByName($name = null)
-    {
-        if (! $name) {
+        if (!$this->name) {
             return 'text';
         }
 
@@ -230,12 +119,47 @@ class Input extends Field
         ];
 
         foreach ($types as $type => $names) {
-            if (Str::contains($name, $names)) {
+            if (Str::contains($this->name, $names)) {
                 return $type;
             }
         }
 
         return 'text';
+    }
+
+    protected function getMask()
+    {
+        if ($this->mask === false || is_array($this->mask)) {
+            return $this->mask;
+        }
+
+        $maskes = [
+            '00000-000' => ['cep', 'zipcode', 'zip-code'],
+            '00/00/0000' => ['date', 'birthdate', 'birth_date', '_at'],
+            '00/00/0000 00:00' => ['datetime', 'date_time'],
+            '00:00' => ['time'],
+            '000.000.000-00' => ['cpf'],
+            '00.000.000/0000-00' => ['cnpj'],
+            '(00) 00000000[0]' => ['phone', 'whatsapp'],
+        ];
+
+        if (!is_null($this->mask)) {
+            foreach ($maskes as $maskValue => $names) {
+                if (Str::contains($this->mask, $names)) {
+                    return $maskValue;
+                }
+            }
+
+            return $this->mask;
+        }
+
+        foreach ($maskes as $maskValue => $names) {
+            if (Str::contains($this->name, $names)) {
+                return $maskValue;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -270,11 +194,11 @@ class Input extends Field
         // Storage
         if (
             is_string($value)
-            && ! filter_var($value, FILTER_VALIDATE_IP)
-            && ! filter_var($value, FILTER_VALIDATE_MAC)
-            && ! filter_var($value, FILTER_VALIDATE_URL)
-            && ! filter_var($value, FILTER_VALIDATE_EMAIL)
-            && ! filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)
+            && !filter_var($value, FILTER_VALIDATE_IP)
+            && !filter_var($value, FILTER_VALIDATE_MAC)
+            && !filter_var($value, FILTER_VALIDATE_URL)
+            && !filter_var($value, FILTER_VALIDATE_EMAIL)
+            && !filter_var($value, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)
             && pathinfo($value, PATHINFO_EXTENSION)
             && Storage::exists($value)
         ) {

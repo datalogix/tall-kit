@@ -23,11 +23,10 @@ class UploadRequest extends FormRequest
      */
     public function rules()
     {
-        $file = $this->has('file') ? ['file' => 'required|file'] : [];
-
         return [
-            'disk' => 'nullable|string',
-            'folder' => 'nullable|string',
-        ] + $file;
+            'file' => ['sometimes', 'file'],
+            'disk' => ['nullable', 'string'],
+            'folder' => ['nullable', 'string'],
+        ];
     }
 }

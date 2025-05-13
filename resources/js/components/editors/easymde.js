@@ -1,6 +1,13 @@
 export default ({ loadComponentAssets, updateInputValue, loadable }) => ({
   ...loadable(),
 
+  /*
+    public static $assets = [
+        'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.css',
+        'https://cdn.jsdelivr.net/npm/easymde@2/dist/easymde.min.js',
+    ];
+    */
+
   easymde: null,
 
   async setup (options = {}) {

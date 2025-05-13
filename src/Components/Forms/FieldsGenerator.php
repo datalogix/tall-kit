@@ -3,45 +3,20 @@
 namespace TALLKit\Components\Forms;
 
 use Illuminate\Support\Str;
-use TALLKit\Components\BladeComponent;
+use TALLKit\View\BladeComponent;
 
 class FieldsGenerator extends BladeComponent
 {
-    /**
-     * @var \Illuminate\Support\Collection
-     */
-    public $fields;
+    protected array $props = [
+        'fields' => []
+    ];
 
-    /**
-     * Create a new component instance.
-     *
-     * @param  mixed  $fields
-     * @param  mixed  $bind
-     * @param  string|null  $theme
-     * @return void
-     */
-    public function __construct(
-        $fields = null,
-        $theme = null
-    ) {
-        $this->fields = collect_value($fields);
-
-        parent::__construct($theme);
-    }
-
-    /**
-     * Get field component.
-     *
-     * @param  string|null  $key
-     * @param  array|string|null  $field
-     * @return string
-     */
     public function getFieldComponent($key, $field)
     {
         $name = target_get($field, 'name', is_int($key) ? $field : $key);
 
         if (! $name || is_array($name)) {
-            return 'input';
+            return 'tallkit-input';
         }
 
         if ($component = target_get($field, 'component')) {
@@ -49,7 +24,7 @@ class FieldsGenerator extends BladeComponent
         }
 
         if (target_get($field, 'options') || Str::endsWith($name, '_id')) {
-            return 'select';
+            return 'tallkit-select';
         }
 
         $types = [
@@ -60,20 +35,13 @@ class FieldsGenerator extends BladeComponent
 
         foreach ($types as $component => $names) {
             if (Str::contains($name, $names)) {
-                return $component;
+                return 'tallkit-'.$component;
             }
         }
 
-        return 'input';
+        return 'tallkit-input';
     }
 
-    /**
-     * Get field options.
-     *
-     * @param  string|null  $key
-     * @param  array|string|null  $field
-     * @return mixed
-     */
     public function getFieldOptions($key, $field)
     {
         if ($options = target_get($field, 'options')) {

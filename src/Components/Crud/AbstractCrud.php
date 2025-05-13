@@ -6,8 +6,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use TALLKit\Components\BladeComponent;
 use TALLKit\Concerns\BoundValues;
+use TALLKit\View\BladeComponent;
 
 abstract class AbstractCrud extends BladeComponent
 {
@@ -87,7 +87,7 @@ abstract class AbstractCrud extends BladeComponent
      * @param  mixed  $actions
      * @param  string|bool|null  $routeName
      * @param  string|bool|null  $tooltip
-     * @param  string|null  $theme
+     * @param  array|null  $props
      * @return void
      */
     public function __construct(
@@ -102,9 +102,9 @@ abstract class AbstractCrud extends BladeComponent
         $actions = null,
         $routeName = null,
         $tooltip = null,
-        $theme = null
+        $props = null
     ) {
-        parent::__construct($theme);
+        parent::__construct(props: $props);
 
         $this->prefix = $prefix;
         $this->key = $key;

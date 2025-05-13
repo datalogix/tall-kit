@@ -4,68 +4,50 @@ namespace TALLKit\Components\Forms;
 
 class FieldView extends Field
 {
-    /**
-     * @var mixed
-     */
-    public $default;
+    protected function props(): array
+    {
+        return array_merge(parent::props(), [
+            'value' => null,
+            'bind' => null,
+            'default' => null,
+        ]);
+    }
 
-    /**
-     * @var mixed
-     */
-    public $value;
+    protected function processed(array $data)
+    {
+        $this->default ??= __('---');
+        $this->bind ??= $this->getBoundTarget();
+    }
 
-    /**
-     * @var mixed
-     */
-    public $bind;
+    protected function attrs()
+    {
+        return [
+            'root' => [
+                'name' => $this->name,
+                'label' => $this->label,
+                'label-wrapper' => $this->labelWrapper,
+                'show-errors' => $this->showErrors,
+                'groupable' => $this->groupable,
+                'icon' => $this->icon,
+                'icon-left' => $this->iconLeft,
+                'icon-right' => $this->iconRight,
+                'prepend' => $this->prepend,
+                'append' => $this->append,
+                'display' => false,
+            ],
 
-    /**
-     * Create a new component instance.
-     *
-     * @param  mixed  $value
-     * @param  string|null  $name
-     * @param  string|bool|null  $label
-     * @param  mixed  $bind
-     * @param  mixed  $default
-     * @param  bool|null  $showErrors
-     * @param  string|null  $theme
-     * @param  bool|null  $groupable
-     * @param  string|null  $prependText
-     * @param  string|null  $prependIcon
-     * @param  string|null  $appendText
-     * @param  string|null  $appendIcon
-     * @return void
-     */
-    public function __construct(
-        $value = null,
-        $name = null,
-        $label = null,
-        $bind = null,
-        $default = null,
-        $showErrors = null,
-        $theme = null,
-        $groupable = null,
-        $prependText = null,
-        $prependIcon = null,
-        $appendText = null,
-        $appendIcon = null,
-    ) {
-        parent::__construct(
-            $name,
-            $label,
-            null,
-            $showErrors,
-            $theme,
-            $groupable,
-            $prependText,
-            $prependIcon,
-            $appendText,
-            $appendIcon,
-            false,
-        );
-
-        $this->default = $default ?? __('---');
-        $this->value = $value;
-        $this->bind = $bind ?? $this->getBoundTarget();
+            'display' => [
+                'value' => $this->value,
+                'bind' => $this->bind,
+                'name' => $this->name,
+                'default' => $this->default,
+                'class' => 'py-2 px-3 overflow-auto',
+                'pt' => [
+                    'img' => ['class' => 'mx-auto max-w-xs max-h-72'],
+                    'audio' => ['class' => 'mx-auto max-w-xs max-h-72'],
+                    'video' => ['class' => 'mx-auto max-w-xs max-h-72'],
+                ]
+            ],
+        ];
     }
 }

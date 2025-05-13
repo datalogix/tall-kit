@@ -4,160 +4,123 @@ namespace TALLKit\Components\Forms;
 
 class InputImage extends Input
 {
-    /**
-     * @var string|bool
-     */
-    public $accept;
+    protected function props(): array
+    {
+        return array_merge(parent::props(), [
+            'type' => 'file',
+            'groupable' => false,
+            'accept' => 'image/*',
+            'confirm' => 'Do you really want to remove this image?',
+        ]);
+    }
 
-    /**
-     * @var string|null
-     */
-    public $empty;
+    protected function attrs()
+    {
+        return [
+            'root' => [
+                'wire:ignore' => '',
+                'x-cloak' => '',
+                'x-data' => 'window.tallkit.component(\'input-image\')',
+                'x-init' => 'setup',
+                'name' => $this->name,
+                'label' => false,
+                'show-errors' => $this->showErrors,
+            ],
 
-    /**
-     * @var string|null
-     */
-    public $emptyText;
+            'label-container' => [],
 
-    /**
-     * @var string|null
-     */
-    public $emptyIcon;
+            'label' => [
+                'class' => 'mb-1',
+                'label' => $this->label
+            ],
 
-    /**
-     * @var string|null
-     */
-    public $loading;
+            'field' => [
+                'class' => 'relative bg-white inline-block overflow-hidden border border-gray-200 rounded-lg shadow focus-within:ring',
+            ],
 
-    /**
-     * @var string|null
-     */
-    public $loadingIcon;
+            'input' => Attr::make(
+                attributes: [
+                    'x-ref' => 'input',
+                '@change' => 'change',
+                'class' => 'absolute opacity-0 w-full h-full -z-50',
+                'type' => 'file',
+                ],
+            )
+                ->when($this->name, fn ($attr, $value) => $attr->attr('name', $value))
+                ->when($this->accept, fn ($attr, $value) => $attr->attr('accept', $value))
+                ->when($this->id, fn ($attr, $value) => $attr->attr('id', $value))
+                ->when(
+                    $this->isModel() && $this->name,
+                    fn ($attr) => $attr->attr('x-model' . $this->modelModifier($this->modifier), $this->modelName($this->name))
+                )->when(
+                    $this->isWired() && $this->name,
+                    fn ($attr) => $attr->attr('wire:model' . $this->wireModifier($this->modifier), $this->name),
+                ),
 
-    /**
-     * @var string|null
-     */
-    public $error;
+            'empty' => [
+                'x-show' => 'isEmpty()',
+                '@click.prevent' => 'edit',
+                'class' => 'w-full h-full',
+                'color' => 'none',
+                'icon' => 'camera',
 
-    /**
-     * @var string|null
-     */
-    public $errorText;
+                'theme:icon-left' => [
+                    'class' => 'inline-block w-6 h-6',
+                ],
+            ],
 
-    /**
-     * @var string|null
-     */
-    public $errorIcon;
+            'loading' => [
+                'x-show' => 'isLoading()',
+                'class' => 'w-full h-full flex items-center justify-center p-2',
+            ],
 
-    /**
-     * @var string|null
-     */
-    public $edit;
+            'loading-icon' => [
+                'class' => 'animate-spin w-6 h-6 shadown',
+                'name' => 'spinner'
+            ],
 
-    /**
-     * @var string|null
-     */
-    public $editIcon;
+            'error' => [
+                'x-show' => 'isFailed()',
+                '@click.prevent' => 'edit',
+                'class' => 'w-full h-full',
+                'color' => 'error',
+                'icon' => 'close',
 
-    /**
-     * @var string|null
-     */
-    public $delete;
+                'theme:icon-left' => [
+                    'class' => 'inline-block w-6 h-6',
+                ],
+            ],
 
-    /**
-     * @var string|null
-     */
-    public $deleteIcon;
+            'complete' => [
+                'x-show' => 'isCompleted()',
+                'class' => 'w-full h-full flex flex-col items-center justify-center',
+            ],
 
-    /**
-     * @var string|null
-     */
-    public $deleteConfirm;
+            'img' => [
+                'data-turbo-cache' => 'false',
+                'data-turbolinks-cache' => 'false',
+                'x-ref' => 'output',
+                'class' => 'm-4 cursor-pointer max-w-sm max-h-80',
+                'src' => $this->value
+            ],
 
-    /**
-     * Create a new component instance.
-     *
-     * @param  string|null  $name
-     * @param  string|bool|null  $id
-     * @param  string|bool|null  $label
-     * @param  mixed  $bind
-     * @param  string|null  $modifier
-     * @param  mixed  $default
-     * @param  string|bool|null  $language
-     * @param  bool|null  $showErrors
-     * @param  string|null  $theme
-     * @param  string|bool|null  $accept
-     * @param  string|null  $empty
-     * @param  string|null  $emptyText
-     * @param  string|null  $emptyIcon
-     * @param  string|null  $loading
-     * @param  string|null  $loadingIcon
-     * @param  string|null  $error
-     * @param  string|null  $errorText
-     * @param  string|null  $errorIcon
-     * @param  string|null  $edit
-     * @param  string|null  $editIcon
-     * @param  string|null  $delete
-     * @param  string|null  $deleteIcon
-     * @param  string|null  $deleteConfirm
-     * @return void
-     */
-    public function __construct(
-        $name = null,
-        $id = null,
-        $label = null,
-        $bind = null,
-        $modifier = null,
-        $default = null,
-        $language = null,
-        $showErrors = null,
-        $theme = null,
-        $accept = null,
-        $empty = null,
-        $emptyText = null,
-        $emptyIcon = null,
-        $loading = null,
-        $loadingIcon = null,
-        $error = null,
-        $errorText = null,
-        $errorIcon = null,
-        $edit = null,
-        $editIcon = null,
-        $delete = null,
-        $deleteIcon = null,
-        $deleteConfirm = null
-    ) {
-        parent::__construct(
-            $name,
-            $id,
-            $label,
-            'file',
-            $bind,
-            $modifier,
-            $default,
-            null,
-            null,
-            null,
-            null,
-            $language,
-            $showErrors,
-            $theme,
-            false
-        );
+            'actions' => [
+                'class' => 'w-full h-full flex items-center justify-center border-t p-2',
+            ],
 
-        $this->accept = $accept ?? 'image/*';
-        $this->empty = $empty;
-        $this->emptyText = $emptyText;
-        $this->emptyIcon = $emptyIcon;
-        $this->loading = $loading;
-        $this->loadingIcon = $loadingIcon;
-        $this->error = $error;
-        $this->errorText = $errorText;
-        $this->errorIcon = $errorIcon;
-        $this->edit = $edit;
-        $this->editIcon = $editIcon;
-        $this->delete = $delete;
-        $this->deleteIcon = $deleteIcon;
-        $this->deleteConfirm = $deleteConfirm;
+            'edit' => [
+                '@click.prevent' => 'edit',
+                'class' => 'transition transform hover:scale-125',
+                'preset' => 'none',
+                'icon' => 'pencil'
+            ],
+
+            'delete' => [
+                'class' => 'transition transform hover:scale-125',
+                'click' => 'remove(\''.__($this->confirm).'\')',
+                'preset' => 'none',
+                'icon' => 'delete',
+            ],
+        ];
     }
 }

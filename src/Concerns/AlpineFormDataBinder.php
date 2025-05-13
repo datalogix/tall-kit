@@ -36,7 +36,7 @@ trait AlpineFormDataBinder
      */
     public function modelModifier($modifier = null)
     {
-        $modifier = $modifier ?? app(FormDataBinder::class)->getModelModifier();
+        $modifier ??= app(FormDataBinder::class)->getModelModifier();
 
         return $modifier ? ".{$modifier}" : null;
     }

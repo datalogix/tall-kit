@@ -2,14 +2,17 @@
 
 namespace TALLKit\Components\Forms;
 
-use TALLKit\Components\Buttons\Button;
+use TALLKit\View\BladeComponent;
 
-class Submit extends Button
+class Submit extends BladeComponent
 {
-    /**
-     * The theme key.
-     *
-     * @var string
-     */
-    protected $themeKey = 'button';
+    protected function attrs()
+    {
+        return [
+            'root' => [
+                'type' => 'submit',
+                'loading' => true,
+            ],
+        ];
+    }
 }

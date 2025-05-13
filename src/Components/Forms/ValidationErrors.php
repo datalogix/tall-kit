@@ -2,82 +2,28 @@
 
 namespace TALLKit\Components\Forms;
 
-use TALLKit\Components\Messages\Message;
+use TALLKit\Components\Message\Message;
+use TALLKit\View\Attr;
 
 class ValidationErrors extends Message
 {
-    /**
-     * @var string
-     */
-    public $bag;
+    protected array $props = [
+        'bag' => 'default',
+        'title' => 'Whoops! Something went wrong.',
+    ];
 
-    /**
-     * Create a new component instance.
-     *
-     * @param  mixed  $options
-     * @param  string|null  $bag
-     * @param  string|bool|null  $type
-     * @param  string|bool|null  $mode
-     * @param  string|bool|null  $rounded
-     * @param  string|bool|null  $shadow
-     * @param  bool|null  $icon
-     * @param  string|bool|null  $iconSvg
-     * @param  string|bool|null  $iconName
-     * @param  int|null  $timeout
-     * @param  bool|null  $dismissible
-     * @param  bool|null  $dismissibleIcon
-     * @param  string|bool|null  $dismissibleIconSvg
-     * @param  string|bool|null  $dismissibleIconName
-     * @param  string|null  $dismissibleText
-     * @param  string|null  $title
-     * @param  string|null  $message
-     * @param  string|null  $on
-     * @param  string|null  $theme
-     * @return void
-     */
-    public function __construct(
-        $options = null,
-        $bag = null,
-        $type = null,
-        $mode = null,
-        $rounded = null,
-        $shadow = null,
-        $icon = null,
-        $iconSvg = null,
-        $iconName = null,
-        $timeout = null,
-        $dismissible = null,
-        $dismissibleIcon = null,
-        $dismissibleIconSvg = null,
-        $dismissibleIconName = null,
-        $dismissibleText = null,
-        $title = null,
-        $message = null,
-        $on = null,
-        $theme = null
-    ) {
-        parent::__construct(
-            $options,
-            false,
-            $type ?? 'danger',
-            $mode,
-            $rounded,
-            $shadow,
-            $icon,
-            $iconSvg,
-            $iconName,
-            $timeout,
-            $dismissible,
-            $dismissibleIcon,
-            $dismissibleIconSvg,
-            $dismissibleIconName,
-            $dismissibleText,
-            $title ?? 'Whoops! Something went wrong.',
-            $message,
-            $on,
-            $theme,
-        );
+    protected function attrs()
+    {
+        return [
+            'message' => Attr::make(attributes: ['type' => 'danger']),
 
-        $this->bag = $bag ?? 'default';
+            'root' => Attr::make(class: 'mb-4'),
+
+            'title' => Attr::make(class: 'font-medium text-red-600'),
+
+            'ul' => Attr::make(class: 'mt-3 list-disc list-inside text-sm text-red-600'),
+
+            'li' => Attr::make(),
+        ];
     }
 }

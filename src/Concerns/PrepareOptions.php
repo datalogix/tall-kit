@@ -9,17 +9,17 @@ trait PrepareOptions
     /**
      * @var \Illuminate\Support\Collection
      */
-    public $options;
+    //public $options;
 
     /**
      * @var string|array|int|null
      */
-    public $itemValue;
+   // public $itemValue;
 
     /**
      * @var string|array|int|null
      */
-    public $itemText;
+    //public $itemText;
 
     /**
      * Create a new component instance.
@@ -46,12 +46,12 @@ trait PrepareOptions
     {
         return Collection::make($options)
             ->mapWithKeys(function ($value, $key) {
-                $key = target_get($value, $this->itemValue, $key);
-                $value = is_iterable($value)
+                $newKey = target_get($value, $this->itemValue, $key);
+                $newValue = is_iterable($value)
                     ? $this->prepareOptions($value)
-                    : target_get($value, [$this->itemText, 'name', 'title', 'text'], $value, $key);
+                    : target_get($value, [$this->itemText, 'name', 'title', 'text'], $value, $newKey);
 
-                return [$key => $value];
+                return [$newKey => $newValue];
             });
     }
 }

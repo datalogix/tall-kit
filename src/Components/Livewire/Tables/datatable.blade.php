@@ -1,0 +1,22 @@
+@wire($modifier)
+    <x-tallkit-datatable
+        :search="$search"
+        :search-default="$searchDefault"
+        :search-values="$searchValues"
+        :search-modelable="$searchModelable"
+        :cols="$cols"
+        :rows="$rows"
+        :resource="$resource"
+        :footer="$footer"
+        :empty-text="$emptyText"
+        :paginator="$paginator"
+        :paginator-position="$paginatorPosition"
+        :parse-search="$parseSearch"
+        :parse-cols="$parseCols"
+        :parse-rows="$parseRows"
+        :sortable="$sortable"
+        :order-by="$orderBy"
+        :order-by-direction="$orderByDirection"
+        :theme="$theme"
+    />
+@endwire

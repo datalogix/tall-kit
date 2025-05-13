@@ -1,0 +1,41 @@
+<x-tallkit-form
+    :init="$init"
+    :method="$method"
+    :target="$target"
+    :action="$action"
+    :route="$route"
+    :bind="$bind"
+    :modelable="$modelable"
+    :enctype="$enctype"
+    :confirm="$confirm"
+    :fields="$fields"
+    :attributes="$attrs()"
+    :props="$props()"
+    :theme="$theme"
+>
+    <x-tallkit-submit
+        :text="$text"
+        :active="$active"
+        :click="$click"
+        :wire-click="$wireClick"
+        :icon="$icon"
+        :icon-left="$iconLeft"
+        :icon-right="$iconRight"
+        :color="$color"
+        :rounded="$rounded"
+        :shadow="$shadow"
+        :outlined="$outlined"
+        :link-text="$linkText"
+        :bordered="$bordered"
+        :loading="$loading"
+        :preset="$preset"
+        :tooltip="$tooltip"
+        :attributes="$attrs('button')"
+        :props="$props('button')"
+        :theme="$theme"
+    >
+        {{ $slot }}
+    </x-tallkit-submit>
+</x-tallkit-form>
+
+{{ $endFormDataBinder() }}

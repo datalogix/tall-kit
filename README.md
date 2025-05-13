@@ -20,3 +20,11 @@ Check out the [CHANGELOG](CHANGELOG.md) in this repository for all the recent ch
 ## License
 
 TALLKit is open-sourced software licensed under [the MIT license](./LICENSE).
+
+- sidebar
+- button
+- Markdown
+- message
+- credit-card
+- payment-fields
+- table

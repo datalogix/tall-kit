@@ -2,36 +2,20 @@
 
 namespace TALLKit\Components\Forms;
 
-use TALLKit\Components\BladeComponent;
+use TALLKit\View\Attr;
+use TALLKit\View\BladeComponent;
 
 class FieldError extends BladeComponent
 {
-    /**
-     * @var string
-     */
-    public $name;
+    protected array $props = [
+        'name' => null,
+        'bag' => 'default',
+    ];
 
-    /**
-     * @var string
-     */
-    public $bag;
-
-    /**
-     * Create a new component instance.
-     *
-     * @param  string  $name
-     * @param  string|null  $bag
-     * @param  string|null  $theme
-     * @return void
-     */
-    public function __construct(
-        $name,
-        $bag = null,
-        $theme = null
-    ) {
-        parent::__construct($theme);
-
-        $this->name = $name;
-        $this->bag = $bag ?? 'default';
+    protected function attrs()
+    {
+        return [
+            'root' => Attr::make(class: 'mt-1 text-red-600 text-sm italic'),
+        ];
     }
 }

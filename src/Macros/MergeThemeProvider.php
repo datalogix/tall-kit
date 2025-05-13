@@ -15,26 +15,42 @@ class MergeThemeProvider
                 return $this;
             }
 
-            $themeAttrs = Collection::make($this->whereStartsWith('theme:'))
+
+
+            $attributes = MergeThemeProvider::convertStringToArrayClass(data_get($this->get('pt'), $themeKey));
+
+            return $this->except('pt')->merge(
+                MergeThemeProvider::mergeRecursiveClass(
+                    MergeThemeProvider::convertStringToArrayClass($themeProvider->$themeKey->except([])->getAttributes()),
+                    $attributes
+                ),
+                false
+            );
+
+
+
+            $themeAttrs = Collection::make($this->whereStartsWith('pt:'))
                 ->mapWithKeys(function ($value, $key) {
-                    return [Str::replace('theme:', '', $key) => MergeThemeProvider::convertStringToArrayClass($value)];
+                    return [Str::replace('pt:', '', $key) => MergeThemeProvider::convertStringToArrayClass($value)];
                 })->get($themeKey, []);
 
-            $exceptAttrs = Collection::make($this->whereStartsWith('theme:'.$themeKey.'.except.'))
+            dd($themeAttrs);
+
+            $exceptAttrs = Collection::make($this->whereStartsWith('pt:'.$themeKey.'.except.'))
                 ->filter(function ($value) {
                     return $value !== false;
                 })->map(function ($value, $key) use ($themeKey) {
-                    return Str::replace('theme:'.$themeKey.'.except.', '', $key);
+                    return Str::replace('pt:'.$themeKey.'.except.', '', $key);
                 })->all();
 
             $subkeyAttrs = new ComponentAttributeBag();
 
             if ($subkey) {
-                $subkeyAttrs = $subkeyAttrs->merge($themeProvider->$themeKey->get($subkey, []), false);
+               // $subkeyAttrs = $subkeyAttrs->merge($themeProvider->$themeKey->get($subkey, []), false);
 
-                if (is_array($themeAttrs) && array_key_exists($subkey, $themeAttrs)) {
-                    $subkeyAttrs = $subkeyAttrs->merge(MergeThemeProvider::convertStringToArrayClass($themeAttrs[$subkey]), false);
-                }
+               // if (is_array($themeAttrs) && array_key_exists($subkey, $themeAttrs)) {
+               //     $subkeyAttrs = $subkeyAttrs->merge(MergeThemeProvider::convertStringToArrayClass($themeAttrs[$subkey]), false);
+               // }
             } else {
                 $subkeyAttrs = $subkeyAttrs->merge(MergeThemeProvider::mergeRecursiveClass(
                     MergeThemeProvider::convertStringToArrayClass($themeProvider->$themeKey->except($exceptAttrs)->getAttributes()),
@@ -42,7 +58,7 @@ class MergeThemeProvider
                 ), false);
             }
 
-            return $this->whereDoesntStartWith('theme:')->merge(
+            return $this->whereDoesntStartWith('pt:')->merge(
                 $subkeyAttrs->getAttributes(),
                 false
             );
@@ -52,10 +68,11 @@ class MergeThemeProvider
     public static function convertStringToArrayClass($value)
     {
         if (is_array($value)) {
+            return $value;
             $newValue = [];
 
             foreach ($value as $k => $v) {
-                $newValue[$k] = Str::startsWith($k, 'theme:')
+                $newValue[$k] = Str::startsWith($k, 'pt:')
                     ? static::convertStringToArrayClass($v)
                     : $v;
             }

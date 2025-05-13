@@ -4,65 +4,86 @@ namespace TALLKit\Components\Crud;
 
 class CrudShow extends AbstractCrud
 {
-    /**
-     * @var string|bool|null
-     */
-    public $back;
+    protected function props(): array
+    {
+        return array_merge(parent::props(), [
+            'back' => null,
+            'forceMenu' => true
+        ]);
+    }
 
-    /**
-     * Create a new component instance.
-     *
-     * @param  string|null  $prefix
-     * @param  string|null  $key
-     * @param  string|bool|null  $title
-     * @param  mixed  $model
-     * @param  mixed  $parameters
-     * @param  mixed  $resource
-     * @param  bool|null  $forceMenu
-     * @param  int|null  $maxActions
-     * @param  mixed  $actions
-     * @param  string|bool|null  $routeName
-     * @param  string|bool|null  $tooltip
-     * @param  string|bool|null  $back
-     * @param  string|null  $theme
-     * @return void
-     */
-    public function __construct(
-        $prefix = null,
-        $key = null,
-        $title = null,
-        $model = null,
-        $parameters = null,
-        $resource = null,
-        $forceMenu = null,
-        $maxActions = null,
-        $actions = null,
-        $routeName = null,
-        $tooltip = null,
-        $back = null,
-        $theme = null
-    ) {
-        parent::__construct(
-            $prefix,
-            $key,
-            $title,
-            $model,
-            $parameters,
-            $resource,
-            $forceMenu ?? true,
-            $maxActions,
-            $actions,
-            $routeName,
-            $tooltip,
-            $theme
-        );
-
+    protected function processed(array $data)
+    {
         if ($this->resourceTitle) {
             $this->title = $title ?? __($this->title).' - '.$this->resourceTitle;
         }
 
-        $this->back = $back ?? (url()->current() === url()->previous() ? route_detect($this->prefix.'.index', null, null) : null);
+        $this->back ??= url()->current() === url()->previous() ? route_detect($this->prefix.'.index', null, null) : null;
 
         $this->startFormDataBinder($this->resource);
+    }
+
+    protected function finished(array $data)
+    {
+        $this->endFormDataBinder();
+    }
+
+    protected function attrs()
+    {
+        return [
+            'root' => [
+                'class' => 'mb-4',
+            ],
+
+            'header' => [
+                'title' => $this->title,
+            ],
+
+            'header-actions' => [
+                'prefix' => $this->prefix,
+                'key' => $this->key,
+                'title' => $this->title,
+                'parameters' => array_merge($this->parameters, [$this->resource]),
+                'resource' => $this->resource,
+                'force-menu' => $this->forceMenu,
+                'max-actions' => $this->maxActions,
+                'actions' => $this->actions,
+                'route-name' => $this->routeName,
+                'tooltip' => $this->tooltip,
+            ],
+
+            'header-back' => [
+                'preset' => 'back-right',
+                'href' => $this->back,
+                'text' => $this->tooltip ? '' : null,
+                'tooltip' => $this->tooltip,
+            ],
+
+            'content' => [],
+
+            'footer' => [
+                'class' => 'flex space-x-2 items-center justify-end pt-4',
+            ],
+
+            'footer-actions' => [
+                'prefix' => $this->prefix,
+                'key' => $this->key,
+                'title' => $this->title,
+                'parameters' => array_merge($this->parameters, [$this->resource]),
+                'resource' => $this->resource,
+                'force-menu' => $this->forceMenu,
+                'max-actions' => $this->maxActions,
+                'actions' => $this->actions,
+                'route-name' => $this->routeName,
+                'tooltip' => $this->tooltip,
+            ],
+
+            'footer-back' => [
+                'preset' => 'back-right',
+                'href' => $this->back,
+                'text' => $this->tooltip ? '' : null,
+                'tooltip' => $this->tooltip,
+            ],
+        ];
     }
 }

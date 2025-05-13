@@ -11,7 +11,9 @@ class MergeOnlyThemeProvider
                 return $this;
             }
 
-            $attrs = $this->whereStartsWith("theme:$themeKey")
+            //dd($themeKey, $this->attributes);
+
+            $attrs = $this->only(["pt", 'th1eme'])
                 ->mergeThemeProvider($themeProvider, $themeKey, $subkey, false);
 
             return $subkey && $merge

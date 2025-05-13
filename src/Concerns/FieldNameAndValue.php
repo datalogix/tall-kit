@@ -24,28 +24,13 @@ trait FieldNameAndValue
     protected $fieldName;
 
     /**
-     * Set name.
-     *
-     * @param  string|null  $name
-     * @return void
-     */
-    public function setName($name = null)
-    {
-        $this->name = $name;
-    }
-
-    /**
      * Get field key.
      *
      * @return string
      */
-    public function getFieldKey()
+    protected function getFieldKey()
     {
-        if (! $this->fieldKey) {
-            $this->fieldKey = Str::before($this->name, '[]');
-        }
-
-        return $this->fieldKey;
+        return $this->fieldKey ??= Str::before($this->name, '[]');
     }
 
     /**
@@ -53,13 +38,9 @@ trait FieldNameAndValue
      *
      * @return string
      */
-    public function getFieldName()
+    protected function getFieldName()
     {
-        if (! $this->fieldName) {
-            $this->fieldName = Str::replace(['[', ']'], ['.', ''], $this->getFieldKey());
-        }
-
-        return $this->fieldName;
+        return $this->fieldName ??= Str::replace(['[', ']'], ['.', ''], $this->getFieldKey());
     }
 
     /**
@@ -67,7 +48,7 @@ trait FieldNameAndValue
      *
      * @return bool
      */
-    public function hasName()
+    protected function hasName()
     {
         return ! empty($this->name);
     }
@@ -79,7 +60,7 @@ trait FieldNameAndValue
      * @param  mixed  $default
      * @return mixed
      */
-    public function getFieldValue($bind = null, $default = null)
+    protected function getFieldValue($bind = null, $default = null)
     {
         return $this->oldFieldValue($this->getFieldBoundValue($bind) ?? $default);
     }
@@ -90,7 +71,7 @@ trait FieldNameAndValue
      * @param  mixed  $default
      * @return mixed
      */
-    public function oldFieldValue($default = null)
+    protected function oldFieldValue($default = null)
     {
         return old($this->getFieldName(), $default);
     }
@@ -101,7 +82,7 @@ trait FieldNameAndValue
      * @param  mixed  $bind
      * @return mixed
      */
-    public function getFieldBoundValue($bind = null)
+    protected function getFieldBoundValue($bind = null)
     {
         return $this->getBoundValue($bind, $this->getFieldName());
     }
@@ -129,13 +110,11 @@ trait FieldNameAndValue
         }
 
         if ($bind !== false) {
-            $bind = $bind ?? $this->getBoundTarget();
+            $bind ??= $this->getBoundTarget();
         }
 
         if ($bind) {
-            $default = $this->formatValue(
-                $bind->getTranslation($this->getFieldKey(), $language, false)
-            ) ?: $default;
+            $default = $this->formatValue($bind->getTranslation($this->getFieldKey(), $language, false)) ?: $default;
         }
 
         return old("{$this->getFieldName()}.{$language}", $default);

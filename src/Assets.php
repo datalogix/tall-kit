@@ -2,6 +2,9 @@
 
 namespace TALLKit;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Js;
+
 trait Assets
 {
     /**
@@ -21,6 +24,10 @@ trait Assets
      */
     public function registerAsset($name, $content = null, $overwrite = true)
     {
+        if (empty($content)) {
+            return;
+        }
+
         if ($overwrite || ! $this->hasAsset($name)) {
             $this->assets[$name] = $content;
         }
@@ -81,7 +88,7 @@ trait Assets
         $result = [];
 
         foreach ($this->assets as $name => $assets) {
-            $assetsEncoded = json_encode($assets);
+            $assetsEncoded = Js::from(Collection::make($assets));
             $result[] = <<<HTML
 window.tallkit.assets.register('$name', $assetsEncoded);
 HTML;

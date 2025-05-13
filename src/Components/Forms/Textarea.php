@@ -2,63 +2,47 @@
 
 namespace TALLKit\Components\Forms;
 
+use TALLKit\View\Attr;
+
 class Textarea extends Input
 {
-    /**
-     * Create a new component instance.
-     *
-     * @param  string|null  $name
-     * @param  string|bool|null  $id
-     * @param  string|bool|null  $label
-     * @param  mixed  $bind
-     * @param  string|null  $modifier
-     * @param  mixed  $default
-     * @param  string|string|null  $language
-     * @param  bool|null  $showErrors
-     * @param  string|null  $theme
-     * @param  bool|null  $groupable
-     * @param  string|null  $prependText
-     * @param  string|null  $prependIcon
-     * @param  string|null  $appendText
-     * @param  string|null  $appendIcon
-     * @return void
-     */
-    public function __construct(
-        $name = null,
-        $id = null,
-        $label = null,
-        $bind = null,
-        $modifier = null,
-        $default = null,
-        $language = null,
-        $showErrors = null,
-        $theme = null,
-        $groupable = null,
-        $prependText = null,
-        $prependIcon = null,
-        $appendText = null,
-        $appendIcon = null
-    ) {
-        parent::__construct(
-            $name,
-            $id,
-            $label,
-            'textarea',
-            $bind,
-            $modifier,
-            $default,
-            null,
-            null,
-            null,
-            null,
-            $language,
-            $showErrors,
-            $theme,
-            $groupable ?? true,
-            $prependText,
-            $prependIcon,
-            $appendText,
-            $appendIcon
-        );
+    protected function props(): array
+    {
+        return array_merge(parent::props(), [
+            'type' => 'textarea',
+        ]);
+    }
+
+    protected function attrs()
+    {
+        return [
+            'root' => Attr::make(
+                attributes: [
+                    'name' => $this->name,
+                    'label' => $this->label,
+                    'show-errors' => $this->showErrors,
+                    'groupable' => $this->groupable,
+                    'icon-left' => $this->iconLeft ?? $this->icon,
+                    'icon-right' => $this->iconRight,
+                    'prepend' => $this->prepend,
+                    'append' => $this->append,
+                    'display' => $this->display,
+                ],
+            ),
+
+            'textarea' => Attr::make(
+                attributes: ['rows' => 5],
+                class: 'block w-full py-2 px-3 outline-none focus:outline-none',
+            )
+                ->when($this->name, fn ($attr, $value) => $attr->attr('name', $value))
+                ->when($this->id, fn ($attr, $value) => $attr->attr('id', $value))
+                ->when(
+                    $this->isModel() && $this->name,
+                    fn ($attr) => $attr->attr('x-model' . $this->modelModifier($this->modifier), $this->modelName($this->name))
+                )->when(
+                    $this->isWired() && $this->name,
+                    fn ($attr) => $attr->attr('wire:model' . $this->wireModifier($this->modifier), $this->name)
+                )
+        ];
     }
 }

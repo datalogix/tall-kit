@@ -1,6 +1,13 @@
 export default ({ loadComponentAssets }) => ({
   chart: null,
 
+  /*
+    public static $assets = [
+        'https://cdn.jsdelivr.net/npm/apexcharts@3/dist/apexcharts.min.css',
+        'https://cdn.jsdelivr.net/npm/apexcharts@3/dist/apexcharts.min.js',
+    ];
+    */
+
   async setup (options = {}) {
     await loadComponentAssets('apex-charts')
 

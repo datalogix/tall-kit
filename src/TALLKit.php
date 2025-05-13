@@ -3,6 +3,7 @@
 namespace TALLKit;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Js;
 use Illuminate\Support\Str;
 
 class TALLKit
@@ -19,7 +20,7 @@ class TALLKit
     {
         $debug = config('app.debug');
 
-        $styles = $this->headAssets(
+        $assets = $this->headAssets(
             array_replace_recursive(config('tallkit.options', []), target_get($config, 'options', [])),
             array_replace_recursive(config('tallkit.assets', []), $this->getAllAssets(), target_get($config, 'assets', []))
         );
@@ -28,7 +29,7 @@ class TALLKit
         $html = $debug ? ['<!-- TALLKit Styles -->'] : [];
 
         // Assets.
-        $html[] = $debug ? $styles : $this->minify($styles);
+        $html[] = $debug ? $assets : $this->minify($assets);
 
         return implode("\n", $html);
     }
@@ -79,20 +80,10 @@ class TALLKit
             $scripts->add($alpine);
         }
 
-        if (target_get($options, 'load_type') === true) {
-            Collection::make($assets)->filter(function ($key) {
-                return $key !== 'tailwindcss' && $key !== 'alpine';
-            })->each(function ($asset) use ($styles, $scripts) {
-                $styles->add($asset);
-                $scripts->add($asset);
-            });
-        }
-
-        $htmlStyles = $styles->flatten()->filter(function ($value) {
-            return Str::endsWith($value, '.css');
-        })->map(function ($url) {
-            return '<link href="'.$url.'" rel="stylesheet" />';
-        })->join("\n");
+        $htmlStyles = $styles->flatten()
+            ->filter(fn ($value) => Str::endsWith($value, '.css'))
+            ->map(fn ($url) => '<link href="'.$url.'" rel="stylesheet" />')
+            ->join("\n");
 
         $tallkitStylesComponents = $this->renderStylesComponents();
 
@@ -102,13 +93,10 @@ class TALLKit
             $nonce = ' nonce="'.$nonceValue.'"';
         }
 
-        $htmlScripts = $scripts->flatten()->filter(function ($value) {
-            return ! Str::endsWith($value, '.css');
-        })->map(function ($url) use ($assets, $nonce) {
-            $defer = (in_array($url, target_get($assets, 'alpine', [])) ? ' defer' : '');
-
-            return '<script data-turbo-eval="false" data-turbolinks-eval="false" src="'.$url.'"'.$defer.$nonce.'></script>';
-        })->join("\n");
+        $htmlScripts = $scripts->flatten()
+            ->filter(fn ($value) => ! Str::endsWith($value, '.css'))
+            ->map(fn ($url) => '<script src="'.$url.'"'.(in_array($url, target_get($assets, 'alpine', [])) ? ' defer' : '').$nonce.'></script>')
+            ->join("\n");
 
         return <<<HTML
 {$htmlStyles}
@@ -126,8 +114,8 @@ HTML;
      */
     protected function scriptsAssets($options, $assets)
     {
-        $jsonEncodedOptions = $options ? json_encode($options) : '';
-        $jsonEncodedAssets = $assets ? json_encode($assets) : '';
+        $jsonEncodedOptions = Js::from($options);
+        $jsonEncodedAssets = Js::from($assets);
         $fullAssetPath = $this->getFullAssetPath($options, 'resources/js/tallkit.js');
         $assetWarning = null;
 
@@ -138,7 +126,7 @@ HTML;
         }
 
         if ($this->isAssetsOutOfDate()) {
-            $assetWarning = <<<'HTML'
+            $assetWarning = <<<HTML
 <script{$nonce}>
     console.warn('TALLKit: The published TALLKit assets are out of date.');
 </script>
@@ -146,21 +134,22 @@ HTML;
         }
 
         $tallkitAssets = $this->renderAssets();
+        //$tallkitAssets = '';
         $tallkitScriptsComponents = $this->renderScriptsComponents($nonce);
 
         // Adding semicolons for this JavaScript is important,
         // because it will be minified in production.
         return <<<HTML
 {$assetWarning}
-<script src="{$fullAssetPath}" data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}></script>
-<script data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}>
+<script src="{$fullAssetPath}"{$nonce}></script>
+<script{$nonce}>
     if (!window.tallkit) {
         window.tallkit = new TALLKit({$jsonEncodedOptions}, {$jsonEncodedAssets});
         {$tallkitAssets}
     }
 </script>
 {$tallkitScriptsComponents}
-<script data-turbo-eval="false" data-turbolinks-eval="false"{$nonce}>
+<script{$nonce}>
     window.deferLoadingAlpine = function (callback) {
         window.addEventListener('tallkit:load', function () {
             callback();

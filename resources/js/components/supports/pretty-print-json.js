@@ -1,6 +1,14 @@
 export default ({ loadable, loadComponentAssets }) => ({
   ...loadable(),
 
+  /*
+    TODO: assets
+    public static $assets = [
+        'https://cdn.jsdelivr.net/npm/pretty-print-json@1/dist/pretty-print-json.css',
+        'https://cdn.jsdelivr.net/npm/pretty-print-json@1/dist/pretty-print-json.min.js',
+    ];
+    */
+
   async setup (code = {}) {
     this.start()
 

@@ -5,59 +5,29 @@ namespace TALLKit\Components\Forms;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
+use TALLKit\View\Attr;
 
 class Checkbox extends Field
 {
-    /**
-     * @var mixed
-     */
-    public $value;
+    protected function props(): array
+    {
+        return array_merge(parent::props(), [
+            'value' => 1,
+            'checked' => false,
+            'bind' => null,
+            'modifier' => null,
+            'default' => null,
+        ]);
+    }
 
-    /**
-     * @var bool
-     */
-    public $checked;
-
-    /**
-     * Create a new component instance.
-     *
-     * @param  string|null  $name
-     * @param  string|bool|null  $label
-     * @param  mixed  $value
-     * @param  mixed  $bind
-     * @param  string|null  $modifier
-     * @param  bool|null  $default
-     * @param  bool|null  $showErrors
-     * @param  string|null  $theme
-     * @return void
-     */
-    public function __construct(
-        $name = null,
-        $label = null,
-        $value = null,
-        $bind = null,
-        $modifier = null,
-        $default = null,
-        $showErrors = null,
-        $theme = null
-    ) {
-        parent::__construct(
-            $name,
-            $label,
-            $modifier,
-            $showErrors,
-            $theme
-        );
-
-        $this->value = $value ?? 1;
-        $this->checked = false;
-
+    protected function processed(array $data)
+    {
         if ($oldData = $this->oldFieldValue()) {
             $this->checked = in_array($this->value, Arr::wrap($oldData));
         }
 
         if (! session()->hasOldInput() && $this->isNotWired()) {
-            $boundValue = $this->getFieldBoundValue($bind);
+            $boundValue = $this->getFieldBoundValue($this->bind);
 
             if ($boundValue instanceof Collection && $firstItem = $boundValue->first()) {
                 $boundValue = $boundValue->pluck($firstItem->getKeyName())->toArray();
@@ -69,7 +39,53 @@ class Checkbox extends Field
 
             $this->checked = is_array($boundValue)
                 ? in_array($this->value, $boundValue)
-                : (is_null($boundValue) ? ($default ?? false) : $boundValue);
+                : (is_null($boundValue) ? ($this->default ?? false) : $boundValue);
         }
+    }
+
+    protected function attrs()
+    {
+        return [
+            'root' => Attr::make(
+                attributes: [
+                    'name' => $this->name,
+                    'label' => false,
+                    'show-errors' => $this->showErrors,
+                    'groupable' => $this->groupable,
+                    'icon' => $this->icon,
+                    'icon-left' => $this->iconLeft,
+                    'icon-right' => $this->iconRight,
+                    'prepend' => $this->prepend,
+                    'append' => $this->append,
+                    'display' => $this->display,
+                ],
+                class: 'flex flex-col',
+            ),
+
+            'label-container' => Attr::make()
+                ->class('flex items-center')
+                ->when($this->groupable, fn ($attr) => $attr->class('mx-4 my-3'))
+            ,
+
+            'label' => [
+                'class' => 'ml-3',
+            ],
+
+            'checkbox' => Attr::make(
+                attributes: [
+                    'type' => 'checkbox',
+                    'value' => $this->value,
+                ],
+                class: 'h-4 w-4 border-gray-200 rounded-lg shadow shrink-0',
+            )->when($this->name, fn ($attr, $value) => $attr->attr('name', $value))
+            ->when($this->checked, fn ($attr, $value) => $attr->attr('checked', 'checked'))
+            ->when(
+                $this->isModel() && $this->name,
+                fn ($attr) => $attr->attr('x-model' . $this->modelModifier($this->modifier), $this->modelName($this->name))
+            )->when(
+                $this->isWired() && $this->name,
+                fn ($attr) => $attr->attr('wire:model' . $this->wireModifier($this->modifier), $this->name)
+            ),
+        ];
     }
 }

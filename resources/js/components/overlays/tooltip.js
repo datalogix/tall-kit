@@ -3,6 +3,15 @@ import { loadComponentAssets, timeout } from '../../utils'
 export default () => ({
   tippy: null,
 
+  /*
+    TODO: assets
+    public static $assets = [
+        'https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js',
+        'https://cdn.jsdelivr.net/npm/tippy.js@6/dist/tippy-bundle.umd.min.js',
+        'https://cdn.jsdelivr.net/npm/tippy.js@6/dist/tippy.css',
+    ];
+    */
+
   async setup (options) {
     await loadComponentAssets('tooltip')
 

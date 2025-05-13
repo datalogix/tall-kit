@@ -1,19 +1,3 @@
-export function detectAssets (el, attributeKey) {
-  const assets = []
-
-  if (el.querySelectorAll) {
-    for (const element of el.querySelectorAll(`[${attributeKey}]`)) {
-      for (const asset of element.getAttribute(attributeKey).split(',')) {
-        if (asset.trim() && !assets.includes(asset)) {
-          assets.push(asset)
-        }
-      }
-    }
-  }
-
-  return assets
-}
-
 export function loadComponentAssets (asset) {
   if (!window.tallkit || !window.tallkit.assets) {
     throw new Error('TALLKit is not defined.')

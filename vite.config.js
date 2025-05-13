@@ -19,7 +19,6 @@ export default defineConfig({
       }
     }
   },
-
   plugins: [
     eslint({
       fix: true

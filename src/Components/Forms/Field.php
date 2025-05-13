@@ -2,97 +2,65 @@
 
 namespace TALLKit\Components\Forms;
 
-use Illuminate\Support\Str;
 use TALLKit\Concerns\FieldNameAndValue;
 use TALLKit\Concerns\ValidationErrors;
+use TALLKit\View\Attr;
+use TALLKit\View\BladeComponent;
 
-class Field extends FieldGroup
+class Field extends BladeComponent
 {
     use FieldNameAndValue;
     use ValidationErrors;
 
-    /**
-     * @var string|bool|null
-     */
-    public $label;
+    protected array $props = [
+        'name' => null,
+        'label' => null,
+        'labelWrapper' => true,
+        'showErrors' => true,
+        'groupable' => false,
+        'display' => null,
+        'icon' => null,
+        'iconLeft' => null,
+        'iconRight' => null,
+        'prepend' => null,
+        'append' => null,
+    ];
 
-    /**
-     * @var string|null
-     */
-    public $modifier;
-
-    /**
-     * @var bool
-     */
-    public $groupable;
-
-    /**
-     * @var mixed
-     */
-    public $display;
-
-    /**
-     * Create a new component instance.
-     *
-     * @param  string|null  $name
-     * @param  string|bool|null  $label
-     * @param  string|null  $modifier
-     * @param  bool|null  $showErrors
-     * @param  string|null  $theme
-     * @param  bool|null  $groupable
-     * @param  string|null  $prependText
-     * @param  string|null  $prependIcon
-     * @param  string|null  $appendText
-     * @param  string|null  $appendIcon
-     * @param  mixed  $display
-     * @return void
-     */
-    public function __construct(
-        $name = null,
-        $label = null,
-        $modifier = null,
-        $showErrors = null,
-        $theme = null,
-        $groupable = null,
-        $prependText = null,
-        $prependIcon = null,
-        $appendText = null,
-        $appendIcon = null,
-        $display = null
-    ) {
-        parent::__construct(
-            $theme,
-            $prependText,
-            $prependIcon,
-            $appendText,
-            $appendIcon
-        );
-
-        $this->setName($name);
-        $this->label = $label ?? $this->getLabel();
-        $this->modifier = $modifier;
-        $this->showErrors = ($showErrors ?? true) && $this->name;
-        $this->groupable = $groupable ?? false;
-        $this->display = $display;
-    }
-
-    /**
-     * Get label.
-     *
-     * @return string
-     */
-    public function getLabel()
+    protected function attrs()
     {
-        $label = $this->getFieldKey();
+        return [
+            'root' => Attr::make(class: 'mb-4'),
 
-        if (! Str::contains($label, '.')) {
-            return $label;
-        }
+            'label-container' => Attr::make(class: 'block'),
 
-        if (Str::afterLast($label, '.') === 'id') {
-            return Str::replace('.', '_', $label);
-        }
+            'label' => Attr::make(
+                attributes: [
+                    'name' => $this->name,
+                    'label' => $this->label
+                ],
+                class: 'mb-1'
+            ),
 
-        return Str::afterLast($label, '.');
+            'field-group' => Attr::make(class: 'flex divide-x items-center border border-gray-200 bg-white rounded-lg shadow overflow-hidden focus-within:ring'),
+
+            'field' => Attr::make(class: 'flex-1 w-full'),
+
+            'icon-left' => Attr::make(attributes: ['name' => $this->iconLeft ?? $this->icon]),
+
+            'icon-right' => Attr::make(attributes: ['name' => $this->iconRight]),
+
+            'prepend' => Attr::make(class: 'py-2 px-3 flex items-center'),
+
+            'append' => Attr::make(class: 'p-2 px-3 flex items-center'),
+
+            'field-error' => Attr::make(
+                attributes: ['name' => $this->getFieldName()],
+            ),
+
+            'display' => Attr::make(
+                attributes: ['value' => $this->display],
+                class: 'flex items-center justify-center my-4 text-center border border-gray-200 rounded shadow bg-white p-2 max-w-xs max-h-72'
+            ),
+        ];
     }
 }

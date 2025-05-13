@@ -36,7 +36,7 @@ trait LivewireFormDataBinder
      */
     public function wireModifier($modifier = null)
     {
-        $modifier = $modifier ?? app(FormDataBinder::class)->getWireModifier();
+        $modifier ??= app(FormDataBinder::class)->getWireModifier();
 
         return $modifier ? ".{$modifier}" : null;
     }
